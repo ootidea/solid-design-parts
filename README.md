@@ -4,8 +4,6 @@
 
 # solidjs-skel
 
-[![pnpm](https://img.shields.io/badge/maintained%20with-pnpm-cc00ff.svg?style=for-the-badge&logo=pnpm)](https://pnpm.io/)
-
 ## Quick start
 
 Install it:
