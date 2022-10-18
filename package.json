@@ -60,5 +60,8 @@
   "keywords": [
     "solid"
   ],
-  "packageManager": "pnpm@7.5.0"
+  "packageManager": "pnpm@7.5.0",
+  "volta": {
+    "node": "18.11.0"
+  }
 }
