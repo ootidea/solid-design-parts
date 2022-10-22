@@ -1,0 +1,70 @@
+@use 'utility/utility.scss';
+
+:root {
+  --skel-Checkbox_checkbox-size: 1.06em;
+  --skel-Checkbox_check-size: 0.94em;
+}
+
+.skel-Checkbox_root {
+  display: inline-grid;
+  vertical-align: top;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5em;
+
+  cursor: pointer;
+
+  &.skel-Checkbox_disabled {
+    cursor: default;
+
+    color: oklch(70% 0 0);
+  }
+}
+
+.skel-Checkbox_checkbox {
+  appearance: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: utility.toIntegerPx(var(--skel-Checkbox_checkbox-size));
+  height: utility.toIntegerPx(var(--skel-Checkbox_checkbox-size));
+  border-radius: 0.25em;
+  margin: 0;
+  border: 1px solid oklch(84% 0 0);
+  background-color: white;
+  font-size: inherit;
+
+  cursor: pointer;
+
+  transition: all 140ms ease-out;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+
+    background-color: white;
+    mask: url('./check-bold.svg') no-repeat center;
+    mask-size: contain;
+  }
+
+  &:checked {
+    background-color: var(--skel-primary-color);
+
+    &::before {
+      width: utility.toIntegerPx(var(--skel-Checkbox_check-size));
+      height: utility.toIntegerPx(var(--skel-Checkbox_check-size));
+    }
+
+    .skel-Checkbox_disabled & {
+      background-color: oklch(70% 0 0);
+    }
+  }
+
+  .skel-Checkbox_disabled & {
+    cursor: default;
+  }
+}

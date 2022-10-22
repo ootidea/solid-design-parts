@@ -1,0 +1,49 @@
+.skel-Foldable_root {
+  --skel-Foldable_header-background-default-color: oklch(98% 0 0);
+  --skel-Foldable_border-default-color: oklch(93% 0 0);
+
+  border: var(--skel-Foldable_border-color) 1px solid;
+  box-sizing: border-box;
+  width: 100%;
+
+  .skel-Foldable_root + & {
+    // Helpful for making accordions
+    border-top: none;
+  }
+}
+
+.skel-Foldable_header {
+  padding: 0.5em 1em;
+  background-color: var(--skel-Foldable_header-background-color);
+  cursor: pointer;
+
+  transition: var(--skel-backward-transition);
+
+  @media (hover: hover) {
+    &:hover {
+      // TODO: Make customizable
+      background-color: oklch(96% 0 0);
+      transition: var(--skel-forward-transition);
+    }
+  }
+
+  &:active {
+    // TODO: Make customizable
+    background-color: oklch(94% 0 0);
+    transition: var(--skel-forward-transition);
+  }
+}
+
+.skel-Foldable_icon {
+  transform-origin: center;
+  transition: all 140ms ease-out;
+
+  .skel-Foldable_root[data-unfolded='true'] & {
+    transform: rotate(-180deg);
+  }
+
+  // Need for nested Foldable
+  .skel-Foldable_root[data-unfolded='false'] & {
+    transform: rotate(0deg);
+  }
+}

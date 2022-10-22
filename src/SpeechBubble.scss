@@ -1,0 +1,54 @@
+:root {
+  --skel-SpeechBubble_border-color: oklch(70% 0 0);
+}
+
+.skel-SpeechBubble_root {
+  box-sizing: border-box;
+  width: max-content;
+}
+
+.skel-SpeechBubble_message-box {
+  border: var(--skel-SpeechBubble_border-color) 1px solid;
+  background-color: var(--skel-background-color);
+  border-radius: 1em;
+  padding: 1em;
+  box-sizing: border-box;
+  width: max-content;
+}
+
+.skel-SpeechBubble_triangle {
+  --skel-SpeechBubble_triangle-width: calc(
+    var(--skel-SpeechBubble_triangle-height) * var(--skel-SpeechBubble_triangle-tangent) * 2
+  );
+
+  // Setting to override the border of the message box.
+  margin-top: -1px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  box-sizing: border-box;
+  width: 0;
+  height: 0;
+  border-top: var(--skel-SpeechBubble_triangle-height) solid var(--skel-SpeechBubble_border-color);
+  border-left: calc(var(--skel-SpeechBubble_triangle-width) / 2) solid transparent;
+  border-right: calc(var(--skel-SpeechBubble_triangle-width) / 2) solid transparent;
+
+  &::after {
+    content: '';
+    display: block;
+
+    margin-top: calc(-1 * var(--skel-SpeechBubble_triangle-height));
+    margin-left: calc(1px * var(--skel-SpeechBubble_triangle-tangent) - var(--skel-SpeechBubble_triangle-width) / 2);
+
+    box-sizing: border-box;
+    width: 0;
+    height: 0;
+    border-top: calc(var(--skel-SpeechBubble_triangle-height) - 1px / var(--skel-SpeechBubble_triangle-tangent)) solid
+      var(--skel-background-color);
+    border-left: calc(var(--skel-SpeechBubble_triangle-width) / 2 - 1px * var(--skel-SpeechBubble_triangle-tangent))
+      solid transparent;
+    border-right: calc(var(--skel-SpeechBubble_triangle-width) / 2 - 1px * var(--skel-SpeechBubble_triangle-tangent))
+      solid transparent;
+  }
+}

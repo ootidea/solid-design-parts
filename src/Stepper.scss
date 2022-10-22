@@ -1,0 +1,83 @@
+:root {
+  --skel-Stepper_line-color: oklch(70% 0 0);
+  --skel-Stepper_circle-size: 2.5em;
+}
+
+.skel-Stepper_root {
+  width: 100%;
+}
+
+.skel-Stepper_line-layer {
+  display: grid;
+  align-items: center;
+  height: var(--skel-Stepper_circle-size);
+}
+
+.skel-Stepper_line {
+  height: 1px;
+
+  background-image: linear-gradient(
+    to right,
+    var(--skel-Stepper_line-color),
+    var(--skel-Stepper_line-color) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 12px 1px;
+  background-repeat: repeat-x;
+
+  &.skel-Stepper_reached {
+    background: var(--skel-primary-color);
+    height: 3px;
+  }
+}
+
+.skel-Stepper_circle-layer {
+  display: grid;
+}
+
+.skel-Stepper_circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--skel-Stepper_circle-size);
+  height: var(--skel-Stepper_circle-size);
+  border-radius: 99999px;
+  background-color: oklch(80% 0 0);
+
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+
+  &.skel-Stepper_past-step {
+    background-color: var(--skel-primary-color);
+  }
+
+  &.skel-Stepper_current-step {
+    background-color: var(--skel-background-color);
+    border: 0.15em solid var(--skel-primary-color);
+    color: var(--skel-primary-color);
+  }
+}
+
+.skel-Stepper_titles-area {
+  display: grid;
+  margin-top: 0.5em;
+}
+
+.skel-Stepper_title {
+  display: flex;
+  justify-content: center;
+
+  color: oklch(70% 0 0);
+  font-weight: bold;
+
+  &.skel-Stepper_past-step {
+    color: oklch(50% 0 0);
+  }
+
+  &.skel-Stepper_current-step {
+    color: var(--skel-primary-color);
+  }
+}

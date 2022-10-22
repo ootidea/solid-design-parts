@@ -1,0 +1,159 @@
+.skel-Button_root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  // Since character height is different between full-pitch and half-pitch, set height instead of padding.
+  height: 2.45em;
+  padding: 0 1em;
+  border-radius: 0.3em;
+  border-width: 1px;
+  border-style: solid;
+
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: var(--skel-Button_backward-transition);
+
+  --skel-Button_forward-transition: all 0.2s ease-out;
+  --skel-Button_backward-transition: all 0.4s ease-out;
+
+  &.skel-Button_disabled {
+    pointer-events: none;
+  }
+
+  &:not(.skel-Button_ghost) {
+    color: var(--skel-inverted-text-color);
+    border-color: var(--skel-Button_tint-color);
+    background-color: var(--skel-Button_tint-color);
+
+    &[data-color='primary'] {
+      --skel-Button_tint-color: var(--skel-primary-color);
+
+      &:not(.skel-Button_disabled) {
+        @media (hover: hover) {
+          &:hover {
+            transition: var(--skel-Button_forward-transition);
+            --skel-Button_tint-color: var(--skel-primary-inverted-background-hover-color);
+          }
+        }
+
+        &:active {
+          transition: var(--skel-Button_forward-transition);
+          --skel-Button_tint-color: var(--skel-primary-inverted-background-active-color);
+        }
+      }
+    }
+
+    &[data-color='achromatic'] {
+      --skel-Button_tint-color: oklch(55% 0 0);
+
+      &:not(.skel-Button_disabled) {
+        @media (hover: hover) {
+          &:hover {
+            transition: var(--skel-Button_forward-transition);
+            --skel-Button_tint-color: oklch(60% 0 0);
+          }
+        }
+
+        &:active {
+          transition: var(--skel-Button_forward-transition);
+          --skel-Button_tint-color: oklch(65% 0 0);
+        }
+      }
+    }
+
+    &[data-color='error'] {
+      --skel-Button_tint-color: var(--skel-error-color);
+
+      &:not(.skel-Button_disabled) {
+        @media (hover: hover) {
+          &:hover {
+            transition: var(--skel-Button_forward-transition);
+            --skel-Button_tint-color: var(--skel-error-hover-color);
+          }
+        }
+
+        &:active {
+          transition: var(--skel-Button_forward-transition);
+          --skel-Button_tint-color: var(--skel-error-active-color);
+        }
+      }
+    }
+  }
+
+  &.skel-Button_ghost {
+    color: var(--skel-Button_tint-color);
+    border-color: var(--skel-Button_tint-color);
+    background-color: transparent;
+
+    &[data-color='primary'] {
+      --skel-Button_tint-color: var(--skel-primary-color);
+
+      &:not(.skel-Button_disabled) {
+        @media (hover: hover) {
+          &:hover {
+            transition: var(--skel-Button_forward-transition);
+            background-color: var(--skel-primary-background-hover-color);
+          }
+        }
+
+        &:active {
+          transition: var(--skel-Button_forward-transition);
+          background-color: var(--skel-primary-background-active-color);
+        }
+      }
+    }
+
+    &[data-color='achromatic'] {
+      --skel-Button_tint-color: oklch(50% 0 0);
+
+      &:not(.skel-Button_disabled) {
+        @media (hover: hover) {
+          &:hover {
+            transition: var(--skel-Button_forward-transition);
+            background-color: oklch(97% 0 0);
+          }
+        }
+
+        &:active {
+          transition: var(--skel-Button_forward-transition);
+          background-color: oklch(94% 0 0);
+        }
+      }
+    }
+
+    &[data-color='error'] {
+      --skel-Button_tint-color: var(--skel-error-color);
+
+      &:not(.skel-Button_disabled) {
+        @media (hover: hover) {
+          &:hover {
+            transition: var(--skel-Button_forward-transition);
+            background-color: var(--skel-error-background-hover-color);
+          }
+        }
+
+        &:active {
+          transition: var(--skel-Button_forward-transition);
+          background-color: var(--skel-error-background-active-color);
+        }
+      }
+    }
+  }
+}
+
+.skel-Button_rounded {
+  border-radius: 99999px;
+}
+
+.skel-Button_invisible {
+  visibility: hidden;
+}
+
+.skel-Button_full-width {
+  display: flex;
+  width: 100%;
+}

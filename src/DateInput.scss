@@ -1,0 +1,46 @@
+.skel-DateInput_date-picker {
+  margin: 0.8em;
+}
+
+.skel-DateInput_launcher {
+  display: inline-grid;
+  vertical-align: top;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  text-align: start;
+
+  border-radius: var(--skel-input-border-radius);
+  border: var(--skel-input-border-color) 1px solid;
+  padding: 0;
+  box-sizing: border-box;
+  height: var(--skel-one-input-height);
+
+  background-color: var(--skel-background-color);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: var(--skel-disabled-input-background-color);
+    cursor: initial;
+  }
+}
+
+.skel-DateInput_invisible {
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+}
+
+.skel-DateInput_icon {
+  margin-right: 0.3em;
+}
+
+.skel-DateInput_preview-area {
+  padding: 0.4em 0.6em;
+}
+
+.skel-DateInput_placeholder {
+  color: var(--skel-placeholder-text-color);
+  user-select: none;
+}

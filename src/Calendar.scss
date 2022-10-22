@@ -1,0 +1,77 @@
+:root {
+  --skel-Calendar_cell-width: 2em;
+  --skel-Calendar_cell-height: 2em;
+  --skel-Calendar_sunday-text-color: oklch(50% 0.6 5);
+  --skel-Calendar_saturday-text-color: oklch(50% 0.6 260);
+}
+
+.skel-Calendar_root {
+  width: max-content;
+}
+
+.skel-Calendar_year-month-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skel-Calendar_month-move-button {
+  &.skel-Calendar_hidden {
+    visibility: hidden;
+  }
+}
+
+.skel-Calendar_year-month {
+  display: grid;
+  grid-template-areas: var(--skel-Calendar_year-month-order);
+  align-items: center;
+  gap: 0.3em;
+}
+
+.skel-Calendar_year,
+.skel-Calendar_month {
+  font-weight: bold;
+  color: oklch(50% 0 0);
+}
+
+.skel-Calendar_year {
+  grid-area: year;
+}
+
+.skel-Calendar_month {
+  grid-area: month;
+}
+
+.skel-Calendar_grid {
+  display: grid;
+  grid-template-columns: repeat(7, var(--skel-Calendar_cell-width));
+  grid-auto-rows: var(--skel-Calendar_cell-height);
+  width: max-content;
+}
+
+.skel-Calendar_day-row,
+.skel-Calendar_date-row {
+  display: contents;
+}
+
+.skel-Calendar_cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .skel-Calendar_day-row & {
+    color: oklch(50% 0 0);
+
+    &[data-day='0'] {
+      color: var(--skel-Calendar_sunday-text-color);
+    }
+
+    &[data-day='6'] {
+      color: var(--skel-Calendar_saturday-text-color);
+    }
+  }
+
+  &.skel-Calendar_other-month {
+    color: oklch(60% 0 0);
+  }
+}

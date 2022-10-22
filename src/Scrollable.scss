@@ -1,0 +1,65 @@
+.skel-Scrollable_root {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: inherit;
+}
+
+.skel-Scrollable_outer {
+  overflow: auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  max-height: inherit;
+
+  /* hide default scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.skel-Scrollable_inner {
+  // To prevent that margin protrude parent element.
+  overflow: hidden;
+}
+
+.skel-Scrollable_scrollbar {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  box-sizing: border-box;
+  width: 11px;
+  padding: 0 1px;
+
+  .skel-Scrollable_overflow & {
+    visibility: visible;
+  }
+}
+
+.skel-Scrollable_thumb {
+  opacity: 0;
+  visibility: hidden;
+
+  margin-top: var(--skel-Scrollable_thumb-top);
+  border-radius: 99999px;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--skel-Scrollable_thumb-height);
+  background-color: oklch(80% 0 0);
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: oklch(75% 0 0);
+    }
+  }
+
+  .skel-Scrollable_dragging & {
+    background-color: oklch(70% 0 0);
+  }
+}

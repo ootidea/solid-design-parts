@@ -1,0 +1,25 @@
+:root {
+  --skel-background-color: oklch(100% 0 0);
+  --skel-inverted-text-color: oklch(100% 0 0);
+  --skel-primary-color: oklch(59% 0.17 255.4);
+  --skel-primary-inverted-background-hover-color: oklch(64% 0.15 255.4);
+  --skel-primary-inverted-background-active-color: oklch(69% 0.13 255.4);
+  --skel-primary-selected-background-color: oklch(98% 0.02 255.4);
+  --skel-primary-selected-background-hover-color: oklch(96% 0.03 255.4);
+  --skel-primary-selected-background-active-color: oklch(94% 0.04 255.4);
+  --skel-primary-background-color: oklch(99% 0.01 255.4);
+  --skel-primary-background-hover-color: oklch(97% 0.02 255.4);
+  --skel-primary-background-active-color: oklch(95% 0.04 255.4);
+  --skel-placeholder-text-color: oklch(70% 0 0);
+  --skel-disabled-input-background-color: oklch(96% 0 0);
+  --skel-error-color: oklch(50% 0.17 30);
+  --skel-error-hover-color: oklch(55% 0.15 30);
+  --skel-error-active-color: oklch(60% 0.13 30);
+  --skel-error-background-hover-color: oklch(98% 0.015 30);
+  --skel-error-background-active-color: oklch(96% 0.02 30);
+  --skel-success-color: oklch(55% 0.2 150);
+  --skel-input-border-color: oklch(82% 0 0);
+  --skel-input-border-radius: 0.3em;
+  --skel-one-input-height: 2.5em;
+  --skel-backdrop-z-index: 1000;
+}

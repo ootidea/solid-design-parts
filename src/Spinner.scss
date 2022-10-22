@@ -1,0 +1,28 @@
+:root {
+  --skel-Spinner_default-size: 1.2em;
+}
+
+.skel-Spinner_root {
+  display: inline-block;
+  position: relative;
+  width: var(--skel-Spinner_size);
+  height: var(--skel-Spinner_size);
+
+  vertical-align: top;
+
+  background-image: conic-gradient(transparent, transparent, var(--skel-Spinner_color));
+  mask: var(--skel-Spinner_svg-url) no-repeat center;
+  mask-size: contain;
+
+  transform-origin: center;
+  animation: rotation var(--skel-Spinner_period) infinite linear;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

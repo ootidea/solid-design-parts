@@ -1,0 +1,42 @@
+.skel-DatePicker_root {
+  width: max-content;
+}
+
+.skel-DatePicker_date-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  font: inherit;
+  background-color: transparent;
+  color: inherit;
+
+  &:where(:not(:disabled)) {
+    cursor: pointer;
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: oklch(96% 0 0);
+      }
+    }
+
+    &:active {
+      background-color: oklch(92% 0 0);
+    }
+  }
+
+  &.skel-DatePicker_selected {
+    background-color: var(--skel-primary-color);
+    color: white;
+  }
+
+  &:disabled {
+    color: oklch(85% 0 0);
+  }
+}

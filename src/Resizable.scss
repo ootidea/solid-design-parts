@@ -1,0 +1,30 @@
+.skel-Resizable_root {
+  position: relative;
+}
+
+.skel-Resizable_resize-handle {
+  visibility: hidden;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  box-sizing: border-box;
+  width: 4px;
+  background-color: oklch(70% 0 0);
+
+  cursor: col-resize;
+  user-select: none;
+
+  @media (hover: hover) {
+    &:hover {
+      width: 6px;
+      background-color: var(--skel-primary-color);
+    }
+
+    .skel-Resizable_root:hover & {
+      visibility: visible;
+    }
+  }
+}

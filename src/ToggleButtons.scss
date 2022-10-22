@@ -1,0 +1,84 @@
+:root {
+  --skel-ToggleButtons_border-radius: 0.4em;
+  --skel-ToggleButtons_border: var(--skel-ToggleButtons_border-color) 1px solid;
+  --skel-ToggleButtons_border-color: oklch(80% 0 0);
+  --skel-ToggleButtons_text-color: oklch(50% 0 0);
+  --skel-ToggleButtons_selected-border-color: oklch(70% 0.08 255.4);
+  --skel-ToggleButtons_selected-text-color: oklch(50% 0.22 255.4);
+  --skel-ToggleButtons_selected-background-color: var(--skel-primary-selected-background-color);
+  --skel-ToggleButtons_selected-font-weight: inherit;
+}
+
+.skel-ToggleButtons_root {
+  display: grid;
+  grid-auto-flow: column;
+  width: max-content;
+
+  &.skel-ToggleButtons_full-width {
+    width: 100%;
+  }
+}
+
+.skel-ToggleButtons_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.3em 0.5em;
+  border: var(--skel-ToggleButtons_border);
+  border-right: none;
+
+  background: transparent;
+  color: var(--skel-ToggleButtons_text-color);
+  font: inherit;
+
+  cursor: pointer;
+
+  transition: var(--skel-backward-transition);
+
+  &:first-of-type {
+    border-top-left-radius: var(--skel-ToggleButtons_border-radius);
+    border-bottom-left-radius: var(--skel-ToggleButtons_border-radius);
+  }
+
+  &:last-of-type {
+    border-top-right-radius: var(--skel-ToggleButtons_border-radius);
+    border-bottom-right-radius: var(--skel-ToggleButtons_border-radius);
+
+    border-right: var(--skel-ToggleButtons_border);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--skel-clickable-hover-background-color);
+      transition: var(--skel-forward-transition);
+    }
+  }
+
+  &:active {
+    background-color: var(--skel-clickable-active-background-color);
+    transition: var(--skel-forward-transition);
+  }
+
+  &.skel-ToggleButton_selected {
+    border-color: var(--skel-ToggleButtons_selected-border-color);
+
+    & + .skel-ToggleButtons_button {
+      border-left-color: var(--skel-ToggleButtons_selected-border-color);
+    }
+
+    background-color: var(--skel-primary-selected-background-color);
+    color: var(--skel-ToggleButtons_selected-text-color);
+    font-weight: var(--skel-ToggleButtons_selected-font-weight);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--skel-primary-selected-background-hover-color);
+      }
+    }
+
+    &:active {
+      background-color: var(--skel-primary-selected-background-active-color);
+    }
+  }
+}

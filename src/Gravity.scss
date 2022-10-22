@@ -1,0 +1,30 @@
+.skel-Gravity_root {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  &[data-horizontal-position='left'] {
+    justify-content: left;
+  }
+
+  &[data-horizontal-position='center'] {
+    justify-content: center;
+  }
+
+  &[data-horizontal-position='right'] {
+    justify-content: right;
+  }
+
+  &[data-vertical-position='top'] {
+    align-items: start;
+  }
+
+  &[data-vertical-position='center'] {
+    align-items: center;
+  }
+
+  &[data-vertical-position='bottom'] {
+    align-items: end;
+  }
+}

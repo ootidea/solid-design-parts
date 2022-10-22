@@ -1,0 +1,55 @@
+.skel-AutoSizeTextArea_root {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+}
+
+.skel-AutoSizeTextArea_dummy,
+.skel-AutoSizeTextArea_text-area {
+  box-sizing: border-box;
+
+  padding: 0.4em 0.6em;
+  border-radius: var(--skel-input-border-radius);
+  border: var(--skel-input-border-color) 1px solid;
+
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  color: inherit;
+  font: inherit;
+  line-height: 1.8em;
+  letter-spacing: inherit;
+
+  min-height: 4.8em;
+}
+
+.skel-AutoSizeTextArea_dummy {
+  visibility: hidden;
+}
+
+.skel-AutoSizeTextArea_text-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  outline: none;
+  resize: none;
+
+  &::placeholder {
+    color: var(--skel-placeholder-text-color);
+  }
+
+  &:disabled {
+    background-color: var(--skel-disabled-input-background-color);
+  }
+
+  &:focus {
+    border-color: var(--skel-primary-color);
+  }
+}

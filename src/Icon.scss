@@ -1,0 +1,18 @@
+:root {
+  --skel-Icon_default-color: oklch(40% 0 0);
+  --skel-Icon_default-size: 1.5em;
+}
+
+.skel-Icon_root {
+  display: inline-block;
+  vertical-align: top;
+  width: var(--skel-Icon_size);
+  height: var(--skel-Icon_size);
+
+  background-color: var(--skel-Icon_color);
+  mask: var(--skel-Icon_url) no-repeat center;
+  mask-size: contain;
+
+  transform-origin: center;
+  transform: rotate(var(--skel-Icon_rotate));
+}

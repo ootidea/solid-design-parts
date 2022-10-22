@@ -1,0 +1,26 @@
+/**
+ * Round to the nearest integer.
+ * Note that the calculation results fluctuate as follows at 0.5.
+ * @example
+ * round(0.5) = 0
+ * round(1.5) = 2
+ * round(2.5) = 2
+ * round(3.5) = 4
+ * round(4.5) = 4
+ * round(5.5) = 6
+ *
+ * round(0.5001) = 1
+ * round(1.4999) = 1
+ */
+@function round($number) {
+  // reference: https://stackoverflow.com/questions/37754542/css-calc-round-down-with-two-decimal-cases
+  @return calc(#{$number} * 4.9406564584124654e-324 / 4.9406564584124654e-324);
+}
+
+@function toIntegerPx($length) {
+  @return round(calc(#{$length} + 0px));
+}
+
+@function toEvenPx($length) {
+  @return calc(round(calc((#{$length} + 0px) / 2)) * 2);
+}

@@ -1,0 +1,15 @@
+.skel-StretchLayout_root {
+  display: grid;
+  box-sizing: border-box;
+
+  &[data-direction='horizontal'] {
+    grid-auto-flow: column;
+    grid-template-columns: var(--skel-StretchLayout_template);
+  }
+
+  &[data-direction='vertical'] {
+    grid-auto-flow: row;
+    grid-template-rows: var(--skel-StretchLayout_template);
+    height: 100%;
+  }
+}
