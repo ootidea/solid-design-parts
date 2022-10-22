@@ -74,7 +74,7 @@ export function TextInput(rawProps: TextInputProps) {
         <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
         <input
           class="skel-TextInput_input"
-          value={props.value}
+          attr:value={props.value}
           placeholder={props.placeholder}
           type={props.type}
           onInput={onInput}

@@ -40,7 +40,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       </div>
       <textarea
         class={joinClasses(rawProps, "skel-AutoSizeTextArea_text-area")}
-        value={value()}
+        attr:value={value()}
         onInput={onInput}
         {...restProps}
       />
