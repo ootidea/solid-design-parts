@@ -1,0 +1,19 @@
+.root {
+  padding: 0.7em 1.4em;
+  cursor: pointer;
+
+  &.active {
+    color: var(--skel-primary-color);
+    font-weight: bold;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: oklch(96% 0 0);
+    }
+  }
+
+  &:active {
+    background-color: oklch(92% 0 0);
+  }
+}

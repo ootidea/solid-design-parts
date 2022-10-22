@@ -1,0 +1,15 @@
+.sidebar {
+  // Required to display scrollbar properly.
+  overflow: hidden;
+}
+
+.sidebarContent {
+  padding-top: 2rem;
+  padding-bottom: 8rem;
+}
+
+.main {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden;
+}
