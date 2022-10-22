@@ -1,7 +1,7 @@
 import { JSX } from "solid-js";
-import checkIcon from "./check.svg";
 import css from "./DataTableCell.scss";
 import { Icon } from "./Icon";
+import checkIcon from "./image/check.svg";
 import { call, DiscriminatedUnion } from "./utility/others";
 import { joinClasses, prepareProps, SkelProps } from "./utility/props";
 import { registerCss } from "./utility/registerCss";

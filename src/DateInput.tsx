@@ -1,9 +1,9 @@
 import { createSignal, Show } from "solid-js";
-import calendarIcon from "./calendar.svg";
 import css from "./DateInput.scss";
 import { DatePicker } from "./DatePicker";
 import { Gravity } from "./Gravity";
 import { Icon } from "./Icon";
+import calendarIcon from "./image/calendar.svg";
 import { Modal } from "./Modal";
 import { joinClasses, prepareProps, SkelProps, SkelSlot } from "./utility/props";
 import { registerCss } from "./utility/registerCss";

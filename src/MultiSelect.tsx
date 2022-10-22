@@ -1,9 +1,9 @@
 import { createEffect, createMemo, createSignal, For, Show } from "solid-js";
 import { Portal } from "solid-js/web";
 import { Checkbox } from "./Checkbox";
-import chevronDownIcon from "./chevron-down.svg";
 import { Divider } from "./Divider";
 import { Icon } from "./Icon";
+import chevronDownIcon from "./image/chevron-down.svg";
 import css from "./MultiSelect.scss";
 import { Scrollable } from "./Scrollable";
 import { TextInput } from "./TextInput";

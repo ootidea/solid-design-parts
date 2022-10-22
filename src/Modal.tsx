@@ -1,8 +1,8 @@
 import { createEffect, createSignal, Show } from "solid-js";
 import { Portal } from "solid-js/web";
-import closeIcon from "./close.svg";
 import { FadeAnimation } from "./FadeAnimation";
 import { IconButton } from "./IconButton";
+import closeIcon from "./image/close.svg";
 import css from "./Modal.scss";
 import { Scrollable } from "./Scrollable";
 import { TitleBarLayout } from "./TitleBarLayout";

@@ -1,9 +1,9 @@
 import dayjs, { Dayjs } from "dayjs";
 import { createEffect, createSignal, For, Show } from "solid-js";
 import css from "./Calendar.scss";
-import chevronLeftIcon from "./chevron-left.svg";
-import chevronRightIcon from "./chevron-right.svg";
 import { IconButton } from "./IconButton";
+import chevronLeftIcon from "./image/chevron-left.svg";
+import chevronRightIcon from "./image/chevron-right.svg";
 import { i18n } from "./utility/i18n";
 import { until } from "./utility/others";
 import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from "./utility/props";

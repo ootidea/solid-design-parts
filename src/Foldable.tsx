@@ -1,9 +1,9 @@
 import { createEffect, createSignal, Show } from "solid-js";
-import chevronDownIcon from "./chevron-down.svg";
 import { Divider } from "./Divider";
 import css from "./Foldable.scss";
 import { Gravity } from "./Gravity";
 import { Icon } from "./Icon";
+import chevronDownIcon from "./image/chevron-down.svg";
 import { StretchLayout } from "./StretchLayout";
 import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from "./utility/props";
 import { registerCss } from "./utility/registerCss";

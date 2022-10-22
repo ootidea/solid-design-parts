@@ -1,10 +1,10 @@
 import { Accessor, createEffect, createMemo, createSignal, For, Show } from "solid-js";
-import arrowDownIcon from "./arrow-down.svg";
 import css from "./DataTable.scss";
 import { DataTableCell } from "./DataTableCell";
 import { Divider } from "./Divider";
 import { Gravity } from "./Gravity";
 import { IconButton } from "./IconButton";
+import arrowDownIcon from "./image/arrow-down.svg";
 import { i18n } from "./utility/i18n";
 import { objectFromEntries } from "./utility/others";
 import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from "./utility/props";
