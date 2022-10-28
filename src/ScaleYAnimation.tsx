@@ -2,7 +2,7 @@ import { createEffect, createSignal, on, Show } from 'solid-js'
 import { prepareProps, SkelProps, SkelSlot } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type ScaleProps = SkelProps<{
+export type ScaleYAnimationProps = SkelProps<{
   shown?: boolean
   options?: number | KeyframeAnimationOptions
   onFinishAnimation?: (type: 'enter' | 'leave') => void
@@ -10,7 +10,7 @@ export type ScaleProps = SkelProps<{
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
 
-export function ScaleYAnimation(rawProps: ScaleProps) {
+export function ScaleYAnimation(rawProps: ScaleYAnimationProps) {
   const [props, restProps] = prepareProps(rawProps, { shown: true, options: 250 }, [
     'onFinishAnimation',
     'launcher',

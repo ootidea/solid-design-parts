@@ -2,7 +2,7 @@ import { createEffect, createSignal, on, Show } from 'solid-js'
 import { prepareProps, SkelProps, SkelSlot } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type FadeProps = SkelProps<{
+export type FadeAnimationProps = SkelProps<{
   shown?: boolean
   options?: number | KeyframeAnimationOptions
   onFinishAnimation?: (type: 'enter' | 'leave') => void
@@ -10,7 +10,7 @@ export type FadeProps = SkelProps<{
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
 
-export function FadeAnimation(rawProps: FadeProps) {
+export function FadeAnimation(rawProps: FadeAnimationProps) {
   const [props, restProps] = prepareProps(rawProps, { shown: true, options: 250 }, [
     'onFinishAnimation',
     'launcher',
