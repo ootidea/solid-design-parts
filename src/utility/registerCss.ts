@@ -2,7 +2,7 @@ import css from "../common.scss";
 
 export function registerCss(css: string) {
   const style = document.createElement("style");
-  style.innerText = css;
+  style.textContent = css;
   document.head.appendChild(style);
 }
 
