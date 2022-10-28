@@ -1,10 +1,6 @@
 import { createEffect, createSignal, on, Show } from 'solid-js'
-import css from './ScaleAnimation.scss'
 import { prepareProps, SkelProps, SkelSlot } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type ScaleProps = SkelProps<{
   shown?: boolean
@@ -14,7 +10,7 @@ export type ScaleProps = SkelProps<{
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
 
-export function ScaleAnimation(rawProps: ScaleProps) {
+export function ScaleYAnimation(rawProps: ScaleProps) {
   const [props, restProps] = prepareProps(rawProps, { shown: true, options: 250 }, [
     'onFinishAnimation',
     'launcher',
@@ -38,7 +34,7 @@ export function ScaleAnimation(rawProps: ScaleProps) {
 
     if (!newShown) {
       if (element !== undefined) {
-        const animation = element.animate([{ transform: 'scale(1)' }, { transform: 'scale(0)' }], props.options)
+        const animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], props.options)
         animation.addEventListener('finish', () => {
           setShown(newShown)
           props.onFinishAnimation?.('leave')
@@ -46,7 +42,7 @@ export function ScaleAnimation(rawProps: ScaleProps) {
       }
     } else {
       setShown(newShown)
-      const animation = element?.animate([{ transform: 'scale(0)' }, { transform: 'scale(1)' }], props.options)
+      const animation = element?.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], props.options)
       animation?.addEventListener('finish', () => {
         props.onFinishAnimation?.('enter')
       })
@@ -59,7 +55,7 @@ export function ScaleAnimation(rawProps: ScaleProps) {
   return (
     <>
       <Slot content={props.launcher} params={{ show, hide, toggle }} />
-      <div class="skel-ScaleAnimation_root" ref={element}>
+      <div class="skel-ScaleYAnimation_root" ref={element}>
         <Show when={shown()}>
           <Slot content={props.children} params={{ show, hide, toggle }} />
         </Show>

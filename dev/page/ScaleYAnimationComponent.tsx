@@ -1,42 +1,42 @@
 import { createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
-import { ScaleAnimation } from '../../src/ScaleAnimation'
+import { ScaleYAnimation } from '../../src/ScaleYAnimation'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
-export function ScaleAnimationComponent() {
+export function ScaleYAnimationComponent() {
   const [shown, setShown] = createSignal(true)
 
   return (
     <article>
-      <PageTitle>ScaleAnimation</PageTitle>
+      <PageTitle>ScaleYAnimation</PageTitle>
 
       <Sample id="basic-example" title="Basic example">
         <Button onClick={() => setShown(!shown())}>Toggle</Button>
-        <ScaleAnimation shown={shown()}>
+        <ScaleYAnimation shown={shown()}>
           <span>Content</span>
-        </ScaleAnimation>
+        </ScaleYAnimation>
       </Sample>
 
       <Sample id="control-by-laucher" title="Control by launcher">
-        <ScaleAnimation launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
+        <ScaleYAnimation launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
           <div>Content</div>
-        </ScaleAnimation>
+        </ScaleYAnimation>
       </Sample>
 
       <Sample id="duration-of-animation" title="Duration of animation">
-        <ScaleAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
+        <ScaleYAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
           <div>Content</div>
-        </ScaleAnimation>
+        </ScaleYAnimation>
       </Sample>
 
       <Sample id="on-finish-animation" title="onFinishAnimation">
-        <ScaleAnimation
+        <ScaleYAnimation
           onFinishAnimation={(type) => console.log(type)}
           launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}
         >
           <div>Content</div>
-        </ScaleAnimation>
+        </ScaleYAnimation>
       </Sample>
     </article>
   )

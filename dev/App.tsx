@@ -25,7 +25,7 @@ import { MultiSelectComponent } from './page/MultiSelectComponent'
 import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonsComponent } from './page/RadioButtonsComponent'
 import { ResizableComponent } from './page/ResizableComponent'
-import { ScaleAnimationComponent } from './page/ScaleAnimationComponent'
+import { ScaleYAnimationComponent } from './page/ScaleYAnimationComponent'
 import { ScrollableComponent } from './page/ScrollableComponent'
 import { SelectComponent } from './page/SelectComponent'
 import { SpeechBubbleComponent } from './page/SpeechBubbleComponent'
@@ -85,7 +85,7 @@ export function App() {
     },
     { title: 'Floating', children: [ModalComponent, PopoverComponent] },
     { title: 'Data collections', children: [DataTableComponent, TabsComponent] },
-    { title: 'Animations', children: [FadeAnimationComponent, ScaleAnimationComponent] },
+    { title: 'Animations', children: [FadeAnimationComponent, ScaleYAnimationComponent] },
     {
       title: 'Others',
       children: [
