@@ -1,40 +1,40 @@
-import { createSignal, Show } from "solid-js";
-import css from "./DateInput.scss";
-import { DatePicker } from "./DatePicker";
-import { Gravity } from "./Gravity";
-import { Icon } from "./Icon";
-import calendarIcon from "./image/calendar.svg";
-import { Modal } from "./Modal";
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
-import { Slot } from "./utility/Slot";
+import { createSignal, Show } from 'solid-js'
+import css from './DateInput.scss'
+import { DatePicker } from './DatePicker'
+import { Gravity } from './Gravity'
+import { Icon } from './Icon'
+import calendarIcon from './image/calendar.svg'
+import { Modal } from './Modal'
+import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { registerCss } from './utility/registerCss'
+import { Slot } from './utility/Slot'
 
-registerCss(css);
+registerCss(css)
 
 export type DateInputProps = SkelProps<{
-  value?: Date | undefined;
-  placeholder?: string;
-  disabled?: boolean | ((date: Date) => boolean);
-  onChangeValue?: ((value: Date) => void) | undefined;
-  format?: SkelSlot<{ value: Date | undefined }>;
-}>;
+  value?: Date | undefined
+  placeholder?: string
+  disabled?: boolean | ((date: Date) => boolean)
+  onChangeValue?: ((value: Date) => void) | undefined
+  format?: SkelSlot<{ value: Date | undefined }>
+}>
 
 export function DateInput(rawProps: DateInputProps) {
   const [props, restProps] = prepareProps(rawProps, { disabled: false }, [
-    "value",
-    "placeholder",
-    "onChangeValue",
-    "format",
-  ]);
-  const [value, setValue] = createSignal<Date | undefined>(props.value);
+    'value',
+    'placeholder',
+    'onChangeValue',
+    'format',
+  ])
+  const [value, setValue] = createSignal<Date | undefined>(props.value)
 
-  const dummyDate = new Date(9999, 11, 29, 23, 59, 59, 999);
+  const dummyDate = new Date(9999, 11, 29, 23, 59, 59, 999)
 
   return (
     <Modal
       launcher={({ toggle }) => (
         <button
-          class={joinClasses(props, "skel-DateInput_launcher")}
+          class={joinClasses(props, 'skel-DateInput_launcher')}
           type="button"
           disabled={props.disabled === true}
           onClick={toggle}
@@ -48,10 +48,7 @@ export function DateInput(rawProps: DateInputProps) {
                 </Slot>
               </div>
             </Show>
-            <div
-              class="skel-DateInput_placeholder"
-              classList={{ "skel-DateInput_invisible": value() !== undefined }}
-            >
+            <div class="skel-DateInput_placeholder" classList={{ 'skel-DateInput_invisible': value() !== undefined }}>
               {props.placeholder}
             </div>
             <div class="skel-DateInput_format skel-DateInput_invisible">
@@ -73,12 +70,12 @@ export function DateInput(rawProps: DateInputProps) {
           value={value()}
           disabled={props.disabled instanceof Function ? props.disabled : undefined}
           onChangeValue={(value) => {
-            toggle();
-            setValue(value);
-            props.onChangeValue?.(value);
+            toggle()
+            setValue(value)
+            props.onChangeValue?.(value)
           }}
         />
       )}
     </Modal>
-  );
+  )
 }

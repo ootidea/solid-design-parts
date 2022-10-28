@@ -1,15 +1,15 @@
-import { createSignal } from "solid-js";
-import { Icon } from "../../src/Icon";
-import { Spinner } from "../../src/Spinner";
-import { TextInput } from "../../src/TextInput";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
-import alertOutlineIcon from "./alert-outline.svg";
-import checkIcon from "./check.svg";
-import searchIcon from "./search.svg";
+import { createSignal } from 'solid-js'
+import { Icon } from '../../src/Icon'
+import { Spinner } from '../../src/Spinner'
+import { TextInput } from '../../src/TextInput'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
+import alertOutlineIcon from './alert-outline.svg'
+import checkIcon from './check.svg'
+import searchIcon from './search.svg'
 
 export function TextInputComponent() {
-  const [value, setValue] = createSignal("default value");
+  const [value, setValue] = createSignal('default value')
 
   return (
     <article>
@@ -54,5 +54,5 @@ export function TextInputComponent() {
         <TextInput value="default value" disabled />
       </Sample>
     </article>
-  );
+  )
 }

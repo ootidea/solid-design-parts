@@ -1,10 +1,10 @@
-import { createSignal } from "solid-js";
-import { Checkbox } from "../../src/Checkbox";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { Checkbox } from '../../src/Checkbox'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function CheckboxComponent() {
-  const [checked, setChecked] = createSignal(true);
+  const [checked, setChecked] = createSignal(true)
 
   return (
     <article>
@@ -45,5 +45,5 @@ export function CheckboxComponent() {
         </Checkbox>
       </Sample>
     </article>
-  );
+  )
 }

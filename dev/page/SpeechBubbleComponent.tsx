@@ -1,6 +1,6 @@
-import { SpeechBubble } from "../../src/SpeechBubble";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { SpeechBubble } from '../../src/SpeechBubble'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function SpeechBubbleComponent() {
   return (
@@ -23,5 +23,5 @@ export function SpeechBubbleComponent() {
         <SpeechBubble triangleAngle="150deg">Customize triangle angle</SpeechBubble>
       </Sample>
     </article>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import { createSignal } from "solid-js";
-import { DatePicker } from "../../src/DatePicker";
-import { toLiteral } from "../other";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { DatePicker } from '../../src/DatePicker'
+import { toLiteral } from '../other'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function DatePickerComponent() {
-  const [value, setValue] = createSignal<Date | undefined>(undefined);
+  const [value, setValue] = createSignal<Date | undefined>(undefined)
 
   return (
     <article>
@@ -32,5 +32,5 @@ export function DatePickerComponent() {
         <DatePicker disabled={(date) => date.getTime() < Date.now()} />
       </Sample>
     </article>
-  );
+  )
 }

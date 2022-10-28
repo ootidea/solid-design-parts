@@ -1,6 +1,6 @@
-import { Spinner } from "../../src/Spinner";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { Spinner } from '../../src/Spinner'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function SpinnerComponent() {
   return (
@@ -42,5 +42,5 @@ export function SpinnerComponent() {
         <Spinner color="hsl(0 90% 50%)" />
       </Sample>
     </article>
-  );
+  )
 }

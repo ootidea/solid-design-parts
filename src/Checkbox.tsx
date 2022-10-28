@@ -1,18 +1,18 @@
-import css from "./Checkbox.scss";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import css from './Checkbox.scss'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type CheckboxProps = SkelProps<
   {
-    checked?: boolean;
-    value?: string | undefined;
-    disabled?: boolean;
-    onChangeChecked?: (checked: boolean) => void;
+    checked?: boolean
+    value?: string | undefined
+    disabled?: boolean
+    onChangeChecked?: (checked: boolean) => void
   },
-  "label"
->;
+  'label'
+>
 
 export function Checkbox(rawProps: CheckboxProps) {
   const [props, restProps] = prepareProps(
@@ -22,19 +22,19 @@ export function Checkbox(rawProps: CheckboxProps) {
       value: undefined,
       disabled: false,
     },
-    ["onChangeChecked"],
-  );
+    ['onChangeChecked']
+  )
 
   function onChange(event: Event) {
     if (event.target instanceof HTMLInputElement) {
-      props.onChangeChecked?.(event.target.checked);
+      props.onChangeChecked?.(event.target.checked)
     }
   }
 
   return (
     <label
-      class={joinClasses(rawProps, "skel-Checkbox_root", {
-        "skel-Checkbox_disabled": props.disabled,
+      class={joinClasses(rawProps, 'skel-Checkbox_root', {
+        'skel-Checkbox_disabled': props.disabled,
       })}
       {...restProps}
     >
@@ -48,5 +48,5 @@ export function Checkbox(rawProps: CheckboxProps) {
       />
       <div class="skel-Checkbox_children">{rawProps.children}</div>
     </label>
-  );
+  )
 }

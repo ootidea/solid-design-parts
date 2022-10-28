@@ -1,12 +1,12 @@
-import { createSignal, For } from "solid-js";
-import { Button } from "../../src/Button";
-import { Gravity } from "../../src/Gravity";
-import { Modal } from "../../src/Modal";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal, For } from 'solid-js'
+import { Button } from '../../src/Button'
+import { Gravity } from '../../src/Gravity'
+import { Modal } from '../../src/Modal'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function ModalComponent() {
-  const [opened, setOpened] = createSignal(false);
+  const [opened, setOpened] = createSignal(false)
 
   return (
     <article>
@@ -63,5 +63,5 @@ export function ModalComponent() {
         </Modal>
       </Sample>
     </article>
-  );
+  )
 }

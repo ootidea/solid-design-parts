@@ -1,11 +1,11 @@
-import { createSignal } from "solid-js";
-import { Button } from "../../src/Button";
-import { Calendar } from "../../src/Calendar";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { Button } from '../../src/Button'
+import { Calendar } from '../../src/Calendar'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function CalendarComponent() {
-  const [date, setDate] = createSignal(new Date(), { equals: false });
+  const [date, setDate] = createSignal(new Date(), { equals: false })
 
   return (
     <article>
@@ -29,7 +29,7 @@ export function CalendarComponent() {
       </Sample>
 
       <Sample id="overwrite-cell" title="Overwrite cell">
-        <Calendar>{({ date }) => String(date.getDate()).padStart(2, "0")}</Calendar>
+        <Calendar>{({ date }) => String(date.getDate()).padStart(2, '0')}</Calendar>
       </Sample>
 
       <Sample id="hide-dates-in-other-months" title="Hide dates in other months">
@@ -41,5 +41,5 @@ export function CalendarComponent() {
         `}</style>
       </Sample>
     </article>
-  );
+  )
 }

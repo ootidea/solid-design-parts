@@ -1,39 +1,39 @@
-import dayjs from "dayjs";
-import { createSignal } from "solid-js";
-import { Calendar } from "./Calendar";
-import css from "./DatePicker.scss";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import dayjs from 'dayjs'
+import { createSignal } from 'solid-js'
+import { Calendar } from './Calendar'
+import css from './DatePicker.scss'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type DatePickerProps = SkelProps<{
-  value?: Date | undefined;
-  month?: Date;
-  disabled?: (date: Date) => boolean;
-  onChangeValue?: (value: Date) => void;
-  onChangeMonth?: (month: Date) => void;
-}>;
+  value?: Date | undefined
+  month?: Date
+  disabled?: (date: Date) => boolean
+  onChangeValue?: (value: Date) => void
+  onChangeMonth?: (month: Date) => void
+}>
 
 export function DatePicker(rawProps: DatePickerProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
       value: undefined,
-      month: dayjs().startOf("date").toDate(),
+      month: dayjs().startOf('date').toDate(),
     },
-    ["disabled", "onChangeValue", "onChangeMonth"],
-  );
+    ['disabled', 'onChangeValue', 'onChangeMonth']
+  )
 
-  const [value, setValue] = createSignal<Date | undefined>(props.value);
+  const [value, setValue] = createSignal<Date | undefined>(props.value)
   function changeValue(value: Date) {
-    setValue(value);
-    props.onChangeValue?.(value);
+    setValue(value)
+    props.onChangeValue?.(value)
   }
 
   return (
     <Calendar
-      class={joinClasses(rawProps, "skel-DatePicker_root")}
+      class={joinClasses(rawProps, 'skel-DatePicker_root')}
       month={props.month}
       onChangeMonth={props.onChangeMonth}
       {...restProps}
@@ -42,8 +42,7 @@ export function DatePicker(rawProps: DatePickerProps) {
         <button
           class="skel-DatePicker_date-cell"
           classList={{
-            "skel-DatePicker_selected":
-              value() !== undefined && dayjs(date).isSame(value(), "date"),
+            'skel-DatePicker_selected': value() !== undefined && dayjs(date).isSame(value(), 'date'),
           }}
           type="button"
           disabled={props.disabled?.(date)}
@@ -53,5 +52,5 @@ export function DatePicker(rawProps: DatePickerProps) {
         </button>
       )}
     </Calendar>
-  );
+  )
 }

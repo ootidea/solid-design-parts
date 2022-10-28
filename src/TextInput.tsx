@@ -1,70 +1,70 @@
-import { JSX } from "solid-js";
-import { Gravity } from "./Gravity";
-import { StretchLayout } from "./StretchLayout";
-import css from "./TextInput.scss";
-import { LiteralUnion } from "./utility/others";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import { JSX } from 'solid-js'
+import { Gravity } from './Gravity'
+import { StretchLayout } from './StretchLayout'
+import css from './TextInput.scss'
+import { LiteralUnion } from './utility/others'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type TextInputProps = SkelProps<{
-  value?: string;
-  placeholder?: string;
+  value?: string
+  placeholder?: string
   type?: LiteralUnion<
-    | "button"
-    | "checkbox"
-    | "color"
-    | "date"
-    | "datetime-local"
-    | "email"
-    | "file"
-    | "hidden"
-    | "image"
-    | "month"
-    | "number"
-    | "password"
-    | "radio"
-    | "range"
-    | "reset"
-    | "search"
-    | "submit"
-    | "tel"
-    | "text"
-    | "time"
-    | "url"
-    | "week"
-  >;
-  disabled?: boolean;
-  prefix?: JSX.Element;
-  postfix?: JSX.Element;
-  prepend?: JSX.Element;
-  append?: JSX.Element;
-  onChangeValue?: (value: string) => void;
-}>;
+    | 'button'
+    | 'checkbox'
+    | 'color'
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'file'
+    | 'hidden'
+    | 'image'
+    | 'month'
+    | 'number'
+    | 'password'
+    | 'radio'
+    | 'range'
+    | 'reset'
+    | 'search'
+    | 'submit'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url'
+    | 'week'
+  >
+  disabled?: boolean
+  prefix?: JSX.Element
+  postfix?: JSX.Element
+  prepend?: JSX.Element
+  append?: JSX.Element
+  onChangeValue?: (value: string) => void
+}>
 
 export function TextInput(rawProps: TextInputProps) {
   const [props, restProps] = prepareProps(rawProps, { disabled: false }, [
-    "value",
-    "placeholder",
-    "type",
-    "prefix",
-    "postfix",
-    "prepend",
-    "append",
-    "onChangeValue",
-  ]);
+    'value',
+    'placeholder',
+    'type',
+    'prefix',
+    'postfix',
+    'prepend',
+    'append',
+    'onChangeValue',
+  ])
 
   function onInput(event: InputEvent) {
     if (event.target instanceof HTMLInputElement) {
-      props.onChangeValue?.(event.target.value);
+      props.onChangeValue?.(event.target.value)
     }
   }
 
   return (
     <StretchLayout
-      class={joinClasses(rawProps, "skel-TextInput_root", {
-        "skel-TextInput_disabled": rawProps.disabled,
+      class={joinClasses(rawProps, 'skel-TextInput_root', {
+        'skel-TextInput_disabled': rawProps.disabled,
       })}
       stretchAt={1}
       {...restProps}
@@ -83,5 +83,5 @@ export function TextInput(rawProps: TextInputProps) {
       </StretchLayout>
       <Gravity class="skel-TextInput_postfix">{rawProps.postfix}</Gravity>
     </StretchLayout>
-  );
+  )
 }

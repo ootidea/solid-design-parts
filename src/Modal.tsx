@@ -1,28 +1,28 @@
-import { createEffect, createSignal, Show } from "solid-js";
-import { Portal } from "solid-js/web";
-import { FadeAnimation } from "./FadeAnimation";
-import { IconButton } from "./IconButton";
-import closeIcon from "./image/close.svg";
-import css from "./Modal.scss";
-import { Scrollable } from "./Scrollable";
-import { TitleBarLayout } from "./TitleBarLayout";
-import { setupFocusTrap } from "./utility/others";
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
-import { Slot } from "./utility/Slot";
+import { createEffect, createSignal, Show } from 'solid-js'
+import { Portal } from 'solid-js/web'
+import { FadeAnimation } from './FadeAnimation'
+import { IconButton } from './IconButton'
+import closeIcon from './image/close.svg'
+import css from './Modal.scss'
+import { Scrollable } from './Scrollable'
+import { TitleBarLayout } from './TitleBarLayout'
+import { setupFocusTrap } from './utility/others'
+import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { registerCss } from './utility/registerCss'
+import { Slot } from './utility/Slot'
 
-registerCss(css);
+registerCss(css)
 
 export type ModalProps = SkelProps<{
-  opened?: boolean;
-  persistent?: boolean;
-  showCloseButton?: boolean;
-  onChangeOpened?: (opened: boolean) => void;
-  launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-  title?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-  children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-  footer?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-}>;
+  opened?: boolean
+  persistent?: boolean
+  showCloseButton?: boolean
+  onChangeOpened?: (opened: boolean) => void
+  launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  title?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  footer?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+}>
 
 export function Modal(rawProps: ModalProps) {
   const [props, restProps] = prepareProps(
@@ -32,26 +32,26 @@ export function Modal(rawProps: ModalProps) {
       opened: false,
       showCloseButton: false,
     },
-    ["onChangeOpened", "launcher", "title", "footer"],
-  );
+    ['onChangeOpened', 'launcher', 'title', 'footer']
+  )
 
-  const [opened, setOpened] = createSignal(props.opened);
-  createEffect(() => setOpened(props.opened));
+  const [opened, setOpened] = createSignal(props.opened)
+  createEffect(() => setOpened(props.opened))
 
   function changeOpened(opened: boolean) {
-    setOpened(opened);
-    props.onChangeOpened?.(opened);
+    setOpened(opened)
+    props.onChangeOpened?.(opened)
   }
 
-  const open = () => changeOpened(true);
-  const close = () => changeOpened(false);
-  const toggle = () => changeOpened(!opened());
+  const open = () => changeOpened(true)
+  const close = () => changeOpened(false)
+  const toggle = () => changeOpened(!opened())
 
   function onClickBackdrop(event: Event) {
-    if (event.target !== event.currentTarget) return;
+    if (event.target !== event.currentTarget) return
 
     if (!props.persistent) {
-      close();
+      close()
     }
   }
 
@@ -61,7 +61,7 @@ export function Modal(rawProps: ModalProps) {
       <Portal>
         <FadeAnimation shown={opened()}>
           <div
-            class={joinClasses(rawProps, "skel-Modal_root")}
+            class={joinClasses(rawProps, 'skel-Modal_root')}
             onClick={onClickBackdrop}
             ref={(element) => setupFocusTrap(element)}
           >
@@ -91,5 +91,5 @@ export function Modal(rawProps: ModalProps) {
         </FadeAnimation>
       </Portal>
     </>
-  );
+  )
 }

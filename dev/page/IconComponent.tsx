@@ -1,7 +1,7 @@
-import { Icon } from "../../src/Icon";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
-import chevronLeftIcon from "./chevron-left.svg";
+import { Icon } from '../../src/Icon'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
+import chevronLeftIcon from './chevron-left.svg'
 
 export function IconComponent() {
   return (
@@ -28,5 +28,5 @@ export function IconComponent() {
         <Icon src={chevronLeftIcon} rotate="-0.25turn" />
       </Sample>
     </article>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import { Image } from "../../src/Image";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { Image } from '../../src/Image'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function ImageComponent() {
   return (
@@ -15,5 +15,5 @@ export function ImageComponent() {
         <Image src="https://example.com" fallback={<>Fallback slot</>} />
       </Sample>
     </article>
-  );
+  )
 }

@@ -1,90 +1,90 @@
-import { createEffect, createSignal, For, Show } from "solid-js";
-import { Portal } from "solid-js/web";
-import { Divider } from "./Divider";
-import { Icon } from "./Icon";
-import chevronDownIcon from "./image/chevron-down.svg";
-import { Scrollable } from "./Scrollable";
-import css from "./Select.scss";
-import { TextInput } from "./TextInput";
-import { call, setupFocusTrap } from "./utility/others";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import { createEffect, createSignal, For, Show } from 'solid-js'
+import { Portal } from 'solid-js/web'
+import { Divider } from './Divider'
+import { Icon } from './Icon'
+import chevronDownIcon from './image/chevron-down.svg'
+import { Scrollable } from './Scrollable'
+import css from './Select.scss'
+import { TextInput } from './TextInput'
+import { call, setupFocusTrap } from './utility/others'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type SelectProps<T extends string> = SkelProps<{
-  values: readonly T[];
-  titles?: Partial<Record<T, string>>;
-  selected?: T | undefined;
-  placeholder?: string;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  showSearchBox?: boolean;
-  onChangeSelected?: (selected: T | undefined) => void;
-}>;
+  values: readonly T[]
+  titles?: Partial<Record<T, string>>
+  selected?: T | undefined
+  placeholder?: string
+  disabled?: boolean
+  fullWidth?: boolean
+  showSearchBox?: boolean
+  onChangeSelected?: (selected: T | undefined) => void
+}>
 
 export function Select<T extends string>(rawProps: SelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
       titles: {},
-      placeholder: "",
+      placeholder: '',
       disabled: false,
       fullWidth: false,
       showSearchBox: false,
     },
-    ["values", "selected", "onChangeSelected"],
-  );
+    ['values', 'selected', 'onChangeSelected']
+  )
 
   function getText(value: T): string {
-    return props.titles?.[value] ?? value;
+    return props.titles?.[value] ?? value
   }
 
-  const [selected, setSelected] = createSignal(props.selected);
-  createEffect(() => setSelected(() => props.selected));
+  const [selected, setSelected] = createSignal(props.selected)
+  createEffect(() => setSelected(() => props.selected))
   function changeSelected(selected: T | undefined) {
-    setSelected(() => selected);
-    props.onChangeSelected?.(selected);
+    setSelected(() => selected)
+    props.onChangeSelected?.(selected)
   }
 
-  const [searchQuery, setSearchQuery] = createSignal("");
+  const [searchQuery, setSearchQuery] = createSignal('')
   function search(values: readonly T[]): readonly T[] {
-    const searchWords = searchQuery().split(/[ 　]/);
+    const searchWords = searchQuery().split(/[ 　]/)
     return values.filter((value) => {
-      const lowerCaseText = getText(value).toLowerCase();
-      return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()));
-    });
+      const lowerCaseText = getText(value).toLowerCase()
+      return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
+    })
   }
 
-  type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number };
+  type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
   const [dropdownInfo, setDropdownInfo] = createSignal<DropdownInfo | undefined>(undefined, {
     equals: false,
-  });
+  })
   function onClickLauncher(event: MouseEvent) {
     if (event.currentTarget instanceof HTMLElement) {
-      const rect = event.currentTarget.getBoundingClientRect();
+      const rect = event.currentTarget.getBoundingClientRect()
       setDropdownInfo({
         leftPx: rect.left,
         topPx: rect.bottom,
         widthPx: rect.width,
         maxHeightPx: window.innerHeight - rect.bottom,
-      });
+      })
     }
   }
 
   function onClickBackdrop(event: MouseEvent) {
-    if (event.target !== event.currentTarget) return;
+    if (event.target !== event.currentTarget) return
 
-    setDropdownInfo(undefined);
+    setDropdownInfo(undefined)
   }
 
   return (
     <>
       <button
-        class={joinClasses(rawProps, "skel-Select_launcher", {
-          "skel-Select_disabled": props.disabled,
-          "skel-Select_opened": dropdownInfo() !== undefined,
-          "skel-Select_full-width": props.fullWidth,
+        class={joinClasses(rawProps, 'skel-Select_launcher', {
+          'skel-Select_disabled': props.disabled,
+          'skel-Select_opened': dropdownInfo() !== undefined,
+          'skel-Select_full-width': props.fullWidth,
         })}
         type="button"
         disabled={props.disabled}
@@ -93,25 +93,21 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
       >
         <div class="skel-Select_preview-area">
           {call(() => {
-            const previewValue = selected();
+            const previewValue = selected()
             return (
               <>
-                {previewValue !== undefined ? (
-                  <div class="skel-Select_preview">{getText(previewValue)} </div>
-                ) : null}
+                {previewValue !== undefined ? <div class="skel-Select_preview">{getText(previewValue)} </div> : null}
                 <div
                   class="skel-Select_placeholder"
-                  classList={{ "skel-Select_invisible": previewValue !== undefined }}
+                  classList={{ 'skel-Select_invisible': previewValue !== undefined }}
                 >
                   {props.placeholder}
                 </div>
                 <div class="skel-Select_invisible">
-                  <For each={props.values}>
-                    {(value) => <div class="skel-Select_preview">{getText(value)}</div>}
-                  </For>
+                  <For each={props.values}>{(value) => <div class="skel-Select_preview">{getText(value)}</div>}</For>
                 </div>
               </>
-            );
+            )
           })}
         </div>
         <Icon class="skel-Select_icon" src={chevronDownIcon} />
@@ -119,18 +115,14 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
       <Show when={dropdownInfo()}>
         {(dropdownInfo) => (
           <Portal>
-            <div
-              class="skel-Select_backdrop"
-              ref={(element) => setupFocusTrap(element)}
-              onClick={onClickBackdrop}
-            >
+            <div class="skel-Select_backdrop" ref={(element) => setupFocusTrap(element)} onClick={onClickBackdrop}>
               <div
                 class="skel-Select_dropdown"
                 style={{
-                  "--skel-Select_dropdown-left": `${dropdownInfo.leftPx}px`,
-                  "--skel-Select_dropdown-top": `${dropdownInfo.topPx}px`,
-                  "--skel-Select_dropdown-width": `${dropdownInfo.widthPx}px`,
-                  "--skel-Select_dropdown-max-height": `${dropdownInfo.maxHeightPx}px`,
+                  '--skel-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
+                  '--skel-Select_dropdown-top': `${dropdownInfo.topPx}px`,
+                  '--skel-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
+                  '--skel-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
                 }}
               >
                 <Show when={props.showSearchBox}>
@@ -153,11 +145,11 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                         </Show>
                         <button
                           class="skel-Select_option"
-                          classList={{ "skel-Select_selected": selected() === value }}
+                          classList={{ 'skel-Select_selected': selected() === value }}
                           type="button"
                           onClick={() => {
-                            changeSelected(value);
-                            setDropdownInfo(undefined);
+                            changeSelected(value)
+                            setDropdownInfo(undefined)
                           }}
                         >
                           {getText(value)}
@@ -172,5 +164,5 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
         )}
       </Show>
     </>
-  );
+  )
 }

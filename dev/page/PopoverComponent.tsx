@@ -1,7 +1,7 @@
-import { Button } from "../../src/Button";
-import { Popover } from "../../src/Popover";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { Button } from '../../src/Button'
+import { Popover } from '../../src/Popover'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function PopoverComponent() {
   return (
@@ -41,5 +41,5 @@ export function PopoverComponent() {
         </Popover>
       </Sample>
     </article>
-  );
+  )
 }

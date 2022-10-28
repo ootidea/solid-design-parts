@@ -1,10 +1,10 @@
-import { createSignal } from "solid-js";
-import { AutoSizeTextArea } from "../../src/AutoSizeTextArea";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { AutoSizeTextArea } from '../../src/AutoSizeTextArea'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function AutoSizeTextAreaComponent() {
-  const [value, setValue] = createSignal("default value");
+  const [value, setValue] = createSignal('default value')
 
   return (
     <article>
@@ -24,7 +24,7 @@ export function AutoSizeTextAreaComponent() {
 
       <Sample id="bind-to-signal" title="Bind to signal">
         <AutoSizeTextArea value={value()} onChangeValue={setValue} />
-        <div style={{ "white-space": "pre-wrap" }}>value() === `{value()}`</div>
+        <div style={{ 'white-space': 'pre-wrap' }}>value() === `{value()}`</div>
       </Sample>
 
       <Sample id="disabled" title="Disabled">
@@ -32,5 +32,5 @@ export function AutoSizeTextAreaComponent() {
         <AutoSizeTextArea value="default value" disabled />
       </Sample>
     </article>
-  );
+  )
 }

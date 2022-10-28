@@ -1,18 +1,18 @@
-import { JSX } from "solid-js";
-import { Gravity } from "./Gravity";
-import css from "./TitleBarLayout.scss";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import { JSX } from 'solid-js'
+import { Gravity } from './Gravity'
+import css from './TitleBarLayout.scss'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
-export type TitleBarLayoutProps = SkelProps<{ left?: JSX.Element; right?: JSX.Element }>;
+export type TitleBarLayoutProps = SkelProps<{ left?: JSX.Element; right?: JSX.Element }>
 
 export function TitleBarLayout(rawProps: TitleBarLayoutProps) {
-  const [props, restProps] = prepareProps(rawProps, {}, ["left", "right", "children"]);
+  const [props, restProps] = prepareProps(rawProps, {}, ['left', 'right', 'children'])
 
   return (
-    <div class={joinClasses(rawProps, "skel-TitleBarLayout_root")} {...restProps}>
+    <div class={joinClasses(rawProps, 'skel-TitleBarLayout_root')} {...restProps}>
       <div class="skel-TitleBarLayout_left-area">
         <div class="skel-TitleBarLayout_left">{props.left}</div>
         <div class="skel-TitleBarLayout_invisible">{props.right}</div>
@@ -23,5 +23,5 @@ export function TitleBarLayout(rawProps: TitleBarLayoutProps) {
         <div class="skel-TitleBarLayout_invisible">{props.left}</div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import { IconButton } from "../../src/IconButton";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
-import chevronLeftIcon from "./chevron-left.svg";
-import chevronRightIcon from "./chevron-right.svg";
+import { IconButton } from '../../src/IconButton'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
+import chevronLeftIcon from './chevron-left.svg'
+import chevronRightIcon from './chevron-right.svg'
 
 export function IconButtonComponent() {
   async function awaitSomeSeconds() {
     return new Promise((resolve) => {
-      setTimeout(resolve, 2000);
-    });
+      setTimeout(resolve, 2000)
+    })
   }
 
   return (
@@ -54,5 +54,5 @@ export function IconButtonComponent() {
         <IconButton src={chevronRightIcon} rotate="0.25turn" />
       </Sample>
     </article>
-  );
+  )
 }

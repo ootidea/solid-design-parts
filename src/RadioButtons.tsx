@@ -1,23 +1,21 @@
-import { createEffect, createSignal, For } from "solid-js";
-import css from "./RadioButtons.scss";
-import { assertNonEmptyArray } from "./utility/others";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import { createEffect, createSignal, For } from 'solid-js'
+import css from './RadioButtons.scss'
+import { assertNonEmptyArray } from './utility/others'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type RadioButtonsProps<Values extends readonly string[]> = SkelProps<{
-  values: Values;
-  name?: string;
-  selected?: Values[number] | undefined;
-  disabled?: boolean | Record<string, boolean>;
-  onChangeSelected?: (selected: Values[number] | undefined) => void;
-}>;
+  values: Values
+  name?: string
+  selected?: Values[number] | undefined
+  disabled?: boolean | Record<string, boolean>
+  onChangeSelected?: (selected: Values[number] | undefined) => void
+}>
 
-export function RadioButtons<Values extends readonly string[]>(
-  rawProps: RadioButtonsProps<Values>,
-) {
-  assertNonEmptyArray(rawProps.values);
+export function RadioButtons<Values extends readonly string[]>(rawProps: RadioButtonsProps<Values>) {
+  assertNonEmptyArray(rawProps.values)
 
   const [props, restProps] = prepareProps(
     rawProps,
@@ -25,26 +23,26 @@ export function RadioButtons<Values extends readonly string[]>(
       name: rawProps.name === undefined ? `skel-RadioButton_name${uniqueId++}` : rawProps.name,
       disabled: false,
     },
-    ["selected", "values", "onChangeSelected"],
-  );
+    ['selected', 'values', 'onChangeSelected']
+  )
 
-  const [selected, setSelected] = createSignal(props.selected);
-  createEffect(() => setSelected(() => props.selected));
+  const [selected, setSelected] = createSignal(props.selected)
+  createEffect(() => setSelected(() => props.selected))
 
   function isDisabled(value: string): boolean {
-    if (typeof props.disabled === "boolean") return props.disabled;
+    if (typeof props.disabled === 'boolean') return props.disabled
 
-    return Boolean(props.disabled[value]);
+    return Boolean(props.disabled[value])
   }
 
   function onClick(event: MouseEvent, value: Values[number]) {
     if (event.target instanceof HTMLInputElement) {
       if (selected() === value) {
-        setSelected(undefined);
-        props.onChangeSelected?.(undefined);
+        setSelected(undefined)
+        props.onChangeSelected?.(undefined)
       } else {
-        setSelected(() => value);
-        props.onChangeSelected?.(value);
+        setSelected(() => value)
+        props.onChangeSelected?.(value)
       }
     }
   }
@@ -53,9 +51,9 @@ export function RadioButtons<Values extends readonly string[]>(
     <For each={props.values}>
       {(value) => (
         <label
-          class={joinClasses(rawProps, "skel-RadioButtons_label")}
+          class={joinClasses(rawProps, 'skel-RadioButtons_label')}
           classList={{
-            "skel-RadioButtons_disabled": isDisabled(value),
+            'skel-RadioButtons_disabled': isDisabled(value),
           }}
           {...restProps}
         >
@@ -72,8 +70,8 @@ export function RadioButtons<Values extends readonly string[]>(
         </label>
       )}
     </For>
-  );
+  )
 }
 
 // Used to generate a unique name attribute when the attribute is omitted.
-let uniqueId = 0;
+let uniqueId = 0

@@ -1,11 +1,11 @@
-import { createSignal } from "solid-js";
-import { Foldable } from "../../src/Foldable";
-import { toLiteral } from "../other";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { Foldable } from '../../src/Foldable'
+import { toLiteral } from '../other'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function FoldableComponent() {
-  const [unfolded, setUnfolded] = createSignal(false);
+  const [unfolded, setUnfolded] = createSignal(false)
 
   return (
     <article>
@@ -35,5 +35,5 @@ export function FoldableComponent() {
         </Foldable>
       </Sample>
     </article>
-  );
+  )
 }

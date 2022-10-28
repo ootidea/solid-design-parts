@@ -1,6 +1,6 @@
-import { createSignal, Show } from "solid-js";
-import { Portal } from "solid-js/web";
-import css from "./Popover.scss";
+import { createSignal, Show } from 'solid-js'
+import { Portal } from 'solid-js/web'
+import css from './Popover.scss'
 import {
   EnneaPosition,
   setupFocusTrap,
@@ -9,66 +9,66 @@ import {
   toVerticalPosition,
   toXPercent,
   toYPercent,
-} from "./utility/others";
-import { prepareProps, SkelProps, SkelSlot } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
-import { Slot } from "./utility/Slot";
+} from './utility/others'
+import { prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { registerCss } from './utility/registerCss'
+import { Slot } from './utility/Slot'
 
-registerCss(css);
+registerCss(css)
 
 export type PopoverProps = SkelProps<{
-  on?: EnneaPosition;
-  joint?: EnneaPosition | undefined;
-  persistent?: boolean;
-  onClose?: () => void;
-  launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-  frame?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-  children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>;
-}>;
+  on?: EnneaPosition
+  joint?: EnneaPosition | undefined
+  persistent?: boolean
+  onClose?: () => void
+  launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  frame?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+}>
 
 export function Popover(rawProps: PopoverProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      on: "bottom",
+      on: 'bottom',
       joint: undefined,
       persistent: false,
     },
-    ["style"],
-  );
+    ['style']
+  )
 
-  const [opened, setOpened] = createSignal(false);
+  const [opened, setOpened] = createSignal(false)
 
   function open() {
-    if (launcher === undefined) return;
+    if (launcher === undefined) return
 
-    const range = document.createRange();
-    range.selectNodeContents(launcher);
-    launcherRect = range.getBoundingClientRect();
-    setOpened(true);
+    const range = document.createRange()
+    range.selectNodeContents(launcher)
+    launcherRect = range.getBoundingClientRect()
+    setOpened(true)
   }
 
   function close() {
-    setOpened(false);
-    props.onClose?.();
+    setOpened(false)
+    props.onClose?.()
   }
 
   function toggle() {
     if (opened()) {
-      close();
+      close()
     } else {
-      open();
+      open()
     }
   }
 
-  let launcher: HTMLDivElement | undefined;
-  let launcherRect: DOMRect | undefined;
+  let launcher: HTMLDivElement | undefined
+  let launcherRect: DOMRect | undefined
 
   function onClickBackdrop(event: MouseEvent) {
-    if (event.target !== event.currentTarget) return;
+    if (event.target !== event.currentTarget) return
 
     if (!props.persistent) {
-      close();
+      close()
     }
   }
 
@@ -82,13 +82,13 @@ export function Popover(rawProps: PopoverProps) {
           <div
             class="skel-Popover_backdrop"
             style={{
-              "--skel-Popover_left": launcherRect ? `${launcherRect.left}px` : "0",
-              "--skel-Popover_right": launcherRect ? `${launcherRect.right}px` : "0",
-              "--skel-Popover_top": launcherRect ? `${launcherRect.top}px` : "0",
-              "--skel-Popover_bottom": launcherRect ? `${launcherRect.bottom}px` : "0",
-              "--skel-Popover_transform": `translate(-${toXPercent(
-                props.joint ?? toOpposite(props.on),
-              )}, -${toYPercent(props.joint ?? toOpposite(props.on))})`,
+              '--skel-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
+              '--skel-Popover_right': launcherRect ? `${launcherRect.right}px` : '0',
+              '--skel-Popover_top': launcherRect ? `${launcherRect.top}px` : '0',
+              '--skel-Popover_bottom': launcherRect ? `${launcherRect.bottom}px` : '0',
+              '--skel-Popover_transform': `translate(-${toXPercent(props.joint ?? toOpposite(props.on))}, -${toYPercent(
+                props.joint ?? toOpposite(props.on)
+              )})`,
             }}
             data-horizontal-position={toHorizontalPosition(props.on)}
             data-vertical-position={toVerticalPosition(props.on)}
@@ -105,5 +105,5 @@ export function Popover(rawProps: PopoverProps) {
         </Portal>
       </Show>
     </>
-  );
+  )
 }

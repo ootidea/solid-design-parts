@@ -1,44 +1,43 @@
-import css from "./StretchLayout.scss";
-import { toArray } from "./utility/others";
-import { joinClasses, joinStyle, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import css from './StretchLayout.scss'
+import { toArray } from './utility/others'
+import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type StretchLayoutProps = SkelProps<{
-  stretchAt?: number | `${number}`;
-  direction?: "horizontal" | "vertical";
-}>;
+  stretchAt?: number | `${number}`
+  direction?: 'horizontal' | 'vertical'
+}>
 
 export function StretchLayout(rawProps: StretchLayoutProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
       stretchAt: 0,
-      direction: "horizontal",
+      direction: 'horizontal',
     },
-    ["style"],
-  );
+    ['style']
+  )
 
   function normalizeIndex(index: number) {
     if (index >= 0) {
-      return index;
+      return index
     }
 
-    return toArray(rawProps.children).length + index;
+    return toArray(rawProps.children).length + index
   }
 
   return (
     <div
-      class={joinClasses(rawProps, "skel-StretchLayout_root")}
+      class={joinClasses(rawProps, 'skel-StretchLayout_root')}
       style={joinStyle(rawProps.style, {
-        "--skel-StretchLayout_template":
-          "auto ".repeat(normalizeIndex(Number(props.stretchAt))) + "minmax(0, 1fr)",
+        '--skel-StretchLayout_template': 'auto '.repeat(normalizeIndex(Number(props.stretchAt))) + 'minmax(0, 1fr)',
       })}
       data-direction={props.direction}
       {...restProps}
     >
       {rawProps.children}
     </div>
-  );
+  )
 }

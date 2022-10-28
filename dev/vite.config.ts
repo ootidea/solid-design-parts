@@ -1,12 +1,12 @@
-import postcssOKLabFunction from "@csstools/postcss-oklab-function";
-import autoprefixer from "autoprefixer";
-import { defineConfig } from "vite";
-import solidPlugin from "vite-plugin-solid";
+import postcssOKLabFunction from '@csstools/postcss-oklab-function'
+import autoprefixer from 'autoprefixer'
+import { defineConfig } from 'vite'
+import solidPlugin from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [solidPlugin()],
   build: {
-    target: "esnext",
+    target: 'esnext',
   },
   server: {
     port: 52260,
@@ -16,4 +16,4 @@ export default defineConfig({
       plugins: [autoprefixer(), postcssOKLabFunction({ subFeatures: { displayP3: false } })],
     },
   },
-});
+})

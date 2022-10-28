@@ -1,28 +1,28 @@
-import { createEffect, createMemo, createSignal, For, Show } from "solid-js";
-import { Portal } from "solid-js/web";
-import { Checkbox } from "./Checkbox";
-import { Divider } from "./Divider";
-import { Icon } from "./Icon";
-import chevronDownIcon from "./image/chevron-down.svg";
-import css from "./MultiSelect.scss";
-import { Scrollable } from "./Scrollable";
-import { TextInput } from "./TextInput";
-import { call, objectFromEntries, setupFocusTrap } from "./utility/others";
-import { joinClasses, prepareProps, SkelProps } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
+import { createEffect, createMemo, createSignal, For, Show } from 'solid-js'
+import { Portal } from 'solid-js/web'
+import { Checkbox } from './Checkbox'
+import { Divider } from './Divider'
+import { Icon } from './Icon'
+import chevronDownIcon from './image/chevron-down.svg'
+import css from './MultiSelect.scss'
+import { Scrollable } from './Scrollable'
+import { TextInput } from './TextInput'
+import { call, objectFromEntries, setupFocusTrap } from './utility/others'
+import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { registerCss } from './utility/registerCss'
 
-registerCss(css);
+registerCss(css)
 
 export type MultiSelectProps<T extends string> = SkelProps<{
-  values: readonly T[];
-  titles?: Partial<Record<T, string>>;
-  selected?: Partial<Record<T, boolean>>;
-  placeholder?: string;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  showSearchBox?: boolean;
-  onChangeSelected?: (selected: Partial<Record<T, boolean>>) => void;
-}>;
+  values: readonly T[]
+  titles?: Partial<Record<T, string>>
+  selected?: Partial<Record<T, boolean>>
+  placeholder?: string
+  disabled?: boolean
+  fullWidth?: boolean
+  showSearchBox?: boolean
+  onChangeSelected?: (selected: Partial<Record<T, boolean>>) => void
+}>
 
 export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const [props, restProps] = prepareProps(
@@ -30,74 +30,72 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     {
       titles: {},
       selected: objectFromEntries(rawProps.values.map((value) => [value, false])),
-      placeholder: "",
+      placeholder: '',
       disabled: false,
       fullWidth: false,
       showSearchBox: false,
     },
-    ["values", "selected", "onChangeSelected"],
-  );
+    ['values', 'selected', 'onChangeSelected']
+  )
 
   function getText(value: T): string {
-    return props.titles?.[value] ?? value;
+    return props.titles?.[value] ?? value
   }
 
-  const [selected, setSelected] = createSignal(props.selected, { equals: false });
-  createEffect(() => setSelected(() => props.selected));
+  const [selected, setSelected] = createSignal(props.selected, { equals: false })
+  createEffect(() => setSelected(() => props.selected))
   function changeSelected(selected: Partial<Record<T, boolean>>) {
-    setSelected(() => selected);
-    props.onChangeSelected?.(selected);
+    setSelected(() => selected)
+    props.onChangeSelected?.(selected)
   }
 
-  const followingCount = createMemo(
-    () => Object.entries(selected()).filter(([, value]) => value).length - 1,
-  );
+  const followingCount = createMemo(() => Object.entries(selected()).filter(([, value]) => value).length - 1)
 
-  const [searchQuery, setSearchQuery] = createSignal("");
+  const [searchQuery, setSearchQuery] = createSignal('')
   function search(values: readonly T[]): readonly T[] {
-    const searchWords = searchQuery().split(/[ 　]/);
+    const searchWords = searchQuery().split(/[ 　]/)
     return values.filter((value) => {
-      const lowerCaseText = getText(value).toLowerCase();
-      return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()));
-    });
+      const lowerCaseText = getText(value).toLowerCase()
+      return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
+    })
   }
 
-  type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number };
+  type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
   const [dropdownInfo, setDropdownInfo] = createSignal<DropdownInfo | undefined>(undefined, {
     equals: false,
-  });
+  })
   function onClickLauncher(event: MouseEvent) {
     if (event.currentTarget instanceof HTMLElement) {
-      const rect = event.currentTarget.getBoundingClientRect();
+      const rect = event.currentTarget.getBoundingClientRect()
       setDropdownInfo({
         leftPx: rect.left,
         topPx: rect.bottom,
         widthPx: rect.width,
         maxHeightPx: window.innerHeight - rect.bottom,
-      });
+      })
     }
   }
 
   function onClickBackdrop(event: MouseEvent) {
-    if (event.target !== event.currentTarget) return;
+    if (event.target !== event.currentTarget) return
 
-    setDropdownInfo(undefined);
+    setDropdownInfo(undefined)
   }
 
   function getPrimarySelectedValue(selected: Partial<Record<T, boolean>>): T | undefined {
     for (const key in selected) {
-      if (selected[key]) return key;
+      if (selected[key]) return key
     }
-    return undefined;
+    return undefined
   }
 
   return (
     <>
       <button
-        class={joinClasses(rawProps, "skel-MultiSelect_launcher", {
-          "skel-MultiSelect_disabled": props.disabled,
-          "skel-MultiSelect_opened": dropdownInfo() !== undefined,
-          "skel-MultiSelect_full-width": props.fullWidth,
+        class={joinClasses(rawProps, 'skel-MultiSelect_launcher', {
+          'skel-MultiSelect_disabled': props.disabled,
+          'skel-MultiSelect_opened': dropdownInfo() !== undefined,
+          'skel-MultiSelect_full-width': props.fullWidth,
         })}
         type="button"
         disabled={props.disabled}
@@ -106,14 +104,12 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       >
         <div class="skel-MultiSelect_preview-area">
           {call(() => {
-            const previewValue = getPrimarySelectedValue(selected());
+            const previewValue = getPrimarySelectedValue(selected())
             return (
               <>
                 {previewValue !== undefined ? (
                   <div class="skel-MultiSelect_preview">
-                    <div class="skel-MultiSelect_primary-selected-value">
-                      {getText(previewValue)}
-                    </div>
+                    <div class="skel-MultiSelect_primary-selected-value">{getText(previewValue)}</div>
                     <Show when={followingCount() > 0}>
                       <div class="skel-MultiSelect_following-count">+{followingCount()}</div>
                     </Show>
@@ -121,7 +117,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                 ) : null}
                 <div
                   class="skel-MultiSelect_placeholder"
-                  classList={{ "skel-MultiSelect_invisible": previewValue !== undefined }}
+                  classList={{ 'skel-MultiSelect_invisible': previewValue !== undefined }}
                 >
                   {props.placeholder}
                 </div>
@@ -129,11 +125,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                   <div class="skel-MultiSelect_preview">
                     <div>
                       <For each={props.values}>
-                        {(value) => (
-                          <div class="skel-MultiSelect_primary-selected-value">
-                            {getText(value)}
-                          </div>
-                        )}
+                        {(value) => <div class="skel-MultiSelect_primary-selected-value">{getText(value)}</div>}
                       </For>
                     </div>
                     <div>
@@ -144,7 +136,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                   </div>
                 </div>
               </>
-            );
+            )
           })}
         </div>
         <Icon class="skel-MultiSelect_icon" src={chevronDownIcon} />
@@ -152,18 +144,14 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       <Show when={dropdownInfo()}>
         {(dropdownInfo) => (
           <Portal>
-            <div
-              class="skel-MultiSelect_backdrop"
-              ref={(element) => setupFocusTrap(element)}
-              onClick={onClickBackdrop}
-            >
+            <div class="skel-MultiSelect_backdrop" ref={(element) => setupFocusTrap(element)} onClick={onClickBackdrop}>
               <div
                 class="skel-MultiSelect_dropdown"
                 style={{
-                  "--skel-MultiSelect_dropdown-left": `${dropdownInfo.leftPx}px`,
-                  "--skel-MultiSelect_dropdown-top": `${dropdownInfo.topPx}px`,
-                  "--skel-MultiSelect_dropdown-width": `${dropdownInfo.widthPx}px`,
-                  "--skel-MultiSelect_dropdown-max-height": `${dropdownInfo.maxHeightPx}px`,
+                  '--skel-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
+                  '--skel-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
+                  '--skel-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
+                  '--skel-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
                 }}
               >
                 <Show when={props.showSearchBox}>
@@ -191,7 +179,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                             changeSelected({
                               ...selected(),
                               [value]: checked,
-                            });
+                            })
                           }}
                         >
                           {getText(value)}
@@ -206,5 +194,5 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
         )}
       </Show>
     </>
-  );
+  )
 }

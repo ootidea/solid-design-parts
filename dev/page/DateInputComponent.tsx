@@ -1,11 +1,11 @@
-import { createSignal } from "solid-js";
-import { DateInput } from "../../src/DateInput";
-import { toLiteral } from "../other";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { DateInput } from '../../src/DateInput'
+import { toLiteral } from '../other'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function DateInputComponent() {
-  const [value, setValue] = createSignal(new Date());
+  const [value, setValue] = createSignal(new Date())
 
   return (
     <article>
@@ -42,5 +42,5 @@ export function DateInputComponent() {
         <DateInput format={({ value }) => value?.toISOString()} />
       </Sample>
     </article>
-  );
+  )
 }

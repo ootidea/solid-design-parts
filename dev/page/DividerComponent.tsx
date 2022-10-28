@@ -1,6 +1,6 @@
-import { Divider } from "../../src/Divider";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { Divider } from '../../src/Divider'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function DividerComponent() {
   return (
@@ -31,5 +31,5 @@ export function DividerComponent() {
         <Divider thickness="0.5rem" />
       </Sample>
     </article>
-  );
+  )
 }

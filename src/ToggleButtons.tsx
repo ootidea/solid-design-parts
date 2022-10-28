@@ -1,30 +1,30 @@
-import { createEffect, createSignal, For } from "solid-js";
-import css from "./ToggleButtons.scss";
-import { call } from "./utility/others";
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from "./utility/props";
-import { registerCss } from "./utility/registerCss";
-import { Slot } from "./utility/Slot";
+import { createEffect, createSignal, For } from 'solid-js'
+import css from './ToggleButtons.scss'
+import { call } from './utility/others'
+import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { registerCss } from './utility/registerCss'
+import { Slot } from './utility/Slot'
 
-registerCss(css);
+registerCss(css)
 
 export type ToggleButtonsProps<T extends string | number> = SkelProps<
   (
     | {
-        exclusive: true;
-        selected?: T | undefined;
-        onChangeSelected?: (state: T | undefined) => void;
-        disableDeselection?: boolean;
+        exclusive: true
+        selected?: T | undefined
+        onChangeSelected?: (state: T | undefined) => void
+        disableDeselection?: boolean
       }
     | { exclusive?: false; selected?: Set<T>; onChangeSelected?: (state: Set<T>) => void }
   ) & {
-    values: readonly T[];
-    titles?: Partial<Record<string, string>>;
-    fullWidth?: boolean;
-    children?: SkelSlot<{ value: T }>;
-    onSelect?: (selected: T) => void;
-    onDeselect?: (selected: T) => void;
+    values: readonly T[]
+    titles?: Partial<Record<string, string>>
+    fullWidth?: boolean
+    children?: SkelSlot<{ value: T }>
+    onSelect?: (selected: T) => void
+    onDeselect?: (selected: T) => void
   }
->;
+>
 
 export function ToggleButtons<T extends string | number>(rawProps: ToggleButtonsProps<T>) {
   const [props, restProps] = prepareProps(
@@ -34,73 +34,73 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
       disableDeselection: false,
       exclusive: false,
     },
-    ["values", "titles", "selected", "onSelect", "children"],
-  );
+    ['values', 'titles', 'selected', 'onSelect', 'children']
+  )
 
   const union = call(() => {
     if (rawProps.exclusive) {
-      const [selected, setSelected] = createSignal(rawProps.selected);
-      createEffect(() => setSelected(() => rawProps.selected));
+      const [selected, setSelected] = createSignal(rawProps.selected)
+      createEffect(() => setSelected(() => rawProps.selected))
       return {
         exclusive: true,
         selected,
         setSelected,
         onChangeSelected: rawProps.onChangeSelected,
         disableDeselection: rawProps.disableDeselection,
-      } as const;
+      } as const
     } else {
       const [selected, setSelected] = createSignal(rawProps.selected ?? new Set<T>(), {
         equals: false,
-      });
-      createEffect(() => setSelected(rawProps.selected ?? new Set<T>()));
+      })
+      createEffect(() => setSelected(rawProps.selected ?? new Set<T>()))
       return {
         exclusive: false,
         selected,
         setSelected,
         onChangeSelected: rawProps.onChangeSelected,
-      } as const;
+      } as const
     }
-  });
+  })
 
   function isSelected(value: T) {
     if (union.exclusive) {
-      return union.selected() === value;
+      return union.selected() === value
     } else {
-      return union.selected().has(value);
+      return union.selected().has(value)
     }
   }
 
   function clickEventHandler(value: T) {
     if (union.exclusive) {
       if (union.selected() !== value) {
-        union.setSelected(() => value);
-        union.onChangeSelected?.(value);
-        props.onSelect?.(value);
+        union.setSelected(() => value)
+        union.onChangeSelected?.(value)
+        props.onSelect?.(value)
       } else if (!union.disableDeselection) {
-        union.setSelected(undefined);
-        union.onChangeSelected?.(undefined);
-        props.onDeselect?.(value);
+        union.setSelected(undefined)
+        union.onChangeSelected?.(undefined)
+        props.onDeselect?.(value)
       }
     } else {
       if (union.selected().has(value)) {
-        union.selected().delete(value);
-        union.setSelected(union.selected());
-        union.onChangeSelected?.(union.selected());
-        props.onDeselect?.(value);
+        union.selected().delete(value)
+        union.setSelected(union.selected())
+        union.onChangeSelected?.(union.selected())
+        props.onDeselect?.(value)
       } else {
-        union.selected().add(value);
-        union.setSelected(union.selected());
-        union.onChangeSelected?.(union.selected());
-        props.onSelect?.(value);
+        union.selected().add(value)
+        union.setSelected(union.selected())
+        union.onChangeSelected?.(union.selected())
+        props.onSelect?.(value)
       }
     }
   }
 
   return (
     <div
-      class={joinClasses(rawProps, "skel-ToggleButtons_root", {
-        "skel-ToggleButtons_full-width": props.fullWidth,
-        "skel-ToggleButtons_exclusive": props.exclusive,
+      class={joinClasses(rawProps, 'skel-ToggleButtons_root', {
+        'skel-ToggleButtons_full-width': props.fullWidth,
+        'skel-ToggleButtons_exclusive': props.exclusive,
       })}
       {...restProps}
     >
@@ -108,7 +108,7 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
         {(value: T) => (
           <button
             class="skel-ToggleButtons_button"
-            classList={{ "skel-ToggleButton_selected": isSelected(value) }}
+            classList={{ 'skel-ToggleButton_selected': isSelected(value) }}
             type="button"
             onClick={() => clickEventHandler(value)}
           >
@@ -119,5 +119,5 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
         )}
       </For>
     </div>
-  );
+  )
 }

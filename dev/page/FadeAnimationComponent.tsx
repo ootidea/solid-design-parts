@@ -1,11 +1,11 @@
-import { createSignal } from "solid-js";
-import { Button } from "../../src/Button";
-import { FadeAnimation } from "../../src/FadeAnimation";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { Button } from '../../src/Button'
+import { FadeAnimation } from '../../src/FadeAnimation'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function FadeAnimationComponent() {
-  const [shown, setShown] = createSignal(true);
+  const [shown, setShown] = createSignal(true)
 
   return (
     <article>
@@ -25,10 +25,7 @@ export function FadeAnimationComponent() {
       </Sample>
 
       <Sample id="duration-of-animation" title="Duration of animation">
-        <FadeAnimation
-          options={1000}
-          launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}
-        >
+        <FadeAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
           <div>Content</div>
         </FadeAnimation>
       </Sample>
@@ -42,5 +39,5 @@ export function FadeAnimationComponent() {
         </FadeAnimation>
       </Sample>
     </article>
-  );
+  )
 }

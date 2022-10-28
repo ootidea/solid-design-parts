@@ -1,14 +1,14 @@
-import { Button } from "../../src/Button";
-import { Icon } from "../../src/Icon";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
-import calendarIcon from "./calendar.svg";
+import { Button } from '../../src/Button'
+import { Icon } from '../../src/Icon'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
+import calendarIcon from './calendar.svg'
 
 export function ButtonComponent() {
   async function awaitSomeSeconds() {
     return new Promise((resolve) => {
-      setTimeout(resolve, 2000);
-    });
+      setTimeout(resolve, 2000)
+    })
   }
 
   return (
@@ -137,5 +137,5 @@ export function ButtonComponent() {
         </Button>
       </Sample>
     </article>
-  );
+  )
 }

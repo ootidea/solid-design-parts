@@ -1,6 +1,6 @@
-import { Resizable } from "../../src/Resizable";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { Resizable } from '../../src/Resizable'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function ResizableComponent() {
   return (
@@ -9,11 +9,9 @@ export function ResizableComponent() {
 
       <Sample id="basic-example" title="Basic example">
         <Resizable>
-          <div style={{ border: "gray 1px dashed", padding: "1em" }}>
-            area area area area area area
-          </div>
+          <div style={{ border: 'gray 1px dashed', padding: '1em' }}>area area area area area area</div>
         </Resizable>
       </Sample>
     </article>
-  );
+  )
 }

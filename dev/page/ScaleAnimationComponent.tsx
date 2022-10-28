@@ -1,11 +1,11 @@
-import { createSignal } from "solid-js";
-import { Button } from "../../src/Button";
-import { ScaleAnimation } from "../../src/ScaleAnimation";
-import { PageTitle } from "../PageTitle";
-import { Sample } from "../Sample";
+import { createSignal } from 'solid-js'
+import { Button } from '../../src/Button'
+import { ScaleAnimation } from '../../src/ScaleAnimation'
+import { PageTitle } from '../PageTitle'
+import { Sample } from '../Sample'
 
 export function ScaleAnimationComponent() {
-  const [shown, setShown] = createSignal(true);
+  const [shown, setShown] = createSignal(true)
 
   return (
     <article>
@@ -25,10 +25,7 @@ export function ScaleAnimationComponent() {
       </Sample>
 
       <Sample id="duration-of-animation" title="Duration of animation">
-        <ScaleAnimation
-          options={1000}
-          launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}
-        >
+        <ScaleAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
           <div>Content</div>
         </ScaleAnimation>
       </Sample>
@@ -42,5 +39,5 @@ export function ScaleAnimationComponent() {
         </ScaleAnimation>
       </Sample>
     </article>
-  );
+  )
 }
