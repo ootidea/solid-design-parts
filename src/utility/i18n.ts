@@ -35,12 +35,8 @@ export namespace i18n {
       Object.defineProperty(result, key, {
         get: () => {
           const pack = source[key]
-          for (const language of getLanguages()) {
-            if (language in pack) {
-              return pack[language]
-            }
-          }
-          return pack.default
+          const resultLanguage = getLanguages().find((language) => language in pack) ?? 'default'
+          return pack[resultLanguage]
         },
         enumerable: true,
         configurable: true,
