@@ -36,6 +36,7 @@ export function TextInputComponent() {
         <TextInput type="tel" placeholder="tel" />
         <TextInput type="email" placeholder="email" />
         <TextInput type="password" placeholder="password" />
+        <TextInput type="number" placeholder="number" />
       </Sample>
 
       <Sample id="append-and-prepend" title="Append and prepend">
