@@ -8,6 +8,9 @@ export default defineConfig({
   build: {
     target: "esnext",
   },
+  server: {
+    port: 52260,
+  },
   css: {
     postcss: {
       plugins: [autoprefixer(), postcssOKLabFunction({ subFeatures: { displayP3: false } })],
