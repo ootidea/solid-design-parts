@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { createEffect, createSignal, For, Show } from 'solid-js'
+import { createEffect, createSignal, For } from 'solid-js'
 import css from './Calendar.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
@@ -109,9 +109,9 @@ export function Calendar(rawProps: CalendarProps) {
                       }}
                       data-day={day()}
                     >
-                      <Show when={rawProps.children !== undefined} fallback={date().date()}>
-                        <Slot content={rawProps.children} params={{ date: date().toDate() }} />
-                      </Show>
+                      <Slot content={rawProps.children} params={{ date: date().toDate() }}>
+                        {date().date()}
+                      </Slot>
                     </div>
                   )
                 }}
