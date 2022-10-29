@@ -35,15 +35,13 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     return Boolean(props.disabled[value])
   }
 
-  function onClick(event: MouseEvent, value: Values[number]) {
-    if (event.target instanceof HTMLInputElement) {
-      if (selected() === value) {
-        setSelected(undefined)
-        props.onChangeSelected?.(undefined)
-      } else {
-        setSelected(() => value)
-        props.onChangeSelected?.(value)
-      }
+  function onClick(value: Values[number]) {
+    if (selected() === value) {
+      setSelected(undefined)
+      props.onChangeSelected?.(undefined)
+    } else {
+      setSelected(() => value)
+      props.onChangeSelected?.(value)
     }
   }
 
@@ -64,7 +62,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
             name={props.name}
             checked={value === selected()}
             disabled={isDisabled(value)}
-            onClick={(event) => onClick(event, value)}
+            onClick={() => onClick(value)}
           />
           {value}
         </label>
