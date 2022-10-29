@@ -48,6 +48,10 @@ export function RadioButtonsComponent() {
       <Sample id="disabled" title="Disabled" direction="horizontal">
         <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
       </Sample>
+
+      <Sample id="enable-deselection" title="Enable deselection" direction="horizontal" description="">
+        <RadioButtons values={['left', 'center', 'right']} enableDeselection />
+      </Sample>
     </article>
   )
 }

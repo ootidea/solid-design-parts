@@ -11,6 +11,7 @@ export type RadioButtonsProps<Values extends readonly string[]> = SkelProps<{
   name?: string
   selected?: Values[number] | undefined
   disabled?: boolean | Record<string, boolean>
+  enableDeselection?: boolean
   onChangeSelected?: (selected: Values[number] | undefined) => void
 }>
 
@@ -22,6 +23,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     {
       name: rawProps.name === undefined ? `skel-RadioButton_name${uniqueId++}` : rawProps.name,
       disabled: false,
+      enableDeselection: false,
     },
     ['selected', 'values', 'onChangeSelected']
   )
@@ -37,8 +39,10 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
 
   function onClick(value: Values[number]) {
     if (selected() === value) {
-      setSelected(undefined)
-      props.onChangeSelected?.(undefined)
+      if (props.enableDeselection) {
+        setSelected(undefined)
+        props.onChangeSelected?.(undefined)
+      }
     } else {
       setSelected(() => value)
       props.onChangeSelected?.(value)
