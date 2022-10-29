@@ -17,6 +17,7 @@ export type IconButtonProps = SkelProps<
     iconColor?: string
     backgroundColor?: string
     disabledColor?: string
+    type?: 'submit' | 'button' | 'reset'
     rotate?: string
     onClick?: (event: MouseEvent) => unknown
   },
@@ -32,6 +33,7 @@ export function IconButton(rawProps: IconButtonProps) {
       iconColor: 'var(--skel-Icon_default-color)',
       backgroundColor: 'transparent',
       disabledColor: 'var(--skel-IconButton_disabled-default-color)',
+      type: 'button',
     },
     ['src', 'rotate', 'onClick']
   )
@@ -62,7 +64,7 @@ export function IconButton(rawProps: IconButtonProps) {
         '--skel-IconButton_background-hover-color': calculateHoverColor(props.backgroundColor),
         '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
       })}
-      type="button"
+      type={props.type}
       onClick={clickEventHandler}
       {...restProps}
     >
