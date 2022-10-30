@@ -11,6 +11,11 @@ export function SpeechBubbleComponent() {
         <SpeechBubble>Sample</SpeechBubble>
       </Sample>
 
+      <Sample id="background-color" title="Background color">
+        <SpeechBubble backgroundColor="hsl(0 100% 95%)">Sample</SpeechBubble>
+        <SpeechBubble backgroundColor="#e9ffe9">Sample</SpeechBubble>
+      </Sample>
+
       <Sample id="triangle-height" title="Customize triangle height">
         <SpeechBubble triangleHeight="0.5em">Customize triangle height</SpeechBubble>
         <SpeechBubble triangleHeight="1.4em">Customize triangle height</SpeechBubble>

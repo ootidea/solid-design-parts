@@ -9,7 +9,7 @@
 
 .skel-SpeechBubble_message-box {
   border: var(--skel-SpeechBubble_border-color) 1px solid;
-  background-color: var(--skel-background-color);
+  background-color: var(--skel-SpeechBubble_background-color);
   border-radius: 1em;
   padding: 1em;
   box-sizing: border-box;
@@ -45,7 +45,7 @@
     width: 0;
     height: 0;
     border-top: calc(var(--skel-SpeechBubble_triangle-height) - 1px / var(--skel-SpeechBubble_triangle-tangent)) solid
-      var(--skel-background-color);
+      var(--skel-SpeechBubble_background-color);
     border-left: calc(var(--skel-SpeechBubble_triangle-width) / 2 - 1px * var(--skel-SpeechBubble_triangle-tangent))
       solid transparent;
     border-right: calc(var(--skel-SpeechBubble_triangle-width) / 2 - 1px * var(--skel-SpeechBubble_triangle-tangent))
