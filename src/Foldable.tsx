@@ -29,7 +29,6 @@ export function Foldable(rawProps: FoldableProps) {
       headerBackgroundColor: 'var(--skel-Foldable_header-background-default-color)',
       borderColor: 'var(--skel-Foldable_border-default-color)',
     },
-    // TODO: data-unfoldedを追加しなければインジェクションで上書きされ壊れてしまう。しかしdata-unfoldedは型エラーになる
     ['title', 'icon', 'onChangeUnfolded']
   )
 
