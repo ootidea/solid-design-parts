@@ -39,7 +39,7 @@
     "test": "echo \"test not setup\"",
     "build": "rollup -c",
     "prepublishOnly": "npm run build",
-    "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,tsx,jsx}\"",
+    "format": "prettier -w \"src/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
     "update-deps": "taze -w && npm i",
     "typecheck": "tsc --noEmit"
   },
