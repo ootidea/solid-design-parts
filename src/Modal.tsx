@@ -17,6 +17,7 @@ export type ModalProps = SkelProps<{
   opened?: boolean
   persistent?: boolean
   showCloseButton?: boolean
+  ignoreEscKey?: boolean
   onChangeOpened?: (opened: boolean) => void
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
   title?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
@@ -31,6 +32,7 @@ export function Modal(rawProps: ModalProps) {
       persistent: false,
       opened: false,
       showCloseButton: false,
+      ignoreEscKey: false,
     },
     ['onChangeOpened', 'launcher', 'title', 'footer']
   )
@@ -58,7 +60,7 @@ export function Modal(rawProps: ModalProps) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && opened() && !props.persistent) {
+    if (event.code === 'Escape' && opened() && !props.persistent && !props.ignoreEscKey) {
       event.preventDefault()
       close()
     }

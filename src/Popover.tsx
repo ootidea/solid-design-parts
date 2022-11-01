@@ -20,6 +20,7 @@ export type PopoverProps = SkelProps<{
   on?: EnneaPosition
   joint?: EnneaPosition | undefined
   persistent?: boolean
+  ignoreEscKey?: boolean
   onClose?: () => void
   launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
   frame?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
@@ -33,6 +34,7 @@ export function Popover(rawProps: PopoverProps) {
       on: 'bottom',
       joint: undefined,
       persistent: false,
+      ignoreEscKey: false,
     },
     ['style']
   )
@@ -75,7 +77,7 @@ export function Popover(rawProps: PopoverProps) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && opened() && !props.persistent) {
+    if (event.code === 'Escape' && opened() && !props.persistent && !props.ignoreEscKey) {
       event.preventDefault()
       close()
     }
