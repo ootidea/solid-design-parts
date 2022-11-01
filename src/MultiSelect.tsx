@@ -89,6 +89,15 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     return undefined
   }
 
+  function onKeyDown(event: KeyboardEvent) {
+    if (event.isComposing || event.defaultPrevented) return
+
+    if (event.code === 'Escape' && dropdownInfo() !== undefined) {
+      event.preventDefault()
+      setDropdownInfo(undefined)
+    }
+  }
+
   return (
     <>
       <button
@@ -144,7 +153,13 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       <Show when={dropdownInfo()}>
         {(dropdownInfo) => (
           <Portal>
-            <div class="skel-MultiSelect_backdrop" ref={(element) => setupFocusTrap(element)} onClick={onClickBackdrop}>
+            <div
+              class="skel-MultiSelect_backdrop"
+              tabindex={-1}
+              ref={(element) => setupFocusTrap(element)}
+              onClick={onClickBackdrop}
+              onKeyDown={onKeyDown}
+            >
               <div
                 class="skel-MultiSelect_dropdown"
                 style={{

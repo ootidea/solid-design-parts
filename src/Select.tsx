@@ -78,6 +78,15 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     setDropdownInfo(undefined)
   }
 
+  function onKeyDown(event: KeyboardEvent) {
+    if (event.isComposing || event.defaultPrevented) return
+
+    if (event.code === 'Escape' && dropdownInfo() !== undefined) {
+      event.preventDefault()
+      setDropdownInfo(undefined)
+    }
+  }
+
   return (
     <>
       <button
@@ -115,7 +124,13 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
       <Show when={dropdownInfo()}>
         {(dropdownInfo) => (
           <Portal>
-            <div class="skel-Select_backdrop" ref={(element) => setupFocusTrap(element)} onClick={onClickBackdrop}>
+            <div
+              class="skel-Select_backdrop"
+              tabindex={-1}
+              ref={(element) => setupFocusTrap(element)}
+              onClick={onClickBackdrop}
+              onKeyDown={onKeyDown}
+            >
               <div
                 class="skel-Select_dropdown"
                 style={{

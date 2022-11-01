@@ -55,6 +55,15 @@ export function Modal(rawProps: ModalProps) {
     }
   }
 
+  function onKeyDown(event: KeyboardEvent) {
+    if (event.isComposing || event.defaultPrevented) return
+
+    if (event.code === 'Escape' && opened() && !props.persistent) {
+      event.preventDefault()
+      close()
+    }
+  }
+
   return (
     <>
       <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
@@ -62,8 +71,10 @@ export function Modal(rawProps: ModalProps) {
         <FadeAnimation shown={opened()}>
           <div
             class={joinClasses(rawProps, 'skel-Modal_root')}
-            onClick={onClickBackdrop}
+            tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
+            onClick={onClickBackdrop}
+            onKeyDown={onKeyDown}
           >
             <div class="skel-Modal_frame">
               <Show when={props.showCloseButton || rawProps.title} fallback={<div />}>

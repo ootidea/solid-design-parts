@@ -202,12 +202,14 @@ export function observeWidth(element: HTMLElement, callback: (width: number) => 
   })
 }
 
+/**
+ * Confine focus under the given element.
+ * Calling this function will focus the element, so the element must be focusable.
+ * It is recommended that tabindex="-1" and outline:none be specified for the element.
+ */
 export function setupFocusTrap(element: HTMLElement) {
   const focusTrap = createFocusTrap(element, {
     escapeDeactivates: false,
-    // If no focusable element is contained, createFocusTrap throws an error.
-    // To prevent this, set the following two options.
-    initialFocus: false,
     fallbackFocus: element,
   })
   focusTrap.activate()

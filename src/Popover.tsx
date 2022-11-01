@@ -72,6 +72,15 @@ export function Popover(rawProps: PopoverProps) {
     }
   }
 
+  function onKeyDown(event: KeyboardEvent) {
+    if (event.isComposing || event.defaultPrevented) return
+
+    if (event.code === 'Escape' && opened() && !props.persistent) {
+      event.preventDefault()
+      close()
+    }
+  }
+
   return (
     <>
       <div class="skel-Popover_launcher" ref={launcher}>
@@ -92,8 +101,10 @@ export function Popover(rawProps: PopoverProps) {
             }}
             data-horizontal-position={toHorizontalPosition(props.on)}
             data-vertical-position={toVerticalPosition(props.on)}
+            tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
             onClick={onClickBackdrop}
+            onKeyDown={onKeyDown}
             {...restProps}
           >
             <Slot content={rawProps.frame} params={{ open, close, toggle }}>
