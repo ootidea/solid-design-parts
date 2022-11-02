@@ -16,29 +16,6 @@
   }
 }
 
-.skel-TextInput_prefix,
-.skel-TextInput_postfix {
-  padding: 0 0.5em;
-  background-color: oklch(96% 0 0);
-
-  &:empty {
-    padding: 0;
-    border: none;
-  }
-}
-
-.skel-TextInput_prefix {
-  border-right: var(--skel-input-border-color) 1px solid;
-  border-top-left-radius: var(--skel-input-border-radius);
-  border-bottom-left-radius: var(--skel-input-border-radius);
-}
-
-.skel-TextInput_postfix {
-  border-left: var(--skel-input-border-color) 1px solid;
-  border-top-right-radius: var(--skel-input-border-radius);
-  border-bottom-right-radius: var(--skel-input-border-radius);
-}
-
 .skel-TextInput_prepend {
   padding-left: 0.3em;
 

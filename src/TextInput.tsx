@@ -36,8 +36,6 @@ export type TextInputProps = SkelProps<{
     | 'week'
   >
   disabled?: boolean
-  prefix?: JSX.Element
-  postfix?: JSX.Element
   prepend?: JSX.Element
   append?: JSX.Element
   onChangeValue?: (value: string) => void
@@ -48,8 +46,6 @@ export function TextInput(rawProps: TextInputProps) {
     'value',
     'placeholder',
     'type',
-    'prefix',
-    'postfix',
     'prepend',
     'append',
     'onChangeValue',
@@ -69,19 +65,15 @@ export function TextInput(rawProps: TextInputProps) {
       stretchAt={1}
       {...restProps}
     >
-      <Gravity class="skel-TextInput_prefix">{rawProps.prefix}</Gravity>
-      <StretchLayout class="skel-TextInput_inner" stretchAt={1}>
-        <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
-        <input
-          class="skel-TextInput_input"
-          attr:value={props.value}
-          placeholder={props.placeholder}
-          type={props.type}
-          onInput={onInput}
-        />
-        <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
-      </StretchLayout>
-      <Gravity class="skel-TextInput_postfix">{rawProps.postfix}</Gravity>
+      <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
+      <input
+        class="skel-TextInput_input"
+        attr:value={props.value}
+        placeholder={props.placeholder}
+        type={props.type}
+        onInput={onInput}
+      />
+      <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
     </StretchLayout>
   )
 }
