@@ -1,4 +1,4 @@
-import { JSX } from 'solid-js'
+import { JSX, Show } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -38,7 +38,11 @@ export type TextInputProps = SkelProps<{
   disabled?: boolean
   prepend?: JSX.Element
   append?: JSX.Element
+  tailButtonContent?: JSX.Element
+  headButtonContent?: JSX.Element
   onChangeValue?: (value: string) => void
+  onClickHeadButton?: (event: MouseEvent) => unknown
+  onClickTailButton?: (event: MouseEvent) => unknown
 }>
 
 export function TextInput(rawProps: TextInputProps) {
@@ -48,7 +52,11 @@ export function TextInput(rawProps: TextInputProps) {
     'type',
     'prepend',
     'append',
+    'headButtonContent',
+    'tailButtonContent',
     'onChangeValue',
+    'onClickHeadButton',
+    'onClickTailButton',
   ])
 
   function onInput(event: InputEvent) {
@@ -58,22 +66,39 @@ export function TextInput(rawProps: TextInputProps) {
   }
 
   return (
-    <StretchLayout
+    <div
       class={joinClasses(rawProps, 'skel-TextInput_root', {
         'skel-TextInput_disabled': rawProps.disabled,
+        'skel-TextInput_has-head-button': props.headButtonContent !== undefined,
+        'skel-TextInput_has-tail-button': props.tailButtonContent !== undefined,
       })}
-      stretchAt={1}
       {...restProps}
     >
-      <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
-      <input
-        class="skel-TextInput_input"
-        attr:value={props.value}
-        placeholder={props.placeholder}
-        type={props.type}
-        onInput={onInput}
-      />
-      <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
-    </StretchLayout>
+      <div class="skel-TextInput_head-area">
+        <Show when={props.headButtonContent !== undefined}>
+          <button class="skel-TextInput_head-button" type="button" onClick={props.onClickHeadButton}>
+            {props.headButtonContent}
+          </button>
+        </Show>
+      </div>
+      <StretchLayout class="skel-TextInput_body" stretchAt={1}>
+        <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
+        <input
+          class="skel-TextInput_input"
+          attr:value={props.value}
+          placeholder={props.placeholder}
+          type={props.type}
+          onInput={onInput}
+        />
+        <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
+      </StretchLayout>
+      <div class="skel-TextInput_tail-area">
+        <Show when={props.tailButtonContent !== undefined}>
+          <button class="skel-TextInput_tail-button" type="button" onClick={props.onClickTailButton}>
+            {props.tailButtonContent}
+          </button>
+        </Show>
+      </div>
+    </div>
   )
 }

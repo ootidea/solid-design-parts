@@ -1,17 +1,33 @@
 .skel-TextInput_root {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+
+  height: var(--skel-one-input-height);
+}
+
+.skel-TextInput_body {
   border-radius: var(--skel-input-border-radius);
   border: var(--skel-input-border-color) 1px solid;
   background-color: var(--skel-background-color);
 
   box-sizing: border-box;
-  height: var(--skel-one-input-height);
 
-  &.skel-TextInput_disabled {
+  .skel-TextInput_disabled & {
     background-color: var(--skel-disabled-input-background-color);
   }
 
   &:focus-within {
     border-color: var(--skel-primary-color);
+  }
+
+  .skel-TextInput_has-head-button & {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .skel-TextInput_has-tail-button & {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
 
@@ -45,4 +61,41 @@
   &::placeholder {
     color: var(--skel-placeholder-text-color);
   }
+}
+
+.skel-TextInput_head-button,
+.skel-TextInput_tail-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0.4em 0.8em;
+  border: none;
+
+  background-color: var(--skel-primary-color);
+  color: var(--skel-inverted-text-color);
+  font: inherit;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--skel-primary-inverted-background-hover-color);
+    }
+  }
+
+  &:active {
+    background-color: var(--skel-primary-inverted-background-active-color);
+  }
+}
+
+.skel-TextInput_head-button {
+  border-top-left-radius: var(--skel-input-border-radius);
+  border-bottom-left-radius: var(--skel-input-border-radius);
+}
+
+.skel-TextInput_tail-button {
+  border-top-right-radius: var(--skel-input-border-radius);
+  border-bottom-right-radius: var(--skel-input-border-radius);
 }

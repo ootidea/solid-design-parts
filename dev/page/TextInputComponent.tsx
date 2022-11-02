@@ -6,6 +6,7 @@ import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 import alertOutlineIcon from './alert-outline.svg'
 import checkIcon from './check.svg'
+import searchIcon from './search.svg'
 
 export function TextInputComponent() {
   const [value, setValue] = createSignal('default value')
@@ -42,6 +43,11 @@ export function TextInputComponent() {
         <TextInput value="valid text" append={<Icon src={checkIcon} />} />
         <TextInput placeholder="security number" prepend={<Icon src={alertOutlineIcon} />} />
         <TextInput placeholder="Search" append={<Spinner />} />
+      </Sample>
+
+      <Sample id="buttons" title="Buttons">
+        <TextInput tailButtonContent="Send" />
+        <TextInput headButtonContent={<Icon src={searchIcon} color="currentColor" size="1.7em" />} />
       </Sample>
 
       <Sample id="disabled" title="Disabled">
