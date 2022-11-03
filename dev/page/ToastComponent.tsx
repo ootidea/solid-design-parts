@@ -9,10 +9,11 @@ export function ToastComponent() {
       <PageTitle>Toast</PageTitle>
 
       <Sample id="basic-example" title="Basic example" direction="horizontal">
-        <Button onClick={() => showToast('success', 'message' + Math.random())}>Show toast</Button>
+        <Button onClick={() => showToast('success', 'message' + Math.random())}>Show success toast</Button>
         <Button color="error" onClick={() => showToast('error', 'message' + Math.random())}>
-          Show toast
+          Show error toast
         </Button>
+        <Button onClick={() => showToast('info', 'message' + Math.random())}>Show info toast</Button>
       </Sample>
 
       <Sample id="duration" title="Duration" direction="horizontal">
