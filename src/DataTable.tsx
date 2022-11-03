@@ -196,6 +196,7 @@ export function DataTable<
       class={joinClasses(props, 'skel-DataTable_root', {
         'skel-DataTable_full-width': props.fullWidth,
       })}
+      role="table"
       style={joinStyle(props.style, {
         '--skel-DataTable_template-columns': `max-content ${props.columns
           .map(getColumnWidth)
@@ -212,7 +213,7 @@ export function DataTable<
         </Slot>
       </div>
 
-      <div class="skel-DataTable_header">
+      <div class="skel-DataTable_header" role="row">
         <For each={props.columns}>
           {(column, horizontalIndex) => (
             <>
@@ -225,7 +226,12 @@ export function DataTable<
                 </Slot>
               </div>
 
-              <Gravity to={aligns()[column.id]} class="skel-DataTable_cell" data-column-id={column.id}>
+              <Gravity
+                to={aligns()[column.id]}
+                class="skel-DataTable_cell"
+                role="columnheader"
+                data-column-id={column.id}
+              >
                 <div class="skel-DataTable_column-title" data-column-id={column.id}>
                   <Slot
                     content={props.headerCell}
@@ -314,6 +320,7 @@ export function DataTable<
                 'skel-DataTable_odd-row': index() % 2 === 1,
                 'skel-DataTable_clickable-row': props.onClickRow !== undefined,
               }}
+              role="row"
               onClick={() => props.onClickRow?.(row)}
             >
               <For each={props.columns}>
@@ -328,7 +335,12 @@ export function DataTable<
                       </Slot>
                     </div>
 
-                    <Gravity to={aligns()[column.id]} class="skel-DataTable_cell" data-column-id={column.id}>
+                    <Gravity
+                      to={aligns()[column.id]}
+                      class="skel-DataTable_cell"
+                      role="cell"
+                      data-column-id={column.id}
+                    >
                       <Slot
                         content={column.cell}
                         params={{
