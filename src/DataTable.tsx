@@ -70,7 +70,7 @@ export function DataTable<
       oddRowBackgroundColor: 'var(--skel-DataTable_odd-row-background-default-color)',
       sortingState: undefined,
     },
-    ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState']
+    ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'onClickRow']
   )
 
   const aligns: Accessor<Record<ColumnId, ColumnAlign>> = createMemo(() => {
