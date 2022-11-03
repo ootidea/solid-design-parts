@@ -7,7 +7,7 @@ export function ResizableComponent() {
     <article>
       <PageTitle>Resizable</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Resizable>
           <div style={{ border: 'gray 1px dashed', padding: '1em' }}>area area area area area area</div>
         </Resizable>

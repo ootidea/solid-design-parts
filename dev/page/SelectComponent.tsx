@@ -11,29 +11,29 @@ export function SelectComponent() {
     <article>
       <PageTitle>Select</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Select values={['Female', 'Male', 'Other']} />
       </Sample>
 
-      <Sample id="placeholder" title="Placeholder">
+      <Sample title="Placeholder">
         <Select values={['Female', 'Male', 'Other']} placeholder="placeholder" />
       </Sample>
 
-      <Sample id="default-selected" title="Default selected">
+      <Sample title="Default selected">
         <Select values={['Female', 'Male', 'Other']} selected="Male" />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <Select values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
         <div>selected() === {toLiteral(selected())}</div>
       </Sample>
 
-      <Sample id="disabled" title="Disabled" direction="horizontal">
+      <Sample title="Disabled" direction="horizontal">
         <Select values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
         <Select values={['Female', 'Male', 'Other']} selected="Male" disabled />
       </Sample>
 
-      <Sample id="search" title="Search">
+      <Sample title="Search">
         <Select
           showSearchBox
           values={[
@@ -53,7 +53,7 @@ export function SelectComponent() {
         />
       </Sample>
 
-      <Sample id="full-width" title="Full width">
+      <Sample title="Full width">
         <Select fullWidth values={['Female', 'Male', 'Other']} placeholder="placeholder" />
       </Sample>
     </article>

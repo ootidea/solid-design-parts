@@ -7,14 +7,14 @@ export function StretchLayoutComponent() {
     <article>
       <PageTitle>StretchLayout</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <StretchLayout>
           <div style={{ padding: '3em', border: 'gray 1px dashed' }}>area1</div>
           <div style={{ padding: '3em', border: 'gray 1px solid' }}>area2</div>
         </StretchLayout>
       </Sample>
 
-      <Sample id="negative-index" title="Negative index">
+      <Sample title="Negative index">
         <StretchLayout stretchAt={-1}>
           <div style={{ padding: '3em', border: 'gray 1px solid' }}>area1</div>
           <div style={{ padding: '3em', border: 'gray 1px solid' }}>area2</div>

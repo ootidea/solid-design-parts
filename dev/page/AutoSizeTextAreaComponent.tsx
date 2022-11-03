@@ -10,24 +10,24 @@ export function AutoSizeTextAreaComponent() {
     <article>
       <PageTitle>AutoSizeTextArea</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <AutoSizeTextArea />
       </Sample>
 
-      <Sample id="placeholder" title="Placeholder">
+      <Sample title="Placeholder">
         <AutoSizeTextArea placeholder="placeholder" />
       </Sample>
 
-      <Sample id="default-value" title="Default value">
+      <Sample title="Default value">
         <AutoSizeTextArea value="default value" />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <AutoSizeTextArea value={value()} onChangeValue={setValue} />
         <div style={{ 'white-space': 'pre-wrap' }}>value() === `{value()}`</div>
       </Sample>
 
-      <Sample id="disabled" title="Disabled">
+      <Sample title="Disabled">
         <AutoSizeTextArea placeholder="placeholder" disabled />
         <AutoSizeTextArea value="default value" disabled />
       </Sample>

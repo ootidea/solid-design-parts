@@ -8,26 +8,26 @@ export function PopoverComponent() {
     <article>
       <PageTitle>Popover</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Popover launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           <h1>Title</h1>
           <p>contents</p>
         </Popover>
       </Sample>
 
-      <Sample id="persistent" title="Persistent">
+      <Sample title="Persistent">
         <Popover persistent launcher={({ toggle }) => <Button onClick={toggle}>Open</Button>}>
           {({ close }) => <Button onClick={close}>Close</Button>}
         </Popover>
       </Sample>
 
-      <Sample id="simple-position" title="Simple position">
+      <Sample title="Simple position">
         <Popover on="top right" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           <div style="padding: 0.5em 1em">Pop up text</div>
         </Popover>
       </Sample>
 
-      <Sample id="detail-position" title="Detail position">
+      <Sample title="Detail position">
         <Popover
           on="bottom right"
           joint="bottom right"

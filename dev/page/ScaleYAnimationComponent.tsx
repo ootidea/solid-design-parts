@@ -11,26 +11,26 @@ export function ScaleYAnimationComponent() {
     <article>
       <PageTitle>ScaleYAnimation</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Button onClick={() => setShown(!shown())}>Toggle</Button>
         <ScaleYAnimation shown={shown()}>
           <span>Content</span>
         </ScaleYAnimation>
       </Sample>
 
-      <Sample id="control-by-laucher" title="Control by launcher">
+      <Sample title="Control by launcher">
         <ScaleYAnimation launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
           <div>Content</div>
         </ScaleYAnimation>
       </Sample>
 
-      <Sample id="duration-of-animation" title="Duration of animation">
+      <Sample title="Duration of animation">
         <ScaleYAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
           <div>Content</div>
         </ScaleYAnimation>
       </Sample>
 
-      <Sample id="on-finish-animation" title="onFinishAnimation">
+      <Sample title="onFinishAnimation">
         <ScaleYAnimation
           onFinishAnimation={(type) => console.log(type)}
           launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}

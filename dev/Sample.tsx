@@ -3,7 +3,6 @@ import { ParentProps } from 'solid-js/types/render/component'
 import classes from './Sample.module.scss'
 
 type SampleProps = ParentProps<{
-  id: string
   title: string
   description?: JSX.Element
   direction?: 'horizontal' | 'vertical'
@@ -11,13 +10,14 @@ type SampleProps = ParentProps<{
 
 export function Sample(rawProps: SampleProps) {
   const props = mergeProps({ direction: 'vertical' }, rawProps)
+  const id = () => props.title.replaceAll(' ', '-')
 
   return (
     <section>
       <Show when={props.title}>
-        <h2 id={props.id} class={classes.title}>
+        <h2 id={id()} class={classes.title}>
           {props.title}
-          <a class={classes.fragment} href={`#${props.id}`}>
+          <a class={classes.fragment} href={`#${id()}`}>
             #
           </a>
         </h2>

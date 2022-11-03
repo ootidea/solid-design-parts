@@ -12,7 +12,7 @@ export function LayerLayoutComponent() {
     <article>
       <PageTitle>LayerLayout</PageTitle>
 
-      <Sample id="badge" title="Badge">
+      <Sample title="Badge">
         <LayerLayout>
           <IconButton src={searchIcon} size="3em" />
           <Gravity to="top right">
@@ -32,7 +32,7 @@ export function LayerLayoutComponent() {
         </LayerLayout>
       </Sample>
 
-      <Sample id="control-buttons" title="Control buttons">
+      <Sample title="Control buttons">
         <LayerLayout>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polar_Bear_ANWR_1.jpg/320px-Polar_Bear_ANWR_1.jpg"

@@ -15,42 +15,42 @@ export function TextInputComponent() {
     <article>
       <PageTitle>TextInput</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <TextInput />
       </Sample>
 
-      <Sample id="placeholder" title="Placeholder">
+      <Sample title="Placeholder">
         <TextInput placeholder="placeholder" />
       </Sample>
 
-      <Sample id="default-value" title="Default value">
+      <Sample title="Default value">
         <TextInput value="default value" />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <TextInput value={value()} onChangeValue={setValue} />
         <div>value() === '{value()}'</div>
       </Sample>
 
-      <Sample id="types" title="Types">
+      <Sample title="Types">
         <TextInput type="tel" placeholder="tel" />
         <TextInput type="email" placeholder="email" />
         <TextInput type="password" placeholder="password" />
         <TextInput type="number" placeholder="number" />
       </Sample>
 
-      <Sample id="append-and-prepend" title="Append and prepend">
+      <Sample title="Append and prepend">
         <TextInput value="valid text" append={<Icon src={checkIcon} />} />
         <TextInput placeholder="security number" prepend={<Icon src={alertOutlineIcon} />} />
         <TextInput placeholder="Search" append={<Spinner />} />
       </Sample>
 
-      <Sample id="buttons" title="Buttons">
+      <Sample title="Buttons">
         <TextInput tailButtonContent="Send" />
         <TextInput headButtonContent={<Icon src={searchIcon} color="currentColor" size="1.7em" />} />
       </Sample>
 
-      <Sample id="disabled" title="Disabled">
+      <Sample title="Disabled">
         <TextInput placeholder="placeholder" disabled />
         <TextInput value="default value" disabled />
       </Sample>

@@ -11,24 +11,24 @@ export function DatePickerComponent() {
     <article>
       <PageTitle>DatePicker</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <DatePicker />
       </Sample>
 
-      <Sample id="specify-default-month" title="Specify default month">
+      <Sample title="Specify default month">
         <DatePicker month={new Date(1999, 0)} />
       </Sample>
 
-      <Sample id="specify-default-selected-date" title="Specify default selected date">
+      <Sample title="Specify default selected date">
         <DatePicker value={new Date()} />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <DatePicker value={value()} onChangeValue={setValue} />
         <div>value()?.toLocaleDateString() === {toLiteral(value()?.toLocaleDateString())}</div>
       </Sample>
 
-      <Sample id="disabled" title="Disabled">
+      <Sample title="Disabled">
         <DatePicker disabled={(date) => date.getTime() < Date.now()} />
       </Sample>
     </article>

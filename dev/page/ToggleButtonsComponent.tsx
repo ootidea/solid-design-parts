@@ -15,33 +15,33 @@ export function ToggleButtonsComponent() {
     <article>
       <PageTitle>ToggleButtons</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <ToggleButtons values={['Male', 'Female']} />
         <ToggleButtons values={['Female', 'Male', 'Other']} />
       </Sample>
 
-      <Sample id="exclusive" title="Exclusive (single select)">
+      <Sample title="Exclusive (single select)">
         <ToggleButtons exclusive values={['Male', 'Female']} />
         <ToggleButtons exclusive values={['Female', 'Male', 'Other']} />
       </Sample>
 
-      <Sample id="titles" title="Titles">
+      <Sample title="Titles">
         <ToggleButtons values={['en', 'zh']} titles={{ en: 'English', zh: 'Chinese' }} />
         <ToggleButtons values={['en', 'zh', 'jp']} titles={{ en: 'English', zh: 'Chinese' }} />
       </Sample>
 
-      <Sample id="icons" title="Icons">
+      <Sample title="Icons">
         <ToggleButtons values={['left', 'right']}>
           {({ value }) => <Icon src={{ left: formatAlignLeftIcon, right: formatAlignRightIcon }[value]} />}
         </ToggleButtons>
       </Sample>
 
-      <Sample id="default-selected" title="Default selected">
+      <Sample title="Default selected">
         <ToggleButtons exclusive values={['Male', 'Female']} selected="Male" />
         <ToggleButtons values={['en', 'zh']} selected={new Set(['en', 'zh'])} />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <ToggleButtons exclusive values={['en', 'zh']} selected={selected1()} onChangeSelected={setSelected1} />
         <div>selected1() === {toLiteral(selected1())}</div>
         <ToggleButtons values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
@@ -49,14 +49,13 @@ export function ToggleButtonsComponent() {
       </Sample>
 
       <Sample
-        id="disable deselection"
         title="Disable deselection"
         description="Disable deselection that occurs when clicking on a selected option."
       >
         <ToggleButtons exclusive values={['Male', 'Female']} disableDeselection />
       </Sample>
 
-      <Sample id="full-width" title="Full width">
+      <Sample title="Full width">
         <ToggleButtons fullWidth values={['Female', 'Male', 'LGBTQQIAAPPO2S']} />
       </Sample>
     </article>

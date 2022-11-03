@@ -10,33 +10,33 @@ export function MultiSelectComponent() {
     <article>
       <PageTitle>MultiSelect</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <MultiSelect values={['Female', 'Male', 'Other']} />
       </Sample>
 
-      <Sample id="placeholder" title="Placeholder">
+      <Sample title="Placeholder">
         <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" />
       </Sample>
 
-      <Sample id="change-titles" title="Change titles">
+      <Sample title="Change titles">
         <MultiSelect values={['dog', 'cat', 'rabbit']} titles={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
       </Sample>
 
-      <Sample id="default-selected" title="Default selected">
+      <Sample title="Default selected">
         <MultiSelect values={['Female', 'Male', 'Other']} selected={{ Female: true, Male: true }} />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <MultiSelect values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
         <div>JSON.stringify(selected()) === '{JSON.stringify(selected())}'</div>
       </Sample>
 
-      <Sample id="disabled" title="Disabled" direction="horizontal">
+      <Sample title="Disabled" direction="horizontal">
         <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
         <MultiSelect values={['Female', 'Male', 'Other']} selected={{ Female: true, Male: true }} disabled />
       </Sample>
 
-      <Sample id="search" title="Search">
+      <Sample title="Search">
         <MultiSelect
           showSearchBox
           values={[
@@ -56,7 +56,7 @@ export function MultiSelectComponent() {
         />
       </Sample>
 
-      <Sample id="full-width" title="Full width">
+      <Sample title="Full width">
         <MultiSelect fullWidth values={['Female', 'Male', 'Other']} placeholder="placeholder" />
       </Sample>
     </article>

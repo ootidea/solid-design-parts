@@ -7,11 +7,11 @@ export function DividerComponent() {
     <article>
       <PageTitle>Divider</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Divider />
       </Sample>
 
-      <Sample id="vertical-divider" title="Vertical divider">
+      <Sample title="Vertical divider">
         <div style="height: 100px; width: 100%; display: flex; justify-content: space-evenly;">
           <Divider direction="vertical" />
           <Divider direction="vertical" />
@@ -19,13 +19,13 @@ export function DividerComponent() {
         </div>
       </Sample>
 
-      <Sample id="color" title="Color">
+      <Sample title="Color">
         <Divider color="green" />
         <Divider color="hsl(0 0% 0%)" />
         <Divider color="linear-gradient(to right, red, blue)" />
       </Sample>
 
-      <Sample id="thickness" title="Thickness">
+      <Sample title="Thickness">
         <Divider thickness="1px" />
         <Divider thickness="0.2em" />
         <Divider thickness="0.5rem" />

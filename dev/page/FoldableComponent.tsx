@@ -11,24 +11,24 @@ export function FoldableComponent() {
     <article>
       <PageTitle>Foldable</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Foldable title="Title">content</Foldable>
       </Sample>
 
-      <Sample id="default-unfolded" title="Default unfolded">
+      <Sample title="Default unfolded">
         <Foldable title="Title" unfolded>
           content
         </Foldable>
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <Foldable title="Title" unfolded={unfolded()} onChangeUnfolded={setUnfolded}>
           content
         </Foldable>
         <div>unfolded() === {toLiteral(unfolded())}</div>
       </Sample>
 
-      <Sample id="nested" title="Nested">
+      <Sample title="Nested">
         <Foldable title="1" unfolded>
           <Foldable title="1.1">...</Foldable>
           <Foldable title="1.2">...</Foldable>

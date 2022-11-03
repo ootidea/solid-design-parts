@@ -7,11 +7,11 @@ export function ImageComponent() {
     <article>
       <PageTitle>Image</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polar_Bear_ANWR_1.jpg/320px-Polar_Bear_ANWR_1.jpg" />
       </Sample>
 
-      <Sample id="fallback" title="Fallback">
+      <Sample title="Fallback">
         <Image src="https://example.com" fallback={<>Fallback slot</>} />
       </Sample>
     </article>

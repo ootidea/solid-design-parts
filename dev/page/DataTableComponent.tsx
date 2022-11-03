@@ -8,7 +8,7 @@ export function DataTableComponent() {
     <article>
       <PageTitle>DataTable</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name' }]}
           rows={[
@@ -18,7 +18,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="sort" title="Sort">
+      <Sample title="Sort">
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name', sortable: true }]}
           rows={[
@@ -28,7 +28,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="default-format" title="Default format for data type">
+      <Sample title="Default format for data type">
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
@@ -38,7 +38,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="cell-slot" title="Cell slot">
+      <Sample title="Cell slot">
         <DataTable
           columns={[
             { id: 'ID' },
@@ -61,7 +61,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="full-width" title="Full width">
+      <Sample title="Full width">
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
@@ -72,7 +72,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="width-of-each-column" title="Width of each column">
+      <Sample title="Width of each column">
         <DataTable
           columns={[
             { id: 'url', width: '4fr' },
@@ -88,11 +88,11 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="empty-state" title="Empty state">
+      <Sample title="Empty state">
         <DataTable columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]} rows={[]} />
       </Sample>
 
-      <Sample id="empty-state-slot" title="Empty state slot">
+      <Sample title="Empty state slot">
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[]}

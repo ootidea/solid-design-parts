@@ -12,19 +12,19 @@ export function ModalComponent() {
     <article>
       <PageTitle>Modal</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Modal launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           <div style="padding: 1em">This is sample text for Modal component.</div>
         </Modal>
       </Sample>
 
-      <Sample id="persistent" title="Persistent">
+      <Sample title="Persistent">
         <Modal persistent launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           {({ close }) => <Button onClick={close}>Close</Button>}
         </Modal>
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <Button onClick={() => setOpened(true)}>Open</Button>
         <div>opened() === {String(opened())}</div>
         <Modal opened={opened()} onChangeOpened={setOpened}>
@@ -32,13 +32,13 @@ export function ModalComponent() {
         </Modal>
       </Sample>
 
-      <Sample id="close-button" title="Close button">
+      <Sample title="Close button">
         <Modal showCloseButton launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           <div style="padding: 1em">This is sample text for Modal component.</div>
         </Modal>
       </Sample>
 
-      <Sample id="title" title="Title">
+      <Sample title="Title">
         <Modal title="Title" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
           <div style="padding: 1em">
             This is sample text for Modal component.
@@ -47,7 +47,7 @@ export function ModalComponent() {
         </Modal>
       </Sample>
 
-      <Sample id="footer" title="Footer">
+      <Sample title="Footer">
         <Modal
           launcher={({ open }) => <Button onClick={open}>Open</Button>}
           footer={({ close }) => (

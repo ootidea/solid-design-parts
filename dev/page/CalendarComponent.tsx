@@ -11,28 +11,28 @@ export function CalendarComponent() {
     <article>
       <PageTitle>Calendar</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Calendar />
       </Sample>
 
-      <Sample id="specify-default-month" title="Specify default month">
+      <Sample title="Specify default month">
         <Calendar month={new Date(1999, 0)} />
       </Sample>
 
-      <Sample id="bind-to-signal" title="Bind to signal">
+      <Sample title="Bind to signal">
         <Calendar month={date()} onChangeMonth={setDate} />
         <Button onClick={() => setDate(new Date(2 * date().getTime()))}>Change month</Button>
       </Sample>
 
-      <Sample id="hide-month-move-buttons" title="Hide month move buttons">
+      <Sample title="Hide month move buttons">
         <Calendar hideMonthMoveButton />
       </Sample>
 
-      <Sample id="overwrite-cell" title="Overwrite cell">
+      <Sample title="Overwrite cell">
         <Calendar>{({ date }) => String(date.getDate()).padStart(2, '0')}</Calendar>
       </Sample>
 
-      <Sample id="hide-dates-in-other-months" title="Hide dates in other months">
+      <Sample title="Hide dates in other months">
         <Calendar class="hide-dates-in-other-months" />
         <style>{`
           .hide-dates-in-other-months .skel-Calendar_cell.skel-Calendar_other-month {

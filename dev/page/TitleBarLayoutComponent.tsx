@@ -11,7 +11,7 @@ export function TitleBarLayoutComponent() {
     <article>
       <PageTitle>TitleBarLayout</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <TitleBarLayout right={<IconButton src={chevronRightIcon} iconSize="100%" />}>Sample title</TitleBarLayout>
         <TitleBarLayout left={<IconButton src={chevronLeftIcon} iconSize="100%" />}>Sample title</TitleBarLayout>
         <TitleBarLayout
@@ -22,11 +22,7 @@ export function TitleBarLayoutComponent() {
         </TitleBarLayout>
       </Sample>
 
-      <Sample
-        id="multiple-children"
-        title="Multiple children"
-        description="Children in any slot are arranged horizontally."
-      >
+      <Sample title="Multiple children" description="Children in any slot are arranged horizontally.">
         <TitleBarLayout
           right={
             <>

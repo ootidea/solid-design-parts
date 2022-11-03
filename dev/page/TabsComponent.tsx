@@ -7,7 +7,7 @@ export function TabsComponent() {
     <article>
       <PageTitle>Tabs</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <Tabs names={['tab1', 'tab2', 'tab3']}>{({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}</Tabs>
         <Tabs type="Surrounded by border" names={['tab1', 'tab2', 'tab3']}>
           {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
@@ -17,7 +17,7 @@ export function TabsComponent() {
         </Tabs>
       </Sample>
 
-      <Sample id="passive" title="Passive">
+      <Sample title="Passive">
         <Tabs passive names={['tab1', 'tab2', 'tab3']} onClickTab={(tabName) => console.log(tabName)}></Tabs>
       </Sample>
     </article>

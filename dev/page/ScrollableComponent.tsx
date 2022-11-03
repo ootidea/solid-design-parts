@@ -8,7 +8,7 @@ export function ScrollableComponent() {
     <article>
       <PageTitle>Scrollable</PageTitle>
 
-      <Sample id="basic-example" title="Basic example">
+      <Sample title="Basic example">
         <div style={{ height: '10rem', width: '100%' }}>
           <Scrollable>
             <For each={[...Array(10).keys()]}>{(i) => <p>{i}</p>}</For>

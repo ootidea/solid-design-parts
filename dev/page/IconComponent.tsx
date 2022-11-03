@@ -8,22 +8,22 @@ export function IconComponent() {
     <article>
       <PageTitle>Icon</PageTitle>
 
-      <Sample id="basic-example" title="Basic example" direction="horizontal">
+      <Sample title="Basic example" direction="horizontal">
         <Icon src={chevronLeftIcon} />
       </Sample>
 
-      <Sample id="size" title="Size" direction="horizontal">
+      <Sample title="Size" direction="horizontal">
         <Icon src={chevronLeftIcon} size="1em" />
         <Icon src={chevronLeftIcon} size="2rem" />
         <Icon src={chevronLeftIcon} size="40px" />
       </Sample>
 
-      <Sample id="color" title="Color" direction="horizontal">
+      <Sample title="Color" direction="horizontal">
         <Icon src={chevronLeftIcon} color="red" />
         <Icon src={chevronLeftIcon} color="green" />
       </Sample>
 
-      <Sample id="rotate" title="Rotate" direction="horizontal">
+      <Sample title="Rotate" direction="horizontal">
         <Icon src={chevronLeftIcon} rotate="90deg" />
         <Icon src={chevronLeftIcon} rotate="-0.25turn" />
       </Sample>

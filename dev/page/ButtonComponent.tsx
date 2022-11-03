@@ -15,7 +15,7 @@ export function ButtonComponent() {
     <article>
       <PageTitle>Button</PageTitle>
 
-      <Sample id="basic-example" title="Basic example" direction="horizontal">
+      <Sample title="Basic example" direction="horizontal">
         <Button>Button</Button>
         <Button ghost>accept</Button>
         <Button rounded>cancel</Button>
@@ -24,7 +24,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="achromatic-color" title="Achromatic color" direction="horizontal">
+      <Sample title="Achromatic color" direction="horizontal">
         <Button color="achromatic">Button</Button>
         <Button color="achromatic" ghost>
           accept
@@ -37,7 +37,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="error-color" title="Error color" direction="horizontal">
+      <Sample title="Error color" direction="horizontal">
         <Button color="error">Button</Button>
         <Button color="error" ghost>
           accept
@@ -50,7 +50,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="ghost" title="Ghost" direction="horizontal">
+      <Sample title="Ghost" direction="horizontal">
         <Button ghost>Button</Button>
         <Button ghost color="achromatic">
           accept
@@ -69,7 +69,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="promise" title="Rounded" direction="horizontal">
+      <Sample title="Rounded" direction="horizontal">
         <Button rounded>Button</Button>
         <Button rounded color="achromatic">
           accept
@@ -82,7 +82,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="href" title="Specify href" direction="horizontal">
+      <Sample title="Specify href" direction="horizontal">
         <Button href="https://google.com" rounded>
           Google
         </Button>
@@ -91,7 +91,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="disabled" title="Disabled" direction="horizontal">
+      <Sample title="Disabled" direction="horizontal">
         <Button disabled>Button</Button>
         <Button href="./confirm" color="achromatic" disabled>
           accept
@@ -104,14 +104,14 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="with-icon" title="Button with icon">
+      <Sample title="Button with icon">
         <Button>
           <Icon style="margin-right: 0.2em;" src={calendarIcon} color="currentColor" size="1.2em" />
           Reserve
         </Button>
       </Sample>
 
-      <Sample id="promise" title="onClick function that returns a Promise" direction="horizontal">
+      <Sample title="onClick function that returns a Promise" direction="horizontal">
         <Button onClick={awaitSomeSeconds}>Submit</Button>
         <Button ghost onClick={awaitSomeSeconds}>
           Send
@@ -124,7 +124,7 @@ export function ButtonComponent() {
         </Button>
       </Sample>
 
-      <Sample id="full-width" title="Full width" description="Option to be a block element.">
+      <Sample title="Full width" description="Option to be a block element.">
         <Button fullWidth>Button</Button>
         <Button fullWidth ghost>
           accept
