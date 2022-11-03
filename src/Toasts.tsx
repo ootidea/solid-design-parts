@@ -9,7 +9,7 @@ registerCss(css)
 type ToastModel = { id: symbol } & ToastProps
 const [toastModels, setToastModels] = createSignal<ToastModel[]>([], { equals: false })
 
-export function showToast(message: JSX.Element, durationMs: number = 3000) {
+export function showToast(type: ToastProps['type'], message: JSX.Element, durationMs: number = 3000) {
   const toasts = document.querySelector('.skel-Toasts_root')
   if (toasts === null) {
     render(() => <Toasts />, document.body)
@@ -25,7 +25,7 @@ export function showToast(message: JSX.Element, durationMs: number = 3000) {
   }
 
   setToastModels((toastModels) => {
-    toastModels.push({ id: newToastId, message, durationMs })
+    toastModels.push({ id: newToastId, type, message, durationMs })
     return toastModels
   })
 }

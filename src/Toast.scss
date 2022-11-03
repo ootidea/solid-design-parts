@@ -1,11 +1,22 @@
 .skel-Toast_root {
   display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+
   box-sizing: border-box;
   width: max-content;
-  padding: 0.8em 1.2em;
+  padding: 0.8em 1em;
   border-radius: 0.4em;
 
   background-color: var(--skel-background-color);
   box-shadow: 0 2px 8px oklch(0% 0 0 / 30%);
   pointer-events: auto;
+}
+
+.skel-Toast_icon-area {
+  margin-right: 0.6em;
+
+  &:empty {
+    display: none;
+  }
 }
