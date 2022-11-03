@@ -1,0 +1,15 @@
+.skel-Toasts_root {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: var(--skel-backdrop-z-index);
+
+  margin: 2em;
+
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: end;
+  gap: 1em;
+
+  pointer-events: none;
+}

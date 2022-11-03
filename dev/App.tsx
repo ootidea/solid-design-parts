@@ -35,6 +35,7 @@ import { StretchLayoutComponent } from './page/StretchLayoutComponent'
 import { TabsComponent } from './page/TabsComponent'
 import { TextInputComponent } from './page/TextInputComponent'
 import { TitleBarLayoutComponent } from './page/TitleBarLayoutComponent'
+import { ToastComponent } from './page/ToastComponent'
 import { ToggleButtonsComponent } from './page/ToggleButtonsComponent'
 import { SidebarMenu } from './SidebarMenu'
 
@@ -83,7 +84,7 @@ export function App() {
         FoldableComponent,
       ],
     },
-    { title: 'Floating', children: [ModalComponent, PopoverComponent] },
+    { title: 'Floating', children: [ModalComponent, PopoverComponent, ToastComponent] },
     { title: 'Data collections', children: [DataTableComponent, TabsComponent] },
     { title: 'Animations', children: [FadeAnimationComponent, ScaleYAnimationComponent] },
     {

@@ -1,0 +1,11 @@
+.skel-Toast_root {
+  display: grid;
+  box-sizing: border-box;
+  width: max-content;
+  padding: 0.8em 1.2em;
+  border-radius: 0.4em;
+
+  background-color: var(--skel-background-color);
+  box-shadow: 0 2px 8px oklch(0% 0 0 / 30%);
+  pointer-events: auto;
+}
