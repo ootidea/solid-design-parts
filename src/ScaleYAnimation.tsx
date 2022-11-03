@@ -5,14 +5,16 @@ import { Slot } from './utility/Slot'
 export type ScaleYAnimationProps = SkelProps<{
   shown?: boolean
   options?: number | KeyframeAnimationOptions
-  onFinishAnimation?: (type: 'enter' | 'exit') => void
+  onFinishEnterAnimation?: () => void
+  onFinishExitAnimation?: () => void
   launcher?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
 
 export function ScaleYAnimation(rawProps: ScaleYAnimationProps) {
   const [props, restProps] = prepareProps(rawProps, { shown: true, options: 250 }, [
-    'onFinishAnimation',
+    'onFinishEnterAnimation',
+    'onFinishExitAnimation',
     'launcher',
     'children',
   ])
@@ -37,14 +39,14 @@ export function ScaleYAnimation(rawProps: ScaleYAnimationProps) {
         const animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], props.options)
         animation.addEventListener('finish', () => {
           setShown(newShown)
-          props.onFinishAnimation?.('exit')
+          props.onFinishExitAnimation?.()
         })
       }
     } else {
       setShown(newShown)
       const animation = element?.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], props.options)
       animation?.addEventListener('finish', () => {
-        props.onFinishAnimation?.('enter')
+        props.onFinishEnterAnimation?.()
       })
     }
   }

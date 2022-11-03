@@ -5,14 +5,16 @@ import { Slot } from './utility/Slot'
 export type FadeAnimationProps = SkelProps<{
   shown?: boolean
   options?: number | KeyframeAnimationOptions
-  onFinishAnimation?: (type: 'enter' | 'exit') => void
+  onFinishEnterAnimation?: () => void
+  onFinishExitAnimation?: () => void
   launcher?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
 
 export function FadeAnimation(rawProps: FadeAnimationProps) {
   const [props, restProps] = prepareProps(rawProps, { shown: true, options: 250 }, [
-    'onFinishAnimation',
+    'onFinishEnterAnimation',
+    'onFinishExitAnimation',
     'launcher',
     'children',
   ])
@@ -36,13 +38,13 @@ export function FadeAnimation(rawProps: FadeAnimationProps) {
       const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], props.options)
       animation?.addEventListener('finish', () => {
         setShown(newShown)
-        props.onFinishAnimation?.('exit')
+        props.onFinishExitAnimation?.()
       })
     } else {
       setShown(newShown)
       const animation = element?.animate([{ opacity: 0 }, { opacity: 1 }], props.options)
       animation?.addEventListener('finish', () => {
-        props.onFinishAnimation?.('enter')
+        props.onFinishEnterAnimation?.()
       })
     }
   }

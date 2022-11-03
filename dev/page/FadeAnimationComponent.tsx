@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { FadeAnimation } from '../../src/FadeAnimation'
+import { showToast } from '../../src/Toasts'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -30,9 +31,10 @@ export function FadeAnimationComponent() {
         </FadeAnimation>
       </Sample>
 
-      <Sample title="onFinishAnimation">
+      <Sample title="Animation finish callbacks">
         <FadeAnimation
-          onFinishAnimation={(type) => console.log(type)}
+          onFinishEnterAnimation={() => showToast('success', 'enter')}
+          onFinishExitAnimation={() => showToast('success', 'exit')}
           launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}
         >
           <div>Content</div>
