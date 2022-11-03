@@ -187,8 +187,8 @@ export function toArray(children: JSX.Element): JSX.Element[] {
 }
 
 /**
- * Use ResizeObserver to detect width changes.
- * Call back the current width immediately after calling this function.
+ * Observe element width in px using ResizeObserver.
+ * Callback immediately when this function is called.
  */
 export function observeWidth(element: HTMLElement, callback: (width: number) => void) {
   callback(element.getBoundingClientRect().width)
