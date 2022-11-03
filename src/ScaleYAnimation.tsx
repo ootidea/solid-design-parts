@@ -5,7 +5,7 @@ import { Slot } from './utility/Slot'
 export type ScaleYAnimationProps = SkelProps<{
   shown?: boolean
   options?: number | KeyframeAnimationOptions
-  onFinishAnimation?: (type: 'enter' | 'leave') => void
+  onFinishAnimation?: (type: 'enter' | 'exit') => void
   launcher?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
@@ -37,7 +37,7 @@ export function ScaleYAnimation(rawProps: ScaleYAnimationProps) {
         const animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], props.options)
         animation.addEventListener('finish', () => {
           setShown(newShown)
-          props.onFinishAnimation?.('leave')
+          props.onFinishAnimation?.('exit')
         })
       }
     } else {

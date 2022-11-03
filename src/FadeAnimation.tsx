@@ -5,7 +5,7 @@ import { Slot } from './utility/Slot'
 export type FadeAnimationProps = SkelProps<{
   shown?: boolean
   options?: number | KeyframeAnimationOptions
-  onFinishAnimation?: (type: 'enter' | 'leave') => void
+  onFinishAnimation?: (type: 'enter' | 'exit') => void
   launcher?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
   children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
 }>
@@ -36,7 +36,7 @@ export function FadeAnimation(rawProps: FadeAnimationProps) {
       const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], props.options)
       animation?.addEventListener('finish', () => {
         setShown(newShown)
-        props.onFinishAnimation?.('leave')
+        props.onFinishAnimation?.('exit')
       })
     } else {
       setShown(newShown)
