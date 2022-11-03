@@ -20,33 +20,28 @@ export function showToast(message: JSX.Element, durationMs: number = 3000) {
 
   const newToastId = Symbol()
 
+  if (toastModels().every((toastModel) => !Number.isFinite(toastModel.durationMs)) && Number.isFinite(durationMs)) {
+    setTimeout(() => removeToast(newToastId), durationMs)
+  }
+
   setToastModels((toastModels) => {
     toastModels.push({ id: newToastId, message, durationMs })
     return toastModels
   })
-
-  if (toastModels().length === 1) {
-    setTimeout(() => {
-      removeToast(newToastId)
-    }, durationMs)
-  }
 }
 
 function removeToast(toastId: symbol) {
   const index = toastModels().findIndex((model) => model.id === toastId)
   if (index === -1) return
 
-  const durationMs = toastModels()[index].durationMs
   setToastModels((toastModels) => {
     toastModels.splice(index, 1)
     return toastModels
   })
 
-  if (index > 0) return
-
-  const nextToast = toastModels()[0]
-  if (nextToast !== undefined) {
-    setTimeout(() => removeToast(nextToast.id), durationMs)
+  const nextFiniteToast = toastModels().find(({ durationMs }) => Number.isFinite(durationMs))
+  if (nextFiniteToast !== undefined) {
+    setTimeout(() => removeToast(nextFiniteToast.id), nextFiniteToast.durationMs)
   }
 }
 
