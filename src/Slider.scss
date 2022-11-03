@@ -1,0 +1,33 @@
+:root {
+  --skel-Slider_track-default-color: oklch(85% 0 0);
+  --skel-Slider_track-default-fill-color: var(--skel-primary-color);
+  --skel-Slider_track-default-height: 0.5rem;
+  --skel-Slider_thumb-default-width: 1rem;
+  --skel-Slider_thumb-default-height: 1rem;
+  --skel-Slider_thumb-default-color: var(--skel-primary-color);
+}
+
+.skel-Slider_root {
+  position: relative;
+}
+
+.skel-Slider_track {
+  box-sizing: border-box;
+  height: var(--skel-Slider_track-height);
+  border-radius: 99999px;
+  background: var(--skel-Slider_track-background);
+}
+
+.skel-Slider_thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(var(--skel-Slider_thumb-x));
+
+  box-sizing: border-box;
+  width: var(--skel-Slider_thumb-width);
+  height: var(--skel-Slider_thumb-height);
+  border-radius: 99999px;
+
+  background-color: var(--skel-Slider_thumb-color);
+  box-shadow: 0 1px 4px oklch(0% 0 0 / 50%);
+}

@@ -28,6 +28,7 @@ import { ResizableComponent } from './page/ResizableComponent'
 import { ScaleYAnimationComponent } from './page/ScaleYAnimationComponent'
 import { ScrollableComponent } from './page/ScrollableComponent'
 import { SelectComponent } from './page/SelectComponent'
+import { SliderComponent } from './page/SliderComponent'
 import { SpeechBubbleComponent } from './page/SpeechBubbleComponent'
 import { SpinnerComponent } from './page/SpinnerComponent'
 import { StepperComponent } from './page/StepperComponent'
@@ -72,6 +73,7 @@ export function App() {
       title: 'Date and time',
       children: [DateInputComponent, CalendarComponent, DatePickerComponent],
     },
+    { title: 'Other inputs', children: [SliderComponent] },
     {
       title: 'Layout',
       children: [
