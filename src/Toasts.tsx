@@ -25,7 +25,7 @@ export function showToast(type: ToastProps['type'], message: JSX.Element, durati
   }
 
   setToastModels((toastModels) => {
-    toastModels.push({ id: newToastId, type, message, durationMs })
+    toastModels.push({ id: newToastId, type, message, durationMs, close: () => removeToast(newToastId) })
     return toastModels
   })
 }
@@ -34,14 +34,18 @@ function removeToast(toastId: symbol) {
   const index = toastModels().findIndex((model) => model.id === toastId)
   if (index === -1) return
 
+  const isFirstFiniteToast = toastId === toastModels().find(({ durationMs }) => Number.isFinite(durationMs))?.id
+
   setToastModels((toastModels) => {
     toastModels.splice(index, 1)
     return toastModels
   })
 
-  const nextFiniteToast = toastModels().find(({ durationMs }) => Number.isFinite(durationMs))
-  if (nextFiniteToast !== undefined) {
-    setTimeout(() => removeToast(nextFiniteToast.id), nextFiniteToast.durationMs)
+  if (isFirstFiniteToast) {
+    const nextFiniteToast = toastModels().find(({ durationMs }) => Number.isFinite(durationMs))
+    if (nextFiniteToast !== undefined) {
+      setTimeout(() => removeToast(nextFiniteToast.id), nextFiniteToast.durationMs)
+    }
   }
 }
 

@@ -1,7 +1,9 @@
 import { JSX } from 'solid-js'
 import { Icon } from './Icon'
+import { IconButton } from './IconButton'
 import alertIcon from './image/alert.svg'
 import checkCircleIcon from './image/check-circle.svg'
+import closeIcon from './image/close.svg'
 import informationIcon from './image/information.svg'
 import css from './Toast.scss'
 import { call } from './utility/others'
@@ -9,7 +11,13 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type ToastProps = { type: 'success' | 'error' | 'info'; message: JSX.Element; durationMs: number }
+export type ToastProps = {
+  type: 'success' | 'error' | 'info'
+  message: JSX.Element
+  durationMs: number
+  /** Injected closure function to close the toast. */
+  close: () => void
+}
 
 export function Toast(props: ToastProps) {
   return (
@@ -27,6 +35,9 @@ export function Toast(props: ToastProps) {
         })}
       </div>
       <div class="skel-Toast_message">{props.message}</div>
+      <div class="skel-Toast_close-button-area">
+        <IconButton src={closeIcon} onClick={props.close} />
+      </div>
     </div>
   )
 }

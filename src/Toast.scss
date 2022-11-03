@@ -20,3 +20,11 @@
     display: none;
   }
 }
+
+.skel-Toast_close-button-area {
+  margin-left: 1em;
+
+  &:empty {
+    display: none;
+  }
+}
