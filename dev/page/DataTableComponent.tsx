@@ -38,10 +38,6 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample id="empty-state" title="Empty state">
-        <DataTable columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]} rows={[]} />
-      </Sample>
-
       <Sample id="cell-slot" title="Cell slot">
         <DataTable
           columns={[
@@ -74,6 +70,26 @@ export function DataTableComponent() {
           ]}
           fullWidth
         />
+      </Sample>
+
+      <Sample id="width-of-each-column" title="Width of each column">
+        <DataTable
+          columns={[
+            { id: 'url', width: '4fr' },
+            { id: 'score', width: '1fr' },
+            { id: 'unread' },
+            { id: 'date', width: '10rem' },
+          ]}
+          rows={[
+            { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
+            { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
+          ]}
+          fullWidth
+        />
+      </Sample>
+
+      <Sample id="empty-state" title="Empty state">
+        <DataTable columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]} rows={[]} />
       </Sample>
 
       <Sample id="empty-state-slot" title="Empty state slot">

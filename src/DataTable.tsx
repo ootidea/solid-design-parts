@@ -21,6 +21,7 @@ export type DataTableProps<
     id: ColumnId
     title?: string
     sortable?: boolean | CompareFunction<Row>
+    width?: string
     align?: ColumnAlign
     // TODO: Make type of 'value' property precise.
     cell?: SkelSlot<{
@@ -50,6 +51,7 @@ export function DataTable<
     id: ColumnId
     title?: string
     sortable?: boolean | CompareFunction<Row>
+    width?: string
     align?: ColumnAlign
     cell?: SkelSlot<{
       value: unknown extends Row[ColumnId] ? any : Row[ColumnId]
@@ -169,6 +171,12 @@ export function DataTable<
     return column.title ?? column.id
   }
 
+  function getColumnWidth(column: Column): string {
+    if (typeof column === 'string') return 'auto'
+
+    return column.width ?? 'auto'
+  }
+
   function getCompareFunction(column: Column): CompareFunction<Row> {
     if (typeof column.sortable === 'function') return column.sortable
 
@@ -189,9 +197,9 @@ export function DataTable<
         'skel-DataTable_full-width': props.fullWidth,
       })}
       style={joinStyle(props.style, {
-        '--skel-DataTable_template-columns': Array(props.columns.length + 1)
-          .fill('max-content')
-          .join(' auto '),
+        '--skel-DataTable_template-columns': `max-content ${props.columns
+          .map(getColumnWidth)
+          .join(' max-content ')} max-content`,
         '--skel-data-table-column-count': props.columns.length,
         '--skel-DataTable_even-row-background-color': props.evenRowBackgroundColor,
         '--skel-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
