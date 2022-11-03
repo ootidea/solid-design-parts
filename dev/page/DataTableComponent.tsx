@@ -1,5 +1,6 @@
 import { Button } from '../../src/Button'
 import { DataTable } from '../../src/DataTable'
+import { showToast } from '../../src/Toasts'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -85,6 +86,17 @@ export function DataTableComponent() {
             { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
           ]}
           fullWidth
+        />
+      </Sample>
+
+      <Sample title="onClickRow">
+        <DataTable
+          columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
+          rows={[
+            { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
+            { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
+          ]}
+          onClickRow={(row) => showToast('success', JSON.stringify(row))}
         />
       </Sample>
 
