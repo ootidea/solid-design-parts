@@ -39,12 +39,13 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
       data-type={props.type}
       {...restProps}
     >
-      <div class="skel-Tabs_tab-bar">
+      <div class="skel-Tabs_tab-bar" role="tablist">
         <For each={props.names}>
           {(name) => (
             <button
               class="skel-Tabs_tab"
               classList={{ 'skel-Tabs_active': activeTab() === name }}
+              role="tab"
               type="button"
               onClick={() => onClick(name)}
             >
@@ -56,7 +57,7 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
           <div class="skel-Tabs_dummy-tab-for-border" />
         </Show>
       </div>
-      <div class="skel-Tabs_content">
+      <div class="skel-Tabs_content" role="tabpanel">
         <Slot content={props.children} params={{ activeTab: activeTab() }} />
       </div>
     </div>
