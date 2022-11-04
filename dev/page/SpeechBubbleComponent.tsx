@@ -17,19 +17,19 @@ export function SpeechBubbleComponent() {
       </Sample>
 
       <Sample title="Border color">
-        <SpeechBubble borderColor="hsl(0 100% 40%)">Sample</SpeechBubble>
+        <SpeechBubble borderColor="hsl(0 60% 60%)">Sample</SpeechBubble>
       </Sample>
 
-      <Sample title="Customize triangle height">
-        <SpeechBubble triangleHeight="0.5em">Customize triangle height</SpeechBubble>
-        <SpeechBubble triangleHeight="1.4em">Customize triangle height</SpeechBubble>
-        <SpeechBubble triangleHeight="3em">Customize triangle height</SpeechBubble>
+      <Sample title="Triangle height">
+        <SpeechBubble triangleHeight="0.5em">Triangle height</SpeechBubble>
+        <SpeechBubble triangleHeight="1.4em">Triangle height</SpeechBubble>
+        <SpeechBubble triangleHeight="3em">Triangle height</SpeechBubble>
       </Sample>
 
-      <Sample title="Customize triangle angle">
-        <SpeechBubble triangleAngle="20deg">Customize triangle angle</SpeechBubble>
-        <SpeechBubble triangleAngle="2rad">Customize triangle angle</SpeechBubble>
-        <SpeechBubble triangleAngle="150deg">Customize triangle angle</SpeechBubble>
+      <Sample title="Triangle angle">
+        <SpeechBubble triangleAngle="20deg">Triangle angle</SpeechBubble>
+        <SpeechBubble triangleAngle="2rad">Triangle angle</SpeechBubble>
+        <SpeechBubble triangleAngle="0.4turn">Triangle angle</SpeechBubble>
       </Sample>
     </article>
   )
