@@ -16,6 +16,8 @@
   height: var(--skel-Slider_track-height);
   border-radius: 99999px;
   background: var(--skel-Slider_track-background);
+
+  cursor: pointer;
 }
 
 .skel-Slider_thumb {
@@ -30,4 +32,6 @@
 
   background-color: var(--skel-Slider_thumb-color);
   box-shadow: 0 1px 4px oklch(0% 0 0 / 50%);
+
+  cursor: pointer;
 }
