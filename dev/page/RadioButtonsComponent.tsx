@@ -23,12 +23,6 @@ export function RadioButtonsComponent() {
         <RadioButtons values={['left', 'center', 'right']} />
       </Sample>
 
-      <Sample title="Grid layout">
-        <div style="display: grid; grid-template-columns: auto auto; gap: 1em; width: max-content;">
-          <RadioButtons values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
-        </div>
-      </Sample>
-
       <Sample title="Default selected" direction="horizontal">
         <RadioButtons values={['left', 'center', 'right']} selected="left" />
       </Sample>
@@ -50,6 +44,12 @@ export function RadioButtonsComponent() {
 
       <Sample title="Enable deselection" direction="horizontal" description="">
         <RadioButtons values={['left', 'center', 'right']} enableDeselection />
+      </Sample>
+
+      <Sample title="Grid layout">
+        <div style="display: grid; grid-template-columns: auto auto; gap: 1em; width: max-content;">
+          <RadioButtons values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+        </div>
       </Sample>
     </article>
   )
