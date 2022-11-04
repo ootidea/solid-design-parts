@@ -25,8 +25,8 @@
   // Setting to override the border of the message box.
   margin-top: -1px;
 
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: var(--skel-SpeechBubble_triangle-x);
+  transform: translateX(-50%);
 
   box-sizing: border-box;
   width: 0;

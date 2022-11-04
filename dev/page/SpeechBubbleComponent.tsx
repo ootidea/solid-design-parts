@@ -31,6 +31,11 @@ export function SpeechBubbleComponent() {
         <SpeechBubble triangleAngle="2rad">Triangle angle</SpeechBubble>
         <SpeechBubble triangleAngle="0.4turn">Triangle angle</SpeechBubble>
       </Sample>
+
+      <Sample title="Triangle x-coordinate">
+        <SpeechBubble triangleX="20%">Triangle x-coordinate</SpeechBubble>
+        <SpeechBubble triangleX="70%">Triangle x-coordinate</SpeechBubble>
+      </Sample>
     </article>
   )
 }
