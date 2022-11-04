@@ -66,6 +66,17 @@ export function Slider(rawProps: SliderProps) {
     changeValue(convertOffsetXToValue(offsetX))
   }
 
+  function onMouseDownThumb(event: MouseEvent) {
+    event.preventDefault()
+
+    if (trackElement === undefined) return
+
+    const offsetX = event.clientX - trackElement.getBoundingClientRect().x
+    changeValue(convertOffsetXToValue(offsetX))
+
+    document.body.addEventListener('mousemove', onMouseMove)
+  }
+
   function convertOffsetXToValue(offsetX: number): number {
     const validOffsetX = Math.max(thumbWidth() / 2, Math.min(offsetX, trackWidth() - thumbWidth() / 2))
     const ratio = (validOffsetX - thumbWidth() / 2) / (trackWidth() - thumbWidth())
@@ -93,7 +104,11 @@ export function Slider(rawProps: SliderProps) {
       {...restProps}
     >
       <div class="skel-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
-      <div class="skel-Slider_thumb" ref={(element) => observeWidth(element, setThumbWidth)} />
+      <div
+        class="skel-Slider_thumb"
+        ref={(element) => observeWidth(element, setThumbWidth)}
+        onMouseDown={onMouseDownThumb}
+      />
     </div>
   )
 }
