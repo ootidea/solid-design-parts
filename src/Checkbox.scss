@@ -14,7 +14,7 @@
 
   cursor: pointer;
 
-  &.skel-Checkbox_disabled {
+  &[aria-disabled='true'] {
     cursor: default;
 
     color: oklch(70% 0 0);
@@ -59,12 +59,12 @@
       height: utility.toIntegerPx(var(--skel-Checkbox_check-size));
     }
 
-    .skel-Checkbox_disabled & {
+    .skel-Checkbox_root[aria-disabled='true'] & {
       background-color: oklch(70% 0 0);
     }
   }
 
-  .skel-Checkbox_disabled & {
+  .skel-Checkbox_root[aria-disabled='true'] & {
     cursor: default;
   }
 }

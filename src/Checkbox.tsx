@@ -32,12 +32,7 @@ export function Checkbox(rawProps: CheckboxProps) {
   }
 
   return (
-    <label
-      class={joinClasses(rawProps, 'skel-Checkbox_root', {
-        'skel-Checkbox_disabled': props.disabled,
-      })}
-      {...restProps}
-    >
+    <label class={joinClasses(rawProps, 'skel-Checkbox_root')} aria-disabled={props.disabled} {...restProps}>
       <input
         type="checkbox"
         class="skel-Checkbox_checkbox"
