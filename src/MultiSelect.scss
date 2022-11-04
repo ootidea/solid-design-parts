@@ -71,13 +71,13 @@
   }
 }
 
-.skel-MultiSelect_backdrop {
+.skel-MultiSelect_overlay {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: var(--skel-backdrop-z-index);
+  z-index: var(--skel-overlay-z-index);
   outline: none;
 }
 

@@ -49,7 +49,7 @@ export function Modal(rawProps: ModalProps) {
   const close = () => changeOpened(false)
   const toggle = () => changeOpened(!opened())
 
-  function onClickBackdrop(event: Event) {
+  function onClickOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
     if (!props.persistent) {
@@ -75,7 +75,7 @@ export function Modal(rawProps: ModalProps) {
             class={joinClasses(rawProps, 'skel-Modal_root')}
             tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
-            onClick={onClickBackdrop}
+            onClick={onClickOverlay}
             onKeyDown={onKeyDown}
           >
             <div class="skel-Modal_frame">

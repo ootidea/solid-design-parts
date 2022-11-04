@@ -72,7 +72,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     }
   }
 
-  function onOperateBackdrop(event: Event) {
+  function onOperateOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
     setDropdownInfo(undefined)
@@ -125,12 +125,12 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
         {(dropdownInfo) => (
           <Portal>
             <div
-              class="skel-Select_backdrop"
+              class="skel-Select_overlay"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
-              onClick={onOperateBackdrop}
-              onTouchMove={onOperateBackdrop}
-              onMouseWheel={onOperateBackdrop}
+              onClick={onOperateOverlay}
+              onTouchMove={onOperateOverlay}
+              onMouseWheel={onOperateOverlay}
               onKeyDown={onKeyDown}
             >
               <div

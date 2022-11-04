@@ -76,7 +76,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     }
   }
 
-  function onOperateBackdrop(event: Event) {
+  function onOperateOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
     setDropdownInfo(undefined)
@@ -154,12 +154,12 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
         {(dropdownInfo) => (
           <Portal>
             <div
-              class="skel-MultiSelect_backdrop"
+              class="skel-MultiSelect_overlay"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
-              onClick={onOperateBackdrop}
-              onTouchMove={onOperateBackdrop}
-              onMouseWheel={onOperateBackdrop}
+              onClick={onOperateOverlay}
+              onTouchMove={onOperateOverlay}
+              onMouseWheel={onOperateOverlay}
               onKeyDown={onKeyDown}
             >
               <div

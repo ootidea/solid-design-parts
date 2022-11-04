@@ -66,7 +66,7 @@ export function Popover(rawProps: PopoverProps) {
   let launcher: HTMLDivElement | undefined
   let launcherRect: DOMRect | undefined
 
-  function onOperateBackdrop(event: Event) {
+  function onOperateOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
     if (!props.persistent) {
@@ -91,7 +91,7 @@ export function Popover(rawProps: PopoverProps) {
       <Show when={opened()}>
         <Portal>
           <div
-            class="skel-Popover_backdrop"
+            class="skel-Popover_overlay"
             style={{
               '--skel-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
               '--skel-Popover_right': launcherRect ? `${launcherRect.right}px` : '0',
@@ -105,9 +105,9 @@ export function Popover(rawProps: PopoverProps) {
             data-vertical-position={toVerticalPosition(props.on)}
             tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
-            onClick={onOperateBackdrop}
-            onTouchMove={onOperateBackdrop}
-            onMouseWheel={onOperateBackdrop}
+            onClick={onOperateOverlay}
+            onTouchMove={onOperateOverlay}
+            onMouseWheel={onOperateOverlay}
             onKeyDown={onKeyDown}
             {...restProps}
           >
