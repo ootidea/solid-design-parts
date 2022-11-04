@@ -66,7 +66,7 @@ export function Popover(rawProps: PopoverProps) {
   let launcher: HTMLDivElement | undefined
   let launcherRect: DOMRect | undefined
 
-  function onClickBackdrop(event: MouseEvent) {
+  function onOperateBackdrop(event: Event) {
     if (event.target !== event.currentTarget) return
 
     if (!props.persistent) {
@@ -105,7 +105,9 @@ export function Popover(rawProps: PopoverProps) {
             data-vertical-position={toVerticalPosition(props.on)}
             tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
-            onClick={onClickBackdrop}
+            onClick={onOperateBackdrop}
+            onTouchMove={onOperateBackdrop}
+            onMouseWheel={onOperateBackdrop}
             onKeyDown={onKeyDown}
             {...restProps}
           >
