@@ -72,7 +72,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     }
   }
 
-  function onClickBackdrop(event: MouseEvent) {
+  function onOperateBackdrop(event: Event) {
     if (event.target !== event.currentTarget) return
 
     setDropdownInfo(undefined)
@@ -128,7 +128,9 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
               class="skel-Select_backdrop"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
-              onClick={onClickBackdrop}
+              onClick={onOperateBackdrop}
+              onTouchMove={onOperateBackdrop}
+              onMouseWheel={onOperateBackdrop}
               onKeyDown={onKeyDown}
             >
               <div
