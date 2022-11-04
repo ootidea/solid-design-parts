@@ -10,6 +10,7 @@ export type SpeechBubbleProps = SkelProps<{
   triangleHeight?: string
   triangleAngle?: string
   triangleX?: string
+  triangleSkew?: string
 }>
 
 export function SpeechBubble(rawProps: SpeechBubbleProps) {
@@ -21,6 +22,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       triangleHeight: '1em',
       triangleAngle: `${Math.PI / 2}rad`,
       triangleX: '50%',
+      triangleSkew: '0rad',
     },
     ['children']
   )
@@ -47,6 +49,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
         '--skel-SpeechBubble_triangle-tangent': tangent(),
         '--skel-SpeechBubble_triangle-height': props.triangleHeight,
         '--skel-SpeechBubble_triangle-x': props.triangleX,
+        '--skel-SpeechBubble_triangle-skew': props.triangleSkew,
       }}
       {...restProps}
     >
