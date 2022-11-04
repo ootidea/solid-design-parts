@@ -6,6 +6,7 @@ registerCss(css)
 
 export type SpeechBubbleProps = SkelProps<{
   backgroundColor?: string
+  borderColor?: string
   triangleHeight?: string
   triangleAngle?: string
 }>
@@ -13,7 +14,12 @@ export type SpeechBubbleProps = SkelProps<{
 export function SpeechBubble(rawProps: SpeechBubbleProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { backgroundColor: 'var(--skel-background-color)', triangleHeight: '1em', triangleAngle: `${Math.PI / 2}rad` },
+    {
+      backgroundColor: 'var(--skel-SpeechBubble_background-default-color)',
+      borderColor: 'var(--skel-SpeechBubble_border-default-color)',
+      triangleHeight: '1em',
+      triangleAngle: `${Math.PI / 2}rad`,
+    },
     ['children']
   )
 
@@ -35,6 +41,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       class={joinClasses(rawProps, 'skel-SpeechBubble_root')}
       style={{
         '--skel-SpeechBubble_background-color': props.backgroundColor,
+        '--skel-SpeechBubble_border-color': props.borderColor,
         '--skel-SpeechBubble_triangle-tangent': tangent(),
         '--skel-SpeechBubble_triangle-height': props.triangleHeight,
       }}

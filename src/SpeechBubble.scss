@@ -1,5 +1,6 @@
 :root {
-  --skel-SpeechBubble_border-color: oklch(70% 0 0);
+  --skel-SpeechBubble_background-default-color: var(--skel-background-color);
+  --skel-SpeechBubble_border-default-color: oklch(70% 0 0);
 }
 
 .skel-SpeechBubble_root {
