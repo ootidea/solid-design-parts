@@ -34,7 +34,7 @@
   bottom: 0;
 
   box-sizing: border-box;
-  width: 11px;
+  width: 10px;
   padding: 0 1px;
 
   .skel-Scrollable_overflow & {
@@ -51,15 +51,15 @@
   box-sizing: border-box;
   width: 100%;
   height: var(--skel-Scrollable_thumb-height);
-  background-color: oklch(80% 0 0);
+  background-color: oklch(0% 0 0 / 20%);
 
   @media (hover: hover) {
     &:hover {
-      background-color: oklch(75% 0 0);
+      background-color: oklch(0% 0 0 / 30%);
     }
   }
 
   .skel-Scrollable_dragging & {
-    background-color: oklch(70% 0 0);
+    background-color: oklch(0% 0 0 / 40%);
   }
 }
