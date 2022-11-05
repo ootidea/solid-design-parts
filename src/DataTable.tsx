@@ -6,7 +6,7 @@ import { Gravity } from './Gravity'
 import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
-import { objectFromEntries } from './utility/others'
+import { maxBy, objectFromEntries } from './utility/others'
 import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
@@ -98,22 +98,12 @@ export function DataTable<
   }
 
   function findMostFrequentValue<T>(array: readonly T[]): T | undefined {
-    if (array.length === 0) return undefined
-
     const valueToCount = new Map<T, number>()
     for (const value of array) {
       const existing = valueToCount.get(value) ?? 0
       valueToCount.set(value, existing + 1)
     }
-    const [first, ...entries] = [...valueToCount.entries()]
-    let [candidateValue, candidateCount] = first
-    for (const [value, count] of entries) {
-      if (candidateCount < count) {
-        candidateCount = count
-        candidateValue = value
-      }
-    }
-    return candidateValue
+    return maxBy([...valueToCount.entries()], ([, count]) => count)?.[0]
   }
 
   const [sortingState, setSortingState] = createSignal(props.sortingState)
