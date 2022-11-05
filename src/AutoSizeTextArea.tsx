@@ -27,7 +27,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const ZERO_WIDTH_SPACE = '\u200B'
 
   return (
-    <div class="skel-AutoSizeTextArea_root" classList={{ 'skel-AutoSizeTextArea_disabled': props.disabled }}>
+    <div class="skel-AutoSizeTextArea_root" aria-disabled={props.disabled}>
       <div class="skel-AutoSizeTextArea_dummy" aria-hidden="true">
         {value() ? value() : rawProps.placeholder}
         {ZERO_WIDTH_SPACE}

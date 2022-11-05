@@ -35,7 +35,7 @@ export function IconButton(rawProps: IconButtonProps) {
       disabledColor: 'var(--skel-IconButton_disabled-default-color)',
       type: 'button',
     },
-    ['src', 'rotate', 'onClick']
+    ['src', 'disabled', 'rotate', 'onClick']
   )
 
   const [isInProgress, setIsInProgress] = createSignal(false)
@@ -54,9 +54,7 @@ export function IconButton(rawProps: IconButtonProps) {
 
   return (
     <button
-      class={joinClasses(rawProps, 'skel-IconButton_root', {
-        'skel-IconButton_disabled': rawProps.disabled,
-      })}
+      class={joinClasses(rawProps, 'skel-IconButton_root')}
       style={joinStyle(rawProps.style, {
         '--skel-IconButton_size': props.size,
         '--skel-IconButton_icon-size': props.iconSize,
@@ -65,6 +63,7 @@ export function IconButton(rawProps: IconButtonProps) {
         '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
       })}
       type={props.type}
+      aria-disabled={props.disabled}
       onClick={clickEventHandler}
       {...restProps}
     >

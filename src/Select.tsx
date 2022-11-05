@@ -91,7 +91,6 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     <>
       <button
         class={joinClasses(rawProps, 'skel-Select_launcher', {
-          'skel-Select_disabled': props.disabled,
           'skel-Select_opened': dropdownInfo() !== undefined,
           'skel-Select_full-width': props.fullWidth,
         })}

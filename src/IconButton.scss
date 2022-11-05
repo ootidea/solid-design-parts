@@ -26,7 +26,7 @@
 
   transition: var(--skel-backward-transition);
 
-  &:not(.skel-IconButton_disabled) {
+  &:not([aria-disabled='true']) {
     cursor: pointer;
 
     @media (hover: hover) {

@@ -63,11 +63,11 @@ export function Button(rawProps: ButtonProps) {
         class={joinClasses(rawProps, 'skel-Button_root', {
           'skel-Button_ghost': props.ghost,
           'skel-Button_rounded': props.rounded,
-          'skel-Button_disabled': props.disabled,
           'skel-Button_full-width': props.fullWidth,
         })}
         data-color={props.color}
         href={props.href}
+        aria-disabled={props.disabled}
         onClick={clickEventHandler}
         tabindex={props.disabled ? -1 : 0}
         {...restProps}
@@ -82,12 +82,12 @@ export function Button(rawProps: ButtonProps) {
       class={joinClasses(rawProps, 'skel-Button_root', {
         'skel-Button_ghost': props.ghost,
         'skel-Button_rounded': props.rounded,
-        'skel-Button_disabled': props.disabled,
         'skel-Button_full-width': props.fullWidth,
       })}
       type={props.type}
       data-color={props.color}
       disabled={props.disabled || isInProgress()}
+      aria-disabled={props.disabled}
       onClick={clickEventHandler}
       {...restProps}
     >

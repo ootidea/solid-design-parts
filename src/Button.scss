@@ -20,7 +20,7 @@
   --skel-Button_forward-transition: all 0.2s ease-out;
   --skel-Button_backward-transition: all 0.4s ease-out;
 
-  &.skel-Button_disabled {
+  &[aria-disabled='true'] {
     pointer-events: none;
   }
 
@@ -32,7 +32,7 @@
     &[data-color='primary'] {
       --skel-Button_tint-color: var(--skel-primary-color);
 
-      &:not(.skel-Button_disabled) {
+      &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
             transition: var(--skel-Button_forward-transition);
@@ -50,7 +50,7 @@
     &[data-color='achromatic'] {
       --skel-Button_tint-color: oklch(55% 0 0);
 
-      &:not(.skel-Button_disabled) {
+      &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
             transition: var(--skel-Button_forward-transition);
@@ -68,7 +68,7 @@
     &[data-color='error'] {
       --skel-Button_tint-color: var(--skel-error-color);
 
-      &:not(.skel-Button_disabled) {
+      &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
             transition: var(--skel-Button_forward-transition);
@@ -92,7 +92,7 @@
     &[data-color='primary'] {
       --skel-Button_tint-color: var(--skel-primary-color);
 
-      &:not(.skel-Button_disabled) {
+      &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
             transition: var(--skel-Button_forward-transition);
@@ -110,7 +110,7 @@
     &[data-color='achromatic'] {
       --skel-Button_tint-color: oklch(50% 0 0);
 
-      &:not(.skel-Button_disabled) {
+      &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
             transition: var(--skel-Button_forward-transition);
@@ -128,7 +128,7 @@
     &[data-color='error'] {
       --skel-Button_tint-color: var(--skel-error-color);
 
-      &:not(.skel-Button_disabled) {
+      &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
             transition: var(--skel-Button_forward-transition);

@@ -54,9 +54,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
       {(value) => (
         <label
           class={joinClasses(rawProps, 'skel-RadioButtons_label')}
-          classList={{
-            'skel-RadioButtons_disabled': isDisabled(value),
-          }}
+          aria-disabled={isDisabled(value)}
           {...restProps}
         >
           <input

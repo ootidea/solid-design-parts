@@ -102,7 +102,6 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     <>
       <button
         class={joinClasses(rawProps, 'skel-MultiSelect_launcher', {
-          'skel-MultiSelect_disabled': props.disabled,
           'skel-MultiSelect_opened': dropdownInfo() !== undefined,
           'skel-MultiSelect_full-width': props.fullWidth,
         })}

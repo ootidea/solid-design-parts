@@ -12,7 +12,7 @@
 
   box-sizing: border-box;
 
-  .skel-TextInput_disabled & {
+  .skel-TextInput_root[aria-disabled='true'] & {
     background-color: var(--skel-disabled-input-background-color);
   }
 

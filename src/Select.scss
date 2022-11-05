@@ -16,7 +16,7 @@
   font: inherit;
   cursor: pointer;
 
-  &.skel-Select_disabled {
+  &:disabled {
     background-color: var(--skel-disabled-input-background-color);
     cursor: initial;
   }

@@ -68,10 +68,10 @@ export function TextInput(rawProps: TextInputProps) {
   return (
     <div
       class={joinClasses(rawProps, 'skel-TextInput_root', {
-        'skel-TextInput_disabled': rawProps.disabled,
         'skel-TextInput_has-head-button': props.headButtonContent !== undefined,
         'skel-TextInput_has-tail-button': props.tailButtonContent !== undefined,
       })}
+      aria-disabled={props.disabled}
       {...restProps}
     >
       <div class="skel-TextInput_head-area">

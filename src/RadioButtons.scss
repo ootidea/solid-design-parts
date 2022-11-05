@@ -14,7 +14,7 @@
 
   cursor: pointer;
 
-  &.skel-RadioButtons_disabled {
+  &[aria-disabled='true'] {
     cursor: default;
 
     color: oklch(70% 0 0);
@@ -63,7 +63,7 @@
     }
   }
 
-  .skel-RadioButtons_disabled & {
+  &:disabled {
     cursor: default;
   }
 }
