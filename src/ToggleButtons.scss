@@ -1,6 +1,6 @@
 :root {
   --skel-ToggleButtons_border-radius: 0.4em;
-  --skel-ToggleButtons_border: var(--skel-ToggleButtons_border-color) 1px solid;
+  --skel-ToggleButtons_border: 1px solid var(--skel-ToggleButtons_border-color);
   --skel-ToggleButtons_border-color: oklch(80% 0 0);
   --skel-ToggleButtons_text-color: oklch(50% 0 0);
   --skel-ToggleButtons_selected-border-color: oklch(70% 0.08 255.4);

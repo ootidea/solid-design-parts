@@ -7,7 +7,7 @@
 
 .skel-TextInput_body {
   border-radius: var(--skel-input-border-radius);
-  border: var(--skel-input-border-color) 1px solid;
+  border: 1px solid var(--skel-input-border-color);
   background-color: var(--skel-background-color);
 
   box-sizing: border-box;

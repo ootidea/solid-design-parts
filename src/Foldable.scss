@@ -2,7 +2,7 @@
   --skel-Foldable_header-background-default-color: oklch(98% 0 0);
   --skel-Foldable_border-default-color: oklch(93% 0 0);
 
-  border: var(--skel-Foldable_border-color) 1px solid;
+  border: 1px solid var(--skel-Foldable_border-color);
   box-sizing: border-box;
 
   .skel-Foldable_root + & {

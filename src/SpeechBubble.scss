@@ -10,7 +10,7 @@
 }
 
 .skel-SpeechBubble_message-box {
-  border: var(--skel-SpeechBubble_border-color) var(--skel-SpeechBubble_border-width) solid;
+  border: var(--skel-SpeechBubble_border-width) solid var(--skel-SpeechBubble_border-color);
   background-color: var(--skel-SpeechBubble_background-color);
   border-radius: 1em;
   padding: 1em;

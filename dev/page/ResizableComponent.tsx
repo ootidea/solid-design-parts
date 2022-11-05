@@ -13,7 +13,7 @@ export function ResizableComponent() {
 
       <Sample title="Basic example">
         <Resizable>
-          <div style={{ border: 'gray 1px dashed', padding: '1em' }}>Resizable div element example</div>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>Resizable div element example</div>
         </Resizable>
         <Resizable>
           <Image
@@ -26,7 +26,7 @@ export function ResizableComponent() {
       <Sample title="Bind to signal">
         <Resizable onChangeWidthPx={setWidthPx}>
           <div
-            style={{ width: `${widthPx()}px`, border: 'gray 1px dashed', padding: '1em', 'box-sizing': 'border-box' }}
+            style={{ width: `${widthPx()}px`, border: '1px dashed gray', padding: '1em', 'box-sizing': 'border-box' }}
           >
             widthPx() === {widthPx()}
           </div>

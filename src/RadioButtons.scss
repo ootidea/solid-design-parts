@@ -33,7 +33,7 @@
   border-radius: 100%;
   margin: 0;
 
-  border: oklch(60% 0 0) 0.1em solid;
+  border: 0.1em solid oklch(60% 0 0);
   background-color: oklch(100% 0 0);
 
   cursor: pointer;
