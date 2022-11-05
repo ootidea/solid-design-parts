@@ -99,6 +99,7 @@ export function Scrollable(rawProps: ScrollableProps) {
         '--skel-Scrollable_thumb-top': `${thumbTopPx()}px`,
       }}
       ref={(element) => observeHeightPx(element, setRootHeightPx)}
+      onMouseEnter={showThumbTemporarily}
     >
       <div class="skel-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
         <div
