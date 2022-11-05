@@ -1,4 +1,5 @@
 import { Tabs } from '../../src/Tabs'
+import { showToast } from '../../src/Toasts'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -17,8 +18,16 @@ export function TabsComponent() {
         </Tabs>
       </Sample>
 
+      <Sample title="Default tab">
+        <Tabs names={['tab1', 'tab2', 'tab3']} activeTab="tab2">
+          {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
+        </Tabs>
+      </Sample>
+
       <Sample title="Passive">
-        <Tabs passive names={['tab1', 'tab2', 'tab3']} onClickTab={(tabName) => console.log(tabName)}></Tabs>
+        <Tabs passive names={['tab1', 'tab2', 'tab3']} onClickTab={(tabName) => showToast('success', tabName)}>
+          {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
+        </Tabs>
       </Sample>
     </article>
   )
