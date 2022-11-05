@@ -24,7 +24,7 @@ export function TabsComponent() {
         </Tabs>
       </Sample>
 
-      <Sample title="Passive">
+      <Sample title="Passive" description="If the passive flag is set, tab clicks will not change the active tab.">
         <Tabs passive names={['tab1', 'tab2', 'tab3']} onClickTab={(tabName) => showToast('success', tabName)}>
           {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
         </Tabs>
