@@ -31,7 +31,7 @@
     }
   }
 
-  &.skel-DatePicker_selected {
+  &[aria-selected='true'] {
     background-color: var(--skel-primary-color);
     color: white;
   }

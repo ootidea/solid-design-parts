@@ -107,7 +107,7 @@
     background-color: oklch(94% 0 0);
   }
 
-  &.skel-Select_selected {
+  &[aria-selected='true'] {
     background-color: var(--skel-primary-selected-background-color);
     color: var(--skel-primary-color);
 

@@ -161,9 +161,9 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                         </Show>
                         <button
                           class="skel-Select_option"
-                          classList={{ 'skel-Select_selected': selected() === value }}
                           type="button"
                           role="menuitem"
+                          aria-selected={selected() === value}
                           onClick={() => {
                             changeSelected(value)
                             setDropdownInfo(undefined)

@@ -116,19 +116,4 @@
   &:active {
     background-color: oklch(94% 0 0);
   }
-
-  &.skel-MultiSelect_selected {
-    background-color: var(--skel-primary-selected-background-color);
-    color: var(--skel-primary-color);
-
-    @media (hover: hover) {
-      &:hover {
-        background-color: var(--skel-primary-selected-background-hover-color);
-      }
-    }
-
-    &:active {
-      background-color: var(--skel-primary-selected-background-active-color);
-    }
-  }
 }

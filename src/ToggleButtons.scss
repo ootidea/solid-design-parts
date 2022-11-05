@@ -60,7 +60,7 @@
     transition: var(--skel-forward-transition);
   }
 
-  &.skel-ToggleButton_selected {
+  &[aria-selected='true'] {
     border-color: var(--skel-ToggleButtons_selected-border-color);
 
     & + .skel-ToggleButtons_button {

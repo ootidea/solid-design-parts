@@ -41,10 +41,8 @@ export function DatePicker(rawProps: DatePickerProps) {
       {({ date }) => (
         <button
           class="skel-DatePicker_date-cell"
-          classList={{
-            'skel-DatePicker_selected': value() !== undefined && dayjs(date).isSame(value(), 'date'),
-          }}
           type="button"
+          aria-selected={value() !== undefined && dayjs(date).isSame(value(), 'date')}
           disabled={props.disabled?.(date)}
           onClick={() => changeValue(date)}
         >
