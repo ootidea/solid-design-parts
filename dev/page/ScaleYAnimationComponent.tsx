@@ -2,6 +2,7 @@ import { createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { ScaleYAnimation } from '../../src/ScaleYAnimation'
 import { showToast } from '../../src/Toasts'
+import { call } from '../../src/utility/others'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -19,26 +20,51 @@ export function ScaleYAnimationComponent() {
         </ScaleYAnimation>
       </Sample>
 
-      <Sample title="Control by launcher">
-        <ScaleYAnimation launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
-          <div>Content</div>
-        </ScaleYAnimation>
+      <Sample title="Duration of animation">
+        {call(() => {
+          const [shown, setShown] = createSignal(true)
+          return (
+            <>
+              <Button onClick={() => setShown(!shown())}>Toggle</Button>
+              <ScaleYAnimation shown={shown()} options={1000}>
+                <div>Content</div>
+              </ScaleYAnimation>
+            </>
+          )
+        })}
       </Sample>
 
-      <Sample title="Duration of animation">
-        <ScaleYAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
-          <div>Content</div>
-        </ScaleYAnimation>
+      <Sample title="Control by non boolean value">
+        {call(() => {
+          const [shown, setShown] = createSignal<string | undefined>('First value')
+          return (
+            <>
+              <Button onClick={() => setShown('Second value')}>Show</Button>
+              <Button ghost onClick={() => setShown(undefined)}>
+                Hide
+              </Button>
+              <ScaleYAnimation shown={shown()}>{(value) => <div>{value}</div>}</ScaleYAnimation>
+            </>
+          )
+        })}
       </Sample>
 
       <Sample title="Animation finish callbacks">
-        <ScaleYAnimation
-          onFinishEnterAnimation={() => showToast('success', 'enter')}
-          onFinishExitAnimation={() => showToast('success', 'exit')}
-          launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}
-        >
-          <div>Content</div>
-        </ScaleYAnimation>
+        {call(() => {
+          const [shown, setShown] = createSignal(true)
+          return (
+            <>
+              <Button onClick={() => setShown(!shown())}>Toggle</Button>
+              <ScaleYAnimation
+                shown={shown()}
+                onFinishEnterAnimation={() => showToast('success', 'enter')}
+                onFinishExitAnimation={() => showToast('success', 'exit')}
+              >
+                <div>Content</div>
+              </ScaleYAnimation>
+            </>
+          )
+        })}
       </Sample>
     </article>
   )
