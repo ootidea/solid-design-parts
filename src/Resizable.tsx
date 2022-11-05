@@ -6,10 +6,10 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type ResizableProps = SkelProps<{ onChangeWidth?: (width: number) => void }>
+export type ResizableProps = SkelProps<{ onChangeWidthPx?: (width: number) => void }>
 
 export function Resizable(rawProps: ResizableProps) {
-  const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidth', 'style'])
+  const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidthPx', 'style'])
 
   const [width, setWidth] = createSignal<number | undefined>(undefined)
 
@@ -37,7 +37,7 @@ export function Resizable(rawProps: ResizableProps) {
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
     const width = right - left - dragState.deltaX
-    props.onChangeWidth?.(width)
+    props.onChangeWidthPx?.(width)
     setWidth(width)
   }
 
