@@ -21,6 +21,12 @@ export function ToastComponent() {
         <Button onClick={() => showToast('success', '4 sec.', { durationMs: 4000 })}>4 sec.</Button>
         <Button onClick={() => showToast('success', 'Infinity', { durationMs: Infinity })}>Infinity</Button>
       </Sample>
+
+      <Sample title="href" direction="horizontal">
+        <Button onClick={() => showToast('info', 'Check website', { href: 'https://www.solidjs.com/' })}>
+          Show link toast
+        </Button>
+      </Sample>
     </article>
   )
 }

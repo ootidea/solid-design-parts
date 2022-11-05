@@ -29,11 +29,11 @@ export function showToast(type: ToastProps['type'], message: JSX.Element, option
 
   setToastModels((toastModels) => {
     toastModels.push({
+      ...options,
       id: newToastId,
       type,
       message,
       durationMs,
-      onClick: options?.onClick,
       close: () => removeToast(newToastId),
     })
     return toastModels

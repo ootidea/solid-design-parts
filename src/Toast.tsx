@@ -15,6 +15,7 @@ export type ToastProps = {
   type: 'success' | 'error' | 'info'
   message: JSX.Element
   durationMs: number
+  href?: string
   onClick?: (event: MouseEvent) => void
   /** Injected closure function to close the toast. */
   close: () => void
@@ -22,7 +23,12 @@ export type ToastProps = {
 
 export function Toast(props: ToastProps) {
   return (
-    <div class="skel-Toast_root" onClick={props.onClick}>
+    <a
+      class="skel-Toast_root"
+      classList={{ 'skel-Toast_clickable': props.onClick !== undefined }}
+      href={props.href}
+      onClick={props.onClick}
+    >
       <div class="skel-Toast_icon-area">
         {call(() => {
           switch (props.type) {
@@ -39,6 +45,6 @@ export function Toast(props: ToastProps) {
       <div class="skel-Toast_close-button-area">
         <IconButton src={closeIcon} onClick={props.close} />
       </div>
-    </div>
+    </a>
   )
 }
