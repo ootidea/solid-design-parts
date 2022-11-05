@@ -1,15 +1,15 @@
 import { createSignal, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import css from './Popover.scss'
+import { setupFocusTrap } from './utility/others'
 import {
   EnneaPosition,
-  setupFocusTrap,
   toHorizontalPosition,
   toOpposite,
   toVerticalPosition,
   toXPercent,
   toYPercent,
-} from './utility/others'
+} from './utility/position'
 import { prepareProps, SkelProps, SkelSlot } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'

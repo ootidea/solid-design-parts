@@ -1,5 +1,5 @@
 import css from './Gravity.scss'
-import { EnneaPosition, toHorizontalPosition, toVerticalPosition } from './utility/others'
+import { EnneaPosition, toHorizontalPosition, toVerticalPosition } from './utility/position'
 import { joinClasses, prepareProps, SkelProps } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
