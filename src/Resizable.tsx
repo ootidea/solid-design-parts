@@ -11,7 +11,7 @@ export type ResizableProps = SkelProps<{ onChangeWidthPx?: (width: number) => vo
 export function Resizable(rawProps: ResizableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidthPx', 'style'])
 
-  const [width, setWidth] = createSignal<number | undefined>(undefined)
+  const [widthPx, setWidthPx] = createSignal<number | undefined>(undefined)
 
   let rootElement: HTMLDivElement | undefined = undefined
   let dragState: { deltaX: number } | undefined = undefined
@@ -36,15 +36,15 @@ export function Resizable(rawProps: ResizableProps) {
     assertNonUndefined(rootElement)
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
-    const width = right - left - dragState.deltaX
-    props.onChangeWidthPx?.(width)
-    setWidth(width)
+    const widthPx = right - left - dragState.deltaX
+    props.onChangeWidthPx?.(widthPx)
+    setWidthPx(widthPx)
   }
 
   return (
     <div
       class={joinClasses(rawProps, 'skel-Resizable_root')}
-      style={joinStyle(rawProps.style, { width: width() ? `${width()}px` : 'max-content' })}
+      style={joinStyle(rawProps.style, { width: widthPx() !== undefined ? `${widthPx()}px` : 'max-content' })}
       ref={rootElement}
       {...restProps}
     >
