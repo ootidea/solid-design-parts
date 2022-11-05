@@ -39,10 +39,10 @@ export type DataTableProps<
   evenRowBackgroundColor?: string
   oddRowBackgroundColor?: string
   onClickRow?: (row: Row) => void
-  sortingState?: { columnId: string; reversed: boolean } | undefined
+  sortingState?: { columnId: ColumnId; reversed: boolean } | undefined
   horizontalRuledLine?: SkelSlot<{ verticalIndex: number }>
   verticalRuledLine?: SkelSlot<{ verticalIndex: number; horizontalIndex: number }>
-  headerCell?: SkelSlot<{ columnId: string; columnTitle: string }>
+  headerCell?: SkelSlot<{ columnId: ColumnId; columnTitle: string }>
   emptyState?: SkelSlot<{}>
 }>
 
@@ -183,7 +183,7 @@ export function DataTable<
     return compareInStandardWay
   }
 
-  function onClickSortButton(columnId: string) {
+  function onClickSortButton(columnId: ColumnId) {
     if (sortingState()?.columnId === columnId) {
       setSortingState({ columnId, reversed: !sortingState().reversed })
     } else {
