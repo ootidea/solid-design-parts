@@ -9,13 +9,16 @@ export function SidebarMenu(props: VoidProps<{ componentName: string }>) {
   })
 
   const navigator = useNavigate()
-  function onClick() {
+  function onClick(event: MouseEvent) {
+    if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return
+
+    event.preventDefault()
     navigator(props.componentName, { resolve: true })
   }
 
   return (
-    <div class={classes.root} classList={{ [classes.active]: isActive() }} onClick={onClick}>
+    <a class={classes.root} href={props.componentName} aria-selected={isActive()} onClick={onClick}>
       {props.componentName}
-    </div>
+    </a>
   )
 }
