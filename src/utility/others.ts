@@ -190,7 +190,7 @@ export function toArray(children: JSX.Element): JSX.Element[] {
  * Observe element width in px using ResizeObserver.
  * Callback immediately when this function is called.
  */
-export function observeWidth(element: HTMLElement, callback: (width: number) => void) {
+export function observeWidthPx(element: HTMLElement, callback: (widthPx: number) => void) {
   callback(element.getBoundingClientRect().width)
   const resizeObserver = new ResizeObserver(() => {
     callback(element.getBoundingClientRect().width)

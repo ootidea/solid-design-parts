@@ -11,8 +11,8 @@ export type ScrollableProps = SkelProps<{}>
 export function Scrollable(rawProps: ScrollableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['children'])
 
-  const [rootHeight, setRootHeight] = createSignal(0)
-  const [innerHeight, setInnerHeight] = createSignal(0)
+  const [rootHeightPx, setRootHeightPx] = createSignal(0)
+  const [innerHeightPx, setInnerHeightPx] = createSignal(0)
   const [thumbTopPx, setThumbTopPx] = createSignal(0)
   const [dragState, setDragState] = createSignal<{ initialMouseY: number; initialScrollTop: number } | undefined>(
     undefined
@@ -21,7 +21,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   let outerElement: HTMLDivElement | undefined
   let thumbElement: HTMLDivElement | undefined
 
-  const isOverflow = () => rootHeight() < innerHeight()
+  const isOverflow = () => rootHeightPx() < innerHeightPx()
 
   onMount(() => {
     assertNonUndefined(thumbElement)
@@ -65,17 +65,17 @@ export function Scrollable(rawProps: ScrollableProps) {
 
       outerElement.scrollTop =
         dragStateSnapshot.initialScrollTop +
-        ((event.clientY - dragStateSnapshot.initialMouseY) * innerHeight()) / rootHeight()
+        ((event.clientY - dragStateSnapshot.initialMouseY) * innerHeightPx()) / rootHeightPx()
     }
   }
 
   function onScroll(event: Event) {
     const element = event.target
     if (element instanceof HTMLElement) {
-      if (innerHeight() === 0) return
+      if (innerHeightPx() === 0) return
 
-      const scrollRatio = element.scrollTop / innerHeight()
-      setThumbTopPx(rootHeight() * scrollRatio)
+      const scrollRatio = element.scrollTop / innerHeightPx()
+      setThumbTopPx(rootHeightPx() * scrollRatio)
     }
 
     showThumbTemporarily()
@@ -95,15 +95,15 @@ export function Scrollable(rawProps: ScrollableProps) {
         'skel-Scrollable_dragging': dragState() !== undefined,
       }}
       style={{
-        '--skel-Scrollable_thumb-height': `${(100 * rootHeight()) / innerHeight()}%`,
+        '--skel-Scrollable_thumb-height': `${(100 * rootHeightPx()) / innerHeightPx()}%`,
         '--skel-Scrollable_thumb-top': `${thumbTopPx()}px`,
       }}
-      ref={(element) => observeHeight(element, setRootHeight)}
+      ref={(element) => observeHeightPx(element, setRootHeightPx)}
     >
       <div class="skel-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
         <div
           class={joinClasses(rawProps, 'skel-Scrollable_inner')}
-          ref={(element) => observeHeight(element, setInnerHeight)}
+          ref={(element) => observeHeightPx(element, setInnerHeightPx)}
           {...restProps}
         >
           {props.children}
@@ -116,7 +116,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   )
 }
 
-function observeHeight(element: HTMLElement, callback: (height: number) => void) {
+function observeHeightPx(element: HTMLElement, callback: (heightPx: number) => void) {
   callback(element.getBoundingClientRect().height)
   const resizeObserver = new ResizeObserver(() => {
     callback(element.getBoundingClientRect().height)

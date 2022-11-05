@@ -1,6 +1,6 @@
 import { createEffect, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
-import { assertNonUndefined, observeWidth } from './utility/others'
+import { assertNonUndefined, observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, SkelProps } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -43,8 +43,8 @@ export function Slider(rawProps: SliderProps) {
     props.onChangeValue?.(newValue)
   }
 
-  const [trackWidth, setTrackWidth] = createSignal(0)
-  const [thumbWidth, setThumbWidth] = createSignal(0)
+  const [trackWidthPx, setTrackWidthPx] = createSignal(0)
+  const [thumbWidthPx, setThumbWidthPx] = createSignal(0)
   let trackElement: HTMLDivElement | undefined = undefined
 
   function onMouseDownTrack(event: MouseEvent) {
@@ -78,14 +78,14 @@ export function Slider(rawProps: SliderProps) {
   }
 
   function convertOffsetXToValue(offsetX: number): number {
-    const validOffsetX = Math.max(thumbWidth() / 2, Math.min(offsetX, trackWidth() - thumbWidth() / 2))
-    const ratio = (validOffsetX - thumbWidth() / 2) / (trackWidth() - thumbWidth())
+    const validOffsetX = Math.max(thumbWidthPx() / 2, Math.min(offsetX, trackWidthPx() - thumbWidthPx() / 2))
+    const ratio = (validOffsetX - thumbWidthPx() / 2) / (trackWidthPx() - thumbWidthPx())
     return props.minValue + ratio * (props.maxValue - props.minValue)
   }
 
   onMount(() => {
     assertNonUndefined(trackElement)
-    observeWidth(trackElement, setTrackWidth)
+    observeWidthPx(trackElement, setTrackWidthPx)
   })
 
   return (
@@ -99,14 +99,14 @@ export function Slider(rawProps: SliderProps) {
         '--skel-Slider_thumb-width': props.thumbWidth,
         '--skel-Slider_thumb-height': props.thumbHeight,
         '--skel-Slider_thumb-color': props.thumbColor,
-        '--skel-Slider_thumb-x': `${ratio() * (trackWidth() - thumbWidth())}px`,
+        '--skel-Slider_thumb-x': `${ratio() * (trackWidthPx() - thumbWidthPx())}px`,
       }}
       {...restProps}
     >
       <div class="skel-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
       <div
         class="skel-Slider_thumb"
-        ref={(element) => observeWidth(element, setThumbWidth)}
+        ref={(element) => observeWidthPx(element, setThumbWidthPx)}
         onMouseDown={onMouseDownThumb}
       />
     </div>
