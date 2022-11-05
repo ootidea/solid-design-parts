@@ -69,7 +69,7 @@ export function IconButton(rawProps: IconButtonProps) {
     >
       {isInProgress() ? (
         <Gravity>
-          <Spinner />
+          <Spinner size="65%" />
         </Gravity>
       ) : (
         <Icon
