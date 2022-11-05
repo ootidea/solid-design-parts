@@ -2,6 +2,7 @@ import { createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { FadeAnimation } from '../../src/FadeAnimation'
 import { showToast } from '../../src/Toasts'
+import { call } from '../../src/utility/others'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -19,26 +20,51 @@ export function FadeAnimationComponent() {
         </FadeAnimation>
       </Sample>
 
-      <Sample title="Control by launcher">
-        <FadeAnimation launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
-          <div>Content</div>
-        </FadeAnimation>
+      <Sample title="Duration of animation">
+        {call(() => {
+          const [shown, setShown] = createSignal(true)
+          return (
+            <>
+              <Button onClick={() => setShown(!shown())}>Toggle</Button>
+              <FadeAnimation shown={shown()} options={1000}>
+                <div>Content</div>
+              </FadeAnimation>
+            </>
+          )
+        })}
       </Sample>
 
-      <Sample title="Duration of animation">
-        <FadeAnimation options={1000} launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}>
-          <div>Content</div>
-        </FadeAnimation>
+      <Sample title="Control by non boolean value">
+        {call(() => {
+          const [shown, setShown] = createSignal<string | undefined>('First value')
+          return (
+            <>
+              <Button onClick={() => setShown('Second value')}>Show</Button>
+              <Button ghost onClick={() => setShown(undefined)}>
+                Hide
+              </Button>
+              <FadeAnimation shown={shown()}>{(value) => <div>{value}</div>}</FadeAnimation>
+            </>
+          )
+        })}
       </Sample>
 
       <Sample title="Animation finish callbacks">
-        <FadeAnimation
-          onFinishEnterAnimation={() => showToast('success', 'enter')}
-          onFinishExitAnimation={() => showToast('success', 'exit')}
-          launcher={({ toggle }) => <Button onClick={toggle}>Toggle</Button>}
-        >
-          <div>Content</div>
-        </FadeAnimation>
+        {call(() => {
+          const [shown, setShown] = createSignal(true)
+          return (
+            <>
+              <Button onClick={() => setShown(!shown())}>Toggle</Button>
+              <FadeAnimation
+                shown={shown()}
+                onFinishEnterAnimation={() => showToast('success', 'enter')}
+                onFinishExitAnimation={() => showToast('success', 'exit')}
+              >
+                <div>Content</div>
+              </FadeAnimation>
+            </>
+          )
+        })}
       </Sample>
     </article>
   )

@@ -2,37 +2,44 @@ import { createEffect, createSignal, on, Show } from 'solid-js'
 import { prepareProps, SkelProps, SkelSlot } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type FadeAnimationProps = SkelProps<{
-  shown?: boolean
+export type FadeAnimationProps<T> = SkelProps<{
+  shown?: T | undefined | null
   options?: number | KeyframeAnimationOptions
   onFinishEnterAnimation?: () => void
   onFinishExitAnimation?: () => void
-  launcher?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
-  children?: SkelSlot<{ show: () => void; hide: () => void; toggle: () => void }>
+  children?: SkelSlot<T>
 }>
 
-export function FadeAnimation(rawProps: FadeAnimationProps) {
-  const [props, restProps] = prepareProps(rawProps, { shown: true, options: 250 }, [
+export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
+  const [props, restProps] = prepareProps(rawProps, { options: 250 }, [
+    'shown',
     'onFinishEnterAnimation',
     'onFinishExitAnimation',
-    'launcher',
     'children',
   ])
 
   let element: HTMLDivElement | undefined
 
   // Signal variable indicating whether props.children should be present on the DOM.
-  const [shown, setShown] = createSignal(props.shown)
+  const [shown, setShown] = createSignal(Boolean(props.shown))
 
   // Signal variable to use the defer option for props.shown.
   const [bindingShown, setBindingShown] = createSignal(props.shown)
-  createEffect(() => setBindingShown(props.shown))
+  // A variable required to render props.children.
+  let lastNonFalsyShown = props.shown
+  createEffect(() => {
+    if (props.shown) {
+      lastNonFalsyShown = props.shown
+    }
+
+    setBindingShown(() => props.shown)
+  })
 
   // Animate when props.shown is changed.
-  createEffect(on(bindingShown, (newShown) => changeShown(newShown), { defer: true }))
+  createEffect(on(bindingShown, (newShown) => changeShown(Boolean(newShown)), { defer: true }))
 
   function changeShown(newShown: boolean) {
-    if (newShown === shown()) return
+    if (newShown === Boolean(shown())) return
 
     if (!newShown) {
       const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], props.options)
@@ -48,18 +55,12 @@ export function FadeAnimation(rawProps: FadeAnimationProps) {
       })
     }
   }
-  const show = () => changeShown(true)
-  const hide = () => changeShown(false)
-  const toggle = () => changeShown(!shown())
 
   return (
-    <>
-      <Slot content={props.launcher} params={{ show, hide, toggle }} />
-      <div class="skel-FadeAnimation_root" ref={element}>
-        <Show when={shown()}>
-          <Slot content={props.children} params={{ show, hide, toggle }} />
-        </Show>
-      </div>
-    </>
+    <div class="skel-FadeAnimation_root" ref={element}>
+      <Show when={shown()}>
+        <Slot content={props.children} params={lastNonFalsyShown!} />
+      </Show>
+    </div>
   )
 }
