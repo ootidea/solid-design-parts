@@ -180,7 +180,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                     />
                   </div>
                 </Show>
-                <Scrollable>
+                <Scrollable role="menu">
                   {/* TODO: implement empty state */}
                   <For each={search(props.values)}>
                     {(value, i) => (
@@ -191,6 +191,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                         <Checkbox
                           class="skel-MultiSelect_option"
                           checked={Boolean(selected()[value])}
+                          role="menuitem"
                           onChangeChecked={(checked) => {
                             changeSelected({
                               ...selected(),

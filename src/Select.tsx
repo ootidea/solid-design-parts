@@ -151,7 +151,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                     />
                   </div>
                 </Show>
-                <Scrollable>
+                <Scrollable role="menu">
                   {/* TODO: implement empty state */}
                   <For each={search(props.values)}>
                     {(value, i) => (
@@ -163,6 +163,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                           class="skel-Select_option"
                           classList={{ 'skel-Select_selected': selected() === value }}
                           type="button"
+                          role="menuitem"
                           onClick={() => {
                             changeSelected(value)
                             setDropdownInfo(undefined)

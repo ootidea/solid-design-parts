@@ -28,6 +28,7 @@ export function Divider(rawProps: DividerProps) {
         '--skel-Divider_thickness': props.thickness,
         '--skel-Divider_color': props.color,
       })}
+      role="separator"
       data-direction={props.direction}
       {...restProps}
     />

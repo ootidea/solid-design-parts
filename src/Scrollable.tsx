@@ -109,7 +109,7 @@ export function Scrollable(rawProps: ScrollableProps) {
           {props.children}
         </div>
       </div>
-      <div class="skel-Scrollable_scrollbar">
+      <div class="skel-Scrollable_scrollbar" role="scrollbar">
         <div class="skel-Scrollable_thumb" ref={thumbElement} />
       </div>
     </div>

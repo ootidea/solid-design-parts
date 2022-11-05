@@ -101,6 +101,7 @@ export function Slider(rawProps: SliderProps) {
         '--skel-Slider_thumb-color': props.thumbColor,
         '--skel-Slider_thumb-x': `${ratio() * (trackWidthPx() - thumbWidthPx())}px`,
       }}
+      role="slider"
       {...restProps}
     >
       <div class="skel-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />

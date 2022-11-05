@@ -78,7 +78,7 @@ export function Modal(rawProps: ModalProps) {
             onClick={onClickOverlay}
             onKeyDown={onKeyDown}
           >
-            <div class="skel-Modal_frame">
+            <div class="skel-Modal_frame" role="dialog">
               <Show when={props.showCloseButton || rawProps.title} fallback={<div />}>
                 <TitleBarLayout
                   class="skel-Modal_header"

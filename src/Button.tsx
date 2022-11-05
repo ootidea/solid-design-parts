@@ -65,11 +65,12 @@ export function Button(rawProps: ButtonProps) {
           'skel-Button_rounded': props.rounded,
           'skel-Button_full-width': props.fullWidth,
         })}
-        data-color={props.color}
         href={props.href}
-        aria-disabled={props.disabled}
-        onClick={clickEventHandler}
+        role="button"
         tabindex={props.disabled ? -1 : 0}
+        aria-disabled={props.disabled}
+        data-color={props.color}
+        onClick={clickEventHandler}
         {...restProps}
       >
         {content}

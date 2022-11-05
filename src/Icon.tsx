@@ -26,6 +26,7 @@ export function Icon(rawProps: IconProps) {
         '--skel-Icon_color': props.color,
         '--skel-Icon_rotate': props.rotate,
       })}
+      role="img"
       {...restProps}
     />
   )
