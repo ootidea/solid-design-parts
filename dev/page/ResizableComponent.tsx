@@ -9,7 +9,9 @@ export function ResizableComponent() {
       <PageTitle>Resizable</PageTitle>
 
       <Sample title="Basic example">
-        <Resizable style={{ border: 'gray 1px dashed', padding: '1em' }}>area area area area area area</Resizable>
+        <Resizable>
+          <div style={{ border: 'gray 1px dashed', padding: '1em' }}>Resizable div element example</div>
+        </Resizable>
         <Resizable>
           <Image
             width="100%"
