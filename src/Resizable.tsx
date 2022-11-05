@@ -17,6 +17,8 @@ export function Resizable(rawProps: ResizableProps) {
   let dragState: { deltaX: number } | undefined = undefined
 
   function onMouseDown(event: MouseEvent) {
+    event.preventDefault()
+
     assertNonUndefined(rootElement)
     dragState = { deltaX: event.clientX - rootElement.getBoundingClientRect().right }
     document.body.addEventListener('mousemove', onMouseMove)
