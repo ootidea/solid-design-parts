@@ -17,9 +17,9 @@ export function ToastComponent() {
       </Sample>
 
       <Sample title="Duration" direction="horizontal">
-        <Button onClick={() => showToast('success', '2 sec.', 2000)}>2 sec.</Button>
-        <Button onClick={() => showToast('success', '4 sec.', 4000)}>4 sec.</Button>
-        <Button onClick={() => showToast('success', 'Infinity', Infinity)}>Infinity</Button>
+        <Button onClick={() => showToast('success', '2 sec.', { durationMs: 2000 })}>2 sec.</Button>
+        <Button onClick={() => showToast('success', '4 sec.', { durationMs: 4000 })}>4 sec.</Button>
+        <Button onClick={() => showToast('success', 'Infinity', { durationMs: Infinity })}>Infinity</Button>
       </Sample>
     </article>
   )

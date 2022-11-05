@@ -6,10 +6,13 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
+export type ToastOptions = Partial<Omit<ToastProps, 'type' | 'message'>>
 type ToastModel = { id: symbol } & ToastProps
 const [toastModels, setToastModels] = createSignal<ToastModel[]>([], { equals: false })
 
-export function showToast(type: ToastProps['type'], message: JSX.Element, durationMs: number = 3000) {
+export function showToast(type: ToastProps['type'], message: JSX.Element, options?: ToastOptions) {
+  const durationMs: number = options?.durationMs ?? 3000
+
   const toasts = document.querySelector('.skel-Toasts_root')
   if (toasts === null) {
     render(() => <Toasts />, document.body)
@@ -25,7 +28,14 @@ export function showToast(type: ToastProps['type'], message: JSX.Element, durati
   }
 
   setToastModels((toastModels) => {
-    toastModels.push({ id: newToastId, type, message, durationMs, close: () => removeToast(newToastId) })
+    toastModels.push({
+      id: newToastId,
+      type,
+      message,
+      durationMs,
+      onClick: options?.onClick,
+      close: () => removeToast(newToastId),
+    })
     return toastModels
   })
 }
