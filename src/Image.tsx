@@ -40,6 +40,7 @@ export function Image(rawProps: ImageProps) {
         <img
           class={joinClasses(rawProps, 'skel-Image_root')}
           alt={props.alt}
+          draggable={false}
           onLoad={onLoad}
           onError={onError}
           {...restProps}
