@@ -40,20 +40,25 @@
   width: var(--skel-Stepper_circle-size);
   height: var(--skel-Stepper_circle-size);
   border-radius: 99999px;
-  background-color: oklch(80% 0 0);
 
-  color: white;
   font-size: 1.2em;
   font-weight: bold;
 
   &.skel-Stepper_past-step {
-    background-color: var(--skel-primary-color);
+    border: 0.15em solid var(--skel-primary-color);
+    background-color: var(--skel-background-color);
+    color: var(--skel-primary-color);
   }
 
   &.skel-Stepper_current-step {
+    background-color: var(--skel-primary-color);
+    color: var(--skel-inverted-text-color);
+  }
+
+  &.skel-Stepper_future-step {
+    border: 0.15em solid oklch(80% 0 0);
     background-color: var(--skel-background-color);
-    border: 0.15em solid var(--skel-primary-color);
-    color: var(--skel-primary-color);
+    color: oklch(80% 0 0);
   }
 }
 
@@ -66,14 +71,17 @@
   display: flex;
   justify-content: center;
 
-  color: oklch(70% 0 0);
   font-weight: bold;
 
   &.skel-Stepper_past-step {
-    color: oklch(50% 0 0);
+    color: oklch(60% 0 0);
   }
 
   &.skel-Stepper_current-step {
     color: var(--skel-primary-color);
+  }
+
+  &.skel-Stepper_future-step {
+    color: oklch(70% 0 0);
   }
 }
