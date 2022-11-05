@@ -1,3 +1,4 @@
+import { Image } from '../../src/Image'
 import { Resizable } from '../../src/Resizable'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
@@ -8,8 +9,12 @@ export function ResizableComponent() {
       <PageTitle>Resizable</PageTitle>
 
       <Sample title="Basic example">
+        <Resizable style={{ border: 'gray 1px dashed', padding: '1em' }}>area area area area area area</Resizable>
         <Resizable>
-          <div style={{ border: 'gray 1px dashed', padding: '1em' }}>area area area area area area</div>
+          <Image
+            width="100%"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polar_Bear_ANWR_1.jpg/320px-Polar_Bear_ANWR_1.jpg"
+          />
         </Resizable>
       </Sample>
     </article>

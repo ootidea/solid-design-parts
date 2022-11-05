@@ -44,7 +44,7 @@ export function Resizable(rawProps: ResizableProps) {
   return (
     <div
       class={joinClasses(rawProps, 'skel-Resizable_root')}
-      style={joinStyle(rawProps.style, { width: width() ? `${width()}px` : 'auto' })}
+      style={joinStyle(rawProps.style, { width: width() ? `${width()}px` : 'max-content' })}
       ref={rootElement}
       {...restProps}
     >
