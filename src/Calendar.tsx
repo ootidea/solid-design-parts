@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { createEffect, createSignal, For } from 'solid-js'
+import { createEffect, createMemo, createSignal, For } from 'solid-js'
 import css from './Calendar.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
@@ -99,7 +99,7 @@ export function Calendar(rawProps: CalendarProps) {
             <div class="skel-Calendar_date-row">
               <For each={dayNames}>
                 {(_, day) => {
-                  const date = () => firstDateOfSelectedCalendar().add(weakIndex, 'week').add(day(), 'day')
+                  const date = createMemo(() => firstDateOfSelectedCalendar().add(weakIndex, 'week').add(day(), 'day'))
                   return (
                     <div
                       class="skel-Calendar_cell"

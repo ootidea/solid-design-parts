@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount } from 'solid-js'
+import { createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import css from './Scrollable.scss'
 import { assertNonUndefined } from './utility/others'
 import { joinClasses, prepareProps, SkelProps } from './utility/props'
@@ -21,7 +21,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   let outerElement: HTMLDivElement | undefined
   let thumbElement: HTMLDivElement | undefined
 
-  const isOverflow = () => rootHeightPx() < innerHeightPx()
+  const isOverflow = createMemo(() => rootHeightPx() < innerHeightPx())
 
   onMount(() => {
     assertNonUndefined(thumbElement)
