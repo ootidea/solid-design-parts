@@ -23,7 +23,7 @@ export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
   // Signal variable indicating whether props.children should be present on the DOM.
   const [shown, setShown] = createSignal(Boolean(props.shown))
 
-  // A variable required to render props.children.
+  // A variable required to render props.children until animation is complete.
   let lastNonFalsyShown = props.shown
   createEffect(
     on(
