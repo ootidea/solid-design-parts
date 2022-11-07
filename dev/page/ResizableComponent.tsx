@@ -15,6 +15,7 @@ export function ResizableComponent() {
         <Resizable>
           <div style={{ border: '1px dashed gray', padding: '1em' }}>Resizable div element example</div>
         </Resizable>
+
         <Resizable>
           <Image
             width="100%"
@@ -30,6 +31,16 @@ export function ResizableComponent() {
           >
             widthPx() === {widthPx()}
           </div>
+        </Resizable>
+      </Sample>
+
+      <Sample title="min-width and max-width">
+        <Resizable style={{ 'min-width': '400px', 'max-width': '70%' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>min-width: 400px; max-width: 70%</div>
+        </Resizable>
+
+        <Resizable style={{ 'min-width': 'initial', 'max-width': 'initial' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>No range restrictions</div>
         </Resizable>
       </Sample>
     </article>

@@ -1,6 +1,9 @@
 .skel-Resizable_root {
   position: relative;
+  box-sizing: border-box;
   width: max-content;
+  min-width: min-content;
+  max-width: 100%;
 }
 
 .skel-Resizable_resize-handle {
