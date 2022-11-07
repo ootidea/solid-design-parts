@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { isSameDay, startOfMonth } from 'date-fns'
 import { createSignal } from 'solid-js'
 import { Calendar } from './Calendar'
 import css from './DatePicker.scss'
@@ -20,7 +20,7 @@ export function DatePicker(rawProps: DatePickerProps) {
     rawProps,
     {
       value: undefined,
-      month: dayjs().startOf('date').toDate(),
+      month: startOfMonth(new Date()),
     },
     ['disabled', 'onChangeValue', 'onChangeMonth']
   )
@@ -42,7 +42,7 @@ export function DatePicker(rawProps: DatePickerProps) {
         <button
           class="skel-DatePicker_date-cell"
           type="button"
-          aria-selected={value() !== undefined && dayjs(date).isSame(value(), 'date')}
+          aria-selected={value() !== undefined && isSameDay(date, value() ?? Number.NaN)}
           disabled={props.disabled?.(date)}
           onClick={() => changeValue(date)}
         >

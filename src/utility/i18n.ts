@@ -12,7 +12,7 @@ export namespace i18n {
     calendarSaturday: { default: 'Sa', ja: '土' },
     calendarYearMonthOrder: { default: `"month year"`, ja: `"year month"` },
     calendarMonthTemplate: { default: 'MMMM', ja: 'M月' },
-    calendarYearTemplate: { default: 'YYYY', ja: 'YYYY年' },
+    calendarYearTemplate: { default: 'yyyy', ja: 'yyyy年' },
   })
 
   export function forceLanguage(language: string) {

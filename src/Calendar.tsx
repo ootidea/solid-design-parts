@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from 'dayjs'
+import { addDays, addMonths, addWeeks, format, isSameMonth, setDate, subDays, subMonths } from 'date-fns'
 import { createEffect, createMemo, createSignal, For } from 'solid-js'
 import css from './Calendar.scss'
 import { IconButton } from './IconButton'
@@ -37,12 +37,8 @@ export function Calendar(rawProps: CalendarProps) {
     props.onChangeMonth?.(month)
   }
 
-  // Dayjs-Date adapters
-  const selectedMonth_ = () => dayjs(selectedMonth())
-  const setSelectedMonth_ = (date: Dayjs) => changeMonth(date.toDate())
-
-  const firstDateOfSelectedMonth = () => selectedMonth_().date(1)
-  const firstDateOfSelectedCalendar = () => firstDateOfSelectedMonth().subtract(firstDateOfSelectedMonth().day(), 'day')
+  const firstDateOfSelectedMonth = () => setDate(selectedMonth(), 1)
+  const firstDateOfSelectedCalendar = () => subDays(firstDateOfSelectedMonth(), firstDateOfSelectedMonth().getDay())
 
   const dayNames = [
     i18n.literals.calendarSunday,
@@ -67,18 +63,18 @@ export function Calendar(rawProps: CalendarProps) {
           class="skel-Calendar_month-move-button skel-Calendar_prev-month-button"
           classList={{ 'skel-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronLeftIcon}
-          onClick={() => setSelectedMonth_(selectedMonth_().subtract(1, 'month'))}
+          onClick={() => changeMonth(subMonths(selectedMonth(), 1))}
           size="1.6em"
         />
         <div class="skel-Calendar_year-month">
-          <span class="skel-Calendar_year">{selectedMonth_().format(i18n.literals.calendarYearTemplate)}</span>
-          <span class="skel-Calendar_month">{selectedMonth_().format(i18n.literals.calendarMonthTemplate)}</span>
+          <span class="skel-Calendar_year">{format(selectedMonth(), i18n.literals.calendarYearTemplate)}</span>
+          <span class="skel-Calendar_month">{format(selectedMonth(), i18n.literals.calendarMonthTemplate)}</span>
         </div>
         <IconButton
           class="skel-Calendar_month-move-button skel-Calendar_next-month-button"
           classList={{ 'skel-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronRightIcon}
-          onClick={() => setSelectedMonth_(selectedMonth_().add(1, 'month'))}
+          onClick={() => changeMonth(addMonths(selectedMonth(), 1))}
           size="1.6em"
         />
       </div>
@@ -99,18 +95,17 @@ export function Calendar(rawProps: CalendarProps) {
             <div class="skel-Calendar_date-row">
               <For each={dayNames}>
                 {(_, day) => {
-                  const date = createMemo(() => firstDateOfSelectedCalendar().add(weakIndex, 'week').add(day(), 'day'))
+                  const date = createMemo(() => addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day()))
                   return (
                     <div
                       class="skel-Calendar_cell"
                       classList={{
-                        'skel-Calendar_other-month':
-                          date().isAfter(selectedMonth(), 'month') || date().isBefore(selectedMonth(), 'month'),
+                        'skel-Calendar_other-month': !isSameMonth(date(), selectedMonth()),
                       }}
                       data-day={day()}
                     >
-                      <Slot content={rawProps.children} params={{ date: date().toDate() }}>
-                        {date().date()}
+                      <Slot content={rawProps.children} params={{ date: date() }}>
+                        {date().getDate()}
                       </Slot>
                     </div>
                   )
