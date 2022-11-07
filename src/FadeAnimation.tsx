@@ -23,20 +23,21 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
   // Signal variable indicating whether props.children should be present on the DOM.
   const [shown, setShown] = createSignal(Boolean(props.shown))
 
-  // Signal variable to use the defer option for props.shown.
-  const [bindingShown, setBindingShown] = createSignal(props.shown)
   // A variable required to render props.children.
   let lastNonFalsyShown = props.shown
-  createEffect(() => {
-    if (props.shown) {
-      lastNonFalsyShown = props.shown
-    }
+  createEffect(
+    on(
+      () => props.shown,
+      () => {
+        if (props.shown) {
+          lastNonFalsyShown = props.shown
+        }
 
-    setBindingShown(() => props.shown)
-  })
-
-  // Animate when props.shown is changed.
-  createEffect(on(bindingShown, (newShown) => changeShown(Boolean(newShown)), { defer: true }))
+        changeShown(Boolean(props.shown))
+      },
+      { defer: true }
+    )
+  )
 
   function changeShown(newShown: boolean) {
     if (newShown === Boolean(shown())) return
