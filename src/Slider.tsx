@@ -1,6 +1,6 @@
 import { createEffect, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
-import { assertNonUndefined, observeWidthPx } from './utility/others'
+import { assertNonUndefined, minBy, observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, SkelProps } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -10,6 +10,7 @@ export type SliderProps = SkelProps<{
   value?: number
   minValue?: number
   maxValue?: number
+  stops?: readonly number[]
   trackColor?: string
   trackFillColor?: string
   thumbWidth?: string
@@ -31,16 +32,28 @@ export function Slider(rawProps: SliderProps) {
       thumbHeight: 'var(--skel-Slider_thumb-default-height)',
       thumbColor: 'var(--skel-Slider_thumb-default-color)',
     },
-    ['onChangeValue']
+    ['stops', 'onChangeValue']
   )
 
   const [value, setValue] = createSignal(props.value)
   createEffect(() => setValue(() => props.value))
   const ratio = () => (value() - props.minValue) / (props.maxValue - props.minValue)
 
+  // Change internal state and callback it.
+  // For discrete sliders, the value is corrected to the nearest stop.
   function changeValue(newValue: number) {
-    setValue(newValue)
-    props.onChangeValue?.(newValue)
+    const value = correctValue(newValue)
+    setValue(value)
+    props.onChangeValue?.(value)
+  }
+
+  // If it is a discrete slider, it is corrected to the nearest stop.
+  function correctValue(value: number): number {
+    if (props.stops === undefined || props.stops.length === 0) {
+      return value
+    } else {
+      return minBy([...props.stops, props.minValue, props.maxValue], (stop) => Math.abs(stop - value))!
+    }
   }
 
   const [trackWidthPx, setTrackWidthPx] = createSignal(0)

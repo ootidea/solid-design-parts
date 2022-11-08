@@ -83,6 +83,22 @@ export function maxBy<T>(array: readonly T[], by: (element: T) => number): T | u
   return candidateElement
 }
 
+export function minBy<T>(array: readonly T[], by: (element: T) => number): T | undefined {
+  if (array.length === 0) return undefined
+
+  const [firstElement, ...rest] = array
+  let candidateElement = firstElement
+  let minValue = by(firstElement)
+  for (const element of rest) {
+    const value = by(element)
+    if (minValue > value) {
+      candidateElement = element
+      minValue = value
+    }
+  }
+  return candidateElement
+}
+
 /**
  * Create sequence starting with 0.
  * @example

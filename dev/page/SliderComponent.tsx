@@ -19,6 +19,10 @@ export function SliderComponent() {
         <Slider minValue={-2} maxValue={2} value={0} />
       </Sample>
 
+      <Sample title="Discrete sliders">
+        <Slider stops={[25, 50, 75]} maxValue={100} />
+      </Sample>
+
       <Sample title="Thumb size">
         <Slider thumbWidth="2px" />
         <Slider thumbWidth="1.5rem" thumbHeight="1.5rem" />
