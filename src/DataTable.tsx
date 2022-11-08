@@ -165,9 +165,7 @@ export function DataTable<
   }
 
   function getColumnWidth(column: Column): string {
-    if (typeof column === 'string') return 'auto'
-
-    return column.width ?? 'auto'
+    return typeof column === 'string' ? 'auto' : column.width ?? 'auto'
   }
 
   function getColumnMinWidth(column: Column): string {
@@ -179,9 +177,7 @@ export function DataTable<
   }
 
   function getCompareFunction(column: Column): CompareFunction<Row> {
-    if (typeof column.sortable === 'function') return column.sortable
-
-    return compareInStandardWay
+    return typeof column.sortable === 'function' ? column.sortable : compareInStandardWay
   }
 
   function onClickSortButton(columnId: ColumnId) {
