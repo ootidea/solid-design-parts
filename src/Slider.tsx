@@ -1,4 +1,4 @@
-import { createEffect, createSignal, onMount } from 'solid-js'
+import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
 import { assertNonUndefined, minBy, observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, SkelProps } from './utility/props'
@@ -11,6 +11,8 @@ export type SliderProps = SkelProps<{
   minValue?: number
   maxValue?: number
   stops?: readonly number[]
+  step?: number
+  offset?: number
   trackColor?: string
   trackFillColor?: string
   thumbWidth?: string
@@ -32,11 +34,26 @@ export function Slider(rawProps: SliderProps) {
       thumbHeight: 'var(--skel-Slider_thumb-default-height)',
       thumbColor: 'var(--skel-Slider_thumb-default-color)',
     },
-    ['stops', 'onChangeValue']
+    ['stops', 'step', 'offset', 'onChangeValue']
   )
 
+  const stops = createMemo(() => {
+    if (props.stops !== undefined) return [props.minValue, ...props.stops, props.maxValue]
+
+    if (props.step !== undefined) {
+      const outcome = []
+      for (let i = props.minValue + (props.offset ?? 0); i < props.maxValue; i += props.step) {
+        outcome.push(i)
+      }
+      outcome.push(props.maxValue)
+      return outcome
+    }
+
+    return undefined
+  })
+
   const [value, setValue] = createSignal(props.value)
-  createEffect(() => setValue(() => props.value))
+  createEffect(() => setValue(correctValue(props.value)))
   const ratio = () => (value() - props.minValue) / (props.maxValue - props.minValue)
 
   // Change internal state and callback it.
@@ -49,10 +66,11 @@ export function Slider(rawProps: SliderProps) {
 
   // If it is a discrete slider, it is corrected to the nearest stop.
   function correctValue(value: number): number {
-    if (props.stops === undefined || props.stops.length === 0) {
+    if (stops() === undefined) {
       return value
     } else {
-      return minBy([...props.stops, props.minValue, props.maxValue], (stop) => Math.abs(stop - value))!
+      // stops() is now neither undefined nor empty. So ! can be used.
+      return minBy(stops()!, (stop) => Math.abs(stop - value))!
     }
   }
 

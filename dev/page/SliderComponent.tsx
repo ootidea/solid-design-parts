@@ -21,6 +21,8 @@ export function SliderComponent() {
 
       <Sample title="Discrete sliders">
         <Slider stops={[25, 50, 75]} maxValue={100} />
+        <Slider step={0.1} maxValue={10} />
+        <Slider step={10} offset={3} maxValue={50} />
       </Sample>
 
       <Sample title="Thumb size">
