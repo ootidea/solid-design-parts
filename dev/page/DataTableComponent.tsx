@@ -89,6 +89,19 @@ export function DataTableComponent() {
         />
       </Sample>
 
+      <Sample title="Min width and max width of each column">
+        <DataTable
+          columns={[
+            { id: 'name', minWidth: '15rem' },
+            { id: 'text', maxWidth: '300px' },
+          ]}
+          rows={[
+            { name: 'createMemo', text: 'Creates a readonly derived reactive memoized signal' },
+            { name: 'onMount', text: 'run an effect only after initial render on mount' },
+          ]}
+        />
+      </Sample>
+
       <Sample title="onClickRow">
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}

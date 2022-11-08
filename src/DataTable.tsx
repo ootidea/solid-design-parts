@@ -22,6 +22,8 @@ export type DataTableProps<
     title?: string
     sortable?: boolean | CompareFunction<Row>
     width?: string
+    minWidth?: string
+    maxWidth?: string
     align?: ColumnAlign
     // TODO: Make type of 'value' property precise.
     cell?: SkelSlot<{
@@ -52,6 +54,8 @@ export function DataTable<
     title?: string
     sortable?: boolean | CompareFunction<Row>
     width?: string
+    minWidth?: string
+    maxWidth?: string
     align?: ColumnAlign
     cell?: SkelSlot<{
       value: unknown extends Row[ColumnId] ? any : Row[ColumnId]
@@ -76,7 +80,6 @@ export function DataTable<
   const aligns: Accessor<Record<ColumnId, ColumnAlign>> = createMemo(() => {
     return objectFromEntries(props.columns.map((column) => [column.id, determineAlign(column)]))
   })
-
   function determineAlign(column: Column): ColumnAlign {
     if (column.align !== undefined) return column.align
 
@@ -165,6 +168,14 @@ export function DataTable<
     if (typeof column === 'string') return 'auto'
 
     return column.width ?? 'auto'
+  }
+
+  function getColumnMinWidth(column: Column): string {
+    return typeof column === 'string' ? 'initial' : column.minWidth ?? 'initial'
+  }
+
+  function getColumnMaxWidth(column: Column): string {
+    return typeof column === 'string' ? 'initial' : column.maxWidth ?? 'initial'
   }
 
   function getCompareFunction(column: Column): CompareFunction<Row> {
@@ -328,6 +339,10 @@ export function DataTable<
                     <Gravity
                       to={aligns()[column.id]}
                       class="skel-DataTable_cell"
+                      style={{
+                        '--skel-DataTable_cell-min-width': getColumnMinWidth(column),
+                        '--skel-DataTable_cell-max-width': getColumnMaxWidth(column),
+                      }}
                       role="cell"
                       data-column-id={column.id}
                     >

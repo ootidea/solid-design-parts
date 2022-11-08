@@ -39,6 +39,9 @@
 
 .skel-DataTable_cell {
   padding: 0.6em 1.6em;
+  min-width: var(--skel-DataTable_cell-min-width);
+  max-width: var(--skel-DataTable_cell-max-width);
+  overflow: hidden;
 
   .skel-DataTable_header & {
     font-weight: bold;
