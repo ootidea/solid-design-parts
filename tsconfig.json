@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
+    "noImplicitReturns": true,
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
