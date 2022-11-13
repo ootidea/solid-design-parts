@@ -41,12 +41,12 @@ export function Slider(rawProps: SliderProps) {
     if (props.stops !== undefined) return [props.minValue, ...props.stops, props.maxValue]
 
     if (props.step !== undefined) {
-      const outcome = []
+      const result = []
       for (let i = props.minValue + (props.offset ?? 0); i < props.maxValue; i += props.step) {
-        outcome.push(i)
+        result.push(i)
       }
-      outcome.push(props.maxValue)
-      return outcome
+      result.push(props.maxValue)
+      return result
     }
 
     return undefined
