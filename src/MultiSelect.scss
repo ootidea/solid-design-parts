@@ -1,7 +1,7 @@
 .skel-MultiSelect_launcher {
   display: inline-grid;
   vertical-align: top;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   text-align: start;
 
@@ -9,7 +9,7 @@
   border: 1px solid var(--skel-input-border-color);
   padding: 0.4em 0.7em;
   box-sizing: border-box;
-  height: var(--skel-one-line-input-height);
+  min-height: var(--skel-one-line-input-height);
 
   background-color: var(--skel-background-color);
   color: inherit;
