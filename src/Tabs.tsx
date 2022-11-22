@@ -47,7 +47,10 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
               classList={{ 'skel-Tabs_active': activeTab() === name }}
               role="tab"
               type="button"
-              onClick={() => onClick(name)}
+              onClick={(event) => {
+                event.preventDefault()
+                onClick(name)
+              }}
             >
               {name}
             </button>

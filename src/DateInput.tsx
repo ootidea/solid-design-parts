@@ -37,7 +37,10 @@ export function DateInput(rawProps: DateInputProps) {
           class={joinClasses(props, 'skel-DateInput_launcher')}
           type="button"
           disabled={props.disabled === true}
-          onClick={toggle}
+          onClick={(event) => {
+            event.preventDefault()
+            toggle()
+          }}
           {...restProps}
         >
           <div class="skel-DateInput_preview-area">

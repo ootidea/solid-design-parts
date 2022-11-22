@@ -61,6 +61,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
+    event.preventDefault()
     if (event.currentTarget instanceof HTMLElement) {
       const rect = event.currentTarget.getBoundingClientRect()
       setDropdownInfo({
@@ -164,7 +165,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                           type="button"
                           role="menuitem"
                           aria-selected={selected() === value}
-                          onClick={() => {
+                          onClick={(event) => {
+                            event.preventDefault()
                             changeSelected(value)
                             setDropdownInfo(undefined)
                           }}

@@ -110,7 +110,10 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
             class="skel-ToggleButtons_button"
             type="button"
             aria-selected={isSelected(value)}
-            onClick={() => clickEventHandler(value)}
+            onClick={(event) => {
+              event.preventDefault()
+              clickEventHandler(value)
+            }}
           >
             <Slot content={props.children} params={{ value }}>
               {props.titles?.[String(value)] ?? value}

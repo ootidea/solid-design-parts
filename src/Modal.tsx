@@ -52,6 +52,7 @@ export function Modal(rawProps: ModalProps) {
   function onClickOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
+    event.preventDefault()
     if (!props.persistent) {
       close()
     }

@@ -65,6 +65,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
+    event.preventDefault()
     if (event.currentTarget instanceof HTMLElement) {
       const rect = event.currentTarget.getBoundingClientRect()
       setDropdownInfo({

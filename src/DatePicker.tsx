@@ -44,7 +44,10 @@ export function DatePicker(rawProps: DatePickerProps) {
           type="button"
           aria-selected={value() !== undefined && isSameDay(date, value() ?? Number.NaN)}
           disabled={props.disabled?.(date)}
-          onClick={() => changeValue(date)}
+          onClick={(event) => {
+            event.preventDefault()
+            changeValue(date)
+          }}
         >
           {date.getDate()}
         </button>
