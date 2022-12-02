@@ -36,10 +36,11 @@ export function Button(rawProps: ButtonProps) {
   const [isInProgress, setIsInProgress] = createSignal(false)
 
   function clickEventHandler(event: MouseEvent) {
-    if (props.onClick === undefined) return
+    if (props.onClick !== undefined || props.href !== undefined) {
+      event.preventDefault()
+    }
 
-    event.preventDefault()
-    const promise = props.onClick(event)
+    const promise = props.onClick?.(event)
     if (promise instanceof Promise) {
       setIsInProgress(true)
       promise.finally(() => setIsInProgress(false))

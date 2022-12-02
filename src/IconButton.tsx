@@ -42,10 +42,12 @@ export function IconButton(rawProps: IconButtonProps) {
 
   function clickEventHandler(event: MouseEvent) {
     if (isInProgress()) return
-    if (props.onClick === undefined) return
 
-    event.preventDefault()
-    const promise = props.onClick(event)
+    if (props.onClick !== undefined) {
+      event.preventDefault()
+    }
+
+    const promise = props.onClick?.(event)
     if (promise instanceof Promise) {
       setIsInProgress(true)
       promise.finally(() => setIsInProgress(false))
