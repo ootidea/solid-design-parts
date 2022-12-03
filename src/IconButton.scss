@@ -24,7 +24,7 @@
 
   user-select: none;
 
-  transition: var(--skel-backward-transition);
+  transition: all 140ms ease-out;
 
   &:not([aria-disabled='true']) {
     cursor: pointer;
@@ -32,13 +32,13 @@
     @media (hover: hover) {
       &:hover {
         background-color: var(--skel-IconButton_background-hover-color);
-        transition: var(--skel-forward-transition);
+        transition: all 140ms ease-out;
       }
     }
 
     &:active {
       background-color: var(--skel-IconButton_background-active-color);
-      transition: var(--skel-forward-transition);
+      transition: all 140ms ease-out;
     }
   }
 }
