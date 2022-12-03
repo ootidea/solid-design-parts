@@ -40,6 +40,23 @@
 
   transition: all 140ms ease-out;
 
+  &:checked {
+    background-color: var(--skel-primary-color);
+
+    &:disabled {
+      background-color: oklch(70% 0 0);
+    }
+
+    &::before {
+      width: utility.toIntegerPx(var(--skel-Checkbox_check-size));
+      height: utility.toIntegerPx(var(--skel-Checkbox_check-size));
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+
   &::before {
     content: '';
     display: inline-block;
@@ -49,22 +66,5 @@
     background-color: white;
     mask: url('./image/check-bold.svg') no-repeat center;
     mask-size: contain;
-  }
-
-  &:checked {
-    background-color: var(--skel-primary-color);
-
-    &::before {
-      width: utility.toIntegerPx(var(--skel-Checkbox_check-size));
-      height: utility.toIntegerPx(var(--skel-Checkbox_check-size));
-    }
-
-    .skel-Checkbox_root[aria-disabled='true'] & {
-      background-color: oklch(70% 0 0);
-    }
-  }
-
-  .skel-Checkbox_root[aria-disabled='true'] & {
-    cursor: default;
   }
 }
