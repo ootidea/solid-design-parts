@@ -38,7 +38,7 @@
 
   cursor: pointer;
 
-  transition: all 0.1s ease-out;
+  transition: all 100ms ease-out;
 
   &::before {
     content: '';
@@ -47,19 +47,19 @@
     height: 0;
     border-radius: 100%;
 
-    transition: all 0.1s ease-out;
+    transition: all 100ms ease-out;
   }
 
   &:checked {
     border-color: var(--skel-primary-color);
-    transition: all 0.1s ease-out;
+    transition: all 100ms ease-out;
 
     &::before {
       width: utility.toEvenPx(var(--skel-RadioButtons_inner-circle-size));
       height: utility.toEvenPx(var(--skel-RadioButtons_inner-circle-size));
       background-color: var(--skel-primary-color);
 
-      transition: all 0.1s ease-out;
+      transition: all 100ms ease-out;
     }
   }
 

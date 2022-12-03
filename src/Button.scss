@@ -17,8 +17,8 @@
 
   transition: var(--skel-Button_backward-transition);
 
-  --skel-Button_forward-transition: all 0.2s ease-out;
-  --skel-Button_backward-transition: all 0.4s ease-out;
+  --skel-Button_forward-transition: all 200ms ease-out;
+  --skel-Button_backward-transition: all 400ms ease-out;
 
   &[aria-disabled='true'] {
     pointer-events: none;
