@@ -91,11 +91,17 @@
   box-sizing: border-box;
   width: 100%;
   height: 2.5em;
+  border-radius: 0.4em;
 
-  background-color: var(--skel-background-color);
+  background-color: transparent;
   color: inherit;
   font: inherit;
   cursor: pointer;
+
+  &:focus-visible {
+    outline-offset: -1px;
+    outline: 1px solid var(--skel-primary-color);
+  }
 
   @media (hover: hover) {
     &:hover {
