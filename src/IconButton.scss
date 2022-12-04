@@ -41,4 +41,9 @@
       transition: all 140ms ease-out;
     }
   }
+
+  &:focus-visible {
+    outline-offset: 1px;
+    outline: 2px solid var(--skel-primary-color);
+  }
 }

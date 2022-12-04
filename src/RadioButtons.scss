@@ -40,6 +40,15 @@
 
   transition: all 100ms ease-out;
 
+  &:disabled {
+    cursor: default;
+  }
+
+  &:focus-visible {
+    outline-offset: 1px;
+    outline: 2px solid var(--skel-primary-color);
+  }
+
   &::before {
     content: '';
     display: inline-block;
@@ -61,9 +70,5 @@
 
       transition: all 100ms ease-out;
     }
-  }
-
-  &:disabled {
-    cursor: default;
   }
 }
