@@ -99,6 +99,18 @@ export function minBy<T>(array: readonly T[], by: (element: T) => number): T | u
   return candidateElement
 }
 
+type FixedSizeArray<N extends number, T, Result extends any[] = []> = Result['length'] extends N
+  ? Result
+  : FixedSizeArray<N, T, [...Result, T]>
+
+export function chunk<T, N extends number>(array: readonly T[], size: N): FixedSizeArray<N, T>[] {
+  const result = []
+  for (let i = 0; i + size <= array.length; i += size) {
+    result.push(array.slice(i, i + size))
+  }
+  return result as any
+}
+
 /**
  * Create sequence starting with 0.
  * @example

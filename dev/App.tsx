@@ -38,6 +38,7 @@ import { TextInputComponent } from './page/TextInputComponent'
 import { TitleBarLayoutComponent } from './page/TitleBarLayoutComponent'
 import { ToastComponent } from './page/ToastComponent'
 import { ToggleButtonsComponent } from './page/ToggleButtonsComponent'
+import { UrlToLinkComponent } from './page/UrlToLinkComponent'
 import { SidebarMenu } from './SidebarMenu'
 
 function getName(component: Function) {
@@ -100,6 +101,7 @@ export function App() {
         SpeechBubbleComponent,
       ],
     },
+    { title: 'Utility', children: [UrlToLinkComponent] },
   ]
 
   return (
