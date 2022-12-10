@@ -42,6 +42,10 @@ export function RadioButtonsComponent() {
         <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
       </Sample>
 
+      <Sample title="Disabled item" direction="horizontal">
+        <RadioButtons values={['left', 'center', 'right']} disabled={new Set(['center'])} />
+      </Sample>
+
       <Sample title="Enable deselection" direction="horizontal" description="">
         <RadioButtons values={['left', 'center', 'right']} enableDeselection />
       </Sample>
