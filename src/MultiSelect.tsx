@@ -45,7 +45,6 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const [selected, setSelected] = createSignal(new Set(props.selected), { equals: false })
   createEffect(() => setSelected(() => new Set(props.selected)))
   function changeSelected(selected: Set<T>) {
-    console.log(selected)
     setSelected(() => selected)
     props.onChangeSelected?.(selected)
   }
