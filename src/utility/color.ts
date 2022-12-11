@@ -15,12 +15,12 @@ export function calculateHoverColor(baseColor: string): string {
     return transparentColor.to('hsl').toString()
   }
 
-  const ratio = Math.pow(0.95, 1 / color.alpha)
+  const lightnessCoefficient = Math.pow(0.95, 1 / color.alpha)
 
   if (color.oklch.lightness > MIDDLE_LIGHTNESS) {
-    color.oklch.lightness = color.oklch.lightness * ratio
+    color.oklch.lightness = color.oklch.lightness * lightnessCoefficient
   } else {
-    color.oklch.lightness = color.oklch.lightness / ratio
+    color.oklch.lightness = color.oklch.lightness / lightnessCoefficient
   }
   return color.to('hsl').toString()
 }
@@ -33,12 +33,12 @@ export function calculateActiveColor(baseColor: string): string {
     return transparentColor.to('hsl').toString()
   }
 
-  const ratio = Math.pow(0.9, 1 / color.alpha)
+  const lightnessCoefficient = Math.pow(0.9, 1 / color.alpha)
 
   if (color.oklch.lightness > MIDDLE_LIGHTNESS) {
-    color.oklch.lightness = color.oklch.lightness * ratio
+    color.oklch.lightness = color.oklch.lightness * lightnessCoefficient
   } else {
-    color.oklch.lightness = color.oklch.lightness / ratio
+    color.oklch.lightness = color.oklch.lightness / lightnessCoefficient
   }
   return color.to('hsl').toString()
 }
