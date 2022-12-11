@@ -4,7 +4,7 @@ import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
 export function MultiSelectComponent() {
-  const [selected, setSelected] = createSignal({ Other: true }, { equals: false })
+  const [selected, setSelected] = createSignal(new Set(['Other']), { equals: false })
 
   return (
     <article>
@@ -23,17 +23,17 @@ export function MultiSelectComponent() {
       </Sample>
 
       <Sample title="Default selected">
-        <MultiSelect values={['Female', 'Male', 'Other']} selected={{ Female: true, Male: true }} />
+        <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
       </Sample>
 
       <Sample title="Bind to signal">
         <MultiSelect values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
-        <div>JSON.stringify(selected()) === '{JSON.stringify(selected())}'</div>
+        <div>JSON.stringify([...selected()]) === '{JSON.stringify([...selected()])}'</div>
       </Sample>
 
       <Sample title="Disabled" direction="horizontal">
         <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
-        <MultiSelect values={['Female', 'Male', 'Other']} selected={{ Female: true, Male: true }} disabled />
+        <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} disabled />
       </Sample>
 
       <Sample title="Search">

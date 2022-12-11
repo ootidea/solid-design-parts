@@ -7,7 +7,7 @@ import chevronDownIcon from './image/chevron-down.svg'
 import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
-import { call, objectFromEntries, setupFocusTrap } from './utility/others'
+import { call, setupFocusTrap } from './utility/others'
 import { joinClasses, prepareProps, SkelProps } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -16,12 +16,12 @@ registerCss(css)
 export type MultiSelectProps<T extends string> = SkelProps<{
   values: readonly T[]
   titles?: Partial<Record<T, string>>
-  selected?: Partial<Record<T, boolean>>
+  selected?: ReadonlySet<T>
   placeholder?: string
   disabled?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
-  onChangeSelected?: (selected: Partial<Record<T, boolean>>) => void
+  onChangeSelected?: (selected: Set<T>) => void
 }>
 
 export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
@@ -29,7 +29,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     rawProps,
     {
       titles: {},
-      selected: objectFromEntries(rawProps.values.map((value) => [value, false])),
+      selected: new Set(),
       placeholder: '',
       disabled: false,
       fullWidth: false,
@@ -42,14 +42,15 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     return props.titles?.[value] ?? value
   }
 
-  const [selected, setSelected] = createSignal(props.selected, { equals: false })
-  createEffect(() => setSelected(() => props.selected))
-  function changeSelected(selected: Partial<Record<T, boolean>>) {
+  const [selected, setSelected] = createSignal(new Set(props.selected), { equals: false })
+  createEffect(() => setSelected(() => new Set(props.selected)))
+  function changeSelected(selected: Set<T>) {
+    console.log(selected)
     setSelected(() => selected)
     props.onChangeSelected?.(selected)
   }
 
-  const followingCount = createMemo(() => Object.entries(selected()).filter(([, value]) => value).length - 1)
+  const followingCount = createMemo(() => selected().size - 1)
 
   const [searchQuery, setSearchQuery] = createSignal('')
   function search(values: readonly T[]): readonly T[] {
@@ -83,11 +84,9 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     setDropdownInfo(undefined)
   }
 
-  function getPrimarySelectedValue(selected: Partial<Record<T, boolean>>): T | undefined {
-    for (const key in selected) {
-      if (selected[key]) return key
-    }
-    return undefined
+  function getPrimarySelectedValue(selected: ReadonlySet<T>): T | undefined {
+    const [firstValue] = selected.values()
+    return firstValue
   }
 
   function onKeyDown(event: KeyboardEvent) {
@@ -191,13 +190,15 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                         </Show>
                         <Checkbox
                           class="skel-MultiSelect_option"
-                          checked={Boolean(selected()[value])}
+                          checked={selected().has(value)}
                           role="menuitem"
                           onChangeChecked={(checked) => {
-                            changeSelected({
-                              ...selected(),
-                              [value]: checked,
-                            })
+                            if (checked) {
+                              selected().add(value)
+                            } else {
+                              selected().delete(value)
+                            }
+                            changeSelected(selected())
                           }}
                         >
                           {getText(value)}
