@@ -40,10 +40,6 @@
 
   transition: all 100ms ease-out;
 
-  &:disabled {
-    cursor: default;
-  }
-
   &:focus-visible {
     outline-offset: 1px;
     outline: 2px solid var(--skel-primary-color);
@@ -70,5 +66,14 @@
 
       transition: all 100ms ease-out;
     }
+
+    &:disabled::before {
+      background-color: oklch(75% 0 0);
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    border-color: oklch(75% 0 0);
   }
 }
