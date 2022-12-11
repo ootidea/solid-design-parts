@@ -65,6 +65,7 @@ export function IconButton(rawProps: IconButtonProps) {
         '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
       })}
       type={props.type}
+      disabled={props.disabled}
       aria-disabled={props.disabled}
       onClick={clickEventHandler}
       {...restProps}
