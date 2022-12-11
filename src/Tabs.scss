@@ -55,6 +55,11 @@
       color: var(--skel-primary-color);
     }
   }
+
+  &:focus-visible {
+    outline-offset: -2px;
+    outline: 2px solid var(--skel-primary-color);
+  }
 }
 
 .skel-Tabs_dummy-tab-for-border {

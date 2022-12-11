@@ -24,6 +24,10 @@
     background-color: var(--skel-disabled-input-background-color);
     cursor: initial;
   }
+
+  &:focus-visible {
+    outline-color: var(--skel-primary-color);
+  }
 }
 
 .skel-DateInput_invisible {
