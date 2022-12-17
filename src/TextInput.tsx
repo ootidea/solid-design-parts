@@ -93,6 +93,7 @@ export function TextInput(rawProps: TextInputProps) {
       class={joinClasses(rawProps, 'skel-TextInput_root', {
         'skel-TextInput_has-head-button': props.headButtonContent !== undefined,
         'skel-TextInput_has-tail-button': props.tailButtonContent !== undefined,
+        'skel-TextInput_has-error': errorMessage() !== undefined,
       })}
       aria-disabled={props.disabled}
       {...restProps}
@@ -125,9 +126,7 @@ export function TextInput(rawProps: TextInputProps) {
           </Show>
         </div>
       </div>
-      <Show when={errorMessage()}>
         <p class="skel-TextInput_error-message">{errorMessage()}</p>
-      </Show>
     </div>
   )
 }

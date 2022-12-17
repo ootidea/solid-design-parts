@@ -16,6 +16,10 @@
     background-color: var(--skel-disabled-input-background-color);
   }
 
+  .skel-TextInput_has-error & {
+    border-color: var(--skel-error-color);
+  }
+
   &:focus-within {
     border-color: var(--skel-primary-color);
   }
@@ -103,4 +107,8 @@
 .skel-TextInput_error-message {
   color: var(--skel-error-color);
   margin: 1em 0 0;
+
+  &:empty {
+    display: none;
+  }
 }
