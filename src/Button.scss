@@ -7,7 +7,7 @@
   // Since character height is different between full-pitch and half-pitch, set height instead of padding.
   height: 2.45em;
   padding: 0 1em;
-  border-radius: 0.3em;
+  border-radius: var(--skel-Button_radius);
   border-width: 1px;
   border-style: solid;
 
@@ -143,10 +143,6 @@
       }
     }
   }
-}
-
-.skel-Button_rounded {
-  border-radius: 99999px;
 }
 
 .skel-Button_invisible {

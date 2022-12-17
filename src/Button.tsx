@@ -3,7 +3,7 @@ import css from './Button.scss'
 import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import { Spinner } from './Spinner'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -11,11 +11,11 @@ registerCss(css)
 export type ButtonProps = SkelProps<{
   color?: 'primary' | 'achromatic' | 'error'
   ghost?: boolean
-  rounded?: boolean
   disabled?: boolean
   fullWidth?: boolean
   type?: 'submit' | 'button' | 'reset'
   href?: string
+  radius?: string
   onClick?: (event: MouseEvent) => unknown
 }>
 
@@ -25,10 +25,10 @@ export function Button(rawProps: ButtonProps) {
     {
       color: 'primary',
       ghost: false,
-      rounded: false,
       disabled: false,
       fullWidth: false,
       type: 'button',
+      radius: '0.3em',
     },
     ['href', 'onClick']
   )
@@ -63,9 +63,9 @@ export function Button(rawProps: ButtonProps) {
       <a
         class={joinClasses(rawProps, 'skel-Button_root', {
           'skel-Button_ghost': props.ghost,
-          'skel-Button_rounded': props.rounded,
           'skel-Button_full-width': props.fullWidth,
         })}
+        style={joinStyle(rawProps.style, { '--skel-Button_radius': props.radius })}
         href={props.href}
         role="button"
         tabindex={props.disabled ? -1 : 0}
@@ -83,9 +83,9 @@ export function Button(rawProps: ButtonProps) {
     <button
       class={joinClasses(rawProps, 'skel-Button_root', {
         'skel-Button_ghost': props.ghost,
-        'skel-Button_rounded': props.rounded,
         'skel-Button_full-width': props.fullWidth,
       })}
+      style={joinStyle(rawProps.style, { '--skel-Button_radius': props.radius })}
       type={props.type}
       data-color={props.color}
       disabled={props.disabled || isInProgress()}

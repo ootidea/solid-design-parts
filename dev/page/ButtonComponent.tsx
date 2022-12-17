@@ -18,10 +18,6 @@ export function ButtonComponent() {
       <Sample title="Basic example" direction="horizontal">
         <Button>Button</Button>
         <Button ghost>accept</Button>
-        <Button rounded>cancel</Button>
-        <Button ghost rounded>
-          OK
-        </Button>
       </Sample>
 
       <Sample title="Achromatic color" direction="horizontal">
@@ -29,24 +25,12 @@ export function ButtonComponent() {
         <Button color="achromatic" ghost>
           accept
         </Button>
-        <Button color="achromatic" rounded>
-          cancel
-        </Button>
-        <Button color="achromatic" ghost rounded>
-          OK
-        </Button>
       </Sample>
 
       <Sample title="Error color" direction="horizontal">
         <Button color="error">Button</Button>
         <Button color="error" ghost>
           accept
-        </Button>
-        <Button color="error" rounded>
-          cancel
-        </Button>
-        <Button color="error" ghost rounded>
-          OK
         </Button>
       </Sample>
 
@@ -58,34 +42,10 @@ export function ButtonComponent() {
         <Button ghost color="error">
           delete
         </Button>
-        <Button ghost rounded>
-          cancel
-        </Button>
-        <Button ghost color="achromatic" rounded>
-          OK
-        </Button>
-        <Button ghost color="error" rounded>
-          close
-        </Button>
-      </Sample>
-
-      <Sample title="Rounded" direction="horizontal">
-        <Button rounded>Button</Button>
-        <Button rounded color="achromatic">
-          accept
-        </Button>
-        <Button rounded ghost>
-          cancel
-        </Button>
-        <Button rounded color="achromatic" ghost>
-          OK
-        </Button>
       </Sample>
 
       <Sample title="Specify href" direction="horizontal">
-        <Button href="https://google.com" rounded>
-          Google
-        </Button>
+        <Button href="https://google.com">Google</Button>
         <Button href="https://google.com" color="achromatic" ghost>
           Google
         </Button>
@@ -129,11 +89,18 @@ export function ButtonComponent() {
         <Button fullWidth ghost>
           accept
         </Button>
-        <Button fullWidth color="achromatic" rounded>
+      </Sample>
+
+      <Sample title="Radius" direction="horizontal">
+        <Button radius="0">Button</Button>
+        <Button radius="9999px" ghost>
           cancel
         </Button>
-        <Button fullWidth color="achromatic" ghost rounded>
+        <Button radius="1em" color="achromatic">
           OK
+        </Button>
+        <Button radius="50%" color="achromatic" ghost>
+          previous
         </Button>
       </Sample>
     </article>
