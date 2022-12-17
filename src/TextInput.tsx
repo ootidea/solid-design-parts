@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createMemo, createSignal, JSX, on, Show } from 'solid-js'
+import { Accessor, createEffect, createMemo, createSignal, JSX, on } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -41,32 +41,15 @@ export type TextInputProps = SkelProps<{
   radius?: string
   prepend?: JSX.Element
   append?: JSX.Element
-  tailButtonContent?: JSX.Element
-  headButtonContent?: JSX.Element
   onChangeValue?: (value: string) => void
   onChangeValidValue?: (value: string) => void
-  onClickHeadButton?: (event: MouseEvent) => unknown
-  onClickTailButton?: (event: MouseEvent) => unknown
 }>
 
 export function TextInput(rawProps: TextInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     { disabled: false, forceValidation: false, radius: 'var(--skel-input-border-radius)' },
-    [
-      'value',
-      'placeholder',
-      'type',
-      'errorMessage',
-      'prepend',
-      'append',
-      'headButtonContent',
-      'tailButtonContent',
-      'onChangeValue',
-      'onChangeValidValue',
-      'onClickHeadButton',
-      'onClickTailButton',
-    ]
+    ['value', 'placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const [value, setValue] = createSignal(props.value)
@@ -114,8 +97,6 @@ export function TextInput(rawProps: TextInputProps) {
   return (
     <div
       class={joinClasses(rawProps, 'skel-TextInput_root', {
-        'skel-TextInput_has-head-button': props.headButtonContent !== undefined,
-        'skel-TextInput_has-tail-button': props.tailButtonContent !== undefined,
         'skel-TextInput_input-element-has-focus': inputElementHasFocus(),
       })}
       style={joinStyle(rawProps.style, { '--skel-TextInput_radius': props.radius })}
@@ -123,39 +104,23 @@ export function TextInput(rawProps: TextInputProps) {
       aria-invalid={errorMessage() !== undefined}
       {...restProps}
     >
-      <div class="skel-TextInput_main-area">
-        <div class="skel-TextInput_head-area">
-          <Show when={props.headButtonContent !== undefined}>
-            <button class="skel-TextInput_head-button" type="button" onClick={props.onClickHeadButton}>
-              {props.headButtonContent}
-            </button>
-          </Show>
-        </div>
-        <StretchLayout class="skel-TextInput_body" stretchAt={1}>
-          <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
-          <input
-            class="skel-TextInput_input"
-            attr:value={value()}
-            placeholder={props.placeholder}
-            type={props.type}
-            disabled={props.disabled}
-            onInput={onInput}
-            onFocus={() => setInputElementHasFocus(true)}
-            onBlur={() => {
-              setShouldValidate(true)
-              setInputElementHasFocus(false)
-            }}
-          />
-          <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
-        </StretchLayout>
-        <div class="skel-TextInput_tail-area">
-          <Show when={props.tailButtonContent !== undefined}>
-            <button class="skel-TextInput_tail-button" type="button" onClick={props.onClickTailButton}>
-              {props.tailButtonContent}
-            </button>
-          </Show>
-        </div>
-      </div>
+      <StretchLayout class="skel-TextInput_body" stretchAt={1}>
+        <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
+        <input
+          class="skel-TextInput_input"
+          attr:value={value()}
+          placeholder={props.placeholder}
+          type={props.type}
+          disabled={props.disabled}
+          onInput={onInput}
+          onFocus={() => setInputElementHasFocus(true)}
+          onBlur={() => {
+            setShouldValidate(true)
+            setInputElementHasFocus(false)
+          }}
+        />
+        <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
+      </StretchLayout>
       <p class="skel-TextInput_error-message">{errorMessage()}</p>
     </div>
   )

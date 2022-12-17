@@ -1,4 +1,5 @@
 import { createSignal } from 'solid-js'
+import { Button } from '../../src/Button'
 import { Icon } from '../../src/Icon'
 import { Spinner } from '../../src/Spinner'
 import { TextInput } from '../../src/TextInput'
@@ -43,11 +44,6 @@ export function TextInputComponent() {
         <TextInput value="valid text" append={<Icon src={checkIcon} />} />
         <TextInput placeholder="security number" prepend={<Icon src={alertOutlineIcon} />} />
         <TextInput placeholder="Search" append={<Spinner />} />
-      </Sample>
-
-      <Sample title="Buttons">
-        <TextInput tailButtonContent="Send" />
-        <TextInput headButtonContent={<Icon src={searchIcon} color="currentColor" size="1.7em" />} />
       </Sample>
 
       <Sample title="Disabled">
@@ -102,6 +98,22 @@ export function TextInputComponent() {
       <Sample title="Radius">
         <TextInput value="default value" radius="0" />
         <TextInput placeholder="placeholder" radius="9999px" />
+      </Sample>
+
+      <Sample title="With action button">
+        <div style={{ display: 'grid', 'grid-template-columns': '1fr auto' }}>
+          <TextInput radius="1em 0 0 1em" />
+          <Button radius="0 1em 1em 0">Send</Button>
+        </div>
+        <div style={{ display: 'grid', 'grid-template-columns': 'auto 1fr' }}>
+          <Button
+            radius="var(--skel-input-border-radius) 0 0 var(--skel-input-border-radius)"
+            style={{ padding: '0 0.4em' }}
+          >
+            <Icon src={searchIcon} color="currentColor" size="1.7em" />
+          </Button>
+          <TextInput radius="0 var(--skel-input-border-radius) var(--skel-input-border-radius) 0" />
+        </div>
       </Sample>
     </article>
   )

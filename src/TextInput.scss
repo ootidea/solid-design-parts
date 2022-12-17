@@ -1,12 +1,6 @@
-.skel-TextInput_main-area {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-
-  min-height: var(--skel-one-line-input-height);
-}
-
 .skel-TextInput_body {
   box-sizing: border-box;
+  min-height: var(--skel-one-line-input-height);
   border-radius: var(--skel-TextInput_radius);
   border: 1px solid var(--skel-input-border-color);
   background-color: var(--skel-background-color);
@@ -22,16 +16,6 @@
   /* TODO: Use :has() instead of CSS class */
   .skel-TextInput_input-element-has-focus & {
     border-color: var(--skel-primary-color);
-  }
-
-  .skel-TextInput_has-head-button & {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .skel-TextInput_has-tail-button & {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
   }
 }
 
@@ -65,43 +49,6 @@
   &::placeholder {
     color: var(--skel-placeholder-text-color);
   }
-}
-
-.skel-TextInput_head-button,
-.skel-TextInput_tail-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  box-sizing: border-box;
-  height: 100%;
-  padding: 0.4em 0.8em;
-  border: none;
-
-  background-color: var(--skel-primary-color);
-  color: var(--skel-inverted-text-color);
-  font: inherit;
-  cursor: pointer;
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--skel-primary-inverted-background-hover-color);
-    }
-  }
-
-  &:active {
-    background-color: var(--skel-primary-inverted-background-active-color);
-  }
-}
-
-.skel-TextInput_head-button {
-  border-top-left-radius: var(--skel-TextInput_radius);
-  border-bottom-left-radius: var(--skel-TextInput_radius);
-}
-
-.skel-TextInput_tail-button {
-  border-top-right-radius: var(--skel-TextInput_radius);
-  border-bottom-right-radius: var(--skel-TextInput_radius);
 }
 
 .skel-TextInput_error-message {
