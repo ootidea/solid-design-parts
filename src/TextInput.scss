@@ -6,7 +6,7 @@
 }
 
 .skel-TextInput_body {
-  border-radius: var(--skel-input-border-radius);
+  border-radius: var(--skel-TextInput_radius);
   border: 1px solid var(--skel-input-border-color);
   background-color: var(--skel-background-color);
 
@@ -96,13 +96,13 @@
 }
 
 .skel-TextInput_head-button {
-  border-top-left-radius: var(--skel-input-border-radius);
-  border-bottom-left-radius: var(--skel-input-border-radius);
+  border-top-left-radius: var(--skel-TextInput_radius);
+  border-bottom-left-radius: var(--skel-TextInput_radius);
 }
 
 .skel-TextInput_tail-button {
-  border-top-right-radius: var(--skel-input-border-radius);
-  border-bottom-right-radius: var(--skel-input-border-radius);
+  border-top-right-radius: var(--skel-TextInput_radius);
+  border-bottom-right-radius: var(--skel-TextInput_radius);
 }
 
 .skel-TextInput_error-message {

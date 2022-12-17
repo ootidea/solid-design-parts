@@ -3,7 +3,7 @@ import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
 import { LiteralUnion } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -38,6 +38,7 @@ export type TextInputProps = SkelProps<{
   disabled?: boolean
   errorMessage?: string | ((value: string) => string | void | undefined)
   forceValidation?: boolean
+  radius?: string
   prepend?: JSX.Element
   append?: JSX.Element
   tailButtonContent?: JSX.Element
@@ -49,20 +50,24 @@ export type TextInputProps = SkelProps<{
 }>
 
 export function TextInput(rawProps: TextInputProps) {
-  const [props, restProps] = prepareProps(rawProps, { disabled: false, forceValidation: false }, [
-    'value',
-    'placeholder',
-    'type',
-    'errorMessage',
-    'prepend',
-    'append',
-    'headButtonContent',
-    'tailButtonContent',
-    'onChangeValue',
-    'onChangeValidValue',
-    'onClickHeadButton',
-    'onClickTailButton',
-  ])
+  const [props, restProps] = prepareProps(
+    rawProps,
+    { disabled: false, forceValidation: false, radius: 'var(--skel-input-border-radius)' },
+    [
+      'value',
+      'placeholder',
+      'type',
+      'errorMessage',
+      'prepend',
+      'append',
+      'headButtonContent',
+      'tailButtonContent',
+      'onChangeValue',
+      'onChangeValidValue',
+      'onClickHeadButton',
+      'onClickTailButton',
+    ]
+  )
 
   const [value, setValue] = createSignal(props.value)
   createEffect(
@@ -113,6 +118,7 @@ export function TextInput(rawProps: TextInputProps) {
         'skel-TextInput_has-tail-button': props.tailButtonContent !== undefined,
         'skel-TextInput_input-element-has-focus': inputElementHasFocus(),
       })}
+      style={joinStyle(rawProps.style, { '--skel-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessage() !== undefined}
       {...restProps}
