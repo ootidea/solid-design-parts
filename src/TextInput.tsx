@@ -131,6 +131,7 @@ export function TextInput(rawProps: TextInputProps) {
             type={props.type}
             disabled={props.disabled}
             onInput={onInput}
+            onBlur={() => setShouldValidate(true)}
           />
           <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
         </StretchLayout>
