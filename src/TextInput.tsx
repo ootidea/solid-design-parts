@@ -37,6 +37,7 @@ export type TextInputProps = SkelProps<{
   >
   disabled?: boolean
   errorMessage?: string | ((value: string) => string | void | undefined)
+  forceValidation?: boolean
   prepend?: JSX.Element
   append?: JSX.Element
   tailButtonContent?: JSX.Element
@@ -48,7 +49,7 @@ export type TextInputProps = SkelProps<{
 }>
 
 export function TextInput(rawProps: TextInputProps) {
-  const [props, restProps] = prepareProps(rawProps, { disabled: false }, [
+  const [props, restProps] = prepareProps(rawProps, { disabled: false, forceValidation: false }, [
     'value',
     'placeholder',
     'type',
@@ -70,20 +71,26 @@ export function TextInput(rawProps: TextInputProps) {
       () => setValue(props.value)
     )
   )
-  const [edited, setEdited] = createSignal(false)
+  const [shouldValidate, setShouldValidate] = createSignal(props.forceValidation)
+  createEffect(
+    on(
+      () => props.forceValidation,
+      () => setShouldValidate(props.forceValidation)
+    )
+  )
 
   const errorMessage: Accessor<string | undefined> = createMemo(() => {
     if (props.errorMessage === undefined) return undefined
 
     if (typeof props.errorMessage === 'string') return props.errorMessage
 
-    if (!edited()) return undefined
+    if (!shouldValidate()) return undefined
 
     return props.errorMessage(value() ?? '') ?? undefined
   })
 
   function onInput(event: InputEvent) {
-    setEdited(true)
+    setShouldValidate(true)
     if (event.target instanceof HTMLInputElement) {
       const newValue = event.target.value
       setValue(newValue)
