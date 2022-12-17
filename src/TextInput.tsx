@@ -42,6 +42,7 @@ export type TextInputProps = SkelProps<{
   tailButtonContent?: JSX.Element
   headButtonContent?: JSX.Element
   onChangeValue?: (value: string) => void
+  onChangeValidValue?: (value: string) => void
   onClickHeadButton?: (event: MouseEvent) => unknown
   onClickTailButton?: (event: MouseEvent) => unknown
 }>
@@ -57,6 +58,7 @@ export function TextInput(rawProps: TextInputProps) {
     'headButtonContent',
     'tailButtonContent',
     'onChangeValue',
+    'onChangeValidValue',
     'onClickHeadButton',
     'onClickTailButton',
   ])
@@ -83,8 +85,15 @@ export function TextInput(rawProps: TextInputProps) {
   function onInput(event: InputEvent) {
     setEdited(true)
     if (event.target instanceof HTMLInputElement) {
-      setValue(event.target.value)
-      props.onChangeValue?.(event.target.value)
+      const newValue = event.target.value
+      setValue(newValue)
+      props.onChangeValue?.(newValue)
+
+      if (props.onChangeValidValue !== undefined) {
+        if (typeof props.errorMessage === 'string' || props.errorMessage?.(newValue) === undefined) {
+          props.onChangeValidValue(newValue)
+        }
+      }
     }
   }
 
@@ -126,7 +135,7 @@ export function TextInput(rawProps: TextInputProps) {
           </Show>
         </div>
       </div>
-        <p class="skel-TextInput_error-message">{errorMessage()}</p>
+      <p class="skel-TextInput_error-message">{errorMessage()}</p>
     </div>
   )
 }
