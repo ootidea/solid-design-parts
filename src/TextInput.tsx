@@ -1,4 +1,4 @@
-import { JSX, Show } from 'solid-js'
+import { Accessor, createEffect, createMemo, createSignal, JSX, on, Show } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -36,6 +36,7 @@ export type TextInputProps = SkelProps<{
     | 'week'
   >
   disabled?: boolean
+  errorMessage?: string | ((value: string) => string | void | undefined)
   prepend?: JSX.Element
   append?: JSX.Element
   tailButtonContent?: JSX.Element
@@ -50,6 +51,7 @@ export function TextInput(rawProps: TextInputProps) {
     'value',
     'placeholder',
     'type',
+    'errorMessage',
     'prepend',
     'append',
     'headButtonContent',
@@ -59,8 +61,29 @@ export function TextInput(rawProps: TextInputProps) {
     'onClickTailButton',
   ])
 
+  const [value, setValue] = createSignal(props.value)
+  createEffect(
+    on(
+      () => props.value,
+      () => setValue(props.value)
+    )
+  )
+  const [edited, setEdited] = createSignal(false)
+
+  const errorMessage: Accessor<string | undefined> = createMemo(() => {
+    if (props.errorMessage === undefined) return undefined
+
+    if (typeof props.errorMessage === 'string') return props.errorMessage
+
+    if (!edited()) return undefined
+
+    return props.errorMessage(value() ?? '') ?? undefined
+  })
+
   function onInput(event: InputEvent) {
+    setEdited(true)
     if (event.target instanceof HTMLInputElement) {
+      setValue(event.target.value)
       props.onChangeValue?.(event.target.value)
     }
   }
@@ -74,32 +97,37 @@ export function TextInput(rawProps: TextInputProps) {
       aria-disabled={props.disabled}
       {...restProps}
     >
-      <div class="skel-TextInput_head-area">
-        <Show when={props.headButtonContent !== undefined}>
-          <button class="skel-TextInput_head-button" type="button" onClick={props.onClickHeadButton}>
-            {props.headButtonContent}
-          </button>
-        </Show>
+      <div class="skel-TextInput_main-area">
+        <div class="skel-TextInput_head-area">
+          <Show when={props.headButtonContent !== undefined}>
+            <button class="skel-TextInput_head-button" type="button" onClick={props.onClickHeadButton}>
+              {props.headButtonContent}
+            </button>
+          </Show>
+        </div>
+        <StretchLayout class="skel-TextInput_body" stretchAt={1}>
+          <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
+          <input
+            class="skel-TextInput_input"
+            attr:value={value()}
+            placeholder={props.placeholder}
+            type={props.type}
+            disabled={props.disabled}
+            onInput={onInput}
+          />
+          <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
+        </StretchLayout>
+        <div class="skel-TextInput_tail-area">
+          <Show when={props.tailButtonContent !== undefined}>
+            <button class="skel-TextInput_tail-button" type="button" onClick={props.onClickTailButton}>
+              {props.tailButtonContent}
+            </button>
+          </Show>
+        </div>
       </div>
-      <StretchLayout class="skel-TextInput_body" stretchAt={1}>
-        <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
-        <input
-          class="skel-TextInput_input"
-          attr:value={props.value}
-          placeholder={props.placeholder}
-          type={props.type}
-          disabled={props.disabled}
-          onInput={onInput}
-        />
-        <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
-      </StretchLayout>
-      <div class="skel-TextInput_tail-area">
-        <Show when={props.tailButtonContent !== undefined}>
-          <button class="skel-TextInput_tail-button" type="button" onClick={props.onClickTailButton}>
-            {props.tailButtonContent}
-          </button>
-        </Show>
-      </div>
+      <Show when={errorMessage()}>
+        <p class="skel-TextInput_error-message">{errorMessage()}</p>
+      </Show>
     </div>
   )
 }

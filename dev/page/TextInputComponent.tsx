@@ -54,6 +54,28 @@ export function TextInputComponent() {
         <TextInput placeholder="placeholder" disabled />
         <TextInput value="default value" disabled />
       </Sample>
+
+      <Sample title="Error message">
+        <TextInput placeholder="placeholder" errorMessage="Invalid value" />
+        <TextInput value="default value" errorMessage="Error" />
+      </Sample>
+
+      <Sample title="Validation">
+        <TextInput
+          placeholder="placeholder"
+          errorMessage={(value) => {
+            if (value.length === 0) return 'Required'
+            return undefined
+          }}
+        />
+        <TextInput
+          value="Default value"
+          errorMessage={(value) => {
+            if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
+            return undefined
+          }}
+        />
+      </Sample>
     </article>
   )
 }
