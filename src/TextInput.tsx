@@ -79,6 +79,8 @@ export function TextInput(rawProps: TextInputProps) {
     )
   )
 
+  const [inputElementHasFocus, setInputElementHasFocus] = createSignal(false)
+
   const errorMessage: Accessor<string | undefined> = createMemo(() => {
     if (props.errorMessage === undefined) return undefined
 
@@ -109,6 +111,7 @@ export function TextInput(rawProps: TextInputProps) {
       class={joinClasses(rawProps, 'skel-TextInput_root', {
         'skel-TextInput_has-head-button': props.headButtonContent !== undefined,
         'skel-TextInput_has-tail-button': props.tailButtonContent !== undefined,
+        'skel-TextInput_input-element-has-focus': inputElementHasFocus(),
       })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessage() !== undefined}
@@ -131,7 +134,11 @@ export function TextInput(rawProps: TextInputProps) {
             type={props.type}
             disabled={props.disabled}
             onInput={onInput}
-            onBlur={() => setShouldValidate(true)}
+            onFocus={() => setInputElementHasFocus(true)}
+            onBlur={() => {
+              setShouldValidate(true)
+              setInputElementHasFocus(false)
+            }}
           />
           <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
         </StretchLayout>

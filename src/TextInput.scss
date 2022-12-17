@@ -16,11 +16,12 @@
     background-color: var(--skel-disabled-input-background-color);
   }
 
-  .skel-TextInput_root[aria-invalid='true'] & {
+  :where(.skel-TextInput_root[aria-invalid='true']) & {
     border-color: var(--skel-error-color);
   }
 
-  &:focus-within {
+  /* TODO: Use :has() instead of CSS class */
+  .skel-TextInput_input-element-has-focus & {
     border-color: var(--skel-primary-color);
   }
 
