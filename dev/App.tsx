@@ -38,6 +38,7 @@ import { TextInputComponent } from './page/TextInputComponent'
 import { TitleBarLayoutComponent } from './page/TitleBarLayoutComponent'
 import { ToastComponent } from './page/ToastComponent'
 import { ToggleButtonsComponent } from './page/ToggleButtonsComponent'
+import { TriangleComponent } from './page/TriangleComponent'
 import { UrlToLinkComponent } from './page/UrlToLinkComponent'
 import { SidebarMenu } from './SidebarMenu'
 
@@ -97,6 +98,7 @@ export function App() {
         ImageComponent,
         DividerComponent,
         SpinnerComponent,
+        TriangleComponent,
         StepperComponent,
         SpeechBubbleComponent,
       ],
