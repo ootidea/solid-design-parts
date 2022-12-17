@@ -4,8 +4,9 @@
   justify-content: center;
   text-align: center;
 
+  box-sizing: border-box;
   // Since character height is different between full-pitch and half-pitch, set height instead of padding.
-  height: 2.45em;
+  min-height: 2.45em;
   padding: 0 1em;
   border-radius: var(--skel-Button_radius);
   border-width: 1px;

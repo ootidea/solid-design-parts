@@ -2,15 +2,14 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
 
-  height: var(--skel-one-line-input-height);
+  min-height: var(--skel-one-line-input-height);
 }
 
 .skel-TextInput_body {
+  box-sizing: border-box;
   border-radius: var(--skel-TextInput_radius);
   border: 1px solid var(--skel-input-border-color);
   background-color: var(--skel-background-color);
-
-  box-sizing: border-box;
 
   .skel-TextInput_root[aria-disabled='true'] & {
     background-color: var(--skel-disabled-input-background-color);
