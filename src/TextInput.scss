@@ -16,7 +16,7 @@
     background-color: var(--skel-disabled-input-background-color);
   }
 
-  .skel-TextInput_has-error & {
+  .skel-TextInput_root[aria-invalid='true'] & {
     border-color: var(--skel-error-color);
   }
 
