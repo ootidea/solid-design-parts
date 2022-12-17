@@ -26,8 +26,8 @@ export function SliderComponent() {
       </Sample>
 
       <Sample title="Thumb size">
-        <Slider thumbWidth="2px" />
-        <Slider thumbWidth="1.5rem" thumbHeight="1.5rem" />
+        <Slider thumbWidth="5px" value={0.2} />
+        <Slider thumbWidth="1.5rem" thumbHeight="1.5rem" value={0.3} />
       </Sample>
     </article>
   )
