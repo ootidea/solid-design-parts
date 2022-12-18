@@ -1,6 +1,6 @@
 import { createEffect, createSignal, For, Show } from 'solid-js'
 import css from './Tabs.scss'
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -9,7 +9,7 @@ registerCss(css)
 export type TabsProps<T extends string> = SkelProps<{
   names: readonly T[]
   activeTab?: T
-  children?: SkelSlot<{ activeTab: T }>
+  children?: SlotProp<{ activeTab: T }>
   type?: 'Colored tab and border' | 'Surrounded by border' | 'Plain background' | 'Active underline'
   passive?: boolean
   onClickTab?: (tabName: T) => void

@@ -5,7 +5,7 @@ import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import { StretchLayout } from './StretchLayout'
-import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -13,9 +13,9 @@ registerCss(css)
 
 export type FoldableProps = SkelProps<{
   unfolded?: boolean
-  title?: SkelSlot<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
-  icon?: SkelSlot<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
-  children?: SkelSlot<{ fold: () => void; unfold: () => void; toggle: () => void }>
+  title?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
+  icon?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
+  children?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void }>
   headerBackgroundColor?: string
   borderColor?: string
   onChangeUnfolded?: (unfolded: boolean) => void

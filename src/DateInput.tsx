@@ -5,7 +5,7 @@ import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import calendarIcon from './image/calendar.svg'
 import { Modal } from './Modal'
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -16,7 +16,7 @@ export type DateInputProps = SkelProps<{
   placeholder?: string
   disabled?: boolean | ((date: Date) => boolean)
   onChangeValue?: ((value: Date) => void) | undefined
-  format?: SkelSlot<{ value: Date | undefined }>
+  format?: SlotProp<{ value: Date | undefined }>
 }>
 
 export function DateInput(rawProps: DateInputProps) {

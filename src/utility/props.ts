@@ -8,7 +8,7 @@ export type SkelProps<T, Base extends keyof JSX.IntrinsicElements | Component<an
 > &
   T
 
-export type SkelSlot<T> = JSX.Element | ((props: T) => JSX.Element)
+export type SlotProp<T> = JSX.Element | ((props: T) => JSX.Element)
 
 /**
  * Convert all nullary function properties to getters immutably.

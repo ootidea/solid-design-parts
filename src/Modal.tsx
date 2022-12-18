@@ -7,7 +7,7 @@ import css from './Modal.scss'
 import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
 import { setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -19,10 +19,10 @@ export type ModalProps = SkelProps<{
   showCloseButton?: boolean
   ignoreEscKey?: boolean
   onChangeOpened?: (opened: boolean) => void
-  launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
-  title?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
-  children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
-  footer?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  launcher?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  title?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  children?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  footer?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
 }>
 
 export function Modal(rawProps: ModalProps) {

@@ -1,6 +1,6 @@
 import { createSignal, Show } from 'solid-js'
 import css from './Image.scss'
-import { joinClasses, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -9,7 +9,7 @@ registerCss(css)
 export type ImageProps = SkelProps<
   {
     alt?: string
-    fallback?: SkelSlot<{}>
+    fallback?: SlotProp<{}>
     onLoad?: (event: Event) => void
     onError?: (event: Event) => void
   },

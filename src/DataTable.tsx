@@ -7,7 +7,7 @@ import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
 import { maxBy, objectFromEntries } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -26,7 +26,7 @@ export type DataTableProps<
     maxWidth?: string
     align?: ColumnAlign
     // TODO: Make type of 'value' property precise.
-    cell?: SkelSlot<{
+    cell?: SlotProp<{
       value: unknown extends Row[ColumnId] ? any : Row[ColumnId]
       row: Row
       columnId: ColumnId
@@ -42,10 +42,10 @@ export type DataTableProps<
   oddRowBackgroundColor?: string
   onClickRow?: (row: Row) => void
   sortingState?: { columnId: ColumnId; reversed: boolean } | undefined
-  horizontalRuledLine?: SkelSlot<{ verticalIndex: number }>
-  verticalRuledLine?: SkelSlot<{ verticalIndex: number; horizontalIndex: number }>
-  headerCell?: SkelSlot<{ columnId: ColumnId; columnTitle: string }>
-  emptyState?: SkelSlot<{}>
+  horizontalRuledLine?: SlotProp<{ verticalIndex: number }>
+  verticalRuledLine?: SlotProp<{ verticalIndex: number; horizontalIndex: number }>
+  headerCell?: SlotProp<{ columnId: ColumnId; columnTitle: string }>
+  emptyState?: SlotProp<{}>
 }>
 
 export function DataTable<
@@ -57,7 +57,7 @@ export function DataTable<
     minWidth?: string
     maxWidth?: string
     align?: ColumnAlign
-    cell?: SkelSlot<{
+    cell?: SlotProp<{
       value: unknown extends Row[ColumnId] ? any : Row[ColumnId]
       row: Row
       columnId: ColumnId

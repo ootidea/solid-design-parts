@@ -6,7 +6,7 @@ import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { i18n } from './utility/i18n'
 import { until } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -16,7 +16,7 @@ export type CalendarProps = SkelProps<{
   month?: Date
   hideMonthMoveButton?: boolean
   onChangeMonth?: (month: Date) => void
-  children?: SkelSlot<{ date: Date }>
+  children?: SlotProp<{ date: Date }>
 }>
 
 export function Calendar(rawProps: CalendarProps) {

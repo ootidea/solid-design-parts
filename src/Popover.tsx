@@ -10,7 +10,7 @@ import {
   toXPercent,
   toYPercent,
 } from './utility/position'
-import { prepareProps, SkelProps, SkelSlot } from './utility/props'
+import { prepareProps, SkelProps, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -22,9 +22,9 @@ export type PopoverProps = SkelProps<{
   persistent?: boolean
   ignoreEscKey?: boolean
   onClose?: () => void
-  launcher?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
-  frame?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
-  children?: SkelSlot<{ open: () => void; close: () => void; toggle: () => void }>
+  launcher?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  frame?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  children?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
 }>
 
 export function Popover(rawProps: PopoverProps) {
