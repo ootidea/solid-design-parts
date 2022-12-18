@@ -19,7 +19,11 @@ export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>)
       {call(() => {
         const analysisResult = analyze(rawProps.value)
         return (
-          <div class={joinClasses(props, 'skel-DataTableCell_root')} data-type={analysisResult.type} {...restProps}>
+          <div
+            class={joinClasses(props, 'mantle-ui-DataTableCell_root')}
+            data-type={analysisResult.type}
+            {...restProps}
+          >
             {render(analysisResult)}
           </div>
         )

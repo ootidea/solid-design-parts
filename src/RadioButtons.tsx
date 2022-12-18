@@ -21,7 +21,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      name: rawProps.name === undefined ? `skel-RadioButton_name${uniqueId++}` : rawProps.name,
+      name: rawProps.name === undefined ? `mantle-ui-RadioButton_name${uniqueId++}` : rawProps.name,
       disabled: false,
       enableDeselection: false,
     },
@@ -53,13 +53,13 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     <For each={props.values}>
       {(value) => (
         <label
-          class={joinClasses(rawProps, 'skel-RadioButtons_label')}
+          class={joinClasses(rawProps, 'mantle-ui-RadioButtons_label')}
           aria-disabled={isDisabled(value)}
           {...restProps}
         >
           <input
             type="radio"
-            class="skel-RadioButtons_radio"
+            class="mantle-ui-RadioButtons_radio"
             value={value}
             name={props.name}
             checked={value === selected()}

@@ -91,41 +91,45 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   return (
     <>
       <button
-        class={joinClasses(rawProps, 'skel-Select_launcher', {
-          'skel-Select_opened': dropdownInfo() !== undefined,
-          'skel-Select_full-width': props.fullWidth,
+        class={joinClasses(rawProps, 'mantle-ui-Select_launcher', {
+          'mantle-ui-Select_opened': dropdownInfo() !== undefined,
+          'mantle-ui-Select_full-width': props.fullWidth,
         })}
         type="button"
         disabled={props.disabled}
         onClick={onClickLauncher}
         {...restProps}
       >
-        <div class="skel-Select_preview-area">
+        <div class="mantle-ui-Select_preview-area">
           {call(() => {
             const previewValue = selected()
             return (
               <>
-                {previewValue !== undefined ? <div class="skel-Select_preview">{getText(previewValue)} </div> : null}
+                {previewValue !== undefined ? (
+                  <div class="mantle-ui-Select_preview">{getText(previewValue)} </div>
+                ) : null}
                 <div
-                  class="skel-Select_placeholder"
-                  classList={{ 'skel-Select_invisible': previewValue !== undefined }}
+                  class="mantle-ui-Select_placeholder"
+                  classList={{ 'mantle-ui-Select_invisible': previewValue !== undefined }}
                 >
                   {props.placeholder}
                 </div>
-                <div class="skel-Select_invisible">
-                  <For each={props.values}>{(value) => <div class="skel-Select_preview">{getText(value)}</div>}</For>
+                <div class="mantle-ui-Select_invisible">
+                  <For each={props.values}>
+                    {(value) => <div class="mantle-ui-Select_preview">{getText(value)}</div>}
+                  </For>
                 </div>
               </>
             )
           })}
         </div>
-        <Icon class="skel-Select_icon" src={chevronDownIcon} />
+        <Icon class="mantle-ui-Select_icon" src={chevronDownIcon} />
       </button>
       <Show when={dropdownInfo()}>
         {(dropdownInfo) => (
           <Portal>
             <div
-              class="skel-Select_overlay"
+              class="mantle-ui-Select_overlay"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
               onClick={onOperateOverlay}
@@ -134,18 +138,18 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
               onKeyDown={onKeyDown}
             >
               <div
-                class="skel-Select_dropdown"
+                class="mantle-ui-Select_dropdown"
                 style={{
-                  '--skel-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
-                  '--skel-Select_dropdown-top': `${dropdownInfo.topPx}px`,
-                  '--skel-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
-                  '--skel-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
+                  '--mantle-ui-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
+                  '--mantle-ui-Select_dropdown-top': `${dropdownInfo.topPx}px`,
+                  '--mantle-ui-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
+                  '--mantle-ui-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
                 }}
               >
                 <Show when={props.showSearchBox}>
-                  <div class="skel-Select_search-box-area">
+                  <div class="mantle-ui-Select_search-box-area">
                     <TextInput
-                      class="skel-Select_search-box"
+                      class="mantle-ui-Select_search-box"
                       placeholder="search"
                       value={searchQuery()}
                       onChangeValue={setSearchQuery}
@@ -161,7 +165,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                           <Divider />
                         </Show>
                         <button
-                          class="skel-Select_option"
+                          class="mantle-ui-Select_option"
                           type="button"
                           role="menuitem"
                           aria-selected={selected() === value}

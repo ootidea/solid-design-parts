@@ -33,14 +33,14 @@ export function DatePicker(rawProps: DatePickerProps) {
 
   return (
     <Calendar
-      class={joinClasses(rawProps, 'skel-DatePicker_root')}
+      class={joinClasses(rawProps, 'mantle-ui-DatePicker_root')}
       month={props.month}
       onChangeMonth={props.onChangeMonth}
       {...restProps}
     >
       {({ date }) => (
         <button
-          class="skel-DatePicker_date-cell"
+          class="mantle-ui-DatePicker_date-cell"
           type="button"
           aria-selected={value() !== undefined && isSameDay(date, value() ?? Number.NaN)}
           disabled={props.disabled?.(date)}

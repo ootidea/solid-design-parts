@@ -1,77 +1,77 @@
 :root {
-  --skel-Calendar_cell-width: 2.3em;
-  --skel-Calendar_cell-height: 2.3em;
-  --skel-Calendar_sunday-text-color: oklch(50% 0.6 5);
-  --skel-Calendar_saturday-text-color: oklch(50% 0.6 260);
+  --mantle-ui-Calendar_cell-width: 2.3em;
+  --mantle-ui-Calendar_cell-height: 2.3em;
+  --mantle-ui-Calendar_sunday-text-color: oklch(50% 0.6 5);
+  --mantle-ui-Calendar_saturday-text-color: oklch(50% 0.6 260);
 }
 
-.skel-Calendar_root {
+.mantle-ui-Calendar_root {
   width: max-content;
 }
 
-.skel-Calendar_year-month-area {
+.mantle-ui-Calendar_year-month-area {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.skel-Calendar_month-move-button {
-  &.skel-Calendar_hidden {
+.mantle-ui-Calendar_month-move-button {
+  &.mantle-ui-Calendar_hidden {
     visibility: hidden;
   }
 }
 
-.skel-Calendar_year-month {
+.mantle-ui-Calendar_year-month {
   display: grid;
-  grid-template-areas: var(--skel-Calendar_year-month-order);
+  grid-template-areas: var(--mantle-ui-Calendar_year-month-order);
   align-items: center;
   gap: 0.3em;
 }
 
-.skel-Calendar_year,
-.skel-Calendar_month {
+.mantle-ui-Calendar_year,
+.mantle-ui-Calendar_month {
   font-weight: bold;
   color: oklch(50% 0 0);
 }
 
-.skel-Calendar_year {
+.mantle-ui-Calendar_year {
   grid-area: year;
 }
 
-.skel-Calendar_month {
+.mantle-ui-Calendar_month {
   grid-area: month;
 }
 
-.skel-Calendar_grid {
+.mantle-ui-Calendar_grid {
   display: grid;
-  grid-template-columns: repeat(7, var(--skel-Calendar_cell-width));
-  grid-auto-rows: var(--skel-Calendar_cell-height);
+  grid-template-columns: repeat(7, var(--mantle-ui-Calendar_cell-width));
+  grid-auto-rows: var(--mantle-ui-Calendar_cell-height);
   width: max-content;
 }
 
-.skel-Calendar_day-row,
-.skel-Calendar_date-row {
+.mantle-ui-Calendar_day-row,
+.mantle-ui-Calendar_date-row {
   display: contents;
 }
 
-.skel-Calendar_cell {
+.mantle-ui-Calendar_cell {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .skel-Calendar_day-row & {
+  .mantle-ui-Calendar_day-row & {
     color: oklch(50% 0 0);
 
     &[data-day='0'] {
-      color: var(--skel-Calendar_sunday-text-color);
+      color: var(--mantle-ui-Calendar_sunday-text-color);
     }
 
     &[data-day='6'] {
-      color: var(--skel-Calendar_saturday-text-color);
+      color: var(--mantle-ui-Calendar_saturday-text-color);
     }
   }
 
-  &.skel-Calendar_other-month {
+  &.mantle-ui-Calendar_other-month {
     color: oklch(60% 0 0);
   }
 }

@@ -27,13 +27,13 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const ZERO_WIDTH_SPACE = '\u200B'
 
   return (
-    <div class="skel-AutoSizeTextArea_root" aria-disabled={props.disabled}>
-      <div class="skel-AutoSizeTextArea_dummy" aria-hidden="true">
+    <div class="mantle-ui-AutoSizeTextArea_root" aria-disabled={props.disabled}>
+      <div class="mantle-ui-AutoSizeTextArea_dummy" aria-hidden="true">
         {value() ? value() : rawProps.placeholder}
         {ZERO_WIDTH_SPACE}
       </div>
       <textarea
-        class={joinClasses(rawProps, 'skel-AutoSizeTextArea_text-area')}
+        class={joinClasses(rawProps, 'mantle-ui-AutoSizeTextArea_text-area')}
         value={value() ?? ''}
         onInput={onInput}
         {...restProps}

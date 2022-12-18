@@ -1,20 +1,20 @@
-.skel-TitleBarLayout_root {
+.mantle-ui-TitleBarLayout_root {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.skel-TitleBarLayout_title {
+.mantle-ui-TitleBarLayout_title {
   font-size: larger;
 }
 
-.skel-TitleBarLayout_left,
-.skel-TitleBarLayout_right {
+.mantle-ui-TitleBarLayout_left,
+.mantle-ui-TitleBarLayout_right {
   display: flex;
   align-items: center;
 }
 
-.skel-TitleBarLayout_invisible {
+.mantle-ui-TitleBarLayout_invisible {
   visibility: hidden;
   height: 0;
 
@@ -22,7 +22,7 @@
   align-items: center;
 }
 
-.skel-TitleBarLayout_right-area {
+.mantle-ui-TitleBarLayout_right-area {
   display: flex;
   flex-direction: column;
   align-items: flex-end;

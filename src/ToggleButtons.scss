@@ -1,35 +1,35 @@
 :root {
-  --skel-ToggleButtons_border-radius: 0.4em;
-  --skel-ToggleButtons_border: 1px solid var(--skel-ToggleButtons_border-color);
-  --skel-ToggleButtons_border-color: oklch(80% 0 0);
-  --skel-ToggleButtons_text-color: oklch(50% 0 0);
-  --skel-ToggleButtons_selected-border-color: oklch(70% 0.08 255.4);
-  --skel-ToggleButtons_selected-text-color: oklch(50% 0.22 255.4);
-  --skel-ToggleButtons_selected-background-color: var(--skel-primary-selected-background-color);
-  --skel-ToggleButtons_selected-font-weight: inherit;
+  --mantle-ui-ToggleButtons_border-radius: 0.4em;
+  --mantle-ui-ToggleButtons_border: 1px solid var(--mantle-ui-ToggleButtons_border-color);
+  --mantle-ui-ToggleButtons_border-color: oklch(80% 0 0);
+  --mantle-ui-ToggleButtons_text-color: oklch(50% 0 0);
+  --mantle-ui-ToggleButtons_selected-border-color: oklch(70% 0.08 255.4);
+  --mantle-ui-ToggleButtons_selected-text-color: oklch(50% 0.22 255.4);
+  --mantle-ui-ToggleButtons_selected-background-color: var(--mantle-ui-primary-selected-background-color);
+  --mantle-ui-ToggleButtons_selected-font-weight: inherit;
 }
 
-.skel-ToggleButtons_root {
+.mantle-ui-ToggleButtons_root {
   display: grid;
   grid-auto-flow: column;
   width: max-content;
 
-  &.skel-ToggleButtons_full-width {
+  &.mantle-ui-ToggleButtons_full-width {
     width: initial;
   }
 }
 
-.skel-ToggleButtons_button {
+.mantle-ui-ToggleButtons_button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   padding: 0.3em 0.5em;
-  border: var(--skel-ToggleButtons_border);
+  border: var(--mantle-ui-ToggleButtons_border);
   border-right: none;
 
   background: transparent;
-  color: var(--skel-ToggleButtons_text-color);
+  color: var(--mantle-ui-ToggleButtons_text-color);
   font: inherit;
 
   cursor: pointer;
@@ -37,15 +37,15 @@
   transition: all 140ms ease-out;
 
   &:first-of-type {
-    border-top-left-radius: var(--skel-ToggleButtons_border-radius);
-    border-bottom-left-radius: var(--skel-ToggleButtons_border-radius);
+    border-top-left-radius: var(--mantle-ui-ToggleButtons_border-radius);
+    border-bottom-left-radius: var(--mantle-ui-ToggleButtons_border-radius);
   }
 
   &:last-of-type {
-    border-top-right-radius: var(--skel-ToggleButtons_border-radius);
-    border-bottom-right-radius: var(--skel-ToggleButtons_border-radius);
+    border-top-right-radius: var(--mantle-ui-ToggleButtons_border-radius);
+    border-bottom-right-radius: var(--mantle-ui-ToggleButtons_border-radius);
 
-    border-right: var(--skel-ToggleButtons_border);
+    border-right: var(--mantle-ui-ToggleButtons_border);
   }
 
   @media (hover: hover) {
@@ -61,29 +61,29 @@
   }
 
   &[aria-selected='true'] {
-    border-color: var(--skel-ToggleButtons_selected-border-color);
+    border-color: var(--mantle-ui-ToggleButtons_selected-border-color);
 
-    & + .skel-ToggleButtons_button {
-      border-left-color: var(--skel-ToggleButtons_selected-border-color);
+    & + .mantle-ui-ToggleButtons_button {
+      border-left-color: var(--mantle-ui-ToggleButtons_selected-border-color);
     }
 
-    background-color: var(--skel-primary-selected-background-color);
-    color: var(--skel-ToggleButtons_selected-text-color);
-    font-weight: var(--skel-ToggleButtons_selected-font-weight);
+    background-color: var(--mantle-ui-primary-selected-background-color);
+    color: var(--mantle-ui-ToggleButtons_selected-text-color);
+    font-weight: var(--mantle-ui-ToggleButtons_selected-font-weight);
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--skel-primary-selected-background-hover-color);
+        background-color: var(--mantle-ui-primary-selected-background-hover-color);
       }
     }
 
     &:active {
-      background-color: var(--skel-primary-selected-background-active-color);
+      background-color: var(--mantle-ui-primary-selected-background-active-color);
     }
   }
 
   &:focus-visible {
     outline-offset: -2px;
-    outline: 2px solid var(--skel-primary-color);
+    outline: 2px solid var(--mantle-ui-primary-color);
   }
 }

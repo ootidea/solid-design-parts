@@ -52,38 +52,38 @@ export function Calendar(rawProps: CalendarProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Calendar_root')}
+      class={joinClasses(rawProps, 'mantle-ui-Calendar_root')}
       style={joinStyle(props.style, {
-        '--skel-Calendar_year-month-order': i18n.literals.calendarYearMonthOrder,
+        '--mantle-ui-Calendar_year-month-order': i18n.literals.calendarYearMonthOrder,
       })}
       {...restProps}
     >
-      <div class="skel-Calendar_year-month-area">
+      <div class="mantle-ui-Calendar_year-month-area">
         <IconButton
-          class="skel-Calendar_month-move-button skel-Calendar_prev-month-button"
-          classList={{ 'skel-Calendar_hidden': props.hideMonthMoveButton }}
+          class="mantle-ui-Calendar_month-move-button mantle-ui-Calendar_prev-month-button"
+          classList={{ 'mantle-ui-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronLeftIcon}
           onClick={() => changeMonth(subMonths(selectedMonth(), 1))}
           size="1.6em"
         />
-        <div class="skel-Calendar_year-month">
-          <span class="skel-Calendar_year">{format(selectedMonth(), i18n.literals.calendarYearTemplate)}</span>
-          <span class="skel-Calendar_month">{format(selectedMonth(), i18n.literals.calendarMonthTemplate)}</span>
+        <div class="mantle-ui-Calendar_year-month">
+          <span class="mantle-ui-Calendar_year">{format(selectedMonth(), i18n.literals.calendarYearTemplate)}</span>
+          <span class="mantle-ui-Calendar_month">{format(selectedMonth(), i18n.literals.calendarMonthTemplate)}</span>
         </div>
         <IconButton
-          class="skel-Calendar_month-move-button skel-Calendar_next-month-button"
-          classList={{ 'skel-Calendar_hidden': props.hideMonthMoveButton }}
+          class="mantle-ui-Calendar_month-move-button mantle-ui-Calendar_next-month-button"
+          classList={{ 'mantle-ui-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronRightIcon}
           onClick={() => changeMonth(addMonths(selectedMonth(), 1))}
           size="1.6em"
         />
       </div>
 
-      <div class="skel-Calendar_grid">
-        <div class="skel-Calendar_day-row">
+      <div class="mantle-ui-Calendar_grid">
+        <div class="mantle-ui-Calendar_day-row">
           <For each={dayNames}>
             {(dayName, day) => (
-              <div class="skel-Calendar_cell" data-day={day()}>
+              <div class="mantle-ui-Calendar_cell" data-day={day()}>
                 {dayName}
               </div>
             )}
@@ -92,15 +92,15 @@ export function Calendar(rawProps: CalendarProps) {
 
         <For each={until(6)}>
           {(weakIndex) => (
-            <div class="skel-Calendar_date-row">
+            <div class="mantle-ui-Calendar_date-row">
               <For each={dayNames}>
                 {(_, day) => {
                   const date = createMemo(() => addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day()))
                   return (
                     <div
-                      class="skel-Calendar_cell"
+                      class="mantle-ui-Calendar_cell"
                       classList={{
-                        'skel-Calendar_other-month': !isSameMonth(date(), selectedMonth()),
+                        'mantle-ui-Calendar_other-month': !isSameMonth(date(), selectedMonth()),
                       }}
                       data-day={day()}
                     >

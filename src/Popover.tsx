@@ -85,21 +85,21 @@ export function Popover(rawProps: PopoverProps) {
 
   return (
     <>
-      <div class="skel-Popover_launcher" ref={launcher}>
+      <div class="mantle-ui-Popover_launcher" ref={launcher}>
         <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
       </div>
       <Show when={opened()}>
         <Portal>
           <div
-            class="skel-Popover_overlay"
+            class="mantle-ui-Popover_overlay"
             style={{
-              '--skel-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
-              '--skel-Popover_right': launcherRect ? `${launcherRect.right}px` : '0',
-              '--skel-Popover_top': launcherRect ? `${launcherRect.top}px` : '0',
-              '--skel-Popover_bottom': launcherRect ? `${launcherRect.bottom}px` : '0',
-              '--skel-Popover_transform': `translate(-${toXPercent(props.joint ?? toOpposite(props.on))}, -${toYPercent(
+              '--mantle-ui-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
+              '--mantle-ui-Popover_right': launcherRect ? `${launcherRect.right}px` : '0',
+              '--mantle-ui-Popover_top': launcherRect ? `${launcherRect.top}px` : '0',
+              '--mantle-ui-Popover_bottom': launcherRect ? `${launcherRect.bottom}px` : '0',
+              '--mantle-ui-Popover_transform': `translate(-${toXPercent(
                 props.joint ?? toOpposite(props.on)
-              )})`,
+              )}, -${toYPercent(props.joint ?? toOpposite(props.on))})`,
             }}
             data-horizontal-position={toHorizontalPosition(props.on)}
             data-vertical-position={toVerticalPosition(props.on)}
@@ -112,7 +112,7 @@ export function Popover(rawProps: PopoverProps) {
             {...restProps}
           >
             <Slot content={rawProps.frame} params={{ open, close, toggle }}>
-              <div class="skel-Popover_frame">
+              <div class="mantle-ui-Popover_frame">
                 <Slot content={rawProps.children} params={{ open, close, toggle }} />
               </div>
             </Slot>

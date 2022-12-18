@@ -89,31 +89,31 @@ export function Scrollable(rawProps: ScrollableProps) {
 
   return (
     <div
-      class="skel-Scrollable_root"
+      class="mantle-ui-Scrollable_root"
       classList={{
-        'skel-Scrollable_overflow': isOverflow(),
-        'skel-Scrollable_dragging': dragState() !== undefined,
+        'mantle-ui-Scrollable_overflow': isOverflow(),
+        'mantle-ui-Scrollable_dragging': dragState() !== undefined,
       }}
       style={{
-        '--skel-Scrollable_thumb-height': `${(100 * rootHeightPx()) / innerHeightPx()}%`,
-        '--skel-Scrollable_thumb-top': `${thumbTopPx()}px`,
+        '--mantle-ui-Scrollable_thumb-height': `${(100 * rootHeightPx()) / innerHeightPx()}%`,
+        '--mantle-ui-Scrollable_thumb-top': `${thumbTopPx()}px`,
       }}
       ref={(element) => observeHeightPx(element, setRootHeightPx)}
       onMouseEnter={showThumbTemporarily}
     >
-      <div class="skel-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
+      <div class="mantle-ui-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
         <div
-          class={joinClasses(rawProps, 'skel-Scrollable_inner')}
+          class={joinClasses(rawProps, 'mantle-ui-Scrollable_inner')}
           ref={(element) => observeHeightPx(element, setInnerHeightPx)}
           {...restProps}
         >
           {props.children}
         </div>
       </div>
-      <div class="skel-Scrollable_overlay">
-        <div class="skel-Scrollable_dummy" />
-        <div class="skel-Scrollable_scrollbar" role="scrollbar">
-          <div class="skel-Scrollable_thumb" ref={thumbElement} />
+      <div class="mantle-ui-Scrollable_overlay">
+        <div class="mantle-ui-Scrollable_dummy" />
+        <div class="mantle-ui-Scrollable_scrollbar" role="scrollbar">
+          <div class="mantle-ui-Scrollable_thumb" ref={thumbElement} />
         </div>
       </div>
     </div>

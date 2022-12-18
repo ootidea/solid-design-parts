@@ -1,15 +1,15 @@
-.skel-AutoSizeTextArea_root {
+.mantle-ui-AutoSizeTextArea_root {
   box-sizing: border-box;
   position: relative;
 }
 
-.skel-AutoSizeTextArea_dummy,
-.skel-AutoSizeTextArea_text-area {
+.mantle-ui-AutoSizeTextArea_dummy,
+.mantle-ui-AutoSizeTextArea_text-area {
   box-sizing: border-box;
 
   padding: 0.4em 0.6em;
-  border-radius: var(--skel-input-border-radius);
-  border: 1px solid var(--skel-input-border-color);
+  border-radius: var(--mantle-ui-input-border-radius);
+  border: 1px solid var(--mantle-ui-input-border-color);
 
   overflow: hidden;
   white-space: pre-wrap;
@@ -24,11 +24,11 @@
   min-height: 4.8em;
 }
 
-.skel-AutoSizeTextArea_dummy {
+.mantle-ui-AutoSizeTextArea_dummy {
   visibility: hidden;
 }
 
-.skel-AutoSizeTextArea_text-area {
+.mantle-ui-AutoSizeTextArea_text-area {
   position: absolute;
   top: 0;
   left: 0;
@@ -41,14 +41,14 @@
   resize: none;
 
   &::placeholder {
-    color: var(--skel-placeholder-text-color);
+    color: var(--mantle-ui-placeholder-text-color);
   }
 
   &:disabled {
-    background-color: var(--skel-disabled-input-background-color);
+    background-color: var(--mantle-ui-disabled-input-background-color);
   }
 
   &:focus {
-    border-color: var(--skel-primary-color);
+    border-color: var(--mantle-ui-primary-color);
   }
 }

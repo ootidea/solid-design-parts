@@ -50,7 +50,7 @@ export function Button(rawProps: ButtonProps) {
   const content = (
     <Show when={isInProgress()} fallback={rawProps.children}>
       <LayerLayout>
-        <div class="skel-Button_invisible">{rawProps.children}</div>
+        <div class="mantle-ui-Button_invisible">{rawProps.children}</div>
         <Gravity>
           <Spinner color="currentColor" />
         </Gravity>
@@ -61,11 +61,11 @@ export function Button(rawProps: ButtonProps) {
   if (props.href !== undefined) {
     return (
       <a
-        class={joinClasses(rawProps, 'skel-Button_root', {
-          'skel-Button_ghost': props.ghost,
-          'skel-Button_full-width': props.fullWidth,
+        class={joinClasses(rawProps, 'mantle-ui-Button_root', {
+          'mantle-ui-Button_ghost': props.ghost,
+          'mantle-ui-Button_full-width': props.fullWidth,
         })}
-        style={joinStyle(rawProps.style, { '--skel-Button_radius': props.radius })}
+        style={joinStyle(rawProps.style, { '--mantle-ui-Button_radius': props.radius })}
         href={props.href}
         role="button"
         tabindex={props.disabled ? -1 : 0}
@@ -81,11 +81,11 @@ export function Button(rawProps: ButtonProps) {
 
   return (
     <button
-      class={joinClasses(rawProps, 'skel-Button_root', {
-        'skel-Button_ghost': props.ghost,
-        'skel-Button_full-width': props.fullWidth,
+      class={joinClasses(rawProps, 'mantle-ui-Button_root', {
+        'mantle-ui-Button_ghost': props.ghost,
+        'mantle-ui-Button_full-width': props.fullWidth,
       })}
-      style={joinStyle(rawProps.style, { '--skel-Button_radius': props.radius })}
+      style={joinStyle(rawProps.style, { '--mantle-ui-Button_radius': props.radius })}
       type={props.type}
       data-color={props.color}
       disabled={props.disabled || isInProgress()}

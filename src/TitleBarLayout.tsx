@@ -12,15 +12,15 @@ export function TitleBarLayout(rawProps: TitleBarLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['left', 'right', 'children'])
 
   return (
-    <div class={joinClasses(rawProps, 'skel-TitleBarLayout_root')} {...restProps}>
-      <div class="skel-TitleBarLayout_left-area">
-        <div class="skel-TitleBarLayout_left">{props.left}</div>
-        <div class="skel-TitleBarLayout_invisible">{props.right}</div>
+    <div class={joinClasses(rawProps, 'mantle-ui-TitleBarLayout_root')} {...restProps}>
+      <div class="mantle-ui-TitleBarLayout_left-area">
+        <div class="mantle-ui-TitleBarLayout_left">{props.left}</div>
+        <div class="mantle-ui-TitleBarLayout_invisible">{props.right}</div>
       </div>
-      <Gravity class="skel-TitleBarLayout_title">{props.children}</Gravity>
-      <div class="skel-TitleBarLayout_right-area">
-        <div class="skel-TitleBarLayout_right">{props.right}</div>
-        <div class="skel-TitleBarLayout_invisible">{props.left}</div>
+      <Gravity class="mantle-ui-TitleBarLayout_title">{props.children}</Gravity>
+      <div class="mantle-ui-TitleBarLayout_right-area">
+        <div class="mantle-ui-TitleBarLayout_right">{props.right}</div>
+        <div class="mantle-ui-TitleBarLayout_invisible">{props.left}</div>
       </div>
     </div>
   )

@@ -48,7 +48,7 @@ export type TextInputProps = Props<{
 export function TextInput(rawProps: TextInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { disabled: false, forceValidation: false, radius: 'var(--skel-input-border-radius)' },
+    { disabled: false, forceValidation: false, radius: 'var(--mantle-ui-input-border-radius)' },
     ['value', 'placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
@@ -96,18 +96,18 @@ export function TextInput(rawProps: TextInputProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-TextInput_root', {
-        'skel-TextInput_input-element-has-focus': inputElementHasFocus(),
+      class={joinClasses(rawProps, 'mantle-ui-TextInput_root', {
+        'mantle-ui-TextInput_input-element-has-focus': inputElementHasFocus(),
       })}
-      style={joinStyle(rawProps.style, { '--skel-TextInput_radius': props.radius })}
+      style={joinStyle(rawProps.style, { '--mantle-ui-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessage() !== undefined}
       {...restProps}
     >
-      <StretchLayout class="skel-TextInput_body" stretchAt={1}>
-        <Gravity class="skel-TextInput_prepend">{rawProps.prepend}</Gravity>
+      <StretchLayout class="mantle-ui-TextInput_body" stretchAt={1}>
+        <Gravity class="mantle-ui-TextInput_prepend">{rawProps.prepend}</Gravity>
         <input
-          class="skel-TextInput_input"
+          class="mantle-ui-TextInput_input"
           attr:value={value()}
           placeholder={props.placeholder}
           type={props.type}
@@ -119,9 +119,9 @@ export function TextInput(rawProps: TextInputProps) {
             setInputElementHasFocus(false)
           }}
         />
-        <Gravity class="skel-TextInput_append">{rawProps.append}</Gravity>
+        <Gravity class="mantle-ui-TextInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
-      <p class="skel-TextInput_error-message">{errorMessage()}</p>
+      <p class="mantle-ui-TextInput_error-message">{errorMessage()}</p>
     </div>
   )
 }

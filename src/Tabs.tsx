@@ -34,17 +34,17 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Tabs_root')}
-      style={{ '--skel-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
+      class={joinClasses(rawProps, 'mantle-ui-Tabs_root')}
+      style={{ '--mantle-ui-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
       data-type={props.type}
       {...restProps}
     >
-      <div class="skel-Tabs_tab-bar" role="tablist">
+      <div class="mantle-ui-Tabs_tab-bar" role="tablist">
         <For each={props.names}>
           {(name) => (
             <button
-              class="skel-Tabs_tab"
-              classList={{ 'skel-Tabs_active': activeTab() === name }}
+              class="mantle-ui-Tabs_tab"
+              classList={{ 'mantle-ui-Tabs_active': activeTab() === name }}
               role="tab"
               type="button"
               onClick={(event) => {
@@ -57,10 +57,10 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
           )}
         </For>
         <Show when={props.type === 'Surrounded by border'}>
-          <div class="skel-Tabs_dummy-tab-for-border" />
+          <div class="mantle-ui-Tabs_dummy-tab-for-border" />
         </Show>
       </div>
-      <div class="skel-Tabs_content" role="tabpanel">
+      <div class="mantle-ui-Tabs_content" role="tabpanel">
         <Slot content={props.children} params={{ activeTab: activeTab() }} />
       </div>
     </div>

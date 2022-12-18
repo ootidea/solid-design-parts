@@ -14,7 +14,7 @@ export function Gravity(rawProps: GravityProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Gravity_root')}
+      class={joinClasses(rawProps, 'mantle-ui-Gravity_root')}
       data-horizontal-position={toHorizontalPosition(props.to)}
       data-vertical-position={toVerticalPosition(props.to)}
       {...restProps}

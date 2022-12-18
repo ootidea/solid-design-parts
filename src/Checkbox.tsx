@@ -32,16 +32,16 @@ export function Checkbox(rawProps: CheckboxProps) {
   }
 
   return (
-    <label class={joinClasses(rawProps, 'skel-Checkbox_root')} aria-disabled={props.disabled} {...restProps}>
+    <label class={joinClasses(rawProps, 'mantle-ui-Checkbox_root')} aria-disabled={props.disabled} {...restProps}>
       <input
         type="checkbox"
-        class="skel-Checkbox_checkbox"
+        class="mantle-ui-Checkbox_checkbox"
         value={props.value}
         checked={props.checked}
         disabled={props.disabled}
         onChange={onChange}
       />
-      <div class="skel-Checkbox_children">{rawProps.children}</div>
+      <div class="mantle-ui-Checkbox_children">{rawProps.children}</div>
     </label>
   )
 }

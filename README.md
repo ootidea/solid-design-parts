@@ -1,23 +1,23 @@
 <p>
-  <img width="100%" src="https://assets.solidjs.com/banner?type=solidjs-skel&background=tiles&project=%20" alt="solidjs-skel">
+  <img width="100%" src="https://assets.solidjs.com/banner?type=solid-mantle-ui&background=tiles&project=%20" alt="solid-mantle-ui">
 </p>
 
-# solidjs-skel
+# solid-mantle-ui
 
 ## Quick start
 
 Install it:
 
 ```bash
-npm i solidjs-skel
+npm i solid-mantle-ui
 # or
-yarn add solidjs-skel
+yarn add solid-mantle-ui
 # or
-pnpm add solidjs-skel
+pnpm add solid-mantle-ui
 ```
 
 Use it:
 
 ```tsx
-import solidjs-skel from 'solidjs-skel'
+import solid-mantle-ui from 'solid-mantle-ui'
 ```

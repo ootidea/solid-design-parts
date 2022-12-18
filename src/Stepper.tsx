@@ -15,34 +15,36 @@ export function Stepper(rawProps: StepperProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Stepper_root')}
-      style={{ '--skel-Stepper_circle-size': '2.5rem' }}
+      class={joinClasses(rawProps, 'mantle-ui-Stepper_root')}
+      style={{ '--mantle-ui-Stepper_circle-size': '2.5rem' }}
       {...restProps}
     >
       <LayerLayout style={{ width: '100%' }}>
         <div
-          class="skel-Stepper_line-layer"
+          class="mantle-ui-Stepper_line-layer"
           style={{ 'grid-template-columns': `1fr repeat(${props.titles.length - 1}, 2fr) 1fr` }}
         >
           <div />
           <For each={until(props.titles.length - 1)}>
-            {(i) => <div class="skel-Stepper_line" classList={{ 'skel-Stepper_reached': i < props.currentStep }} />}
+            {(i) => (
+              <div class="mantle-ui-Stepper_line" classList={{ 'mantle-ui-Stepper_reached': i < props.currentStep }} />
+            )}
           </For>
           <div />
         </div>
         <div
-          class="skel-Stepper_circle-layer"
+          class="mantle-ui-Stepper_circle-layer"
           style={{ 'grid-template-columns': `repeat(${props.titles.length}, 1fr)` }}
         >
           <For each={until(props.titles.length)}>
             {(i) => (
               <Gravity>
                 <div
-                  class="skel-Stepper_circle"
+                  class="mantle-ui-Stepper_circle"
                   classList={{
-                    'skel-Stepper_past-step': i < props.currentStep,
-                    'skel-Stepper_current-step': i === props.currentStep,
-                    'skel-Stepper_future-step': i > props.currentStep,
+                    'mantle-ui-Stepper_past-step': i < props.currentStep,
+                    'mantle-ui-Stepper_current-step': i === props.currentStep,
+                    'mantle-ui-Stepper_future-step': i > props.currentStep,
                   }}
                 >
                   {i + 1}
@@ -52,15 +54,18 @@ export function Stepper(rawProps: StepperProps) {
           </For>
         </div>
       </LayerLayout>
-      <div class="skel-Stepper_titles-area" style={{ 'grid-template-columns': `repeat(${props.titles.length}, 1fr)` }}>
+      <div
+        class="mantle-ui-Stepper_titles-area"
+        style={{ 'grid-template-columns': `repeat(${props.titles.length}, 1fr)` }}
+      >
         <For each={props.titles}>
           {(title, i) => (
             <div
-              class="skel-Stepper_title"
+              class="mantle-ui-Stepper_title"
               classList={{
-                'skel-Stepper_past-step': i() < props.currentStep,
-                'skel-Stepper_current-step': i() === props.currentStep,
-                'skel-Stepper_future-step': i() > props.currentStep,
+                'mantle-ui-Stepper_past-step': i() < props.currentStep,
+                'mantle-ui-Stepper_current-step': i() === props.currentStep,
+                'mantle-ui-Stepper_future-step': i() > props.currentStep,
               }}
             >
               {title}

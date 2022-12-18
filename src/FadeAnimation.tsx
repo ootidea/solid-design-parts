@@ -58,7 +58,7 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
   }
 
   return (
-    <div class="skel-FadeAnimation_root" ref={element}>
+    <div class="mantle-ui-FadeAnimation_root" ref={element}>
       <Show when={shown()}>
         <Slot content={props.children} params={lastNonFalsyShown!} />
       </Show>

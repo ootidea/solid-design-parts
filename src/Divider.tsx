@@ -15,18 +15,18 @@ export function Divider(rawProps: DividerProps) {
     rawProps,
     {
       direction: 'horizontal',
-      thickness: 'var(--skel-Divider_default-thickness)',
-      color: 'var(--skel-Divider_default-color)',
+      thickness: 'var(--mantle-ui-Divider_default-thickness)',
+      color: 'var(--mantle-ui-Divider_default-color)',
     },
     ['style']
   )
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Divider_root')}
+      class={joinClasses(rawProps, 'mantle-ui-Divider_root')}
       style={joinStyle(rawProps.style, {
-        '--skel-Divider_thickness': props.thickness,
-        '--skel-Divider_color': props.color,
+        '--mantle-ui-Divider_thickness': props.thickness,
+        '--mantle-ui-Divider_color': props.color,
       })}
       role="separator"
       data-direction={props.direction}

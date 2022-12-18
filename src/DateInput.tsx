@@ -34,7 +34,7 @@ export function DateInput(rawProps: DateInputProps) {
     <Modal
       launcher={({ toggle }) => (
         <button
-          class={joinClasses(props, 'skel-DateInput_launcher')}
+          class={joinClasses(props, 'mantle-ui-DateInput_launcher')}
           type="button"
           disabled={props.disabled === true}
           onClick={(event) => {
@@ -43,18 +43,21 @@ export function DateInput(rawProps: DateInputProps) {
           }}
           {...restProps}
         >
-          <div class="skel-DateInput_preview-area">
+          <div class="mantle-ui-DateInput_preview-area">
             <Show when={value() !== undefined}>
-              <div class="skel-DateInput_format">
+              <div class="mantle-ui-DateInput_format">
                 <Slot content={props.format} params={{ value: value() }}>
                   {value()!.toLocaleDateString()}
                 </Slot>
               </div>
             </Show>
-            <div class="skel-DateInput_placeholder" classList={{ 'skel-DateInput_invisible': value() !== undefined }}>
+            <div
+              class="mantle-ui-DateInput_placeholder"
+              classList={{ 'mantle-ui-DateInput_invisible': value() !== undefined }}
+            >
               {props.placeholder}
             </div>
-            <div class="skel-DateInput_format skel-DateInput_invisible">
+            <div class="mantle-ui-DateInput_format mantle-ui-DateInput_invisible">
               {/* Intended to be the maximum rendering width */}
               <Slot content={props.format} params={{ value: dummyDate }}>
                 {dummyDate.toLocaleDateString()}
@@ -62,14 +65,14 @@ export function DateInput(rawProps: DateInputProps) {
             </div>
           </div>
           <Gravity>
-            <Icon class="skel-DateInput_icon" src={calendarIcon} size="1.3em" />
+            <Icon class="mantle-ui-DateInput_icon" src={calendarIcon} size="1.3em" />
           </Gravity>
         </button>
       )}
     >
       {({ toggle }) => (
         <DatePicker
-          class="skel-DateInput_date-picker"
+          class="mantle-ui-DateInput_date-picker"
           value={value()}
           disabled={props.disabled instanceof Function ? props.disabled : undefined}
           onChangeValue={(value) => {

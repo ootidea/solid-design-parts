@@ -24,25 +24,25 @@ export type ToastProps = {
 export function Toast(props: ToastProps) {
   return (
     <a
-      class="skel-Toast_root"
-      classList={{ 'skel-Toast_clickable': props.onClick !== undefined }}
+      class="mantle-ui-Toast_root"
+      classList={{ 'mantle-ui-Toast_clickable': props.onClick !== undefined }}
       href={props.href}
       onClick={props.onClick}
     >
-      <div class="skel-Toast_icon-area">
+      <div class="mantle-ui-Toast_icon-area">
         {call(() => {
           switch (props.type) {
             case 'success':
-              return <Icon src={checkCircleIcon} color="var(--skel-success-color)" size="1.7em" />
+              return <Icon src={checkCircleIcon} color="var(--mantle-ui-success-color)" size="1.7em" />
             case 'error':
-              return <Icon src={alertIcon} color="var(--skel-error-color)" size="1.7em" />
+              return <Icon src={alertIcon} color="var(--mantle-ui-error-color)" size="1.7em" />
             case 'info':
-              return <Icon src={informationIcon} color="var(--skel-primary-color)" size="1.7em" />
+              return <Icon src={informationIcon} color="var(--mantle-ui-primary-color)" size="1.7em" />
           }
         })}
       </div>
-      <div class="skel-Toast_message">{props.message}</div>
-      <div class="skel-Toast_close-button-area">
+      <div class="mantle-ui-Toast_message">{props.message}</div>
+      <div class="mantle-ui-Toast_close-button-area">
         <IconButton src={closeIcon} onClick={props.close} />
       </div>
     </a>

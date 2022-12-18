@@ -1,11 +1,11 @@
 @use 'utility/utility.scss';
 
 :root {
-  --skel-RadioButtons_radio-size: 1.2em;
-  --skel-RadioButtons_inner-circle-size: 0.6em;
+  --mantle-ui-RadioButtons_radio-size: 1.2em;
+  --mantle-ui-RadioButtons_inner-circle-size: 0.6em;
 }
 
-.skel-RadioButtons_label {
+.mantle-ui-RadioButtons_label {
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
@@ -21,15 +21,15 @@
   }
 }
 
-.skel-RadioButtons_radio {
+.mantle-ui-RadioButtons_radio {
   appearance: none;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: utility.toEvenPx(var(--skel-RadioButtons_radio-size));
-  height: utility.toEvenPx(var(--skel-RadioButtons_radio-size));
+  width: utility.toEvenPx(var(--mantle-ui-RadioButtons_radio-size));
+  height: utility.toEvenPx(var(--mantle-ui-RadioButtons_radio-size));
   border-radius: 100%;
   margin: 0;
 
@@ -42,7 +42,7 @@
 
   &:focus-visible {
     outline-offset: 1px;
-    outline: 2px solid var(--skel-primary-color);
+    outline: 2px solid var(--mantle-ui-primary-color);
   }
 
   &::before {
@@ -56,13 +56,13 @@
   }
 
   &:checked {
-    border-color: var(--skel-primary-color);
+    border-color: var(--mantle-ui-primary-color);
     transition: all 100ms ease-out;
 
     &::before {
-      width: utility.toEvenPx(var(--skel-RadioButtons_inner-circle-size));
-      height: utility.toEvenPx(var(--skel-RadioButtons_inner-circle-size));
-      background-color: var(--skel-primary-color);
+      width: utility.toEvenPx(var(--mantle-ui-RadioButtons_inner-circle-size));
+      height: utility.toEvenPx(var(--mantle-ui-RadioButtons_inner-circle-size));
+      background-color: var(--mantle-ui-primary-color);
 
       transition: all 100ms ease-out;
     }

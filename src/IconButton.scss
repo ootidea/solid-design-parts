@@ -1,12 +1,12 @@
 :root {
-  --skel-IconButton_default-size: 1.8em;
-  --skel-IconButton_icon-default-size: 80%;
-  --skel-IconButton_disabled-default-color: oklch(70% 0 0);
+  --mantle-ui-IconButton_default-size: 1.8em;
+  --mantle-ui-IconButton_icon-default-size: 80%;
+  --mantle-ui-IconButton_disabled-default-color: oklch(70% 0 0);
 }
 
-.skel-IconButton_root {
+.mantle-ui-IconButton_root {
   border: none;
-  background-color: var(--skel-IconButton_background-color);
+  background-color: var(--mantle-ui-IconButton_background-color);
   padding: 0;
   color: inherit;
   font: inherit;
@@ -16,8 +16,8 @@
   align-items: center;
   justify-content: center;
 
-  width: var(--skel-IconButton_size);
-  height: var(--skel-IconButton_size);
+  width: var(--mantle-ui-IconButton_size);
+  height: var(--mantle-ui-IconButton_size);
   box-sizing: border-box;
   border-radius: 50%;
   overflow: hidden;
@@ -31,19 +31,19 @@
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--skel-IconButton_background-hover-color);
+        background-color: var(--mantle-ui-IconButton_background-hover-color);
         transition: all 140ms ease-out;
       }
     }
 
     &:active {
-      background-color: var(--skel-IconButton_background-active-color);
+      background-color: var(--mantle-ui-IconButton_background-active-color);
       transition: all 140ms ease-out;
     }
   }
 
   &:focus-visible {
     outline-offset: 1px;
-    outline: 2px solid var(--skel-primary-color);
+    outline: 2px solid var(--mantle-ui-primary-color);
   }
 }

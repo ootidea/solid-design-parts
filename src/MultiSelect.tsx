@@ -100,44 +100,44 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   return (
     <>
       <button
-        class={joinClasses(rawProps, 'skel-MultiSelect_launcher', {
-          'skel-MultiSelect_opened': dropdownInfo() !== undefined,
-          'skel-MultiSelect_full-width': props.fullWidth,
+        class={joinClasses(rawProps, 'mantle-ui-MultiSelect_launcher', {
+          'mantle-ui-MultiSelect_opened': dropdownInfo() !== undefined,
+          'mantle-ui-MultiSelect_full-width': props.fullWidth,
         })}
         type="button"
         disabled={props.disabled}
         onClick={onClickLauncher}
         {...restProps}
       >
-        <div class="skel-MultiSelect_preview-area">
+        <div class="mantle-ui-MultiSelect_preview-area">
           {call(() => {
             const previewValue = getPrimarySelectedValue(selected())
             return (
               <>
                 {previewValue !== undefined ? (
-                  <div class="skel-MultiSelect_preview">
-                    <div class="skel-MultiSelect_primary-selected-value">{getText(previewValue)}</div>
+                  <div class="mantle-ui-MultiSelect_preview">
+                    <div class="mantle-ui-MultiSelect_primary-selected-value">{getText(previewValue)}</div>
                     <Show when={followingCount() > 0}>
-                      <div class="skel-MultiSelect_following-count">+{followingCount()}</div>
+                      <div class="mantle-ui-MultiSelect_following-count">+{followingCount()}</div>
                     </Show>
                   </div>
                 ) : null}
                 <div
-                  class="skel-MultiSelect_placeholder"
-                  classList={{ 'skel-MultiSelect_invisible': previewValue !== undefined }}
+                  class="mantle-ui-MultiSelect_placeholder"
+                  classList={{ 'mantle-ui-MultiSelect_invisible': previewValue !== undefined }}
                 >
                   {props.placeholder}
                 </div>
-                <div class="skel-MultiSelect_invisible">
-                  <div class="skel-MultiSelect_preview">
+                <div class="mantle-ui-MultiSelect_invisible">
+                  <div class="mantle-ui-MultiSelect_preview">
                     <div>
                       <For each={props.values}>
-                        {(value) => <div class="skel-MultiSelect_primary-selected-value">{getText(value)}</div>}
+                        {(value) => <div class="mantle-ui-MultiSelect_primary-selected-value">{getText(value)}</div>}
                       </For>
                     </div>
                     <div>
                       <For each={[...Array(props.values.length - 2).keys()]}>
-                        {(i) => <div class="skel-MultiSelect_following-count">+{i + 1}</div>}
+                        {(i) => <div class="mantle-ui-MultiSelect_following-count">+{i + 1}</div>}
                       </For>
                     </div>
                   </div>
@@ -146,13 +146,13 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
             )
           })}
         </div>
-        <Icon class="skel-MultiSelect_icon" src={chevronDownIcon} />
+        <Icon class="mantle-ui-MultiSelect_icon" src={chevronDownIcon} />
       </button>
       <Show when={dropdownInfo()}>
         {(dropdownInfo) => (
           <Portal>
             <div
-              class="skel-MultiSelect_overlay"
+              class="mantle-ui-MultiSelect_overlay"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
               onClick={onOperateOverlay}
@@ -161,18 +161,18 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
               onKeyDown={onKeyDown}
             >
               <div
-                class="skel-MultiSelect_dropdown"
+                class="mantle-ui-MultiSelect_dropdown"
                 style={{
-                  '--skel-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
-                  '--skel-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
-                  '--skel-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
-                  '--skel-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
+                  '--mantle-ui-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
+                  '--mantle-ui-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
+                  '--mantle-ui-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
+                  '--mantle-ui-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
                 }}
               >
                 <Show when={props.showSearchBox}>
-                  <div class="skel-MultiSelect_search-box-area">
+                  <div class="mantle-ui-MultiSelect_search-box-area">
                     <TextInput
-                      class="skel-MultiSelect_search-box"
+                      class="mantle-ui-MultiSelect_search-box"
                       placeholder="search"
                       value={searchQuery()}
                       onChangeValue={setSearchQuery}
@@ -188,7 +188,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                           <Divider />
                         </Show>
                         <Checkbox
-                          class="skel-MultiSelect_option"
+                          class="mantle-ui-MultiSelect_option"
                           checked={selected().has(value)}
                           role="menuitem"
                           onChangeChecked={(checked) => {

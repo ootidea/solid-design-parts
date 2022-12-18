@@ -1,50 +1,50 @@
-.skel-DateInput_date-picker {
+.mantle-ui-DateInput_date-picker {
   margin: 0.8em;
 }
 
-.skel-DateInput_launcher {
+.mantle-ui-DateInput_launcher {
   display: inline-grid;
   vertical-align: top;
   grid-template-columns: 1fr auto;
   align-items: center;
   text-align: start;
 
-  border-radius: var(--skel-input-border-radius);
-  border: 1px solid var(--skel-input-border-color);
+  border-radius: var(--mantle-ui-input-border-radius);
+  border: 1px solid var(--mantle-ui-input-border-color);
   padding: 0;
   box-sizing: border-box;
-  min-height: var(--skel-one-line-input-height);
+  min-height: var(--mantle-ui-one-line-input-height);
 
-  background-color: var(--skel-background-color);
+  background-color: var(--mantle-ui-background-color);
   color: inherit;
   font: inherit;
   cursor: pointer;
 
   &:disabled {
-    background-color: var(--skel-disabled-input-background-color);
+    background-color: var(--mantle-ui-disabled-input-background-color);
     cursor: initial;
   }
 
   &:focus-visible {
-    outline-color: var(--skel-primary-color);
+    outline-color: var(--mantle-ui-primary-color);
   }
 }
 
-.skel-DateInput_invisible {
+.mantle-ui-DateInput_invisible {
   visibility: hidden;
   height: 0;
   overflow: hidden;
 }
 
-.skel-DateInput_icon {
+.mantle-ui-DateInput_icon {
   margin-right: 0.3em;
 }
 
-.skel-DateInput_preview-area {
+.mantle-ui-DateInput_preview-area {
   padding: 0.4em 0.6em;
 }
 
-.skel-DateInput_placeholder {
-  color: var(--skel-placeholder-text-color);
+.mantle-ui-DateInput_placeholder {
+  color: var(--mantle-ui-placeholder-text-color);
   user-select: none;
 }

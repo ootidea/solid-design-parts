@@ -1,21 +1,21 @@
 :root {
-  --skel-Spinner_default-size: 1.2em;
+  --mantle-ui-Spinner_default-size: 1.2em;
 }
 
-.skel-Spinner_root {
+.mantle-ui-Spinner_root {
   display: inline-block;
   position: relative;
-  width: var(--skel-Spinner_size);
-  height: var(--skel-Spinner_size);
+  width: var(--mantle-ui-Spinner_size);
+  height: var(--mantle-ui-Spinner_size);
 
   vertical-align: top;
 
-  background-image: conic-gradient(transparent, transparent, var(--skel-Spinner_color));
-  mask: var(--skel-Spinner_svg-url) no-repeat center;
+  background-image: conic-gradient(transparent, transparent, var(--mantle-ui-Spinner_color));
+  mask: var(--mantle-ui-Spinner_svg-url) no-repeat center;
   mask-size: contain;
 
   transform-origin: center;
-  animation: rotation var(--skel-Spinner_period) infinite linear;
+  animation: rotation var(--mantle-ui-Spinner_period) infinite linear;
 }
 
 @keyframes rotation {

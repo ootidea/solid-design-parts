@@ -1,28 +1,28 @@
-.skel-Triangle_root {
+.mantle-ui-Triangle_root {
   display: inline-block;
   vertical-align: top;
 
   &[data-direction='top'] {
-    border-bottom: var(--skel-Triangle_height) solid var(--skel-Triangle_color);
-    border-left: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
-    border-right: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
+    border-bottom: var(--mantle-ui-Triangle_height) solid var(--mantle-ui-Triangle_color);
+    border-left: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
+    border-right: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
   }
 
   &[data-direction='bottom'] {
-    border-top: var(--skel-Triangle_height) solid var(--skel-Triangle_color);
-    border-left: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
-    border-right: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
+    border-top: var(--mantle-ui-Triangle_height) solid var(--mantle-ui-Triangle_color);
+    border-left: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
+    border-right: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
   }
 
   &[data-direction='left'] {
-    border-right: var(--skel-Triangle_height) solid var(--skel-Triangle_color);
-    border-top: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
-    border-bottom: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
+    border-right: var(--mantle-ui-Triangle_height) solid var(--mantle-ui-Triangle_color);
+    border-top: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
+    border-bottom: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
   }
 
   &[data-direction='right'] {
-    border-left: var(--skel-Triangle_height) solid var(--skel-Triangle_color);
-    border-top: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
-    border-bottom: calc(var(--skel-Triangle_base-length) / 2) solid transparent;
+    border-left: var(--mantle-ui-Triangle_height) solid var(--mantle-ui-Triangle_color);
+    border-top: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
+    border-bottom: calc(var(--mantle-ui-Triangle_base-length) / 2) solid transparent;
   }
 }

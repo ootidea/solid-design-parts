@@ -1,48 +1,48 @@
-.skel-Foldable_root {
-  --skel-Foldable_header-background-default-color: oklch(98% 0 0);
-  --skel-Foldable_border-default-color: oklch(93% 0 0);
+.mantle-ui-Foldable_root {
+  --mantle-ui-Foldable_header-background-default-color: oklch(98% 0 0);
+  --mantle-ui-Foldable_border-default-color: oklch(93% 0 0);
 
-  border: 1px solid var(--skel-Foldable_border-color);
+  border: 1px solid var(--mantle-ui-Foldable_border-color);
   box-sizing: border-box;
 
-  .skel-Foldable_root + & {
+  .mantle-ui-Foldable_root + & {
     // Helpful for making accordions
     border-top: none;
   }
 }
 
-.skel-Foldable_header {
+.mantle-ui-Foldable_header {
   padding: 0.5em 1em;
-  background-color: var(--skel-Foldable_header-background-color);
+  background-color: var(--mantle-ui-Foldable_header-background-color);
   cursor: pointer;
 
-  transition: var(--skel-backward-transition);
+  transition: var(--mantle-ui-backward-transition);
 
   @media (hover: hover) {
     &:hover {
       // TODO: Make customizable
       background-color: oklch(96% 0 0);
-      transition: var(--skel-forward-transition);
+      transition: var(--mantle-ui-forward-transition);
     }
   }
 
   &:active {
     // TODO: Make customizable
     background-color: oklch(94% 0 0);
-    transition: var(--skel-forward-transition);
+    transition: var(--mantle-ui-forward-transition);
   }
 }
 
-.skel-Foldable_icon {
+.mantle-ui-Foldable_icon {
   transform-origin: center;
   transition: all 140ms ease-out;
 
-  .skel-Foldable_root[data-unfolded='true'] & {
+  .mantle-ui-Foldable_root[data-unfolded='true'] & {
     transform: rotate(-180deg);
   }
 
   // Need for nested Foldable
-  .skel-Foldable_root[data-unfolded='false'] & {
+  .mantle-ui-Foldable_root[data-unfolded='false'] & {
     transform: rotate(0deg);
   }
 }

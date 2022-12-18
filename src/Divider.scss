@@ -1,17 +1,17 @@
 :root {
-  --skel-Divider_default-thickness: 1px;
-  --skel-Divider_default-color: oklch(90% 0 0);
+  --mantle-ui-Divider_default-thickness: 1px;
+  --mantle-ui-Divider_default-color: oklch(90% 0 0);
 }
 
-.skel-Divider_root {
-  background: var(--skel-Divider_color);
+.mantle-ui-Divider_root {
+  background: var(--mantle-ui-Divider_color);
 
   &[data-direction='horizontal'] {
-    height: var(--skel-Divider_thickness);
+    height: var(--mantle-ui-Divider_thickness);
   }
 
   &[data-direction='vertical'] {
-    width: var(--skel-Divider_thickness);
+    width: var(--mantle-ui-Divider_thickness);
     height: 100%;
   }
 }

@@ -12,13 +12,13 @@ export function LayerLayout(rawProps: LayerLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {})
 
   return (
-    <div class={joinClasses(rawProps, 'skel-LayerLayout_root')} {...restProps}>
+    <div class={joinClasses(rawProps, 'mantle-ui-LayerLayout_root')} {...restProps}>
       <For each={toArray(rawProps.children)}>
         {(child, i) => {
           if (i() === 0) {
             return child
           } else {
-            return <div class="skel-LayerLayout_non-base-layer">{child}</div>
+            return <div class="mantle-ui-LayerLayout_non-base-layer">{child}</div>
           }
         }}
       </For>

@@ -1,4 +1,4 @@
-.skel-Button_root {
+.mantle-ui-Button_root {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
   // Since character height is different between full-pitch and half-pitch, set height instead of padding.
   min-height: 2.45em;
   padding: 0 1em;
-  border-radius: var(--skel-Button_radius);
+  border-radius: var(--mantle-ui-Button_radius);
   border-width: 1px;
   border-style: solid;
 
@@ -16,141 +16,141 @@
   text-decoration: none;
   cursor: pointer;
 
-  transition: var(--skel-Button_backward-transition);
+  transition: var(--mantle-ui-Button_backward-transition);
 
-  --skel-Button_forward-transition: all 200ms ease-out;
-  --skel-Button_backward-transition: all 400ms ease-out;
+  --mantle-ui-Button_forward-transition: all 200ms ease-out;
+  --mantle-ui-Button_backward-transition: all 400ms ease-out;
 
   &[aria-disabled='true'] {
     pointer-events: none;
   }
 
-  &:not(.skel-Button_ghost) {
-    color: var(--skel-inverted-text-color);
-    border-color: var(--skel-Button_tint-color);
-    background-color: var(--skel-Button_tint-color);
+  &:not(.mantle-ui-Button_ghost) {
+    color: var(--mantle-ui-inverted-text-color);
+    border-color: var(--mantle-ui-Button_tint-color);
+    background-color: var(--mantle-ui-Button_tint-color);
 
     &[data-color='primary'] {
-      --skel-Button_tint-color: var(--skel-primary-color);
+      --mantle-ui-Button_tint-color: var(--mantle-ui-primary-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--skel-Button_forward-transition);
-            --skel-Button_tint-color: var(--skel-primary-inverted-background-hover-color);
+            transition: var(--mantle-ui-Button_forward-transition);
+            --mantle-ui-Button_tint-color: var(--mantle-ui-primary-inverted-background-hover-color);
           }
         }
 
         &:active {
-          transition: var(--skel-Button_forward-transition);
-          --skel-Button_tint-color: var(--skel-primary-inverted-background-active-color);
+          transition: var(--mantle-ui-Button_forward-transition);
+          --mantle-ui-Button_tint-color: var(--mantle-ui-primary-inverted-background-active-color);
         }
       }
     }
 
     &[data-color='achromatic'] {
-      --skel-Button_tint-color: oklch(55% 0 0);
+      --mantle-ui-Button_tint-color: oklch(55% 0 0);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--skel-Button_forward-transition);
-            --skel-Button_tint-color: oklch(60% 0 0);
+            transition: var(--mantle-ui-Button_forward-transition);
+            --mantle-ui-Button_tint-color: oklch(60% 0 0);
           }
         }
 
         &:active {
-          transition: var(--skel-Button_forward-transition);
-          --skel-Button_tint-color: oklch(65% 0 0);
+          transition: var(--mantle-ui-Button_forward-transition);
+          --mantle-ui-Button_tint-color: oklch(65% 0 0);
         }
       }
     }
 
     &[data-color='error'] {
-      --skel-Button_tint-color: var(--skel-error-color);
+      --mantle-ui-Button_tint-color: var(--mantle-ui-error-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--skel-Button_forward-transition);
-            --skel-Button_tint-color: var(--skel-error-hover-color);
+            transition: var(--mantle-ui-Button_forward-transition);
+            --mantle-ui-Button_tint-color: var(--mantle-ui-error-hover-color);
           }
         }
 
         &:active {
-          transition: var(--skel-Button_forward-transition);
-          --skel-Button_tint-color: var(--skel-error-active-color);
+          transition: var(--mantle-ui-Button_forward-transition);
+          --mantle-ui-Button_tint-color: var(--mantle-ui-error-active-color);
         }
       }
     }
   }
 
-  &.skel-Button_ghost {
-    color: var(--skel-Button_tint-color);
-    border-color: var(--skel-Button_tint-color);
+  &.mantle-ui-Button_ghost {
+    color: var(--mantle-ui-Button_tint-color);
+    border-color: var(--mantle-ui-Button_tint-color);
     background-color: transparent;
 
     &[data-color='primary'] {
-      --skel-Button_tint-color: var(--skel-primary-color);
+      --mantle-ui-Button_tint-color: var(--mantle-ui-primary-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--skel-Button_forward-transition);
-            background-color: var(--skel-primary-background-hover-color);
+            transition: var(--mantle-ui-Button_forward-transition);
+            background-color: var(--mantle-ui-primary-background-hover-color);
           }
         }
 
         &:active {
-          transition: var(--skel-Button_forward-transition);
-          background-color: var(--skel-primary-background-active-color);
+          transition: var(--mantle-ui-Button_forward-transition);
+          background-color: var(--mantle-ui-primary-background-active-color);
         }
       }
     }
 
     &[data-color='achromatic'] {
-      --skel-Button_tint-color: oklch(50% 0 0);
+      --mantle-ui-Button_tint-color: oklch(50% 0 0);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--skel-Button_forward-transition);
+            transition: var(--mantle-ui-Button_forward-transition);
             background-color: oklch(97% 0 0);
           }
         }
 
         &:active {
-          transition: var(--skel-Button_forward-transition);
+          transition: var(--mantle-ui-Button_forward-transition);
           background-color: oklch(94% 0 0);
         }
       }
     }
 
     &[data-color='error'] {
-      --skel-Button_tint-color: var(--skel-error-color);
+      --mantle-ui-Button_tint-color: var(--mantle-ui-error-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--skel-Button_forward-transition);
-            background-color: var(--skel-error-background-hover-color);
+            transition: var(--mantle-ui-Button_forward-transition);
+            background-color: var(--mantle-ui-error-background-hover-color);
           }
         }
 
         &:active {
-          transition: var(--skel-Button_forward-transition);
-          background-color: var(--skel-error-background-active-color);
+          transition: var(--mantle-ui-Button_forward-transition);
+          background-color: var(--mantle-ui-error-background-active-color);
         }
       }
     }
   }
 }
 
-.skel-Button_invisible {
+.mantle-ui-Button_invisible {
   visibility: hidden;
 }
 
-.skel-Button_full-width {
+.mantle-ui-Button_full-width {
   display: flex;
   width: 100%;
 }

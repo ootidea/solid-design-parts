@@ -1,67 +1,67 @@
 :root {
-  --skel-SpeechBubble_background-default-color: var(--skel-background-color);
-  --skel-SpeechBubble_border-default-color: oklch(70% 0 0);
-  --skel-SpeechBubble_border-default-width: 1px;
+  --mantle-ui-SpeechBubble_background-default-color: var(--mantle-ui-background-color);
+  --mantle-ui-SpeechBubble_border-default-color: oklch(70% 0 0);
+  --mantle-ui-SpeechBubble_border-default-width: 1px;
 }
 
-.skel-SpeechBubble_root {
+.mantle-ui-SpeechBubble_root {
   box-sizing: border-box;
   width: max-content;
 }
 
-.skel-SpeechBubble_message-box {
-  border: var(--skel-SpeechBubble_border-width) solid var(--skel-SpeechBubble_border-color);
-  background-color: var(--skel-SpeechBubble_background-color);
+.mantle-ui-SpeechBubble_message-box {
+  border: var(--mantle-ui-SpeechBubble_border-width) solid var(--mantle-ui-SpeechBubble_border-color);
+  background-color: var(--mantle-ui-SpeechBubble_background-color);
   border-radius: 1em;
   padding: 1em;
   box-sizing: border-box;
   width: max-content;
 }
 
-.skel-SpeechBubble_triangle {
-  --skel-SpeechBubble_triangle-width: calc(
-    var(--skel-SpeechBubble_triangle-height) * var(--skel-SpeechBubble_triangle-tangent) * 2
+.mantle-ui-SpeechBubble_triangle {
+  --mantle-ui-SpeechBubble_triangle-width: calc(
+    var(--mantle-ui-SpeechBubble_triangle-height) * var(--mantle-ui-SpeechBubble_triangle-tangent) * 2
   );
 
   // Setting to override the border of the message box.
-  margin-top: calc(-1 * var(--skel-SpeechBubble_border-width));
+  margin-top: calc(-1 * var(--mantle-ui-SpeechBubble_border-width));
 
-  margin-left: var(--skel-SpeechBubble_triangle-x);
-  transform: translateX(-50%) skewX(var(--skel-SpeechBubble_triangle-skew));
+  margin-left: var(--mantle-ui-SpeechBubble_triangle-x);
+  transform: translateX(-50%) skewX(var(--mantle-ui-SpeechBubble_triangle-skew));
 
   box-sizing: border-box;
   width: 0;
   height: 0;
-  border-top: var(--skel-SpeechBubble_triangle-height) solid var(--skel-SpeechBubble_border-color);
-  border-left: calc(var(--skel-SpeechBubble_triangle-width) / 2) solid transparent;
-  border-right: calc(var(--skel-SpeechBubble_triangle-width) / 2) solid transparent;
+  border-top: var(--mantle-ui-SpeechBubble_triangle-height) solid var(--mantle-ui-SpeechBubble_border-color);
+  border-left: calc(var(--mantle-ui-SpeechBubble_triangle-width) / 2) solid transparent;
+  border-right: calc(var(--mantle-ui-SpeechBubble_triangle-width) / 2) solid transparent;
 
   &::after {
     content: '';
     display: block;
 
-    margin-top: calc(-1 * var(--skel-SpeechBubble_triangle-height));
+    margin-top: calc(-1 * var(--mantle-ui-SpeechBubble_triangle-height));
     margin-left: calc(
-      var(--skel-SpeechBubble_border-width) * var(--skel-SpeechBubble_triangle-tangent) -
-        var(--skel-SpeechBubble_triangle-width) / 2
+      var(--mantle-ui-SpeechBubble_border-width) * var(--mantle-ui-SpeechBubble_triangle-tangent) -
+        var(--mantle-ui-SpeechBubble_triangle-width) / 2
     );
 
     box-sizing: border-box;
     width: 0;
     height: 0;
     border-top: calc(
-        var(--skel-SpeechBubble_triangle-height) - var(--skel-SpeechBubble_border-width) /
-          var(--skel-SpeechBubble_triangle-tangent)
+        var(--mantle-ui-SpeechBubble_triangle-height) - var(--mantle-ui-SpeechBubble_border-width) /
+          var(--mantle-ui-SpeechBubble_triangle-tangent)
       )
-      solid var(--skel-SpeechBubble_background-color);
+      solid var(--mantle-ui-SpeechBubble_background-color);
     border-left: calc(
-        var(--skel-SpeechBubble_triangle-width) / 2 - var(--skel-SpeechBubble_border-width) *
-          var(--skel-SpeechBubble_triangle-tangent)
+        var(--mantle-ui-SpeechBubble_triangle-width) / 2 - var(--mantle-ui-SpeechBubble_border-width) *
+          var(--mantle-ui-SpeechBubble_triangle-tangent)
       )
       solid transparent;
     border-right: calc(
-        var(--skel-SpeechBubble_triangle-width) / 2 - var(--skel-SpeechBubble_border-width) *
-          var(--skel-SpeechBubble_triangle-tangent)
+        var(--mantle-ui-SpeechBubble_triangle-width) / 2 - var(--mantle-ui-SpeechBubble_border-width) *
+          var(--mantle-ui-SpeechBubble_triangle-tangent)
       )
       solid transparent;
   }

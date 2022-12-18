@@ -1,4 +1,4 @@
-.skel-Resizable_root {
+.mantle-ui-Resizable_root {
   position: relative;
   box-sizing: border-box;
   width: max-content;
@@ -6,7 +6,7 @@
   max-width: 100%;
 }
 
-.skel-Resizable_resize-handle {
+.mantle-ui-Resizable_resize-handle {
   visibility: hidden;
 
   position: absolute;
@@ -24,10 +24,10 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--skel-primary-color);
+      background-color: var(--mantle-ui-primary-color);
     }
 
-    .skel-Resizable_root:hover & {
+    .mantle-ui-Resizable_root:hover & {
       visibility: visible;
     }
   }

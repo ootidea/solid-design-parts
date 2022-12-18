@@ -19,11 +19,11 @@ export function Triangle(rawProps: TriangleProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Triangle_root')}
+      class={joinClasses(rawProps, 'mantle-ui-Triangle_root')}
       style={{
-        '--skel-Triangle_height': props.height,
-        '--skel-Triangle_base-length': props.baseLength,
-        '--skel-Triangle_color': props.color,
+        '--mantle-ui-Triangle_height': props.height,
+        '--mantle-ui-Triangle_base-length': props.baseLength,
+        '--mantle-ui-Triangle_color': props.color,
       }}
       data-direction={props.direction}
       {...restProps}

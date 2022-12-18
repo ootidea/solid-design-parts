@@ -1,8 +1,8 @@
-.skel-DatePicker_root {
+.mantle-ui-DatePicker_root {
   width: max-content;
 }
 
-.skel-DatePicker_date-cell {
+.mantle-ui-DatePicker_date-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +32,7 @@
   }
 
   &[aria-selected='true'] {
-    background-color: var(--skel-primary-color);
+    background-color: var(--mantle-ui-primary-color);
     color: white;
   }
 
@@ -42,6 +42,6 @@
 
   &:focus-visible {
     outline-offset: -2px;
-    outline: 2px solid var(--skel-primary-color);
+    outline: 2px solid var(--mantle-ui-primary-color);
   }
 }

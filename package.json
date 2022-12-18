@@ -1,17 +1,17 @@
 {
   "version": "0.0.0",
-  "name": "solidjs-skel",
+  "name": "solid-mantle-ui",
   "description": "",
   "license": "CC0",
   "author": "ootidea",
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ootidea/solidjs-skel.git"
+    "url": "git+https://github.com/ootidea/solid-mantle-ui.git"
   },
-  "homepage": "https://github.com/ootidea/solidjs-skel#readme",
+  "homepage": "https://github.com/ootidea/solid-mantle-ui#readme",
   "bugs": {
-    "url": "https://github.com/ootidea/solidjs-skel/issues"
+    "url": "https://github.com/ootidea/solid-mantle-ui/issues"
   },
   "private": false,
   "sideEffects": false,

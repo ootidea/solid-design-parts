@@ -28,11 +28,11 @@ export function Slider(rawProps: SliderProps) {
       minValue: 0,
       maxValue: 1,
       value: rawProps.minValue ?? 0,
-      trackColor: 'var(--skel-Slider_track-default-color)',
-      trackFillColor: 'var(--skel-Slider_track-default-fill-color)',
-      thumbWidth: 'var(--skel-Slider_thumb-default-width)',
-      thumbHeight: 'var(--skel-Slider_thumb-default-height)',
-      thumbColor: 'var(--skel-Slider_thumb-default-color)',
+      trackColor: 'var(--mantle-ui-Slider_track-default-color)',
+      trackFillColor: 'var(--mantle-ui-Slider_track-default-fill-color)',
+      thumbWidth: 'var(--mantle-ui-Slider_thumb-default-width)',
+      thumbHeight: 'var(--mantle-ui-Slider_thumb-default-height)',
+      thumbColor: 'var(--mantle-ui-Slider_thumb-default-color)',
     },
     ['stops', 'step', 'offset', 'onChangeValue']
   )
@@ -121,23 +121,23 @@ export function Slider(rawProps: SliderProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'skel-Slider_root')}
+      class={joinClasses(rawProps, 'mantle-ui-Slider_root')}
       style={{
-        '--skel-Slider_track-height': 'var(--skel-Slider_track-default-height)',
-        '--skel-Slider_track-background': `linear-gradient(to right, ${props.trackFillColor} ${100 * ratio()}%, ${
+        '--mantle-ui-Slider_track-height': 'var(--mantle-ui-Slider_track-default-height)',
+        '--mantle-ui-Slider_track-background': `linear-gradient(to right, ${props.trackFillColor} ${100 * ratio()}%, ${
           props.trackColor
         } ${100 * ratio()}%)`,
-        '--skel-Slider_thumb-width': props.thumbWidth,
-        '--skel-Slider_thumb-height': props.thumbHeight,
-        '--skel-Slider_thumb-color': props.thumbColor,
-        '--skel-Slider_thumb-x': `${ratio() * (trackWidthPx() - thumbWidthPx())}px`,
+        '--mantle-ui-Slider_thumb-width': props.thumbWidth,
+        '--mantle-ui-Slider_thumb-height': props.thumbHeight,
+        '--mantle-ui-Slider_thumb-color': props.thumbColor,
+        '--mantle-ui-Slider_thumb-x': `${ratio() * (trackWidthPx() - thumbWidthPx())}px`,
       }}
       role="slider"
       {...restProps}
     >
-      <div class="skel-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
+      <div class="mantle-ui-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
       <div
-        class="skel-Slider_thumb"
+        class="mantle-ui-Slider_thumb"
         ref={(element) => observeWidthPx(element, setThumbWidthPx)}
         onMouseDown={onMouseDownThumb}
       />

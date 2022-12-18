@@ -1,25 +1,25 @@
-.skel-TextInput_body {
+.mantle-ui-TextInput_body {
   box-sizing: border-box;
-  min-height: var(--skel-one-line-input-height);
-  border-radius: var(--skel-TextInput_radius);
-  border: 1px solid var(--skel-input-border-color);
-  background-color: var(--skel-background-color);
+  min-height: var(--mantle-ui-one-line-input-height);
+  border-radius: var(--mantle-ui-TextInput_radius);
+  border: 1px solid var(--mantle-ui-input-border-color);
+  background-color: var(--mantle-ui-background-color);
 
-  .skel-TextInput_root[aria-disabled='true'] & {
-    background-color: var(--skel-disabled-input-background-color);
+  .mantle-ui-TextInput_root[aria-disabled='true'] & {
+    background-color: var(--mantle-ui-disabled-input-background-color);
   }
 
-  :where(.skel-TextInput_root[aria-invalid='true']) & {
-    border-color: var(--skel-error-color);
+  :where(.mantle-ui-TextInput_root[aria-invalid='true']) & {
+    border-color: var(--mantle-ui-error-color);
   }
 
   /* TODO: Use :has() instead of CSS class */
-  .skel-TextInput_input-element-has-focus & {
-    border-color: var(--skel-primary-color);
+  .mantle-ui-TextInput_input-element-has-focus & {
+    border-color: var(--mantle-ui-primary-color);
   }
 }
 
-.skel-TextInput_prepend {
+.mantle-ui-TextInput_prepend {
   padding-left: 0.3em;
 
   &:empty {
@@ -27,7 +27,7 @@
   }
 }
 
-.skel-TextInput_append {
+.mantle-ui-TextInput_append {
   padding-right: 0.3em;
 
   &:empty {
@@ -35,7 +35,7 @@
   }
 }
 
-.skel-TextInput_input {
+.mantle-ui-TextInput_input {
   padding: 0.4em 0.6em;
   border: none;
   outline: none;
@@ -47,12 +47,12 @@
   letter-spacing: inherit;
 
   &::placeholder {
-    color: var(--skel-placeholder-text-color);
+    color: var(--mantle-ui-placeholder-text-color);
   }
 }
 
-.skel-TextInput_error-message {
-  color: var(--skel-error-color);
+.mantle-ui-TextInput_error-message {
+  color: var(--mantle-ui-error-color);
   margin: 1em 0 0;
 
   &:empty {

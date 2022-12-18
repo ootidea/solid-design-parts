@@ -70,8 +70,8 @@ export function DataTable<
     rawProps,
     {
       fullWidth: false,
-      evenRowBackgroundColor: 'var(--skel-DataTable_even-row-background-default-color)',
-      oddRowBackgroundColor: 'var(--skel-DataTable_odd-row-background-default-color)',
+      evenRowBackgroundColor: 'var(--mantle-ui-DataTable_even-row-background-default-color)',
+      oddRowBackgroundColor: 'var(--mantle-ui-DataTable_odd-row-background-default-color)',
       sortingState: undefined,
     },
     ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'onClickRow']
@@ -190,31 +190,31 @@ export function DataTable<
 
   return (
     <div
-      class={joinClasses(props, 'skel-DataTable_root', {
-        'skel-DataTable_full-width': props.fullWidth,
+      class={joinClasses(props, 'mantle-ui-DataTable_root', {
+        'mantle-ui-DataTable_full-width': props.fullWidth,
       })}
       role="table"
       style={joinStyle(props.style, {
-        '--skel-DataTable_template-columns': `max-content ${props.columns
+        '--mantle-ui-DataTable_template-columns': `max-content ${props.columns
           .map(getColumnWidth)
           .join(' max-content ')} max-content`,
-        '--skel-data-table-column-count': props.columns.length,
-        '--skel-DataTable_even-row-background-color': props.evenRowBackgroundColor,
-        '--skel-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
+        '--mantle-ui-data-table-column-count': props.columns.length,
+        '--mantle-ui-DataTable_even-row-background-color': props.evenRowBackgroundColor,
+        '--mantle-ui-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
       })}
       {...restProps}
     >
-      <div class="skel-DataTable_horizontal-ruled-line">
+      <div class="mantle-ui-DataTable_horizontal-ruled-line">
         <Slot content={props.horizontalRuledLine} params={{ verticalIndex: 0 }}>
           <Divider />
         </Slot>
       </div>
 
-      <div class="skel-DataTable_header" role="row">
+      <div class="mantle-ui-DataTable_header" role="row">
         <For each={props.columns}>
           {(column, horizontalIndex) => (
             <>
-              <div class="skel-DataTable_vertical-ruled-line">
+              <div class="mantle-ui-DataTable_vertical-ruled-line">
                 <Slot
                   content={props.verticalRuledLine}
                   params={{ verticalIndex: 0, horizontalIndex: horizontalIndex() }}
@@ -225,11 +225,11 @@ export function DataTable<
 
               <Gravity
                 to={aligns()[column.id]}
-                class="skel-DataTable_cell"
+                class="mantle-ui-DataTable_cell"
                 role="columnheader"
                 data-column-id={column.id}
               >
-                <div class="skel-DataTable_column-title" data-column-id={column.id}>
+                <div class="mantle-ui-DataTable_column-title" data-column-id={column.id}>
                   <Slot
                     content={props.headerCell}
                     params={{ columnId: column.id, columnTitle: getColumnTitle(column) }}
@@ -242,17 +242,17 @@ export function DataTable<
                     when={sortingState()?.columnId === column.id}
                     fallback={
                       <IconButton
-                        class="skel-DataTable_sort-button"
+                        class="mantle-ui-DataTable_sort-button"
                         src={arrowDownIcon}
-                        iconColor="var(--skel-DataTable_sort-icon-default-inactive-color)"
+                        iconColor="var(--mantle-ui-DataTable_sort-icon-default-inactive-color)"
                         onClick={() => onClickSortButton(column.id)}
                       />
                     }
                   >
                     <IconButton
-                      class="skel-DataTable_sort-button"
+                      class="mantle-ui-DataTable_sort-button"
                       src={arrowDownIcon}
-                      iconColor="var(--skel-DataTable_sort-icon-default-active-color)"
+                      iconColor="var(--mantle-ui-DataTable_sort-icon-default-active-color)"
                       data-reversed={sortingState().reversed}
                       onClick={() => onClickSortButton(column.id)}
                     />
@@ -263,7 +263,7 @@ export function DataTable<
           )}
         </For>
 
-        <div class="skel-DataTable_vertical-ruled-line">
+        <div class="mantle-ui-DataTable_vertical-ruled-line">
           <Slot content={props.verticalRuledLine} params={{ verticalIndex: 0, horizontalIndex: props.columns.length }}>
             <Divider direction="vertical" />
           </Slot>
@@ -274,23 +274,23 @@ export function DataTable<
         each={sortedRows()}
         fallback={
           <>
-            <div class="skel-DataTable_horizontal-ruled-line">
+            <div class="mantle-ui-DataTable_horizontal-ruled-line">
               <Slot content={props.horizontalRuledLine} params={{ verticalIndex: 1 }}>
                 <Divider />
               </Slot>
             </div>
-            <div class="skel-DataTable_empty-state">
-              <div class="skel-DataTable_vertical-ruled-line">
+            <div class="mantle-ui-DataTable_empty-state">
+              <div class="mantle-ui-DataTable_vertical-ruled-line">
                 <Slot content={props.verticalRuledLine} params={{ verticalIndex: 1, horizontalIndex: 0 }}>
                   <Divider direction="vertical" />
                 </Slot>
               </div>
-              <div class="skel-DataTable_empty-state-cell">
+              <div class="mantle-ui-DataTable_empty-state-cell">
                 <Slot content={props.emptyState} params={{}}>
-                  <Gravity class="skel-DataTable_empty-message">{i18n.literals.dataTableEmptyMessage}</Gravity>
+                  <Gravity class="mantle-ui-DataTable_empty-message">{i18n.literals.dataTableEmptyMessage}</Gravity>
                 </Slot>
               </div>
-              <div class="skel-DataTable_vertical-ruled-line">
+              <div class="mantle-ui-DataTable_vertical-ruled-line">
                 <Slot
                   content={props.verticalRuledLine}
                   params={{ verticalIndex: 1, horizontalIndex: props.columns.length }}
@@ -304,18 +304,18 @@ export function DataTable<
       >
         {(row, index) => (
           <>
-            <div class="skel-DataTable_horizontal-ruled-line">
+            <div class="mantle-ui-DataTable_horizontal-ruled-line">
               <Slot content={props.horizontalRuledLine} params={{ verticalIndex: index() + 1 }}>
                 <Divider />
               </Slot>
             </div>
 
             <div
-              class="skel-DataTable_row"
+              class="mantle-ui-DataTable_row"
               classList={{
-                'skel-DataTable_even-row': index() % 2 === 0,
-                'skel-DataTable_odd-row': index() % 2 === 1,
-                'skel-DataTable_clickable-row': props.onClickRow !== undefined,
+                'mantle-ui-DataTable_even-row': index() % 2 === 0,
+                'mantle-ui-DataTable_odd-row': index() % 2 === 1,
+                'mantle-ui-DataTable_clickable-row': props.onClickRow !== undefined,
               }}
               role="row"
               onClick={() => props.onClickRow?.(row)}
@@ -323,7 +323,7 @@ export function DataTable<
               <For each={props.columns}>
                 {(column, horizontalIndex) => (
                   <>
-                    <div class="skel-DataTable_vertical-ruled-line">
+                    <div class="mantle-ui-DataTable_vertical-ruled-line">
                       <Slot
                         content={props.verticalRuledLine}
                         params={{ verticalIndex: index() + 1, horizontalIndex: horizontalIndex() }}
@@ -334,10 +334,10 @@ export function DataTable<
 
                     <Gravity
                       to={aligns()[column.id]}
-                      class="skel-DataTable_cell"
+                      class="mantle-ui-DataTable_cell"
                       style={{
-                        '--skel-DataTable_cell-min-width': getColumnMinWidth(column),
-                        '--skel-DataTable_cell-max-width': getColumnMaxWidth(column),
+                        '--mantle-ui-DataTable_cell-min-width': getColumnMinWidth(column),
+                        '--mantle-ui-DataTable_cell-max-width': getColumnMaxWidth(column),
                       }}
                       role="cell"
                       data-column-id={column.id}
@@ -357,7 +357,7 @@ export function DataTable<
                 )}
               </For>
 
-              <div class="skel-DataTable_vertical-ruled-line">
+              <div class="mantle-ui-DataTable_vertical-ruled-line">
                 <Slot
                   content={props.verticalRuledLine}
                   params={{ verticalIndex: index() + 1, horizontalIndex: props.columns.length }}
@@ -370,7 +370,7 @@ export function DataTable<
         )}
       </For>
 
-      <div class="skel-DataTable_horizontal-ruled-line">
+      <div class="mantle-ui-DataTable_horizontal-ruled-line">
         <Slot content={props.horizontalRuledLine} params={{ verticalIndex: props.rows.length + 1 }}>
           <Divider />
         </Slot>

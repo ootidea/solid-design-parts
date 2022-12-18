@@ -107,12 +107,12 @@ export function TextInputComponent() {
         </div>
         <div style={{ display: 'grid', 'grid-template-columns': 'auto 1fr' }}>
           <Button
-            radius="var(--skel-input-border-radius) 0 0 var(--skel-input-border-radius)"
+            radius="var(--mantle-ui-input-border-radius) 0 0 var(--mantle-ui-input-border-radius)"
             style={{ padding: '0 0.4em' }}
           >
             <Icon src={searchIcon} color="currentColor" size="1.7em" />
           </Button>
-          <TextInput radius="0 var(--skel-input-border-radius) var(--skel-input-border-radius) 0" />
+          <TextInput radius="0 var(--mantle-ui-input-border-radius) var(--mantle-ui-input-border-radius) 0" />
         </div>
       </Sample>
     </article>

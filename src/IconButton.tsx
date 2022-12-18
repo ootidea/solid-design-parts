@@ -28,11 +28,11 @@ export function IconButton(rawProps: IconButtonProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      size: 'var(--skel-IconButton_default-size)',
-      iconSize: 'var(--skel-IconButton_icon-default-size)',
-      iconColor: 'var(--skel-Icon_default-color)',
+      size: 'var(--mantle-ui-IconButton_default-size)',
+      iconSize: 'var(--mantle-ui-IconButton_icon-default-size)',
+      iconColor: 'var(--mantle-ui-Icon_default-color)',
       backgroundColor: 'transparent',
-      disabledColor: 'var(--skel-IconButton_disabled-default-color)',
+      disabledColor: 'var(--mantle-ui-IconButton_disabled-default-color)',
       type: 'button',
     },
     ['src', 'disabled', 'rotate', 'onClick']
@@ -56,13 +56,13 @@ export function IconButton(rawProps: IconButtonProps) {
 
   return (
     <button
-      class={joinClasses(rawProps, 'skel-IconButton_root')}
+      class={joinClasses(rawProps, 'mantle-ui-IconButton_root')}
       style={joinStyle(rawProps.style, {
-        '--skel-IconButton_size': props.size,
-        '--skel-IconButton_icon-size': props.iconSize,
-        '--skel-IconButton_background-color': toHsl(props.backgroundColor),
-        '--skel-IconButton_background-hover-color': calculateHoverColor(props.backgroundColor),
-        '--skel-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
+        '--mantle-ui-IconButton_size': props.size,
+        '--mantle-ui-IconButton_icon-size': props.iconSize,
+        '--mantle-ui-IconButton_background-color': toHsl(props.backgroundColor),
+        '--mantle-ui-IconButton_background-hover-color': calculateHoverColor(props.backgroundColor),
+        '--mantle-ui-IconButton_background-active-color': calculateActiveColor(props.backgroundColor),
       })}
       type={props.type}
       disabled={props.disabled}
