@@ -1,8 +1,8 @@
 import { createEffect, createSignal, on, Show } from 'solid-js'
-import { prepareProps, SkelProps, SlotProp } from './utility/props'
+import { prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type FadeAnimationProps<T> = SkelProps<{
+export type FadeAnimationProps<T> = Props<{
   shown?: T | undefined | null
   options?: number | KeyframeAnimationOptions
   onFinishEnterAnimation?: () => void

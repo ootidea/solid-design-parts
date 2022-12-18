@@ -1,12 +1,12 @@
 import { createSignal, Show } from 'solid-js'
 import css from './Resizable.scss'
 import { assertNonUndefined } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type ResizableProps = SkelProps<{ onChangeWidthPx?: (width: number) => void }>
+export type ResizableProps = Props<{ onChangeWidthPx?: (width: number) => void }>
 
 export function Resizable(rawProps: ResizableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidthPx', 'style'])

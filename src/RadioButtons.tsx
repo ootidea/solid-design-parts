@@ -1,12 +1,12 @@
 import { createEffect, createSignal, For } from 'solid-js'
 import css from './RadioButtons.scss'
 import { assertNonEmptyArray } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type RadioButtonsProps<Values extends readonly string[]> = SkelProps<{
+export type RadioButtonsProps<Values extends readonly string[]> = Props<{
   values: Values
   name?: string
   selected?: Values[number] | undefined

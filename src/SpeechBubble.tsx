@@ -1,10 +1,10 @@
 import css from './SpeechBubble.scss'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type SpeechBubbleProps = SkelProps<{
+export type SpeechBubbleProps = Props<{
   backgroundColor?: string
   borderColor?: string
   borderWidth?: string

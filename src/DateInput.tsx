@@ -5,13 +5,13 @@ import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import calendarIcon from './image/calendar.svg'
 import { Modal } from './Modal'
-import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type DateInputProps = SkelProps<{
+export type DateInputProps = Props<{
   value?: Date | undefined
   placeholder?: string
   disabled?: boolean | ((date: Date) => boolean)

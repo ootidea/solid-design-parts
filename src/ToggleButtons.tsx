@@ -1,13 +1,13 @@
 import { createEffect, createSignal, For } from 'solid-js'
 import css from './ToggleButtons.scss'
 import { call } from './utility/others'
-import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type ToggleButtonsProps<T extends string | number> = SkelProps<
+export type ToggleButtonsProps<T extends string | number> = Props<
   (
     | {
         exclusive: true

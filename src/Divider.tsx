@@ -1,10 +1,10 @@
 import css from './Divider.scss'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type DividerProps = SkelProps<{
+export type DividerProps = Props<{
   direction?: 'horizontal' | 'vertical'
   thickness?: string
   color?: string

@@ -3,12 +3,12 @@ import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import css from './Stepper.scss'
 import { until } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type StepperProps = SkelProps<{ titles: string[]; currentStep: number }>
+export type StepperProps = Props<{ titles: string[]; currentStep: number }>
 
 export function Stepper(rawProps: StepperProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['titles', 'currentStep'])

@@ -1,11 +1,11 @@
 import { createMemo } from 'solid-js'
 import css from './Spinner.scss'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type SpinnerProps = SkelProps<{
+export type SpinnerProps = Props<{
   size?: string
   thickness?: number
   frequency?: number

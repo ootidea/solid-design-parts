@@ -8,12 +8,12 @@ import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
 import { call, setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type MultiSelectProps<T extends string> = SkelProps<{
+export type MultiSelectProps<T extends string> = Props<{
   values: readonly T[]
   titles?: Partial<Record<T, string>>
   selected?: ReadonlySet<T>

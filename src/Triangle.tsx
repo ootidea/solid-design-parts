@@ -1,10 +1,10 @@
 import css from './Triangle.scss'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type TriangleProps = SkelProps<{
+export type TriangleProps = Props<{
   height: string
   baseLength: string
   color?: string

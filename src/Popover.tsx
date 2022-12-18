@@ -10,13 +10,13 @@ import {
   toXPercent,
   toYPercent,
 } from './utility/position'
-import { prepareProps, SkelProps, SlotProp } from './utility/props'
+import { prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type PopoverProps = SkelProps<{
+export type PopoverProps = Props<{
   on?: EnneaPosition
   joint?: EnneaPosition | undefined
   persistent?: boolean

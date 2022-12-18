@@ -3,12 +3,12 @@ import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
 import { LiteralUnion } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type TextInputProps = SkelProps<{
+export type TextInputProps = Props<{
   value?: string
   placeholder?: string
   type?: LiteralUnion<

@@ -1,12 +1,12 @@
 import { createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import css from './Scrollable.scss'
 import { assertNonUndefined } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type ScrollableProps = SkelProps<{}>
+export type ScrollableProps = Props<{}>
 
 export function Scrollable(rawProps: ScrollableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['children'])

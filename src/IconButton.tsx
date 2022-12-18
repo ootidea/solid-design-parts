@@ -4,12 +4,12 @@ import { Icon } from './Icon'
 import css from './IconButton.scss'
 import { Spinner } from './Spinner'
 import { calculateActiveColor, calculateHoverColor, toHsl } from './utility/color'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type IconButtonProps = SkelProps<
+export type IconButtonProps = Props<
   {
     src: string
     size?: string

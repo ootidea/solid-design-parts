@@ -1,12 +1,12 @@
 import { createEffect, createSignal, For, Show } from 'solid-js'
 import css from './Tabs.scss'
-import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type TabsProps<T extends string> = SkelProps<{
+export type TabsProps<T extends string> = Props<{
   names: readonly T[]
   activeTab?: T
   children?: SlotProp<{ activeTab: T }>

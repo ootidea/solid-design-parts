@@ -2,7 +2,7 @@ import { ComponentProps, JSX, mergeProps, splitProps } from 'solid-js'
 import { Component } from 'solid-js/types/render/component'
 import { objectKeys } from './others'
 
-export type SkelProps<T, Base extends keyof JSX.IntrinsicElements | Component<any> = 'div'> = Omit<
+export type Props<T, Base extends keyof JSX.IntrinsicElements | Component<any> = 'div'> = Omit<
   ComponentProps<Base>,
   keyof T
 > &

@@ -7,7 +7,7 @@ import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
 import { maxBy, objectFromEntries } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -34,7 +34,7 @@ export type DataTableProps<
   },
   ColumnId extends string,
   Row extends Record<string, unknown>
-> = SkelProps<{
+> = Props<{
   columns: readonly Column[]
   rows: readonly Row[]
   fullWidth?: boolean

@@ -1,10 +1,10 @@
 import css from './Checkbox.scss'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type CheckboxProps = SkelProps<
+export type CheckboxProps = Props<
   {
     checked?: boolean
     value?: string | undefined

@@ -1,12 +1,12 @@
 import { JSX } from 'solid-js'
 import { Gravity } from './Gravity'
 import css from './TitleBarLayout.scss'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type TitleBarLayoutProps = SkelProps<{ left?: JSX.Element; right?: JSX.Element }>
+export type TitleBarLayoutProps = Props<{ left?: JSX.Element; right?: JSX.Element }>
 
 export function TitleBarLayout(rawProps: TitleBarLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['left', 'right', 'children'])

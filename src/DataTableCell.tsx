@@ -3,12 +3,12 @@ import css from './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
 import { call, DiscriminatedUnion } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type DataTableCellProps<T extends string> = SkelProps<{ value: unknown }>
+export type DataTableCellProps<T extends string> = Props<{ value: unknown }>
 
 export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>) {
   const [props, restProps] = prepareProps(rawProps, {}, ['value'])

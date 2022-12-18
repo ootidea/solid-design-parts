@@ -1,12 +1,12 @@
 import { createSignal, Show } from 'solid-js'
 import css from './Image.scss'
-import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type ImageProps = SkelProps<
+export type ImageProps = Props<
   {
     alt?: string
     fallback?: SlotProp<{}>

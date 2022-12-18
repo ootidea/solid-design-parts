@@ -1,12 +1,12 @@
 import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
 import { assertNonUndefined, minBy, observeWidthPx } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type SliderProps = SkelProps<{
+export type SliderProps = Props<{
   value?: number
   minValue?: number
   maxValue?: number

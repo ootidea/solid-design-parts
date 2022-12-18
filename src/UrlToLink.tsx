@@ -1,12 +1,12 @@
 import { JSX } from 'solid-js'
 import css from './UrlToLink.scss'
 import { chunk, until } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type UrlToLinkProps = SkelProps<{
+export type UrlToLinkProps = Props<{
   children?: string
   link?: (url: string) => JSX.Element
 }>

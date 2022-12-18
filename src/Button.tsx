@@ -3,12 +3,12 @@ import css from './Button.scss'
 import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import { Spinner } from './Spinner'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type ButtonProps = SkelProps<{
+export type ButtonProps = Props<{
   color?: 'primary' | 'achromatic' | 'error'
   ghost?: boolean
   disabled?: boolean

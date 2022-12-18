@@ -5,13 +5,13 @@ import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import { StretchLayout } from './StretchLayout'
-import { joinClasses, joinStyle, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type FoldableProps = SkelProps<{
+export type FoldableProps = Props<{
   unfolded?: boolean
   title?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
   icon?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>

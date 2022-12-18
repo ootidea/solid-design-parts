@@ -1,11 +1,11 @@
 import css from './StretchLayout.scss'
 import { toArray } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type StretchLayoutProps = SkelProps<{
+export type StretchLayoutProps = Props<{
   stretchAt?: number | `${number}`
   direction?: 'horizontal' | 'vertical'
 }>

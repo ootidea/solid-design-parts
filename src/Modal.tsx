@@ -7,13 +7,13 @@ import css from './Modal.scss'
 import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
 import { setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, SkelProps, SlotProp } from './utility/props'
+import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
 registerCss(css)
 
-export type ModalProps = SkelProps<{
+export type ModalProps = Props<{
   opened?: boolean
   persistent?: boolean
   showCloseButton?: boolean

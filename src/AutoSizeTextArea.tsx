@@ -1,11 +1,11 @@
 import { createEffect, createSignal } from 'solid-js'
 import css from './AutoSizeTextArea.scss'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type AutoSizeTextAreaProps = SkelProps<{ value?: string; onChangeValue?: (value: string) => void }, 'textarea'>
+export type AutoSizeTextAreaProps = Props<{ value?: string; onChangeValue?: (value: string) => void }, 'textarea'>
 
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['value', 'onChangeValue'])

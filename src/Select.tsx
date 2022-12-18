@@ -7,12 +7,12 @@ import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
 import { call, setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type SelectProps<T extends string> = SkelProps<{
+export type SelectProps<T extends string> = Props<{
   values: readonly T[]
   titles?: Partial<Record<T, string>>
   selected?: T | undefined

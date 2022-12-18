@@ -1,11 +1,11 @@
 import css from './Gravity.scss'
 import { EnneaPosition, toHorizontalPosition, toVerticalPosition } from './utility/position'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type GravityProps = SkelProps<{ to?: EnneaPosition }>
+export type GravityProps = Props<{ to?: EnneaPosition }>
 
 export function Gravity(rawProps: GravityProps) {
   const [props, restProps] = prepareProps(rawProps, {

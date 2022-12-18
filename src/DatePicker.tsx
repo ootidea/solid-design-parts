@@ -2,12 +2,12 @@ import { isSameDay, startOfMonth } from 'date-fns'
 import { createSignal } from 'solid-js'
 import { Calendar } from './Calendar'
 import css from './DatePicker.scss'
-import { joinClasses, prepareProps, SkelProps } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type DatePickerProps = SkelProps<{
+export type DatePickerProps = Props<{
   value?: Date | undefined
   month?: Date
   disabled?: (date: Date) => boolean
