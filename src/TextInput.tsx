@@ -56,14 +56,16 @@ export function TextInput(rawProps: TextInputProps) {
   createEffect(
     on(
       () => props.value,
-      () => setValue(props.value)
+      () => setValue(props.value),
+      { defer: true }
     )
   )
   const [shouldValidate, setShouldValidate] = createSignal(props.forceValidation)
   createEffect(
     on(
       () => props.forceValidation,
-      () => setShouldValidate(props.forceValidation)
+      () => setShouldValidate(props.forceValidation),
+      { defer: true }
     )
   )
 
