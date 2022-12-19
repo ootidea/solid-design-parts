@@ -6,6 +6,7 @@ import { Scrollable } from '../src/Scrollable'
 import { StretchLayout } from '../src/StretchLayout'
 import classes from './App.module.scss'
 import { AutoSizeTextAreaComponent } from './page/AutoSizeTextAreaComponent'
+import { AwaitComponent } from './page/AwaitComponent'
 import { ButtonComponent } from './page/ButtonComponent'
 import { CalendarComponent } from './page/CalendarComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
@@ -103,7 +104,7 @@ export function App() {
         SpeechBubbleComponent,
       ],
     },
-    { title: 'Utility', children: [UrlToLinkComponent] },
+    { title: 'Utility', children: [AwaitComponent, UrlToLinkComponent] },
   ]
 
   return (
