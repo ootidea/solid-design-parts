@@ -1,6 +1,5 @@
-import { createEffect, createSignal } from 'solid-js'
 import css from './AutoSizeTextArea.scss'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -10,8 +9,7 @@ export type AutoSizeTextAreaProps = Props<{ value?: string; onChangeValue?: (val
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['value', 'onChangeValue'])
 
-  const [value, setValue] = createSignal(rawProps.value)
-  createEffect(() => setValue(rawProps.value))
+  const [value, setValue] = createInjectableSignal(rawProps, 'value')
 
   function onChangeValue(value: string) {
     setValue(value)

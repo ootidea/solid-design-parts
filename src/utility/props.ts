@@ -1,4 +1,4 @@
-import { ComponentProps, JSX, mergeProps, splitProps } from 'solid-js'
+import { ComponentProps, createEffect, createSignal, JSX, mergeProps, on, Signal, splitProps } from 'solid-js'
 import { Component } from 'solid-js/types/render/component'
 import { objectKeys } from './others'
 
@@ -9,6 +9,20 @@ export type Props<T, Base extends keyof JSX.IntrinsicElements | Component<any> =
   T
 
 export type SlotProp<T> = JSX.Element | ((props: T) => JSX.Element)
+
+export function createInjectableSignal<T, K extends keyof T>(props: T, key: K, equals?: false): Signal<T[K]> {
+  const [value, setValue] = createSignal(props[key], { equals })
+  createEffect(
+    on(
+      () => props[key],
+      () => {
+        setValue(() => props[key])
+      },
+      { defer: true }
+    )
+  )
+  return [value, setValue]
+}
 
 /**
  * Convert all nullary function properties to getters immutably.
