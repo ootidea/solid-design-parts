@@ -102,7 +102,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample title="onClickRow">
+      <Sample title="Clickable rows: onClickRow callback">
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
