@@ -2,7 +2,7 @@ import { Accessor, createEffect, createMemo, createSignal, JSX, on } from 'solid
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
-import { LiteralUnion } from './utility/others'
+import { LiteralAutoComplete } from './utility/others'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -11,7 +11,7 @@ registerCss(css)
 export type TextInputProps = Props<{
   value?: string
   placeholder?: string
-  type?: LiteralUnion<
+  type?: LiteralAutoComplete<
     | 'button'
     | 'checkbox'
     | 'color'
