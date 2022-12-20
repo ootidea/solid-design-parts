@@ -71,6 +71,12 @@
   }
 }
 
+.mantle-ui-DataTable_header-cell-cage {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
 .mantle-ui-DataTable_horizontal-ruled-line {
   grid-column: 1 / calc(2 * var(--mantle-ui-data-table-column-count) + 2);
 }

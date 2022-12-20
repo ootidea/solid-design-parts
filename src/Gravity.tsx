@@ -19,7 +19,7 @@ export function Gravity(rawProps: GravityProps) {
       data-vertical-position={toVerticalPosition(props.to)}
       {...restProps}
     >
-      {rawProps.children}
+      <div class="mantle-ui-Gravity_cage">{rawProps.children}</div>
     </div>
   )
 }

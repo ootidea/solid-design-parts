@@ -1,4 +1,3 @@
-import { Icon } from '../../src/Icon'
 import { IconButton } from '../../src/IconButton'
 import { TitleBarLayout } from '../../src/TitleBarLayout'
 import { PageTitle } from '../PageTitle'
@@ -19,19 +18,6 @@ export function TitleBarLayoutComponent() {
           right={<IconButton src={chevronRightIcon} iconSize="100%" />}
         >
           Sample title
-        </TitleBarLayout>
-      </Sample>
-
-      <Sample title="Multiple children" description="Children in any slot are arranged horizontally.">
-        <TitleBarLayout
-          right={
-            <>
-              Next
-              <Icon src={chevronRightIcon} />
-            </>
-          }
-        >
-          April
         </TitleBarLayout>
       </Sample>
     </article>

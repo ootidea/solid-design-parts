@@ -229,35 +229,37 @@ export function DataTable<
                 role="columnheader"
                 data-column-id={column.id}
               >
-                <div class="mantle-ui-DataTable_column-title" data-column-id={column.id}>
-                  <Slot
-                    content={props.headerCell}
-                    params={{ columnId: column.id, columnTitle: getColumnTitle(column) }}
-                  >
-                    <span style="white-space: pre-wrap">{getColumnTitle(column)}</span>
-                  </Slot>
-                </div>
-                <Show when={column.sortable}>
-                  <Show
-                    when={sortingState()?.columnId === column.id}
-                    fallback={
+                <div class="mantle-ui-DataTable_header-cell-cage">
+                  <div class="mantle-ui-DataTable_column-title" data-column-id={column.id}>
+                    <Slot
+                      content={props.headerCell}
+                      params={{ columnId: column.id, columnTitle: getColumnTitle(column) }}
+                    >
+                      <span style="white-space: pre-wrap">{getColumnTitle(column)}</span>
+                    </Slot>
+                  </div>
+                  <Show when={column.sortable}>
+                    <Show
+                      when={sortingState()?.columnId === column.id}
+                      fallback={
+                        <IconButton
+                          class="mantle-ui-DataTable_sort-button"
+                          src={arrowDownIcon}
+                          iconColor="var(--mantle-ui-DataTable_sort-icon-default-inactive-color)"
+                          onClick={() => onClickSortButton(column.id)}
+                        />
+                      }
+                    >
                       <IconButton
                         class="mantle-ui-DataTable_sort-button"
                         src={arrowDownIcon}
-                        iconColor="var(--mantle-ui-DataTable_sort-icon-default-inactive-color)"
+                        iconColor="var(--mantle-ui-DataTable_sort-icon-default-active-color)"
+                        data-reversed={sortingState().reversed}
                         onClick={() => onClickSortButton(column.id)}
                       />
-                    }
-                  >
-                    <IconButton
-                      class="mantle-ui-DataTable_sort-button"
-                      src={arrowDownIcon}
-                      iconColor="var(--mantle-ui-DataTable_sort-icon-default-active-color)"
-                      data-reversed={sortingState().reversed}
-                      onClick={() => onClickSortButton(column.id)}
-                    />
+                    </Show>
                   </Show>
-                </Show>
+                </div>
               </Gravity>
             </>
           )}
