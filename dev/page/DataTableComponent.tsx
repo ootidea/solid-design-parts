@@ -113,6 +113,17 @@ export function DataTableComponent() {
         />
       </Sample>
 
+      <Sample title="Clickable rows: rowHref">
+        <DataTable
+          columns={[{ id: 'name' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
+          rows={[
+            { name: 'Alice', score: 47, unread: true, date: new Date() },
+            { name: 'Bob', score: 1029, unread: false, date: new Date(0) },
+          ]}
+          rowHref={(row) => 'https://example.com/' + row.name}
+        />
+      </Sample>
+
       <Sample title="Empty state">
         <DataTable columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]} rows={[]} />
       </Sample>

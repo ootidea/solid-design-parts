@@ -40,6 +40,7 @@ export type DataTableProps<
   fullWidth?: boolean
   evenRowBackgroundColor?: string
   oddRowBackgroundColor?: string
+  rowHref?: (row: Row) => string
   onClickRow?: (row: Row) => void
   sortingState?: { columnId: ColumnId; reversed: boolean } | undefined
   horizontalRuledLine?: SlotProp<{ verticalIndex: number }>
@@ -74,7 +75,7 @@ export function DataTable<
       oddRowBackgroundColor: 'var(--mantle-ui-DataTable_odd-row-background-default-color)',
       sortingState: undefined,
     },
-    ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'onClickRow']
+    ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'rowHref', 'onClickRow']
   )
 
   const aligns: Accessor<Record<ColumnId, ColumnAlign>> = createMemo(() => {
@@ -312,15 +313,20 @@ export function DataTable<
               </Slot>
             </div>
 
-            <div
+            <a
               class="mantle-ui-DataTable_row"
               classList={{
                 'mantle-ui-DataTable_even-row': index() % 2 === 0,
                 'mantle-ui-DataTable_odd-row': index() % 2 === 1,
-                'mantle-ui-DataTable_clickable-row': props.onClickRow !== undefined,
+                'mantle-ui-DataTable_clickable-row': props.rowHref !== undefined || props.onClickRow !== undefined,
               }}
               role="row"
-              onClick={() => props.onClickRow?.(row)}
+              href={props.rowHref?.(row)}
+              onClick={(event) => {
+                if (event.defaultPrevented) return
+
+                props.onClickRow?.(row)
+              }}
             >
               <For each={props.columns}>
                 {(column, horizontalIndex) => (
@@ -367,7 +373,7 @@ export function DataTable<
                   <Divider direction="vertical" />
                 </Slot>
               </div>
-            </div>
+            </a>
           </>
         )}
       </For>
