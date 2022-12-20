@@ -305,77 +305,80 @@ export function DataTable<
           </>
         }
       >
-        {(row, index) => (
-          <>
-            <div class="mantle-ui-DataTable_horizontal-ruled-line">
-              <Slot content={props.horizontalRuledLine} params={{ verticalIndex: index() + 1 }}>
-                <Divider />
-              </Slot>
-            </div>
-
-            <a
-              class="mantle-ui-DataTable_row"
-              classList={{
-                'mantle-ui-DataTable_even-row': index() % 2 === 0,
-                'mantle-ui-DataTable_odd-row': index() % 2 === 1,
-                'mantle-ui-DataTable_clickable-row': props.rowHref !== undefined || props.onClickRow !== undefined,
-              }}
-              role="row"
-              href={props.rowHref?.(row)}
-              onClick={(event) => {
-                if (event.defaultPrevented) return
-
-                props.onClickRow?.(row)
-              }}
-            >
-              <For each={props.columns}>
-                {(column, horizontalIndex) => (
-                  <>
-                    <div class="mantle-ui-DataTable_vertical-ruled-line">
-                      <Slot
-                        content={props.verticalRuledLine}
-                        params={{ verticalIndex: index() + 1, horizontalIndex: horizontalIndex() }}
-                      >
-                        <Divider direction="vertical" />
-                      </Slot>
-                    </div>
-
-                    <Gravity
-                      to={aligns()[column.id]}
-                      class="mantle-ui-DataTable_cell"
-                      style={{
-                        '--mantle-ui-DataTable_cell-min-width': getColumnMinWidth(column),
-                        '--mantle-ui-DataTable_cell-max-width': getColumnMaxWidth(column),
-                      }}
-                      role="cell"
-                      data-column-id={column.id}
-                    >
-                      <Slot
-                        content={column.cell}
-                        params={{
-                          row,
-                          columnId: column.id,
-                          value: row[column.id],
-                        }}
-                      >
-                        <DataTableCell value={row[column.id]} />
-                      </Slot>
-                    </Gravity>
-                  </>
-                )}
-              </For>
-
-              <div class="mantle-ui-DataTable_vertical-ruled-line">
-                <Slot
-                  content={props.verticalRuledLine}
-                  params={{ verticalIndex: index() + 1, horizontalIndex: props.columns.length }}
-                >
-                  <Divider direction="vertical" />
+        {(row, index) => {
+          const href = props.rowHref?.(row)
+          return (
+            <>
+              <div class="mantle-ui-DataTable_horizontal-ruled-line">
+                <Slot content={props.horizontalRuledLine} params={{ verticalIndex: index() + 1 }}>
+                  <Divider />
                 </Slot>
               </div>
-            </a>
-          </>
-        )}
+
+              <a
+                class="mantle-ui-DataTable_row"
+                classList={{
+                  'mantle-ui-DataTable_even-row': index() % 2 === 0,
+                  'mantle-ui-DataTable_odd-row': index() % 2 === 1,
+                  'mantle-ui-DataTable_clickable-row': href !== undefined || props.onClickRow !== undefined,
+                }}
+                role="row"
+                href={href}
+                onClick={(event) => {
+                  if (event.defaultPrevented) return
+
+                  props.onClickRow?.(row)
+                }}
+              >
+                <For each={props.columns}>
+                  {(column, horizontalIndex) => (
+                    <>
+                      <div class="mantle-ui-DataTable_vertical-ruled-line">
+                        <Slot
+                          content={props.verticalRuledLine}
+                          params={{ verticalIndex: index() + 1, horizontalIndex: horizontalIndex() }}
+                        >
+                          <Divider direction="vertical" />
+                        </Slot>
+                      </div>
+
+                      <Gravity
+                        to={aligns()[column.id]}
+                        class="mantle-ui-DataTable_cell"
+                        style={{
+                          '--mantle-ui-DataTable_cell-min-width': getColumnMinWidth(column),
+                          '--mantle-ui-DataTable_cell-max-width': getColumnMaxWidth(column),
+                        }}
+                        role="cell"
+                        data-column-id={column.id}
+                      >
+                        <Slot
+                          content={column.cell}
+                          params={{
+                            row,
+                            columnId: column.id,
+                            value: row[column.id],
+                          }}
+                        >
+                          <DataTableCell value={row[column.id]} />
+                        </Slot>
+                      </Gravity>
+                    </>
+                  )}
+                </For>
+
+                <div class="mantle-ui-DataTable_vertical-ruled-line">
+                  <Slot
+                    content={props.verticalRuledLine}
+                    params={{ verticalIndex: index() + 1, horizontalIndex: props.columns.length }}
+                  >
+                    <Divider direction="vertical" />
+                  </Slot>
+                </div>
+              </a>
+            </>
+          )
+        }}
       </For>
 
       <div class="mantle-ui-DataTable_horizontal-ruled-line">
