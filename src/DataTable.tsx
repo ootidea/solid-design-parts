@@ -40,7 +40,7 @@ export type DataTableProps<
   fullWidth?: boolean
   evenRowBackgroundColor?: string
   oddRowBackgroundColor?: string
-  rowHref?: (row: Row) => string
+  rowHref?: (row: Row) => string | undefined
   onClickRow?: (row: Row) => void
   sortingState?: { columnId: ColumnId; reversed: boolean } | undefined
   horizontalRuledLine?: SlotProp<{ verticalIndex: number }>
