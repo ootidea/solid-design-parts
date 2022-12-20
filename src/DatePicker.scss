@@ -43,5 +43,10 @@
   &:focus-visible {
     outline-offset: -2px;
     outline: 2px solid var(--mantle-ui-primary-color);
+
+    &[aria-selected='true'] {
+      outline-offset: -2px;
+      outline: 1px solid var(--mantle-ui-background-color);
+    }
   }
 }
