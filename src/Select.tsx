@@ -125,7 +125,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
         </div>
         <Icon class="mantle-ui-Select_icon" src={chevronDownIcon} />
       </button>
-      {/* @ts-ignore For some reason, it is treated as the first of the Show function overloads and a type error occurs. */}
+      {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
       <Show when={dropdownInfo()}>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
