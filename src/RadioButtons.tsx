@@ -1,7 +1,7 @@
-import { createEffect, createSignal, For } from 'solid-js'
+import { For } from 'solid-js'
 import css from './RadioButtons.scss'
 import { assertNonEmptyArray } from './utility/others'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -28,8 +28,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     ['selected', 'values', 'onChangeSelected']
   )
 
-  const [selected, setSelected] = createSignal(props.selected)
-  createEffect(() => setSelected(() => props.selected))
+  const [selected, setSelected] = createInjectableSignal(props, 'selected')
 
   function isDisabled(value: string): boolean {
     if (typeof props.disabled === 'boolean') return props.disabled

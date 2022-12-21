@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For, Show } from 'solid-js'
+import { createSignal, For, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
@@ -9,7 +9,7 @@ import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
 import { call, setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -44,8 +44,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     return props.titles?.[value] ?? value
   }
 
-  const [selected, setSelected] = createSignal(props.selected)
-  createEffect(() => setSelected(() => props.selected))
+  const [selected, setSelected] = createInjectableSignal(props, 'selected')
   function changeSelected(selected: T | undefined) {
     setSelected(() => selected)
     props.onChangeSelected?.(selected)

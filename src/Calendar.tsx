@@ -1,12 +1,12 @@
 import { addDays, addMonths, addWeeks, format, isSameMonth, setDate, subDays, subMonths } from 'date-fns'
-import { createEffect, createMemo, createSignal, For } from 'solid-js'
+import { createMemo, For } from 'solid-js'
 import css from './Calendar.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { i18n } from './utility/i18n'
 import { until } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -29,9 +29,7 @@ export function Calendar(rawProps: CalendarProps) {
     ['onChangeMonth', 'style']
   )
 
-  const [selectedMonth, setSelectedMonth] = createSignal(props.month, { equals: false })
-  createEffect(() => setSelectedMonth(props.month))
-
+  const [selectedMonth, setSelectedMonth] = createInjectableSignal(props, 'month', false)
   function changeMonth(month: Date) {
     setSelectedMonth(month)
     props.onChangeMonth?.(month)

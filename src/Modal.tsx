@@ -1,4 +1,4 @@
-import { createEffect, createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { FadeAnimation } from './FadeAnimation'
 import { IconButton } from './IconButton'
@@ -7,7 +7,7 @@ import css from './Modal.scss'
 import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
 import { setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -37,9 +37,7 @@ export function Modal(rawProps: ModalProps) {
     ['onChangeOpened', 'launcher', 'title', 'footer']
   )
 
-  const [opened, setOpened] = createSignal(props.opened)
-  createEffect(() => setOpened(props.opened))
-
+  const [opened, setOpened] = createInjectableSignal(props, 'opened')
   function changeOpened(opened: boolean) {
     setOpened(opened)
     props.onChangeOpened?.(opened)

@@ -1,4 +1,4 @@
-import { Accessor, createEffect, createMemo, createSignal, For, Show } from 'solid-js'
+import { Accessor, createMemo, For, Show } from 'solid-js'
 import css from './DataTable.scss'
 import { DataTableCell } from './DataTableCell'
 import { Divider } from './Divider'
@@ -7,7 +7,7 @@ import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
 import { maxBy, objectFromEntries } from './utility/others'
-import { joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -110,8 +110,7 @@ export function DataTable<
     return maxBy([...valueToCount.entries()], ([, count]) => count)?.[0]
   }
 
-  const [sortingState, setSortingState] = createSignal(props.sortingState)
-  createEffect(() => setSortingState(props.sortingState))
+  const [sortingState, setSortingState] = createInjectableSignal(props, 'sortingState')
 
   const sortedRows = createMemo(() => {
     const result = props.rows.slice()

@@ -1,11 +1,11 @@
-import { createEffect, createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
 import { Divider } from './Divider'
 import css from './Foldable.scss'
 import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import { StretchLayout } from './StretchLayout'
-import { joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -32,12 +32,10 @@ export function Foldable(rawProps: FoldableProps) {
     ['title', 'icon', 'onChangeUnfolded']
   )
 
-  const [unfolded, setUnfolded] = createSignal(props.unfolded)
-  createEffect(() => setUnfolded(props.unfolded))
-
+  const [unfolded, setUnfolded] = createInjectableSignal(props, 'unfolded')
   function changeUnfolded(newUnfolded: boolean) {
     setUnfolded(newUnfolded)
-    rawProps.onChangeUnfolded?.(newUnfolded)
+    props.onChangeUnfolded?.(newUnfolded)
   }
   const fold = () => changeUnfolded(false)
   const unfold = () => changeUnfolded(true)

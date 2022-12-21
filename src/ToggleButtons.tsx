@@ -1,7 +1,7 @@
 import { createEffect, createSignal, For } from 'solid-js'
 import css from './ToggleButtons.scss'
 import { call } from './utility/others'
-import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -39,8 +39,7 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
 
   const union = call(() => {
     if (rawProps.exclusive) {
-      const [selected, setSelected] = createSignal(rawProps.selected)
-      createEffect(() => setSelected(() => rawProps.selected))
+      const [selected, setSelected] = createInjectableSignal(rawProps, 'selected')
       return {
         exclusive: true,
         selected,

@@ -1,6 +1,6 @@
-import { createEffect, createSignal, For, Show } from 'solid-js'
+import { For, Show } from 'solid-js'
 import css from './Tabs.scss'
-import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -22,8 +22,7 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
     ['names', 'onClickTab', 'children']
   )
 
-  const [activeTab, setActiveTab] = createSignal(props.activeTab)
-  createEffect(() => setActiveTab(() => props.activeTab))
+  const [activeTab, setActiveTab] = createInjectableSignal(props, 'activeTab')
 
   function onClick(name: T) {
     if (!props.passive) {
