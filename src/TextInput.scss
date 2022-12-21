@@ -1,4 +1,4 @@
-.mantle-ui-TextInput_body {
+:where(.mantle-ui-TextInput_body) {
   box-sizing: border-box;
   min-height: var(--mantle-ui-one-line-input-height);
   border-radius: var(--mantle-ui-TextInput_radius);
@@ -9,7 +9,7 @@
     background-color: var(--mantle-ui-disabled-input-background-color);
   }
 
-  :where(.mantle-ui-TextInput_root[aria-invalid='true']) & {
+  :where(.mantle-ui-TextInput_root[aria-invalid='true'] &) {
     border-color: var(--mantle-ui-error-color);
   }
 

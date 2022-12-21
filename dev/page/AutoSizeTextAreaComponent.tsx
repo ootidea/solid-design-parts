@@ -31,6 +31,50 @@ export function AutoSizeTextAreaComponent() {
         <AutoSizeTextArea placeholder="placeholder" disabled />
         <AutoSizeTextArea value="default value" disabled />
       </Sample>
+
+      <Sample title="Error message">
+        <AutoSizeTextArea placeholder="placeholder" errorMessage="Invalid value" />
+        <AutoSizeTextArea value="default value" errorMessage="Error" />
+      </Sample>
+
+      <Sample title="Validation">
+        <AutoSizeTextArea
+          placeholder="placeholder"
+          errorMessage={(value) => {
+            if (value.length === 0) return 'Required'
+            return undefined
+          }}
+        />
+        <AutoSizeTextArea
+          value="Default value"
+          errorMessage={(value) => {
+            if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
+            return undefined
+          }}
+        />
+      </Sample>
+
+      <Sample
+        title="Force validation"
+        description="If forceValidation option is set, it perform validation even if the user did not edit it."
+      >
+        <AutoSizeTextArea
+          placeholder="placeholder"
+          forceValidation
+          errorMessage={(value) => {
+            if (value.length === 0) return 'Required'
+            return undefined
+          }}
+        />
+        <AutoSizeTextArea
+          value="Default value"
+          forceValidation
+          errorMessage={(value) => {
+            if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
+            return undefined
+          }}
+        />
+      </Sample>
     </article>
   )
 }
