@@ -64,8 +64,10 @@
     background-color: var(--mantle-ui-DataTable_odd-row-background-color);
   }
 
-  .mantle-ui-DataTable_clickable-row:hover & {
-    background-color: oklch(98% 0 0);
+  @media (hover: hover) {
+    .mantle-ui-DataTable_clickable-row:hover & {
+      background-color: oklch(98% 0 0);
+    }
   }
 
   .mantle-ui-DataTable_clickable-row:active & {

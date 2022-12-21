@@ -18,8 +18,10 @@
   font-weight: bold;
   color: var(--mantle-ui-primary-color);
 
-  .title:hover & {
-    visibility: initial;
+  @media (hover: hover) {
+    .title:hover & {
+      visibility: initial;
+    }
   }
 }
 
