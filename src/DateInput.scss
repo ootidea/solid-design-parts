@@ -5,7 +5,7 @@
 .mantle-ui-DateInput_launcher {
   display: inline-grid;
   vertical-align: top;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   text-align: start;
 
@@ -36,12 +36,20 @@
   overflow: hidden;
 }
 
+.mantle-ui-DateInput_clear-button {
+  margin-right: 0.3em;
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+  }
+}
+
 .mantle-ui-DateInput_icon {
   margin-right: 0.3em;
 }
 
 .mantle-ui-DateInput_preview-area {
-  padding: 0.4em 0.6em;
+  margin: 0.3em 0.5em 0.3em 0.6em;
 }
 
 .mantle-ui-DateInput_placeholder {

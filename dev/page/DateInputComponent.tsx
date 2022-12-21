@@ -38,6 +38,10 @@ export function DateInputComponent() {
         <DateInput disabled={(date) => date.getTime() < Date.now()} />
       </Sample>
 
+      <Sample title="Default value" direction="horizontal">
+        <DateInput placeholder="placeholder" value={new Date()} showClearButton />
+      </Sample>
+
       <Sample title="Change date format" direction="horizontal">
         <DateInput format={({ value }) => value?.toISOString()} />
       </Sample>
