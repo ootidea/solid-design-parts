@@ -9,16 +9,16 @@ export function StretchLayoutComponent() {
 
       <Sample title="Basic example">
         <StretchLayout>
-          <div style={{ padding: '3em', border: '1px dashed gray' }}>area1</div>
-          <div style={{ padding: '3em', border: '1px solid gray' }}>area2</div>
+          <div style={{ padding: '3em', border: '1px solid gray' }}>Flexible area</div>
+          <div style={{ padding: '3em', border: '1px dashed gray' }}>Fixed area</div>
         </StretchLayout>
       </Sample>
 
       <Sample title="Negative index">
         <StretchLayout stretchAt={-1}>
-          <div style={{ padding: '3em', border: '1px solid gray' }}>area1</div>
-          <div style={{ padding: '3em', border: '1px solid gray' }}>area2</div>
-          <div style={{ padding: '3em', border: '1px dashed gray' }}>area3</div>
+          <div style={{ padding: '3em', border: '1px dashed gray' }}>Fixed area</div>
+          <div style={{ padding: '3em', border: '1px dashed gray' }}>Fixed area</div>
+          <div style={{ padding: '3em', border: '1px solid gray' }}>Flexible area</div>
         </StretchLayout>
       </Sample>
     </article>
