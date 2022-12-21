@@ -1,7 +1,7 @@
 .mantle-ui-Select_launcher {
   display: inline-grid;
   vertical-align: top;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   text-align: start;
 
@@ -32,6 +32,10 @@
   }
 }
 
+.mantle-ui-Select_preview-area {
+  margin-right: 0.8em;
+}
+
 .mantle-ui-Select_invisible {
   visibility: hidden;
   height: 0;
@@ -43,12 +47,16 @@
   user-select: none;
 }
 
+.mantle-ui-Select_clear-button {
+  &[aria-hidden='true'] {
+    visibility: hidden;
+  }
+}
+
 .mantle-ui-Select_icon {
   transform-origin: center;
   transition: all 140ms ease-out;
   transform: rotate(0deg);
-
-  margin-left: 0.5em;
 
   .mantle-ui-Select_opened & {
     transform: rotate(-180deg);

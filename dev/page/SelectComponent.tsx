@@ -33,6 +33,10 @@ export function SelectComponent() {
         <Select values={['Female', 'Male', 'Other']} selected="Male" disabled />
       </Sample>
 
+      <Sample title="Clear button">
+        <Select placeholder="gender" values={['Female', 'Male', 'Other']} selected="Female" showClearButton />
+      </Sample>
+
       <Sample title="Search">
         <Select
           showSearchBox

@@ -2,7 +2,9 @@ import { createEffect, createSignal, For, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
+import { IconButton } from './IconButton'
 import chevronDownIcon from './image/chevron-down.svg'
+import closeCircleIcon from './image/close-circle.svg'
 import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
@@ -20,6 +22,7 @@ export type SelectProps<T extends string> = Props<{
   disabled?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
+  showClearButton?: boolean
   onChangeSelected?: (selected: T | undefined) => void
 }>
 
@@ -32,6 +35,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
       disabled: false,
       fullWidth: false,
       showSearchBox: false,
+      showClearButton: false,
     },
     ['values', 'selected', 'onChangeSelected']
   )
@@ -61,6 +65,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
+    if (event.defaultPrevented) return
+
     event.preventDefault()
     if (event.currentTarget instanceof HTMLElement) {
       const rect = event.currentTarget.getBoundingClientRect()
@@ -74,8 +80,9 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   }
 
   function onOperateOverlay(event: Event) {
-    if (event.target !== event.currentTarget) return
+    if (event.target !== event.currentTarget || event.defaultPrevented) return
 
+    event.preventDefault()
     setDropdownInfo(undefined)
   }
 
@@ -123,6 +130,17 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
             )
           })}
         </div>
+        <Show when={props.showClearButton}>
+          <IconButton
+            class="mantle-ui-Select_clear-button"
+            src={closeCircleIcon}
+            size="1.6em"
+            iconSize="1.25em"
+            iconColor="var(--mantle-ui-clear-button-icon-default-color)"
+            aria-hidden={selected() === undefined}
+            onClick={() => changeSelected(undefined)}
+          />
+        </Show>
         <Icon class="mantle-ui-Select_icon" src={chevronDownIcon} />
       </button>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
