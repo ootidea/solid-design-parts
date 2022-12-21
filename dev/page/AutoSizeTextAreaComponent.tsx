@@ -42,14 +42,16 @@ export function AutoSizeTextAreaComponent() {
           placeholder="placeholder"
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
-            return undefined
+
+            return
           }}
         />
         <AutoSizeTextArea
           value="Default value"
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
-            return undefined
+
+            return
           }}
         />
       </Sample>
@@ -63,7 +65,8 @@ export function AutoSizeTextAreaComponent() {
           forceValidation
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
-            return undefined
+
+            return
           }}
         />
         <AutoSizeTextArea
@@ -71,7 +74,8 @@ export function AutoSizeTextAreaComponent() {
           forceValidation
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
-            return undefined
+
+            return
           }}
         />
       </Sample>

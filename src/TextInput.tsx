@@ -37,7 +37,7 @@ export type TextInputProps = Props<{
     | 'week'
   >
   disabled?: boolean
-  errorMessage?: string | ((value: string) => Promisable<string | void | undefined>)
+  errorMessage?: string | ((value: string) => Promisable<string | void>)
   forceValidation?: boolean
   radius?: string
   prepend?: JSX.Element

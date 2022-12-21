@@ -9,7 +9,7 @@ registerCss(css)
 export type AutoSizeTextAreaProps = Props<
   {
     value?: string
-    errorMessage?: string | ((value: string) => Promisable<string | void | undefined>)
+    errorMessage?: string | ((value: string) => Promisable<string | void>)
     forceValidation?: boolean
     onChangeValue?: (value: string) => void
     onChangeValidValue?: (value: string) => void

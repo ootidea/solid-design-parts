@@ -61,14 +61,16 @@ export function TextInputComponent() {
           placeholder="placeholder"
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
-            return undefined
+
+            return
           }}
         />
         <TextInput
           value="Default value"
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
-            return undefined
+
+            return
           }}
         />
       </Sample>
@@ -82,7 +84,8 @@ export function TextInputComponent() {
           forceValidation
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
-            return undefined
+
+            return
           }}
         />
         <TextInput
@@ -90,7 +93,8 @@ export function TextInputComponent() {
           forceValidation
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
-            return undefined
+
+            return
           }}
         />
       </Sample>
