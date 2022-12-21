@@ -1,4 +1,5 @@
-import { Accessor, createEffect, createMemo, createSignal, JSX, on } from 'solid-js'
+import { Promisable } from 'base-up/dist/types/Promise'
+import { createEffect, createSignal, JSX, on } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -36,7 +37,7 @@ export type TextInputProps = Props<{
     | 'week'
   >
   disabled?: boolean
-  errorMessage?: string | ((value: string) => string | void | undefined)
+  errorMessage?: string | ((value: string) => Promisable<string | void | undefined>)
   forceValidation?: boolean
   radius?: string
   prepend?: JSX.Element
@@ -71,17 +72,21 @@ export function TextInput(rawProps: TextInputProps) {
 
   const [inputElementHasFocus, setInputElementHasFocus] = createSignal(false)
 
-  const errorMessage: Accessor<string | undefined> = createMemo(() => {
-    if (props.errorMessage === undefined) return undefined
-
-    if (typeof props.errorMessage === 'string') return props.errorMessage
-
-    if (!shouldValidate()) return undefined
-
-    return props.errorMessage(value() ?? '') ?? undefined
+  const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
+  createEffect(async () => {
+    if (props.errorMessage === undefined) {
+      setErrorMessage(undefined)
+    } else if (typeof props.errorMessage === 'string') {
+      setErrorMessage(props.errorMessage)
+    } else if (!shouldValidate()) {
+      setErrorMessage(undefined)
+    } else {
+      const result = await props.errorMessage(value() ?? '')
+      setErrorMessage(result ?? undefined)
+    }
   })
 
-  function onInput(event: InputEvent) {
+  async function onInput(event: InputEvent) {
     setShouldValidate(true)
     if (event.target instanceof HTMLInputElement) {
       const newValue = event.target.value
@@ -89,7 +94,7 @@ export function TextInput(rawProps: TextInputProps) {
       props.onChangeValue?.(newValue)
 
       if (props.onChangeValidValue !== undefined) {
-        if (typeof props.errorMessage === 'string' || props.errorMessage?.(newValue) === undefined) {
+        if (typeof props.errorMessage === 'string' || (await props.errorMessage?.(newValue)) === undefined) {
           props.onChangeValidValue(newValue)
         }
       }
