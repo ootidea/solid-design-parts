@@ -1,15 +1,15 @@
 .mantle-ui-Select_launcher {
-  display: inline-grid;
-  vertical-align: top;
+  display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
   text-align: start;
 
+  box-sizing: border-box;
+  width: max-content;
+  min-height: var(--mantle-ui-one-line-input-height);
   border-radius: 0.3em;
   border: 1px solid var(--mantle-ui-input-border-color);
   padding: 0.4em 0.7em;
-  box-sizing: border-box;
-  min-height: var(--mantle-ui-one-line-input-height);
 
   background-color: var(--mantle-ui-background-color);
   color: inherit;
@@ -27,7 +27,6 @@
   }
 
   &.mantle-ui-Select_full-width {
-    display: grid;
     width: 100%;
   }
 }

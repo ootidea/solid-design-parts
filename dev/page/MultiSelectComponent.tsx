@@ -31,7 +31,7 @@ export function MultiSelectComponent() {
         <div>JSON.stringify([...selected()]) === '{JSON.stringify([...selected()])}'</div>
       </Sample>
 
-      <Sample title="Disabled" direction="horizontal">
+      <Sample title="Disabled">
         <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
         <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} disabled />
       </Sample>

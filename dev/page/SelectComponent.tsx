@@ -28,7 +28,7 @@ export function SelectComponent() {
         <div>selected() === {toLiteral(selected())}</div>
       </Sample>
 
-      <Sample title="Disabled" direction="horizontal">
+      <Sample title="Disabled">
         <Select values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
         <Select values={['Female', 'Male', 'Other']} selected="Male" disabled />
       </Sample>
