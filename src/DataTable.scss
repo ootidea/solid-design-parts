@@ -9,14 +9,10 @@
 
 .mantle-ui-DataTable_root {
   grid-template-columns: var(--mantle-ui-DataTable_template-columns);
+  display: grid;
 
   &:not(.mantle-ui-DataTable_full-width) {
-    display: inline-grid;
-    vertical-align: top;
-  }
-
-  &.mantle-ui-DataTable_full-width {
-    display: grid;
+    width: max-content;
   }
 }
 
@@ -40,7 +36,7 @@
 }
 
 .mantle-ui-DataTable_cell {
-  padding: 0.6em 1.6em;
+  padding: 0.6em 1em;
   min-width: var(--mantle-ui-DataTable_cell-min-width);
   max-width: var(--mantle-ui-DataTable_cell-max-width);
   overflow: hidden;
