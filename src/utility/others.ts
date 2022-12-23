@@ -67,38 +67,6 @@ export function filterNonUndefined<T>(array: (T | undefined)[]): T[] {
   return array.filter((value) => value !== undefined) as T[]
 }
 
-export function maxBy<T>(array: readonly T[], by: (element: T) => number): T | undefined {
-  if (array.length === 0) return undefined
-
-  const [firstElement, ...rest] = array
-  let candidateElement = firstElement
-  let maxValue = by(firstElement)
-  for (const element of rest) {
-    const value = by(element)
-    if (maxValue < value) {
-      candidateElement = element
-      maxValue = value
-    }
-  }
-  return candidateElement
-}
-
-export function minBy<T>(array: readonly T[], by: (element: T) => number): T | undefined {
-  if (array.length === 0) return undefined
-
-  const [firstElement, ...rest] = array
-  let candidateElement = firstElement
-  let minValue = by(firstElement)
-  for (const element of rest) {
-    const value = by(element)
-    if (minValue > value) {
-      candidateElement = element
-      minValue = value
-    }
-  }
-  return candidateElement
-}
-
 type FixedSizeArray<N extends number, T, Result extends any[] = []> = Result['length'] extends N
   ? Result
   : FixedSizeArray<N, T, [...Result, T]>

@@ -1,6 +1,7 @@
+import { minBy } from 'base-up'
 import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
-import { assertNonUndefined, minBy, observeWidthPx } from './utility/others'
+import { assertNonUndefined, observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
