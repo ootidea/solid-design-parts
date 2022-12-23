@@ -26,8 +26,12 @@
     outline: none;
   }
 
-  &.mantle-ui-MultiSelect_full-width {
+  .mantle-ui-MultiSelect_full-width & {
     width: 100%;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--mantle-ui-error-color);
   }
 }
 
@@ -67,6 +71,15 @@
 
   .mantle-ui-MultiSelect_opened & {
     transform: rotate(-180deg);
+  }
+}
+
+.mantle-ui-MultiSelect_error-message {
+  color: var(--mantle-ui-error-color);
+  margin: 1em 0 0;
+
+  &:empty {
+    display: none;
   }
 }
 

@@ -36,6 +36,36 @@ export function MultiSelectComponent() {
         <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} disabled />
       </Sample>
 
+      <Sample title="Error message">
+        <MultiSelect values={['Female', 'Male', 'Other']} errorMessage="Invalid value" />
+      </Sample>
+
+      <Sample title="Validation">
+        <MultiSelect
+          values={['Female', 'Male', 'Other']}
+          errorMessage={(selected) => {
+            if (selected.size < 2) return 'Select multiple options'
+
+            return
+          }}
+        />
+      </Sample>
+
+      <Sample
+        title="Force validation"
+        description="If forceValidation option is set, it perform validation even if the user did not edit it."
+      >
+        <MultiSelect
+          values={['Female', 'Male', 'Other']}
+          forceValidation
+          errorMessage={(selected) => {
+            if (selected.size < 2) return 'Select multiple options'
+
+            return
+          }}
+        />
+      </Sample>
+
       <Sample title="Search">
         <MultiSelect
           showSearchBox
