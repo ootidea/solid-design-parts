@@ -8,7 +8,7 @@ import chevronDownIcon from './image/chevron-down.svg'
 import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
-import { call, setupFocusTrap } from './utility/others'
+import { setupFocusTrap } from './utility/others'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 

@@ -8,7 +8,7 @@ import closeCircleIcon from './image/close-circle.svg'
 import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
-import { call, setupFocusTrap } from './utility/others'
+import { setupFocusTrap } from './utility/others'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
