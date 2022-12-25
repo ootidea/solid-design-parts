@@ -8,8 +8,10 @@ registerCss(css)
 
 export type RadioButtonsProps<Values extends readonly string[]> = Props<{
   values: Values
-  name?: string
   selected?: Values[number] | undefined
+  name?: string
+  layout?: 'horizontal' | 'vertical' | 'flex-wrap'
+  gap?: string
   disabled?: boolean | ReadonlySet<string>
   enableDeselection?: boolean
   onChangeSelected?: (selected: Values[number] | undefined) => void
@@ -22,6 +24,8 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     rawProps,
     {
       name: rawProps.name === undefined ? `mantle-ui-RadioButton_name${uniqueId++}` : rawProps.name,
+      layout: 'horizontal',
+      gap: '0.2em 1em',
       disabled: false,
       enableDeselection: false,
     },
@@ -49,26 +53,32 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
   }
 
   return (
-    <For each={props.values}>
-      {(value) => (
-        <label
-          class={joinClasses(rawProps, 'mantle-ui-RadioButtons_label')}
-          aria-disabled={isDisabled(value)}
-          {...restProps}
-        >
-          <input
-            type="radio"
-            class="mantle-ui-RadioButtons_radio"
-            value={value}
-            name={props.name}
-            checked={value === selected()}
-            disabled={isDisabled(value)}
-            onClick={() => onClick(value)}
-          />
-          {value}
-        </label>
-      )}
-    </For>
+    <div
+      class="mantle-ui-RadioButtons_root"
+      style={{ '--mantle-ui-RadioButtons_gap': props.gap }}
+      data-layout={props.layout}
+    >
+      <For each={props.values}>
+        {(value) => (
+          <label
+            class={joinClasses(rawProps, 'mantle-ui-RadioButtons_label')}
+            aria-disabled={isDisabled(value)}
+            {...restProps}
+          >
+            <input
+              type="radio"
+              class="mantle-ui-RadioButtons_radio"
+              value={value}
+              name={props.name}
+              checked={value === selected()}
+              disabled={isDisabled(value)}
+              onClick={() => onClick(value)}
+            />
+            {value}
+          </label>
+        )}
+      </For>
+    </div>
   )
 }
 

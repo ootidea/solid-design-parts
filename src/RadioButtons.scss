@@ -5,6 +5,26 @@
   --mantle-ui-RadioButtons_inner-circle-size: 0.6em;
 }
 
+.mantle-ui-RadioButtons_root {
+  gap: var(--mantle-ui-RadioButtons_gap);
+
+  &[data-layout='horizontal'] {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+  }
+
+  &[data-layout='vertical'] {
+    display: grid;
+    grid-template-columns: max-content;
+  }
+
+  &[data-layout='flex-wrap'] {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
 .mantle-ui-RadioButtons_label {
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr);

@@ -50,9 +50,28 @@ export function RadioButtonsComponent() {
         <RadioButtons values={['left', 'center', 'right']} enableDeselection />
       </Sample>
 
-      <Sample title="Grid layout">
-        <div style="display: grid; grid-template-columns: auto auto; gap: 1em; width: max-content;">
-          <RadioButtons values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+      <Sample title="Layout">
+        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons values={['Python', 'TypeScript', 'Kotlin', 'Swift']} layout="vertical" />
+        </div>
+        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons
+            values={[
+              'January',
+              'February',
+              'March',
+              'April',
+              'May',
+              'June',
+              'July',
+              'August',
+              'September',
+              'October',
+              'November',
+              'December',
+            ]}
+            layout="flex-wrap"
+          />
         </div>
       </Sample>
     </article>
