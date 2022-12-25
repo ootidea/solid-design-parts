@@ -1,8 +1,9 @@
+import { call } from 'base-up'
 import { JSX } from 'solid-js'
 import css from './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
-import { call, DiscriminatedUnion } from './utility/others'
+import { DiscriminatedUnion } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 

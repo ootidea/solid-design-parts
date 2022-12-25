@@ -1,6 +1,6 @@
+import { chunk, rangeTo } from 'base-up'
 import { JSX } from 'solid-js'
 import css from './UrlToLink.scss'
-import { chunk, until } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -30,7 +30,7 @@ export function UrlToLink(rawProps: UrlToLinkProps) {
 
   return (
     <div class={joinClasses(rawProps, 'mantle-ui-UrlToLink_root')} {...restProps}>
-      {until(texts.length).map((i) => (
+      {rangeTo(texts.length).map((i) => (
         <>
           {texts[i]}
           {i < urls.length && props.link(urls[i])}

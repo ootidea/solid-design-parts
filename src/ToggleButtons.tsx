@@ -1,6 +1,6 @@
+import { call } from 'base-up'
 import { createEffect, createSignal, For } from 'solid-js'
 import css from './ToggleButtons.scss'
-import { call } from './utility/others'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'

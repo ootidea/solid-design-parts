@@ -1,3 +1,4 @@
+import { rangeTo } from 'base-up'
 import { addDays, addMonths, addWeeks, format, isSameMonth, setDate, subDays, subMonths } from 'date-fns'
 import { createMemo, For } from 'solid-js'
 import css from './Calendar.scss'
@@ -5,7 +6,6 @@ import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { i18n } from './utility/i18n'
-import { until } from './utility/others'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
@@ -88,7 +88,7 @@ export function Calendar(rawProps: CalendarProps) {
           </For>
         </div>
 
-        <For each={until(6)}>
+        <For each={rangeTo(6)}>
           {(weakIndex) => (
             <div class="mantle-ui-Calendar_date-row">
               <For each={dayNames}>

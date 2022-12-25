@@ -1,8 +1,8 @@
+import { call } from 'base-up'
 import { createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { FadeAnimation } from '../../src/FadeAnimation'
 import { showToast } from '../../src/Toasts'
-import { call } from '../../src/utility/others'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 

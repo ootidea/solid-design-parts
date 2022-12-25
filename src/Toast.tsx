@@ -1,3 +1,4 @@
+import { call } from 'base-up'
 import { JSX } from 'solid-js'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
@@ -6,7 +7,6 @@ import checkCircleIcon from './image/check-circle.svg'
 import closeIcon from './image/close.svg'
 import informationIcon from './image/information.svg'
 import css from './Toast.scss'
-import { call } from './utility/others'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)

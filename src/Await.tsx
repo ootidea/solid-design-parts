@@ -1,5 +1,6 @@
+import { call } from 'base-up'
 import { createEffect, createSignal, JSX, on } from 'solid-js'
-import { call } from './utility/others'
+
 import { prepareProps, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 

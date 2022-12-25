@@ -1,4 +1,4 @@
-import { maxBy } from 'base-up'
+import { fromEntries, maxBy } from 'base-up'
 import { Accessor, createMemo, For, Show } from 'solid-js'
 import css from './DataTable.scss'
 import { DataTableCell } from './DataTableCell'
@@ -7,7 +7,6 @@ import { Gravity } from './Gravity'
 import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
-import { objectFromEntries } from './utility/others'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
@@ -80,7 +79,7 @@ export function DataTable<
   )
 
   const aligns: Accessor<Record<ColumnId, ColumnAlign>> = createMemo(() => {
-    return objectFromEntries(props.columns.map((column) => [column.id, determineAlign(column)]))
+    return fromEntries(props.columns.map((column) => [column.id, determineAlign(column)]))
   })
   function determineAlign(column: Column): ColumnAlign {
     if (column.align !== undefined) return column.align

@@ -1,8 +1,8 @@
+import { rangeTo } from 'base-up'
 import { For } from 'solid-js'
 import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import css from './Stepper.scss'
-import { until } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -25,7 +25,7 @@ export function Stepper(rawProps: StepperProps) {
           style={{ 'grid-template-columns': `1fr repeat(${props.titles.length - 1}, 2fr) 1fr` }}
         >
           <div />
-          <For each={until(props.titles.length - 1)}>
+          <For each={rangeTo(props.titles.length - 1)}>
             {(i) => (
               <div class="mantle-ui-Stepper_line" classList={{ 'mantle-ui-Stepper_reached': i < props.currentStep }} />
             )}
@@ -36,7 +36,7 @@ export function Stepper(rawProps: StepperProps) {
           class="mantle-ui-Stepper_circle-layer"
           style={{ 'grid-template-columns': `repeat(${props.titles.length}, 1fr)` }}
         >
-          <For each={until(props.titles.length)}>
+          <For each={rangeTo(props.titles.length)}>
             {(i) => (
               <Gravity>
                 <div

@@ -18,19 +18,6 @@ export type LiteralAutoComplete<Literals extends Base, Base = string> = Literals
 export type DiscriminatedUnion<T, K extends keyof T = keyof T> = K extends K ? { type: K } & T[K] : never
 
 /**
- * call(() => {
- *   ...
- * })
- * is readable than
- * (() => {
- *   ...
- * })()
- */
-export function call<T>(f: () => T): T {
-  return f()
-}
-
-/**
  * Assert that a value is not undefined.
  * Throws an exception if it is undefined.
  */
@@ -40,52 +27,10 @@ export function assertNonUndefined<T>(value: T | undefined, message?: string): a
   }
 }
 
-/**
- * Assert that a value is not null.
- * Throws an exception if it is null.
- */
-export function assertNonNull<T>(value: T | null, message?: string): asserts value is T {
-  if (value === null) {
-    throw new Error(message ?? 'Assertion error: the given value is null.')
-  }
-}
-
 export function assertNonEmptyArray<T>(array: readonly T[]): asserts array is [T] & T[] {
   if (array.length === 0) {
     throw new Error('Assertion error: the given array is empty.')
   }
-}
-
-/**
- * Clone given array, and remove all undefined.
- * @example
- * filterNonUndefined([123, undefined, 456, undefined])
- * is equivalent to
- * [123, 456]
- */
-export function filterNonUndefined<T>(array: (T | undefined)[]): T[] {
-  return array.filter((value) => value !== undefined) as T[]
-}
-
-type FixedSizeArray<N extends number, T, Result extends any[] = []> = Result['length'] extends N
-  ? Result
-  : FixedSizeArray<N, T, [...Result, T]>
-
-export function chunk<T, N extends number>(array: readonly T[], size: N): FixedSizeArray<N, T>[] {
-  const result = []
-  for (let i = 0; i + size <= array.length; i += size) {
-    result.push(array.slice(i, i + size))
-  }
-  return result as any
-}
-
-/**
- * Create sequence starting with 0.
- * @example
- * until(5) is equivalent to [0, 1, 2, 3, 4]
- */
-export function until(length: number): readonly number[] {
-  return Array.from({ length }, (_, i) => i)
 }
 
 /**
@@ -100,11 +45,6 @@ export function objectKeys<T extends {}>(object: T): ObjectKeys<T> {
 }
 
 export type ObjectKeys<T, K extends keyof any = keyof T> = (K extends symbol ? never : K extends number ? `${K}` : K)[]
-
-/** Object.fromEntries with improved type. */
-export function objectFromEntries<K extends string, T>(entries: Iterable<readonly [K, T]>): Record<K, T> {
-  return Object.fromEntries(entries) as Record<K, T>
-}
 
 export function isInsideOf(x: number, y: number, rect: DOMRect): boolean {
   if (x < rect.left) return false
