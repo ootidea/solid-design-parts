@@ -10,7 +10,7 @@ export type RadioButtonsProps<Values extends readonly string[]> = Props<{
   values: Values
   selected?: Values[number] | undefined
   name?: string
-  layout?: 'horizontal' | 'vertical' | 'flex-wrap'
+  layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
   disabled?: boolean | ReadonlySet<string>
   enableDeselection?: boolean

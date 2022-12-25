@@ -52,10 +52,11 @@ export function RadioButtonsComponent() {
 
       <Sample title="Layout">
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons values={['Python', 'TypeScript', 'Kotlin', 'Swift']} layout="vertical" />
+          <RadioButtons layout="vertical" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
         </div>
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
           <RadioButtons
+            layout="flex-wrap"
             values={[
               'January',
               'February',
@@ -70,8 +71,16 @@ export function RadioButtonsComponent() {
               'November',
               'December',
             ]}
-            layout="flex-wrap"
           />
+        </div>
+        <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons layout="space-between" values={['left', 'middle', 'right']} />
+        </div>
+        <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons layout="space-evenly" values={['left', 'middle', 'right']} />
+        </div>
+        <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons layout="space-around" values={['left', 'middle', 'right']} />
         </div>
       </Sample>
     </article>

@@ -23,6 +23,27 @@
     display: flex;
     flex-wrap: wrap;
   }
+
+  &[data-layout='space-between'] {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: space-between;
+  }
+
+  &[data-layout='space-around'] {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: space-around;
+  }
+
+  &[data-layout='space-evenly'] {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    justify-content: space-evenly;
+  }
 }
 
 .mantle-ui-RadioButtons_label {
