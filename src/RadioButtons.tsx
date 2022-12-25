@@ -10,8 +10,9 @@ export type RadioButtonsProps<Values extends readonly string[]> = Props<{
   values: Values
   selected?: Values[number] | undefined
   name?: string
-  layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
+  layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'grid' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
+  gridColumnsCount?: number
   disabled?: boolean | ReadonlySet<string>
   enableDeselection?: boolean
   onChangeSelected?: (selected: Values[number] | undefined) => void
@@ -26,6 +27,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
       name: rawProps.name === undefined ? `mantle-ui-RadioButton_name${uniqueId++}` : rawProps.name,
       layout: 'horizontal',
       gap: '0.2em 1em',
+      gridColumnsCount: rawProps.values.length / 2,
       disabled: false,
       enableDeselection: false,
     },
@@ -55,7 +57,10 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
   return (
     <div
       class="mantle-ui-RadioButtons_root"
-      style={{ '--mantle-ui-RadioButtons_gap': props.gap }}
+      style={{
+        '--mantle-ui-RadioButtons_gap': props.gap,
+        '--mantle-ui-RadioButtons_grid-columns-count': props.gridColumnsCount,
+      }}
       data-layout={props.layout}
     >
       <For each={props.values}>

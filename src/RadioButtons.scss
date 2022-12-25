@@ -24,6 +24,11 @@
     flex-wrap: wrap;
   }
 
+  &[data-layout='grid'] {
+    display: grid;
+    grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+  }
+
   &[data-layout='space-between'] {
     display: grid;
     grid-auto-flow: column;

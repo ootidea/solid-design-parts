@@ -73,6 +73,9 @@ export function RadioButtonsComponent() {
             ]}
           />
         </div>
+        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons layout="grid" gridColumnsCount={2} values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+        </div>
         <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
           <RadioButtons layout="space-between" values={['left', 'middle', 'right']} />
         </div>
