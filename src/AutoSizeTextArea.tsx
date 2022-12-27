@@ -1,5 +1,5 @@
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createSignal } from 'solid-js'
+import { createEffect, createSignal, untrack } from 'solid-js'
 import css from './AutoSizeTextArea.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -18,13 +18,12 @@ export type AutoSizeTextAreaProps = Props<
 >
 
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
-  const [props, restProps] = prepareProps(rawProps, { validateInitialValue: false }, [
-    'value',
+  const [props, restProps] = prepareProps(rawProps, { value: '', validateInitialValue: false }, [
     'errorMessage',
     'onChangeValue',
   ])
 
-  const [value, setValue] = createInjectableSignal(rawProps, 'value')
+  const [value, setValue] = createInjectableSignal(props, 'value')
   function onChangeValue(value: string) {
     setValue(value)
     props.onChangeValue?.(value)
@@ -34,14 +33,16 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createEffect(async () => {
+    props.value
+
     if (props.errorMessage === undefined) {
       setErrorMessage(undefined)
     } else if (typeof props.errorMessage === 'string') {
       setErrorMessage(props.errorMessage)
-    } else if (!shouldValidate()) {
+    } else if (!untrack(shouldValidate)) {
       setErrorMessage(undefined)
     } else {
-      const result = await props.errorMessage(value() ?? '')
+      const result = await props.errorMessage(props.value)
       setErrorMessage(result ?? undefined)
     }
   })
@@ -52,9 +53,14 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       const newValue = event.target.value
       onChangeValue(newValue)
 
-      if (props.onChangeValidValue !== undefined) {
-        if (typeof props.errorMessage !== 'string' && (await props.errorMessage?.(newValue)) === undefined) {
-          props.onChangeValidValue(newValue)
+      if (typeof props.errorMessage === 'string') {
+        setErrorMessage(props.errorMessage)
+      } else {
+        const result = await props.errorMessage?.(newValue)
+        setErrorMessage(result ?? undefined)
+
+        if (result === undefined) {
+          props.onChangeValidValue?.(newValue)
         }
       }
     }
@@ -75,7 +81,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
         </div>
         <textarea
           class={joinClasses(rawProps, 'mantle-ui-AutoSizeTextArea_text-area')}
-          value={value() ?? ''}
+          value={value()}
           onInput={onInput}
           {...restProps}
         />
