@@ -1,5 +1,5 @@
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createSignal, JSX } from 'solid-js'
+import { createEffect, createSignal, JSX, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -39,8 +39,8 @@ export type TextInputProps = Props<{
 export function TextInput(rawProps: TextInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { disabled: false, validateInitialValue: false, radius: 'var(--mantle-ui-input-border-radius)' },
-    ['value', 'placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    { value: '', disabled: false, validateInitialValue: false, radius: 'var(--mantle-ui-input-border-radius)' },
+    ['placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const [value, setValue] = createInjectableSignal(props, 'value')
@@ -50,14 +50,16 @@ export function TextInput(rawProps: TextInputProps) {
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createEffect(async () => {
+    props.value
+
     if (props.errorMessage === undefined) {
       setErrorMessage(undefined)
     } else if (typeof props.errorMessage === 'string') {
       setErrorMessage(props.errorMessage)
-    } else if (!shouldValidate()) {
+    } else if (!untrack(shouldValidate)) {
       setErrorMessage(undefined)
     } else {
-      const result = await props.errorMessage(value() ?? '')
+      const result = await props.errorMessage(props.value)
       setErrorMessage(result ?? undefined)
     }
   })
@@ -69,9 +71,14 @@ export function TextInput(rawProps: TextInputProps) {
       setValue(newValue)
       props.onChangeValue?.(newValue)
 
-      if (props.onChangeValidValue !== undefined) {
-        if (typeof props.errorMessage !== 'string' && (await props.errorMessage?.(newValue)) === undefined) {
-          props.onChangeValidValue(newValue)
+      if (typeof props.errorMessage === 'string') {
+        setErrorMessage(props.errorMessage)
+      } else {
+        const result = await props.errorMessage?.(newValue)
+        setErrorMessage(result ?? undefined)
+
+        if (result === undefined) {
+          props.onChangeValidValue?.(newValue)
         }
       }
     }
@@ -91,7 +98,7 @@ export function TextInput(rawProps: TextInputProps) {
         <Gravity class="mantle-ui-TextInput_prepend">{rawProps.prepend}</Gravity>
         <input
           class="mantle-ui-TextInput_input"
-          attr:value={value()}
+          value={value()}
           placeholder={props.placeholder}
           type={props.type}
           disabled={props.disabled}
