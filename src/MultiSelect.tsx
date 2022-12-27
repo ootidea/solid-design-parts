@@ -1,6 +1,6 @@
 import { call } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createMemo, createSignal, For, Show } from 'solid-js'
+import { createEffect, createMemo, createSignal, For, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Checkbox } from './Checkbox'
 import { Divider } from './Divider'
@@ -54,9 +54,14 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     setSelected(() => selected)
     props.onChangeSelected?.(selected)
 
-    if (props.onChangeValidSelected !== undefined) {
-      if (typeof props.errorMessage !== 'string' && (await props.errorMessage?.(selected)) === undefined) {
-        props.onChangeValidSelected(selected)
+    if (typeof props.errorMessage === 'string') {
+      setErrorMessage(props.errorMessage)
+    } else {
+      const result = await props.errorMessage?.(selected)
+      setErrorMessage(result ?? undefined)
+
+      if (result === undefined) {
+        props.onChangeValidSelected?.(selected)
       }
     }
   }
@@ -65,14 +70,16 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createEffect(async () => {
+    props.selected
+
     if (props.errorMessage === undefined) {
       setErrorMessage(undefined)
     } else if (typeof props.errorMessage === 'string') {
       setErrorMessage(props.errorMessage)
-    } else if (!shouldValidate()) {
+    } else if (!untrack(shouldValidate)) {
       setErrorMessage(undefined)
     } else {
-      const result = await props.errorMessage(selected())
+      const result = await props.errorMessage(props.selected)
       setErrorMessage(result ?? undefined)
     }
   })
