@@ -73,9 +73,6 @@ export function RadioButtonsComponent() {
             ]}
           />
         </div>
-        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="grid" gridColumnsCount={2} values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
-        </div>
         <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
           <RadioButtons layout="space-between" values={['left', 'middle', 'right']} />
         </div>
@@ -84,6 +81,54 @@ export function RadioButtonsComponent() {
         </div>
         <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
           <RadioButtons layout="space-around" values={['left', 'middle', 'right']} />
+        </div>
+      </Sample>
+
+      <Sample title="Grid layout">
+        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons gridColumnsCount={2} values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+        </div>
+        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons
+            layout="space-between"
+            gridColumnsCount={2}
+            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+          />
+        </div>
+        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons
+            layout="space-evenly"
+            gridColumnsCount={2}
+            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+          />
+        </div>
+        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons layout="space-around" gridColumnsCount={2} values={['left', 'middle', 'right']} />
+        </div>
+      </Sample>
+
+      <Sample title="Gap">
+        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons layout="vertical" gap="10px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+        </div>
+        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <RadioButtons
+            layout="flex-wrap"
+            values={[
+              'January',
+              'February',
+              'March',
+              'April',
+              'May',
+              'June',
+              'July',
+              'August',
+              'September',
+              'October',
+              'November',
+              'December',
+            ]}
+          />
         </div>
       </Sample>
     </article>

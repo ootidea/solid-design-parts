@@ -10,8 +10,15 @@
 
   &[data-layout='horizontal'] {
     display: grid;
-    grid-auto-flow: column;
     grid-auto-columns: max-content;
+
+    &.mantle-ui-RadioButtons_has-columns-count {
+      grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+    }
+
+    &:not(.mantle-ui-RadioButtons_has-columns-count) {
+      grid-auto-flow: column;
+    }
   }
 
   &[data-layout='vertical'] {
@@ -24,30 +31,46 @@
     flex-wrap: wrap;
   }
 
-  &[data-layout='grid'] {
-    display: grid;
-    grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
-  }
-
   &[data-layout='space-between'] {
     display: grid;
-    grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-between;
+
+    &.mantle-ui-RadioButtons_has-columns-count {
+      grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+    }
+
+    &:not(.mantle-ui-RadioButtons_has-columns-count) {
+      grid-auto-flow: column;
+    }
   }
 
   &[data-layout='space-around'] {
     display: grid;
-    grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-around;
+
+    &.mantle-ui-RadioButtons_has-columns-count {
+      grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+    }
+
+    &:not(.mantle-ui-RadioButtons_has-columns-count) {
+      grid-auto-flow: column;
+    }
   }
 
   &[data-layout='space-evenly'] {
     display: grid;
-    grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-evenly;
+
+    &.mantle-ui-RadioButtons_has-columns-count {
+      grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+    }
+
+    &:not(.mantle-ui-RadioButtons_has-columns-count) {
+      grid-auto-flow: column;
+    }
   }
 }
 
