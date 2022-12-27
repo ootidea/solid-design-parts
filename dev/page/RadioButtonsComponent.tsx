@@ -109,26 +109,10 @@ export function RadioButtonsComponent() {
 
       <Sample title="Gap">
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="vertical" gap="10px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+          <RadioButtons layout="vertical" gap="20px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
         </div>
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons
-            layout="flex-wrap"
-            values={[
-              'January',
-              'February',
-              'March',
-              'April',
-              'May',
-              'June',
-              'July',
-              'August',
-              'September',
-              'October',
-              'November',
-              'December',
-            ]}
-          />
+          <RadioButtons gridColumnsCount={2} gap="0.5em 2em" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
         </div>
       </Sample>
     </article>
