@@ -77,11 +77,11 @@ export function TextInputComponent() {
 
       <Sample
         title="Force validation"
-        description="If forceValidation option is set, it perform validation even if the user did not edit it."
+        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
       >
         <TextInput
           placeholder="placeholder"
-          forceValidation
+          validateInitialValue
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
 
@@ -90,7 +90,7 @@ export function TextInputComponent() {
         />
         <TextInput
           value="Default value"
-          forceValidation
+          validateInitialValue
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 

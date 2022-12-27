@@ -58,11 +58,11 @@ export function AutoSizeTextAreaComponent() {
 
       <Sample
         title="Force validation"
-        description="If forceValidation option is set, it perform validation even if the user did not edit it."
+        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
       >
         <AutoSizeTextArea
           placeholder="placeholder"
-          forceValidation
+          validateInitialValue
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
 
@@ -71,7 +71,7 @@ export function AutoSizeTextAreaComponent() {
         />
         <AutoSizeTextArea
           value="Default value"
-          forceValidation
+          validateInitialValue
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 

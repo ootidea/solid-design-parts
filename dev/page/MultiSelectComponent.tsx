@@ -53,11 +53,11 @@ export function MultiSelectComponent() {
 
       <Sample
         title="Force validation"
-        description="If forceValidation option is set, it perform validation even if the user did not edit it."
+        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
       >
         <MultiSelect
           values={['Female', 'Male', 'Other']}
-          forceValidation
+          validateInitialValue
           errorMessage={(selected) => {
             if (selected.size < 2) return 'Select multiple options'
 

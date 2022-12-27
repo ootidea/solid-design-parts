@@ -22,7 +22,7 @@ export type MultiSelectProps<T extends string> = Props<{
   placeholder?: string
   disabled?: boolean
   errorMessage?: string | ((selected: ReadonlySet<T>) => Promisable<string | void>)
-  forceValidation?: boolean
+  validateInitialValue?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
   onChangeSelected?: (selected: Set<T>) => void
@@ -36,7 +36,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       selected: new Set(),
       placeholder: '',
       disabled: false,
-      forceValidation: false,
+      validateInitialValue: false,
       fullWidth: false,
       showSearchBox: false,
     },
@@ -54,7 +54,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     props.onChangeSelected?.(selected)
   }
 
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'forceValidation')
+  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createEffect(async () => {

@@ -28,7 +28,7 @@ export type TextInputProps = Props<{
   >
   disabled?: boolean
   errorMessage?: string | ((value: string) => Promisable<string | void>)
-  forceValidation?: boolean
+  validateInitialValue?: boolean
   radius?: string
   prepend?: JSX.Element
   append?: JSX.Element
@@ -39,12 +39,12 @@ export type TextInputProps = Props<{
 export function TextInput(rawProps: TextInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { disabled: false, forceValidation: false, radius: 'var(--mantle-ui-input-border-radius)' },
+    { disabled: false, validateInitialValue: false, radius: 'var(--mantle-ui-input-border-radius)' },
     ['value', 'placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const [value, setValue] = createInjectableSignal(props, 'value')
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'forceValidation')
+  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
   const [inputElementHasFocus, setInputElementHasFocus] = createSignal(false)
 

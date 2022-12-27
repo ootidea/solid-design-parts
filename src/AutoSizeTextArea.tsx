@@ -10,7 +10,7 @@ export type AutoSizeTextAreaProps = Props<
   {
     value?: string
     errorMessage?: string | ((value: string) => Promisable<string | void>)
-    forceValidation?: boolean
+    validateInitialValue?: boolean
     onChangeValue?: (value: string) => void
     onChangeValidValue?: (value: string) => void
   },
@@ -18,7 +18,7 @@ export type AutoSizeTextAreaProps = Props<
 >
 
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
-  const [props, restProps] = prepareProps(rawProps, { forceValidation: false }, [
+  const [props, restProps] = prepareProps(rawProps, { validateInitialValue: false }, [
     'value',
     'errorMessage',
     'onChangeValue',
@@ -30,7 +30,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     props.onChangeValue?.(value)
   }
 
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'forceValidation')
+  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createEffect(async () => {
