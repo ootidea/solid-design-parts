@@ -53,7 +53,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       onChangeValue(newValue)
 
       if (props.onChangeValidValue !== undefined) {
-        if (typeof props.errorMessage === 'string' || (await props.errorMessage?.(newValue)) === undefined) {
+        if (typeof props.errorMessage !== 'string' && (await props.errorMessage?.(newValue)) === undefined) {
           props.onChangeValidValue(newValue)
         }
       }
