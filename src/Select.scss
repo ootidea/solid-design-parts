@@ -35,6 +35,10 @@
   margin-right: 0.8em;
 }
 
+.mantle-ui-Select_preview {
+  white-space: pre-wrap;
+}
+
 .mantle-ui-Select_invisible {
   visibility: hidden;
   height: 0;
@@ -43,6 +47,7 @@
 
 .mantle-ui-Select_placeholder {
   color: var(--mantle-ui-placeholder-text-color);
+  white-space: pre-wrap;
   user-select: none;
 }
 
@@ -94,15 +99,15 @@
   text-align: start;
 
   border: none;
-  padding: 0 0.8em;
+  padding: 0.5em 0.8em;
   box-sizing: border-box;
   width: 100%;
-  height: 2.5em;
   border-radius: 0.4em;
 
   background-color: transparent;
   color: inherit;
   font: inherit;
+  white-space: pre-wrap;
   cursor: pointer;
 
   &:focus-visible {
