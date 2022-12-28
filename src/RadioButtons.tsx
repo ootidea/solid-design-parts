@@ -1,5 +1,6 @@
-import { assert, isNotEmpty } from 'base-up'
-import { For } from 'solid-js'
+import { assert, call, isNotEmpty } from 'base-up'
+import { Promisable } from 'base-up/dist/types/Promise'
+import { createEffect, createSignal, For, untrack } from 'solid-js'
 import css from './RadioButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -14,8 +15,11 @@ export type RadioButtonsProps<Values extends readonly string[]> = Props<{
   gap?: string
   gridColumnsCount?: number | undefined
   disabled?: boolean | ReadonlySet<string>
+  errorMessage?: string | ((selected: Values[number] | undefined) => Promisable<string | void>)
+  validateInitialValue?: boolean
   enableDeselection?: boolean
   onChangeSelected?: (selected: Values[number] | undefined) => void
+  onChangeValidSelected?: (selected: Values[number] | undefined) => void
 }>
 
 export function RadioButtons<Values extends readonly string[]>(rawProps: RadioButtonsProps<Values>) {
@@ -28,12 +32,31 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
       layout: 'horizontal',
       gap: '0.2em 1em',
       disabled: false,
+      validateInitialValue: false,
       enableDeselection: false,
     },
-    ['selected', 'values', 'gridColumnsCount', 'onChangeSelected']
+    ['selected', 'values', 'gridColumnsCount', 'errorMessage', 'onChangeSelected', 'onChangeValidSelected']
   )
 
   const [selected, setSelected] = createInjectableSignal(props, 'selected')
+
+  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
+
+  const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
+  createEffect(async () => {
+    props.selected
+
+    if (props.errorMessage === undefined) {
+      setErrorMessage(undefined)
+    } else if (typeof props.errorMessage === 'string') {
+      setErrorMessage(props.errorMessage)
+    } else if (!untrack(shouldValidate)) {
+      setErrorMessage(undefined)
+    } else {
+      const result = await props.errorMessage(props.selected)
+      setErrorMessage(result ?? undefined)
+    }
+  })
 
   function isDisabled(value: string): boolean {
     if (typeof props.disabled === 'boolean') return props.disabled
@@ -41,15 +64,28 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     return props.disabled.has(value)
   }
 
-  function onClick(value: Values[number]) {
-    if (selected() === value) {
-      if (props.enableDeselection) {
-        setSelected(undefined)
-        props.onChangeSelected?.(undefined)
+  async function onClick(value: Values[number]) {
+    setShouldValidate(true)
+    const nextSelected = call(() => {
+      if (selected() === value && props.enableDeselection) {
+        return undefined
+      } else {
+        return value
       }
+    })
+
+    setSelected(nextSelected)
+    props.onChangeSelected?.(nextSelected)
+
+    if (typeof props.errorMessage === 'string') {
+      setErrorMessage(props.errorMessage)
     } else {
-      setSelected(() => value)
-      props.onChangeSelected?.(value)
+      const result = await props.errorMessage?.(nextSelected)
+      setErrorMessage(result ?? undefined)
+
+      if (result === undefined) {
+        props.onChangeValidSelected?.(nextSelected)
+      }
     }
   }
 
@@ -61,28 +97,33 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
         '--mantle-ui-RadioButtons_gap': props.gap,
         '--mantle-ui-RadioButtons_grid-columns-count': props.gridColumnsCount,
       }}
+      aria-invalid={errorMessage() !== undefined}
       data-layout={props.layout}
+      data-grid-columns-count={props.gridColumnsCount}
     >
-      <For each={props.values}>
-        {(value) => (
-          <label
-            class={joinClasses(rawProps, 'mantle-ui-RadioButtons_label')}
-            aria-disabled={isDisabled(value)}
-            {...restProps}
-          >
-            <input
-              type="radio"
-              class="mantle-ui-RadioButtons_radio"
-              value={value}
-              name={props.name}
-              checked={value === selected()}
-              disabled={isDisabled(value)}
-              onClick={() => onClick(value)}
-            />
-            {value}
-          </label>
-        )}
-      </For>
+      <div class="mantle-ui-RadioButtons_radio-buttons">
+        <For each={props.values}>
+          {(value) => (
+            <label
+              class={joinClasses(rawProps, 'mantle-ui-RadioButtons_label')}
+              aria-disabled={isDisabled(value)}
+              {...restProps}
+            >
+              <input
+                type="radio"
+                class="mantle-ui-RadioButtons_radio"
+                value={value}
+                name={props.name}
+                checked={value === selected()}
+                disabled={isDisabled(value)}
+                onClick={() => onClick(value)}
+              />
+              {value}
+            </label>
+          )}
+        </For>
+      </div>
+      <p class="mantle-ui-RadioButtons_error-message">{errorMessage()}</p>
     </div>
   )
 }

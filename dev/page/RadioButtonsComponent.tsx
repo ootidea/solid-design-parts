@@ -114,6 +114,36 @@ export function RadioButtonsComponent() {
           <RadioButtons gridColumnsCount={2} gap="0.5em 2em" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
         </div>
       </Sample>
+
+      <Sample title="Error message">
+        <RadioButtons values={['left', 'center', 'right']} selected="left" errorMessage="Invalid" />
+      </Sample>
+
+      <Sample title="Validation">
+        <RadioButtons
+          values={['left', 'center', 'right']}
+          errorMessage={(selected) => {
+            if (selected === 'center') return 'Currently, center is not available.'
+
+            return
+          }}
+        />
+      </Sample>
+
+      <Sample
+        title="Validate initial value"
+        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
+      >
+        <RadioButtons
+          values={['left', 'center', 'right']}
+          errorMessage={(selected) => {
+            if (selected !== 'center') return 'Must be center'
+
+            return
+          }}
+          validateInitialValue
+        />
+      </Sample>
     </article>
   )
 }
