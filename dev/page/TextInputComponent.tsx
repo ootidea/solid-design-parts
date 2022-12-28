@@ -99,6 +99,12 @@ export function TextInputComponent() {
         />
       </Sample>
 
+      <Sample title="Required">
+        <TextInput placeholder="placeholder" required errorMessage="Required" />
+        <TextInput placeholder="placeholder" required errorMessage="Required" validateInitialValue />
+        <TextInput placeholder="Empty error message" required />
+      </Sample>
+
       <Sample title="Radius">
         <TextInput value="default value" radius="0" />
         <TextInput placeholder="placeholder" radius="9999px" />

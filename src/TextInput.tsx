@@ -1,3 +1,4 @@
+import { call } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createEffect, createSignal, JSX, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
@@ -27,6 +28,7 @@ export type TextInputProps = Props<{
     | 'week'
   >
   disabled?: boolean
+  required?: boolean
   errorMessage?: string | ((value: string) => Promisable<string | void>)
   validateInitialValue?: boolean
   radius?: string
@@ -39,7 +41,13 @@ export type TextInputProps = Props<{
 export function TextInput(rawProps: TextInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { value: '', disabled: false, validateInitialValue: false, radius: 'var(--mantle-ui-input-border-radius)' },
+    {
+      value: '',
+      disabled: false,
+      required: false,
+      validateInitialValue: false,
+      radius: 'var(--mantle-ui-input-border-radius)',
+    },
     ['placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
@@ -52,13 +60,32 @@ export function TextInput(rawProps: TextInputProps) {
   createEffect(async () => {
     props.value
 
-    if (typeof props.errorMessage === 'string') {
-      setErrorMessage(props.errorMessage)
-    } else if (!untrack(shouldValidate)) {
-      setErrorMessage(undefined)
+    if (props.required) {
+      if (!untrack(shouldValidate)) {
+        setErrorMessage(undefined)
+      } else if (typeof props.errorMessage === 'string') {
+        if (props.value) {
+          setErrorMessage(undefined)
+        } else {
+          setErrorMessage(props.errorMessage)
+        }
+      } else {
+        const result = await props.errorMessage?.(props.value)
+        if (props.value) {
+          setErrorMessage(result ?? undefined)
+        } else {
+          setErrorMessage(result ?? '')
+        }
+      }
     } else {
-      const result = await props.errorMessage?.(props.value)
-      setErrorMessage(result ?? undefined)
+      if (typeof props.errorMessage === 'string') {
+        setErrorMessage(props.errorMessage)
+      } else if (!untrack(shouldValidate)) {
+        setErrorMessage(undefined)
+      } else {
+        const result = await props.errorMessage?.(props.value)
+        setErrorMessage(result ?? undefined)
+      }
     }
   })
 
@@ -69,15 +96,34 @@ export function TextInput(rawProps: TextInputProps) {
       setValue(newValue)
       props.onChangeValue?.(newValue)
 
-      if (typeof props.errorMessage === 'string') {
-        setErrorMessage(props.errorMessage)
-      } else {
-        const result = await props.errorMessage?.(newValue)
-        setErrorMessage(result ?? undefined)
-
-        if (result === undefined) {
-          props.onChangeValidValue?.(newValue)
+      const nextErrorMessage = await call(async () => {
+        if (props.required) {
+          if (typeof props.errorMessage === 'string') {
+            if (newValue) {
+              return undefined
+            } else {
+              return props.errorMessage
+            }
+          } else {
+            const result = await props.errorMessage?.(newValue)
+            if (newValue) {
+              return result ?? undefined
+            } else {
+              return result ?? ''
+            }
+          }
+        } else {
+          if (typeof props.errorMessage === 'string') {
+            return props.errorMessage
+          } else {
+            const result = await props.errorMessage?.(newValue)
+            return result ?? undefined
+          }
         }
+      })
+      setErrorMessage(nextErrorMessage)
+      if (nextErrorMessage === undefined) {
+        props.onChangeValidValue?.(newValue)
       }
     }
   }
@@ -90,6 +136,7 @@ export function TextInput(rawProps: TextInputProps) {
       style={joinStyle(rawProps.style, { '--mantle-ui-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessage() !== undefined}
+      aria-required={props.required}
       {...restProps}
     >
       <StretchLayout class="mantle-ui-TextInput_body" stretchAt={1}>
