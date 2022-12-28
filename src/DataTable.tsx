@@ -195,9 +195,7 @@ export function DataTable<
       })}
       role="table"
       style={joinStyle(props.style, {
-        '--mantle-ui-DataTable_template-columns': `max-content ${props.columns
-          .map(getColumnWidth)
-          .join(' max-content ')} max-content`,
+        '--mantle-ui-DataTable_template-columns': `1px ${props.columns.map(getColumnWidth).join(' 1px ')} 1px`,
         '--mantle-ui-DataTable_even-row-background-color': props.evenRowBackgroundColor,
         '--mantle-ui-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
       })}
