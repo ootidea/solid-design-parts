@@ -106,7 +106,7 @@ export function RadioButtonsComponent() {
         </div>
       </Sample>
 
-      <Sample title="Gap">
+      <Sample title="Gap" description="Note that flex gap is not supported on iOS versions earlier than 15.4.">
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
           <RadioButtons layout="vertical" gap="20px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
         </div>
