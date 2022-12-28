@@ -72,14 +72,12 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   createEffect(async () => {
     props.selected
 
-    if (props.errorMessage === undefined) {
-      setErrorMessage(undefined)
-    } else if (typeof props.errorMessage === 'string') {
+    if (typeof props.errorMessage === 'string') {
       setErrorMessage(props.errorMessage)
     } else if (!untrack(shouldValidate)) {
       setErrorMessage(undefined)
     } else {
-      const result = await props.errorMessage(props.selected)
+      const result = await props.errorMessage?.(props.selected)
       setErrorMessage(result ?? undefined)
     }
   })
