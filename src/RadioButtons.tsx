@@ -7,22 +7,22 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type RadioButtonsProps<Values extends readonly string[]> = Props<{
-  values: Values
-  selected?: Values[number] | undefined
+export type RadioButtonsProps<T extends string> = Props<{
+  values: readonly T[]
+  selected?: T | undefined
   name?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
   gridColumnsCount?: number | undefined
   disabled?: boolean | ReadonlySet<string>
-  errorMessage?: string | ((selected: Values[number] | undefined) => Promisable<string | void>)
+  errorMessage?: string | ((selected: T | undefined) => Promisable<string | void>)
   validateInitialValue?: boolean
   enableDeselection?: boolean
-  onChangeSelected?: (selected: Values[number] | undefined) => void
-  onChangeValidSelected?: (selected: Values[number] | undefined) => void
+  onChangeSelected?: (selected: T | undefined) => void
+  onChangeValidSelected?: (selected: T | undefined) => void
 }>
 
-export function RadioButtons<Values extends readonly string[]>(rawProps: RadioButtonsProps<Values>) {
+export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   assert(rawProps.values, isNotEmpty)
 
   const [props, restProps] = prepareProps(
@@ -62,7 +62,7 @@ export function RadioButtons<Values extends readonly string[]>(rawProps: RadioBu
     return props.disabled.has(value)
   }
 
-  async function onClick(value: Values[number]) {
+  async function onClick(value: T) {
     setShouldValidate(true)
     const nextSelected = call(() => {
       if (selected() === value && props.enableDeselection) {
