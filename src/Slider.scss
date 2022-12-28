@@ -14,7 +14,7 @@
 .mantle-ui-Slider_track {
   box-sizing: border-box;
   height: var(--mantle-ui-Slider_track-height);
-  border-radius: 99999px;
+  border-radius: 999vh;
   background: var(--mantle-ui-Slider_track-background);
 
   cursor: pointer;
@@ -28,7 +28,7 @@
   box-sizing: border-box;
   width: var(--mantle-ui-Slider_thumb-width);
   height: var(--mantle-ui-Slider_thumb-height);
-  border-radius: 99999px;
+  border-radius: 999vh;
 
   background-color: var(--mantle-ui-Slider_thumb-color);
   box-shadow: 0 1px 4px oklch(0% 0 0 / 50%);

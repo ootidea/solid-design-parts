@@ -93,7 +93,7 @@ export function ButtonComponent() {
 
       <Sample title="Radius" direction="horizontal">
         <Button radius="0">Button</Button>
-        <Button radius="9999px" ghost>
+        <Button radius="999vh" ghost>
           cancel
         </Button>
         <Button radius="1em" color="achromatic">
