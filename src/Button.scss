@@ -5,14 +5,13 @@
   text-align: center;
 
   box-sizing: border-box;
-  // Since character height is different between full-pitch and half-pitch, set height instead of padding.
-  min-height: 2.45em;
-  padding: 0 1em;
+  padding: 0.4em 1em;
   border-radius: var(--mantle-ui-Button_radius);
   border-width: 1px;
   border-style: solid;
 
   font: inherit;
+  white-space: pre-wrap;
   text-decoration: none;
   cursor: pointer;
 
