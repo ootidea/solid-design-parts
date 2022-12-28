@@ -11,19 +11,18 @@ export function RadioButtonsComponent() {
     <article>
       <PageTitle>RadioButtons</PageTitle>
 
-      <Sample title="Basic example" direction="horizontal">
+      <Sample title="Basic example">
         <RadioButtons name="animal" values={['Dog', 'Cat']} />
       </Sample>
 
       <Sample
         title="Omit name attribute"
         description="Automatically generates a unique name if the attribute is omitted."
-        direction="horizontal"
       >
         <RadioButtons values={['left', 'center', 'right']} />
       </Sample>
 
-      <Sample title="Default selected" direction="horizontal">
+      <Sample title="Default selected">
         <RadioButtons values={['left', 'center', 'right']} selected="left" />
       </Sample>
 
@@ -38,15 +37,15 @@ export function RadioButtonsComponent() {
         <div>selected() === {toLiteral(selected())}</div>
       </Sample>
 
-      <Sample title="Disabled" direction="horizontal">
+      <Sample title="Disabled">
         <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
       </Sample>
 
-      <Sample title="Disabled item" direction="horizontal">
+      <Sample title="Disabled item">
         <RadioButtons values={['left', 'center', 'right']} disabled={new Set(['center'])} />
       </Sample>
 
-      <Sample title="Enable deselection" direction="horizontal" description="">
+      <Sample title="Enable deselection">
         <RadioButtons values={['left', 'center', 'right']} enableDeselection />
       </Sample>
 
