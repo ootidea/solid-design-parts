@@ -1,4 +1,4 @@
-import { objectKeys } from './others'
+import { keysOf } from 'base-up'
 
 export namespace i18n {
   export const literals = defineGetters({
@@ -31,7 +31,7 @@ export namespace i18n {
     source: T
   ): Record<keyof T, string> {
     const result = {}
-    for (const key of objectKeys(source)) {
+    for (const key of keysOf(source)) {
       Object.defineProperty(result, key, {
         get: () => {
           const pack = source[key]

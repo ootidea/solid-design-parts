@@ -1,6 +1,6 @@
+import { assert, isNotUndefined } from 'base-up'
 import { createSignal, Show } from 'solid-js'
 import css from './Resizable.scss'
-import { assertNonUndefined } from './utility/others'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -19,7 +19,7 @@ export function Resizable(rawProps: ResizableProps) {
   function onMouseDown(event: MouseEvent) {
     event.preventDefault()
 
-    assertNonUndefined(rootElement)
+    assert(rootElement, isNotUndefined)
     dragState = { deltaX: event.clientX - rootElement.getBoundingClientRect().right }
     document.body.addEventListener('mousemove', onMouseMove)
   }
@@ -35,7 +35,7 @@ export function Resizable(rawProps: ResizableProps) {
       return
     }
 
-    assertNonUndefined(rootElement)
+    assert(rootElement, isNotUndefined)
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
     const widthPx = right - left - dragState.deltaX

@@ -17,35 +17,6 @@ export type LiteralAutoComplete<Literals extends Base, Base = string> = Literals
  */
 export type DiscriminatedUnion<T, K extends keyof T = keyof T> = K extends K ? { type: K } & T[K] : never
 
-/**
- * Assert that a value is not undefined.
- * Throws an exception if it is undefined.
- */
-export function assertNonUndefined<T>(value: T | undefined, message?: string): asserts value is T {
-  if (value === undefined) {
-    throw new Error(message ?? 'Assertion error: the given value is undefined.')
-  }
-}
-
-export function assertNonEmptyArray<T>(array: readonly T[]): asserts array is [T] & T[] {
-  if (array.length === 0) {
-    throw new Error('Assertion error: the given array is empty.')
-  }
-}
-
-/**
- * Object.keys with improved type.
- * @example
- * objectKeys({ alice: 'female', 123: null, [Symbol()]: true })
- * is equivalent to
- * Object.keys({ alice: 'female', 123: null, [Symbol()]: true }) as ('alice' | '123')[]
- */
-export function objectKeys<T extends {}>(object: T): ObjectKeys<T> {
-  return Object.keys(object) as any
-}
-
-export type ObjectKeys<T, K extends keyof any = keyof T> = (K extends symbol ? never : K extends number ? `${K}` : K)[]
-
 export function isInsideOf(x: number, y: number, rect: DOMRect): boolean {
   if (x < rect.left) return false
   if (rect.right < x) return false

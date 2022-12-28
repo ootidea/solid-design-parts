@@ -1,7 +1,7 @@
-import { minBy } from 'base-up'
+import { assert, isNotUndefined, minBy } from 'base-up'
 import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
-import { assertNonUndefined, observeWidthPx } from './utility/others'
+import { observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -116,7 +116,7 @@ export function Slider(rawProps: SliderProps) {
   }
 
   onMount(() => {
-    assertNonUndefined(trackElement)
+    assert(trackElement, isNotUndefined)
     observeWidthPx(trackElement, setTrackWidthPx)
   })
 

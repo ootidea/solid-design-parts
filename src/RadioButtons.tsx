@@ -1,6 +1,6 @@
+import { assert, isNotEmpty } from 'base-up'
 import { For } from 'solid-js'
 import css from './RadioButtons.scss'
-import { assertNonEmptyArray } from './utility/others'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -19,7 +19,7 @@ export type RadioButtonsProps<Values extends readonly string[]> = Props<{
 }>
 
 export function RadioButtons<Values extends readonly string[]>(rawProps: RadioButtonsProps<Values>) {
-  assertNonEmptyArray(rawProps.values)
+  assert(rawProps.values, isNotEmpty)
 
   const [props, restProps] = prepareProps(
     rawProps,

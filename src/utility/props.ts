@@ -1,6 +1,6 @@
+import { keysOf } from 'base-up'
 import { ComponentProps, createEffect, createSignal, JSX, mergeProps, on, Signal, splitProps } from 'solid-js'
 import { Component } from 'solid-js/types/render/component'
-import { objectKeys } from './others'
 
 export type Props<T, Base extends keyof JSX.IntrinsicElements | Component<any> = 'div'> = Omit<
   ComponentProps<Base>,
@@ -30,7 +30,7 @@ export function createInjectableSignal<T, K extends keyof T>(props: T, key: K, e
  */
 export function toGetters<T extends Record<string, () => unknown>>(functions: T) {
   const result = {}
-  for (const objectKey of objectKeys(functions)) {
+  for (const objectKey of keysOf(functions)) {
     Object.defineProperty(result, objectKey, {
       get: functions[objectKey],
       enumerable: true,
@@ -83,7 +83,7 @@ export function prepareProps<T, U extends Pick<T, OptionalKeys<T>>>(
   otherKnownKeys: (keyof T)[] = []
 ): [T & Required<Pick<T, keyof T & keyof U>>, {}] {
   // Difficult to type accurately because keyof T equals string | number | Symbol but Object.keys returns string[]
-  const keys = objectKeys(defaultValues) as any
+  const keys = keysOf(defaultValues) as any
   // Handle the classList attribute manually because of the bug that it is not updated reactively when transferred using spread syntax.
   return splitProps(mergeProps(defaultValues, rawProps), ['class', 'classList', ...otherKnownKeys, ...keys]) as any
 }
