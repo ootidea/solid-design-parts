@@ -76,7 +76,7 @@ export function TextInputComponent() {
       </Sample>
 
       <Sample
-        title="Force validation"
+        title="Validate initial value"
         description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
       >
         <TextInput
