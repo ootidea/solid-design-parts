@@ -1,4 +1,4 @@
-import { call } from 'base-up'
+import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createEffect, createSignal, JSX, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
@@ -91,40 +91,41 @@ export function TextInput(rawProps: TextInputProps) {
 
   async function onInput(event: InputEvent) {
     setShouldValidate(true)
-    if (event.target instanceof HTMLInputElement) {
-      const newValue = event.target.value
-      setValue(newValue)
-      props.onChangeValue?.(newValue)
 
-      const nextErrorMessage = await call(async () => {
-        if (props.required) {
-          if (typeof props.errorMessage === 'string') {
-            if (newValue) {
-              return undefined
-            } else {
-              return props.errorMessage
-            }
+    if (!isInstanceOf(event.target, HTMLInputElement)) return
+
+    const newValue = event.target.value
+    setValue(newValue)
+    props.onChangeValue?.(newValue)
+
+    const nextErrorMessage = await call(async () => {
+      if (props.required) {
+        if (typeof props.errorMessage === 'string') {
+          if (newValue) {
+            return undefined
           } else {
-            const result = await props.errorMessage?.(newValue)
-            if (newValue) {
-              return result ?? undefined
-            } else {
-              return result ?? ''
-            }
+            return props.errorMessage
           }
         } else {
-          if (typeof props.errorMessage === 'string') {
-            return props.errorMessage
-          } else {
-            const result = await props.errorMessage?.(newValue)
+          const result = await props.errorMessage?.(newValue)
+          if (newValue) {
             return result ?? undefined
+          } else {
+            return result ?? ''
           }
         }
-      })
-      setErrorMessage(nextErrorMessage)
-      if (nextErrorMessage === undefined) {
-        props.onChangeValidValue?.(newValue)
+      } else {
+        if (typeof props.errorMessage === 'string') {
+          return props.errorMessage
+        } else {
+          const result = await props.errorMessage?.(newValue)
+          return result ?? undefined
+        }
       }
+    })
+    setErrorMessage(nextErrorMessage)
+    if (nextErrorMessage === undefined) {
+      props.onChangeValidValue?.(newValue)
     }
   }
 

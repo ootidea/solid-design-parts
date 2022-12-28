@@ -1,4 +1,4 @@
-import { call } from 'base-up'
+import { call, isInstanceOf } from 'base-up'
 import { createSignal, For, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Divider } from './Divider'
@@ -68,15 +68,15 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     if (event.defaultPrevented) return
 
     event.preventDefault()
-    if (event.currentTarget instanceof HTMLElement) {
-      const rect = event.currentTarget.getBoundingClientRect()
-      setDropdownInfo({
-        leftPx: rect.left,
-        topPx: rect.bottom,
-        widthPx: rect.width,
-        maxHeightPx: window.innerHeight - rect.bottom,
-      })
-    }
+    if (!isInstanceOf(event.currentTarget, HTMLElement)) return
+
+    const rect = event.currentTarget.getBoundingClientRect()
+    setDropdownInfo({
+      leftPx: rect.left,
+      topPx: rect.bottom,
+      widthPx: rect.width,
+      maxHeightPx: window.innerHeight - rect.bottom,
+    })
   }
 
   function onOperateOverlay(event: Event) {

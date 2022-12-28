@@ -1,3 +1,4 @@
+import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createEffect, createSignal, untrack } from 'solid-js'
 import css from './AutoSizeTextArea.scss'
@@ -47,19 +48,20 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   async function onInput(event: InputEvent) {
     setShouldValidate(true)
-    if (event.target instanceof HTMLTextAreaElement) {
-      const newValue = event.target.value
-      onChangeValue(newValue)
 
-      if (typeof props.errorMessage === 'string') {
-        setErrorMessage(props.errorMessage)
-      } else {
-        const result = await props.errorMessage?.(newValue)
-        setErrorMessage(result ?? undefined)
+    if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
 
-        if (result === undefined) {
-          props.onChangeValidValue?.(newValue)
-        }
+    const newValue = event.target.value
+    onChangeValue(newValue)
+
+    if (typeof props.errorMessage === 'string') {
+      setErrorMessage(props.errorMessage)
+    } else {
+      const result = await props.errorMessage?.(newValue)
+      setErrorMessage(result ?? undefined)
+
+      if (result === undefined) {
+        props.onChangeValidValue?.(newValue)
       }
     }
   }

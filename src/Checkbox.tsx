@@ -1,3 +1,4 @@
+import { isInstanceOf } from 'base-up'
 import css from './Checkbox.scss'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -26,9 +27,9 @@ export function Checkbox(rawProps: CheckboxProps) {
   )
 
   function onChange(event: Event) {
-    if (event.target instanceof HTMLInputElement) {
-      props.onChangeChecked?.(event.target.checked)
-    }
+    if (!isInstanceOf(event.target, HTMLInputElement)) return
+
+    props.onChangeChecked?.(event.target.checked)
   }
 
   return (

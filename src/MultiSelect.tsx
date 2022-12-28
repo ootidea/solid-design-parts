@@ -1,4 +1,4 @@
-import { call } from 'base-up'
+import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createEffect, createMemo, createSignal, For, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
@@ -99,15 +99,16 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   })
   function onClickLauncher(event: MouseEvent) {
     event.preventDefault()
-    if (event.currentTarget instanceof HTMLElement) {
-      const rect = event.currentTarget.getBoundingClientRect()
-      setDropdownInfo({
-        leftPx: rect.left,
-        topPx: rect.bottom,
-        widthPx: rect.width,
-        maxHeightPx: window.innerHeight - rect.bottom,
-      })
-    }
+
+    if (!isInstanceOf(event.currentTarget, HTMLElement)) return
+
+    const rect = event.currentTarget.getBoundingClientRect()
+    setDropdownInfo({
+      leftPx: rect.left,
+      topPx: rect.bottom,
+      widthPx: rect.width,
+      maxHeightPx: window.innerHeight - rect.bottom,
+    })
   }
 
   function onOperateOverlay(event: Event) {
