@@ -87,8 +87,8 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const followingCount = createMemo(() => selected().size - 1)
 
   const [searchQuery, setSearchQuery] = createSignal('')
-  function search(values: readonly T[]): readonly T[] {
-    const searchWords = searchQuery().split(/[ 　]/)
+  function search(values: readonly T[], searchQuery: string): readonly T[] {
+    const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
       const lowerCaseText = getText(value).toLowerCase()
       return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
@@ -222,13 +222,17 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                       class="mantle-ui-MultiSelect_search-box"
                       placeholder="search"
                       value={searchQuery()}
+                      errorMessage={(value) => {
+                        if (search(props.values, value).length === 0) return ''
+
+                        return
+                      }}
                       onChangeValue={setSearchQuery}
                     />
                   </div>
                 </Show>
                 <Scrollable role="menu">
-                  {/* TODO: implement empty state */}
-                  <For each={search(props.values)}>
+                  <For each={search(props.values, searchQuery())}>
                     {(value, i) => (
                       <>
                         <Show when={i() > 0}>
