@@ -13,13 +13,7 @@ export function SelectComponent() {
 
       <Sample title="Basic example">
         <Select values={['Female', 'Male', 'Other']} />
-      </Sample>
-
-      <Sample title="Placeholder">
         <Select values={['Female', 'Male', 'Other']} placeholder="placeholder" />
-      </Sample>
-
-      <Sample title="Default selected">
         <Select values={['Female', 'Male', 'Other']} selected="Male" />
       </Sample>
 

@@ -13,9 +13,6 @@ export function FoldableComponent() {
 
       <Sample title="Basic example">
         <Foldable title="Title">content</Foldable>
-      </Sample>
-
-      <Sample title="Default unfolded">
         <Foldable title="Title" unfolded>
           content
         </Foldable>

@@ -12,13 +12,7 @@ export function AutoSizeTextAreaComponent() {
 
       <Sample title="Basic example">
         <AutoSizeTextArea />
-      </Sample>
-
-      <Sample title="Placeholder">
         <AutoSizeTextArea placeholder="placeholder" />
-      </Sample>
-
-      <Sample title="Default value">
         <AutoSizeTextArea value="default value" />
       </Sample>
 

@@ -13,14 +13,7 @@ export function DateInputComponent() {
 
       <Sample title="Basic example" direction="horizontal">
         <DateInput />
-      </Sample>
-
-      <Sample title="Placeholder" direction="horizontal">
-        <DateInput placeholder="placeholder" />
         <DateInput placeholder="a little long placeholder" />
-      </Sample>
-
-      <Sample title="Default value" direction="horizontal">
         <DateInput value={new Date()} />
       </Sample>
 

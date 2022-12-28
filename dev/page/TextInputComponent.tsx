@@ -18,13 +18,7 @@ export function TextInputComponent() {
 
       <Sample title="Basic example">
         <TextInput />
-      </Sample>
-
-      <Sample title="Placeholder">
         <TextInput placeholder="placeholder" />
-      </Sample>
-
-      <Sample title="Default value">
         <TextInput value="default value" />
       </Sample>
 

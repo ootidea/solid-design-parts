@@ -12,18 +12,12 @@ export function MultiSelectComponent() {
 
       <Sample title="Basic example">
         <MultiSelect values={['Female', 'Male', 'Other']} />
-      </Sample>
-
-      <Sample title="Placeholder">
         <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" />
+        <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
       </Sample>
 
       <Sample title="Change titles">
         <MultiSelect values={['dog', 'cat', 'rabbit']} titles={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
-      </Sample>
-
-      <Sample title="Default selected">
-        <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
       </Sample>
 
       <Sample title="Bind to signal">

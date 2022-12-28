@@ -12,10 +12,6 @@ export function CheckboxComponent() {
 
       <Sample title="Basic example" direction="horizontal">
         <Checkbox>Agree</Checkbox>
-        <Checkbox>Accept</Checkbox>
-      </Sample>
-
-      <Sample title="Default checked">
         <Checkbox checked>Agree</Checkbox>
       </Sample>
 
