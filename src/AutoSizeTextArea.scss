@@ -47,12 +47,12 @@
     background-color: var(--mantle-ui-disabled-input-background-color);
   }
 
-  :where(.mantle-ui-AutoSizeTextArea_root[aria-invalid='true'] &) {
-    border-color: var(--mantle-ui-error-color);
-  }
-
   &:focus {
     border-color: var(--mantle-ui-primary-color);
+  }
+
+  .mantle-ui-AutoSizeTextArea_root[aria-invalid='true'] & {
+    border-color: var(--mantle-ui-error-color);
   }
 }
 

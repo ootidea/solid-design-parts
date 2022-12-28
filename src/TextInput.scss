@@ -9,13 +9,13 @@
     background-color: var(--mantle-ui-disabled-input-background-color);
   }
 
-  :where(.mantle-ui-TextInput_root[aria-invalid='true'] &) {
-    border-color: var(--mantle-ui-error-color);
-  }
-
   /* TODO: Use :has() instead of CSS class */
   .mantle-ui-TextInput_input-element-has-focus & {
     border-color: var(--mantle-ui-primary-color);
+  }
+
+  .mantle-ui-TextInput_root[aria-invalid='true'] & {
+    border-color: var(--mantle-ui-error-color);
   }
 }
 
