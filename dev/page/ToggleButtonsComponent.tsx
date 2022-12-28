@@ -16,13 +16,13 @@ export function ToggleButtonsComponent() {
       <PageTitle>ToggleButtons</PageTitle>
 
       <Sample title="Basic example">
-        <ToggleButtons values={['Male', 'Female']} />
-        <ToggleButtons values={['Female', 'Male', 'Other']} />
+        <ToggleButtons values={['Dog', 'Cat']} />
+        <ToggleButtons values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
       </Sample>
 
       <Sample title="Exclusive (single select)">
-        <ToggleButtons exclusive values={['Male', 'Female']} />
-        <ToggleButtons exclusive values={['Female', 'Male', 'Other']} />
+        <ToggleButtons exclusive values={['Dog', 'Cat']} />
+        <ToggleButtons exclusive values={['Female', 'Male', 'Other']} selected="Male" />
       </Sample>
 
       <Sample title="Titles">
@@ -34,11 +34,6 @@ export function ToggleButtonsComponent() {
         <ToggleButtons values={['left', 'right']}>
           {({ value }) => <Icon src={{ left: formatAlignLeftIcon, right: formatAlignRightIcon }[value]} />}
         </ToggleButtons>
-      </Sample>
-
-      <Sample title="Default selected">
-        <ToggleButtons exclusive values={['Male', 'Female']} selected="Male" />
-        <ToggleButtons values={['en', 'zh']} selected={new Set(['en', 'zh'])} />
       </Sample>
 
       <Sample title="Bind to signal">

@@ -13,14 +13,11 @@ export function DatePickerComponent() {
 
       <Sample title="Basic example">
         <DatePicker />
+        <DatePicker value={new Date()} />
       </Sample>
 
       <Sample title="Specify default month">
         <DatePicker month={new Date(1999, 0)} />
-      </Sample>
-
-      <Sample title="Specify default selected date">
-        <DatePicker value={new Date()} />
       </Sample>
 
       <Sample title="Bind to signal">
