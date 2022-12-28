@@ -198,7 +198,6 @@ export function DataTable<
         '--mantle-ui-DataTable_template-columns': `max-content ${props.columns
           .map(getColumnWidth)
           .join(' max-content ')} max-content`,
-        '--mantle-ui-data-table-column-count': props.columns.length,
         '--mantle-ui-DataTable_even-row-background-color': props.evenRowBackgroundColor,
         '--mantle-ui-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
       })}

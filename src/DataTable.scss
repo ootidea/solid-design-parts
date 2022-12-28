@@ -78,7 +78,7 @@
 }
 
 .mantle-ui-DataTable_horizontal-ruled-line {
-  grid-column: 1 / calc(2 * var(--mantle-ui-data-table-column-count) + 2);
+  grid-column: 1 / -1;
 }
 
 .mantle-ui-DataTable_empty-state {
@@ -86,7 +86,7 @@
 }
 
 .mantle-ui-DataTable_empty-state-cell {
-  grid-column: 2 / calc(2 * var(--mantle-ui-data-table-column-count) + 1);
+  grid-column: 2 / -2;
 }
 
 .mantle-ui-DataTable_empty-message {
