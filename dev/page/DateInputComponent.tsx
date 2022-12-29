@@ -31,7 +31,7 @@ export function DateInputComponent() {
         <DateInput disabled={(date) => date.getTime() < Date.now()} />
       </Sample>
 
-      <Sample title="Default value" direction="horizontal">
+      <Sample title="Clear button" direction="horizontal">
         <DateInput placeholder="placeholder" value={new Date()} showClearButton />
       </Sample>
 
