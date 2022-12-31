@@ -41,10 +41,11 @@
     "dev": "vite serve dev",
     "test": "echo \"test not setup\"",
     "build": "rollup -c",
-    "prepublishOnly": "npm run build",
     "format": "run-p format:*",
     "format:prettier": "prettier -w \"src/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
     "format:package-json": "sort-package-json",
+    "postversion": "git push && git push --tags",
+    "prepublishOnly": "npm run build",
     "update-deps": "taze -w && npm i",
     "typecheck": "tsc --noEmit"
   },
