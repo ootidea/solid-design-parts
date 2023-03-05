@@ -1,6 +1,6 @@
 {
   "name": "solid-mantle-ui",
-  "version": "0.0.0",
+  "version": "0.0.10",
   "private": false,
   "description": "",
   "keywords": [
@@ -14,21 +14,17 @@
     "type": "git",
     "url": "git+https://github.com/ootidea/solid-mantle-ui.git"
   },
-  "license": "CC0",
+  "license": "CC0-1.0",
   "author": "ootidea",
   "contributors": [],
   "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
-      "solid": "./dist/source/index.jsx",
       "import": "./dist/esm/index.js",
-      "browser": {
-        "import": "./dist/esm/index.js",
-        "require": "./dist/cjs/index.js"
-      },
-      "require": "./dist/cjs/index.js",
-      "node": "./dist/cjs/index.js"
+      "browser": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "main": "dist/cjs/index.js",
