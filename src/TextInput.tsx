@@ -1,4 +1,4 @@
-import { call, isInstanceOf } from 'base-up'
+import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createRenderEffect, createSignal, JSX, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
@@ -58,35 +58,7 @@ export function TextInput(rawProps: TextInputProps) {
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
-    props.value
-
-    if (props.required) {
-      if (!untrack(shouldValidate)) {
-        setErrorMessage(undefined)
-      } else if (typeof props.errorMessage === 'string') {
-        if (props.value) {
-          setErrorMessage(undefined)
-        } else {
-          setErrorMessage(props.errorMessage)
-        }
-      } else {
-        const result = await props.errorMessage?.(props.value)
-        if (props.value) {
-          setErrorMessage(result ?? undefined)
-        } else {
-          setErrorMessage(result ?? '')
-        }
-      }
-    } else {
-      if (typeof props.errorMessage === 'string') {
-        setErrorMessage(props.errorMessage)
-      } else if (!untrack(shouldValidate)) {
-        setErrorMessage(undefined)
-      } else {
-        const result = await props.errorMessage?.(props.value)
-        setErrorMessage(result ?? undefined)
-      }
-    }
+    setErrorMessage(await deriveErrorMessage(props.value, untrack(shouldValidate), props.required, props.errorMessage))
   })
 
   async function onInput(event: InputEvent) {
@@ -98,34 +70,45 @@ export function TextInput(rawProps: TextInputProps) {
     setValue(newValue)
     props.onChangeValue?.(newValue)
 
-    const nextErrorMessage = await call(async () => {
-      if (props.required) {
-        if (typeof props.errorMessage === 'string') {
-          if (newValue) {
-            return undefined
-          } else {
-            return props.errorMessage
-          }
-        } else {
-          const result = await props.errorMessage?.(newValue)
-          if (newValue) {
-            return result ?? undefined
-          } else {
-            return result ?? ''
-          }
-        }
-      } else {
-        if (typeof props.errorMessage === 'string') {
-          return props.errorMessage
-        } else {
-          const result = await props.errorMessage?.(newValue)
-          return result ?? undefined
-        }
-      }
-    })
+    const nextErrorMessage = await deriveErrorMessage(newValue, shouldValidate(), props.required, props.errorMessage)
     setErrorMessage(nextErrorMessage)
     if (nextErrorMessage === undefined) {
       props.onChangeValidValue?.(newValue)
+    }
+  }
+
+  async function deriveErrorMessage(
+    value: string,
+    shouldValidate: boolean,
+    required: boolean,
+    errorMessage: TextInputProps['errorMessage']
+  ) {
+    if (required) {
+      if (!shouldValidate) {
+        return undefined
+      } else if (typeof errorMessage === 'string') {
+        if (value) {
+          return undefined
+        } else {
+          return errorMessage
+        }
+      } else {
+        const result = await errorMessage?.(value)
+        if (value) {
+          return result ?? undefined
+        } else {
+          return result ?? ''
+        }
+      }
+    } else {
+      if (typeof errorMessage === 'string') {
+        return errorMessage
+      } else if (!shouldValidate) {
+        return undefined
+      } else {
+        const result = await errorMessage?.(value)
+        return result ?? undefined
+      }
     }
   }
 
