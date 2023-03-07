@@ -70,13 +70,13 @@ export function RadioButtonsComponent() {
           />
         </div>
         <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-between" values={['left', 'middle', 'right']} />
+          <RadioButtons layout="space-between" values={['left', 'center', 'right']} />
         </div>
         <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-evenly" values={['left', 'middle', 'right']} />
+          <RadioButtons layout="space-evenly" values={['left', 'center', 'right']} />
         </div>
         <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-around" values={['left', 'middle', 'right']} />
+          <RadioButtons layout="space-around" values={['left', 'center', 'right']} />
         </div>
       </Sample>
 
@@ -99,7 +99,7 @@ export function RadioButtonsComponent() {
           />
         </div>
         <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-around" gridColumnsCount={2} values={['left', 'middle', 'right']} />
+          <RadioButtons layout="space-around" gridColumnsCount={2} values={['left', 'center', 'right']} />
         </div>
       </Sample>
 
@@ -140,6 +140,11 @@ export function RadioButtonsComponent() {
           }}
           validateInitialValue
         />
+      </Sample>
+
+      <Sample title="Required">
+        <RadioButtons values={['left', 'center', 'right']} required validateInitialValue />
+        <RadioButtons values={['left', 'center', 'right']} required enableDeselection />
       </Sample>
     </article>
   )

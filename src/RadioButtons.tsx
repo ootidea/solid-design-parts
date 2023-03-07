@@ -15,6 +15,7 @@ export type RadioButtonsProps<T extends string> = Props<{
   gap?: string
   gridColumnsCount?: number | undefined
   disabled?: boolean | ReadonlySet<string>
+  required?: boolean
   errorMessage?: string | ((selected: T | undefined) => Promisable<string | void>)
   validateInitialValue?: boolean
   enableDeselection?: boolean
@@ -32,6 +33,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       layout: 'horizontal',
       gap: '0.2em 1em',
       disabled: false,
+      required: false,
       validateInitialValue: false,
       enableDeselection: false,
     },
@@ -46,7 +48,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
 
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage))
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required))
   })
 
   function isDisabled(value: string): boolean {
@@ -68,7 +70,12 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
     setSelected(nextSelected)
     props.onChangeSelected?.(nextSelected)
 
-    const nextErrorMessage = await deriveErrorMessage(shouldValidate(), nextSelected, props.errorMessage)
+    const nextErrorMessage = await deriveErrorMessage(
+      shouldValidate(),
+      nextSelected,
+      props.errorMessage,
+      props.required
+    )
     setErrorMessage(nextErrorMessage)
     if (nextErrorMessage === undefined) {
       props.onChangeValidSelected?.(nextSelected)
@@ -78,15 +85,35 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   async function deriveErrorMessage(
     shouldValidate: boolean,
     selected: T | undefined,
-    errorMessage: RadioButtonsProps<T>['errorMessage']
+    errorMessage: RadioButtonsProps<T>['errorMessage'],
+    required: boolean
   ): Promise<string | undefined> {
-    if (typeof errorMessage === 'string') {
-      return errorMessage
-    } else if (!shouldValidate) {
-      return undefined
+    if (required) {
+      if (!shouldValidate) {
+        return undefined
+      } else if (typeof errorMessage === 'string') {
+        if (selected !== undefined) {
+          return undefined
+        } else {
+          return errorMessage
+        }
+      } else {
+        const result = await errorMessage?.(selected)
+        if (selected) {
+          return result ?? undefined
+        } else {
+          return result ?? ''
+        }
+      }
     } else {
-      const result = await errorMessage?.(selected)
-      return result ?? undefined
+      if (typeof errorMessage === 'string') {
+        return errorMessage
+      } else if (!shouldValidate) {
+        return undefined
+      } else {
+        const result = await errorMessage?.(selected)
+        return result ?? undefined
+      }
     }
   }
 
