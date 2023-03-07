@@ -1,5 +1,5 @@
 import { assert, isNotUndefined, minBy } from 'base-up'
-import { createEffect, createMemo, createSignal, onMount } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
 import { observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
@@ -54,7 +54,7 @@ export function Slider(rawProps: SliderProps) {
   })
 
   const [value, setValue] = createSignal(props.value)
-  createEffect(() => setValue(correctValue(props.value)))
+  createRenderEffect(() => setValue(correctValue(props.value)))
   const ratio = () => (value() - props.minValue) / (props.maxValue - props.minValue)
 
   // Change internal state and callback it.

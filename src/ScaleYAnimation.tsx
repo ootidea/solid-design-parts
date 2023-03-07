@@ -1,4 +1,4 @@
-import { createEffect, createSignal, on, Show } from 'solid-js'
+import { createRenderEffect, createSignal, on, Show } from 'solid-js'
 import { prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
@@ -25,7 +25,7 @@ export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
 
   // A variable required to render props.children until animation is complete.
   let lastNonFalsyShown = props.shown
-  createEffect(
+  createRenderEffect(
     on(
       () => props.shown,
       () => {

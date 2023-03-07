@@ -1,5 +1,5 @@
 import { call, isInstanceOf } from 'base-up'
-import { createEffect, createSignal, For, Show } from 'solid-js'
+import { createRenderEffect, createSignal, For, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
@@ -46,7 +46,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   }
 
   const [selected, setSelected] = createSignal<T | undefined>(undefined)
-  createEffect(() => {
+  createRenderEffect(() => {
     // Treat as undefined if props.selected is out of range.
     if (props.selected !== undefined && !props.values.includes(props.selected)) {
       changeSelected(undefined)

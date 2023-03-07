@@ -1,6 +1,6 @@
 import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createMemo, createSignal, For, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, For, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Checkbox } from './Checkbox'
 import { Divider } from './Divider'
@@ -49,7 +49,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   }
 
   const [selected, setSelected] = createSignal(new Set(props.selected), { equals: false })
-  createEffect(() => setSelected(() => new Set(props.selected)))
+  createRenderEffect(() => setSelected(() => new Set(props.selected)))
   async function changeSelected(selected: Set<T>) {
     setSelected(() => selected)
     props.onChangeSelected?.(selected)
@@ -69,7 +69,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
-  createEffect(async () => {
+  createRenderEffect(async () => {
     props.selected
 
     if (typeof props.errorMessage === 'string') {

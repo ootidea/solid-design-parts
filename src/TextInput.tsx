@@ -1,6 +1,6 @@
 import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createSignal, JSX, untrack } from 'solid-js'
+import { createRenderEffect, createSignal, JSX, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -57,7 +57,7 @@ export function TextInput(rawProps: TextInputProps) {
   const [inputElementHasFocus, setInputElementHasFocus] = createSignal(false)
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
-  createEffect(async () => {
+  createRenderEffect(async () => {
     props.value
 
     if (props.required) {

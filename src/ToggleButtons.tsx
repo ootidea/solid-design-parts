@@ -1,5 +1,5 @@
 import { call } from 'base-up'
-import { createEffect, createSignal, For } from 'solid-js'
+import { createRenderEffect, createSignal, For } from 'solid-js'
 import css from './ToggleButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -51,7 +51,7 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
       const [selected, setSelected] = createSignal(rawProps.selected ?? new Set<T>(), {
         equals: false,
       })
-      createEffect(() => setSelected(rawProps.selected ?? new Set<T>()))
+      createRenderEffect(() => setSelected(rawProps.selected ?? new Set<T>()))
       return {
         exclusive: false,
         selected,

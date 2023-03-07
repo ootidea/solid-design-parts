@@ -1,6 +1,6 @@
 import { assert, call, isNotEmpty } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createSignal, For, untrack } from 'solid-js'
+import { createRenderEffect, createSignal, For, untrack } from 'solid-js'
 import css from './RadioButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -43,7 +43,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
-  createEffect(async () => {
+  createRenderEffect(async () => {
     props.selected
 
     if (typeof props.errorMessage === 'string') {

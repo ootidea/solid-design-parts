@@ -1,6 +1,6 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createEffect, createSignal, untrack } from 'solid-js'
+import { createRenderEffect, createSignal, untrack } from 'solid-js'
 import css from './AutoSizeTextArea.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -33,7 +33,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
-  createEffect(async () => {
+  createRenderEffect(async () => {
     props.value
 
     if (typeof props.errorMessage === 'string') {
