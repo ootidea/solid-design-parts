@@ -1,6 +1,6 @@
 import { assert, call, isNotEmpty } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, For } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, For, on, untrack } from 'solid-js'
 import css from './RadioButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -48,8 +48,18 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
 
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required))
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage, props.required))
   })
+
+  createRenderEffect(
+    on(
+      () => props.selected,
+      async () => {
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required))
+      },
+      { defer: true }
+    )
+  )
 
   function isDisabled(value: string): boolean {
     if (typeof props.disabled === 'boolean') return props.disabled
