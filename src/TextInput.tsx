@@ -59,7 +59,7 @@ export function TextInput(rawProps: TextInputProps) {
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(untrack(value), shouldValidate(), props.required, props.errorMessage))
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(value), props.errorMessage, props.required))
   })
 
   async function onInput(event: InputEvent) {
@@ -71,7 +71,7 @@ export function TextInput(rawProps: TextInputProps) {
     setValue(newValue)
     props.onChangeValue?.(newValue)
 
-    const nextErrorMessage = await deriveErrorMessage(newValue, shouldValidate(), props.required, props.errorMessage)
+    const nextErrorMessage = await deriveErrorMessage(shouldValidate(), newValue, props.errorMessage, props.required)
     setErrorMessage(nextErrorMessage)
     if (nextErrorMessage === undefined) {
       props.onChangeValidValue?.(newValue)
@@ -79,10 +79,10 @@ export function TextInput(rawProps: TextInputProps) {
   }
 
   async function deriveErrorMessage(
-    value: string,
     shouldValidate: boolean,
-    required: boolean,
-    errorMessage: TextInputProps['errorMessage']
+    value: string,
+    errorMessage: TextInputProps['errorMessage'],
+    required: boolean
   ): Promise<string | undefined> {
     if (required) {
       if (!shouldValidate) {

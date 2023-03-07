@@ -46,7 +46,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
 
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(props.selected, shouldValidate(), props.errorMessage))
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage))
   })
 
   function isDisabled(value: string): boolean {
@@ -68,7 +68,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
     setSelected(nextSelected)
     props.onChangeSelected?.(nextSelected)
 
-    const nextErrorMessage = await deriveErrorMessage(nextSelected, shouldValidate(), props.errorMessage)
+    const nextErrorMessage = await deriveErrorMessage(shouldValidate(), nextSelected, props.errorMessage)
     setErrorMessage(nextErrorMessage)
     if (nextErrorMessage === undefined) {
       props.onChangeValidSelected?.(nextSelected)
@@ -76,8 +76,8 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   }
 
   async function deriveErrorMessage(
-    selected: T | undefined,
     shouldValidate: boolean,
+    selected: T | undefined,
     errorMessage: RadioButtonsProps<T>['errorMessage']
   ): Promise<string | undefined> {
     if (typeof errorMessage === 'string') {
