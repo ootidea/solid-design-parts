@@ -129,7 +129,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
-      <div class="mantle-ui-RadioButtons_radio-buttons">
+      <div class="mantle-ui-RadioButtons_radio-buttons" role="radiogroup" aria-required={props.required}>
         <For each={props.values}>
           {(value) => (
             <label

@@ -132,6 +132,7 @@ export function TextInput(rawProps: TextInputProps) {
           placeholder={props.placeholder}
           type={props.type}
           disabled={props.disabled}
+          aria-required={props.required}
           onInput={onInput}
           onFocus={() => setInputElementHasFocus(true)}
           onBlur={() => {
