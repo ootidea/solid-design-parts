@@ -1,6 +1,6 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createRenderEffect, createSignal, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, on, untrack } from 'solid-js'
 import css from './AutoSizeTextArea.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -26,24 +26,25 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   const [value, setValue] = createInjectableSignal(props, 'value')
 
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
+  const [isEdited, setEdited] = createSignal(false)
+  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
-    props.value
-
-    if (typeof props.errorMessage === 'string') {
-      setErrorMessage(props.errorMessage)
-    } else if (!untrack(shouldValidate)) {
-      setErrorMessage(undefined)
-    } else {
-      const result = await props.errorMessage?.(props.value)
-      setErrorMessage(result ?? undefined)
-    }
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(value), props.errorMessage))
   })
+  createRenderEffect(
+    on(
+      () => props.value,
+      async () => {
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage))
+      },
+      { defer: true }
+    )
+  )
 
   async function onInput(event: InputEvent) {
-    setShouldValidate(true)
+    setEdited(true)
 
     if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
 
@@ -51,15 +52,25 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     setValue(newValue)
     props.onChangeValue?.(newValue)
 
-    if (typeof props.errorMessage === 'string') {
-      setErrorMessage(props.errorMessage)
-    } else {
-      const result = await props.errorMessage?.(newValue)
-      setErrorMessage(result ?? undefined)
+    const nextErrorMessage = await deriveErrorMessage(shouldValidate(), newValue, props.errorMessage)
+    setErrorMessage(nextErrorMessage)
+    if (nextErrorMessage === undefined) {
+      props.onChangeValidValue?.(newValue)
+    }
+  }
 
-      if (result === undefined) {
-        props.onChangeValidValue?.(newValue)
-      }
+  async function deriveErrorMessage(
+    shouldValidate: boolean,
+    value: string,
+    errorMessage: AutoSizeTextAreaProps['errorMessage']
+  ): Promise<string | undefined> {
+    if (typeof errorMessage === 'string') {
+      return errorMessage
+    } else if (!shouldValidate) {
+      return undefined
+    } else {
+      const result = await errorMessage?.(value)
+      return result ?? undefined
     }
   }
 
