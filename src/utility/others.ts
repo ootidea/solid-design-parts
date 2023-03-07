@@ -1,3 +1,4 @@
+import { assertInstanceOf, isOneOf } from 'base-up'
 import { createFocusTrap } from 'focus-trap'
 import { JSX, onCleanup } from 'solid-js'
 
@@ -16,6 +17,43 @@ export type LiteralAutoComplete<Literals extends Base, Base = string> = Literals
  * { type: 'Rect'; width: number; height: number } | { type: 'Circle'; radius: number }
  */
 export type DiscriminatedUnion<T, K extends keyof T = keyof T> = K extends K ? { type: K } & T[K] : never
+
+export function isNestedClickEvent(event: MouseEvent) {
+  assertInstanceOf(event.target, Element)
+  assertInstanceOf(event.currentTarget, Element)
+  return detectNestedClickableElement(event.currentTarget, event.target)
+}
+
+function detectNestedClickableElement(currentTarget: Element, target: Element): boolean {
+  if (currentTarget === target) return false
+
+  if (isClickable(target)) return true
+
+  return detectNestedClickableElement(currentTarget, target.parentElement!)
+}
+
+function isClickable(element: Element): boolean {
+  return (
+    isOneOf('A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION')(element.tagName) ||
+    isOneOf(
+      'link',
+      'menuitem',
+      'button',
+      'spinbutton',
+      'slider',
+      'scrollbar',
+      'textbox',
+      'option',
+      'radio',
+      'menuitemradio',
+      'checkbox',
+      'menuitemcheckbox',
+      'treeitem',
+      'switch',
+      'tab'
+    )(element.getAttribute('role'))
+  )
+}
 
 export function isInsideOf(x: number, y: number, rect: DOMRect): boolean {
   if (x < rect.left) return false

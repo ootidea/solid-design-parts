@@ -109,10 +109,7 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
             class="mantle-ui-ToggleButtons_button"
             type="button"
             aria-selected={isSelected(value)}
-            onClick={(event) => {
-              event.preventDefault()
-              clickEventHandler(value)
-            }}
+            onClick={() => clickEventHandler(value)}
           >
             <Slot content={props.children} params={{ value }}>
               {props.titles?.[String(value)] ?? value}

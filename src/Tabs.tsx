@@ -46,10 +46,7 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
               classList={{ 'mantle-ui-Tabs_active': activeTab() === name }}
               role="tab"
               type="button"
-              onClick={(event) => {
-                event.preventDefault()
-                onClick(name)
-              }}
+              onClick={() => onClick(name)}
             >
               {name}
             </button>

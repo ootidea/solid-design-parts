@@ -7,6 +7,7 @@ import { Gravity } from './Gravity'
 import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
+import { isNestedClickEvent } from './utility/others'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
@@ -321,7 +322,7 @@ export function DataTable<
                 role="row"
                 href={href}
                 onClick={(event) => {
-                  if (event.defaultPrevented) return
+                  if (isNestedClickEvent(event)) return
 
                   props.onClickRow?.(row)
                 }}

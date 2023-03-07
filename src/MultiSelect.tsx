@@ -98,8 +98,6 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
-    event.preventDefault()
-
     if (!isInstanceOf(event.currentTarget, HTMLElement)) return
 
     const rect = event.currentTarget.getBoundingClientRect()

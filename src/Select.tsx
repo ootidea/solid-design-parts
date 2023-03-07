@@ -73,9 +73,6 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
-    if (event.defaultPrevented) return
-
-    event.preventDefault()
     if (!isInstanceOf(event.currentTarget, HTMLElement)) return
 
     const rect = event.currentTarget.getBoundingClientRect()
@@ -88,9 +85,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   }
 
   function onOperateOverlay(event: Event) {
-    if (event.target !== event.currentTarget || event.defaultPrevented) return
+    if (event.target !== event.currentTarget) return
 
-    event.preventDefault()
     setDropdownInfo(undefined)
   }
 
@@ -200,8 +196,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                           type="button"
                           role="menuitem"
                           aria-selected={selected() === value}
-                          onClick={(event) => {
-                            event.preventDefault()
+                          onClick={() => {
                             changeSelected(value)
                             setDropdownInfo(undefined)
                           }}
