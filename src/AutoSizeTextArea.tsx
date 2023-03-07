@@ -25,10 +25,6 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   ])
 
   const [value, setValue] = createInjectableSignal(props, 'value')
-  function onChangeValue(value: string) {
-    setValue(value)
-    props.onChangeValue?.(value)
-  }
 
   const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
 
@@ -52,7 +48,8 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
 
     const newValue = event.target.value
-    onChangeValue(newValue)
+    setValue(newValue)
+    props.onChangeValue?.(newValue)
 
     if (typeof props.errorMessage === 'string') {
       setErrorMessage(props.errorMessage)
