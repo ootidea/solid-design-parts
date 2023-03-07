@@ -1,6 +1,6 @@
 import { assert, call, isNotEmpty } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createRenderEffect, createSignal, For, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, For } from 'solid-js'
 import css from './RadioButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -40,7 +40,8 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
 
   const [selected, setSelected] = createInjectableSignal(props, 'selected')
 
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
+  const [isEdited, setEdited] = createSignal(false)
+  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
@@ -48,7 +49,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
 
     if (typeof props.errorMessage === 'string') {
       setErrorMessage(props.errorMessage)
-    } else if (!untrack(shouldValidate)) {
+    } else if (!shouldValidate()) {
       setErrorMessage(undefined)
     } else {
       const result = await props.errorMessage?.(props.selected)
@@ -63,7 +64,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   }
 
   async function onClick(value: T) {
-    setShouldValidate(true)
+    setEdited(true)
     const nextSelected = call(() => {
       if (selected() === value && props.enableDeselection) {
         return undefined
