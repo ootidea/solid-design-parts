@@ -46,11 +46,9 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
-
   createRenderEffect(async () => {
     setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage, props.required))
   })
-
   createRenderEffect(
     on(
       () => props.selected,

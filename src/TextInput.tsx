@@ -1,6 +1,6 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, JSX, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, JSX, on, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -61,6 +61,15 @@ export function TextInput(rawProps: TextInputProps) {
   createRenderEffect(async () => {
     setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(value), props.errorMessage, props.required))
   })
+  createRenderEffect(
+    on(
+      () => props.value,
+      async () => {
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage, props.required))
+      },
+      { defer: true }
+    )
+  )
 
   async function onInput(event: InputEvent) {
     setEdited(true)
