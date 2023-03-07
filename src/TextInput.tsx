@@ -1,6 +1,6 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createRenderEffect, createSignal, JSX, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, JSX, untrack } from 'solid-js'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
@@ -52,17 +52,18 @@ export function TextInput(rawProps: TextInputProps) {
   )
 
   const [value, setValue] = createInjectableSignal(props, 'value')
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
+  const [isEdited, setEdited] = createSignal(false)
+  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
 
   const [inputElementHasFocus, setInputElementHasFocus] = createSignal(false)
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(props.value, untrack(shouldValidate), props.required, props.errorMessage))
+    setErrorMessage(await deriveErrorMessage(untrack(value), shouldValidate(), props.required, props.errorMessage))
   })
 
   async function onInput(event: InputEvent) {
-    setShouldValidate(true)
+    setEdited(true)
 
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
@@ -134,7 +135,7 @@ export function TextInput(rawProps: TextInputProps) {
           onInput={onInput}
           onFocus={() => setInputElementHasFocus(true)}
           onBlur={() => {
-            setShouldValidate(true)
+            setEdited(true)
             setInputElementHasFocus(false)
           }}
         />
