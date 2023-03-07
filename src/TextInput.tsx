@@ -83,7 +83,7 @@ export function TextInput(rawProps: TextInputProps) {
     shouldValidate: boolean,
     required: boolean,
     errorMessage: TextInputProps['errorMessage']
-  ) {
+  ): Promise<string | undefined> {
     if (required) {
       if (!shouldValidate) {
         return undefined
