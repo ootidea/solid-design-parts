@@ -73,6 +73,16 @@ export function AutoSizeTextAreaComponent() {
           }}
         />
       </Sample>
+
+      <Sample title="Required">
+        <AutoSizeTextArea placeholder="placeholder" required />
+        <AutoSizeTextArea
+          placeholder="placeholder"
+          required
+          errorMessage="This field is required"
+          validateInitialValue
+        />
+      </Sample>
     </article>
   )
 }
