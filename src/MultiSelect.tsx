@@ -1,6 +1,6 @@
 import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, For, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, For, on, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { Checkbox } from './Checkbox'
 import { Divider } from './Divider'
@@ -10,7 +10,7 @@ import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
 import { setupFocusTrap } from './utility/others'
-import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
+import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -50,37 +50,48 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
 
   const [selected, setSelected] = createSignal(new Set(props.selected), { equals: false })
   createRenderEffect(() => setSelected(() => new Set(props.selected)))
-  async function changeSelected(selected: Set<T>) {
-    setSelected(() => selected)
-    props.onChangeSelected?.(selected)
+  async function changeSelected(newSelected: Set<T>) {
+    setSelected(() => newSelected)
+    props.onChangeSelected?.(newSelected)
 
-    if (typeof props.errorMessage === 'string') {
-      setErrorMessage(props.errorMessage)
-    } else {
-      const result = await props.errorMessage?.(selected)
-      setErrorMessage(result ?? undefined)
-
-      if (result === undefined) {
-        props.onChangeValidSelected?.(selected)
-      }
+    const newErrorMessage = await deriveErrorMessage(shouldValidate(), newSelected, props.errorMessage)
+    setErrorMessage(newErrorMessage)
+    if (newErrorMessage === undefined) {
+      props.onChangeValidSelected?.(newSelected)
     }
   }
 
-  const [shouldValidate, setShouldValidate] = createInjectableSignal(props, 'validateInitialValue')
+  const [isEdited, setEdited] = createSignal(false)
+  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
-    props.selected
-
-    if (typeof props.errorMessage === 'string') {
-      setErrorMessage(props.errorMessage)
-    } else if (!untrack(shouldValidate)) {
-      setErrorMessage(undefined)
-    } else {
-      const result = await props.errorMessage?.(props.selected)
-      setErrorMessage(result ?? undefined)
-    }
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage))
   })
+  createRenderEffect(
+    on(
+      () => props.selected,
+      async () => {
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage))
+      },
+      { defer: true }
+    )
+  )
+
+  async function deriveErrorMessage(
+    shouldValidate: boolean,
+    selected: ReadonlySet<T>,
+    errorMessage: MultiSelectProps<T>['errorMessage']
+  ): Promise<string | undefined> {
+    if (typeof errorMessage === 'string') {
+      return errorMessage
+    } else if (!shouldValidate) {
+      return undefined
+    } else {
+      const result = await errorMessage?.(selected)
+      return result ?? undefined
+    }
+  }
 
   const followingCount = createMemo(() => selected().size - 1)
 
@@ -132,7 +143,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   }
 
   function closeDropdown() {
-    setShouldValidate(true)
+    setEdited(true)
     setDropdownInfo(undefined)
   }
 
