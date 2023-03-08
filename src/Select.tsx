@@ -9,7 +9,7 @@ import closeCircleIcon from './image/close-circle.svg'
 import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
-import { setupFocusTrap } from './utility/others'
+import { isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -75,6 +75,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
+    if (isNestedClickEvent(event)) return
+
     if (!isInstanceOf(event.currentTarget, HTMLElement)) return
 
     const rect = event.currentTarget.getBoundingClientRect()

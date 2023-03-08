@@ -9,7 +9,7 @@ import chevronDownIcon from './image/chevron-down.svg'
 import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
-import { setupFocusTrap } from './utility/others'
+import { isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -109,6 +109,8 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
+    if (isNestedClickEvent(event)) return
+
     if (!isInstanceOf(event.currentTarget, HTMLElement)) return
 
     const rect = event.currentTarget.getBoundingClientRect()
