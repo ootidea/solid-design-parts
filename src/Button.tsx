@@ -10,7 +10,7 @@ registerCss(css)
 
 export type ButtonProps = Props<{
   color?: 'primary' | 'achromatic' | 'error'
-  ghost?: boolean
+  variant?: 'solid' | 'ghost'
   disabled?: boolean
   fullWidth?: boolean
   type?: 'submit' | 'button' | 'reset'
@@ -24,7 +24,7 @@ export function Button(rawProps: ButtonProps) {
     rawProps,
     {
       color: 'primary',
-      ghost: false,
+      variant: 'solid',
       disabled: false,
       fullWidth: false,
       type: 'button',
@@ -58,7 +58,6 @@ export function Button(rawProps: ButtonProps) {
     return (
       <a
         class={joinClasses(rawProps, 'mantle-ui-Button_root', {
-          'mantle-ui-Button_ghost': props.ghost,
           'mantle-ui-Button_full-width': props.fullWidth,
         })}
         style={joinStyle(rawProps.style, { '--mantle-ui-Button_radius': props.radius })}
@@ -66,6 +65,7 @@ export function Button(rawProps: ButtonProps) {
         role="button"
         tabindex={props.disabled ? -1 : 0}
         aria-disabled={props.disabled}
+        data-variant={props.variant}
         data-color={props.color}
         onClick={clickEventHandler}
         {...restProps}
@@ -78,11 +78,11 @@ export function Button(rawProps: ButtonProps) {
   return (
     <button
       class={joinClasses(rawProps, 'mantle-ui-Button_root', {
-        'mantle-ui-Button_ghost': props.ghost,
         'mantle-ui-Button_full-width': props.fullWidth,
       })}
       style={joinStyle(rawProps.style, { '--mantle-ui-Button_radius': props.radius })}
       type={props.type}
+      data-variant={props.variant}
       data-color={props.color}
       disabled={props.disabled || isInProgress()}
       aria-disabled={props.disabled}

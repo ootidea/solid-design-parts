@@ -24,7 +24,7 @@
     pointer-events: none;
   }
 
-  &:not(.mantle-ui-Button_ghost) {
+  &[data-variant='solid'] {
     color: var(--mantle-ui-inverted-text-color);
     border-color: var(--mantle-ui-Button_tint-color);
     background-color: var(--mantle-ui-Button_tint-color);
@@ -84,7 +84,7 @@
     }
   }
 
-  &.mantle-ui-Button_ghost {
+  &[data-variant='ghost'] {
     color: var(--mantle-ui-Button_tint-color);
     border-color: var(--mantle-ui-Button_tint-color);
     background-color: transparent;
