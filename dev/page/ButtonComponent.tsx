@@ -15,26 +15,13 @@ export function ButtonComponent() {
     <article>
       <PageTitle>Button</PageTitle>
 
-      <Sample title="Basic example" direction="horizontal">
+      <Sample title="Basic examples" direction="horizontal">
         <Button>Button</Button>
-        <Button variant="ghost">accept</Button>
-      </Sample>
-
-      <Sample title="Achromatic color" direction="horizontal">
         <Button color="achromatic">Button</Button>
-        <Button variant="ghost" color="achromatic">
-          accept
-        </Button>
-      </Sample>
-
-      <Sample title="Error color" direction="horizontal">
         <Button color="error">Button</Button>
-        <Button variant="ghost" color="error">
-          accept
-        </Button>
       </Sample>
 
-      <Sample title="Ghost" direction="horizontal">
+      <Sample title="Ghost buttons" direction="horizontal">
         <Button variant="ghost">Button</Button>
         <Button variant="ghost" color="achromatic">
           accept
@@ -59,8 +46,8 @@ export function ButtonComponent() {
         <Button variant="ghost" disabled>
           cancel
         </Button>
-        <Button variant="ghost" color="achromatic" disabled>
-          OK
+        <Button variant="ghost" color="error" disabled>
+          delete
         </Button>
       </Sample>
 
@@ -81,6 +68,12 @@ export function ButtonComponent() {
         </Button>
         <Button variant="ghost" color="achromatic" onClick={awaitSomeSeconds}>
           Purchase
+        </Button>
+        <Button color="error" onClick={awaitSomeSeconds}>
+          Delete
+        </Button>
+        <Button variant="ghost" color="error" onClick={awaitSomeSeconds}>
+          Post
         </Button>
       </Sample>
 
