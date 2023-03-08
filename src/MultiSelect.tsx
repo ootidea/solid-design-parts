@@ -71,9 +71,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   createRenderEffect(
     on(
       () => props.selected,
-      async () => {
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage))
-      },
+      async () => setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage)),
       { defer: true }
     )
   )

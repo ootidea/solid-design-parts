@@ -64,9 +64,8 @@ export function TextInput(rawProps: TextInputProps) {
   createRenderEffect(
     on(
       () => props.value,
-      async () => {
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage, props.required))
-      },
+      async () =>
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage, props.required)),
       { defer: true }
     )
   )

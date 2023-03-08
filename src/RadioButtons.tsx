@@ -52,9 +52,8 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   createRenderEffect(
     on(
       () => props.selected,
-      async () => {
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required))
-      },
+      async () =>
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required)),
       { defer: true }
     )
   )

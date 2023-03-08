@@ -36,9 +36,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   createRenderEffect(
     on(
       () => props.value,
-      async () => {
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage))
-      },
+      async () => setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage)),
       { defer: true }
     )
   )
