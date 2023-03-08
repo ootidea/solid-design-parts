@@ -61,8 +61,10 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
 
   const [searchQuery, setSearchQuery] = createSignal('')
   function search(values: readonly T[], searchQuery: string): readonly T[] {
+    // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
+      // case-insensitive search
       const lowerCaseText = getText(value).toLowerCase()
       return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
     })
