@@ -1,6 +1,7 @@
 import { keysOf } from 'base-up'
 import { ComponentProps, createRenderEffect, createSignal, JSX, mergeProps, on, Signal, splitProps } from 'solid-js'
 import { Component } from 'solid-js/types/render/component'
+import { createSignalObject, SignalObject } from 'solid-signal-object'
 
 export type Props<T, Base extends keyof JSX.IntrinsicElements | Component<any> = 'div'> = Omit<
   ComponentProps<Base>,
@@ -22,6 +23,25 @@ export function createInjectableSignal<T, K extends keyof T>(props: T, key: K, e
     )
   )
   return [value, setValue]
+}
+
+export function createInjectableSignalObject<T, K extends keyof T>(
+  props: T,
+  key: K,
+  equals?: false
+): SignalObject<T[K]> {
+  const signalObject =
+    equals !== undefined ? createSignalObject(props[key], { equals }) : createSignalObject(props[key])
+  createRenderEffect(
+    on(
+      () => props[key],
+      () => {
+        signalObject.value = props[key]
+      },
+      { defer: true }
+    )
+  )
+  return signalObject
 }
 
 /**

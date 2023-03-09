@@ -8,7 +8,7 @@ import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
 import { isNestedClickEvent } from './utility/others'
-import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -110,15 +110,15 @@ export function DataTable<
     return maxBy([...valueToCount.entries()], ([, count]) => count)?.[0]
   }
 
-  const [sortingState, setSortingState] = createInjectableSignal(props, 'sortingState')
+  const sortingState = createInjectableSignalObject(props, 'sortingState')
 
   const sortedRows = createMemo(() => {
     const result = props.rows.slice()
-    if (sortingState() === undefined) return result
+    if (sortingState.value === undefined) return result
 
-    const sortingColumn = props.columns.find((column) => column.id === sortingState()?.columnId)
+    const sortingColumn = props.columns.find((column) => column.id === sortingState.value?.columnId)
     if (sortingColumn === undefined) return result
-    const sortingColumnId = sortingState().columnId
+    const sortingColumnId = sortingState.value.columnId
 
     result.sort((row1, row2) => {
       const value1 = row1[sortingColumnId]
@@ -127,7 +127,7 @@ export function DataTable<
       return compareFunction(value1, value2, row1, row2)
     })
 
-    if (sortingState().reversed) {
+    if (sortingState.value.reversed) {
       result.reverse()
     }
 
@@ -181,10 +181,10 @@ export function DataTable<
   }
 
   function onClickSortButton(columnId: ColumnId) {
-    if (sortingState()?.columnId === columnId) {
-      setSortingState({ columnId, reversed: !sortingState().reversed })
+    if (sortingState.value?.columnId === columnId) {
+      sortingState.value = { columnId, reversed: !sortingState.value.reversed }
     } else {
-      setSortingState({ columnId, reversed: false })
+      sortingState.value = { columnId, reversed: false }
     }
   }
 
@@ -237,7 +237,7 @@ export function DataTable<
                   </div>
                   <Show when={column.sortable}>
                     <Show
-                      when={sortingState()?.columnId === column.id}
+                      when={sortingState.value?.columnId === column.id}
                       fallback={
                         <IconButton
                           class="mantle-ui-DataTable_sort-button"
@@ -251,7 +251,7 @@ export function DataTable<
                         class="mantle-ui-DataTable_sort-button"
                         src={arrowDownIcon}
                         iconColor="var(--mantle-ui-DataTable_sort-icon-default-active-color)"
-                        data-reversed={sortingState().reversed}
+                        data-reversed={sortingState.value?.reversed}
                         onClick={() => onClickSortButton(column.id)}
                       />
                     </Show>
