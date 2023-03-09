@@ -21,6 +21,7 @@ export type MultiSelectProps<T extends string> = Props<{
   selected?: ReadonlySet<T>
   placeholder?: string
   disabled?: boolean
+  required?: boolean
   errorMessage?: string | ((selected: ReadonlySet<T>) => Promisable<string | void>)
   validateInitialValue?: boolean
   fullWidth?: boolean
@@ -37,6 +38,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       selected: new Set(),
       placeholder: '',
       disabled: false,
+      required: false,
       validateInitialValue: false,
       fullWidth: false,
       showSearchBox: false,
@@ -54,7 +56,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     setSelected(() => newSelected)
     props.onChangeSelected?.(newSelected)
 
-    const newErrorMessage = await deriveErrorMessage(shouldValidate(), newSelected, props.errorMessage)
+    const newErrorMessage = await deriveErrorMessage(shouldValidate(), newSelected, props.errorMessage, props.required)
     setErrorMessage(newErrorMessage)
     if (newErrorMessage === undefined) {
       props.onChangeValidSelected?.(newSelected)
@@ -66,12 +68,13 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
 
   const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage))
+    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage, props.required))
   })
   createRenderEffect(
     on(
       () => props.selected,
-      async () => setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage)),
+      async () =>
+        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required)),
       { defer: true }
     )
   )
@@ -79,15 +82,35 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   async function deriveErrorMessage(
     shouldValidate: boolean,
     selected: ReadonlySet<T>,
-    errorMessage: MultiSelectProps<T>['errorMessage']
+    errorMessage: MultiSelectProps<T>['errorMessage'],
+    required: boolean
   ): Promise<string | undefined> {
-    if (typeof errorMessage === 'string') {
-      return errorMessage
-    } else if (!shouldValidate) {
-      return undefined
+    if (required) {
+      if (!shouldValidate) {
+        return undefined
+      } else if (typeof errorMessage === 'string') {
+        if (selected.size > 0) {
+          return undefined
+        } else {
+          return errorMessage
+        }
+      } else {
+        const result = await errorMessage?.(selected)
+        if (selected.size > 0) {
+          return result ?? undefined
+        } else {
+          return result ?? ''
+        }
+      }
     } else {
-      const result = await errorMessage?.(selected)
-      return result ?? undefined
+      if (typeof errorMessage === 'string') {
+        return errorMessage
+      } else if (!shouldValidate) {
+        return undefined
+      } else {
+        const result = await errorMessage?.(selected)
+        return result ?? undefined
+      }
     }
   }
 

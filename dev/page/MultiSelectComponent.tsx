@@ -60,6 +60,16 @@ export function MultiSelectComponent() {
         />
       </Sample>
 
+      <Sample title="Required">
+        <MultiSelect values={['Female', 'Male', 'Other']} required />
+        <MultiSelect
+          values={['Female', 'Male', 'Other']}
+          required
+          validateInitialValue
+          errorMessage="One or more selections required"
+        />
+      </Sample>
+
       <Sample title="Search">
         <MultiSelect
           showSearchBox
