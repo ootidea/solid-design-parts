@@ -11,7 +11,7 @@ export type Props<T, Base extends keyof JSX.IntrinsicElements | Component<any> =
 export type SlotProp<T> = JSX.Element | ((props: T) => JSX.Element)
 
 export function createInjectableSignal<T, K extends keyof T>(props: T, key: K, equals?: false): Signal<T[K]> {
-  const [value, setValue] = createSignal(props[key], { equals })
+  const [value, setValue] = equals !== undefined ? createSignal(props[key], { equals }) : createSignal(props[key])
   createRenderEffect(
     on(
       () => props[key],
@@ -103,7 +103,7 @@ export function prepareProps<T, U extends Partial<T>, Ks extends readonly (keyof
 }
 
 export function joinClasses(
-  props: { class?: string; classList?: Record<string, boolean | undefined> },
+  props: { class?: string | undefined; classList?: Record<string, boolean | undefined> | undefined },
   baseClass: string,
   baseClassList?: Record<string, boolean | undefined>
 ) {
