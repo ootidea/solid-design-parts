@@ -31,7 +31,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      titles: {},
+      titles: {} as Required<SelectProps<T>>['titles'],
       placeholder: '',
       disabled: false,
       fullWidth: false,

@@ -74,7 +74,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       }
     })
 
-    setSelected(nextSelected)
+    setSelected(() => nextSelected)
     props.onChangeSelected?.(nextSelected)
 
     const nextErrorMessage = await deriveErrorMessage(

@@ -33,7 +33,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      titles: {},
+      titles: {} as Required<MultiSelectProps<T>>['titles'],
       selected: new Set(),
       placeholder: '',
       disabled: false,

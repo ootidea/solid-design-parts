@@ -23,12 +23,11 @@ export type DateInputProps = Props<{
 }>
 
 export function DateInput(rawProps: DateInputProps) {
-  const [props, restProps] = prepareProps(rawProps, { disabled: false, showClearButton: false }, [
-    'value',
-    'placeholder',
-    'onChangeValue',
-    'format',
-  ])
+  const [props, restProps] = prepareProps(
+    rawProps,
+    { disabled: false as Required<DateInputProps>['disabled'], showClearButton: false },
+    ['value', 'placeholder', 'onChangeValue', 'format']
+  )
   const [value, setValue] = createSignal<Date | undefined>(props.value)
   function changeValue(newValue: Date | undefined) {
     setValue(newValue)

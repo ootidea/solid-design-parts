@@ -68,24 +68,38 @@ type DefaultValues<T> = Required<Pick<T, OptionalKeys<T>>>
 export type AtLeastOneProperty<T, K extends keyof T = keyof T> = K extends K ? Record<K, T[K]> : never
 
 /**
- * Set default value to props, and split props into two parts.
- * The first part is for direct use within the component.
- * The second part is for transport to DOM element as attributes.
+ * Set default value to props, and split props into two objects.
+ * The first object is for direct use within the component.
+ * The second object is for transport to DOM element as attributes.
  *
  * @example
  * prepareProps({ tint: 'red', tabindex: '0' }, { size: '1em' }, ['tint'])
  * is the same value as
  * [{ tint: 'red', size: '1em' }, { tabindex: '0' }]
  */
-export function prepareProps<T, U extends Pick<T, OptionalKeys<T>>>(
+export function prepareProps<T, U extends Partial<T>>(
+  rawProps: T,
+  defaultValues: U
+): [Required<U> & Omit<T, keyof U>, {}]
+export function prepareProps<T, U extends Partial<T>, Ks extends readonly (keyof T)[]>(
   rawProps: T,
   defaultValues: U,
-  otherKnownKeys: (keyof T)[] = []
-): [T & Required<Pick<T, keyof T & keyof U>>, {}] {
+  otherKnownKeys: Ks
+): [Required<Omit<U, Ks[number]>> & Omit<T, keyof Omit<U, Ks[number]>>, {}]
+export function prepareProps<T, U extends Partial<T>, Ks extends readonly (keyof T)[]>(
+  rawProps: T,
+  defaultValues: U,
+  otherKnownKeys?: Ks
+): [Required<Omit<U, Ks[number]>> & Omit<T, keyof Omit<U, Ks[number]>>, {}] {
   // Difficult to type accurately because keyof T equals string | number | Symbol but Object.keys returns string[]
   const keys = keysOf(defaultValues) as any
   // Handle the classList attribute manually because of the bug that it is not updated reactively when transferred using spread syntax.
-  return splitProps(mergeProps(defaultValues, rawProps), ['class', 'classList', ...otherKnownKeys, ...keys]) as any
+  return splitProps(mergeProps(defaultValues, rawProps), [
+    'class',
+    'classList',
+    ...(otherKnownKeys ?? []),
+    ...keys,
+  ]) as any
 }
 
 export function joinClasses(

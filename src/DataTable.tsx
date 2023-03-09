@@ -74,7 +74,6 @@ export function DataTable<
       fullWidth: false,
       evenRowBackgroundColor: 'var(--mantle-ui-DataTable_even-row-background-default-color)',
       oddRowBackgroundColor: 'var(--mantle-ui-DataTable_odd-row-background-default-color)',
-      sortingState: undefined,
     },
     ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'rowHref', 'onClickRow']
   )
