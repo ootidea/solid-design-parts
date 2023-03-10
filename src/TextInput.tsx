@@ -1,11 +1,12 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, JSX, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, JSX, on, untrack } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
 import { LiteralAutoComplete } from './utility/others'
-import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -51,36 +52,47 @@ export function TextInput(rawProps: TextInputProps) {
     ['placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
-  const [value, setValue] = createInjectableSignal(props, 'value')
-  const [isEdited, setEdited] = createSignal(false)
-  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
+  const valueSignal = createInjectableSignalObject(props, 'value')
+  const isEditedSignal = createSignalObject(false)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateInitialValue)
 
-  const [inputElementHasFocus, setInputElementHasFocus] = createSignal(false)
+  const hasInputElementFocusSignal = createSignalObject(false)
 
-  const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
+  const errorMessageSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(value), props.errorMessage, props.required))
+    errorMessageSignal.value = await deriveErrorMessage(
+      shouldValidate(),
+      untrack(valueSignal.get),
+      props.errorMessage,
+      props.required
+    )
   })
   createRenderEffect(
     on(
       () => props.value,
-      async () =>
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage, props.required)),
+      async () => {
+        errorMessageSignal.value = await deriveErrorMessage(
+          shouldValidate(),
+          props.value,
+          props.errorMessage,
+          props.required
+        )
+      },
       { defer: true }
     )
   )
 
   async function onInput(event: InputEvent) {
-    setEdited(true)
+    isEditedSignal.value = true
 
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
     const newValue = event.target.value
-    setValue(newValue)
+    valueSignal.value = newValue
     props.onChangeValue?.(newValue)
 
     const nextErrorMessage = await deriveErrorMessage(shouldValidate(), newValue, props.errorMessage, props.required)
-    setErrorMessage(nextErrorMessage)
+    errorMessageSignal.value = nextErrorMessage
     if (nextErrorMessage === undefined) {
       props.onChangeValidValue?.(newValue)
     }
@@ -124,11 +136,11 @@ export function TextInput(rawProps: TextInputProps) {
   return (
     <div
       class={joinClasses(rawProps, 'mantle-ui-TextInput_root', {
-        'mantle-ui-TextInput_input-element-has-focus': inputElementHasFocus(),
+        'mantle-ui-TextInput_input-element-has-focus': hasInputElementFocusSignal.value,
       })}
       style={joinStyle(rawProps.style, { '--mantle-ui-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
-      aria-invalid={errorMessage() !== undefined}
+      aria-invalid={errorMessageSignal.value !== undefined}
       aria-required={props.required}
       {...restProps}
     >
@@ -136,20 +148,20 @@ export function TextInput(rawProps: TextInputProps) {
         <Gravity class="mantle-ui-TextInput_prepend">{rawProps.prepend}</Gravity>
         <input
           class="mantle-ui-TextInput_input"
-          value={value()}
+          value={valueSignal.value}
           placeholder={props.placeholder}
           type={props.type}
           disabled={props.disabled}
           onInput={onInput}
-          onFocus={() => setInputElementHasFocus(true)}
+          onFocus={() => (hasInputElementFocusSignal.value = true)}
           onBlur={() => {
-            setEdited(true)
-            setInputElementHasFocus(false)
+            isEditedSignal.value = true
+            hasInputElementFocusSignal.value = false
           }}
         />
         <Gravity class="mantle-ui-TextInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
-      <p class="mantle-ui-TextInput_error-message">{errorMessage()}</p>
+      <p class="mantle-ui-TextInput_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }
