@@ -1,8 +1,9 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, on, untrack } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './AutoSizeTextArea.scss'
-import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -25,35 +26,46 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     'onChangeValue',
   ])
 
-  const [value, setValue] = createInjectableSignal(props, 'value')
+  const valueSignal = createInjectableSignalObject(props, 'value')
 
-  const [isEdited, setEdited] = createSignal(false)
-  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
+  const isEditedSignal = createSignalObject(false)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateInitialValue)
 
-  const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
+  const errorMessageSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(value), props.errorMessage, props.required))
+    errorMessageSignal.value = await deriveErrorMessage(
+      shouldValidate(),
+      untrack(valueSignal.get),
+      props.errorMessage,
+      props.required
+    )
   })
   createRenderEffect(
     on(
       () => props.value,
-      async () =>
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.value, props.errorMessage, props.required)),
+      async () => {
+        errorMessageSignal.value = await deriveErrorMessage(
+          shouldValidate(),
+          props.value,
+          props.errorMessage,
+          props.required
+        )
+      },
       { defer: true }
     )
   )
 
   async function onInput(event: InputEvent) {
-    setEdited(true)
+    isEditedSignal.value = true
 
     if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
 
     const newValue = event.target.value
-    setValue(newValue)
+    valueSignal.value = newValue
     props.onChangeValue?.(newValue)
 
     const nextErrorMessage = await deriveErrorMessage(shouldValidate(), newValue, props.errorMessage, props.required)
-    setErrorMessage(nextErrorMessage)
+    errorMessageSignal.value = nextErrorMessage
     if (nextErrorMessage === undefined) {
       props.onChangeValidValue?.(newValue)
     }
@@ -100,23 +112,23 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     <div
       class="mantle-ui-AutoSizeTextArea_root"
       aria-disabled={props.disabled}
-      aria-invalid={errorMessage() !== undefined}
+      aria-invalid={errorMessageSignal.value !== undefined}
       aria-required={props.required}
     >
       <div class="mantle-ui-AutoSizeTextArea_body">
         <div class="mantle-ui-AutoSizeTextArea_dummy" aria-hidden="true">
-          {value() ? value() : rawProps.placeholder}
+          {valueSignal.value || rawProps.placeholder}
           {ZERO_WIDTH_SPACE}
         </div>
         <textarea
           class={joinClasses(rawProps, 'mantle-ui-AutoSizeTextArea_text-area')}
-          value={value()}
+          value={valueSignal.value}
           onInput={onInput}
-          onBlur={() => setEdited(true)}
+          onBlur={() => (isEditedSignal.value = true)}
           {...restProps}
         />
       </div>
-      <p class="mantle-ui-AutoSizeTextArea_error-message">{errorMessage()}</p>
+      <p class="mantle-ui-AutoSizeTextArea_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }
