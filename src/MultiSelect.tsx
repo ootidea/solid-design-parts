@@ -2,6 +2,7 @@ import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createMemo, createRenderEffect, createSignal, For, on, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
+import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
@@ -50,31 +51,42 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     return props.titles?.[value] ?? value
   }
 
-  const [selected, setSelected] = createSignal(new Set(props.selected), { equals: false })
-  createRenderEffect(() => setSelected(() => new Set(props.selected)))
+  const selectedSignal = createSignalObject(new Set(props.selected), { equals: false })
+  createRenderEffect(() => (selectedSignal.value = new Set(props.selected)))
   async function changeSelected(newSelected: Set<T>) {
-    setSelected(() => newSelected)
+    selectedSignal.value = newSelected
     props.onChangeSelected?.(newSelected)
 
     const newErrorMessage = await deriveErrorMessage(shouldValidate(), newSelected, props.errorMessage, props.required)
-    setErrorMessage(newErrorMessage)
+    errorMessageSignal.value = newErrorMessage
     if (newErrorMessage === undefined) {
       props.onChangeValidSelected?.(newSelected)
     }
   }
 
-  const [isEdited, setEdited] = createSignal(false)
-  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
+  const isEditedSignal = createSignalObject(false)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateInitialValue)
 
-  const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
+  const errorMessageSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage, props.required))
+    errorMessageSignal.value = await deriveErrorMessage(
+      shouldValidate(),
+      untrack(selectedSignal.get),
+      props.errorMessage,
+      props.required
+    )
   })
   createRenderEffect(
     on(
       () => props.selected,
-      async () =>
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required)),
+      async () => {
+        errorMessageSignal.value = await deriveErrorMessage(
+          shouldValidate(),
+          props.selected,
+          props.errorMessage,
+          props.required
+        )
+      },
       { defer: true }
     )
   )
@@ -114,9 +126,9 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     }
   }
 
-  const followingCount = createMemo(() => selected().size - 1)
+  const followingCount = createMemo(() => selectedSignal.value.size - 1)
 
-  const [searchQuery, setSearchQuery] = createSignal('')
+  const searchQuerySignal = createSignalObject('')
   function search(values: readonly T[], searchQuery: string): readonly T[] {
     // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
@@ -166,7 +178,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   }
 
   function closeDropdown() {
-    setEdited(true)
+    isEditedSignal.value = true
     setDropdownInfo(undefined)
   }
 
@@ -183,12 +195,12 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
           class="mantle-ui-MultiSelect_launcher"
           type="button"
           disabled={props.disabled}
-          aria-invalid={errorMessage() !== undefined}
+          aria-invalid={errorMessageSignal.value !== undefined}
           onClick={onClickLauncher}
         >
           <div class="mantle-ui-MultiSelect_preview-area">
             {call(() => {
-              const previewValue = getPrimarySelectedValue(selected())
+              const previewValue = getPrimarySelectedValue(selectedSignal.value)
               return (
                 <>
                   {previewValue !== undefined ? (
@@ -225,7 +237,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
           </div>
           <Icon class="mantle-ui-MultiSelect_icon" src={chevronDownIcon} />
         </button>
-        <p class="mantle-ui-MultiSelect_error-message">{errorMessage()}</p>
+        <p class="mantle-ui-MultiSelect_error-message">{errorMessageSignal.value}</p>
       </div>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
       <Show when={dropdownInfo()}>
@@ -254,18 +266,18 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                     <TextInput
                       class="mantle-ui-MultiSelect_search-box"
                       placeholder="search"
-                      value={searchQuery()}
+                      value={searchQuerySignal.value}
                       errorMessage={(value) => {
                         if (search(props.values, value).length === 0) return ''
 
                         return
                       }}
-                      onChangeValue={setSearchQuery}
+                      onChangeValue={searchQuerySignal.set}
                     />
                   </div>
                 </Show>
                 <Scrollable role="menu">
-                  <For each={search(props.values, searchQuery())}>
+                  <For each={search(props.values, searchQuerySignal.value)}>
                     {(value, i) => (
                       <>
                         <Show when={i() > 0}>
@@ -273,15 +285,15 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                         </Show>
                         <Checkbox
                           class="mantle-ui-MultiSelect_option"
-                          checked={selected().has(value)}
+                          checked={selectedSignal.value.has(value)}
                           role="menuitem"
                           onChangeChecked={(checked) => {
                             if (checked) {
-                              selected().add(value)
+                              selectedSignal.value.add(value)
                             } else {
-                              selected().delete(value)
+                              selectedSignal.value.delete(value)
                             }
-                            changeSelected(selected())
+                            changeSelected(selectedSignal.value)
                           }}
                         >
                           {getText(value)}
