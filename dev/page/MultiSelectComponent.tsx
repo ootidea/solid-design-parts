@@ -47,11 +47,11 @@ export function MultiSelectComponent() {
 
       <Sample
         title="Validate initial value"
-        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
+        description="If validateImmediately option is set, it perform validation even if the user did not edit it."
       >
         <MultiSelect
           values={['Female', 'Male', 'Other']}
-          validateInitialValue
+          validateImmediately
           errorMessage={(selected) => {
             if (selected.size < 2) return 'Select multiple options'
 
@@ -65,7 +65,7 @@ export function MultiSelectComponent() {
         <MultiSelect
           values={['Female', 'Male', 'Other']}
           required
-          validateInitialValue
+          validateImmediately
           errorMessage="One or more selections required"
         />
       </Sample>

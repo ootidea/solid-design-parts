@@ -24,7 +24,7 @@ export type MultiSelectProps<T extends string> = Props<{
   disabled?: boolean
   required?: boolean
   errorMessage?: string | ((selected: ReadonlySet<T>) => Promisable<string | void>)
-  validateInitialValue?: boolean
+  validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
   onChangeSelected?: (selected: Set<T>) => void
@@ -40,7 +40,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       placeholder: '',
       disabled: false,
       required: false,
-      validateInitialValue: false,
+      validateImmediately: false,
       fullWidth: false,
       showSearchBox: false,
     },
@@ -65,7 +65,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   }
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateInitialValue)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
   const errorMessageSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {

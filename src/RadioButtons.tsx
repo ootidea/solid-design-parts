@@ -18,7 +18,7 @@ export type RadioButtonsProps<T extends string> = Props<{
   disabled?: boolean | ReadonlySet<string>
   required?: boolean
   errorMessage?: string | ((selected: T | undefined) => Promisable<string | void>)
-  validateInitialValue?: boolean
+  validateImmediately?: boolean
   enableDeselection?: boolean
   onChangeSelected?: (selected: T | undefined) => void
   onChangeValidSelected?: (selected: T | undefined) => void
@@ -33,7 +33,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       gap: '0.2em 1em',
       disabled: false,
       required: false,
-      validateInitialValue: false,
+      validateImmediately: false,
       enableDeselection: false,
     },
     ['selected', 'values', 'gridColumnsCount', 'errorMessage', 'onChangeSelected', 'onChangeValidSelected']
@@ -42,7 +42,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const selectedSignal = createInjectableSignalObject(props, 'selected')
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateInitialValue)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
   const errorMessageSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {

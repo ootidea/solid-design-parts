@@ -52,11 +52,11 @@ export function AutoSizeTextAreaComponent() {
 
       <Sample
         title="Validate initial value"
-        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
+        description="If validateImmediately option is set, it perform validation even if the user did not edit it."
       >
         <AutoSizeTextArea
           placeholder="placeholder"
-          validateInitialValue
+          validateImmediately
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
 
@@ -65,7 +65,7 @@ export function AutoSizeTextAreaComponent() {
         />
         <AutoSizeTextArea
           value="Default value"
-          validateInitialValue
+          validateImmediately
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
@@ -80,7 +80,7 @@ export function AutoSizeTextAreaComponent() {
           placeholder="placeholder"
           required
           errorMessage="This field is required"
-          validateInitialValue
+          validateImmediately
         />
       </Sample>
     </article>

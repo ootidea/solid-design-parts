@@ -71,11 +71,11 @@ export function TextInputComponent() {
 
       <Sample
         title="Validate initial value"
-        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
+        description="If validateImmediately option is set, it perform validation even if the user did not edit it."
       >
         <TextInput
           placeholder="placeholder"
-          validateInitialValue
+          validateImmediately
           errorMessage={(value) => {
             if (value.length === 0) return 'Required'
 
@@ -84,7 +84,7 @@ export function TextInputComponent() {
         />
         <TextInput
           value="Default value"
-          validateInitialValue
+          validateImmediately
           errorMessage={(value) => {
             if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
@@ -95,7 +95,7 @@ export function TextInputComponent() {
 
       <Sample title="Required">
         <TextInput placeholder="placeholder" required errorMessage="Required" />
-        <TextInput placeholder="placeholder" required errorMessage="Required" validateInitialValue />
+        <TextInput placeholder="placeholder" required errorMessage="Required" validateImmediately />
         <TextInput placeholder="Empty error message" required />
       </Sample>
 

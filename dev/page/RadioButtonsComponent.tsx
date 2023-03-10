@@ -129,7 +129,7 @@ export function RadioButtonsComponent() {
 
       <Sample
         title="Validate initial value"
-        description="If validateInitialValue option is set, it perform validation even if the user did not edit it."
+        description="If validateImmediately option is set, it perform validation even if the user did not edit it."
       >
         <RadioButtons
           values={['left', 'center', 'right']}
@@ -138,12 +138,12 @@ export function RadioButtonsComponent() {
 
             return
           }}
-          validateInitialValue
+          validateImmediately
         />
       </Sample>
 
       <Sample title="Required">
-        <RadioButtons values={['left', 'center', 'right']} required validateInitialValue />
+        <RadioButtons values={['left', 'center', 'right']} required validateImmediately />
         <RadioButtons values={['left', 'center', 'right']} required enableDeselection />
       </Sample>
     </article>
