@@ -116,7 +116,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
         }
       } else {
         const result = await errorMessage?.(selected)
-        if (selected) {
+        if (selected !== undefined) {
           return result ?? undefined
         } else {
           return result ?? ''
