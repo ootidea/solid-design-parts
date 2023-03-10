@@ -1,8 +1,9 @@
 import { call } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, For, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, on, untrack } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './RadioButtons.scss'
-import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -38,20 +39,31 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
     ['selected', 'values', 'gridColumnsCount', 'errorMessage', 'onChangeSelected', 'onChangeValidSelected']
   )
 
-  const [selected, setSelected] = createInjectableSignal(props, 'selected')
+  const selectedSignal = createInjectableSignalObject(props, 'selected')
 
-  const [isEdited, setEdited] = createSignal(false)
-  const shouldValidate = createMemo(() => isEdited() || props.validateInitialValue)
+  const isEditedSignal = createSignalObject(false)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateInitialValue)
 
-  const [errorMessage, setErrorMessage] = createSignal<string | undefined>()
+  const errorMessageSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    setErrorMessage(await deriveErrorMessage(shouldValidate(), untrack(selected), props.errorMessage, props.required))
+    errorMessageSignal.value = await deriveErrorMessage(
+      shouldValidate(),
+      untrack(selectedSignal.get),
+      props.errorMessage,
+      props.required
+    )
   })
   createRenderEffect(
     on(
       () => props.selected,
-      async () =>
-        setErrorMessage(await deriveErrorMessage(shouldValidate(), props.selected, props.errorMessage, props.required)),
+      async () => {
+        errorMessageSignal.value = await deriveErrorMessage(
+          shouldValidate(),
+          props.selected,
+          props.errorMessage,
+          props.required
+        )
+      },
       { defer: true }
     )
   )
@@ -63,16 +75,16 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   }
 
   async function onClick(value: T) {
-    setEdited(true)
+    isEditedSignal.value = true
     const nextSelected = call(() => {
-      if (selected() === value && props.enableDeselection) {
+      if (selectedSignal.value === value && props.enableDeselection) {
         return undefined
       } else {
         return value
       }
     })
 
-    setSelected(() => nextSelected)
+    selectedSignal.value = nextSelected
     props.onChangeSelected?.(nextSelected)
 
     const nextErrorMessage = await deriveErrorMessage(
@@ -81,7 +93,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       props.errorMessage,
       props.required
     )
-    setErrorMessage(nextErrorMessage)
+    errorMessageSignal.value = nextErrorMessage
     if (nextErrorMessage === undefined) {
       props.onChangeValidSelected?.(nextSelected)
     }
@@ -130,7 +142,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
         '--mantle-ui-RadioButtons_gap': props.gap,
         '--mantle-ui-RadioButtons_grid-columns-count': props.gridColumnsCount,
       }}
-      aria-invalid={errorMessage() !== undefined}
+      aria-invalid={errorMessageSignal.value !== undefined}
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
@@ -147,7 +159,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
                 class="mantle-ui-RadioButtons_radio"
                 value={value}
                 name={props.name}
-                checked={value === selected()}
+                checked={value === selectedSignal.value}
                 disabled={isDisabled(value)}
                 onClick={() => onClick(value)}
               />
@@ -156,7 +168,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
           )}
         </For>
       </div>
-      <p class="mantle-ui-RadioButtons_error-message">{errorMessage()}</p>
+      <p class="mantle-ui-RadioButtons_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }
