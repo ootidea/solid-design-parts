@@ -1,4 +1,4 @@
-import { assert, call, isNotEmpty } from 'base-up'
+import { call } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createMemo, createRenderEffect, createSignal, For, on, untrack } from 'solid-js'
 import css from './RadioButtons.scss'
@@ -24,8 +24,6 @@ export type RadioButtonsProps<T extends string> = Props<{
 }>
 
 export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
-  assert(rawProps.values, isNotEmpty)
-
   const [props, restProps] = prepareProps(
     rawProps,
     {
