@@ -1,6 +1,7 @@
-import { call, isInstanceOf } from 'base-up'
-import { createRenderEffect, createSignal, For, Show } from 'solid-js'
+import { isInstanceOf } from 'base-up'
+import { createRenderEffect, For, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
+import { createSignalObject } from 'solid-signal-object'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
@@ -45,21 +46,21 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     return props.titles?.[value] ?? value
   }
 
-  const [selected, setSelected] = createSignal<T | undefined>(undefined)
+  const selectedSignal = createSignalObject<T | undefined>(undefined)
   createRenderEffect(() => {
     // Treat as undefined if props.selected is out of range.
     if (props.selected !== undefined && !props.values.includes(props.selected)) {
       changeSelected(undefined)
     } else {
-      setSelected(() => props.selected)
+      selectedSignal.value = props.selected
     }
   })
   function changeSelected(selected: T | undefined) {
-    setSelected(() => selected)
+    selectedSignal.value = selected
     props.onChangeSelected?.(selected)
   }
 
-  const [searchQuery, setSearchQuery] = createSignal('')
+  const searchQuerySignal = createSignalObject('')
   function search(values: readonly T[], searchQuery: string): readonly T[] {
     // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
@@ -71,7 +72,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   }
 
   type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
-  const [dropdownInfo, setDropdownInfo] = createSignal<DropdownInfo | undefined>(undefined, {
+  const dropdownInfoSignal = createSignalObject<DropdownInfo | undefined>(undefined, {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
@@ -80,26 +81,26 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     if (!isInstanceOf(event.currentTarget, HTMLElement)) return
 
     const rect = event.currentTarget.getBoundingClientRect()
-    setDropdownInfo({
+    dropdownInfoSignal.value = {
       leftPx: rect.left,
       topPx: rect.bottom,
       widthPx: rect.width,
       maxHeightPx: window.innerHeight - rect.bottom,
-    })
+    }
   }
 
   function onOperateOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
-    setDropdownInfo(undefined)
+    dropdownInfoSignal.value = undefined
   }
 
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && dropdownInfo() !== undefined) {
+    if (event.code === 'Escape' && dropdownInfoSignal.value !== undefined) {
       event.preventDefault()
-      setDropdownInfo(undefined)
+      dropdownInfoSignal.value = undefined
     }
   }
 
@@ -107,7 +108,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     <>
       <button
         class={joinClasses(rawProps, 'mantle-ui-Select_launcher', {
-          'mantle-ui-Select_opened': dropdownInfo() !== undefined,
+          'mantle-ui-Select_opened': dropdownInfoSignal.value !== undefined,
           'mantle-ui-Select_full-width': props.fullWidth,
         })}
         type="button"
@@ -116,27 +117,21 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
         {...restProps}
       >
         <div class="mantle-ui-Select_preview-area">
-          {call(() => {
-            const previewValue = selected()
-            return (
-              <>
-                {previewValue !== undefined ? (
-                  <div class="mantle-ui-Select_preview">{getText(previewValue)} </div>
-                ) : null}
-                <div
-                  class="mantle-ui-Select_placeholder"
-                  classList={{ 'mantle-ui-Select_invisible': previewValue !== undefined }}
-                >
-                  {props.placeholder}
-                </div>
-                <div class="mantle-ui-Select_invisible">
-                  <For each={props.values}>
-                    {(value) => <div class="mantle-ui-Select_preview">{getText(value)}</div>}
-                  </For>
-                </div>
-              </>
-            )
-          })}
+          {/* TODO: */}
+          {true}
+          {false}
+          {selectedSignal.value !== undefined ? (
+            <div class="mantle-ui-Select_preview">{getText(selectedSignal.value)}</div>
+          ) : null}
+          <div
+            class="mantle-ui-Select_placeholder"
+            classList={{ 'mantle-ui-Select_invisible': selectedSignal.value !== undefined }}
+          >
+            {props.placeholder}
+          </div>
+          <div class="mantle-ui-Select_invisible">
+            <For each={props.values}>{(value) => <div class="mantle-ui-Select_preview">{getText(value)}</div>}</For>
+          </div>
         </div>
         <Show when={props.showClearButton}>
           <IconButton
@@ -145,14 +140,14 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
             size="1.6em"
             iconSize="1.25em"
             iconColor="var(--mantle-ui-clear-button-icon-default-color)"
-            aria-hidden={selected() === undefined}
+            aria-hidden={selectedSignal.value === undefined}
             onClick={() => changeSelected(undefined)}
           />
         </Show>
         <Icon class="mantle-ui-Select_icon" src={chevronDownIcon} />
       </button>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
-      <Show when={dropdownInfo()}>
+      <Show when={dropdownInfoSignal.value}>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
             <div
@@ -178,18 +173,18 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                     <TextInput
                       class="mantle-ui-Select_search-box"
                       placeholder="search"
-                      value={searchQuery()}
+                      value={searchQuerySignal.value}
                       errorMessage={(value) => {
                         if (search(props.values, value).length === 0) return ''
 
                         return
                       }}
-                      onChangeValue={setSearchQuery}
+                      onChangeValue={searchQuerySignal.set}
                     />
                   </div>
                 </Show>
                 <Scrollable role="menu">
-                  <For each={search(props.values, searchQuery())}>
+                  <For each={search(props.values, searchQuerySignal.value)}>
                     {(value, i) => (
                       <>
                         <Show when={i() > 0}>
@@ -199,10 +194,10 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                           class="mantle-ui-Select_option"
                           type="button"
                           role="menuitem"
-                          aria-selected={selected() === value}
+                          aria-selected={selectedSignal.value === value}
                           onClick={() => {
                             changeSelected(value)
-                            setDropdownInfo(undefined)
+                            dropdownInfoSignal.value = undefined
                           }}
                         >
                           {getText(value)}
