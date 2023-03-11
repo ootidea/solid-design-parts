@@ -1,19 +1,23 @@
 import { isInstanceOf } from 'base-up'
+import { Promisable } from 'base-up/dist/types/Promise'
+import { createMemo, createRenderEffect, on, untrack } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './Checkbox.scss'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type CheckboxProps = Props<
-  {
-    checked?: boolean
-    value?: string | undefined
-    disabled?: boolean
-    onChangeChecked?: (checked: boolean) => void
-  },
-  'label'
->
+export type CheckboxProps = Props<{
+  checked?: boolean
+  value?: string | undefined
+  disabled?: boolean
+  required?: boolean
+  errorMessage?: string | ((checked: boolean) => Promisable<string | void>)
+  validateImmediately?: boolean
+  onChangeChecked?: (checked: boolean) => void
+  onChangeValidChecked?: (checked: boolean) => void
+}>
 
 export function Checkbox(rawProps: CheckboxProps) {
   const [props, restProps] = prepareProps(
@@ -22,27 +26,108 @@ export function Checkbox(rawProps: CheckboxProps) {
       checked: false,
       value: undefined,
       disabled: false,
+      required: false,
+      validateImmediately: false,
     },
-    ['onChangeChecked']
+    ['errorMessage', 'onChangeChecked', 'onChangeValidChecked']
   )
 
-  function onChange(event: Event) {
+  const checkedSignal = createInjectableSignalObject(props, 'checked')
+
+  const isEditedSignal = createSignalObject(false)
+  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+
+  const errorMessageSignal = createSignalObject<string | undefined>()
+  createRenderEffect(async () => {
+    errorMessageSignal.value = await deriveErrorMessage(
+      shouldValidate(),
+      untrack(checkedSignal.get),
+      props.errorMessage,
+      props.required
+    )
+  })
+  createRenderEffect(
+    on(
+      () => props.checked,
+      async () => {
+        errorMessageSignal.value = await deriveErrorMessage(
+          shouldValidate(),
+          props.checked,
+          props.errorMessage,
+          props.required
+        )
+      },
+      { defer: true }
+    )
+  )
+
+  async function onChange(event: Event) {
+    isEditedSignal.value = true
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
-    props.onChangeChecked?.(event.target.checked)
+    const checked = event.target.checked
+    checkedSignal.value = checked
+    props.onChangeChecked?.(checked)
+
+    const newErrorMessage = await deriveErrorMessage(shouldValidate(), checked, props.errorMessage, props.required)
+    errorMessageSignal.value = newErrorMessage
+    console.log(newErrorMessage, props.errorMessage, checkedSignal.value)
+  }
+
+  async function deriveErrorMessage(
+    shouldValidate: boolean,
+    checked: boolean,
+    errorMessage: CheckboxProps['errorMessage'],
+    required: boolean
+  ): Promise<string | undefined> {
+    if (required) {
+      if (!shouldValidate) {
+        return undefined
+      } else if (typeof errorMessage === 'string') {
+        if (checked) {
+          return undefined
+        } else {
+          return errorMessage
+        }
+      } else {
+        const result = await errorMessage?.(checked)
+        if (checked) {
+          return result ?? undefined
+        } else {
+          return result ?? ''
+        }
+      }
+    } else {
+      if (typeof errorMessage === 'string') {
+        return errorMessage
+      } else if (!shouldValidate) {
+        return undefined
+      } else {
+        const result = await errorMessage?.(checked)
+        return result ?? undefined
+      }
+    }
   }
 
   return (
-    <label class={joinClasses(rawProps, 'mantle-ui-Checkbox_root')} aria-disabled={props.disabled} {...restProps}>
-      <input
-        type="checkbox"
-        class="mantle-ui-Checkbox_checkbox"
-        value={props.value}
-        checked={props.checked}
-        disabled={props.disabled}
-        onChange={onChange}
-      />
-      <div class="mantle-ui-Checkbox_children">{rawProps.children}</div>
-    </label>
+    <div
+      class={joinClasses(rawProps, 'mantle-ui-Checkbox_root')}
+      aria-disabled={props.disabled}
+      aria-invalid={errorMessageSignal.value !== undefined}
+      {...restProps}
+    >
+      <label class="mantle-ui-Checkbox_label">
+        <input
+          type="checkbox"
+          class="mantle-ui-Checkbox_checkbox"
+          value={props.value}
+          checked={checkedSignal.value}
+          disabled={props.disabled}
+          onChange={onChange}
+        />
+        <div class="mantle-ui-Checkbox_children">{rawProps.children}</div>
+      </label>
+      <p class="mantle-ui-Checkbox_error-message">{errorMessageSignal.value}</p>
+    </div>
   )
 }

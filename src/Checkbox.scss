@@ -5,7 +5,7 @@
   --mantle-ui-Checkbox_check-size: 0.94em;
 }
 
-.mantle-ui-Checkbox_root {
+.mantle-ui-Checkbox_label {
   display: inline-grid;
   vertical-align: top;
   grid-template-columns: auto minmax(0, 1fr);
@@ -14,7 +14,7 @@
 
   cursor: pointer;
 
-  &[aria-disabled='true'] {
+  .mantle-ui-Checkbox_root[aria-disabled='true'] & {
     cursor: default;
 
     color: oklch(70% 0 0);
@@ -40,8 +40,16 @@
 
   transition: all 140ms ease-out;
 
+  .mantle-ui-Checkbox_root[aria-invalid='true'] & {
+    border-color: var(--mantle-ui-error-color);
+  }
+
   &:checked {
     background-color: var(--mantle-ui-primary-color);
+
+    .mantle-ui-Checkbox_root[aria-invalid='true'] & {
+      background-color: var(--mantle-ui-error-color);
+    }
 
     &:disabled {
       background-color: oklch(70% 0 0);
@@ -76,4 +84,13 @@
 
 .mantle-ui-Checkbox_children {
   white-space: pre-wrap;
+}
+
+.mantle-ui-Checkbox_error-message {
+  color: var(--mantle-ui-error-color);
+  margin: 0.5em 0 0;
+
+  &:empty {
+    display: none;
+  }
 }

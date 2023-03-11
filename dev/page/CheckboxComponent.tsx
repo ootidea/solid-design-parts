@@ -10,26 +10,75 @@ export function CheckboxComponent() {
     <article>
       <PageTitle>Checkbox</PageTitle>
 
-      <Sample title="Basic example" direction="horizontal">
-        <Checkbox>Agree</Checkbox>
-        <Checkbox checked>Agree</Checkbox>
+      <Sample title="Basic example">
+        <Checkbox checked>Remember my choice</Checkbox>
+        <Checkbox>I agree to the terms of service</Checkbox>
       </Sample>
 
       <Sample title="Bind to signal">
         <Checkbox checked={checked()} onChangeChecked={setChecked}>
-          Agree
+          Send me weekly summary
         </Checkbox>
         <div>checked() === {String(checked())}</div>
       </Sample>
 
-      <Sample title="Disabled" direction="horizontal">
-        <Checkbox disabled>Agree</Checkbox>
+      <Sample title="Disabled">
+        <Checkbox disabled>Keep me signed</Checkbox>
         <Checkbox checked disabled>
-          Accept
+          Accept cookies
         </Checkbox>
       </Sample>
 
-      <Sample title="Size" direction="horizontal">
+      <Sample title="Error message">
+        <Checkbox errorMessage="Something went wrong">Auto-update</Checkbox>
+        <Checkbox errorMessage="">Keep me signed in</Checkbox>
+      </Sample>
+
+      <Sample title="Validation">
+        <Checkbox
+          errorMessage={(checked) => {
+            if (checked) return
+
+            return 'This checkbox is required'
+          }}
+        >
+          I agree to the terms of service
+        </Checkbox>
+        <Checkbox errorMessage={(checked) => (checked ? 'Cannot be used with other options' : undefined)}>
+          Auto-update
+        </Checkbox>
+      </Sample>
+
+      <Sample title="Validate initial value">
+        <Checkbox
+          errorMessage={(checked) => {
+            if (checked) return
+
+            return 'This checkbox is required'
+          }}
+          validateImmediately
+        >
+          I agree to the terms of service
+        </Checkbox>
+        <Checkbox
+          checked
+          errorMessage={(checked) => (checked ? 'Cannot be used with other options' : undefined)}
+          validateImmediately
+        >
+          Auto-update
+        </Checkbox>
+      </Sample>
+
+      <Sample title="Required">
+        <Checkbox required validateImmediately>
+          I agree to the terms of service
+        </Checkbox>
+        <Checkbox required errorMessage="Required under the new policy">
+          Auto-update
+        </Checkbox>
+      </Sample>
+
+      <Sample title="Size">
         <Checkbox style="font-size: 14px" checked>
           14px
         </Checkbox>
