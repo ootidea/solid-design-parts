@@ -13,6 +13,7 @@ registerCss(css)
 export type NumberInputProps = Props<{
   value?: number | undefined
   placeholder?: string
+  inputMode?: 'decimal' | 'numeric'
   disabled?: boolean
   required?: boolean
   errorMessage?: string | ((value: number | undefined) => Promisable<string | void>)
@@ -28,6 +29,7 @@ export function NumberInput(rawProps: NumberInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
+      inputMode: 'numeric',
       disabled: false,
       required: false,
       validateImmediately: false,
@@ -160,6 +162,7 @@ export function NumberInput(rawProps: NumberInputProps) {
           class="mantle-ui-NumberInput_input"
           type="text"
           value={stringSignal.value}
+          inputMode={props.inputMode}
           placeholder={props.placeholder}
           disabled={props.disabled}
           onInput={onInput}
