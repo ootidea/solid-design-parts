@@ -1,6 +1,6 @@
 import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, createSignal, For, on, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, on, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
@@ -140,7 +140,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   }
 
   type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
-  const [dropdownInfo, setDropdownInfo] = createSignal<DropdownInfo | undefined>(undefined, {
+  const dropdownInfoSignal = createSignalObject<DropdownInfo | undefined>(undefined, {
     equals: false,
   })
   function onClickLauncher(event: MouseEvent) {
@@ -149,12 +149,12 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     if (!isInstanceOf(event.currentTarget, HTMLElement)) return
 
     const rect = event.currentTarget.getBoundingClientRect()
-    setDropdownInfo({
+    dropdownInfoSignal.value = {
       leftPx: rect.left,
       topPx: rect.bottom,
       widthPx: rect.width,
       maxHeightPx: window.innerHeight - rect.bottom,
-    })
+    }
   }
 
   function onOperateOverlay(event: Event) {
@@ -171,7 +171,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && dropdownInfo() !== undefined) {
+    if (event.code === 'Escape' && dropdownInfoSignal.value !== undefined) {
       event.preventDefault()
       closeDropdown()
     }
@@ -179,14 +179,14 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
 
   function closeDropdown() {
     isEditedSignal.value = true
-    setDropdownInfo(undefined)
+    dropdownInfoSignal.value = undefined
   }
 
   return (
     <>
       <div
         class={joinClasses(rawProps, 'mantle-ui-MultiSelect_error-message-layout', {
-          'mantle-ui-MultiSelect_opened': dropdownInfo() !== undefined,
+          'mantle-ui-MultiSelect_opened': dropdownInfoSignal.value !== undefined,
           'mantle-ui-MultiSelect_full-width': props.fullWidth,
         })}
         {...restProps}
@@ -240,7 +240,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
         <p class="mantle-ui-MultiSelect_error-message">{errorMessageSignal.value}</p>
       </div>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
-      <Show when={dropdownInfo()}>
+      <Show when={dropdownInfoSignal.value}>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
             <div
