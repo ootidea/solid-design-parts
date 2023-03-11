@@ -23,6 +23,7 @@ import { ImageComponent } from './page/ImageComponent'
 import { LayerLayoutComponent } from './page/LayerLayoutComponent'
 import { ModalComponent } from './page/ModalComponent'
 import { MultiSelectComponent } from './page/MultiSelectComponent'
+import { NumberInputComponent } from './page/NumberInputComponent'
 import { PopoverComponent } from './page/PopoverComponent'
 import { RadioButtonsComponent } from './page/RadioButtonsComponent'
 import { ResizableComponent } from './page/ResizableComponent'
@@ -71,7 +72,7 @@ export function App() {
         MultiSelectComponent,
       ],
     },
-    { title: 'Text input', children: [TextInputComponent, AutoSizeTextAreaComponent] },
+    { title: 'Text input', children: [TextInputComponent, AutoSizeTextAreaComponent, NumberInputComponent] },
     {
       title: 'Date and time',
       children: [DateInputComponent, CalendarComponent, DatePickerComponent],
