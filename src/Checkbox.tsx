@@ -71,7 +71,9 @@ export function Checkbox(rawProps: CheckboxProps) {
 
     const newErrorMessage = await deriveErrorMessage(shouldValidate(), checked, props.errorMessage, props.required)
     errorMessageSignal.value = newErrorMessage
-    console.log(newErrorMessage, props.errorMessage, checkedSignal.value)
+    if (newErrorMessage === undefined) {
+      props.onChangeValidChecked?.(checked)
+    }
   }
 
   async function deriveErrorMessage(
