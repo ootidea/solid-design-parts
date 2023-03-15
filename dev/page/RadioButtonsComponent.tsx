@@ -36,9 +36,6 @@ export function RadioButtonsComponent() {
 
       <Sample title="Disabled">
         <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
-      </Sample>
-
-      <Sample title="Disabled item">
         <RadioButtons values={['left', 'center', 'right']} disabled={new Set(['center'])} />
       </Sample>
 
@@ -99,13 +96,17 @@ export function RadioButtonsComponent() {
           />
         </div>
         <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-around" gridColumnsCount={2} values={['left', 'center', 'right']} />
+          <RadioButtons
+            layout="space-around"
+            gridColumnsCount={2}
+            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+          />
         </div>
       </Sample>
 
       <Sample title="Gap" description="Note that flex gap is not supported on iOS versions earlier than 15.4.">
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="vertical" gap="20px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+          <RadioButtons layout="vertical" gap="14px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
         </div>
         <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
           <RadioButtons gridColumnsCount={2} gap="0.5em 2em" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
