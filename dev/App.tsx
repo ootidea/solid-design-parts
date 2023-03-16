@@ -10,6 +10,7 @@ import { AwaitComponent } from './page/AwaitComponent'
 import { ButtonComponent } from './page/ButtonComponent'
 import { CalendarComponent } from './page/CalendarComponent'
 import { CheckboxComponent } from './page/CheckboxComponent'
+import { CheckboxesComponent } from './page/CheckboxesComponent'
 import { DataTableComponent } from './page/DataTableComponent'
 import { DateInputComponent } from './page/DateInputComponent'
 import { DatePickerComponent } from './page/DatePickerComponent'
@@ -66,6 +67,7 @@ export function App() {
       title: 'Selection',
       children: [
         CheckboxComponent,
+        CheckboxesComponent,
         RadioButtonsComponent,
         ToggleButtonsComponent,
         SelectComponent,
