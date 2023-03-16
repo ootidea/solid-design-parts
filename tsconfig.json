@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "types": [],
-    "baseUrl": "."
+    "baseUrl": ".",
+    "noErrorTruncation": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
