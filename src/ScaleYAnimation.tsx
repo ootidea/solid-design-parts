@@ -60,7 +60,7 @@ export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
   }
 
   return (
-    <div class="mantle-ui-ScaleYAnimation_root" ref={element}>
+    <div class="solid-design-parts-ScaleYAnimation_root" ref={element}>
       <Show when={shown()}>
         <Slot content={props.children} params={lastNonFalsyShown!} />
       </Show>

@@ -107,51 +107,53 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   return (
     <>
       <button
-        class={joinClasses(rawProps, 'mantle-ui-Select_launcher', {
-          'mantle-ui-Select_opened': dropdownInfoSignal.value !== undefined,
-          'mantle-ui-Select_full-width': props.fullWidth,
+        class={joinClasses(rawProps, 'solid-design-parts-Select_launcher', {
+          'solid-design-parts-Select_opened': dropdownInfoSignal.value !== undefined,
+          'solid-design-parts-Select_full-width': props.fullWidth,
         })}
         type="button"
         disabled={props.disabled}
         onClick={onClickLauncher}
         {...restProps}
       >
-        <div class="mantle-ui-Select_preview-area">
+        <div class="solid-design-parts-Select_preview-area">
           {/* TODO: */}
           {true}
           {false}
           {selectedSignal.value !== undefined ? (
-            <div class="mantle-ui-Select_preview">{getText(selectedSignal.value)}</div>
+            <div class="solid-design-parts-Select_preview">{getText(selectedSignal.value)}</div>
           ) : null}
           <div
-            class="mantle-ui-Select_placeholder"
-            classList={{ 'mantle-ui-Select_invisible': selectedSignal.value !== undefined }}
+            class="solid-design-parts-Select_placeholder"
+            classList={{ 'solid-design-parts-Select_invisible': selectedSignal.value !== undefined }}
           >
             {props.placeholder}
           </div>
-          <div class="mantle-ui-Select_invisible">
-            <For each={props.values}>{(value) => <div class="mantle-ui-Select_preview">{getText(value)}</div>}</For>
+          <div class="solid-design-parts-Select_invisible">
+            <For each={props.values}>
+              {(value) => <div class="solid-design-parts-Select_preview">{getText(value)}</div>}
+            </For>
           </div>
         </div>
         <Show when={props.showClearButton}>
           <IconButton
-            class="mantle-ui-Select_clear-button"
+            class="solid-design-parts-Select_clear-button"
             src={closeCircleIcon}
             size="1.6em"
             iconSize="1.25em"
-            iconColor="var(--mantle-ui-clear-button-icon-default-color)"
+            iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
             aria-hidden={selectedSignal.value === undefined}
             onClick={() => changeSelected(undefined)}
           />
         </Show>
-        <Icon class="mantle-ui-Select_icon" src={chevronDownIcon} />
+        <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
       </button>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
       <Show when={dropdownInfoSignal.value}>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
             <div
-              class="mantle-ui-Select_overlay"
+              class="solid-design-parts-Select_overlay"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
               onClick={onOperateOverlay}
@@ -160,18 +162,18 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
               onKeyDown={onKeyDown}
             >
               <div
-                class="mantle-ui-Select_dropdown"
+                class="solid-design-parts-Select_dropdown"
                 style={{
-                  '--mantle-ui-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
-                  '--mantle-ui-Select_dropdown-top': `${dropdownInfo.topPx}px`,
-                  '--mantle-ui-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
-                  '--mantle-ui-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
+                  '--solid-design-parts-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
+                  '--solid-design-parts-Select_dropdown-top': `${dropdownInfo.topPx}px`,
+                  '--solid-design-parts-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
+                  '--solid-design-parts-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
                 }}
               >
                 <Show when={props.showSearchBox}>
-                  <div class="mantle-ui-Select_search-box-area">
+                  <div class="solid-design-parts-Select_search-box-area">
                     <TextInput
-                      class="mantle-ui-Select_search-box"
+                      class="solid-design-parts-Select_search-box"
                       placeholder="search"
                       value={searchQuerySignal.value}
                       errorMessage={(value) => {
@@ -191,7 +193,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                           <Divider />
                         </Show>
                         <button
-                          class="mantle-ui-Select_option"
+                          class="solid-design-parts-Select_option"
                           type="button"
                           role="menuitem"
                           aria-selected={selectedSignal.value === value}

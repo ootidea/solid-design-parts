@@ -1,4 +1,4 @@
-.mantle-ui-Button_root {
+.solid-design-parts-Button_root {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6,7 +6,7 @@
 
   box-sizing: border-box;
   padding: 0.4em 1em;
-  border-radius: var(--mantle-ui-Button_radius);
+  border-radius: var(--solid-design-parts-Button_radius);
   border-width: 1px;
   border-style: solid;
 
@@ -15,141 +15,141 @@
   text-decoration: none;
   cursor: pointer;
 
-  transition: var(--mantle-ui-Button_backward-transition);
+  transition: var(--solid-design-parts-Button_backward-transition);
 
-  --mantle-ui-Button_forward-transition: all 200ms ease-out;
-  --mantle-ui-Button_backward-transition: all 400ms ease-out;
+  --solid-design-parts-Button_forward-transition: all 200ms ease-out;
+  --solid-design-parts-Button_backward-transition: all 400ms ease-out;
 
   &[aria-disabled='true'] {
     pointer-events: none;
   }
 
   &[data-variant='solid'] {
-    color: var(--mantle-ui-inverted-text-color);
-    border-color: var(--mantle-ui-Button_tint-color);
-    background-color: var(--mantle-ui-Button_tint-color);
+    color: var(--solid-design-parts-inverted-text-color);
+    border-color: var(--solid-design-parts-Button_tint-color);
+    background-color: var(--solid-design-parts-Button_tint-color);
 
     &[data-color='primary'] {
-      --mantle-ui-Button_tint-color: var(--mantle-ui-primary-color);
+      --solid-design-parts-Button_tint-color: var(--solid-design-parts-primary-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--mantle-ui-Button_forward-transition);
-            --mantle-ui-Button_tint-color: var(--mantle-ui-primary-inverted-background-hover-color);
+            transition: var(--solid-design-parts-Button_forward-transition);
+            --solid-design-parts-Button_tint-color: var(--solid-design-parts-primary-inverted-background-hover-color);
           }
         }
 
         &:active {
-          transition: var(--mantle-ui-Button_forward-transition);
-          --mantle-ui-Button_tint-color: var(--mantle-ui-primary-inverted-background-active-color);
+          transition: var(--solid-design-parts-Button_forward-transition);
+          --solid-design-parts-Button_tint-color: var(--solid-design-parts-primary-inverted-background-active-color);
         }
       }
     }
 
     &[data-color='achromatic'] {
-      --mantle-ui-Button_tint-color: oklch(55% 0 0);
+      --solid-design-parts-Button_tint-color: oklch(55% 0 0);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--mantle-ui-Button_forward-transition);
-            --mantle-ui-Button_tint-color: oklch(60% 0 0);
+            transition: var(--solid-design-parts-Button_forward-transition);
+            --solid-design-parts-Button_tint-color: oklch(60% 0 0);
           }
         }
 
         &:active {
-          transition: var(--mantle-ui-Button_forward-transition);
-          --mantle-ui-Button_tint-color: oklch(65% 0 0);
+          transition: var(--solid-design-parts-Button_forward-transition);
+          --solid-design-parts-Button_tint-color: oklch(65% 0 0);
         }
       }
     }
 
     &[data-color='error'] {
-      --mantle-ui-Button_tint-color: var(--mantle-ui-error-color);
+      --solid-design-parts-Button_tint-color: var(--solid-design-parts-error-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--mantle-ui-Button_forward-transition);
-            --mantle-ui-Button_tint-color: var(--mantle-ui-error-hover-color);
+            transition: var(--solid-design-parts-Button_forward-transition);
+            --solid-design-parts-Button_tint-color: var(--solid-design-parts-error-hover-color);
           }
         }
 
         &:active {
-          transition: var(--mantle-ui-Button_forward-transition);
-          --mantle-ui-Button_tint-color: var(--mantle-ui-error-active-color);
+          transition: var(--solid-design-parts-Button_forward-transition);
+          --solid-design-parts-Button_tint-color: var(--solid-design-parts-error-active-color);
         }
       }
     }
   }
 
   &[data-variant='ghost'] {
-    color: var(--mantle-ui-Button_tint-color);
-    border-color: var(--mantle-ui-Button_tint-color);
+    color: var(--solid-design-parts-Button_tint-color);
+    border-color: var(--solid-design-parts-Button_tint-color);
     background-color: transparent;
 
     &[data-color='primary'] {
-      --mantle-ui-Button_tint-color: var(--mantle-ui-primary-color);
+      --solid-design-parts-Button_tint-color: var(--solid-design-parts-primary-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--mantle-ui-Button_forward-transition);
-            background-color: var(--mantle-ui-primary-background-hover-color);
+            transition: var(--solid-design-parts-Button_forward-transition);
+            background-color: var(--solid-design-parts-primary-background-hover-color);
           }
         }
 
         &:active {
-          transition: var(--mantle-ui-Button_forward-transition);
-          background-color: var(--mantle-ui-primary-background-active-color);
+          transition: var(--solid-design-parts-Button_forward-transition);
+          background-color: var(--solid-design-parts-primary-background-active-color);
         }
       }
     }
 
     &[data-color='achromatic'] {
-      --mantle-ui-Button_tint-color: oklch(50% 0 0);
+      --solid-design-parts-Button_tint-color: oklch(50% 0 0);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--mantle-ui-Button_forward-transition);
+            transition: var(--solid-design-parts-Button_forward-transition);
             background-color: oklch(97% 0 0);
           }
         }
 
         &:active {
-          transition: var(--mantle-ui-Button_forward-transition);
+          transition: var(--solid-design-parts-Button_forward-transition);
           background-color: oklch(94% 0 0);
         }
       }
     }
 
     &[data-color='error'] {
-      --mantle-ui-Button_tint-color: var(--mantle-ui-error-color);
+      --solid-design-parts-Button_tint-color: var(--solid-design-parts-error-color);
 
       &:not([aria-disabled='true']) {
         @media (hover: hover) {
           &:hover {
-            transition: var(--mantle-ui-Button_forward-transition);
-            background-color: var(--mantle-ui-error-background-hover-color);
+            transition: var(--solid-design-parts-Button_forward-transition);
+            background-color: var(--solid-design-parts-error-background-hover-color);
           }
         }
 
         &:active {
-          transition: var(--mantle-ui-Button_forward-transition);
-          background-color: var(--mantle-ui-error-background-active-color);
+          transition: var(--solid-design-parts-Button_forward-transition);
+          background-color: var(--solid-design-parts-error-background-active-color);
         }
       }
     }
   }
 }
 
-.mantle-ui-Button_invisible {
+.solid-design-parts-Button_invisible {
   visibility: hidden;
 }
 
-.mantle-ui-Button_full-width {
+.solid-design-parts-Button_full-width {
   display: flex;
   width: 100%;
 }

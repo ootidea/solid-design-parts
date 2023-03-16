@@ -1,4 +1,4 @@
-.mantle-ui-Scrollable_root {
+.solid-design-parts-Scrollable_root {
   position: relative;
   box-sizing: border-box;
   width: 100%;
@@ -6,7 +6,7 @@
   max-height: inherit;
 }
 
-.mantle-ui-Scrollable_outer {
+.solid-design-parts-Scrollable_outer {
   overflow: auto;
   box-sizing: border-box;
   width: 100%;
@@ -21,12 +21,12 @@
   }
 }
 
-.mantle-ui-Scrollable_inner {
+.solid-design-parts-Scrollable_inner {
   // To prevent that margin protrude parent element.
   overflow: hidden;
 }
 
-.mantle-ui-Scrollable_overlay {
+.solid-design-parts-Scrollable_overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,27 +40,27 @@
   pointer-events: none;
 }
 
-.mantle-ui-Scrollable_scrollbar {
+.solid-design-parts-Scrollable_scrollbar {
   visibility: hidden;
 
   box-sizing: border-box;
   width: 10px;
   padding: 0 1px;
 
-  .mantle-ui-Scrollable_overflow & {
+  .solid-design-parts-Scrollable_overflow & {
     visibility: visible;
   }
 }
 
-.mantle-ui-Scrollable_thumb {
+.solid-design-parts-Scrollable_thumb {
   opacity: 0;
   visibility: hidden;
 
-  margin-top: var(--mantle-ui-Scrollable_thumb-top);
+  margin-top: var(--solid-design-parts-Scrollable_thumb-top);
   border-radius: 999vh;
   box-sizing: border-box;
   width: 100%;
-  height: var(--mantle-ui-Scrollable_thumb-height);
+  height: var(--solid-design-parts-Scrollable_thumb-height);
   background-color: oklch(0% 0 0 / 20%);
   pointer-events: auto;
 
@@ -70,7 +70,7 @@
     }
   }
 
-  .mantle-ui-Scrollable_dragging & {
+  .solid-design-parts-Scrollable_dragging & {
     background-color: oklch(0% 0 0 / 40%);
   }
 }

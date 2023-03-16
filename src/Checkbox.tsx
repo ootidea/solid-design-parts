@@ -113,23 +113,23 @@ export function Checkbox(rawProps: CheckboxProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Checkbox_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Checkbox_root')}
       aria-disabled={props.disabled}
       aria-invalid={errorMessageSignal.value !== undefined}
       {...restProps}
     >
-      <label class="mantle-ui-Checkbox_label">
+      <label class="solid-design-parts-Checkbox_label">
         <input
           type="checkbox"
-          class="mantle-ui-Checkbox_checkbox"
+          class="solid-design-parts-Checkbox_checkbox"
           value={props.value}
           checked={checkedSignal.value}
           disabled={props.disabled}
           onChange={onChange}
         />
-        <div class="mantle-ui-Checkbox_children">{rawProps.children}</div>
+        <div class="solid-design-parts-Checkbox_children">{rawProps.children}</div>
       </label>
-      <p class="mantle-ui-Checkbox_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-Checkbox_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }

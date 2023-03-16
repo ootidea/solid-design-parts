@@ -1,18 +1,18 @@
 {
-  "name": "solid-mantle-ui",
+  "name": "solid-design-parts",
   "version": "0.0.10",
   "private": false,
   "description": "",
   "keywords": [
     "solid"
   ],
-  "homepage": "https://github.com/ootidea/solid-mantle-ui#readme",
+  "homepage": "https://github.com/ootidea/solid-design-parts#readme",
   "bugs": {
-    "url": "https://github.com/ootidea/solid-mantle-ui/issues"
+    "url": "https://github.com/ootidea/solid-design-parts/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ootidea/solid-mantle-ui.git"
+    "url": "git+https://github.com/ootidea/solid-design-parts.git"
   },
   "license": "CC0-1.0",
   "author": "ootidea",

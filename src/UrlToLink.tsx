@@ -29,7 +29,7 @@ export function UrlToLink(rawProps: UrlToLinkProps) {
   const texts = chunk(indexes, 2).map(([start, end]) => props.children.substring(start, end))
 
   return (
-    <div class={joinClasses(rawProps, 'mantle-ui-UrlToLink_root')} {...restProps}>
+    <div class={joinClasses(rawProps, 'solid-design-parts-UrlToLink_root')} {...restProps}>
       {rangeTo(texts.length).map((i) => (
         <>
           {texts[i]}

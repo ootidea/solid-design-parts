@@ -97,16 +97,16 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-ToggleButtons_root', {
-        'mantle-ui-ToggleButtons_full-width': props.fullWidth,
-        'mantle-ui-ToggleButtons_exclusive': props.exclusive,
+      class={joinClasses(rawProps, 'solid-design-parts-ToggleButtons_root', {
+        'solid-design-parts-ToggleButtons_full-width': props.fullWidth,
+        'solid-design-parts-ToggleButtons_exclusive': props.exclusive,
       })}
       {...restProps}
     >
       <For each={props.values}>
         {(value: T) => (
           <button
-            class="mantle-ui-ToggleButtons_button"
+            class="solid-design-parts-ToggleButtons_button"
             type="button"
             aria-selected={isSelected(value)}
             onClick={() => clickEventHandler(value)}

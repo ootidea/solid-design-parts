@@ -13,7 +13,7 @@ const [toastModels, setToastModels] = createSignal<ToastModel[]>([], { equals: f
 export function showToast(type: ToastProps['type'], message: JSX.Element, options?: ToastOptions) {
   const durationMs: number = options?.durationMs ?? 3000
 
-  const toasts = document.querySelector('.mantle-ui-Toasts_root')
+  const toasts = document.querySelector('.solid-design-parts-Toasts_root')
   if (toasts === null) {
     render(() => <Toasts />, document.body)
   } else {
@@ -61,7 +61,7 @@ function removeToast(toastId: symbol) {
 
 export function Toasts() {
   return (
-    <div class="mantle-ui-Toasts_root">
+    <div class="solid-design-parts-Toasts_root">
       <For each={toastModels()}>{(toastModel) => <Toast {...toastModel} />}</For>
     </div>
   )

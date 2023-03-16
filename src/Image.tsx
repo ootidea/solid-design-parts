@@ -38,7 +38,7 @@ export function Image(rawProps: ImageProps) {
       when={loadingState() === 'failed' && props.fallback}
       fallback={
         <img
-          class={joinClasses(rawProps, 'mantle-ui-Image_root')}
+          class={joinClasses(rawProps, 'solid-design-parts-Image_root')}
           alt={props.alt}
           draggable={false}
           onLoad={onLoad}

@@ -85,19 +85,19 @@ export function Popover(rawProps: PopoverProps) {
 
   return (
     <>
-      <div class="mantle-ui-Popover_launcher" ref={launcher}>
+      <div class="solid-design-parts-Popover_launcher" ref={launcher}>
         <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
       </div>
       <Show when={opened()}>
         <Portal>
           <div
-            class="mantle-ui-Popover_overlay"
+            class="solid-design-parts-Popover_overlay"
             style={{
-              '--mantle-ui-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
-              '--mantle-ui-Popover_right': launcherRect ? `${launcherRect.right}px` : '0',
-              '--mantle-ui-Popover_top': launcherRect ? `${launcherRect.top}px` : '0',
-              '--mantle-ui-Popover_bottom': launcherRect ? `${launcherRect.bottom}px` : '0',
-              '--mantle-ui-Popover_transform': `translate(-${toXPercent(
+              '--solid-design-parts-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
+              '--solid-design-parts-Popover_right': launcherRect ? `${launcherRect.right}px` : '0',
+              '--solid-design-parts-Popover_top': launcherRect ? `${launcherRect.top}px` : '0',
+              '--solid-design-parts-Popover_bottom': launcherRect ? `${launcherRect.bottom}px` : '0',
+              '--solid-design-parts-Popover_transform': `translate(-${toXPercent(
                 props.joint ?? toOpposite(props.on)
               )}, -${toYPercent(props.joint ?? toOpposite(props.on))})`,
             }}
@@ -112,7 +112,7 @@ export function Popover(rawProps: PopoverProps) {
             {...restProps}
           >
             <Slot content={rawProps.frame} params={{ open, close, toggle }}>
-              <div class="mantle-ui-Popover_frame">
+              <div class="solid-design-parts-Popover_frame">
                 <Slot content={rawProps.children} params={{ open, close, toggle }} />
               </div>
             </Slot>

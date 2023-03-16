@@ -21,7 +21,7 @@ export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>)
         const analysisResult = analyze(rawProps.value)
         return (
           <div
-            class={joinClasses(props, 'mantle-ui-DataTableCell_root')}
+            class={joinClasses(props, 'solid-design-parts-DataTableCell_root')}
             data-type={analysisResult.type}
             {...restProps}
           >

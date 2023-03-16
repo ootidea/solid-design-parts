@@ -24,25 +24,25 @@ export type ToastProps = {
 export function Toast(props: ToastProps) {
   return (
     <a
-      class="mantle-ui-Toast_root"
-      classList={{ 'mantle-ui-Toast_clickable': props.onClick !== undefined }}
+      class="solid-design-parts-Toast_root"
+      classList={{ 'solid-design-parts-Toast_clickable': props.onClick !== undefined }}
       href={props.href}
       onClick={props.onClick}
     >
-      <div class="mantle-ui-Toast_icon-area">
+      <div class="solid-design-parts-Toast_icon-area">
         {call(() => {
           switch (props.type) {
             case 'success':
-              return <Icon src={checkCircleIcon} color="var(--mantle-ui-success-color)" size="1.7em" />
+              return <Icon src={checkCircleIcon} color="var(--solid-design-parts-success-color)" size="1.7em" />
             case 'error':
-              return <Icon src={alertIcon} color="var(--mantle-ui-error-color)" size="1.7em" />
+              return <Icon src={alertIcon} color="var(--solid-design-parts-error-color)" size="1.7em" />
             case 'info':
-              return <Icon src={informationIcon} color="var(--mantle-ui-primary-color)" size="1.7em" />
+              return <Icon src={informationIcon} color="var(--solid-design-parts-primary-color)" size="1.7em" />
           }
         })}
       </div>
-      <div class="mantle-ui-Toast_message">{props.message}</div>
-      <div class="mantle-ui-Toast_close-button-area">
+      <div class="solid-design-parts-Toast_message">{props.message}</div>
+      <div class="solid-design-parts-Toast_close-button-area">
         <IconButton src={closeIcon} onClick={props.close} />
       </div>
     </a>

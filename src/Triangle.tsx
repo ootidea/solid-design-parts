@@ -19,11 +19,11 @@ export function Triangle(rawProps: TriangleProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Triangle_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Triangle_root')}
       style={{
-        '--mantle-ui-Triangle_height': props.height,
-        '--mantle-ui-Triangle_base-length': props.baseLength,
-        '--mantle-ui-Triangle_color': props.color,
+        '--solid-design-parts-Triangle_height': props.height,
+        '--solid-design-parts-Triangle_base-length': props.baseLength,
+        '--solid-design-parts-Triangle_color': props.color,
       }}
       data-direction={props.direction}
       {...restProps}

@@ -1,23 +1,23 @@
 <p>
-  <img width="100%" src="https://assets.solidjs.com/banner?type=solid-mantle-ui&background=tiles&project=%20" alt="solid-mantle-ui">
+  <img width="100%" src="https://assets.solidjs.com/banner?type=solid-design-parts&background=tiles&project=%20" alt="solid-design-parts">
 </p>
 
-# solid-mantle-ui
+# solid-design-parts
 
 ## Quick start
 
 Install it:
 
 ```bash
-npm i solid-mantle-ui
+npm i solid-design-parts
 # or
-yarn add solid-mantle-ui
+yarn add solid-design-parts
 # or
-pnpm add solid-mantle-ui
+pnpm add solid-design-parts
 ```
 
 Use it:
 
 ```tsx
-import solid-mantle-ui from 'solid-mantle-ui'
+import solid-design-parts from 'solid-design-parts'
 ```

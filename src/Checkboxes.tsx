@@ -131,17 +131,17 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
 
   return (
     <div
-      class="mantle-ui-Checkboxes_root"
-      classList={{ 'mantle-ui-Checkboxes_has-columns-count': props.gridColumnsCount !== undefined }}
+      class="solid-design-parts-Checkboxes_root"
+      classList={{ 'solid-design-parts-Checkboxes_has-columns-count': props.gridColumnsCount !== undefined }}
       style={{
-        '--mantle-ui-Checkboxes_gap': props.gap,
-        '--mantle-ui-Checkboxes_grid-columns-count': props.gridColumnsCount,
+        '--solid-design-parts-Checkboxes_gap': props.gap,
+        '--solid-design-parts-Checkboxes_grid-columns-count': props.gridColumnsCount,
       }}
       aria-invalid={errorMessageSignal.value !== undefined}
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
-      <div class="mantle-ui-Checkboxes_checkboxes" role="group" aria-required={props.required}>
+      <div class="solid-design-parts-Checkboxes_checkboxes" role="group" aria-required={props.required}>
         <For each={props.values}>
           {(value) => (
             <Checkbox
@@ -163,7 +163,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
           )}
         </For>
       </div>
-      <p class="mantle-ui-Checkboxes_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-Checkboxes_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }

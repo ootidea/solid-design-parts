@@ -1,42 +1,42 @@
-.mantle-ui-DateInput_date-picker {
+.solid-design-parts-DateInput_date-picker {
   margin: 0.8em;
 }
 
-.mantle-ui-DateInput_launcher {
+.solid-design-parts-DateInput_launcher {
   display: inline-grid;
   vertical-align: top;
   grid-template-columns: 1fr auto auto;
   align-items: center;
   text-align: start;
 
-  border-radius: var(--mantle-ui-input-border-radius);
-  border: 1px solid var(--mantle-ui-input-border-color);
+  border-radius: var(--solid-design-parts-input-border-radius);
+  border: 1px solid var(--solid-design-parts-input-border-color);
   padding: 0;
   box-sizing: border-box;
-  min-height: var(--mantle-ui-one-line-input-height);
+  min-height: var(--solid-design-parts-one-line-input-height);
 
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   color: inherit;
   font: inherit;
   cursor: pointer;
 
   &:disabled {
-    background-color: var(--mantle-ui-disabled-input-background-color);
+    background-color: var(--solid-design-parts-disabled-input-background-color);
     cursor: initial;
   }
 
   &:focus-visible {
-    outline-color: var(--mantle-ui-primary-color);
+    outline-color: var(--solid-design-parts-primary-color);
   }
 }
 
-.mantle-ui-DateInput_invisible {
+.solid-design-parts-DateInput_invisible {
   visibility: hidden;
   height: 0;
   overflow: hidden;
 }
 
-.mantle-ui-DateInput_clear-button {
+.solid-design-parts-DateInput_clear-button {
   margin-right: 0.3em;
 
   &[aria-hidden='true'] {
@@ -44,15 +44,15 @@
   }
 }
 
-.mantle-ui-DateInput_icon {
+.solid-design-parts-DateInput_icon {
   margin-right: 0.3em;
 }
 
-.mantle-ui-DateInput_preview-area {
+.solid-design-parts-DateInput_preview-area {
   margin: 0.3em 0.5em 0.3em 0.6em;
 }
 
-.mantle-ui-DateInput_placeholder {
-  color: var(--mantle-ui-placeholder-text-color);
+.solid-design-parts-DateInput_placeholder {
+  color: var(--solid-design-parts-placeholder-text-color);
   user-select: none;
 }

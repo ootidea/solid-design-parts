@@ -30,9 +30,9 @@ export function StretchLayout(rawProps: StretchLayoutProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-StretchLayout_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-StretchLayout_root')}
       style={joinStyle(rawProps.style, {
-        '--mantle-ui-StretchLayout_template':
+        '--solid-design-parts-StretchLayout_template':
           'auto '.repeat(normalizeIndex(Number(props.stretchAt))) + 'minmax(0, 1fr)',
       })}
       data-direction={props.direction}

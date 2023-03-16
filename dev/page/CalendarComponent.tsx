@@ -35,7 +35,7 @@ export function CalendarComponent() {
       <Sample title="Hide dates in other months">
         <Calendar class="hide-dates-in-other-months" />
         <style>{`
-          .hide-dates-in-other-months .mantle-ui-Calendar_cell.mantle-ui-Calendar_other-month {
+          .hide-dates-in-other-months .solid-design-parts-Calendar_cell.solid-design-parts-Calendar_other-month {
             visibility: hidden;
           }
         `}</style>

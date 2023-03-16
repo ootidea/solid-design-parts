@@ -28,7 +28,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      name: rawProps.name === undefined ? `mantle-ui-RadioButton_name${uniqueId++}` : rawProps.name,
+      name: rawProps.name === undefined ? `solid-design-parts-RadioButton_name${uniqueId++}` : rawProps.name,
       layout: 'horizontal',
       gap: '0.2em 1em',
       disabled: false,
@@ -136,27 +136,27 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
 
   return (
     <div
-      class="mantle-ui-RadioButtons_root"
-      classList={{ 'mantle-ui-RadioButtons_has-columns-count': props.gridColumnsCount !== undefined }}
+      class="solid-design-parts-RadioButtons_root"
+      classList={{ 'solid-design-parts-RadioButtons_has-columns-count': props.gridColumnsCount !== undefined }}
       style={{
-        '--mantle-ui-RadioButtons_gap': props.gap,
-        '--mantle-ui-RadioButtons_grid-columns-count': props.gridColumnsCount,
+        '--solid-design-parts-RadioButtons_gap': props.gap,
+        '--solid-design-parts-RadioButtons_grid-columns-count': props.gridColumnsCount,
       }}
       aria-invalid={errorMessageSignal.value !== undefined}
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
-      <div class="mantle-ui-RadioButtons_radio-buttons" role="radiogroup" aria-required={props.required}>
+      <div class="solid-design-parts-RadioButtons_radio-buttons" role="radiogroup" aria-required={props.required}>
         <For each={props.values}>
           {(value) => (
             <label
-              class={joinClasses(rawProps, 'mantle-ui-RadioButtons_label')}
+              class={joinClasses(rawProps, 'solid-design-parts-RadioButtons_label')}
               aria-disabled={isDisabled(value)}
               {...restProps}
             >
               <input
                 type="radio"
-                class="mantle-ui-RadioButtons_radio"
+                class="solid-design-parts-RadioButtons_radio"
                 value={value}
                 name={props.name}
                 checked={value === selectedSignal.value}
@@ -168,7 +168,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
           )}
         </For>
       </div>
-      <p class="mantle-ui-RadioButtons_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-RadioButtons_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }

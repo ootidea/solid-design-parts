@@ -1,41 +1,41 @@
-.mantle-ui-Popover_overlay {
+.solid-design-parts-Popover_overlay {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: var(--mantle-ui-overlay-z-index);
+  z-index: var(--solid-design-parts-overlay-z-index);
   outline: none;
 }
 
-.mantle-ui-Popover_frame {
+.solid-design-parts-Popover_frame {
   position: fixed;
-  transform: var(--mantle-ui-Popover_transform);
+  transform: var(--solid-design-parts-Popover_transform);
   border-radius: 0.4rem;
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   box-shadow: 0 2px 8px oklch(0% 0 0 / 20%);
 
-  .mantle-ui-Popover_overlay[data-horizontal-position='left'] & {
-    left: var(--mantle-ui-Popover_left);
+  .solid-design-parts-Popover_overlay[data-horizontal-position='left'] & {
+    left: var(--solid-design-parts-Popover_left);
   }
 
-  .mantle-ui-Popover_overlay[data-horizontal-position='center'] & {
-    left: calc((var(--mantle-ui-Popover_left) + var(--mantle-ui-Popover_right)) / 2);
+  .solid-design-parts-Popover_overlay[data-horizontal-position='center'] & {
+    left: calc((var(--solid-design-parts-Popover_left) + var(--solid-design-parts-Popover_right)) / 2);
   }
 
-  .mantle-ui-Popover_overlay[data-horizontal-position='right'] & {
-    left: var(--mantle-ui-Popover_right);
+  .solid-design-parts-Popover_overlay[data-horizontal-position='right'] & {
+    left: var(--solid-design-parts-Popover_right);
   }
 
-  .mantle-ui-Popover_overlay[data-vertical-position='top'] & {
-    top: var(--mantle-ui-Popover_top);
+  .solid-design-parts-Popover_overlay[data-vertical-position='top'] & {
+    top: var(--solid-design-parts-Popover_top);
   }
 
-  .mantle-ui-Popover_overlay[data-vertical-position='center'] & {
-    top: calc((var(--mantle-ui-Popover_top) + var(--mantle-ui-Popover_bottom)) / 2);
+  .solid-design-parts-Popover_overlay[data-vertical-position='center'] & {
+    top: calc((var(--solid-design-parts-Popover_top) + var(--solid-design-parts-Popover_bottom)) / 2);
   }
 
-  .mantle-ui-Popover_overlay[data-vertical-position='bottom'] & {
-    top: var(--mantle-ui-Popover_bottom);
+  .solid-design-parts-Popover_overlay[data-vertical-position='bottom'] & {
+    top: var(--solid-design-parts-Popover_bottom);
   }
 }

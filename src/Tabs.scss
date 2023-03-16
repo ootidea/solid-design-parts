@@ -1,13 +1,13 @@
-.mantle-ui-Tabs_tab-bar {
+.solid-design-parts-Tabs_tab-bar {
   display: grid;
-  grid-template-columns: var(--mantle-ui-Tabs_template);
+  grid-template-columns: var(--solid-design-parts-Tabs_template);
 
-  .mantle-ui-Tabs_root[data-type='Colored tab and border'] & {
+  .solid-design-parts-Tabs_root[data-type='Colored tab and border'] & {
     gap: 0.3em;
   }
 }
 
-.mantle-ui-Tabs_tab {
+.solid-design-parts-Tabs_tab {
   display: inline-flex;
   vertical-align: top;
   align-items: center;
@@ -18,60 +18,60 @@
   height: 2.4em;
 
   border: none;
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   color: inherit;
   font: inherit;
   cursor: pointer;
 
-  .mantle-ui-Tabs_root[data-type='Colored tab and border'] & {
+  .solid-design-parts-Tabs_root[data-type='Colored tab and border'] & {
     background-color: oklch(95% 0 0);
     color: oklch(30% 0 0);
 
-    &.mantle-ui-Tabs_active {
-      color: var(--mantle-ui-inverted-text-color);
-      background-color: var(--mantle-ui-primary-color);
+    &.solid-design-parts-Tabs_active {
+      color: var(--solid-design-parts-inverted-text-color);
+      background-color: var(--solid-design-parts-primary-color);
     }
   }
 
-  .mantle-ui-Tabs_root[data-type='Surrounded by border'] & {
+  .solid-design-parts-Tabs_root[data-type='Surrounded by border'] & {
     border: 1px solid transparent;
 
-    &:not(.mantle-ui-Tabs_active) {
+    &:not(.solid-design-parts-Tabs_active) {
       border-bottom-color: oklch(80% 0 0);
     }
 
-    &.mantle-ui-Tabs_active {
+    &.solid-design-parts-Tabs_active {
       border-top-color: oklch(80% 0 0);
       border-left-color: oklch(80% 0 0);
       border-right-color: oklch(80% 0 0);
     }
   }
 
-  .mantle-ui-Tabs_root[data-type='Active underline'] & {
+  .solid-design-parts-Tabs_root[data-type='Active underline'] & {
     border-bottom: transparent 2px solid;
 
-    &.mantle-ui-Tabs_active {
-      border-bottom-color: var(--mantle-ui-primary-color);
-      color: var(--mantle-ui-primary-color);
+    &.solid-design-parts-Tabs_active {
+      border-bottom-color: var(--solid-design-parts-primary-color);
+      color: var(--solid-design-parts-primary-color);
     }
   }
 
   &:focus-visible {
     outline-offset: -2px;
-    outline: 2px solid var(--mantle-ui-primary-color);
+    outline: 2px solid var(--solid-design-parts-primary-color);
   }
 }
 
-.mantle-ui-Tabs_dummy-tab-for-border {
-  .mantle-ui-Tabs_root[data-type='Surrounded by border'] & {
+.solid-design-parts-Tabs_dummy-tab-for-border {
+  .solid-design-parts-Tabs_root[data-type='Surrounded by border'] & {
     border-bottom: oklch(80% 0 0) 1px solid;
   }
 }
 
-.mantle-ui-Tabs_content {
-  background-color: var(--mantle-ui-background-color);
+.solid-design-parts-Tabs_content {
+  background-color: var(--solid-design-parts-background-color);
 
-  .mantle-ui-Tabs_root[data-type='Colored tab and border'] & {
-    border-top: var(--mantle-ui-primary-color) 2px solid;
+  .solid-design-parts-Tabs_root[data-type='Colored tab and border'] & {
+    border-top: var(--solid-design-parts-primary-color) 2px solid;
   }
 }

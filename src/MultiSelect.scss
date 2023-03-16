@@ -1,4 +1,4 @@
-.mantle-ui-MultiSelect_launcher {
+.solid-design-parts-MultiSelect_launcher {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -6,36 +6,36 @@
 
   box-sizing: border-box;
   width: max-content;
-  min-height: var(--mantle-ui-one-line-input-height);
+  min-height: var(--solid-design-parts-one-line-input-height);
   border-radius: 0.3em;
-  border: 1px solid var(--mantle-ui-input-border-color);
+  border: 1px solid var(--solid-design-parts-input-border-color);
   padding: 0.4em 0.7em;
 
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   color: inherit;
   font: inherit;
   cursor: pointer;
 
   &:disabled {
-    background-color: var(--mantle-ui-disabled-input-background-color);
+    background-color: var(--solid-design-parts-disabled-input-background-color);
     cursor: initial;
   }
 
   &:focus-visible {
-    border-color: var(--mantle-ui-primary-color);
+    border-color: var(--solid-design-parts-primary-color);
     outline: none;
   }
 
-  .mantle-ui-MultiSelect_full-width & {
+  .solid-design-parts-MultiSelect_full-width & {
     width: 100%;
   }
 
   &[aria-invalid='true'] {
-    border-color: var(--mantle-ui-error-color);
+    border-color: var(--solid-design-parts-error-color);
   }
 }
 
-.mantle-ui-MultiSelect_preview {
+.solid-design-parts-MultiSelect_preview {
   display: inline-grid;
   vertical-align: top;
   grid-template-columns: auto auto;
@@ -43,23 +43,23 @@
   gap: 0.5em;
 }
 
-.mantle-ui-MultiSelect_primary-selected-value {
+.solid-design-parts-MultiSelect_primary-selected-value {
   white-space: pre-wrap;
 }
 
-.mantle-ui-MultiSelect_invisible {
+.solid-design-parts-MultiSelect_invisible {
   visibility: hidden;
   height: 0;
   overflow: hidden;
 }
 
-.mantle-ui-MultiSelect_placeholder {
-  color: var(--mantle-ui-placeholder-text-color);
+.solid-design-parts-MultiSelect_placeholder {
+  color: var(--solid-design-parts-placeholder-text-color);
   white-space: pre-wrap;
   user-select: none;
 }
 
-.mantle-ui-MultiSelect_following-count {
+.solid-design-parts-MultiSelect_following-count {
   border-radius: 999vh;
   padding: 0.2em 0.5em;
   background-color: oklch(0% 0 0 / 7%);
@@ -67,20 +67,20 @@
   font-size: 80%;
 }
 
-.mantle-ui-MultiSelect_icon {
+.solid-design-parts-MultiSelect_icon {
   transform-origin: center;
   transition: all 140ms ease-out;
   transform: rotate(0deg);
 
   margin-left: 0.5em;
 
-  .mantle-ui-MultiSelect_opened & {
+  .solid-design-parts-MultiSelect_opened & {
     transform: rotate(-180deg);
   }
 }
 
-.mantle-ui-MultiSelect_error-message {
-  color: var(--mantle-ui-error-color);
+.solid-design-parts-MultiSelect_error-message {
+  color: var(--solid-design-parts-error-color);
   margin: 0.5em 0 0;
 
   &:empty {
@@ -88,33 +88,33 @@
   }
 }
 
-.mantle-ui-MultiSelect_overlay {
+.solid-design-parts-MultiSelect_overlay {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: var(--mantle-ui-overlay-z-index);
+  z-index: var(--solid-design-parts-overlay-z-index);
   outline: none;
 }
 
-.mantle-ui-MultiSelect_dropdown {
+.solid-design-parts-MultiSelect_dropdown {
   position: fixed;
-  left: var(--mantle-ui-MultiSelect_dropdown-left);
-  top: var(--mantle-ui-MultiSelect_dropdown-top);
+  left: var(--solid-design-parts-MultiSelect_dropdown-left);
+  top: var(--solid-design-parts-MultiSelect_dropdown-top);
   box-sizing: border-box;
-  width: var(--mantle-ui-MultiSelect_dropdown-width);
-  max-height: var(--mantle-ui-MultiSelect_dropdown-max-height);
+  width: var(--solid-design-parts-MultiSelect_dropdown-width);
+  max-height: var(--solid-design-parts-MultiSelect_dropdown-max-height);
   border-radius: 0.4em;
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   box-shadow: 0 1px 4px oklch(75% 0 0);
 }
 
-.mantle-ui-MultiSelect_search-box-area {
+.solid-design-parts-MultiSelect_search-box-area {
   padding: 0.3em;
 }
 
-.mantle-ui-MultiSelect_option {
+.solid-design-parts-MultiSelect_option {
   border: none;
   padding: 0.5em 0.8em;
   box-sizing: border-box;

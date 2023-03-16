@@ -110,25 +110,25 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   return (
     <div
-      class="mantle-ui-AutoSizeTextArea_root"
+      class="solid-design-parts-AutoSizeTextArea_root"
       aria-disabled={props.disabled}
       aria-invalid={errorMessageSignal.value !== undefined}
       aria-required={props.required}
     >
-      <div class="mantle-ui-AutoSizeTextArea_body">
-        <div class="mantle-ui-AutoSizeTextArea_dummy" aria-hidden="true">
+      <div class="solid-design-parts-AutoSizeTextArea_body">
+        <div class="solid-design-parts-AutoSizeTextArea_dummy" aria-hidden="true">
           {valueSignal.value || rawProps.placeholder}
           {ZERO_WIDTH_SPACE}
         </div>
         <textarea
-          class={joinClasses(rawProps, 'mantle-ui-AutoSizeTextArea_text-area')}
+          class={joinClasses(rawProps, 'solid-design-parts-AutoSizeTextArea_text-area')}
           value={valueSignal.value}
           onInput={onInput}
           onBlur={() => (isEditedSignal.value = true)}
           {...restProps}
         />
       </div>
-      <p class="mantle-ui-AutoSizeTextArea_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-AutoSizeTextArea_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }

@@ -71,31 +71,31 @@ export function Modal(rawProps: ModalProps) {
       <Portal>
         <FadeAnimation shown={opened()}>
           <div
-            class={joinClasses(rawProps, 'mantle-ui-Modal_root')}
+            class={joinClasses(rawProps, 'solid-design-parts-Modal_root')}
             tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
             onClick={onClickOverlay}
             onKeyDown={onKeyDown}
           >
-            <div class="mantle-ui-Modal_frame" role="dialog">
+            <div class="solid-design-parts-Modal_frame" role="dialog">
               <Show when={props.showCloseButton || rawProps.title} fallback={<div />}>
                 <TitleBarLayout
-                  class="mantle-ui-Modal_header"
+                  class="solid-design-parts-Modal_header"
                   right={
                     <Show when={props.showCloseButton}>
                       <IconButton src={closeIcon} onClick={close} />
                     </Show>
                   }
                 >
-                  <div class="mantle-ui-Modal_title">
+                  <div class="solid-design-parts-Modal_title">
                     <Slot content={rawProps.title} params={{ open, close, toggle }} />
                   </div>
                 </TitleBarLayout>
               </Show>
-              <Scrollable class="mantle-ui-Modal_body" {...restProps}>
+              <Scrollable class="solid-design-parts-Modal_body" {...restProps}>
                 <Slot content={rawProps.children} params={{ open, close, toggle }} />
               </Scrollable>
-              <div class="mantle-ui-Modal_footer">
+              <div class="solid-design-parts-Modal_footer">
                 <Slot content={props.footer} params={{ open, close, toggle }} />
               </div>
             </div>

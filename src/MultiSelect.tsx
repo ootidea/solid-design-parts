@@ -185,48 +185,50 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   return (
     <>
       <div
-        class={joinClasses(rawProps, 'mantle-ui-MultiSelect_error-message-layout', {
-          'mantle-ui-MultiSelect_opened': dropdownInfoSignal.value !== undefined,
-          'mantle-ui-MultiSelect_full-width': props.fullWidth,
+        class={joinClasses(rawProps, 'solid-design-parts-MultiSelect_error-message-layout', {
+          'solid-design-parts-MultiSelect_opened': dropdownInfoSignal.value !== undefined,
+          'solid-design-parts-MultiSelect_full-width': props.fullWidth,
         })}
         {...restProps}
       >
         <button
-          class="mantle-ui-MultiSelect_launcher"
+          class="solid-design-parts-MultiSelect_launcher"
           type="button"
           disabled={props.disabled}
           aria-invalid={errorMessageSignal.value !== undefined}
           onClick={onClickLauncher}
         >
-          <div class="mantle-ui-MultiSelect_preview-area">
+          <div class="solid-design-parts-MultiSelect_preview-area">
             {call(() => {
               const previewValue = getPrimarySelectedValue(selectedSignal.value)
               return (
                 <>
                   {previewValue !== undefined ? (
-                    <div class="mantle-ui-MultiSelect_preview">
-                      <div class="mantle-ui-MultiSelect_primary-selected-value">{getText(previewValue)}</div>
+                    <div class="solid-design-parts-MultiSelect_preview">
+                      <div class="solid-design-parts-MultiSelect_primary-selected-value">{getText(previewValue)}</div>
                       <Show when={followingCount() > 0}>
-                        <div class="mantle-ui-MultiSelect_following-count">+{followingCount()}</div>
+                        <div class="solid-design-parts-MultiSelect_following-count">+{followingCount()}</div>
                       </Show>
                     </div>
                   ) : null}
                   <div
-                    class="mantle-ui-MultiSelect_placeholder"
-                    classList={{ 'mantle-ui-MultiSelect_invisible': previewValue !== undefined }}
+                    class="solid-design-parts-MultiSelect_placeholder"
+                    classList={{ 'solid-design-parts-MultiSelect_invisible': previewValue !== undefined }}
                   >
                     {props.placeholder}
                   </div>
-                  <div class="mantle-ui-MultiSelect_invisible">
-                    <div class="mantle-ui-MultiSelect_preview">
+                  <div class="solid-design-parts-MultiSelect_invisible">
+                    <div class="solid-design-parts-MultiSelect_preview">
                       <div>
                         <For each={props.values}>
-                          {(value) => <div class="mantle-ui-MultiSelect_primary-selected-value">{getText(value)}</div>}
+                          {(value) => (
+                            <div class="solid-design-parts-MultiSelect_primary-selected-value">{getText(value)}</div>
+                          )}
                         </For>
                       </div>
                       <div>
                         <For each={[...Array(props.values.length - 2).keys()]}>
-                          {(i) => <div class="mantle-ui-MultiSelect_following-count">+{i + 1}</div>}
+                          {(i) => <div class="solid-design-parts-MultiSelect_following-count">+{i + 1}</div>}
                         </For>
                       </div>
                     </div>
@@ -235,16 +237,16 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
               )
             })}
           </div>
-          <Icon class="mantle-ui-MultiSelect_icon" src={chevronDownIcon} />
+          <Icon class="solid-design-parts-MultiSelect_icon" src={chevronDownIcon} />
         </button>
-        <p class="mantle-ui-MultiSelect_error-message">{errorMessageSignal.value}</p>
+        <p class="solid-design-parts-MultiSelect_error-message">{errorMessageSignal.value}</p>
       </div>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
       <Show when={dropdownInfoSignal.value}>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
             <div
-              class="mantle-ui-MultiSelect_overlay"
+              class="solid-design-parts-MultiSelect_overlay"
               tabindex={-1}
               ref={(element) => setupFocusTrap(element)}
               onClick={onOperateOverlay}
@@ -253,18 +255,18 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
               onKeyDown={onKeyDown}
             >
               <div
-                class="mantle-ui-MultiSelect_dropdown"
+                class="solid-design-parts-MultiSelect_dropdown"
                 style={{
-                  '--mantle-ui-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
-                  '--mantle-ui-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
-                  '--mantle-ui-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
-                  '--mantle-ui-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
+                  '--solid-design-parts-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
+                  '--solid-design-parts-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
+                  '--solid-design-parts-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
+                  '--solid-design-parts-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
                 }}
               >
                 <Show when={props.showSearchBox}>
-                  <div class="mantle-ui-MultiSelect_search-box-area">
+                  <div class="solid-design-parts-MultiSelect_search-box-area">
                     <TextInput
-                      class="mantle-ui-MultiSelect_search-box"
+                      class="solid-design-parts-MultiSelect_search-box"
                       placeholder="search"
                       value={searchQuerySignal.value}
                       errorMessage={(value) => {
@@ -284,7 +286,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                           <Divider />
                         </Show>
                         <Checkbox
-                          class="mantle-ui-MultiSelect_option"
+                          class="solid-design-parts-MultiSelect_option"
                           checked={selectedSignal.value.has(value)}
                           role="menuitem"
                           onChangeChecked={(checked) => {

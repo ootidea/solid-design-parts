@@ -14,12 +14,12 @@ export function Gravity(rawProps: GravityProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Gravity_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Gravity_root')}
       data-horizontal-position={toHorizontalPosition(props.to)}
       data-vertical-position={toVerticalPosition(props.to)}
       {...restProps}
     >
-      <div class="mantle-ui-Gravity_cage">{rawProps.children}</div>
+      <div class="solid-design-parts-Gravity_cage">{rawProps.children}</div>
     </div>
   )
 }

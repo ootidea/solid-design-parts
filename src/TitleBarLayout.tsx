@@ -12,15 +12,15 @@ export function TitleBarLayout(rawProps: TitleBarLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['left', 'right', 'children'])
 
   return (
-    <div class={joinClasses(rawProps, 'mantle-ui-TitleBarLayout_root')} {...restProps}>
-      <div class="mantle-ui-TitleBarLayout_left-area">
-        <div class="mantle-ui-TitleBarLayout_left">{props.left}</div>
-        <div class="mantle-ui-TitleBarLayout_invisible">{props.right}</div>
+    <div class={joinClasses(rawProps, 'solid-design-parts-TitleBarLayout_root')} {...restProps}>
+      <div class="solid-design-parts-TitleBarLayout_left-area">
+        <div class="solid-design-parts-TitleBarLayout_left">{props.left}</div>
+        <div class="solid-design-parts-TitleBarLayout_invisible">{props.right}</div>
       </div>
-      <Gravity class="mantle-ui-TitleBarLayout_title">{props.children}</Gravity>
-      <div class="mantle-ui-TitleBarLayout_right-area">
-        <div class="mantle-ui-TitleBarLayout_right">{props.right}</div>
-        <div class="mantle-ui-TitleBarLayout_invisible">{props.left}</div>
+      <Gravity class="solid-design-parts-TitleBarLayout_title">{props.children}</Gravity>
+      <div class="solid-design-parts-TitleBarLayout_right-area">
+        <div class="solid-design-parts-TitleBarLayout_right">{props.right}</div>
+        <div class="solid-design-parts-TitleBarLayout_invisible">{props.left}</div>
       </div>
     </div>
   )

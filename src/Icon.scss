@@ -1,18 +1,18 @@
 :root {
-  --mantle-ui-Icon_default-color: oklch(50% 0 0);
-  --mantle-ui-Icon_default-size: 1.5em;
+  --solid-design-parts-Icon_default-color: oklch(50% 0 0);
+  --solid-design-parts-Icon_default-size: 1.5em;
 }
 
-.mantle-ui-Icon_root {
+.solid-design-parts-Icon_root {
   display: inline-block;
   vertical-align: top;
-  width: var(--mantle-ui-Icon_size);
-  height: var(--mantle-ui-Icon_size);
+  width: var(--solid-design-parts-Icon_size);
+  height: var(--solid-design-parts-Icon_size);
 
-  background-color: var(--mantle-ui-Icon_color);
-  mask: var(--mantle-ui-Icon_url) no-repeat center;
+  background-color: var(--solid-design-parts-Icon_color);
+  mask: var(--solid-design-parts-Icon_url) no-repeat center;
   mask-size: contain;
 
   transform-origin: center;
-  transform: rotate(var(--mantle-ui-Icon_rotate));
+  transform: rotate(var(--solid-design-parts-Icon_rotate));
 }

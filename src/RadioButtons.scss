@@ -1,68 +1,71 @@
 @use 'utility/utility.scss';
 
 :root {
-  --mantle-ui-RadioButtons_radio-size: 1.2em;
-  --mantle-ui-RadioButtons_inner-circle-size: 0.6em;
+  --solid-design-parts-RadioButtons_radio-size: 1.2em;
+  --solid-design-parts-RadioButtons_inner-circle-size: 0.6em;
 }
 
-.mantle-ui-RadioButtons_radio-buttons {
-  gap: var(--mantle-ui-RadioButtons_gap);
+.solid-design-parts-RadioButtons_radio-buttons {
+  gap: var(--solid-design-parts-RadioButtons_gap);
 
-  .mantle-ui-RadioButtons_root[data-layout='horizontal'] & {
+  .solid-design-parts-RadioButtons_root[data-layout='horizontal'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
   }
-  .mantle-ui-RadioButtons_root[data-layout='horizontal'].mantle-ui-RadioButtons_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+  .solid-design-parts-RadioButtons_root[data-layout='horizontal'].solid-design-parts-RadioButtons_has-columns-count & {
+    grid-template-columns: repeat(var(--solid-design-parts-RadioButtons_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 
-  .mantle-ui-RadioButtons_root[data-layout='vertical'] & {
+  .solid-design-parts-RadioButtons_root[data-layout='vertical'] & {
     display: grid;
     grid-template-columns: max-content;
   }
 
-  .mantle-ui-RadioButtons_root[data-layout='flex-wrap'] & {
+  .solid-design-parts-RadioButtons_root[data-layout='flex-wrap'] & {
     display: flex;
     flex-wrap: wrap;
   }
 
-  .mantle-ui-RadioButtons_root[data-layout='space-between'] & {
+  .solid-design-parts-RadioButtons_root[data-layout='space-between'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-between;
   }
-  .mantle-ui-RadioButtons_root[data-layout='space-between'].mantle-ui-RadioButtons_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+  .solid-design-parts-RadioButtons_root[data-layout='space-between'].solid-design-parts-RadioButtons_has-columns-count
+    & {
+    grid-template-columns: repeat(var(--solid-design-parts-RadioButtons_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 
-  .mantle-ui-RadioButtons_root[data-layout='space-around'] & {
+  .solid-design-parts-RadioButtons_root[data-layout='space-around'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-around;
   }
-  .mantle-ui-RadioButtons_root[data-layout='space-around'].mantle-ui-RadioButtons_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+  .solid-design-parts-RadioButtons_root[data-layout='space-around'].solid-design-parts-RadioButtons_has-columns-count
+    & {
+    grid-template-columns: repeat(var(--solid-design-parts-RadioButtons_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 
-  .mantle-ui-RadioButtons_root[data-layout='space-evenly'] & {
+  .solid-design-parts-RadioButtons_root[data-layout='space-evenly'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-evenly;
   }
-  .mantle-ui-RadioButtons_root[data-layout='space-evenly'].mantle-ui-RadioButtons_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-RadioButtons_grid-columns-count), max-content);
+  .solid-design-parts-RadioButtons_root[data-layout='space-evenly'].solid-design-parts-RadioButtons_has-columns-count
+    & {
+    grid-template-columns: repeat(var(--solid-design-parts-RadioButtons_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 }
 
-.mantle-ui-RadioButtons_label {
+.solid-design-parts-RadioButtons_label {
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
@@ -78,15 +81,15 @@
   }
 }
 
-.mantle-ui-RadioButtons_radio {
+.solid-design-parts-RadioButtons_radio {
   appearance: none;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: utility.toEvenPx(var(--mantle-ui-RadioButtons_radio-size));
-  height: utility.toEvenPx(var(--mantle-ui-RadioButtons_radio-size));
+  width: utility.toEvenPx(var(--solid-design-parts-RadioButtons_radio-size));
+  height: utility.toEvenPx(var(--solid-design-parts-RadioButtons_radio-size));
   border-radius: 100%;
   margin: 0;
 
@@ -99,7 +102,7 @@
 
   &:focus-visible {
     outline-offset: 1px;
-    outline: 2px solid var(--mantle-ui-primary-color);
+    outline: 2px solid var(--solid-design-parts-primary-color);
   }
 
   &::before {
@@ -113,18 +116,18 @@
   }
 
   &:checked {
-    border-color: var(--mantle-ui-primary-color);
+    border-color: var(--solid-design-parts-primary-color);
     transition: all 100ms ease-out;
 
     &::before {
-      width: utility.toEvenPx(var(--mantle-ui-RadioButtons_inner-circle-size));
-      height: utility.toEvenPx(var(--mantle-ui-RadioButtons_inner-circle-size));
-      background-color: var(--mantle-ui-primary-color);
+      width: utility.toEvenPx(var(--solid-design-parts-RadioButtons_inner-circle-size));
+      height: utility.toEvenPx(var(--solid-design-parts-RadioButtons_inner-circle-size));
+      background-color: var(--solid-design-parts-primary-color);
 
       transition: all 100ms ease-out;
 
-      .mantle-ui-RadioButtons_root[aria-invalid='true'] & {
-        background-color: var(--mantle-ui-error-color);
+      .solid-design-parts-RadioButtons_root[aria-invalid='true'] & {
+        background-color: var(--solid-design-parts-error-color);
       }
     }
 
@@ -133,8 +136,8 @@
     }
   }
 
-  .mantle-ui-RadioButtons_root[aria-invalid='true'] & {
-    border-color: var(--mantle-ui-error-color);
+  .solid-design-parts-RadioButtons_root[aria-invalid='true'] & {
+    border-color: var(--solid-design-parts-error-color);
   }
 
   &:disabled {
@@ -143,8 +146,8 @@
   }
 }
 
-.mantle-ui-RadioButtons_error-message {
-  color: var(--mantle-ui-error-color);
+.solid-design-parts-RadioButtons_error-message {
+  color: var(--solid-design-parts-error-color);
   margin: 0.5em 0 0;
 
   &:empty {

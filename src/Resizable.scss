@@ -1,4 +1,4 @@
-.mantle-ui-Resizable_root {
+.solid-design-parts-Resizable_root {
   position: relative;
   box-sizing: border-box;
   width: max-content;
@@ -6,7 +6,7 @@
   max-width: 100%;
 }
 
-.mantle-ui-Resizable_resize-handle {
+.solid-design-parts-Resizable_resize-handle {
   visibility: hidden;
 
   position: absolute;
@@ -24,10 +24,10 @@
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--mantle-ui-primary-color);
+      background-color: var(--solid-design-parts-primary-color);
     }
 
-    .mantle-ui-Resizable_root:hover & {
+    .solid-design-parts-Resizable_root:hover & {
       visibility: visible;
     }
   }

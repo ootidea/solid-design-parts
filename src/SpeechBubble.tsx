@@ -18,9 +18,9 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      backgroundColor: 'var(--mantle-ui-SpeechBubble_background-default-color)',
-      borderColor: 'var(--mantle-ui-SpeechBubble_border-default-color)',
-      borderWidth: 'var(--mantle-ui-SpeechBubble_border-default-width)',
+      backgroundColor: 'var(--solid-design-parts-SpeechBubble_background-default-color)',
+      borderColor: 'var(--solid-design-parts-SpeechBubble_border-default-color)',
+      borderWidth: 'var(--solid-design-parts-SpeechBubble_border-default-width)',
       triangleHeight: '1em',
       triangleAngle: `${Math.PI / 2}rad`,
       triangleX: '50%',
@@ -44,20 +44,20 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-SpeechBubble_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-SpeechBubble_root')}
       style={{
-        '--mantle-ui-SpeechBubble_background-color': props.backgroundColor,
-        '--mantle-ui-SpeechBubble_border-color': props.borderColor,
-        '--mantle-ui-SpeechBubble_border-width': props.borderWidth,
-        '--mantle-ui-SpeechBubble_triangle-tangent': tangent(),
-        '--mantle-ui-SpeechBubble_triangle-height': props.triangleHeight,
-        '--mantle-ui-SpeechBubble_triangle-x': props.triangleX,
-        '--mantle-ui-SpeechBubble_triangle-skew': props.triangleSkew,
+        '--solid-design-parts-SpeechBubble_background-color': props.backgroundColor,
+        '--solid-design-parts-SpeechBubble_border-color': props.borderColor,
+        '--solid-design-parts-SpeechBubble_border-width': props.borderWidth,
+        '--solid-design-parts-SpeechBubble_triangle-tangent': tangent(),
+        '--solid-design-parts-SpeechBubble_triangle-height': props.triangleHeight,
+        '--solid-design-parts-SpeechBubble_triangle-x': props.triangleX,
+        '--solid-design-parts-SpeechBubble_triangle-skew': props.triangleSkew,
       }}
       {...restProps}
     >
-      <div class="mantle-ui-SpeechBubble_message-box">{props.children}</div>
-      <div class="mantle-ui-SpeechBubble_triangle"></div>
+      <div class="solid-design-parts-SpeechBubble_message-box">{props.children}</div>
+      <div class="solid-design-parts-SpeechBubble_triangle"></div>
     </div>
   )
 }

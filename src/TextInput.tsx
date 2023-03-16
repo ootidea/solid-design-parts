@@ -47,7 +47,7 @@ export function TextInput(rawProps: TextInputProps) {
       disabled: false,
       required: false,
       validateImmediately: false,
-      radius: 'var(--mantle-ui-input-border-radius)',
+      radius: 'var(--solid-design-parts-input-border-radius)',
     },
     ['placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
@@ -135,19 +135,19 @@ export function TextInput(rawProps: TextInputProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-TextInput_root', {
-        'mantle-ui-TextInput_input-element-has-focus': hasInputElementFocusSignal.value,
+      class={joinClasses(rawProps, 'solid-design-parts-TextInput_root', {
+        'solid-design-parts-TextInput_input-element-has-focus': hasInputElementFocusSignal.value,
       })}
-      style={joinStyle(rawProps.style, { '--mantle-ui-TextInput_radius': props.radius })}
+      style={joinStyle(rawProps.style, { '--solid-design-parts-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessageSignal.value !== undefined}
       aria-required={props.required}
       {...restProps}
     >
-      <StretchLayout class="mantle-ui-TextInput_body" stretchAt={1}>
-        <Gravity class="mantle-ui-TextInput_prepend">{rawProps.prepend}</Gravity>
+      <StretchLayout class="solid-design-parts-TextInput_body" stretchAt={1}>
+        <Gravity class="solid-design-parts-TextInput_prepend">{rawProps.prepend}</Gravity>
         <input
-          class="mantle-ui-TextInput_input"
+          class="solid-design-parts-TextInput_input"
           value={valueSignal.value}
           placeholder={props.placeholder}
           type={props.type}
@@ -159,9 +159,9 @@ export function TextInput(rawProps: TextInputProps) {
             hasInputElementFocusSignal.value = false
           }}
         />
-        <Gravity class="mantle-ui-TextInput_append">{rawProps.append}</Gravity>
+        <Gravity class="solid-design-parts-TextInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
-      <p class="mantle-ui-TextInput_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-TextInput_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }

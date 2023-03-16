@@ -1,21 +1,21 @@
 :root {
-  --mantle-ui-Spinner_default-size: 1.2em;
+  --solid-design-parts-Spinner_default-size: 1.2em;
 }
 
-.mantle-ui-Spinner_root {
+.solid-design-parts-Spinner_root {
   display: inline-block;
   position: relative;
-  width: var(--mantle-ui-Spinner_size);
-  height: var(--mantle-ui-Spinner_size);
+  width: var(--solid-design-parts-Spinner_size);
+  height: var(--solid-design-parts-Spinner_size);
 
   vertical-align: top;
 
-  background-image: conic-gradient(transparent, transparent, var(--mantle-ui-Spinner_color));
-  mask: var(--mantle-ui-Spinner_svg-url) no-repeat center;
+  background-image: conic-gradient(transparent, transparent, var(--solid-design-parts-Spinner_color));
+  mask: var(--solid-design-parts-Spinner_svg-url) no-repeat center;
   mask-size: contain;
 
   transform-origin: center;
-  animation: rotation var(--mantle-ui-Spinner_period) infinite linear;
+  animation: rotation var(--solid-design-parts-Spinner_period) infinite linear;
 }
 
 @keyframes rotation {

@@ -1,4 +1,4 @@
-.mantle-ui-Select_launcher {
+.solid-design-parts-Select_launcher {
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
@@ -6,94 +6,94 @@
 
   box-sizing: border-box;
   width: max-content;
-  min-height: var(--mantle-ui-one-line-input-height);
+  min-height: var(--solid-design-parts-one-line-input-height);
   border-radius: 0.3em;
-  border: 1px solid var(--mantle-ui-input-border-color);
+  border: 1px solid var(--solid-design-parts-input-border-color);
   padding: 0.4em 0.7em;
 
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   color: inherit;
   font: inherit;
   cursor: pointer;
 
   &:disabled {
-    background-color: var(--mantle-ui-disabled-input-background-color);
+    background-color: var(--solid-design-parts-disabled-input-background-color);
     cursor: initial;
   }
 
   &:focus-visible {
-    border-color: var(--mantle-ui-primary-color);
+    border-color: var(--solid-design-parts-primary-color);
     outline: none;
   }
 
-  &.mantle-ui-Select_full-width {
+  &.solid-design-parts-Select_full-width {
     width: 100%;
   }
 }
 
-.mantle-ui-Select_preview-area {
+.solid-design-parts-Select_preview-area {
   margin-right: 0.8em;
 }
 
-.mantle-ui-Select_preview {
+.solid-design-parts-Select_preview {
   white-space: pre-wrap;
 }
 
-.mantle-ui-Select_invisible {
+.solid-design-parts-Select_invisible {
   visibility: hidden;
   height: 0;
   overflow: hidden;
 }
 
-.mantle-ui-Select_placeholder {
-  color: var(--mantle-ui-placeholder-text-color);
+.solid-design-parts-Select_placeholder {
+  color: var(--solid-design-parts-placeholder-text-color);
   white-space: pre-wrap;
   user-select: none;
 }
 
-.mantle-ui-Select_clear-button {
+.solid-design-parts-Select_clear-button {
   &[aria-hidden='true'] {
     visibility: hidden;
   }
 }
 
-.mantle-ui-Select_icon {
+.solid-design-parts-Select_icon {
   transform-origin: center;
   transition: all 140ms ease-out;
   transform: rotate(0deg);
 
-  .mantle-ui-Select_opened & {
+  .solid-design-parts-Select_opened & {
     transform: rotate(-180deg);
   }
 }
 
-.mantle-ui-Select_overlay {
+.solid-design-parts-Select_overlay {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: var(--mantle-ui-overlay-z-index);
+  z-index: var(--solid-design-parts-overlay-z-index);
   outline: none;
 }
 
-.mantle-ui-Select_dropdown {
+.solid-design-parts-Select_dropdown {
   position: fixed;
-  left: var(--mantle-ui-Select_dropdown-left);
-  top: var(--mantle-ui-Select_dropdown-top);
+  left: var(--solid-design-parts-Select_dropdown-left);
+  top: var(--solid-design-parts-Select_dropdown-top);
   box-sizing: border-box;
-  width: var(--mantle-ui-Select_dropdown-width);
-  max-height: var(--mantle-ui-Select_dropdown-max-height);
+  width: var(--solid-design-parts-Select_dropdown-width);
+  max-height: var(--solid-design-parts-Select_dropdown-max-height);
   border-radius: 0.4em;
-  background-color: var(--mantle-ui-background-color);
+  background-color: var(--solid-design-parts-background-color);
   box-shadow: 0 1px 4px oklch(75% 0 0);
 }
 
-.mantle-ui-Select_search-box-area {
+.solid-design-parts-Select_search-box-area {
   padding: 0.3em;
 }
 
-.mantle-ui-Select_option {
+.solid-design-parts-Select_option {
   display: flex;
   align-items: center;
   text-align: start;
@@ -112,7 +112,7 @@
 
   &:focus-visible {
     outline-offset: -2px;
-    outline: 2px solid var(--mantle-ui-primary-color);
+    outline: 2px solid var(--solid-design-parts-primary-color);
   }
 
   @media (hover: hover) {
@@ -126,17 +126,17 @@
   }
 
   &[aria-selected='true'] {
-    background-color: var(--mantle-ui-primary-selected-background-color);
-    color: var(--mantle-ui-primary-color);
+    background-color: var(--solid-design-parts-primary-selected-background-color);
+    color: var(--solid-design-parts-primary-color);
 
     @media (hover: hover) {
       &:hover {
-        background-color: var(--mantle-ui-primary-selected-background-hover-color);
+        background-color: var(--solid-design-parts-primary-selected-background-hover-color);
       }
     }
 
     &:active {
-      background-color: var(--mantle-ui-primary-selected-background-active-color);
+      background-color: var(--solid-design-parts-primary-selected-background-active-color);
     }
   }
 }

@@ -50,38 +50,42 @@ export function Calendar(rawProps: CalendarProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Calendar_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Calendar_root')}
       style={joinStyle(props.style, {
-        '--mantle-ui-Calendar_year-month-order': i18n.literals.calendarYearMonthOrder,
+        '--solid-design-parts-Calendar_year-month-order': i18n.literals.calendarYearMonthOrder,
       })}
       {...restProps}
     >
-      <div class="mantle-ui-Calendar_year-month-area">
+      <div class="solid-design-parts-Calendar_year-month-area">
         <IconButton
-          class="mantle-ui-Calendar_month-move-button mantle-ui-Calendar_prev-month-button"
-          classList={{ 'mantle-ui-Calendar_hidden': props.hideMonthMoveButton }}
+          class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_prev-month-button"
+          classList={{ 'solid-design-parts-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronLeftIcon}
           onClick={() => changeMonth(subMonths(selectedMonth(), 1))}
           size="1.6em"
         />
-        <div class="mantle-ui-Calendar_year-month">
-          <span class="mantle-ui-Calendar_year">{format(selectedMonth(), i18n.literals.calendarYearTemplate)}</span>
-          <span class="mantle-ui-Calendar_month">{format(selectedMonth(), i18n.literals.calendarMonthTemplate)}</span>
+        <div class="solid-design-parts-Calendar_year-month">
+          <span class="solid-design-parts-Calendar_year">
+            {format(selectedMonth(), i18n.literals.calendarYearTemplate)}
+          </span>
+          <span class="solid-design-parts-Calendar_month">
+            {format(selectedMonth(), i18n.literals.calendarMonthTemplate)}
+          </span>
         </div>
         <IconButton
-          class="mantle-ui-Calendar_month-move-button mantle-ui-Calendar_next-month-button"
-          classList={{ 'mantle-ui-Calendar_hidden': props.hideMonthMoveButton }}
+          class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
+          classList={{ 'solid-design-parts-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronRightIcon}
           onClick={() => changeMonth(addMonths(selectedMonth(), 1))}
           size="1.6em"
         />
       </div>
 
-      <div class="mantle-ui-Calendar_grid">
-        <div class="mantle-ui-Calendar_day-row">
+      <div class="solid-design-parts-Calendar_grid">
+        <div class="solid-design-parts-Calendar_day-row">
           <For each={dayNames}>
             {(dayName, day) => (
-              <div class="mantle-ui-Calendar_cell" data-day={day()}>
+              <div class="solid-design-parts-Calendar_cell" data-day={day()}>
                 {dayName}
               </div>
             )}
@@ -90,15 +94,15 @@ export function Calendar(rawProps: CalendarProps) {
 
         <For each={rangeTo(6)}>
           {(weakIndex) => (
-            <div class="mantle-ui-Calendar_date-row">
+            <div class="solid-design-parts-Calendar_date-row">
               <For each={dayNames}>
                 {(_, day) => {
                   const date = createMemo(() => addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day()))
                   return (
                     <div
-                      class="mantle-ui-Calendar_cell"
+                      class="solid-design-parts-Calendar_cell"
                       classList={{
-                        'mantle-ui-Calendar_other-month': !isSameMonth(date(), selectedMonth()),
+                        'solid-design-parts-Calendar_other-month': !isSameMonth(date(), selectedMonth()),
                       }}
                       data-day={day()}
                     >

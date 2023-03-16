@@ -10,8 +10,8 @@ export function Icon(rawProps: IconProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      size: 'var(--mantle-ui-Icon_default-size)',
-      color: 'var(--mantle-ui-Icon_default-color)',
+      size: 'var(--solid-design-parts-Icon_default-size)',
+      color: 'var(--solid-design-parts-Icon_default-color)',
       rotate: '0deg',
     },
     ['src', 'style']
@@ -19,12 +19,12 @@ export function Icon(rawProps: IconProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Icon_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Icon_root')}
       style={joinStyle(rawProps.style, {
-        '--mantle-ui-Icon_url': `url('${props.src}')`,
-        '--mantle-ui-Icon_size': props.size,
-        '--mantle-ui-Icon_color': props.color,
-        '--mantle-ui-Icon_rotate': props.rotate,
+        '--solid-design-parts-Icon_url': `url('${props.src}')`,
+        '--solid-design-parts-Icon_size': props.size,
+        '--solid-design-parts-Icon_color': props.color,
+        '--solid-design-parts-Icon_rotate': props.rotate,
       })}
       role="img"
       {...restProps}

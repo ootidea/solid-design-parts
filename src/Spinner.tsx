@@ -16,10 +16,10 @@ export function Spinner(rawProps: SpinnerProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      size: 'var(--mantle-ui-Spinner_default-size)',
+      size: 'var(--solid-design-parts-Spinner_default-size)',
       thickness: 25,
       frequency: 1.4,
-      color: 'var(--mantle-ui-primary-color)',
+      color: 'var(--solid-design-parts-primary-color)',
     },
     ['style']
   )
@@ -33,12 +33,12 @@ export function Spinner(rawProps: SpinnerProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Spinner_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Spinner_root')}
       style={joinStyle(rawProps.style, {
-        '--mantle-ui-Spinner_size': props.size,
-        '--mantle-ui-Spinner_svg-url': svgUrl(),
-        '--mantle-ui-Spinner_period': `${1 / props.frequency}s`,
-        '--mantle-ui-Spinner_color': props.color,
+        '--solid-design-parts-Spinner_size': props.size,
+        '--solid-design-parts-Spinner_svg-url': svgUrl(),
+        '--solid-design-parts-Spinner_period': `${1 / props.frequency}s`,
+        '--solid-design-parts-Spinner_color': props.color,
       })}
       {...restProps}
     />

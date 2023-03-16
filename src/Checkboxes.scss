@@ -1,63 +1,63 @@
 @use 'utility/utility.scss';
 
-.mantle-ui-Checkboxes_checkboxes {
-  gap: var(--mantle-ui-Checkboxes_gap);
+.solid-design-parts-Checkboxes_checkboxes {
+  gap: var(--solid-design-parts-Checkboxes_gap);
 
-  .mantle-ui-Checkboxes_root[data-layout='horizontal'] & {
+  .solid-design-parts-Checkboxes_root[data-layout='horizontal'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
   }
-  .mantle-ui-Checkboxes_root[data-layout='horizontal'].mantle-ui-Checkboxes_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-Checkboxes_grid-columns-count), max-content);
+  .solid-design-parts-Checkboxes_root[data-layout='horizontal'].solid-design-parts-Checkboxes_has-columns-count & {
+    grid-template-columns: repeat(var(--solid-design-parts-Checkboxes_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 
-  .mantle-ui-Checkboxes_root[data-layout='vertical'] & {
+  .solid-design-parts-Checkboxes_root[data-layout='vertical'] & {
     display: grid;
     grid-template-columns: max-content;
   }
 
-  .mantle-ui-Checkboxes_root[data-layout='flex-wrap'] & {
+  .solid-design-parts-Checkboxes_root[data-layout='flex-wrap'] & {
     display: flex;
     flex-wrap: wrap;
   }
 
-  .mantle-ui-Checkboxes_root[data-layout='space-between'] & {
+  .solid-design-parts-Checkboxes_root[data-layout='space-between'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-between;
   }
-  .mantle-ui-Checkboxes_root[data-layout='space-between'].mantle-ui-Checkboxes_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-Checkboxes_grid-columns-count), max-content);
+  .solid-design-parts-Checkboxes_root[data-layout='space-between'].solid-design-parts-Checkboxes_has-columns-count & {
+    grid-template-columns: repeat(var(--solid-design-parts-Checkboxes_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 
-  .mantle-ui-Checkboxes_root[data-layout='space-around'] & {
+  .solid-design-parts-Checkboxes_root[data-layout='space-around'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-around;
   }
-  .mantle-ui-Checkboxes_root[data-layout='space-around'].mantle-ui-Checkboxes_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-Checkboxes_grid-columns-count), max-content);
+  .solid-design-parts-Checkboxes_root[data-layout='space-around'].solid-design-parts-Checkboxes_has-columns-count & {
+    grid-template-columns: repeat(var(--solid-design-parts-Checkboxes_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 
-  .mantle-ui-Checkboxes_root[data-layout='space-evenly'] & {
+  .solid-design-parts-Checkboxes_root[data-layout='space-evenly'] & {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     justify-content: space-evenly;
   }
-  .mantle-ui-Checkboxes_root[data-layout='space-evenly'].mantle-ui-Checkboxes_has-columns-count & {
-    grid-template-columns: repeat(var(--mantle-ui-Checkboxes_grid-columns-count), max-content);
+  .solid-design-parts-Checkboxes_root[data-layout='space-evenly'].solid-design-parts-Checkboxes_has-columns-count & {
+    grid-template-columns: repeat(var(--solid-design-parts-Checkboxes_grid-columns-count), max-content);
     grid-auto-flow: initial;
   }
 }
 
-.mantle-ui-Checkboxes_label {
+.solid-design-parts-Checkboxes_label {
   display: inline-grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
@@ -73,8 +73,8 @@
   }
 }
 
-.mantle-ui-Checkboxes_error-message {
-  color: var(--mantle-ui-error-color);
+.solid-design-parts-Checkboxes_error-message {
+  color: var(--solid-design-parts-error-color);
   margin: 0.5em 0 0;
 
   &:empty {

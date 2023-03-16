@@ -1,8 +1,8 @@
-.mantle-ui-DatePicker_root {
+.solid-design-parts-DatePicker_root {
   width: max-content;
 }
 
-.mantle-ui-DatePicker_date-cell {
+.solid-design-parts-DatePicker_date-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +32,7 @@
   }
 
   &[aria-selected='true'] {
-    background-color: var(--mantle-ui-primary-color);
+    background-color: var(--solid-design-parts-primary-color);
     color: white;
   }
 
@@ -42,11 +42,11 @@
 
   &:focus-visible {
     outline-offset: -2px;
-    outline: 2px solid var(--mantle-ui-primary-color);
+    outline: 2px solid var(--solid-design-parts-primary-color);
 
     &[aria-selected='true'] {
       outline-offset: -2px;
-      outline: 1px solid var(--mantle-ui-background-color);
+      outline: 1px solid var(--solid-design-parts-background-color);
     }
   }
 }

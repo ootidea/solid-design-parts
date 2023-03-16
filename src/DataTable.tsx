@@ -72,8 +72,8 @@ export function DataTable<
     rawProps,
     {
       fullWidth: false,
-      evenRowBackgroundColor: 'var(--mantle-ui-DataTable_even-row-background-default-color)',
-      oddRowBackgroundColor: 'var(--mantle-ui-DataTable_odd-row-background-default-color)',
+      evenRowBackgroundColor: 'var(--solid-design-parts-DataTable_even-row-background-default-color)',
+      oddRowBackgroundColor: 'var(--solid-design-parts-DataTable_odd-row-background-default-color)',
     },
     ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'rowHref', 'onClickRow']
   )
@@ -190,28 +190,28 @@ export function DataTable<
 
   return (
     <div
-      class={joinClasses(props, 'mantle-ui-DataTable_root', {
-        'mantle-ui-DataTable_full-width': props.fullWidth,
+      class={joinClasses(props, 'solid-design-parts-DataTable_root', {
+        'solid-design-parts-DataTable_full-width': props.fullWidth,
       })}
       role="table"
       style={joinStyle(props.style, {
-        '--mantle-ui-DataTable_template-columns': `1px ${props.columns.map(getColumnWidth).join(' 1px ')} 1px`,
-        '--mantle-ui-DataTable_even-row-background-color': props.evenRowBackgroundColor,
-        '--mantle-ui-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
+        '--solid-design-parts-DataTable_template-columns': `1px ${props.columns.map(getColumnWidth).join(' 1px ')} 1px`,
+        '--solid-design-parts-DataTable_even-row-background-color': props.evenRowBackgroundColor,
+        '--solid-design-parts-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
       })}
       {...restProps}
     >
-      <div class="mantle-ui-DataTable_horizontal-ruled-line">
+      <div class="solid-design-parts-DataTable_horizontal-ruled-line">
         <Slot content={props.horizontalRuledLine} params={{ verticalIndex: 0 }}>
           <Divider />
         </Slot>
       </div>
 
-      <div class="mantle-ui-DataTable_header" role="row">
+      <div class="solid-design-parts-DataTable_header" role="row">
         <For each={props.columns}>
           {(column, horizontalIndex) => (
             <>
-              <div class="mantle-ui-DataTable_vertical-ruled-line">
+              <div class="solid-design-parts-DataTable_vertical-ruled-line">
                 <Slot
                   content={props.verticalRuledLine}
                   params={{ verticalIndex: 0, horizontalIndex: horizontalIndex() }}
@@ -222,12 +222,12 @@ export function DataTable<
 
               <Gravity
                 to={aligns()[column.id]}
-                class="mantle-ui-DataTable_cell"
+                class="solid-design-parts-DataTable_cell"
                 role="columnheader"
                 data-column-id={column.id}
               >
-                <div class="mantle-ui-DataTable_header-cell-cage">
-                  <div class="mantle-ui-DataTable_column-title" data-column-id={column.id}>
+                <div class="solid-design-parts-DataTable_header-cell-cage">
+                  <div class="solid-design-parts-DataTable_column-title" data-column-id={column.id}>
                     <Slot
                       content={props.headerCell}
                       params={{ columnId: column.id, columnTitle: getColumnTitle(column) }}
@@ -240,17 +240,17 @@ export function DataTable<
                       when={sortingState.value?.columnId === column.id}
                       fallback={
                         <IconButton
-                          class="mantle-ui-DataTable_sort-button"
+                          class="solid-design-parts-DataTable_sort-button"
                           src={arrowDownIcon}
-                          iconColor="var(--mantle-ui-DataTable_sort-icon-default-inactive-color)"
+                          iconColor="var(--solid-design-parts-DataTable_sort-icon-default-inactive-color)"
                           onClick={() => onClickSortButton(column.id)}
                         />
                       }
                     >
                       <IconButton
-                        class="mantle-ui-DataTable_sort-button"
+                        class="solid-design-parts-DataTable_sort-button"
                         src={arrowDownIcon}
-                        iconColor="var(--mantle-ui-DataTable_sort-icon-default-active-color)"
+                        iconColor="var(--solid-design-parts-DataTable_sort-icon-default-active-color)"
                         data-reversed={sortingState.value?.reversed}
                         onClick={() => onClickSortButton(column.id)}
                       />
@@ -262,7 +262,7 @@ export function DataTable<
           )}
         </For>
 
-        <div class="mantle-ui-DataTable_vertical-ruled-line">
+        <div class="solid-design-parts-DataTable_vertical-ruled-line">
           <Slot content={props.verticalRuledLine} params={{ verticalIndex: 0, horizontalIndex: props.columns.length }}>
             <Divider direction="vertical" />
           </Slot>
@@ -273,23 +273,25 @@ export function DataTable<
         each={sortedRows()}
         fallback={
           <>
-            <div class="mantle-ui-DataTable_horizontal-ruled-line">
+            <div class="solid-design-parts-DataTable_horizontal-ruled-line">
               <Slot content={props.horizontalRuledLine} params={{ verticalIndex: 1 }}>
                 <Divider />
               </Slot>
             </div>
-            <div class="mantle-ui-DataTable_empty-state">
-              <div class="mantle-ui-DataTable_vertical-ruled-line">
+            <div class="solid-design-parts-DataTable_empty-state">
+              <div class="solid-design-parts-DataTable_vertical-ruled-line">
                 <Slot content={props.verticalRuledLine} params={{ verticalIndex: 1, horizontalIndex: 0 }}>
                   <Divider direction="vertical" />
                 </Slot>
               </div>
-              <div class="mantle-ui-DataTable_empty-state-cell">
+              <div class="solid-design-parts-DataTable_empty-state-cell">
                 <Slot content={props.emptyState} params={{}}>
-                  <Gravity class="mantle-ui-DataTable_empty-message">{i18n.literals.dataTableEmptyMessage}</Gravity>
+                  <Gravity class="solid-design-parts-DataTable_empty-message">
+                    {i18n.literals.dataTableEmptyMessage}
+                  </Gravity>
                 </Slot>
               </div>
-              <div class="mantle-ui-DataTable_vertical-ruled-line">
+              <div class="solid-design-parts-DataTable_vertical-ruled-line">
                 <Slot
                   content={props.verticalRuledLine}
                   params={{ verticalIndex: 1, horizontalIndex: props.columns.length }}
@@ -305,18 +307,18 @@ export function DataTable<
           const href = props.rowHref?.(row)
           return (
             <>
-              <div class="mantle-ui-DataTable_horizontal-ruled-line">
+              <div class="solid-design-parts-DataTable_horizontal-ruled-line">
                 <Slot content={props.horizontalRuledLine} params={{ verticalIndex: index() + 1 }}>
                   <Divider />
                 </Slot>
               </div>
 
               <a
-                class="mantle-ui-DataTable_row"
+                class="solid-design-parts-DataTable_row"
                 classList={{
-                  'mantle-ui-DataTable_even-row': index() % 2 === 0,
-                  'mantle-ui-DataTable_odd-row': index() % 2 === 1,
-                  'mantle-ui-DataTable_clickable-row': href !== undefined || props.onClickRow !== undefined,
+                  'solid-design-parts-DataTable_even-row': index() % 2 === 0,
+                  'solid-design-parts-DataTable_odd-row': index() % 2 === 1,
+                  'solid-design-parts-DataTable_clickable-row': href !== undefined || props.onClickRow !== undefined,
                 }}
                 role="row"
                 href={href}
@@ -329,7 +331,7 @@ export function DataTable<
                 <For each={props.columns}>
                   {(column, horizontalIndex) => (
                     <>
-                      <div class="mantle-ui-DataTable_vertical-ruled-line">
+                      <div class="solid-design-parts-DataTable_vertical-ruled-line">
                         <Slot
                           content={props.verticalRuledLine}
                           params={{ verticalIndex: index() + 1, horizontalIndex: horizontalIndex() }}
@@ -340,10 +342,10 @@ export function DataTable<
 
                       <Gravity
                         to={aligns()[column.id]}
-                        class="mantle-ui-DataTable_cell"
+                        class="solid-design-parts-DataTable_cell"
                         style={{
-                          '--mantle-ui-DataTable_cell-min-width': getColumnMinWidth(column),
-                          '--mantle-ui-DataTable_cell-max-width': getColumnMaxWidth(column),
+                          '--solid-design-parts-DataTable_cell-min-width': getColumnMinWidth(column),
+                          '--solid-design-parts-DataTable_cell-max-width': getColumnMaxWidth(column),
                         }}
                         role="cell"
                         data-column-id={column.id}
@@ -363,7 +365,7 @@ export function DataTable<
                   )}
                 </For>
 
-                <div class="mantle-ui-DataTable_vertical-ruled-line">
+                <div class="solid-design-parts-DataTable_vertical-ruled-line">
                   <Slot
                     content={props.verticalRuledLine}
                     params={{ verticalIndex: index() + 1, horizontalIndex: props.columns.length }}
@@ -377,7 +379,7 @@ export function DataTable<
         }}
       </For>
 
-      <div class="mantle-ui-DataTable_horizontal-ruled-line">
+      <div class="solid-design-parts-DataTable_horizontal-ruled-line">
         <Slot content={props.horizontalRuledLine} params={{ verticalIndex: props.rows.length + 1 }}>
           <Divider />
         </Slot>

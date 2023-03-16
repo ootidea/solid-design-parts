@@ -26,8 +26,8 @@ export function Foldable(rawProps: FoldableProps) {
     rawProps,
     {
       unfolded: false,
-      headerBackgroundColor: 'var(--mantle-ui-Foldable_header-background-default-color)',
-      borderColor: 'var(--mantle-ui-Foldable_border-default-color)',
+      headerBackgroundColor: 'var(--solid-design-parts-Foldable_header-background-default-color)',
+      borderColor: 'var(--solid-design-parts-Foldable_border-default-color)',
     },
     ['title', 'icon', 'onChangeUnfolded']
   )
@@ -43,27 +43,27 @@ export function Foldable(rawProps: FoldableProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Foldable_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Foldable_root')}
       style={joinStyle(rawProps.style, {
-        '--mantle-ui-Foldable_header-background-color': props.headerBackgroundColor,
-        '--mantle-ui-Foldable_border-color': props.borderColor,
+        '--solid-design-parts-Foldable_header-background-color': props.headerBackgroundColor,
+        '--solid-design-parts-Foldable_border-color': props.borderColor,
       })}
       data-unfolded={unfolded()}
       {...restProps}
     >
-      <StretchLayout class="mantle-ui-Foldable_header" direction="horizontal" onClick={toggle}>
-        <div class="mantle-ui-Foldable_title">
+      <StretchLayout class="solid-design-parts-Foldable_header" direction="horizontal" onClick={toggle}>
+        <div class="solid-design-parts-Foldable_title">
           <Slot content={rawProps.title} params={{ fold, unfold, toggle, unfolded: unfolded() }} />
         </div>
         <Gravity>
           <Slot content={rawProps.icon} params={{ fold, unfold, toggle, unfolded: unfolded() }}>
-            <Icon class="mantle-ui-Foldable_icon" src={chevronDownIcon} />
+            <Icon class="solid-design-parts-Foldable_icon" src={chevronDownIcon} />
           </Slot>
         </Gravity>
       </StretchLayout>
       <Show when={unfolded()}>
-        <Divider color="var(--mantle-ui-Foldable_border-color)" />
-        <div class="mantle-ui-Foldable_content-area">
+        <Divider color="var(--solid-design-parts-Foldable_border-color)" />
+        <div class="solid-design-parts-Foldable_content-area">
           <Slot content={rawProps.children} params={{ fold, unfold, toggle }} />
         </div>
       </Show>

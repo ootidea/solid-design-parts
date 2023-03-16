@@ -1,87 +1,87 @@
 :root {
-  --mantle-ui-Stepper_line-color: oklch(70% 0 0);
-  --mantle-ui-Stepper_circle-size: 2.5em;
+  --solid-design-parts-Stepper_line-color: oklch(70% 0 0);
+  --solid-design-parts-Stepper_circle-size: 2.5em;
 }
 
-.mantle-ui-Stepper_line-layer {
+.solid-design-parts-Stepper_line-layer {
   display: grid;
   align-items: center;
-  height: var(--mantle-ui-Stepper_circle-size);
+  height: var(--solid-design-parts-Stepper_circle-size);
 }
 
-.mantle-ui-Stepper_line {
+.solid-design-parts-Stepper_line {
   height: 1px;
 
   background-image: linear-gradient(
     to right,
-    var(--mantle-ui-Stepper_line-color),
-    var(--mantle-ui-Stepper_line-color) 6px,
+    var(--solid-design-parts-Stepper_line-color),
+    var(--solid-design-parts-Stepper_line-color) 6px,
     transparent 6px,
     transparent 12px
   );
   background-size: 12px 1px;
   background-repeat: repeat-x;
 
-  &.mantle-ui-Stepper_reached {
-    background: var(--mantle-ui-primary-color);
+  &.solid-design-parts-Stepper_reached {
+    background: var(--solid-design-parts-primary-color);
     height: 3px;
   }
 }
 
-.mantle-ui-Stepper_circle-layer {
+.solid-design-parts-Stepper_circle-layer {
   display: grid;
 }
 
-.mantle-ui-Stepper_circle {
+.solid-design-parts-Stepper_circle {
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: var(--mantle-ui-Stepper_circle-size);
-  height: var(--mantle-ui-Stepper_circle-size);
+  width: var(--solid-design-parts-Stepper_circle-size);
+  height: var(--solid-design-parts-Stepper_circle-size);
   border-radius: 999vh;
 
   font-size: 1.2em;
   font-weight: bold;
 
-  &.mantle-ui-Stepper_past-step {
-    border: 0.15em solid var(--mantle-ui-primary-color);
-    background-color: var(--mantle-ui-background-color);
-    color: var(--mantle-ui-primary-color);
+  &.solid-design-parts-Stepper_past-step {
+    border: 0.15em solid var(--solid-design-parts-primary-color);
+    background-color: var(--solid-design-parts-background-color);
+    color: var(--solid-design-parts-primary-color);
   }
 
-  &.mantle-ui-Stepper_current-step {
-    background-color: var(--mantle-ui-primary-color);
-    color: var(--mantle-ui-inverted-text-color);
+  &.solid-design-parts-Stepper_current-step {
+    background-color: var(--solid-design-parts-primary-color);
+    color: var(--solid-design-parts-inverted-text-color);
   }
 
-  &.mantle-ui-Stepper_future-step {
+  &.solid-design-parts-Stepper_future-step {
     border: 0.15em solid oklch(80% 0 0);
-    background-color: var(--mantle-ui-background-color);
+    background-color: var(--solid-design-parts-background-color);
     color: oklch(80% 0 0);
   }
 }
 
-.mantle-ui-Stepper_titles-area {
+.solid-design-parts-Stepper_titles-area {
   display: grid;
   margin-top: 0.5em;
 }
 
-.mantle-ui-Stepper_title {
+.solid-design-parts-Stepper_title {
   display: flex;
   justify-content: center;
 
   font-weight: bold;
 
-  &.mantle-ui-Stepper_past-step {
+  &.solid-design-parts-Stepper_past-step {
     color: oklch(60% 0 0);
   }
 
-  &.mantle-ui-Stepper_current-step {
-    color: var(--mantle-ui-primary-color);
+  &.solid-design-parts-Stepper_current-step {
+    color: var(--solid-design-parts-primary-color);
   }
 
-  &.mantle-ui-Stepper_future-step {
+  &.solid-design-parts-Stepper_future-step {
     color: oklch(70% 0 0);
   }
 }

@@ -111,12 +111,12 @@ export function TextInputComponent() {
         </div>
         <div style={{ display: 'grid', 'grid-template-columns': 'auto 1fr' }}>
           <Button
-            radius="var(--mantle-ui-input-border-radius) 0 0 var(--mantle-ui-input-border-radius)"
+            radius="var(--solid-design-parts-input-border-radius) 0 0 var(--solid-design-parts-input-border-radius)"
             style={{ padding: '0 0.4em' }}
           >
             <Icon src={searchIcon} color="currentColor" size="1.7em" />
           </Button>
-          <TextInput radius="0 var(--mantle-ui-input-border-radius) var(--mantle-ui-input-border-radius) 0" />
+          <TextInput radius="0 var(--solid-design-parts-input-border-radius) var(--solid-design-parts-input-border-radius) 0" />
         </div>
       </Sample>
     </article>

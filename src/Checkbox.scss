@@ -1,11 +1,11 @@
 @use 'utility/utility.scss';
 
 :root {
-  --mantle-ui-Checkbox_checkbox-size: 1.06em;
-  --mantle-ui-Checkbox_check-size: 0.94em;
+  --solid-design-parts-Checkbox_checkbox-size: 1.06em;
+  --solid-design-parts-Checkbox_check-size: 0.94em;
 }
 
-.mantle-ui-Checkbox_label {
+.solid-design-parts-Checkbox_label {
   display: inline-grid;
   vertical-align: top;
   grid-template-columns: auto minmax(0, 1fr);
@@ -14,22 +14,22 @@
 
   cursor: pointer;
 
-  .mantle-ui-Checkbox_root[aria-disabled='true'] & {
+  .solid-design-parts-Checkbox_root[aria-disabled='true'] & {
     cursor: default;
 
     color: oklch(70% 0 0);
   }
 }
 
-.mantle-ui-Checkbox_checkbox {
+.solid-design-parts-Checkbox_checkbox {
   appearance: none;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  width: utility.toIntegerPx(var(--mantle-ui-Checkbox_checkbox-size));
-  height: utility.toIntegerPx(var(--mantle-ui-Checkbox_checkbox-size));
+  width: utility.toIntegerPx(var(--solid-design-parts-Checkbox_checkbox-size));
+  height: utility.toIntegerPx(var(--solid-design-parts-Checkbox_checkbox-size));
   border-radius: 0.25em;
   margin: 0;
   border: 1px solid oklch(84% 0 0);
@@ -40,15 +40,15 @@
 
   transition: all 140ms ease-out;
 
-  .mantle-ui-Checkbox_root[aria-invalid='true'] & {
-    border-color: var(--mantle-ui-error-color);
+  .solid-design-parts-Checkbox_root[aria-invalid='true'] & {
+    border-color: var(--solid-design-parts-error-color);
   }
 
   &:checked {
-    background-color: var(--mantle-ui-primary-color);
+    background-color: var(--solid-design-parts-primary-color);
 
-    .mantle-ui-Checkbox_root[aria-invalid='true'] & {
-      background-color: var(--mantle-ui-error-color);
+    .solid-design-parts-Checkbox_root[aria-invalid='true'] & {
+      background-color: var(--solid-design-parts-error-color);
     }
 
     &:disabled {
@@ -56,8 +56,8 @@
     }
 
     &::before {
-      width: utility.toIntegerPx(var(--mantle-ui-Checkbox_check-size));
-      height: utility.toIntegerPx(var(--mantle-ui-Checkbox_check-size));
+      width: utility.toIntegerPx(var(--solid-design-parts-Checkbox_check-size));
+      height: utility.toIntegerPx(var(--solid-design-parts-Checkbox_check-size));
     }
   }
 
@@ -67,7 +67,7 @@
 
   &:focus-visible {
     outline-offset: 1px;
-    outline: 2px solid var(--mantle-ui-primary-color);
+    outline: 2px solid var(--solid-design-parts-primary-color);
   }
 
   &::before {
@@ -82,12 +82,12 @@
   }
 }
 
-.mantle-ui-Checkbox_children {
+.solid-design-parts-Checkbox_children {
   white-space: pre-wrap;
 }
 
-.mantle-ui-Checkbox_error-message {
-  color: var(--mantle-ui-error-color);
+.solid-design-parts-Checkbox_error-message {
+  color: var(--solid-design-parts-error-color);
   margin: 0.5em 0 0;
 
   &:empty {

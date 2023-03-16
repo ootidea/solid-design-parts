@@ -1,17 +1,17 @@
 :root {
-  --mantle-ui-Divider_default-thickness: 1px;
-  --mantle-ui-Divider_default-color: oklch(90% 0 0);
+  --solid-design-parts-Divider_default-thickness: 1px;
+  --solid-design-parts-Divider_default-color: oklch(90% 0 0);
 }
 
-.mantle-ui-Divider_root {
-  background: var(--mantle-ui-Divider_color);
+.solid-design-parts-Divider_root {
+  background: var(--solid-design-parts-Divider_color);
 
   &[data-direction='horizontal'] {
-    height: var(--mantle-ui-Divider_thickness);
+    height: var(--solid-design-parts-Divider_thickness);
   }
 
   &[data-direction='vertical'] {
-    width: var(--mantle-ui-Divider_thickness);
+    width: var(--solid-design-parts-Divider_thickness);
     height: 100%;
   }
 }

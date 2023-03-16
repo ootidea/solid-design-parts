@@ -1,26 +1,26 @@
 :root {
-  --mantle-ui-DataTable_header-background-default-color: oklch(97% 0 0);
-  --mantle-ui-DataTable_header-text-default-color: oklch(40% 0 0);
-  --mantle-ui-DataTable_even-row-background-default-color: transparent;
-  --mantle-ui-DataTable_odd-row-background-default-color: transparent;
-  --mantle-ui-DataTable_sort-icon-default-active-color: oklch(40% 0 0);
-  --mantle-ui-DataTable_sort-icon-default-inactive-color: oklch(60% 0 0);
+  --solid-design-parts-DataTable_header-background-default-color: oklch(97% 0 0);
+  --solid-design-parts-DataTable_header-text-default-color: oklch(40% 0 0);
+  --solid-design-parts-DataTable_even-row-background-default-color: transparent;
+  --solid-design-parts-DataTable_odd-row-background-default-color: transparent;
+  --solid-design-parts-DataTable_sort-icon-default-active-color: oklch(40% 0 0);
+  --solid-design-parts-DataTable_sort-icon-default-inactive-color: oklch(60% 0 0);
 }
 
-.mantle-ui-DataTable_root {
-  grid-template-columns: var(--mantle-ui-DataTable_template-columns);
+.solid-design-parts-DataTable_root {
+  grid-template-columns: var(--solid-design-parts-DataTable_template-columns);
   display: grid;
 
-  &:not(.mantle-ui-DataTable_full-width) {
+  &:not(.solid-design-parts-DataTable_full-width) {
     width: max-content;
   }
 }
 
-.mantle-ui-DataTable_header {
+.solid-design-parts-DataTable_header {
   display: contents;
 }
 
-.mantle-ui-DataTable_sort-button {
+.solid-design-parts-DataTable_sort-button {
   transform-origin: center;
   transition: all 140ms ease-out;
 
@@ -29,66 +29,66 @@
   }
 }
 
-.mantle-ui-DataTable_row {
+.solid-design-parts-DataTable_row {
   display: contents;
   color: inherit;
   text-decoration: none;
 }
 
-.mantle-ui-DataTable_cell {
+.solid-design-parts-DataTable_cell {
   padding: 0.6em 1em;
-  min-width: var(--mantle-ui-DataTable_cell-min-width);
-  max-width: var(--mantle-ui-DataTable_cell-max-width);
+  min-width: var(--solid-design-parts-DataTable_cell-min-width);
+  max-width: var(--solid-design-parts-DataTable_cell-max-width);
   overflow: hidden;
 
-  .mantle-ui-DataTable_header & {
+  .solid-design-parts-DataTable_header & {
     font-weight: bold;
-    color: var(--mantle-ui-DataTable_header-text-default-color);
+    color: var(--solid-design-parts-DataTable_header-text-default-color);
 
-    background-color: var(--mantle-ui-DataTable_header-background-default-color);
+    background-color: var(--solid-design-parts-DataTable_header-background-default-color);
   }
 
-  .mantle-ui-DataTable_clickable-row & {
+  .solid-design-parts-DataTable_clickable-row & {
     cursor: pointer;
   }
 
-  .mantle-ui-DataTable_even-row & {
-    background-color: var(--mantle-ui-DataTable_even-row-background-color);
+  .solid-design-parts-DataTable_even-row & {
+    background-color: var(--solid-design-parts-DataTable_even-row-background-color);
   }
 
-  .mantle-ui-DataTable_odd-row & {
-    background-color: var(--mantle-ui-DataTable_odd-row-background-color);
+  .solid-design-parts-DataTable_odd-row & {
+    background-color: var(--solid-design-parts-DataTable_odd-row-background-color);
   }
 
   @media (hover: hover) {
-    .mantle-ui-DataTable_clickable-row:hover & {
+    .solid-design-parts-DataTable_clickable-row:hover & {
       background-color: oklch(98% 0 0);
     }
   }
 
-  .mantle-ui-DataTable_clickable-row:active & {
+  .solid-design-parts-DataTable_clickable-row:active & {
     background-color: oklch(96% 0 0);
   }
 }
 
-.mantle-ui-DataTable_header-cell-cage {
+.solid-design-parts-DataTable_header-cell-cage {
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
 }
 
-.mantle-ui-DataTable_horizontal-ruled-line {
+.solid-design-parts-DataTable_horizontal-ruled-line {
   grid-column: 1 / -1;
 }
 
-.mantle-ui-DataTable_empty-state {
+.solid-design-parts-DataTable_empty-state {
   display: contents;
 }
 
-.mantle-ui-DataTable_empty-state-cell {
+.solid-design-parts-DataTable_empty-state-cell {
   grid-column: 2 / -2;
 }
 
-.mantle-ui-DataTable_empty-message {
+.solid-design-parts-DataTable_empty-message {
   padding: 1em 2em;
 }

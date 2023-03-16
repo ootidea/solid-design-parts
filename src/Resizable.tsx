@@ -45,7 +45,7 @@ export function Resizable(rawProps: ResizableProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Resizable_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Resizable_root')}
       style={joinStyle(rawProps.style, { width: widthPx() !== undefined ? `${widthPx()}px` : 'max-content' })}
       ref={rootElement}
       {...restProps}
@@ -53,7 +53,7 @@ export function Resizable(rawProps: ResizableProps) {
       <Show when={rawProps.children instanceof Array} fallback={rawProps.children}>
         <div>{rawProps.children}</div>
       </Show>
-      <div class="mantle-ui-Resizable_resize-handle" onMouseDown={onMouseDown}></div>
+      <div class="solid-design-parts-Resizable_resize-handle" onMouseDown={onMouseDown}></div>
     </div>
   )
 }

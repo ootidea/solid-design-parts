@@ -1,25 +1,25 @@
-:where(.mantle-ui-TextInput_body) {
+:where(.solid-design-parts-TextInput_body) {
   box-sizing: border-box;
-  min-height: var(--mantle-ui-one-line-input-height);
-  border-radius: var(--mantle-ui-TextInput_radius);
-  border: 1px solid var(--mantle-ui-input-border-color);
-  background-color: var(--mantle-ui-background-color);
+  min-height: var(--solid-design-parts-one-line-input-height);
+  border-radius: var(--solid-design-parts-TextInput_radius);
+  border: 1px solid var(--solid-design-parts-input-border-color);
+  background-color: var(--solid-design-parts-background-color);
 
-  .mantle-ui-TextInput_root[aria-disabled='true'] & {
-    background-color: var(--mantle-ui-disabled-input-background-color);
+  .solid-design-parts-TextInput_root[aria-disabled='true'] & {
+    background-color: var(--solid-design-parts-disabled-input-background-color);
   }
 
   /* TODO: Use :has() instead of CSS class */
-  .mantle-ui-TextInput_input-element-has-focus & {
-    border-color: var(--mantle-ui-primary-color);
+  .solid-design-parts-TextInput_input-element-has-focus & {
+    border-color: var(--solid-design-parts-primary-color);
   }
 
-  .mantle-ui-TextInput_root[aria-invalid='true'] & {
-    border-color: var(--mantle-ui-error-color);
+  .solid-design-parts-TextInput_root[aria-invalid='true'] & {
+    border-color: var(--solid-design-parts-error-color);
   }
 }
 
-.mantle-ui-TextInput_prepend {
+.solid-design-parts-TextInput_prepend {
   padding-left: 0.3em;
 
   &:empty {
@@ -27,7 +27,7 @@
   }
 }
 
-.mantle-ui-TextInput_append {
+.solid-design-parts-TextInput_append {
   padding-right: 0.3em;
 
   &:empty {
@@ -35,7 +35,7 @@
   }
 }
 
-.mantle-ui-TextInput_input {
+.solid-design-parts-TextInput_input {
   padding: 0.4em 0.6em;
   border: none;
   outline: none;
@@ -47,12 +47,12 @@
   letter-spacing: inherit;
 
   &::placeholder {
-    color: var(--mantle-ui-placeholder-text-color);
+    color: var(--solid-design-parts-placeholder-text-color);
   }
 }
 
-.mantle-ui-TextInput_error-message {
-  color: var(--mantle-ui-error-color);
+.solid-design-parts-TextInput_error-message {
+  color: var(--solid-design-parts-error-color);
   margin: 0.5em 0 0;
 
   &:empty {

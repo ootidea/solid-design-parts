@@ -33,17 +33,17 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-Tabs_root')}
-      style={{ '--mantle-ui-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
+      class={joinClasses(rawProps, 'solid-design-parts-Tabs_root')}
+      style={{ '--solid-design-parts-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
       data-type={props.type}
       {...restProps}
     >
-      <div class="mantle-ui-Tabs_tab-bar" role="tablist">
+      <div class="solid-design-parts-Tabs_tab-bar" role="tablist">
         <For each={props.names}>
           {(name) => (
             <button
-              class="mantle-ui-Tabs_tab"
-              classList={{ 'mantle-ui-Tabs_active': activeTab() === name }}
+              class="solid-design-parts-Tabs_tab"
+              classList={{ 'solid-design-parts-Tabs_active': activeTab() === name }}
               role="tab"
               type="button"
               onClick={() => onClick(name)}
@@ -53,10 +53,10 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
           )}
         </For>
         <Show when={props.type === 'Surrounded by border'}>
-          <div class="mantle-ui-Tabs_dummy-tab-for-border" />
+          <div class="solid-design-parts-Tabs_dummy-tab-for-border" />
         </Show>
       </div>
-      <div class="mantle-ui-Tabs_content" role="tabpanel">
+      <div class="solid-design-parts-Tabs_content" role="tabpanel">
         <Slot content={props.children} params={{ activeTab: activeTab() }} />
       </div>
     </div>

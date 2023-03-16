@@ -89,31 +89,31 @@ export function Scrollable(rawProps: ScrollableProps) {
 
   return (
     <div
-      class="mantle-ui-Scrollable_root"
+      class="solid-design-parts-Scrollable_root"
       classList={{
-        'mantle-ui-Scrollable_overflow': isOverflow(),
-        'mantle-ui-Scrollable_dragging': dragState() !== undefined,
+        'solid-design-parts-Scrollable_overflow': isOverflow(),
+        'solid-design-parts-Scrollable_dragging': dragState() !== undefined,
       }}
       style={{
-        '--mantle-ui-Scrollable_thumb-height': `${(100 * rootHeightPx()) / innerHeightPx()}%`,
-        '--mantle-ui-Scrollable_thumb-top': `${thumbTopPx()}px`,
+        '--solid-design-parts-Scrollable_thumb-height': `${(100 * rootHeightPx()) / innerHeightPx()}%`,
+        '--solid-design-parts-Scrollable_thumb-top': `${thumbTopPx()}px`,
       }}
       ref={(element) => observeHeightPx(element, setRootHeightPx)}
       onMouseEnter={showThumbTemporarily}
     >
-      <div class="mantle-ui-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
+      <div class="solid-design-parts-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
         <div
-          class={joinClasses(rawProps, 'mantle-ui-Scrollable_inner')}
+          class={joinClasses(rawProps, 'solid-design-parts-Scrollable_inner')}
           ref={(element) => observeHeightPx(element, setInnerHeightPx)}
           {...restProps}
         >
           {props.children}
         </div>
       </div>
-      <div class="mantle-ui-Scrollable_overlay">
-        <div class="mantle-ui-Scrollable_dummy" />
-        <div class="mantle-ui-Scrollable_scrollbar" role="scrollbar">
-          <div class="mantle-ui-Scrollable_thumb" ref={thumbElement} />
+      <div class="solid-design-parts-Scrollable_overlay">
+        <div class="solid-design-parts-Scrollable_dummy" />
+        <div class="solid-design-parts-Scrollable_scrollbar" role="scrollbar">
+          <div class="solid-design-parts-Scrollable_thumb" ref={thumbElement} />
         </div>
       </div>
     </div>

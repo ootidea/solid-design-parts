@@ -33,7 +33,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       disabled: false,
       required: false,
       validateImmediately: false,
-      radius: 'var(--mantle-ui-input-border-radius)',
+      radius: 'var(--solid-design-parts-input-border-radius)',
     },
     ['value', 'placeholder', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
@@ -147,19 +147,19 @@ export function NumberInput(rawProps: NumberInputProps) {
 
   return (
     <div
-      class={joinClasses(rawProps, 'mantle-ui-NumberInput_root', {
-        'mantle-ui-NumberInput_input-element-has-focus': hasInputElementFocusSignal.value,
+      class={joinClasses(rawProps, 'solid-design-parts-NumberInput_root', {
+        'solid-design-parts-NumberInput_input-element-has-focus': hasInputElementFocusSignal.value,
       })}
-      style={joinStyle(rawProps.style, { '--mantle-ui-NumberInput_radius': props.radius })}
+      style={joinStyle(rawProps.style, { '--solid-design-parts-NumberInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessageSignal.value !== undefined}
       aria-required={props.required}
       {...restProps}
     >
-      <StretchLayout class="mantle-ui-NumberInput_body" stretchAt={1}>
-        <Gravity class="mantle-ui-NumberInput_prepend">{rawProps.prepend}</Gravity>
+      <StretchLayout class="solid-design-parts-NumberInput_body" stretchAt={1}>
+        <Gravity class="solid-design-parts-NumberInput_prepend">{rawProps.prepend}</Gravity>
         <input
-          class="mantle-ui-NumberInput_input"
+          class="solid-design-parts-NumberInput_input"
           type="text"
           value={stringSignal.value}
           inputMode={props.inputMode}
@@ -172,9 +172,9 @@ export function NumberInput(rawProps: NumberInputProps) {
             hasInputElementFocusSignal.value = false
           }}
         />
-        <Gravity class="mantle-ui-NumberInput_append">{rawProps.append}</Gravity>
+        <Gravity class="solid-design-parts-NumberInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
-      <p class="mantle-ui-NumberInput_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-NumberInput_error-message">{errorMessageSignal.value}</p>
     </div>
   )
 }
