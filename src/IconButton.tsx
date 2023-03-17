@@ -1,5 +1,4 @@
 import { createSignal } from 'solid-js'
-import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import css from './IconButton.scss'
 import { Spinner } from './Spinner'
@@ -67,9 +66,7 @@ export function IconButton(rawProps: IconButtonProps) {
       {...restProps}
     >
       {isInProgress() ? (
-        <Gravity>
-          <Spinner size="65%" />
-        </Gravity>
+        <Spinner size="65%" color={props.disabled ? props.disabledColor : props.iconColor} />
       ) : (
         <Icon
           src={props.src}
