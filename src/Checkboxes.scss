@@ -74,8 +74,9 @@
 }
 
 .solid-design-parts-Checkboxes_error-message {
-  color: var(--solid-design-parts-error-color);
   margin: 0.5em 0 0;
+  color: var(--solid-design-parts-error-color);
+  white-space: pre-wrap;
 
   &:empty {
     display: none;
