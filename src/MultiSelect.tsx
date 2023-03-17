@@ -3,8 +3,7 @@ import { Promisable } from 'base-up/dist/types/Promise'
 import { createMemo, createRenderEffect, For, on, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
-import { Checkbox } from './Checkbox'
-import { Divider } from './Divider'
+import { Checkboxes } from './Checkboxes'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import css from './MultiSelect.scss'
@@ -279,30 +278,18 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                   </div>
                 </Show>
                 <Scrollable role="menu">
-                  <For each={search(props.values, searchQuerySignal.value)}>
-                    {(value, i) => (
-                      <>
-                        <Show when={i() > 0}>
-                          <Divider />
-                        </Show>
-                        <Checkbox
-                          class="solid-design-parts-MultiSelect_option"
-                          checked={selectedSignal.value.has(value)}
-                          role="menuitem"
-                          onChangeChecked={(checked) => {
-                            if (checked) {
-                              selectedSignal.value.add(value)
-                            } else {
-                              selectedSignal.value.delete(value)
-                            }
-                            changeSelected(selectedSignal.value)
-                          }}
-                        >
-                          {getText(value)}
-                        </Checkbox>
-                      </>
-                    )}
-                  </For>
+                  <Checkboxes
+                    class="solid-design-parts-MultiSelect_options"
+                    values={search(props.values, searchQuerySignal.value)}
+                    titles={props.titles}
+                    layout="vertical"
+                    gap="0.5em"
+                    selected={selectedSignal.value}
+                    disabled={props.disabled}
+                    onChangeSelected={(selected) => {
+                      changeSelected(selected)
+                    }}
+                  ></Checkboxes>
                 </Scrollable>
               </div>
             </div>

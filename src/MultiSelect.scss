@@ -114,22 +114,7 @@
   padding: 0.3em;
 }
 
-.solid-design-parts-MultiSelect_option {
-  border: none;
-  padding: 0.5em 0.8em;
+.solid-design-parts-MultiSelect_options {
+  margin: 0.6em 0.8em;
   box-sizing: border-box;
-  width: 100%;
-
-  font: inherit;
-  cursor: pointer;
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: oklch(97% 0 0);
-    }
-  }
-
-  &:active {
-    background-color: oklch(94% 0 0);
-  }
 }
