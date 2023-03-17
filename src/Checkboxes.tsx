@@ -3,7 +3,7 @@ import { createMemo, createRenderEffect, For, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import css from './Checkboxes.scss'
-import { prepareProps, Props } from './utility/props'
+import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -131,12 +131,13 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
 
   return (
     <div
-      class="solid-design-parts-Checkboxes_root"
-      classList={{ 'solid-design-parts-Checkboxes_has-columns-count': props.gridColumnsCount !== undefined }}
-      style={{
+      class={joinClasses(rawProps, 'solid-design-parts-Checkboxes_root', {
+        'solid-design-parts-Checkboxes_has-columns-count': props.gridColumnsCount !== undefined,
+      })}
+      style={joinStyle(rawProps.style, {
         '--solid-design-parts-Checkboxes_gap': props.gap,
         '--solid-design-parts-Checkboxes_grid-columns-count': props.gridColumnsCount,
-      }}
+      })}
       aria-invalid={errorMessageSignal.value !== undefined}
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
