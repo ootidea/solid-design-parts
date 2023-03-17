@@ -12,15 +12,8 @@ export function RadioButtonsComponent() {
       <PageTitle>RadioButtons</PageTitle>
 
       <Sample title="Basic example">
-        <RadioButtons name="animal" values={['Dog', 'Cat']} />
-        <RadioButtons name="position" values={['left', 'center', 'right']} selected="left" />
-      </Sample>
-
-      <Sample
-        title="Omit name attribute"
-        description="Automatically generates a unique name if the attribute is omitted."
-      >
-        <RadioButtons values={['left', 'center', 'right']} />
+        <RadioButtons values={['Dog', 'Cat']} />
+        <RadioButtons values={['left', 'center', 'right']} selected="left" />
       </Sample>
 
       <Sample title="Bind to signal">
