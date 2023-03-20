@@ -33,6 +33,9 @@ function detectNestedClickableElement(currentTarget: Element, target: Element): 
 }
 
 function isClickable(element: Element): boolean {
+  const contenteditable = element.getAttribute('contenteditable')
+  if (contenteditable && contenteditable !== 'false') return true
+
   return (
     isOneOf('A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION')(element.tagName) ||
     isOneOf(
