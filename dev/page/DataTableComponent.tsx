@@ -48,11 +48,7 @@ export function DataTableComponent() {
             {
               id: 'action',
               title: '',
-              cell: ({ row }) => (
-                <Button ghost href={`#${row.name}`}>
-                  edit
-                </Button>
-              ),
+              cell: ({ row }) => <Button.ghost href={`#${row.name}`}>edit</Button.ghost>,
             },
           ]}
           rows={[

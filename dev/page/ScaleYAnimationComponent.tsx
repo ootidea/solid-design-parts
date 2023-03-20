@@ -40,9 +40,7 @@ export function ScaleYAnimationComponent() {
           return (
             <>
               <Button onClick={() => setShown('Second value')}>Show</Button>
-              <Button ghost onClick={() => setShown(undefined)}>
-                Hide
-              </Button>
+              <Button.ghost onClick={() => setShown(undefined)}>Hide</Button.ghost>
               <ScaleYAnimation shown={shown()}>{(value) => <div>{value}</div>}</ScaleYAnimation>
             </>
           )

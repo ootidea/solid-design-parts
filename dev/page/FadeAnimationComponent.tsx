@@ -40,9 +40,7 @@ export function FadeAnimationComponent() {
           return (
             <>
               <Button onClick={() => setShown('Second value')}>Show</Button>
-              <Button ghost onClick={() => setShown(undefined)}>
-                Hide
-              </Button>
+              <Button.ghost onClick={() => setShown(undefined)}>Hide</Button.ghost>
               <FadeAnimation shown={shown()}>{(value) => <div>{value}</div>}</FadeAnimation>
             </>
           )
