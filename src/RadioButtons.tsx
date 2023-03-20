@@ -1,6 +1,6 @@
 import { call } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, For, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, JSX, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './RadioButtons.scss'
 import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
@@ -11,6 +11,7 @@ registerCss(css)
 export type RadioButtonsProps<T extends string> = Props<{
   values: readonly T[]
   selected?: T | undefined
+  labels?: Partial<Record<T, JSX.Element>> | ((value: T) => JSX.Element)
   name?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
@@ -36,7 +37,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       validateImmediately: false,
       enableDeselection: false,
     },
-    ['selected', 'values', 'gridColumnsCount', 'errorMessage', 'onChangeSelected', 'onChangeValidSelected']
+    ['values', 'selected', 'labels', 'gridColumnsCount', 'errorMessage', 'onChangeSelected', 'onChangeValidSelected']
   )
 
   const selectedSignal = createInjectableSignalObject(props, 'selected')
@@ -67,6 +68,11 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       { defer: true }
     )
   )
+
+  function getLabel(value: T): JSX.Element {
+    if (props.labels instanceof Function) return props.labels(value)
+    else return props.labels?.[value] ?? value
+  }
 
   function isDisabled(value: string): boolean {
     if (typeof props.disabled === 'boolean') return props.disabled
@@ -163,7 +169,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
                 disabled={isDisabled(value)}
                 onClick={() => onClick(value)}
               />
-              {value}
+              {getLabel(value)}
             </label>
           )}
         </For>
