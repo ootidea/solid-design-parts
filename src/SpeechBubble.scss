@@ -28,6 +28,7 @@
   margin-top: calc(-1 * var(--solid-design-parts-SpeechBubble_border-width));
 
   margin-left: var(--solid-design-parts-SpeechBubble_triangle-x);
+  transform-origin: top;
   transform: translateX(-50%) skewX(var(--solid-design-parts-SpeechBubble_triangle-skew));
 
   box-sizing: border-box;
