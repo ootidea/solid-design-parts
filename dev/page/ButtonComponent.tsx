@@ -22,20 +22,16 @@ export function ButtonComponent() {
       </Sample>
 
       <Sample title="Ghost buttons" direction="horizontal">
-        <Button variant="ghost">Button</Button>
-        <Button variant="ghost" color="achromatic">
-          accept
-        </Button>
-        <Button variant="ghost" color="error">
-          delete
-        </Button>
+        <Button.ghost>Button</Button.ghost>
+        <Button.ghost color="achromatic">accept</Button.ghost>
+        <Button.ghost color="error">delete</Button.ghost>
       </Sample>
 
       <Sample title="Specify href" direction="horizontal">
         <Button href="https://google.com">Google</Button>
-        <Button href="https://google.com" variant="ghost" color="achromatic">
+        <Button.ghost href="https://google.com" color="achromatic">
           Google
-        </Button>
+        </Button.ghost>
       </Sample>
 
       <Sample title="Disabled" direction="horizontal">
@@ -43,12 +39,10 @@ export function ButtonComponent() {
         <Button href="./confirm" color="achromatic" disabled>
           accept
         </Button>
-        <Button variant="ghost" disabled>
-          cancel
-        </Button>
-        <Button variant="ghost" color="error" disabled>
+        <Button.ghost disabled>cancel</Button.ghost>
+        <Button.ghost color="error" disabled>
           delete
-        </Button>
+        </Button.ghost>
       </Sample>
 
       <Sample title="Button with icon">
@@ -60,41 +54,35 @@ export function ButtonComponent() {
 
       <Sample title="onClick function that returns a Promise" direction="horizontal">
         <Button onClick={awaitSomeSeconds}>Submit</Button>
-        <Button variant="ghost" onClick={awaitSomeSeconds}>
-          Send
-        </Button>
+        <Button.ghost onClick={awaitSomeSeconds}>Send</Button.ghost>
         <Button color="achromatic" onClick={awaitSomeSeconds}>
           Save
         </Button>
-        <Button variant="ghost" color="achromatic" onClick={awaitSomeSeconds}>
+        <Button.ghost color="achromatic" onClick={awaitSomeSeconds}>
           Purchase
-        </Button>
+        </Button.ghost>
         <Button color="error" onClick={awaitSomeSeconds}>
           Delete
         </Button>
-        <Button variant="ghost" color="error" onClick={awaitSomeSeconds}>
+        <Button.ghost color="error" onClick={awaitSomeSeconds}>
           Post
-        </Button>
+        </Button.ghost>
       </Sample>
 
       <Sample title="Full width" description="Option to be a block element.">
         <Button fullWidth>Button</Button>
-        <Button fullWidth variant="ghost">
-          accept
-        </Button>
+        <Button.ghost fullWidth>accept</Button.ghost>
       </Sample>
 
       <Sample title="Radius" direction="horizontal">
         <Button radius="0">Button</Button>
-        <Button radius="999vh" variant="ghost">
-          cancel
-        </Button>
+        <Button.ghost radius="999vh">cancel</Button.ghost>
         <Button radius="1em" color="achromatic">
           OK
         </Button>
-        <Button radius="50%" variant="ghost" color="achromatic">
+        <Button.ghost radius="50%" color="achromatic">
           previous
-        </Button>
+        </Button.ghost>
       </Sample>
     </article>
   )
