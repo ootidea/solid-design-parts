@@ -72,6 +72,7 @@
   justify-content: center;
 
   font-weight: bold;
+  white-space: pre-wrap;
 
   &.solid-design-parts-Stepper_past-step {
     color: oklch(60% 0 0);
