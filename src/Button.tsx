@@ -93,3 +93,6 @@ export function Button(rawProps: ButtonProps) {
     </button>
   )
 }
+
+/** You can write <Button.ghost ...> instead of <Button variant="ghost" ...> */
+Button.ghost = (rawProps: Omit<ButtonProps, 'variant'>) => <Button variant="ghost" {...rawProps} />
