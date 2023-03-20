@@ -1,6 +1,5 @@
 import { createSignal } from 'solid-js'
 import { DateInput } from '../../src/DateInput'
-import { toLiteral } from '../other'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -19,7 +18,7 @@ export function DateInputComponent() {
 
       <Sample title="Bind to signal">
         <DateInput value={value()} onChangeValue={setValue} />
-        <div>value()?.toLocaleDateString() === {toLiteral(value()?.toLocaleDateString())}</div>
+        <div>value: {value() === undefined ? 'undefined' : value()?.toLocaleDateString()}</div>
       </Sample>
 
       <Sample title="Disabled" direction="horizontal">

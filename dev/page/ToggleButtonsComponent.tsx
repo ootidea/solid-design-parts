@@ -38,9 +38,9 @@ export function ToggleButtonsComponent() {
 
       <Sample title="Bind to signal">
         <ToggleButtons exclusive values={['en', 'zh']} selected={selected1()} onChangeSelected={setSelected1} />
-        <div>selected1() === {toLiteral(selected1())}</div>
+        <div>selected1: {toLiteral(selected1())}</div>
         <ToggleButtons values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
-        <div>selected2() equals new Set({JSON.stringify([...selected2()])})</div>
+        <div>{`selected: {${[...selected2()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
       </Sample>
 
       <Sample

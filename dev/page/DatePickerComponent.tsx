@@ -1,6 +1,5 @@
 import { createSignal } from 'solid-js'
 import { DatePicker } from '../../src/DatePicker'
-import { toLiteral } from '../other'
 import { PageTitle } from '../PageTitle'
 import { Sample } from '../Sample'
 
@@ -22,7 +21,7 @@ export function DatePickerComponent() {
 
       <Sample title="Bind to signal">
         <DatePicker value={value()} onChangeValue={setValue} />
-        <div>value()?.toLocaleDateString() === {toLiteral(value()?.toLocaleDateString())}</div>
+        <div>value: {value() === undefined ? 'undefined' : value()?.toLocaleDateString()}</div>
       </Sample>
 
       <Sample title="Disabled">

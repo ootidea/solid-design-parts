@@ -19,7 +19,7 @@ export function SelectComponent() {
 
       <Sample title="Bind to signal">
         <Select values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
-        <div>selected() === {toLiteral(selected())}</div>
+        <div>selected: {toLiteral(selected())}</div>
       </Sample>
 
       <Sample title="Disabled">

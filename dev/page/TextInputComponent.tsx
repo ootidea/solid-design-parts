@@ -24,7 +24,7 @@ export function TextInputComponent() {
 
       <Sample title="Bind to signal">
         <TextInput value={value()} onChangeValue={setValue} />
-        <div>value() === '{value()}'</div>
+        <div style={{ 'white-space': 'pre-wrap' }}>value: {JSON.stringify(value())}</div>
       </Sample>
 
       <Sample title="Types">

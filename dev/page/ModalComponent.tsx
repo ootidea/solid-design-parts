@@ -26,7 +26,7 @@ export function ModalComponent() {
 
       <Sample title="Bind to signal">
         <Button onClick={() => setOpened(true)}>Open</Button>
-        <div>opened() === {String(opened())}</div>
+        <div>opened: {String(opened())}</div>
         <Modal opened={opened()} onChangeOpened={setOpened}>
           <Button onClick={() => setOpened(false)}>Close</Button>
         </Modal>

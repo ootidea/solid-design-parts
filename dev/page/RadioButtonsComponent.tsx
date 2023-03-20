@@ -24,7 +24,7 @@ export function RadioButtonsComponent() {
             onChangeSelected={setSelected}
           />
         </div>
-        <div>selected() === {toLiteral(selected())}</div>
+        <div>selected: {toLiteral(selected())}</div>
       </Sample>
 
       <Sample title="Disabled">

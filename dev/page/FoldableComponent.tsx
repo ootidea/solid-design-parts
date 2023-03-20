@@ -22,7 +22,7 @@ export function FoldableComponent() {
         <Foldable title="Title" unfolded={unfolded()} onChangeUnfolded={setUnfolded}>
           content
         </Foldable>
-        <div>unfolded() === {toLiteral(unfolded())}</div>
+        <div>unfolded: {toLiteral(unfolded())}</div>
       </Sample>
 
       <Sample title="Nested">

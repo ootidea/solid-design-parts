@@ -19,7 +19,7 @@ export function NumberInputComponent() {
 
       <Sample title="Bind to signal">
         <NumberInput value={value()} onChangeValue={setValue} />
-        <div>value() === {String(value())}</div>
+        <div>value: {String(value())}</div>
       </Sample>
 
       <Sample title="Disabled">

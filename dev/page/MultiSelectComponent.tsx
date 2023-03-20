@@ -22,7 +22,7 @@ export function MultiSelectComponent() {
 
       <Sample title="Bind to signal">
         <MultiSelect values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
-        <div>JSON.stringify([...selected()]) === '{JSON.stringify([...selected()])}'</div>
+        <div>{`selected: {${[...selected()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
       </Sample>
 
       <Sample title="Disabled">

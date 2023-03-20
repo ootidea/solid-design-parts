@@ -29,7 +29,7 @@ export function ResizableComponent() {
           <div
             style={{ width: `${widthPx()}px`, border: '1px dashed gray', padding: '1em', 'box-sizing': 'border-box' }}
           >
-            widthPx() === {widthPx()}
+            widthPx: {widthPx()}
           </div>
         </Resizable>
       </Sample>

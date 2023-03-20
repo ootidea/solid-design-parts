@@ -19,7 +19,7 @@ export function CheckboxComponent() {
         <Checkbox checked={checked()} onChangeChecked={setChecked}>
           Send me weekly summary
         </Checkbox>
-        <div>checked() === {String(checked())}</div>
+        <div>checked: {String(checked())}</div>
       </Sample>
 
       <Sample title="Disabled">

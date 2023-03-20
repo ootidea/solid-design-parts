@@ -18,7 +18,7 @@ export function AutoSizeTextAreaComponent() {
 
       <Sample title="Bind to signal">
         <AutoSizeTextArea value={value()} onChangeValue={setValue} />
-        <div style={{ 'white-space': 'pre-wrap' }}>value() === `{value()}`</div>
+        <div style={{ 'white-space': 'pre-wrap' }}>value: {JSON.stringify(value())}</div>
       </Sample>
 
       <Sample title="Disabled">
