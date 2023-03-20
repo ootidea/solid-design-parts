@@ -17,7 +17,7 @@ registerCss(css)
 
 export type MultiSelectProps<T extends string> = Props<{
   values: readonly T[]
-  titles?: Partial<Record<T, string>>
+  labels?: Partial<Record<T, string>>
   selected?: ReadonlySet<T>
   placeholder?: string
   disabled?: boolean
@@ -34,7 +34,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      titles: {} as Required<MultiSelectProps<T>>['titles'],
+      labels: {} as Required<MultiSelectProps<T>>['labels'],
       selected: new Set(),
       placeholder: '',
       disabled: false,
@@ -46,8 +46,8 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     ['values', 'errorMessage', 'onChangeSelected']
   )
 
-  function getText(value: T): string {
-    return props.titles?.[value] ?? value
+  function getLabel(value: T): string {
+    return props.labels?.[value] ?? value
   }
 
   const selectedSignal = createSignalObject(new Set(props.selected), { equals: false })
@@ -133,7 +133,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
       // case-insensitive search
-      const lowerCaseText = getText(value).toLowerCase()
+      const lowerCaseText = getLabel(value).toLowerCase()
       return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
     })
   }
@@ -204,7 +204,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                 <>
                   {previewValue !== undefined ? (
                     <div class="solid-design-parts-MultiSelect_preview">
-                      <div class="solid-design-parts-MultiSelect_primary-selected-value">{getText(previewValue)}</div>
+                      <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(previewValue)}</div>
                       <Show when={followingCount() > 0}>
                         <div class="solid-design-parts-MultiSelect_following-count">+{followingCount()}</div>
                       </Show>
@@ -221,7 +221,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                       <div>
                         <For each={props.values}>
                           {(value) => (
-                            <div class="solid-design-parts-MultiSelect_primary-selected-value">{getText(value)}</div>
+                            <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(value)}</div>
                           )}
                         </For>
                       </div>
@@ -281,7 +281,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                   <Checkboxes
                     class="solid-design-parts-MultiSelect_options"
                     values={search(props.values, searchQuerySignal.value)}
-                    titles={props.titles}
+                    labels={props.labels}
                     layout="vertical"
                     gap="0.5em"
                     selected={selectedSignal.value}

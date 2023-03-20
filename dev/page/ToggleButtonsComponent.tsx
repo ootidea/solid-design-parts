@@ -26,8 +26,8 @@ export function ToggleButtonsComponent() {
       </Sample>
 
       <Sample title="Titles">
-        <ToggleButtons values={['en', 'zh']} titles={{ en: 'English', zh: 'Chinese' }} />
-        <ToggleButtons values={['en', 'zh', 'jp']} titles={{ en: 'English', zh: 'Chinese' }} />
+        <ToggleButtons values={['en', 'zh']} labels={{ en: 'English', zh: 'Chinese' }} />
+        <ToggleButtons values={['en', 'zh', 'jp']} labels={{ en: 'English', zh: 'Chinese' }} />
       </Sample>
 
       <Sample title="Icons">

@@ -12,7 +12,7 @@ export function CheckboxesComponent() {
 
       <Sample title="Basic sample">
         <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} />
-        <Checkboxes values={['dog', 'cat']} titles={{ dog: '🐶Dog', cat: '😺Cat' }} />
+        <Checkboxes values={['dog', 'cat']} labels={{ dog: '🐶Dog', cat: '😺Cat' }} />
       </Sample>
 
       <Sample title="Bind to signal">

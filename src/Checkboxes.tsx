@@ -10,7 +10,7 @@ registerCss(css)
 
 export type CheckboxesProps<T extends string> = Props<{
   values: readonly T[]
-  titles?: Partial<Record<T, JSX.Element>>
+  labels?: Partial<Record<T, JSX.Element>>
   selected?: ReadonlySet<T>
   placeholder?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
@@ -30,7 +30,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      titles: {} as Required<CheckboxesProps<T>>['titles'],
+      labels: {} as Required<CheckboxesProps<T>>['labels'],
       selected: new Set(),
       placeholder: '',
       layout: 'horizontal',
@@ -44,8 +44,8 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
     ['values', 'gridColumnsCount', 'errorMessage', 'onChangeSelected']
   )
 
-  function getText(value: T): JSX.Element {
-    return props.titles?.[value] ?? value
+  function getLabel(value: T): JSX.Element {
+    return props.labels?.[value] ?? value
   }
 
   const selectedSignal = createSignalObject(new Set(props.selected), { equals: false })
@@ -159,7 +159,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
                 changeSelected(selectedSignal.value)
               }}
             >
-              {getText(value)}
+              {getLabel(value)}
             </Checkbox>
           )}
         </For>

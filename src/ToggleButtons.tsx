@@ -18,7 +18,7 @@ export type ToggleButtonsProps<T extends string | number> = Props<
     | { exclusive?: false; selected?: Set<T>; onChangeSelected?: (state: Set<T>) => void }
   ) & {
     values: readonly T[]
-    titles?: Partial<Record<string, string>>
+    labels?: Partial<Record<string, string>>
     fullWidth?: boolean
     children?: SlotProp<{ value: T }>
     onSelect?: (selected: T) => void
@@ -34,7 +34,7 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
       disableDeselection: false,
       exclusive: false,
     },
-    ['values', 'titles', 'selected', 'onSelect', 'children']
+    ['values', 'labels', 'selected', 'onSelect', 'children']
   )
 
   const union = call(() => {
@@ -112,7 +112,7 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
             onClick={() => clickEventHandler(value)}
           >
             <Slot content={props.children} params={{ value }}>
-              {props.titles?.[String(value)] ?? value}
+              {props.labels?.[String(value)] ?? value}
             </Slot>
           </button>
         )}

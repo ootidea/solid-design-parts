@@ -17,7 +17,7 @@ export function MultiSelectComponent() {
       </Sample>
 
       <Sample title="Change titles">
-        <MultiSelect values={['dog', 'cat', 'rabbit']} titles={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
+        <MultiSelect values={['dog', 'cat', 'rabbit']} labels={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
       </Sample>
 
       <Sample title="Bind to signal">

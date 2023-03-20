@@ -18,7 +18,7 @@ registerCss(css)
 
 export type SelectProps<T extends string> = Props<{
   values: readonly T[]
-  titles?: Partial<Record<T, string>>
+  labels?: Partial<Record<T, string>>
   selected?: T | undefined
   placeholder?: string
   disabled?: boolean
@@ -32,7 +32,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      titles: {} as Required<SelectProps<T>>['titles'],
+      labels: {} as Required<SelectProps<T>>['labels'],
       placeholder: '',
       disabled: false,
       fullWidth: false,
@@ -42,8 +42,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     ['values', 'selected', 'onChangeSelected']
   )
 
-  function getText(value: T): string {
-    return props.titles?.[value] ?? value
+  function getLabel(value: T): string {
+    return props.labels?.[value] ?? value
   }
 
   const selectedSignal = createSignalObject<T | undefined>(undefined)
@@ -66,7 +66,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
       // case-insensitive search
-      const lowerCaseText = getText(value).toLowerCase()
+      const lowerCaseText = getLabel(value).toLowerCase()
       return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
     })
   }
@@ -121,7 +121,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
           {true}
           {false}
           {selectedSignal.value !== undefined ? (
-            <div class="solid-design-parts-Select_preview">{getText(selectedSignal.value)}</div>
+            <div class="solid-design-parts-Select_preview">{getLabel(selectedSignal.value)}</div>
           ) : null}
           <div
             class="solid-design-parts-Select_placeholder"
@@ -131,7 +131,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
           </div>
           <div class="solid-design-parts-Select_invisible">
             <For each={props.values}>
-              {(value) => <div class="solid-design-parts-Select_preview">{getText(value)}</div>}
+              {(value) => <div class="solid-design-parts-Select_preview">{getLabel(value)}</div>}
             </For>
           </div>
         </div>
@@ -202,7 +202,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
                             dropdownInfoSignal.value = undefined
                           }}
                         >
-                          {getText(value)}
+                          {getLabel(value)}
                         </button>
                       </>
                     )}
