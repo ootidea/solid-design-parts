@@ -1,5 +1,4 @@
-import { call } from 'base-up'
-import { JSX } from 'solid-js'
+import { createMemo, JSX } from 'solid-js'
 import css from './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
@@ -14,22 +13,15 @@ export type DataTableCellProps<T extends string> = Props<{ value: unknown }>
 export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>) {
   const [props, restProps] = prepareProps(rawProps, {}, ['value'])
 
+  const analysisResult = createMemo(() => analyze(props.value))
   return (
-    // Run in JSX to be reactive.
-    <>
-      {call(() => {
-        const analysisResult = analyze(rawProps.value)
-        return (
-          <div
-            class={joinClasses(props, 'solid-design-parts-DataTableCell_root')}
-            data-type={analysisResult.type}
-            {...restProps}
-          >
-            {render(analysisResult)}
-          </div>
-        )
-      })}
-    </>
+    <div
+      class={joinClasses(props, 'solid-design-parts-DataTableCell_root')}
+      data-type={analysisResult().type}
+      {...restProps}
+    >
+      {render(analysisResult())}
+    </div>
   )
 }
 
