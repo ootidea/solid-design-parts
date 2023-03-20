@@ -1,5 +1,5 @@
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, For, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, JSX, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import css from './Checkboxes.scss'
@@ -10,7 +10,7 @@ registerCss(css)
 
 export type CheckboxesProps<T extends string> = Props<{
   values: readonly T[]
-  titles?: Partial<Record<T, string>>
+  titles?: Partial<Record<T, JSX.Element>>
   selected?: ReadonlySet<T>
   placeholder?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
@@ -44,7 +44,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
     ['values', 'gridColumnsCount', 'errorMessage', 'onChangeSelected']
   )
 
-  function getText(value: T): string {
+  function getText(value: T): JSX.Element {
     return props.titles?.[value] ?? value
   }
 
