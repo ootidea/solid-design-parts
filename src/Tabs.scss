@@ -13,14 +13,14 @@
   align-items: center;
   justify-content: center;
 
-  padding: 0 1.8em;
+  padding: 0.5em 1em;
   box-sizing: border-box;
-  height: 2.4em;
 
   border: none;
   background-color: var(--solid-design-parts-background-color);
   color: inherit;
   font: inherit;
+  white-space: pre-wrap;
   cursor: pointer;
 
   .solid-design-parts-Tabs_root[data-type='Colored tab and border'] & {
