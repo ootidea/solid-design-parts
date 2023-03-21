@@ -19,7 +19,7 @@ export function SliderComponent() {
         <Slider minValue={-2} maxValue={2} value={0} />
       </Sample>
 
-      <Sample title="Discrete sliders" description="Set stops or step props to be a discrete slider.">
+      <Sample title="Discrete sliders" description="Specifying stops or steps prop will make it a discrete slider.">
         <Slider stops={[25, 50, 75]} maxValue={100} />
         <Slider step={0.1} maxValue={10} />
         <Slider step={10} offset={3} maxValue={50} />
