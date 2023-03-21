@@ -50,7 +50,7 @@
     color: var(--solid-design-parts-primary-color);
   }
 
-  &.solid-design-parts-Stepper_current-step {
+  &[aria-current='step'] {
     background-color: var(--solid-design-parts-primary-color);
     color: var(--solid-design-parts-inverted-text-color);
   }
@@ -78,7 +78,7 @@
     color: oklch(60% 0 0);
   }
 
-  &.solid-design-parts-Stepper_current-step {
+  &[aria-current='step'] {
     color: var(--solid-design-parts-primary-color);
   }
 
