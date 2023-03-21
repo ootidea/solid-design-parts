@@ -3,10 +3,9 @@
   --solid-design-parts-Stepper_circle-size: 2.5em;
 }
 
-.solid-design-parts-Stepper_line-layer {
+.solid-design-parts-Stepper_diagram {
   display: grid;
   align-items: center;
-  height: var(--solid-design-parts-Stepper_circle-size);
 }
 
 .solid-design-parts-Stepper_line {
@@ -26,10 +25,6 @@
     background: var(--solid-design-parts-primary-color);
     height: 3px;
   }
-}
-
-.solid-design-parts-Stepper_circle-layer {
-  display: grid;
 }
 
 .solid-design-parts-Stepper_circle {
