@@ -41,7 +41,7 @@
 
   &.solid-design-parts-Stepper_reached {
     &:not([aria-current='step']) {
-      border: 0.15em solid var(--solid-design-parts-primary-color);
+      border: 0.1em solid var(--solid-design-parts-primary-color);
       background-color: var(--solid-design-parts-background-color);
       color: var(--solid-design-parts-primary-color);
     }
@@ -53,7 +53,7 @@
   }
 
   &:not(.solid-design-parts-Stepper_reached) {
-    border: 0.15em solid oklch(80% 0 0);
+    border: 0.1em solid oklch(80% 0 0);
     background-color: var(--solid-design-parts-background-color);
     color: oklch(80% 0 0);
   }
