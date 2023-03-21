@@ -1,5 +1,5 @@
 import { isInstanceOf } from 'base-up'
-import { createRenderEffect, For, Show } from 'solid-js'
+import { createRenderEffect, For, JSX, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
 import { Divider } from './Divider'
@@ -10,7 +10,7 @@ import closeCircleIcon from './image/close-circle.svg'
 import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
-import { isNestedClickEvent, setupFocusTrap } from './utility/others'
+import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -18,7 +18,7 @@ registerCss(css)
 
 export type SelectProps<T extends string> = Props<{
   values: readonly T[]
-  labels?: Partial<Record<T, string>>
+  labels?: Partial<Record<T, JSX.Element>>
   selected?: T | undefined
   placeholder?: string
   disabled?: boolean
@@ -42,7 +42,7 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     ['values', 'selected', 'onChangeSelected']
   )
 
-  function getLabel(value: T): string {
+  function getLabel(value: T): JSX.Element {
     return props.labels?.[value] ?? value
   }
 
@@ -66,8 +66,8 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
       // case-insensitive search
-      const lowerCaseText = getLabel(value).toLowerCase()
-      return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
+      const lowerCaseTexts = extractContainedTexts(getLabel(value)).map((text) => text.toLowerCase())
+      return searchWords.every((word) => lowerCaseTexts.some((text) => text.includes(word.toLowerCase())))
     })
   }
 

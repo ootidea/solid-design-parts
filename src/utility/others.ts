@@ -105,3 +105,34 @@ export function setupFocusTrap(element: HTMLElement) {
     focusTrap.deactivate()
   })
 }
+
+/**
+ * Extract texts from JSX.Element.
+ * @example
+ * extractContainedTexts(<div title="title">abc<p>{123}</p></div>) results ['abc', '123']
+ * extractContainedTexts(<img src="http://example.com" alt="example" />) results []
+ * extractContainedTexts(<>{undefined}{false}</>) results []
+ */
+export function extractContainedTexts(element: JSX.Element): string[] {
+  switch (typeof element) {
+    case 'undefined':
+    case 'boolean':
+      return []
+    case 'string':
+      return [element]
+    case 'number':
+      return [String(element)]
+    case 'function':
+      return extractContainedTexts(element())
+    case 'object':
+      if (element === null) return []
+
+      if (element instanceof Array) return element.flatMap(extractContainedTexts)
+
+      if (element.nodeType === element.TEXT_NODE) {
+        return element.textContent === null ? [] : [element.textContent]
+      }
+
+      return [...element.childNodes].flatMap(extractContainedTexts)
+  }
+}
