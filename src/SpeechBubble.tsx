@@ -6,8 +6,6 @@ registerCss(css)
 
 export type SpeechBubbleProps = Props<{
   backgroundColor?: string
-  borderColor?: string
-  borderWidth?: string
   triangleHeight?: string
   triangleAngle?: string
   triangleX?: string
@@ -19,8 +17,6 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
     rawProps,
     {
       backgroundColor: 'var(--solid-design-parts-SpeechBubble_background-default-color)',
-      borderColor: 'var(--solid-design-parts-SpeechBubble_border-default-color)',
-      borderWidth: 'var(--solid-design-parts-SpeechBubble_border-default-width)',
       triangleHeight: '1em',
       triangleAngle: `${Math.PI / 2}rad`,
       triangleX: '50%',
@@ -47,8 +43,6 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       class={joinClasses(rawProps, 'solid-design-parts-SpeechBubble_root')}
       style={{
         '--solid-design-parts-SpeechBubble_background-color': props.backgroundColor,
-        '--solid-design-parts-SpeechBubble_border-color': props.borderColor,
-        '--solid-design-parts-SpeechBubble_border-width': props.borderWidth,
         '--solid-design-parts-SpeechBubble_triangle-tangent': tangent(),
         '--solid-design-parts-SpeechBubble_triangle-height': props.triangleHeight,
         '--solid-design-parts-SpeechBubble_triangle-x': props.triangleX,

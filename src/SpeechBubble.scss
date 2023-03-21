@@ -1,16 +1,14 @@
 :root {
   --solid-design-parts-SpeechBubble_background-default-color: var(--solid-design-parts-background-color);
-  --solid-design-parts-SpeechBubble_border-default-color: oklch(70% 0 0);
-  --solid-design-parts-SpeechBubble_border-default-width: 1px;
 }
 
 .solid-design-parts-SpeechBubble_root {
   box-sizing: border-box;
   width: max-content;
+  filter: drop-shadow(0 0 1px oklch(0% 0 0));
 }
 
 .solid-design-parts-SpeechBubble_message-box {
-  border: var(--solid-design-parts-SpeechBubble_border-width) solid var(--solid-design-parts-SpeechBubble_border-color);
   background-color: var(--solid-design-parts-SpeechBubble_background-color);
   border-radius: 1em;
   padding: 1em;
@@ -24,9 +22,6 @@
     var(--solid-design-parts-SpeechBubble_triangle-height) * var(--solid-design-parts-SpeechBubble_triangle-tangent) * 2
   );
 
-  // Setting to override the border of the message box.
-  margin-top: calc(-1 * var(--solid-design-parts-SpeechBubble_border-width));
-
   margin-left: var(--solid-design-parts-SpeechBubble_triangle-x);
   transform-origin: top;
   transform: translateX(-50%) skewX(var(--solid-design-parts-SpeechBubble_triangle-skew));
@@ -35,37 +30,7 @@
   width: 0;
   height: 0;
   border-top: var(--solid-design-parts-SpeechBubble_triangle-height) solid
-    var(--solid-design-parts-SpeechBubble_border-color);
+    var(--solid-design-parts-SpeechBubble_background-color);
   border-left: calc(var(--solid-design-parts-SpeechBubble_triangle-width) / 2) solid transparent;
   border-right: calc(var(--solid-design-parts-SpeechBubble_triangle-width) / 2) solid transparent;
-
-  &::after {
-    content: '';
-    display: block;
-
-    margin-top: calc(-1 * var(--solid-design-parts-SpeechBubble_triangle-height));
-    margin-left: calc(
-      var(--solid-design-parts-SpeechBubble_border-width) * var(--solid-design-parts-SpeechBubble_triangle-tangent) -
-        var(--solid-design-parts-SpeechBubble_triangle-width) / 2
-    );
-
-    box-sizing: border-box;
-    width: 0;
-    height: 0;
-    border-top: calc(
-        var(--solid-design-parts-SpeechBubble_triangle-height) - var(--solid-design-parts-SpeechBubble_border-width) /
-          var(--solid-design-parts-SpeechBubble_triangle-tangent)
-      )
-      solid var(--solid-design-parts-SpeechBubble_background-color);
-    border-left: calc(
-        var(--solid-design-parts-SpeechBubble_triangle-width) / 2 - var(--solid-design-parts-SpeechBubble_border-width) *
-          var(--solid-design-parts-SpeechBubble_triangle-tangent)
-      )
-      solid transparent;
-    border-right: calc(
-        var(--solid-design-parts-SpeechBubble_triangle-width) / 2 - var(--solid-design-parts-SpeechBubble_border-width) *
-          var(--solid-design-parts-SpeechBubble_triangle-tangent)
-      )
-      solid transparent;
-  }
 }
