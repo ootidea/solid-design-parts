@@ -1,5 +1,5 @@
 import { fromEntries, maxBy } from 'base-up'
-import { Accessor, createMemo, For, Show } from 'solid-js'
+import { Accessor, createMemo, For, JSX, Show } from 'solid-js'
 import css from './DataTable.scss'
 import { DataTableCell } from './DataTableCell'
 import { Divider } from './Divider'
@@ -20,7 +20,7 @@ type CompareFunction<Row extends Record<string, unknown>> = (value1: any, value2
 export type DataTableProps<
   Column extends {
     id: ColumnId
-    title?: string
+    title?: JSX.Element
     sortable?: boolean | CompareFunction<Row>
     width?: string
     minWidth?: string
@@ -46,14 +46,14 @@ export type DataTableProps<
   sortingState?: { columnId: ColumnId; reversed: boolean } | undefined
   horizontalRuledLine?: SlotProp<{ verticalIndex: number }>
   verticalRuledLine?: SlotProp<{ verticalIndex: number; horizontalIndex: number }>
-  headerCell?: SlotProp<{ columnId: ColumnId; columnTitle: string }>
+  headerCell?: SlotProp<{ columnId: ColumnId; columnTitle: JSX.Element }>
   emptyState?: SlotProp<{}>
 }>
 
 export function DataTable<
   Column extends {
     id: ColumnId
-    title?: string
+    title?: JSX.Element
     sortable?: boolean | CompareFunction<Row>
     width?: string
     minWidth?: string
@@ -160,7 +160,7 @@ export function DataTable<
     }
   }
 
-  function getColumnTitle(column: Column): string {
+  function getColumnTitle(column: Column): JSX.Element {
     return column.title ?? column.id
   }
 
