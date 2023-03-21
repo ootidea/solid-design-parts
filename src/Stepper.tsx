@@ -1,5 +1,7 @@
 import { rangeTo } from 'base-up'
 import { For, Show } from 'solid-js'
+import { Icon } from './Icon'
+import checkIcon from './image/check.svg'
 import css from './Stepper.scss'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -39,7 +41,9 @@ export function Stepper(rawProps: StepperProps) {
                 }}
                 aria-current={i === props.currentStep ? 'step' : false}
               >
-                {i + 1}
+                <Show when={i < props.currentStep} fallback={i + 1}>
+                  <Icon src={checkIcon} color="currentColor" size="70%" />
+                </Show>
               </div>
             </>
           )}
