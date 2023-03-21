@@ -59,7 +59,7 @@
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-preset-solid": "^1.4.0",
     "sass": "^1.55.0",
-    "solid-js": "^1.6.0",
+    "solid-js": "^1.6.15",
     "sort-package-json": "^2.1.0",
     "taze": "^0.7.6",
     "typescript": "^4.8.4",
