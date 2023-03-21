@@ -16,19 +16,19 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type SelectProps<T extends string> = Props<{
-  values: readonly T[]
-  labels?: Partial<Record<T, JSX.Element>>
-  selected?: T | undefined
+export type SelectProps<T extends readonly (string | number)[]> = Props<{
+  values: T
+  labels?: Partial<Record<T[number], JSX.Element>>
+  selected?: T[number] | undefined
   placeholder?: string
   disabled?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
   showClearButton?: boolean
-  onChangeSelected?: (selected: T | undefined) => void
+  onChangeSelected?: (selected: T[number] | undefined) => void
 }>
 
-export function Select<T extends string>(rawProps: SelectProps<T>) {
+export function Select<T extends readonly (string | number)[]>(rawProps: SelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -42,11 +42,11 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
     ['values', 'selected', 'onChangeSelected']
   )
 
-  function getLabel(value: T): JSX.Element {
+  function getLabel(value: T[number]): JSX.Element {
     return props.labels?.[value] ?? value
   }
 
-  const selectedSignal = createSignalObject<T | undefined>(undefined)
+  const selectedSignal = createSignalObject<T[number] | undefined>(undefined)
   createRenderEffect(() => {
     // Treat as undefined if props.selected is out of range.
     if (props.selected !== undefined && !props.values.includes(props.selected)) {
@@ -55,16 +55,16 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
       selectedSignal.value = props.selected
     }
   })
-  function changeSelected(selected: T | undefined) {
+  function changeSelected(selected: T[number] | undefined) {
     selectedSignal.value = selected
     props.onChangeSelected?.(selected)
   }
 
   const searchQuerySignal = createSignalObject('')
-  function search(values: readonly T[], searchQuery: string): readonly T[] {
+  function search(values: T, searchQuery: string): readonly T[number][] {
     // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
-    return values.filter((value) => {
+    return values.filter((value: T[number]) => {
       // case-insensitive search
       const lowerCaseTexts = extractContainedTexts(getLabel(value)).map((text) => text.toLowerCase())
       return searchWords.every((word) => lowerCaseTexts.some((text) => text.includes(word.toLowerCase())))
@@ -117,9 +117,6 @@ export function Select<T extends string>(rawProps: SelectProps<T>) {
         {...restProps}
       >
         <div class="solid-design-parts-Select_preview-area">
-          {/* TODO: */}
-          {true}
-          {false}
           {selectedSignal.value !== undefined ? (
             <div class="solid-design-parts-Select_preview">{getLabel(selectedSignal.value)}</div>
           ) : null}
