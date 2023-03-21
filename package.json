@@ -1,7 +1,6 @@
 {
   "name": "solid-design-parts",
   "version": "0.0.10",
-  "private": false,
   "description": "",
   "keywords": [
     "solid"
@@ -16,8 +15,6 @@
   },
   "license": "CC0-1.0",
   "author": "ootidea",
-  "contributors": [],
-  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -35,7 +32,6 @@
   ],
   "scripts": {
     "dev": "vite serve dev",
-    "test": "echo \"test not setup\"",
     "build": "rollup -c",
     "format": "run-p format:*",
     "format:prettier": "prettier -w \"src/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"dev/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
