@@ -13,7 +13,7 @@ export function DataTableComponent() {
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name' }]}
           rows={[
-            { ID: 1, name: 'ada' },
+            { ID: 1, name: 'alice' },
             { ID: 2, name: 'bob' },
           ]}
         />
@@ -21,10 +21,11 @@ export function DataTableComponent() {
 
       <Sample title="Sort">
         <DataTable
-          columns={[{ id: 'ID' }, { id: 'name', sortable: true }]}
+          columns={[{ id: 'ID' }, { id: 'name', sortable: true }, { id: 'age', sortable: true }]}
           rows={[
-            { ID: 1, name: 'ada' },
-            { ID: 2, name: 'bob' },
+            { ID: 1, name: 'alice', age: 25 },
+            { ID: 2, name: 'bob', age: 30 },
+            { ID: 3, name: 'charlie', age: 20 },
           ]}
         />
       </Sample>
@@ -52,7 +53,7 @@ export function DataTableComponent() {
             },
           ]}
           rows={[
-            { ID: 1, name: 'ada', date: new Date(0) },
+            { ID: 1, name: 'alice', date: new Date(0) },
             { ID: 2, name: 'bob', date: new Date() },
           ]}
         />
