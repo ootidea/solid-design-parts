@@ -69,7 +69,16 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample title="Width of each column">
+      <Sample title="Width of column">
+        <DataTable
+          columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread', width: 'max-content' }, { id: 'date' }]}
+          rows={[
+            { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
+            { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
+          ]}
+          fullWidth
+        />
+
         <DataTable
           columns={[
             { id: 'url', width: '4fr' },
@@ -85,7 +94,7 @@ export function DataTableComponent() {
         />
       </Sample>
 
-      <Sample title="Min width and max width of each column">
+      <Sample title="Min width and max width of column">
         <DataTable
           columns={[
             { id: 'name', minWidth: '15rem' },

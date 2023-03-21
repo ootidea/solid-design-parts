@@ -7,7 +7,7 @@ import { Gravity } from './Gravity'
 import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { i18n } from './utility/i18n'
-import { isNestedClickEvent } from './utility/others'
+import { isNestedClickEvent, LiteralAutoComplete } from './utility/others'
 import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
@@ -55,7 +55,7 @@ export function DataTable<
     id: ColumnId
     title?: JSX.Element
     sortable?: boolean | CompareFunction<Row>
-    width?: string
+    width?: LiteralAutoComplete<'auto' | 'max-content'>
     minWidth?: string
     maxWidth?: string
     align?: ColumnAlign
