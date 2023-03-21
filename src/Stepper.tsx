@@ -45,8 +45,7 @@ export function Stepper(rawProps: StepperProps) {
                 <div
                   class="solid-design-parts-Stepper_circle"
                   classList={{
-                    'solid-design-parts-Stepper_past-step': i < props.currentStep,
-                    'solid-design-parts-Stepper_future-step': i > props.currentStep,
+                    'solid-design-parts-Stepper_reached': i <= props.currentStep,
                   }}
                   aria-current={i === props.currentStep ? 'step' : false}
                 >
@@ -66,8 +65,7 @@ export function Stepper(rawProps: StepperProps) {
             <div
               class="solid-design-parts-Stepper_title"
               classList={{
-                'solid-design-parts-Stepper_past-step': i() < props.currentStep,
-                'solid-design-parts-Stepper_future-step': i() > props.currentStep,
+                'solid-design-parts-Stepper_reached': i() <= props.currentStep,
               }}
               aria-current={i() === props.currentStep ? 'step' : false}
             >

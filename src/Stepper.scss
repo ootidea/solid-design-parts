@@ -44,18 +44,20 @@
   font-size: 1.2em;
   font-weight: bold;
 
-  &.solid-design-parts-Stepper_past-step {
-    border: 0.15em solid var(--solid-design-parts-primary-color);
-    background-color: var(--solid-design-parts-background-color);
-    color: var(--solid-design-parts-primary-color);
+  &.solid-design-parts-Stepper_reached {
+    &:not([aria-current='step']) {
+      border: 0.15em solid var(--solid-design-parts-primary-color);
+      background-color: var(--solid-design-parts-background-color);
+      color: var(--solid-design-parts-primary-color);
+    }
+
+    &[aria-current='step'] {
+      background-color: var(--solid-design-parts-primary-color);
+      color: var(--solid-design-parts-inverted-text-color);
+    }
   }
 
-  &[aria-current='step'] {
-    background-color: var(--solid-design-parts-primary-color);
-    color: var(--solid-design-parts-inverted-text-color);
-  }
-
-  &.solid-design-parts-Stepper_future-step {
+  &:not(.solid-design-parts-Stepper_reached) {
     border: 0.15em solid oklch(80% 0 0);
     background-color: var(--solid-design-parts-background-color);
     color: oklch(80% 0 0);
@@ -71,18 +73,15 @@
   display: flex;
   justify-content: center;
 
+  color: oklch(70% 0 0);
   font-weight: bold;
   white-space: pre-wrap;
 
-  &.solid-design-parts-Stepper_past-step {
+  &.solid-design-parts-Stepper_reached {
     color: oklch(60% 0 0);
   }
 
   &[aria-current='step'] {
     color: var(--solid-design-parts-primary-color);
-  }
-
-  &.solid-design-parts-Stepper_future-step {
-    color: oklch(70% 0 0);
   }
 }
