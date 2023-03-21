@@ -1,5 +1,5 @@
 import { rangeTo } from 'base-up'
-import { For, Show } from 'solid-js'
+import { For, JSX, Show } from 'solid-js'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
 import css from './Stepper.scss'
@@ -8,7 +8,7 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type StepperProps = Props<{ titles: string[]; currentStep: number }>
+export type StepperProps = Props<{ titles: JSX.Element[]; currentStep: number }>
 
 export function Stepper(rawProps: StepperProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['titles', 'currentStep'])
