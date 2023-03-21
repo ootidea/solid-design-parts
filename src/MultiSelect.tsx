@@ -1,6 +1,6 @@
 import { call, isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, For, on, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, JSX, on, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkboxes } from './Checkboxes'
@@ -9,7 +9,7 @@ import chevronDownIcon from './image/chevron-down.svg'
 import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
-import { isNestedClickEvent, setupFocusTrap } from './utility/others'
+import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -17,7 +17,7 @@ registerCss(css)
 
 export type MultiSelectProps<T extends string> = Props<{
   values: readonly T[]
-  labels?: Partial<Record<T, string>>
+  labels?: Partial<Record<T, JSX.Element>>
   selected?: ReadonlySet<T>
   placeholder?: string
   disabled?: boolean
@@ -46,7 +46,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     ['values', 'errorMessage', 'onChangeSelected']
   )
 
-  function getLabel(value: T): string {
+  function getLabel(value: T): JSX.Element {
     return props.labels?.[value] ?? value
   }
 
@@ -133,8 +133,8 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
       // case-insensitive search
-      const lowerCaseText = getLabel(value).toLowerCase()
-      return searchWords.every((word) => lowerCaseText.includes(word.toLowerCase()))
+      const lowerCaseTexts = extractContainedTexts(getLabel(value)).map((text) => text.toLowerCase())
+      return searchWords.every((word) => lowerCaseTexts.some((text) => text.includes(word.toLowerCase())))
     })
   }
 
