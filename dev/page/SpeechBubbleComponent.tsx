@@ -16,6 +16,13 @@ export function SpeechBubbleComponent() {
         <SpeechBubble backgroundColor="#e9ffe9">Sample</SpeechBubble>
       </Sample>
 
+      <Sample title="Radius">
+        <SpeechBubble radius="0">Sample</SpeechBubble>
+        <SpeechBubble radius="10px">Sample</SpeechBubble>
+        <SpeechBubble radius="999vh">Sample</SpeechBubble>
+        <SpeechBubble radius="1em 0 1em 0">Sample</SpeechBubble>
+      </Sample>
+
       <Sample title="Triangle height">
         <SpeechBubble triangleHeight="0.5em">Triangle height</SpeechBubble>
         <SpeechBubble triangleHeight="1.4em">Triangle height</SpeechBubble>

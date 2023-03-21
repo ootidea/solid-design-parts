@@ -1,5 +1,6 @@
 :root {
   --solid-design-parts-SpeechBubble_background-default-color: var(--solid-design-parts-background-color);
+  --solid-design-parts-SpeechBubble_default-radius: 1em;
 }
 
 .solid-design-parts-SpeechBubble_root {
@@ -10,7 +11,7 @@
 
 .solid-design-parts-SpeechBubble_message-box {
   background-color: var(--solid-design-parts-SpeechBubble_background-color);
-  border-radius: 1em;
+  border-radius: var(--solid-design-parts-SpeechBubble_radius);
   padding: 1em;
   box-sizing: border-box;
   width: max-content;
