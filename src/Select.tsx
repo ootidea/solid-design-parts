@@ -120,17 +120,16 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
           {selectedSignal.value !== undefined ? (
             <div class="solid-design-parts-Select_preview">{getLabel(selectedSignal.value)}</div>
           ) : null}
-          <div
-            class="solid-design-parts-Select_placeholder"
-            classList={{ 'solid-design-parts-Select_invisible': selectedSignal.value !== undefined }}
-          >
+          <div class="solid-design-parts-Select_placeholder" aria-hidden={selectedSignal.value !== undefined}>
             {props.placeholder}
           </div>
-          <div class="solid-design-parts-Select_invisible">
-            <For each={props.values}>
-              {(value) => <div class="solid-design-parts-Select_preview">{getLabel(value)}</div>}
-            </For>
-          </div>
+          <For each={props.values}>
+            {(value) => (
+              <div class="solid-design-parts-Select_preview" aria-hidden="true">
+                {getLabel(value)}
+              </div>
+            )}
+          </For>
         </div>
         <Show when={props.showClearButton}>
           <IconButton

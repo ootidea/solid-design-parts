@@ -12,6 +12,12 @@
 .solid-design-parts-TitleBarLayout_right {
   display: flex;
   align-items: center;
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
 }
 
 .solid-design-parts-TitleBarLayout_invisible {
