@@ -4,8 +4,8 @@ import classes from './SidebarMenu.module.scss'
 
 export function SidebarMenu(props: VoidProps<{ componentName: string }>) {
   const isActive = createMemo(() => {
-    const pathLastEntry = useLocation().pathname.match(/\w+/)?.[0]
-    return pathLastEntry === props.componentName
+    const urlComponentName = useLocation().pathname.match(/\/components\/(\w+)/)?.[1]
+    return urlComponentName === props.componentName
   })
 
   const navigator = useNavigate()
@@ -13,7 +13,7 @@ export function SidebarMenu(props: VoidProps<{ componentName: string }>) {
     if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return
 
     event.preventDefault()
-    navigator(props.componentName, { resolve: true })
+    navigator(`components/${props.componentName}`, { resolve: true })
   }
 
   return (

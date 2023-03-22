@@ -132,7 +132,7 @@ export function App() {
             <Routes>
               {/* For some reason, it was not displayed using the For component. */}
               {extractComponents(menuItems).map((component) => (
-                <Route path={getName(component)} element={component} />
+                <Route path={`components/${getName(component)}`} element={component} />
               ))}
             </Routes>
           </Scrollable>
