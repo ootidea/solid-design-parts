@@ -2,7 +2,7 @@ import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
 import classes from './Sample.module.scss'
 
-type SampleProps = ParentProps<{
+export type SampleProps = ParentProps<{
   title: string
   description?: JSX.Element
   direction?: 'horizontal' | 'vertical'

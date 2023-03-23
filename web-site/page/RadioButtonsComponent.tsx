@@ -1,145 +1,184 @@
 import { createSignal } from 'solid-js'
 import { RadioButtons } from '../../src/RadioButtons'
 import { toLiteral } from '../other'
-import { PageTitle } from '../PageTitle'
-import { Sample } from '../Sample'
+import { Catalog } from './ComponentCatalog'
 
-export function RadioButtonsComponent() {
-  const [selected, setSelected] = createSignal<'Python' | 'TypeScript' | 'Kotlin' | 'Swift' | undefined>(undefined)
+const [selected, setSelected] = createSignal<'Python' | 'TypeScript' | 'Kotlin' | 'Swift' | undefined>(undefined)
 
-  return (
-    <article>
-      <PageTitle>RadioButtons</PageTitle>
-
-      <Sample title="Basic example">
-        <RadioButtons values={['Dog', 'Cat']} />
-        <RadioButtons values={['left', 'center', 'right']} selected="left" />
-      </Sample>
-
-      <Sample title="Bind to signal">
-        <div style="display: grid; grid-template-columns: auto auto; gap: 1em; width: max-content;">
+export const RadioButtonsCatalog: Catalog = {
+  samples: [
+    {
+      title: 'Basic example',
+      children: (
+        <>
+          <RadioButtons values={['Dog', 'Cat']} />
+          <RadioButtons values={['left', 'center', 'right']} selected="left" />
+        </>
+      ),
+    },
+    {
+      title: 'Bind to signal',
+      children: (
+        <>
+          <div style="display: grid; grid-template-columns: auto auto; gap: 1em; width: max-content;">
+            <RadioButtons
+              values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+              selected={selected()}
+              onChangeSelected={setSelected}
+            />
+          </div>
+          <div>selected: {toLiteral(selected())}</div>
+        </>
+      ),
+    },
+    {
+      title: 'Disabled',
+      children: (
+        <>
+          <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
+          <RadioButtons values={['left', 'center', 'right']} disabled={new Set(['center'])} />
+        </>
+      ),
+    },
+    {
+      title: 'Enable deselection',
+      children: (
+        <>
+          <RadioButtons values={['left', 'center', 'right']} enableDeselection />
+        </>
+      ),
+    },
+    {
+      title: 'Layout',
+      children: (
+        <>
+          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons layout="vertical" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+          </div>
+          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons
+              layout="flex-wrap"
+              values={[
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+              ]}
+            />
+          </div>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons layout="space-between" values={['left', 'center', 'right']} />
+          </div>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons layout="space-evenly" values={['left', 'center', 'right']} />
+          </div>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons layout="space-around" values={['left', 'center', 'right']} />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: 'Grid layout',
+      children: (
+        <>
+          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons gridColumnsCount={2} values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+          </div>
+          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons
+              layout="space-between"
+              gridColumnsCount={2}
+              values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+            />
+          </div>
+          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons
+              layout="space-evenly"
+              gridColumnsCount={2}
+              values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+            />
+          </div>
+          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons
+              layout="space-around"
+              gridColumnsCount={2}
+              values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+            />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: 'Gap',
+      description: 'Note that flex gap is not supported on iOS versions earlier than 15.4.',
+      children: (
+        <>
+          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons layout="vertical" gap="14px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+          </div>
+          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+            <RadioButtons gridColumnsCount={2} gap="0.5em 2em" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: 'Error message',
+      children: (
+        <>
+          <RadioButtons values={['left', 'center', 'right']} selected="left" errorMessage="Invalid" />
+        </>
+      ),
+    },
+    {
+      title: 'Validation',
+      children: (
+        <>
           <RadioButtons
-            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
-            selected={selected()}
-            onChangeSelected={setSelected}
+            values={['left', 'center', 'right']}
+            errorMessage={(selected) => {
+              if (selected === 'center') return 'Currently, center is not available.'
+
+              return
+            }}
           />
-        </div>
-        <div>selected: {toLiteral(selected())}</div>
-      </Sample>
-
-      <Sample title="Disabled">
-        <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
-        <RadioButtons values={['left', 'center', 'right']} disabled={new Set(['center'])} />
-      </Sample>
-
-      <Sample title="Enable deselection">
-        <RadioButtons values={['left', 'center', 'right']} enableDeselection />
-      </Sample>
-
-      <Sample title="Layout">
-        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="vertical" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
-        </div>
-        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+        </>
+      ),
+    },
+    {
+      title: 'Validate initial value',
+      description: 'If validateImmediately option is set, it perform validation even if the user did not edit it.',
+      children: (
+        <>
           <RadioButtons
-            layout="flex-wrap"
-            values={[
-              'January',
-              'February',
-              'March',
-              'April',
-              'May',
-              'June',
-              'July',
-              'August',
-              'September',
-              'October',
-              'November',
-              'December',
-            ]}
+            values={['left', 'center', 'right']}
+            errorMessage={(selected) => {
+              if (selected !== 'center') return 'Must be center'
+
+              return
+            }}
+            validateImmediately
           />
-        </div>
-        <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-between" values={['left', 'center', 'right']} />
-        </div>
-        <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-evenly" values={['left', 'center', 'right']} />
-        </div>
-        <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="space-around" values={['left', 'center', 'right']} />
-        </div>
-      </Sample>
-
-      <Sample title="Grid layout">
-        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons gridColumnsCount={2} values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
-        </div>
-        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons
-            layout="space-between"
-            gridColumnsCount={2}
-            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
-          />
-        </div>
-        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons
-            layout="space-evenly"
-            gridColumnsCount={2}
-            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
-          />
-        </div>
-        <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons
-            layout="space-around"
-            gridColumnsCount={2}
-            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
-          />
-        </div>
-      </Sample>
-
-      <Sample title="Gap" description="Note that flex gap is not supported on iOS versions earlier than 15.4.">
-        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons layout="vertical" gap="14px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
-        </div>
-        <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
-          <RadioButtons gridColumnsCount={2} gap="0.5em 2em" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
-        </div>
-      </Sample>
-
-      <Sample title="Error message">
-        <RadioButtons values={['left', 'center', 'right']} selected="left" errorMessage="Invalid" />
-      </Sample>
-
-      <Sample title="Validation">
-        <RadioButtons
-          values={['left', 'center', 'right']}
-          errorMessage={(selected) => {
-            if (selected === 'center') return 'Currently, center is not available.'
-
-            return
-          }}
-        />
-      </Sample>
-
-      <Sample
-        title="Validate initial value"
-        description="If validateImmediately option is set, it perform validation even if the user did not edit it."
-      >
-        <RadioButtons
-          values={['left', 'center', 'right']}
-          errorMessage={(selected) => {
-            if (selected !== 'center') return 'Must be center'
-
-            return
-          }}
-          validateImmediately
-        />
-      </Sample>
-
-      <Sample title="Required">
-        <RadioButtons values={['left', 'center', 'right']} required validateImmediately />
-        <RadioButtons values={['left', 'center', 'right']} required enableDeselection />
-      </Sample>
-    </article>
-  )
+        </>
+      ),
+    },
+    {
+      title: 'Required',
+      children: (
+        <>
+          <RadioButtons values={['left', 'center', 'right']} required validateImmediately />
+          <RadioButtons values={['left', 'center', 'right']} required enableDeselection />
+        </>
+      ),
+    },
+  ],
 }

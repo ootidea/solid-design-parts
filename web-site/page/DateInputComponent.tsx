@@ -1,42 +1,67 @@
 import { createSignal } from 'solid-js'
 import { DateInput } from '../../src/DateInput'
-import { PageTitle } from '../PageTitle'
-import { Sample } from '../Sample'
+import { Catalog } from './ComponentCatalog'
 
-export function DateInputComponent() {
-  const [value, setValue] = createSignal(new Date())
+const [value, setValue] = createSignal(new Date())
 
-  return (
-    <article>
-      <PageTitle>DateInput</PageTitle>
-
-      <Sample title="Basic example" direction="horizontal">
-        <DateInput />
-        <DateInput placeholder="a little long placeholder" />
-        <DateInput value={new Date()} />
-      </Sample>
-
-      <Sample title="Bind to signal">
-        <DateInput value={value()} onChangeValue={setValue} />
-        <div>value: {value() === undefined ? 'undefined' : value()?.toLocaleDateString()}</div>
-      </Sample>
-
-      <Sample title="Disabled" direction="horizontal">
-        <DateInput placeholder="placeholder" disabled />
-        <DateInput value={new Date()} disabled />
-      </Sample>
-
-      <Sample title="Disable by date" direction="horizontal">
-        <DateInput disabled={(date) => date.getTime() < Date.now()} />
-      </Sample>
-
-      <Sample title="Clear button" direction="horizontal">
-        <DateInput placeholder="placeholder" value={new Date()} showClearButton />
-      </Sample>
-
-      <Sample title="Change date format" direction="horizontal">
-        <DateInput format={({ value }) => value?.toISOString()} />
-      </Sample>
-    </article>
-  )
+export const DateInputCatalog: Catalog = {
+  samples: [
+    {
+      title: 'Basic example',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput />
+          <DateInput placeholder="a little long placeholder" />
+          <DateInput value={new Date()} />
+        </>
+      ),
+    },
+    {
+      title: 'Bind to signal',
+      children: (
+        <>
+          <DateInput value={value()} onChangeValue={setValue} />
+          <div>value: {value() === undefined ? 'undefined' : value()?.toLocaleDateString()}</div>
+        </>
+      ),
+    },
+    {
+      title: 'Disabled',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput placeholder="placeholder" disabled />
+          <DateInput value={new Date()} disabled />
+        </>
+      ),
+    },
+    {
+      title: 'Disable by date',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput disabled={(date) => date.getTime() < Date.now()} />
+        </>
+      ),
+    },
+    {
+      title: 'Clear button',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput placeholder="placeholder" value={new Date()} showClearButton />
+        </>
+      ),
+    },
+    {
+      title: 'Change date format',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput format={({ value }) => value?.toISOString()} />
+        </>
+      ),
+    },
+  ],
 }

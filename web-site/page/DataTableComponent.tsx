@@ -1,15 +1,13 @@
 import { Button } from '../../src/Button'
 import { DataTable } from '../../src/DataTable'
 import { showToast } from '../../src/Toasts'
-import { PageTitle } from '../PageTitle'
-import { Sample } from '../Sample'
+import { Catalog } from './ComponentCatalog'
 
-export function DataTableComponent() {
-  return (
-    <article>
-      <PageTitle>DataTable</PageTitle>
-
-      <Sample title="Basic example">
+export const DataTableCatalog: Catalog = {
+  samples: [
+    {
+      title: 'Basic example',
+      children: (
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name' }]}
           rows={[
@@ -17,9 +15,11 @@ export function DataTableComponent() {
             { ID: 2, name: 'bob' },
           ]}
         />
-      </Sample>
-
-      <Sample title="Sort">
+      ),
+    },
+    {
+      title: 'Sort',
+      children: (
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name', sortable: true }, { id: 'age', sortable: true }]}
           rows={[
@@ -28,9 +28,11 @@ export function DataTableComponent() {
             { ID: 3, name: 'charlie', age: 20 },
           ]}
         />
-      </Sample>
-
-      <Sample title="Default format for data type">
+      ),
+    },
+    {
+      title: 'Default format for data type',
+      children: (
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
@@ -38,9 +40,11 @@ export function DataTableComponent() {
             { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
           ]}
         />
-      </Sample>
-
-      <Sample title="Cell slot">
+      ),
+    },
+    {
+      title: 'Cell slot',
+      children: (
         <DataTable
           columns={[
             { id: 'ID' },
@@ -57,9 +61,11 @@ export function DataTableComponent() {
             { ID: 2, name: 'bob', date: new Date() },
           ]}
         />
-      </Sample>
-
-      <Sample title="Full width">
+      ),
+    },
+    {
+      title: 'Full width',
+      children: (
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
@@ -68,34 +74,40 @@ export function DataTableComponent() {
           ]}
           fullWidth
         />
-      </Sample>
+      ),
+    },
+    {
+      title: 'Width of column',
+      children: (
+        <>
+          <DataTable
+            columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread', width: 'max-content' }, { id: 'date' }]}
+            rows={[
+              { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
+              { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
+            ]}
+            fullWidth
+          />
 
-      <Sample title="Width of column">
-        <DataTable
-          columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread', width: 'max-content' }, { id: 'date' }]}
-          rows={[
-            { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
-            { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
-          ]}
-          fullWidth
-        />
-
-        <DataTable
-          columns={[
-            { id: 'url', width: '4fr' },
-            { id: 'score', width: '1fr' },
-            { id: 'unread' },
-            { id: 'date', width: '10rem' },
-          ]}
-          rows={[
-            { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
-            { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
-          ]}
-          fullWidth
-        />
-      </Sample>
-
-      <Sample title="Min width and max width of column">
+          <DataTable
+            columns={[
+              { id: 'url', width: '4fr' },
+              { id: 'score', width: '1fr' },
+              { id: 'unread' },
+              { id: 'date', width: '10rem' },
+            ]}
+            rows={[
+              { url: 'https://example.com/alice', score: 47, unread: true, date: new Date() },
+              { url: 'https://example.com/bob', score: 1029, unread: false, date: new Date(0) },
+            ]}
+            fullWidth
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Min width and max width of column',
+      children: (
         <DataTable
           columns={[
             { id: 'name', minWidth: '15rem' },
@@ -106,9 +118,11 @@ export function DataTableComponent() {
             { name: 'onMount', text: 'run an effect only after initial render on mount' },
           ]}
         />
-      </Sample>
-
-      <Sample title="Clickable rows: onClickRow callback">
+      ),
+    },
+    {
+      title: 'Clickable rows: onClickRow callback',
+      children: (
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
@@ -117,9 +131,11 @@ export function DataTableComponent() {
           ]}
           onClickRow={(row) => showToast('success', JSON.stringify(row))}
         />
-      </Sample>
-
-      <Sample title="Clickable rows: rowHref">
+      ),
+    },
+    {
+      title: 'Clickable rows: rowHref',
+      children: (
         <DataTable
           columns={[{ id: 'name' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[
@@ -128,19 +144,21 @@ export function DataTableComponent() {
           ]}
           rowHref={(row) => 'https://example.com/' + row.name}
         />
-      </Sample>
-
-      <Sample title="Empty state">
-        <DataTable columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]} rows={[]} />
-      </Sample>
-
-      <Sample title="Empty state slot">
+      ),
+    },
+    {
+      title: 'Empty state',
+      children: <DataTable columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]} rows={[]} />,
+    },
+    {
+      title: 'Empty state slot',
+      children: (
         <DataTable
           columns={[{ id: 'url' }, { id: 'score' }, { id: 'unread' }, { id: 'date' }]}
           rows={[]}
           emptyState={<p style="padding: 1em">Not found😅</p>}
         />
-      </Sample>
-    </article>
-  )
+      ),
+    },
+  ],
 }

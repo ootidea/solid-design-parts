@@ -1,98 +1,132 @@
 import { createSignal } from 'solid-js'
 import { MultiSelect } from '../../src/MultiSelect'
-import { PageTitle } from '../PageTitle'
-import { Sample } from '../Sample'
+import { Catalog } from './ComponentCatalog'
 
-export function MultiSelectComponent() {
-  const [selected, setSelected] = createSignal(new Set(['Other']), { equals: false })
+const [selected, setSelected] = createSignal(new Set(['Other']), { equals: false })
 
-  return (
-    <article>
-      <PageTitle>MultiSelect</PageTitle>
+export const MultiSelectCatalog: Catalog = {
+  samples: [
+    {
+      title: 'Basic example',
+      children: (
+        <>
+          <MultiSelect values={['Female', 'Male', 'Other']} />
+          <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" />
+          <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
+        </>
+      ),
+    },
+    {
+      title: 'Change titles',
+      children: (
+        <>
+          <MultiSelect values={['dog', 'cat', 'rabbit']} labels={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
+        </>
+      ),
+    },
+    {
+      title: 'Bind to signal',
+      children: (
+        <>
+          <MultiSelect values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
+          <div>{`selected: {${[...selected()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
+        </>
+      ),
+    },
+    {
+      title: 'Disabled',
+      children: (
+        <>
+          <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
+          <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} disabled />
+        </>
+      ),
+    },
+    {
+      title: 'Error message',
+      children: (
+        <>
+          <MultiSelect values={['Female', 'Male', 'Other']} errorMessage="Invalid value" />
+        </>
+      ),
+    },
+    {
+      title: 'Validation',
+      children: (
+        <>
+          <MultiSelect
+            values={['Female', 'Male', 'Other']}
+            errorMessage={(selected) => {
+              if (selected.size < 2) return 'Select multiple options'
 
-      <Sample title="Basic example">
-        <MultiSelect values={['Female', 'Male', 'Other']} />
-        <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" />
-        <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
-      </Sample>
+              return
+            }}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Validate initial value',
+      description: 'If validateImmediately option is set, it perform validation even if the user did not edit it.',
+      children: (
+        <>
+          <MultiSelect
+            values={['Female', 'Male', 'Other']}
+            validateImmediately
+            errorMessage={(selected) => {
+              if (selected.size < 2) return 'Select multiple options'
 
-      <Sample title="Change titles">
-        <MultiSelect values={['dog', 'cat', 'rabbit']} labels={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
-      </Sample>
-
-      <Sample title="Bind to signal">
-        <MultiSelect values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
-        <div>{`selected: {${[...selected()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
-      </Sample>
-
-      <Sample title="Disabled">
-        <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
-        <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} disabled />
-      </Sample>
-
-      <Sample title="Error message">
-        <MultiSelect values={['Female', 'Male', 'Other']} errorMessage="Invalid value" />
-      </Sample>
-
-      <Sample title="Validation">
-        <MultiSelect
-          values={['Female', 'Male', 'Other']}
-          errorMessage={(selected) => {
-            if (selected.size < 2) return 'Select multiple options'
-
-            return
-          }}
-        />
-      </Sample>
-
-      <Sample
-        title="Validate initial value"
-        description="If validateImmediately option is set, it perform validation even if the user did not edit it."
-      >
-        <MultiSelect
-          values={['Female', 'Male', 'Other']}
-          validateImmediately
-          errorMessage={(selected) => {
-            if (selected.size < 2) return 'Select multiple options'
-
-            return
-          }}
-        />
-      </Sample>
-
-      <Sample title="Required">
-        <MultiSelect values={['Female', 'Male', 'Other']} required />
-        <MultiSelect
-          values={['Female', 'Male', 'Other']}
-          required
-          validateImmediately
-          errorMessage="One or more selections required"
-        />
-      </Sample>
-
-      <Sample title="Search">
-        <MultiSelect
-          showSearchBox
-          values={[
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
-          ]}
-        />
-      </Sample>
-
-      <Sample title="Full width">
-        <MultiSelect fullWidth values={['Female', 'Male', 'Other']} placeholder="placeholder" />
-      </Sample>
-    </article>
-  )
+              return
+            }}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Required',
+      children: (
+        <>
+          <MultiSelect values={['Female', 'Male', 'Other']} required />
+          <MultiSelect
+            values={['Female', 'Male', 'Other']}
+            required
+            validateImmediately
+            errorMessage="One or more selections required"
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Search',
+      children: (
+        <>
+          <MultiSelect
+            showSearchBox
+            values={[
+              'January',
+              'February',
+              'March',
+              'April',
+              'May',
+              'June',
+              'July',
+              'August',
+              'September',
+              'October',
+              'November',
+              'December',
+            ]}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Full width',
+      children: (
+        <>
+          <MultiSelect fullWidth values={['Female', 'Male', 'Other']} placeholder="placeholder" />
+        </>
+      ),
+    },
+  ],
 }
