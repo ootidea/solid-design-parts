@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { Stepper } from '../../src/Stepper'
 import { Catalog } from './ComponentCatalog'
 
-export const StepperCatalog: Catalog = {
+export const StepperCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -23,4 +24,4 @@ export const StepperCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

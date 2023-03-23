@@ -1,5 +1,5 @@
 import { call } from 'base-up'
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { FadeAnimation } from '../../src/FadeAnimation'
 import { showToast } from '../../src/Toasts'
@@ -7,7 +7,7 @@ import { Catalog } from './ComponentCatalog'
 
 const [shown, setShown] = createSignal(true)
 
-export const FadeAnimationCatalog: Catalog = {
+export const FadeAnimationCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -78,4 +78,4 @@ export const FadeAnimationCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

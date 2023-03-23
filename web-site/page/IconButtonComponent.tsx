@@ -1,3 +1,4 @@
+import { createRoot } from 'solid-js'
 import { IconButton } from '../../src/IconButton'
 import chevronLeftIcon from './chevron-left.svg'
 import chevronRightIcon from './chevron-right.svg'
@@ -9,7 +10,7 @@ async function awaitSomeSeconds() {
   })
 }
 
-export const IconButtonCatalog: Catalog = {
+export const IconButtonCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -86,4 +87,4 @@ export const IconButtonCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

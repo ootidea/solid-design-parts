@@ -1,10 +1,11 @@
+import { createRoot } from 'solid-js'
 import { IconButton } from '../../src/IconButton'
 import { TitleBarLayout } from '../../src/TitleBarLayout'
 import chevronLeftIcon from './chevron-left.svg'
 import chevronRightIcon from './chevron-right.svg'
 import { Catalog } from './ComponentCatalog'
 
-export const TitleBarLayoutCatalog: Catalog = {
+export const TitleBarLayoutCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -22,4 +23,4 @@ export const TitleBarLayoutCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

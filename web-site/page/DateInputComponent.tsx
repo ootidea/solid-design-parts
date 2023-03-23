@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { DateInput } from '../../src/DateInput'
 import { Catalog } from './ComponentCatalog'
 
 const [value, setValue] = createSignal(new Date())
 
-export const DateInputCatalog: Catalog = {
+export const DateInputCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -64,4 +64,4 @@ export const DateInputCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

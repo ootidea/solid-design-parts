@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Await } from '../../src/Await'
 import { Button } from '../../src/Button'
 import { Spinner } from '../../src/Spinner'
@@ -10,7 +10,7 @@ const [promise, setPromise] = createSignal(
   })
 )
 
-export const AwaitCatalog: Catalog = {
+export const AwaitCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -67,4 +67,4 @@ export const AwaitCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

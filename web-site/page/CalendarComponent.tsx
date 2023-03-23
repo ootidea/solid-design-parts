@@ -1,11 +1,11 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { Calendar } from '../../src/Calendar'
 import { Catalog } from './ComponentCatalog'
 
 const [date, setDate] = createSignal(new Date(), { equals: false })
 
-export const CalendarCatalog: Catalog = {
+export const CalendarCatalog: Catalog = createRoot(() => ({
   samples: [
     { title: 'Basic example', children: <Calendar /> },
     {
@@ -51,4 +51,4 @@ export const CalendarCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

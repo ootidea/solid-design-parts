@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { Spinner } from '../../src/Spinner'
 import { Catalog } from './ComponentCatalog'
 
-export const SpinnerCatalog: Catalog = {
+export const SpinnerCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -60,4 +61,4 @@ export const SpinnerCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { Icon } from '../../src/Icon'
 import { Spinner } from '../../src/Spinner'
@@ -10,7 +10,7 @@ import searchIcon from './search.svg'
 
 const [value, setValue] = createSignal('default value')
 
-export const TextInputCatalog: Catalog = {
+export const TextInputCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -160,4 +160,4 @@ export const TextInputCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

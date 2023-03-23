@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Checkboxes } from '../../src/Checkboxes'
 import { Catalog } from './ComponentCatalog'
 
 const [selected, setSelected] = createSignal(new Set(['PC']), { equals: false })
 
-export const CheckboxesCatalog: Catalog = {
+export const CheckboxesCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic sample',
@@ -153,4 +153,4 @@ export const CheckboxesCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

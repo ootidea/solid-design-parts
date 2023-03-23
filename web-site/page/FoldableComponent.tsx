@@ -1,11 +1,11 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Foldable } from '../../src/Foldable'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalog'
 
 const [unfolded, setUnfolded] = createSignal(false)
 
-export const FoldableCatalog: Catalog = {
+export const FoldableCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -41,4 +41,4 @@ export const FoldableCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

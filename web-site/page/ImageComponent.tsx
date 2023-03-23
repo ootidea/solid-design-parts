@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { Image } from '../../src/Image'
 import { Catalog } from './ComponentCatalog'
 
-export const ImageCatalog: Catalog = {
+export const ImageCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -14,4 +15,4 @@ export const ImageCatalog: Catalog = {
       children: <Image src="https://example.com" fallback={<>Fallback slot</>} />,
     },
   ],
-}
+}))

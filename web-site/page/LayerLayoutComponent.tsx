@@ -1,3 +1,4 @@
+import { createRoot } from 'solid-js'
 import { Gravity } from '../../src/Gravity'
 import { IconButton } from '../../src/IconButton'
 import { LayerLayout } from '../../src/LayerLayout'
@@ -6,7 +7,7 @@ import chevronRightIcon from './chevron-right.svg'
 import { Catalog } from './ComponentCatalog'
 import searchIcon from './search.svg'
 
-export const LayerLayoutCatalog: Catalog = {
+export const LayerLayoutCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Badge',
@@ -58,4 +59,4 @@ export const LayerLayoutCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

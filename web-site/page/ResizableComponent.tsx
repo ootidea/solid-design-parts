@@ -1,11 +1,11 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Image } from '../../src/Image'
 import { Resizable } from '../../src/Resizable'
 import { Catalog } from './ComponentCatalog'
 
 const [widthPx, setWidthPx] = createSignal(500)
 
-export const ResizableCatalog: Catalog = {
+export const ResizableCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -53,4 +53,4 @@ export const ResizableCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

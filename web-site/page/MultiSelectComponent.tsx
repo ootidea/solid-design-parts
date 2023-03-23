@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { MultiSelect } from '../../src/MultiSelect'
 import { Catalog } from './ComponentCatalog'
 
 const [selected, setSelected] = createSignal(new Set(['Other']), { equals: false })
 
-export const MultiSelectCatalog: Catalog = {
+export const MultiSelectCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -129,4 +129,4 @@ export const MultiSelectCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

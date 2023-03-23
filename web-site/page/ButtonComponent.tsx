@@ -1,3 +1,4 @@
+import { createRoot } from 'solid-js'
 import { Button } from '../../src/Button'
 import { Icon } from '../../src/Icon'
 import calendarIcon from './calendar.svg'
@@ -9,7 +10,7 @@ async function awaitSomeSeconds() {
   })
 }
 
-export const ButtonCatalog: Catalog = {
+export const ButtonCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic examples',
@@ -122,4 +123,4 @@ export const ButtonCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

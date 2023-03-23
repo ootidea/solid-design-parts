@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Icon } from '../../src/Icon'
 import { ToggleButtons } from '../../src/ToggleButtons'
 import { toLiteral } from '../other'
@@ -9,7 +9,7 @@ import formatAlignRightIcon from './format-align-right.svg'
 const [selected1, setSelected1] = createSignal<'en' | 'zh' | undefined>('en')
 const [selected2, setSelected2] = createSignal<Set<'en' | 'zh'>>(new Set(), { equals: false })
 
-export const ToggleButtonsCatalog: Catalog = {
+export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -77,4 +77,4 @@ export const ToggleButtonsCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

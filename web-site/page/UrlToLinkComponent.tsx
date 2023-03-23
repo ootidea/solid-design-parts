@@ -1,3 +1,4 @@
+import { createRoot } from 'solid-js'
 import { UrlToLink } from '../../src/UrlToLink'
 import { Catalog } from './ComponentCatalog'
 
@@ -8,6 +9,6 @@ whatsapp://send?text=Hello+World
 Domain is not a link: google.com
 file:///C:/something.txt`
 
-export const UrlToLinkCatalog: Catalog = {
+export const UrlToLinkCatalog: Catalog = createRoot(() => ({
   samples: [{ title: 'Basic example', children: <UrlToLink>{text}</UrlToLink> }],
-}
+}))

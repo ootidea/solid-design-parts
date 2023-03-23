@@ -1,11 +1,11 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Select } from '../../src/Select'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalog'
 
 const [selected, setSelected] = createSignal<'Female' | 'Male' | 'Other' | undefined>('Female')
 
-export const SelectCatalog: Catalog = {
+export const SelectCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -76,4 +76,4 @@ export const SelectCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { Divider } from '../../src/Divider'
 import { Catalog } from './ComponentCatalog'
 
-export const DividerCatalog: Catalog = {
+export const DividerCatalog: Catalog = createRoot(() => ({
   samples: [
     { title: 'Basic example', children: <Divider /> },
     {
@@ -38,4 +39,4 @@ export const DividerCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

@@ -1,4 +1,4 @@
-import { createSignal, For } from 'solid-js'
+import { createRoot, createSignal, For } from 'solid-js'
 import { Button } from '../../src/Button'
 import { Gravity } from '../../src/Gravity'
 import { Modal } from '../../src/Modal'
@@ -6,7 +6,7 @@ import { Catalog } from './ComponentCatalog'
 
 const [opened, setOpened] = createSignal(false)
 
-export const ModalCatalog: Catalog = {
+export const ModalCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -80,4 +80,4 @@ export const ModalCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

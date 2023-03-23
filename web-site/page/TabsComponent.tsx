@@ -1,8 +1,9 @@
+import { createRoot } from 'solid-js'
 import { Tabs } from '../../src/Tabs'
 import { showToast } from '../../src/Toasts'
 import { Catalog } from './ComponentCatalog'
 
-export const TabsCatalog: Catalog = {
+export const TabsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -38,4 +39,4 @@ export const TabsCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

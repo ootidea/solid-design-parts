@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { DatePicker } from '../../src/DatePicker'
 import { Catalog } from './ComponentCatalog'
 
 const [value, setValue] = createSignal<Date | undefined>(undefined)
 
-export const DatePickerCatalog: Catalog = {
+export const DatePickerCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -41,4 +41,4 @@ export const DatePickerCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

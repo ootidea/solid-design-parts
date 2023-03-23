@@ -1,8 +1,9 @@
+import { createRoot } from 'solid-js'
 import { Button } from '../../src/Button'
 import { Popover } from '../../src/Popover'
 import { Catalog } from './ComponentCatalog'
 
-export const PopoverCatalog: Catalog = {
+export const PopoverCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -46,4 +47,4 @@ export const PopoverCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

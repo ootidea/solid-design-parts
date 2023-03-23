@@ -1,11 +1,11 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Button } from '../../src/Button'
 import { NumberInput } from '../../src/NumberInput'
 import { Catalog } from './ComponentCatalog'
 
 const [value, setValue] = createSignal(0)
 
-export const NumberInputCatalog: Catalog = {
+export const NumberInputCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -126,4 +126,4 @@ export const NumberInputCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

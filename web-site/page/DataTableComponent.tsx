@@ -1,9 +1,10 @@
+import { createRoot } from 'solid-js'
 import { Button } from '../../src/Button'
 import { DataTable } from '../../src/DataTable'
 import { showToast } from '../../src/Toasts'
 import { Catalog } from './ComponentCatalog'
 
-export const DataTableCatalog: Catalog = {
+export const DataTableCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -161,4 +162,4 @@ export const DataTableCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

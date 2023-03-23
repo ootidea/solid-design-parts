@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { StretchLayout } from '../../src/StretchLayout'
 import { Catalog } from './ComponentCatalog'
 
-export const StretchLayoutCatalog: Catalog = {
+export const StretchLayoutCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -27,4 +28,4 @@ export const StretchLayoutCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

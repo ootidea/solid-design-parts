@@ -1,10 +1,10 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { AutoSizeTextArea } from '../../src/AutoSizeTextArea'
 import { Catalog } from './ComponentCatalog'
 
 const [value, setValue] = createSignal('default value')
 
-export const AutoSizeTextAreaCatalog: Catalog = {
+export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -107,4 +107,4 @@ export const AutoSizeTextAreaCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

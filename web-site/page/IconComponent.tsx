@@ -1,8 +1,9 @@
+import { createRoot } from 'solid-js'
 import { Icon } from '../../src/Icon'
 import chevronLeftIcon from './chevron-left.svg'
 import { Catalog } from './ComponentCatalog'
 
-export const IconCatalog: Catalog = {
+export const IconCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -45,4 +46,4 @@ export const IconCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

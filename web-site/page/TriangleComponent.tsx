@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { Triangle } from '../../src/Triangle'
 import { Catalog } from './ComponentCatalog'
 
-export const TriangleCatalog: Catalog = {
+export const TriangleCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -30,4 +31,4 @@ export const TriangleCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

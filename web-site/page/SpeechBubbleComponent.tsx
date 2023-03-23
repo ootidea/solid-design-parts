@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { SpeechBubble } from '../../src/SpeechBubble'
 import { Catalog } from './ComponentCatalog'
 
-export const SpeechBubbleCatalog: Catalog = {
+export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -70,4 +71,4 @@ export const SpeechBubbleCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

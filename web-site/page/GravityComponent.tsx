@@ -1,7 +1,8 @@
+import { createRoot } from 'solid-js'
 import { Gravity } from '../../src/Gravity'
 import { Catalog } from './ComponentCatalog'
 
-export const GravityCatalog: Catalog = {
+export const GravityCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -33,4 +34,4 @@ export const GravityCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

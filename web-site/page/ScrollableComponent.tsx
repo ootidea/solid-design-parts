@@ -1,9 +1,9 @@
-import { For } from 'solid-js'
+import { createRoot, For } from 'solid-js'
 import { Image } from '../../src/Image'
 import { Scrollable } from '../../src/Scrollable'
 import { Catalog } from './ComponentCatalog'
 
-export const ScrollableCatalog: Catalog = {
+export const ScrollableCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -24,4 +24,4 @@ export const ScrollableCatalog: Catalog = {
       ),
     },
   ],
-}
+}))

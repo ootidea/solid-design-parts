@@ -1,11 +1,11 @@
-import { createSignal } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { RadioButtons } from '../../src/RadioButtons'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalog'
 
 const [selected, setSelected] = createSignal<'Python' | 'TypeScript' | 'Kotlin' | 'Swift' | undefined>(undefined)
 
-export const RadioButtonsCatalog: Catalog = {
+export const RadioButtonsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -181,4 +181,4 @@ export const RadioButtonsCatalog: Catalog = {
       ),
     },
   ],
-}
+}))
