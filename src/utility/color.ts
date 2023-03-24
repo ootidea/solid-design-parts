@@ -1,7 +1,11 @@
 import Color from 'colorjs.io'
 
-export function toHsl(color: string): string {
-  return new Color(color).to('hsl').toString()
+export function resolveColorOnBodyElement(color: string): string {
+  const backup = document.body.style.color
+  document.body.style.color = color
+  const computedColor = getComputedStyle(document.body).color
+  document.body.style.color = backup
+  return computedColor
 }
 
 const MIDDLE_LIGHTNESS = 0.75
