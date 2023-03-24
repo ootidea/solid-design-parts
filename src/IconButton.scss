@@ -32,13 +32,11 @@
     @media (hover: hover) {
       &:hover {
         background-color: var(--solid-design-parts-IconButton_background-hover-color);
-        transition: all 140ms ease-out;
       }
     }
 
     &:active {
       background-color: var(--solid-design-parts-IconButton_background-active-color);
-      transition: all 140ms ease-out;
     }
   }
 
