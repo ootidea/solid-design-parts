@@ -38,11 +38,18 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <IconButton src={chevronLeftIcon} backgroundColor="hsl(0 0% 90%)" />
-          <IconButton src={chevronRightIcon} backgroundColor="hsl(0 0% 90%)" />
-          <IconButton src={chevronLeftIcon} backgroundColor="hsl(200 100% 93%)" />
-          <IconButton src={chevronRightIcon} backgroundColor="hsl(200 100% 93%)" />
-          <IconButton src={chevronLeftIcon} backgroundColor="hsl(200 100% 40%)" iconColor="white" />
-          <IconButton src={chevronRightIcon} backgroundColor="hsl(200 100% 40%)" iconColor="white" />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(0 0% 80%)" />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(0 0% 50%)" iconColor="white" />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(0 0% 30%)" iconColor="white" />
+          <IconButton
+            src={chevronLeftIcon}
+            backgroundColor="var(--solid-design-parts-primary-color)"
+            iconColor="white"
+          />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(20 80% 90%)" />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(20 80% 80%)" />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(20 80% 40%)" iconColor="white" />
+          <IconButton src={chevronLeftIcon} backgroundColor="hsl(20 80% 30%)" iconColor="white" />
         </>
       ),
     },
