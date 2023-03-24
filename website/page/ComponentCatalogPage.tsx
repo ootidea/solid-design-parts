@@ -42,6 +42,7 @@ import { TriangleCatalog } from './TriangleCatalog'
 import { UrlToLinkCatalog } from './UrlToLinkCatalog'
 
 export type Catalog = {
+  introduction?: string
   samples: SampleProps[]
 }
 
@@ -103,6 +104,9 @@ export function ComponentCatalogPage() {
         {({ catalog, componentName }) => (
           <>
             <PageTitle>{componentName}</PageTitle>
+            <Show when={catalog.introduction}>
+              <p>{catalog.introduction}</p>
+            </Show>
 
             <For each={catalog.samples}>{(sample) => <Sample {...sample} />}</For>
           </>
