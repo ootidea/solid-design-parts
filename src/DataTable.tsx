@@ -22,7 +22,7 @@ export type DataTableProps<
     id: ColumnId
     title?: JSX.Element
     sortable?: boolean | CompareFunction<Row>
-    width?: string
+    width?: LiteralAutoComplete<'auto' | 'max-content'>
     minWidth?: string
     maxWidth?: string
     align?: ColumnAlign
