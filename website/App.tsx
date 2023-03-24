@@ -5,7 +5,7 @@ import { Foldable } from '../src/Foldable'
 import { Scrollable } from '../src/Scrollable'
 import { StretchLayout } from '../src/StretchLayout'
 import classes from './App.module.scss'
-import { ComponentCatalog } from './page/ComponentCatalog'
+import { ComponentCatalogPage } from './page/ComponentCatalogPage'
 import { SidebarMenu } from './SidebarMenu'
 
 function getName(component: Function) {
@@ -64,7 +64,7 @@ export function App() {
         <main class={classes.main}>
           <Scrollable style="padding: 1rem 4rem 10rem;">
             <Routes>
-              <Route path="components/*" element={ComponentCatalog} />
+              <Route path="components/*" element={ComponentCatalogPage} />
             </Routes>
           </Scrollable>
         </main>
