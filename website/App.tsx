@@ -1,5 +1,5 @@
 import { Route, Router, Routes } from '@solidjs/router'
-import { For, JSX } from 'solid-js'
+import { For } from 'solid-js'
 import { Divider } from '../src/Divider'
 import { Foldable } from '../src/Foldable'
 import { Scrollable } from '../src/Scrollable'
@@ -7,12 +7,6 @@ import { StretchLayout } from '../src/StretchLayout'
 import classes from './App.module.scss'
 import { ComponentCatalogPage } from './page/ComponentCatalogPage'
 import { SidebarMenu } from './SidebarMenu'
-
-function getName(component: Function) {
-  return component.name.replace(/Component$/, '')
-}
-
-type Component = Function & JSX.Element
 
 type MenuItem = {
   title: string
