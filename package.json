@@ -31,10 +31,10 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite serve web-site",
+    "dev": "vite serve website",
     "build": "rollup -c",
     "format": "run-p format:*",
-    "format:prettier": "prettier -w \"src/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"web-site/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
+    "format:prettier": "prettier -w \"src/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"website/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
     "format:package-json": "sort-package-json",
     "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run build",
