@@ -1,5 +1,5 @@
 import { useLocation } from '@solidjs/router'
-import { createMemo, createRoot, For, Show } from 'solid-js'
+import { createMemo, createRoot, For, JSX, Show } from 'solid-js'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
 import { AutoSizeTextAreaCatalog } from './AutoSizeTextAreaCatalog'
@@ -42,7 +42,7 @@ import { TriangleCatalog } from './TriangleCatalog'
 import { UrlToLinkCatalog } from './UrlToLinkCatalog'
 
 export type Catalog = {
-  introduction?: string
+  introduction?: JSX.Element
   samples: SampleProps[]
 }
 

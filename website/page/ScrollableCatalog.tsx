@@ -4,6 +4,12 @@ import { Scrollable } from '../../src/Scrollable'
 import { Catalog } from './ComponentCatalogPage'
 
 export const ScrollableCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Scrollable</code> is a component that displays a scrollbar when the content overflows. The scrollbar is
+      created with CSS, so it is cross-browser and customizable.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
