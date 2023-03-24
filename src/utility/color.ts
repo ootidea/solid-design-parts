@@ -20,26 +20,24 @@ export function calculateHoverColor(baseColor: string): string {
       ? color.oklch.lightness - 0.05 / color.oklch.lightness
       : 1 - (1 - color.oklch.lightness) * 0.8
 
-  const newColor = createColorUsingChromaRatio(newLightness, chromaRatio, color.oklch.hue)
-  return newColor.to('hsl').toString()
+  return createColorUsingChromaRatio(newLightness, chromaRatio, color.oklch.hue).to('hsl').toString()
 }
 
 export function calculateActiveColor(baseColor: string): string {
   const color = new Color(baseColor)
   if (color.alpha === 0) {
-    const transparentColor = new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0], 1)
-    transparentColor.alpha = 0.3
-    return transparentColor.to('hsl').toString()
+    return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0], 0.3).to('hsl').toString()
   }
 
-  const lightnessCoefficient = Math.pow(0.9, 1 / color.alpha)
+  const maxChroma = calculateMaxChromaInGamut(color.oklch.lightness, color.oklch.hue)
+  const chromaRatio = color.oklch.chroma / maxChroma
 
-  if (color.oklch.lightness > MIDDLE_LIGHTNESS) {
-    color.oklch.lightness = color.oklch.lightness * lightnessCoefficient
-  } else {
-    color.oklch.lightness = color.oklch.lightness / lightnessCoefficient
-  }
-  return color.to('hsl').toString()
+  const newLightness =
+    color.oklch.lightness > MIDDLE_LIGHTNESS
+      ? color.oklch.lightness - 0.1 / color.oklch.lightness
+      : 1 - (1 - color.oklch.lightness) * 0.7
+
+  return createColorUsingChromaRatio(newLightness, chromaRatio, color.oklch.hue).to('hsl').toString()
 }
 
 // An object to cache the return value of the calculateMaxChromaInGamut function.
