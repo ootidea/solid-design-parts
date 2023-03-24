@@ -11,7 +11,11 @@ const [promise, setPromise] = createSignal(
 )
 
 export const AwaitCatalog: Catalog = createRoot(() => ({
-  introduction: 'Await is a component that switches the display based on the state of the given Promise.',
+  introduction: (
+    <>
+      <code>Await</code> is a component that switches the display based on the state of the given Promise.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',

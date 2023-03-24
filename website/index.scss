@@ -6,3 +6,9 @@ body {
   height: 100%;
   margin: 0;
 }
+
+code {
+  display: inline-block;
+  padding: 0.2em 0.3em;
+  background-color: oklch(95% 0 0);
+}
