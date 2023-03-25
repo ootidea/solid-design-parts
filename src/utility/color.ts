@@ -10,38 +10,36 @@ export function resolveColorOnBodyElement(color: string): string {
 
 const MIDDLE_LIGHTNESS = 0.75
 
-export function calculateHoverColor(baseColor: string): string {
-  const color = new Color(baseColor)
+export function calculateHoverColor(baseCssColor: string): string {
+  const color = new Color(baseCssColor)
   if (Number(color.alpha) === 0) {
     return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0], 0.2).to('hsl').toString()
   }
 
-  const maxChroma = calculateMaxChromaInGamut(color.oklch.lightness, color.oklch.hue)
-  const chromaRatio = color.oklch.chroma / maxChroma
+  const oklch = color.oklch
+  const maxChroma = calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
+  const chromaRatio = oklch.chroma / maxChroma
 
   const newLightness =
-    color.oklch.lightness > MIDDLE_LIGHTNESS
-      ? color.oklch.lightness - 0.05 / color.oklch.lightness
-      : 1 - (1 - color.oklch.lightness) * 0.8
+    oklch.lightness > MIDDLE_LIGHTNESS ? oklch.lightness - 0.05 / oklch.lightness : 1 - (1 - oklch.lightness) * 0.8
 
-  return createColorUsingChromaRatio(newLightness, chromaRatio, color.oklch.hue).to('hsl').toString()
+  return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue).to('hsl').toString()
 }
 
-export function calculateActiveColor(baseColor: string): string {
-  const color = new Color(baseColor)
+export function calculateActiveColor(baseCssColor: string): string {
+  const color = new Color(baseCssColor)
   if (Number(color.alpha) === 0) {
     return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0], 0.3).to('hsl').toString()
   }
 
-  const maxChroma = calculateMaxChromaInGamut(color.oklch.lightness, color.oklch.hue)
-  const chromaRatio = color.oklch.chroma / maxChroma
+  const oklch = color.oklch
+  const maxChroma = calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
+  const chromaRatio = oklch.chroma / maxChroma
 
   const newLightness =
-    color.oklch.lightness > MIDDLE_LIGHTNESS
-      ? color.oklch.lightness - 0.1 / color.oklch.lightness
-      : 1 - (1 - color.oklch.lightness) * 0.7
+    oklch.lightness > MIDDLE_LIGHTNESS ? oklch.lightness - 0.1 / oklch.lightness : 1 - (1 - oklch.lightness) * 0.7
 
-  return createColorUsingChromaRatio(newLightness, chromaRatio, color.oklch.hue).to('hsl').toString()
+  return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue).to('hsl').toString()
 }
 
 // An object to cache the return value of the calculateMaxChromaInGamut function.
