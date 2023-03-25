@@ -258,11 +258,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                       class="solid-design-parts-MultiSelect_search-box"
                       placeholder="search"
                       value={searchQuerySignal.value}
-                      error={(value) => {
-                        if (search(props.values, value).length === 0) return ''
-
-                        return
-                      }}
+                      error={(value) => search(props.values, value).length === 0}
                       onChangeValue={searchQuerySignal.set}
                     />
                   </div>
