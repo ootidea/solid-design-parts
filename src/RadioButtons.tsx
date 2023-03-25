@@ -8,24 +8,24 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type RadioButtonsProps<T extends string> = Props<{
-  values: readonly T[]
-  selected?: T | undefined
-  labels?: Partial<Record<T, JSX.Element>> | ((value: T) => JSX.Element)
+export type RadioButtonsProps<T extends readonly (string | number)[]> = Props<{
+  values: T
+  selected?: T[number] | undefined
+  labels?: Partial<Record<T[number], JSX.Element>> | ((value: T[number]) => JSX.Element)
   name?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
   gridColumnsCount?: number | undefined
-  disabled?: boolean | ReadonlySet<string>
+  disabled?: boolean | ReadonlySet<T[number]>
   required?: boolean
-  error?: boolean | string | ((selected: T | undefined) => Promisable<boolean | string>)
+  error?: boolean | string | ((selected: T[number] | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
   enableDeselection?: boolean
-  onChangeSelected?: (selected: T | undefined) => void
-  onChangeValidSelected?: (selected: T | undefined) => void
+  onChangeSelected?: (selected: T[number] | undefined) => void
+  onChangeValidSelected?: (selected: T[number] | undefined) => void
 }>
 
-export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
+export function RadioButtons<T extends readonly (string | number)[]>(rawProps: RadioButtonsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -60,18 +60,18 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
     )
   )
 
-  function getLabel(value: T): JSX.Element {
+  function getLabel(value: T[number]): JSX.Element {
     if (props.labels instanceof Function) return props.labels(value)
     else return props.labels?.[value] ?? value
   }
 
-  function isDisabled(value: string): boolean {
+  function isDisabled(value: T[number]): boolean {
     if (typeof props.disabled === 'boolean') return props.disabled
 
     return props.disabled.has(value)
   }
 
-  async function onClick(value: T) {
+  async function onClick(value: T[number]) {
     isEditedSignal.value = true
     const nextSelected = call(() => {
       if (selectedSignal.value === value && props.enableDeselection) {
@@ -93,7 +93,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
 
   async function deriveError(
     shouldValidate: boolean,
-    selected: T | undefined,
+    selected: T[number] | undefined,
     error: Required<RadioButtonsProps<T>>['error'],
     required: boolean
   ): Promise<boolean | string> {
