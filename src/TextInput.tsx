@@ -30,7 +30,7 @@ export type TextInputProps = Props<{
   >
   disabled?: boolean
   required?: boolean
-  error?: string | ((value: string) => Promisable<string | void>)
+  error?: boolean | string | ((value: string) => Promisable<boolean | string>)
   validateImmediately?: boolean
   radius?: string
   prepend?: JSX.Element
@@ -46,10 +46,11 @@ export function TextInput(rawProps: TextInputProps) {
       value: '',
       disabled: false,
       required: false,
+      error: false as Required<TextInputProps>['error'],
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['placeholder', 'type', 'error', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    ['placeholder', 'type', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const valueSignal = createInjectableSignalObject(props, 'value')
@@ -58,7 +59,7 @@ export function TextInput(rawProps: TextInputProps) {
 
   const hasInputElementFocusSignal = createSignalObject(false)
 
-  const errorSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(valueSignal.get), props.error, props.required)
   })
@@ -91,34 +92,35 @@ export function TextInput(rawProps: TextInputProps) {
   async function deriveError(
     shouldValidate: boolean,
     value: string,
-    error: TextInputProps['error'],
+    error: Required<TextInputProps>['error'],
     required: boolean
-  ): Promise<string | undefined> {
+  ): Promise<boolean | string> {
+    if (error === true) return true
+
     if (required) {
       if (!shouldValidate) {
-        return undefined
+        return false
+      } else if (error === false) {
+        return value.length === 0
       } else if (typeof error === 'string') {
-        if (value) {
-          return undefined
+        if (value.length > 0) {
+          return false
         } else {
           return error
         }
       } else {
-        const result = await error?.(value)
-        if (value) {
-          return result ?? undefined
-        } else {
-          return result ?? ''
-        }
+        const result = await error(value)
+        if (value.length === 0 && result === false) return true
+
+        return result
       }
     } else {
-      if (typeof error === 'string') {
+      if (error === false || typeof error === 'string') {
         return error
       } else if (!shouldValidate) {
-        return undefined
+        return false
       } else {
-        const result = await error?.(value)
-        return result ?? undefined
+        return await error(value)
       }
     }
   }
@@ -130,7 +132,7 @@ export function TextInput(rawProps: TextInputProps) {
       })}
       style={joinStyle(rawProps.style, { '--solid-design-parts-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
-      aria-invalid={errorSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== false}
       aria-required={props.required}
       {...restProps}
     >

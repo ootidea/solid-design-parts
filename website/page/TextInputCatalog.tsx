@@ -79,7 +79,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
             error={(value) => {
               if (value.length === 0) return 'Required'
 
-              return
+              return false
             }}
           />
           <TextInput
@@ -87,7 +87,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
             error={(value) => {
               if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
-              return
+              return false
             }}
           />
         </>
@@ -105,7 +105,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
             error={(value) => {
               if (value.length === 0) return 'Required'
 
-              return
+              return false
             }}
           />
           <TextInput
@@ -114,7 +114,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
             error={(value) => {
               if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
-              return
+              return false
             }}
           />
         </>
