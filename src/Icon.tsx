@@ -1,10 +1,16 @@
 import css from './Icon.scss'
+import { LiteralAutoComplete } from './utility/others'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type IconProps = Props<{ src: string; size?: string; color?: string; rotate?: string }>
+export type IconProps = Props<{
+  src: string
+  size?: string
+  color?: LiteralAutoComplete<'currentColor' | 'transparent'>
+  rotate?: string
+}>
 
 export function Icon(rawProps: IconProps) {
   const [props, restProps] = prepareProps(

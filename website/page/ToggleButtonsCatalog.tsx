@@ -43,7 +43,9 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <ToggleButtons values={['left', 'right']}>
-            {({ value }) => <Icon src={{ left: formatAlignLeftIcon, right: formatAlignRightIcon }[value]} />}
+            {({ value }) => (
+              <Icon src={{ left: formatAlignLeftIcon, right: formatAlignRightIcon }[value]} color="currentColor" />
+            )}
           </ToggleButtons>
         </>
       ),
