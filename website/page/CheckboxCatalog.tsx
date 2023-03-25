@@ -42,7 +42,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Checkbox error="Something went wrong">Auto-update</Checkbox>
-          <Checkbox error="">Keep me signed in</Checkbox>
+          <Checkbox error>Keep me signed in</Checkbox>
         </>
       ),
     },
