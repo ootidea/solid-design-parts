@@ -11,20 +11,19 @@
 
   position: absolute;
   right: 0;
-  top: 15%;
-  bottom: 15%;
+  top: 0;
+  bottom: 0;
 
   box-sizing: border-box;
-  width: 8px;
-  border-radius: 999vh;
-  background-color: oklch(70% 0 0);
+  width: 6px;
+  background-color: oklch(75% 0 0);
 
   cursor: col-resize;
   user-select: none;
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--solid-design-parts-primary-color);
+      background-color: oklch(70% 0 0);
     }
 
     .solid-design-parts-Resizable_root:hover & {
