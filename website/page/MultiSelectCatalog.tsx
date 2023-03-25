@@ -56,11 +56,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
         <>
           <MultiSelect
             values={['Windows', 'macOS', 'Linux']}
-            error={(selected) => {
-              if (selected.size < 2) return 'Select multiple options'
-
-              return
-            }}
+            error={(selected) => selected.size < 2 && 'Select multiple options'}
           />
         </>
       ),
@@ -73,11 +69,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
           <MultiSelect
             values={['Windows', 'macOS', 'Linux']}
             validateImmediately
-            error={(selected) => {
-              if (selected.size < 2) return 'Select multiple options'
-
-              return
-            }}
+            error={(selected) => selected.size < 2 && 'Select multiple options'}
           />
         </>
       ),
