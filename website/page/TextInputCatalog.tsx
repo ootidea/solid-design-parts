@@ -74,21 +74,10 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       title: 'Validation',
       children: (
         <>
-          <TextInput
-            placeholder="placeholder"
-            error={(value) => {
-              if (value.length === 0) return 'Required'
-
-              return false
-            }}
-          />
+          <TextInput placeholder="placeholder" error={(value) => value.length === 0 && 'Required'} />
           <TextInput
             value="Default value"
-            error={(value) => {
-              if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
-
-              return false
-            }}
+            error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
           />
         </>
       ),
@@ -102,20 +91,12 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           <TextInput
             placeholder="placeholder"
             validateImmediately
-            error={(value) => {
-              if (value.length === 0) return 'Required'
-
-              return false
-            }}
+            error={(value) => value.length === 0 && 'Required'}
           />
           <TextInput
             value="Default value"
             validateImmediately
-            error={(value) => {
-              if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
-
-              return false
-            }}
+            error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
           />
         </>
       ),
