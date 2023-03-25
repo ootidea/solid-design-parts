@@ -3,7 +3,7 @@ import { Promisable } from 'base-up/dist/types/Promise'
 import { createMemo, createRenderEffect, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './Checkbox.scss'
-import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -15,6 +15,7 @@ export type CheckboxProps = Props<{
   required?: boolean
   errorMessage?: string | ((checked: boolean) => Promisable<string | void>)
   validateImmediately?: boolean
+  radius?: string
   onChangeChecked?: (checked: boolean) => void
   onChangeValidChecked?: (checked: boolean) => void
 }>
@@ -28,6 +29,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       disabled: false,
       required: false,
       validateImmediately: false,
+      radius: 'var(--solid-design-parts-Checkbox_checkbox-default-radius)',
     },
     ['errorMessage', 'onChangeChecked', 'onChangeValidChecked']
   )
@@ -114,6 +116,7 @@ export function Checkbox(rawProps: CheckboxProps) {
   return (
     <div
       class={joinClasses(rawProps, 'solid-design-parts-Checkbox_root')}
+      style={joinStyle(rawProps.style, { '--solid-design-parts-Checkbox_checkbox-radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorMessageSignal.value !== undefined}
       {...restProps}

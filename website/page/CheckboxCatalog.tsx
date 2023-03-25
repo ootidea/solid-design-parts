@@ -103,6 +103,19 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Radius',
+      children: (
+        <>
+          <Checkbox radius="0" checked>
+            I agree to the terms of service
+          </Checkbox>
+          <Checkbox radius="999vh" checked>
+            Auto-update
+          </Checkbox>
+        </>
+      ),
+    },
+    {
       title: 'Size',
       children: (
         <>
