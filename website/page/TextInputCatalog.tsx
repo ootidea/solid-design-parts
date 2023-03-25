@@ -62,7 +62,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Error message',
+      title: 'Error state',
       children: (
         <>
           <TextInput placeholder="placeholder" error="Invalid value" />
@@ -71,7 +71,16 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation',
+      title: 'Required',
+      children: (
+        <>
+          <TextInput placeholder="Empty error message" required />
+          <TextInput placeholder="placeholder" required error="Required" />
+        </>
+      ),
+    },
+    {
+      title: 'Validation function',
       children: (
         <>
           <TextInput placeholder="placeholder" error={(value) => value.length === 0 && 'Required'} />
@@ -98,16 +107,6 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
             validateImmediately
             error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
           />
-        </>
-      ),
-    },
-    {
-      title: 'Required',
-      children: (
-        <>
-          <TextInput placeholder="placeholder" required error="Required" />
-          <TextInput placeholder="placeholder" required error="Required" validateImmediately />
-          <TextInput placeholder="Empty error message" required />
         </>
       ),
     },

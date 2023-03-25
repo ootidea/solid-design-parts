@@ -132,7 +132,7 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Error message',
+      title: 'Error state',
       children: (
         <>
           <RadioButtons values={['left', 'center', 'right']} selected="left" error="Invalid" />
@@ -140,7 +140,15 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation',
+      title: 'Required',
+      children: (
+        <>
+          <RadioButtons values={['left', 'center', 'right']} required enableDeselection />
+        </>
+      ),
+    },
+    {
+      title: 'Validation function',
       children: (
         <>
           <RadioButtons
@@ -160,15 +168,6 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
             error={(selected) => selected !== 'center' && 'Must be center'}
             validateImmediately
           />
-        </>
-      ),
-    },
-    {
-      title: 'Required',
-      children: (
-        <>
-          <RadioButtons values={['left', 'center', 'right']} required validateImmediately />
-          <RadioButtons values={['left', 'center', 'right']} required enableDeselection />
         </>
       ),
     },

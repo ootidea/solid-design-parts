@@ -105,7 +105,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Error message',
+      title: 'Error state',
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} error="Something went wrong" />

@@ -43,7 +43,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Error message',
+      title: 'Error state',
       children: (
         <>
           <MultiSelect values={['Windows', 'macOS', 'Linux']} error="Invalid value" />
@@ -51,7 +51,16 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation',
+      title: 'Required',
+      children: (
+        <>
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} required />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} required error="One or more selections required" />
+        </>
+      ),
+    },
+    {
+      title: 'Validation function',
       children: (
         <>
           <MultiSelect
@@ -70,20 +79,6 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
             values={['Windows', 'macOS', 'Linux']}
             validateImmediately
             error={(selected) => selected.size < 2 && 'Select multiple options'}
-          />
-        </>
-      ),
-    },
-    {
-      title: 'Required',
-      children: (
-        <>
-          <MultiSelect values={['Windows', 'macOS', 'Linux']} required />
-          <MultiSelect
-            values={['Windows', 'macOS', 'Linux']}
-            required
-            validateImmediately
-            error="One or more selections required"
           />
         </>
       ),

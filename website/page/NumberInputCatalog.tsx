@@ -36,7 +36,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Error message',
+      title: 'Error state',
       children: (
         <>
           <NumberInput placeholder="placeholder" error="Invalid value" />
@@ -45,7 +45,16 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation',
+      title: 'Required',
+      children: (
+        <>
+          <NumberInput placeholder="placeholder" required error="Required" />
+          <NumberInput placeholder="Empty error message" required />
+        </>
+      ),
+    },
+    {
+      title: 'Validation function',
       children: (
         <>
           <NumberInput placeholder="placeholder" error={(value) => value === undefined && 'Required'} />
@@ -81,16 +90,6 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
             }}
             validateImmediately
           />
-        </>
-      ),
-    },
-    {
-      title: 'Required',
-      children: (
-        <>
-          <NumberInput placeholder="placeholder" required error="Required" />
-          <NumberInput placeholder="placeholder" required error="Required" validateImmediately />
-          <NumberInput placeholder="Empty error message" required />
         </>
       ),
     },

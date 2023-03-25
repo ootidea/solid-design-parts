@@ -38,7 +38,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Error message',
+      title: 'Error state',
       children: (
         <>
           <Checkbox error="Something went wrong">Auto-update</Checkbox>
@@ -47,7 +47,18 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation',
+      title: 'Required',
+      children: (
+        <>
+          <Checkbox required>I agree to the terms of service</Checkbox>
+          <Checkbox required error="Required under the new policy">
+            Auto-update
+          </Checkbox>
+        </>
+      ),
+    },
+    {
+      title: 'Validation function',
       children: (
         <>
           <Checkbox error={(checked) => !checked && 'This checkbox is required'}>
@@ -65,19 +76,6 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
             I agree to the terms of service
           </Checkbox>
           <Checkbox checked error={(checked) => checked && 'Cannot be used with other options'} validateImmediately>
-            Auto-update
-          </Checkbox>
-        </>
-      ),
-    },
-    {
-      title: 'Required',
-      children: (
-        <>
-          <Checkbox required validateImmediately>
-            I agree to the terms of service
-          </Checkbox>
-          <Checkbox required error="Required under the new policy">
             Auto-update
           </Checkbox>
         </>
