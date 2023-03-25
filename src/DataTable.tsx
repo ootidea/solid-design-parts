@@ -1,4 +1,4 @@
-import { fromEntries, maxBy } from 'base-up'
+import { fromEntries, modeOf } from 'base-up'
 import { Accessor, createMemo, For, JSX, Show } from 'solid-js'
 import css from './DataTable.scss'
 import { DataTableCell } from './DataTableCell'
@@ -85,7 +85,7 @@ export function DataTable<
     if (column.align !== undefined) return column.align
 
     return (
-      findMostFrequentValue(
+      modeOf(
         props.rows.map((row) => {
           switch (typeof row[column.id]) {
             case 'number':
@@ -99,15 +99,6 @@ export function DataTable<
         })
       ) ?? 'left'
     )
-  }
-
-  function findMostFrequentValue<T>(array: readonly T[]): T | undefined {
-    const valueToCount = new Map<T, number>()
-    for (const value of array) {
-      const existing = valueToCount.get(value) ?? 0
-      valueToCount.set(value, existing + 1)
-    }
-    return maxBy([...valueToCount.entries()], ([, count]) => count)?.[0]
   }
 
   const sortingState = createInjectableSignalObject(props, 'sortingState')
