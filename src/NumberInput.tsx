@@ -36,7 +36,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['value', 'placeholder', 'error', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    ['value', 'placeholder', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const stringSignal = createSignalObject(stringify(props.value))

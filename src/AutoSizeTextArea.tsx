@@ -29,7 +29,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       error: false as Required<AutoSizeTextAreaProps>['error'],
       validateImmediately: false,
     },
-    ['error', 'onChangeValue']
+    ['onChangeValue']
   )
 
   const valueSignal = createInjectableSignalObject(props, 'value')

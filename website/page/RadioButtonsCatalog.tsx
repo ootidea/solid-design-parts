@@ -145,11 +145,7 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
         <>
           <RadioButtons
             values={['left', 'center', 'right']}
-            error={(selected) => {
-              if (selected === 'center') return 'Currently, center is not available.'
-
-              return
-            }}
+            error={(selected) => selected === 'center' && 'Currently, center is not available.'}
           />
         </>
       ),
@@ -161,11 +157,7 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
         <>
           <RadioButtons
             values={['left', 'center', 'right']}
-            error={(selected) => {
-              if (selected !== 'center') return 'Must be center'
-
-              return
-            }}
+            error={(selected) => selected !== 'center' && 'Must be center'}
             validateImmediately
           />
         </>
