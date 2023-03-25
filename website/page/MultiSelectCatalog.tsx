@@ -2,7 +2,7 @@ import { createRoot, createSignal } from 'solid-js'
 import { MultiSelect } from '../../src/MultiSelect'
 import { Catalog } from './ComponentCatalogPage'
 
-const [selected, setSelected] = createSignal(new Set(['Other']), { equals: false })
+const [selected, setSelected] = createSignal(new Set(['macOS', 'Linux']), { equals: false })
 
 export const MultiSelectCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -10,9 +10,9 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <MultiSelect values={['Female', 'Male', 'Other']} />
-          <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" />
-          <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} />
+          <MultiSelect values={['PC', 'Smartphone', 'Tablet']} placeholder="Devices" />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} selected={new Set(['Windows', 'macOS'])} />
         </>
       ),
     },
@@ -28,7 +28,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Bind to signal',
       children: (
         <>
-          <MultiSelect values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} selected={selected()} onChangeSelected={setSelected} />
           <div>{`selected: {${[...selected()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
         </>
       ),
@@ -37,8 +37,8 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Disabled',
       children: (
         <>
-          <MultiSelect values={['Female', 'Male', 'Other']} placeholder="placeholder" disabled />
-          <MultiSelect values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} disabled />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} placeholder="Operating systems" disabled />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} selected={new Set(['Windows', 'macOS'])} disabled />
         </>
       ),
     },
@@ -46,7 +46,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Error message',
       children: (
         <>
-          <MultiSelect values={['Female', 'Male', 'Other']} errorMessage="Invalid value" />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} errorMessage="Invalid value" />
         </>
       ),
     },
@@ -55,7 +55,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <MultiSelect
-            values={['Female', 'Male', 'Other']}
+            values={['Windows', 'macOS', 'Linux']}
             errorMessage={(selected) => {
               if (selected.size < 2) return 'Select multiple options'
 
@@ -71,7 +71,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <MultiSelect
-            values={['Female', 'Male', 'Other']}
+            values={['Windows', 'macOS', 'Linux']}
             validateImmediately
             errorMessage={(selected) => {
               if (selected.size < 2) return 'Select multiple options'
@@ -86,9 +86,9 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Required',
       children: (
         <>
-          <MultiSelect values={['Female', 'Male', 'Other']} required />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} required />
           <MultiSelect
-            values={['Female', 'Male', 'Other']}
+            values={['Windows', 'macOS', 'Linux']}
             required
             validateImmediately
             errorMessage="One or more selections required"
@@ -124,7 +124,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Full width',
       children: (
         <>
-          <MultiSelect fullWidth values={['Female', 'Male', 'Other']} placeholder="placeholder" />
+          <MultiSelect fullWidth values={['Windows', 'macOS', 'Linux']} placeholder="Operating systems" />
         </>
       ),
     },
