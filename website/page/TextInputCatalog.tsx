@@ -83,10 +83,10 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       title: 'Validation function',
       children: (
         <>
-          <TextInput placeholder="placeholder" error={(value) => value.length === 0 && 'Required'} />
+          <TextInput placeholder="placeholder" error={(value) => value.length % 2 === 0} />
           <TextInput
-            value="Default value"
-            error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
+            placeholder="verification code"
+            error={(value) => !/[0-9]{5}/.test(value) && 'Please enter 5 digits'}
           />
         </>
       ),
@@ -94,18 +94,13 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
     {
       title: 'Validate initial value',
       description: 'If validateImmediately option is set, it perform validation even if the user did not edit it.',
-
       children: (
         <>
+          <TextInput placeholder="placeholder" error={(value) => value.length % 2 === 0} validateImmediately />
           <TextInput
-            placeholder="placeholder"
+            placeholder="verification code"
+            error={(value) => !/[0-9]{5}/.test(value) && 'Please enter 5 digits'}
             validateImmediately
-            error={(value) => value.length === 0 && 'Required'}
-          />
-          <TextInput
-            value="Default value"
-            validateImmediately
-            error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
           />
         </>
       ),
