@@ -1,16 +1,17 @@
 import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
+import { extractContainedTexts } from '../src/utility/others'
 import classes from './Sample.module.scss'
 
 export type SampleProps = ParentProps<{
-  title: string
+  title: JSX.Element
   description?: JSX.Element
   direction?: 'horizontal' | 'vertical'
 }>
 
 export function Sample(rawProps: SampleProps) {
   const props = mergeProps({ direction: 'vertical' }, rawProps)
-  const id = () => props.title.replaceAll(' ', '-')
+  const id = () => extractContainedTexts(props.title).join(' ').replaceAll(' ', '-')
 
   return (
     <section>
