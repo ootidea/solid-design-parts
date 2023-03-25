@@ -50,18 +50,10 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Validation',
       children: (
         <>
-          <Checkbox
-            errorMessage={(checked) => {
-              if (checked) return
-
-              return 'This checkbox is required'
-            }}
-          >
+          <Checkbox errorMessage={(checked) => !checked && 'This checkbox is required'}>
             I agree to the terms of service
           </Checkbox>
-          <Checkbox errorMessage={(checked) => (checked ? 'Cannot be used with other options' : undefined)}>
-            Auto-update
-          </Checkbox>
+          <Checkbox errorMessage={(checked) => checked && 'Cannot be used with other options'}>Auto-update</Checkbox>
         </>
       ),
     },
@@ -69,19 +61,12 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Validate initial value',
       children: (
         <>
-          <Checkbox
-            errorMessage={(checked) => {
-              if (checked) return
-
-              return 'This checkbox is required'
-            }}
-            validateImmediately
-          >
+          <Checkbox errorMessage={(checked) => !checked && 'This checkbox is required'} validateImmediately>
             I agree to the terms of service
           </Checkbox>
           <Checkbox
             checked
-            errorMessage={(checked) => (checked ? 'Cannot be used with other options' : undefined)}
+            errorMessage={(checked) => checked && 'Cannot be used with other options'}
             validateImmediately
           >
             Auto-update
