@@ -16,7 +16,7 @@ export type NumberInputProps = Props<{
   inputMode?: 'decimal' | 'numeric'
   disabled?: boolean
   required?: boolean
-  error?: string | ((value: number | undefined) => Promisable<string | void>)
+  error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
   radius?: string
   prepend?: JSX.Element
@@ -32,6 +32,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       inputMode: 'numeric',
       disabled: false,
       required: false,
+      error: false as Required<NumberInputProps>['error'],
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
@@ -57,7 +58,7 @@ export function NumberInput(rawProps: NumberInputProps) {
 
   const hasInputElementFocusSignal = createSignalObject(false)
 
-  const errorSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(numberSignal.get), props.error, props.required)
   })
@@ -103,34 +104,35 @@ export function NumberInput(rawProps: NumberInputProps) {
   async function deriveError(
     shouldValidate: boolean,
     value: number | undefined,
-    error: NumberInputProps['error'],
+    error: Required<NumberInputProps>['error'],
     required: boolean
-  ): Promise<string | undefined> {
+  ): Promise<boolean | string> {
+    if (error === true) return true
+
     if (required) {
       if (!shouldValidate) {
-        return undefined
+        return false
+      } else if (error === false) {
+        return value === undefined
       } else if (typeof error === 'string') {
         if (value !== undefined) {
-          return undefined
+          return false
         } else {
           return error
         }
       } else {
-        const result = await error?.(value)
-        if (value !== undefined) {
-          return result ?? undefined
-        } else {
-          return result ?? ''
-        }
+        const result = await error(value)
+        if (value === undefined && result === false) return true
+
+        return result
       }
     } else {
-      if (typeof error === 'string') {
+      if (error === false || typeof error === 'string') {
         return error
       } else if (!shouldValidate) {
-        return undefined
+        return false
       } else {
-        const result = await error?.(value)
-        return result ?? undefined
+        return await error(value)
       }
     }
   }
@@ -142,7 +144,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       })}
       style={joinStyle(rawProps.style, { '--solid-design-parts-NumberInput_radius': props.radius })}
       aria-disabled={props.disabled}
-      aria-invalid={errorSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== false}
       aria-required={props.required}
       {...restProps}
     >

@@ -48,21 +48,14 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       title: 'Validation',
       children: (
         <>
-          <NumberInput
-            placeholder="placeholder"
-            error={(value) => {
-              if (value === undefined) return 'Required'
-
-              return
-            }}
-          />
+          <NumberInput placeholder="placeholder" error={(value) => value === undefined && 'Required'} />
           <NumberInput
             value={100}
             error={(value) => {
               if (value === undefined) return 'Required'
               if (value < 0) return 'Please enter a non-negative number'
 
-              return
+              return false
             }}
           />
         </>
@@ -75,11 +68,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
         <>
           <NumberInput
             placeholder="placeholder"
-            error={(value) => {
-              if (value === undefined) return 'Required'
-
-              return
-            }}
+            error={(value) => value === undefined && 'Required'}
             validateImmediately
           />
           <NumberInput
@@ -88,7 +77,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
               if (value === undefined) return 'Required'
               if (value < 0) return 'Please enter a non-negative number'
 
-              return
+              return false
             }}
             validateImmediately
           />
