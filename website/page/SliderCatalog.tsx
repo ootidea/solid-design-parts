@@ -1,6 +1,8 @@
-import { createRoot } from 'solid-js'
+import { createRoot, createSignal } from 'solid-js'
 import { Slider } from '../../src/Slider'
 import { Catalog } from './ComponentCatalogPage'
+
+const [value, setValue] = createSignal(0)
 
 export const SliderCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -45,6 +47,15 @@ export const SliderCatalog: Catalog = createRoot(() => ({
         <>
           <Slider thumbWidth="5px" value={0.2} />
           <Slider thumbWidth="1.5rem" thumbHeight="1.5rem" value={0.3} />
+        </>
+      ),
+    },
+    {
+      title: 'Bind to signal',
+      children: (
+        <>
+          <Slider value={value()} onChangeValue={setValue} />
+          <div>value: {value()}</div>
         </>
       ),
     },
