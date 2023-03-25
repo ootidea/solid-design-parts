@@ -1,19 +1,18 @@
 .solid-design-parts-Gravity_root {
-  display: flex;
+  display: grid;
   box-sizing: border-box;
-  width: 100%;
   height: 100%;
 
   &[data-horizontal-position='left'] {
-    justify-content: left;
+    justify-items: left;
   }
 
   &[data-horizontal-position='center'] {
-    justify-content: center;
+    justify-items: center;
   }
 
   &[data-horizontal-position='right'] {
-    justify-content: right;
+    justify-items: right;
   }
 
   &[data-vertical-position='top'] {
