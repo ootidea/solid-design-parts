@@ -1,7 +1,7 @@
 import { createRoot, createSignal } from 'solid-js'
+import { Gravity } from '../../src'
 import { Button } from '../../src/Button'
 import { Icon } from '../../src/Icon'
-import { Spinner } from '../../src/Spinner'
 import { TextInput } from '../../src/TextInput'
 import alertOutlineIcon from './alert-outline.svg'
 import checkIcon from './check.svg'
@@ -46,9 +46,16 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       title: 'Append and prepend',
       children: (
         <>
-          <TextInput value="valid text" append={<Icon src={checkIcon} />} />
-          <TextInput placeholder="security number" prepend={<Icon src={alertOutlineIcon} />} />
-          <TextInput placeholder="Search" append={<Spinner />} />
+          <TextInput value="valid text" append={<Icon src={checkIcon} style={{ 'margin-right': '0.5em' }} />} />
+          <TextInput
+            placeholder="security number"
+            prepend={<Icon src={alertOutlineIcon} style={{ 'margin-left': '0.5em' }} />}
+          />
+          <TextInput
+            placeholder="your.domain"
+            prepend={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>https://</Gravity>}
+            append={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>.com</Gravity>}
+          />
         </>
       ),
     },

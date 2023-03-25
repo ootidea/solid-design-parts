@@ -2,7 +2,6 @@ import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createMemo, createRenderEffect, JSX, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Gravity } from './Gravity'
 import { StretchLayout } from './StretchLayout'
 import css from './TextInput.scss'
 import { LiteralAutoComplete } from './utility/others'
@@ -137,7 +136,7 @@ export function TextInput(rawProps: TextInputProps) {
       {...restProps}
     >
       <StretchLayout class="solid-design-parts-TextInput_body" stretchAt={1}>
-        <Gravity class="solid-design-parts-TextInput_prepend">{rawProps.prepend}</Gravity>
+        <div class="solid-design-parts-TextInput_prepend">{rawProps.prepend}</div>
         <input
           class="solid-design-parts-TextInput_input"
           value={valueSignal.value}
@@ -151,7 +150,7 @@ export function TextInput(rawProps: TextInputProps) {
             hasInputElementFocusSignal.value = false
           }}
         />
-        <Gravity class="solid-design-parts-TextInput_append">{rawProps.append}</Gravity>
+        <div class="solid-design-parts-TextInput_append">{rawProps.append}</div>
       </StretchLayout>
       <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
     </div>
