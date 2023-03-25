@@ -12,7 +12,7 @@ const MIDDLE_LIGHTNESS = 0.75
 
 export function calculateHoverColor(baseColor: string): string {
   const color = new Color(baseColor)
-  if (color.alpha === 0) {
+  if (Number(color.alpha) === 0) {
     return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0], 0.2).to('hsl').toString()
   }
 
@@ -29,7 +29,7 @@ export function calculateHoverColor(baseColor: string): string {
 
 export function calculateActiveColor(baseColor: string): string {
   const color = new Color(baseColor)
-  if (color.alpha === 0) {
+  if (Number(color.alpha) === 0) {
     return new Color('oklch', [MIDDLE_LIGHTNESS, 0, 0], 0.3).to('hsl').toString()
   }
 
