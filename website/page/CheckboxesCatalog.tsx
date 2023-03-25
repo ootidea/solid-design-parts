@@ -128,10 +128,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
         <>
           <Checkboxes
             values={['Windows', 'macOS', 'Linux']}
-            error={(selected) => {
-              if (selected.size === 2) return
-              return 'Select two options.'
-            }}
+            error={(selected) => selected.size !== 2 && 'Select two options.'}
           />
         </>
       ),
@@ -143,10 +140,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
           <Checkboxes values={['PC', 'Smartphone']} required validateImmediately />
           <Checkboxes
             values={['Windows', 'macOS', 'Linux']}
-            error={(selected) => {
-              if (selected.size === 2) return
-              return 'Select two options.'
-            }}
+            error={(selected) => selected.size !== 2 && 'Select two options.'}
             validateImmediately
           />
         </>

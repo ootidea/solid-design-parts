@@ -18,7 +18,7 @@ export type CheckboxesProps<T extends string> = Props<{
   gridColumnsCount?: number | undefined
   disabled?: boolean | ReadonlySet<string>
   required?: boolean
-  error?: string | ((selected: ReadonlySet<T>) => Promisable<string | void>)
+  error?: boolean | string | ((selected: ReadonlySet<T>) => Promisable<boolean | string>)
   validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
@@ -37,11 +37,12 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
       gap: '0.2em 1em',
       disabled: false,
       required: false,
+      error: false as Required<CheckboxesProps<T>>['error'],
       validateImmediately: false,
       fullWidth: false,
       showSearchBox: false,
     },
-    ['values', 'gridColumnsCount', 'error', 'onChangeSelected']
+    ['values', 'gridColumnsCount', 'onChangeSelected']
   )
 
   function getLabel(value: T): JSX.Element {
@@ -64,7 +65,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
-  const errorSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
   })
@@ -81,34 +82,35 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
   async function deriveError(
     shouldValidate: boolean,
     selected: ReadonlySet<T>,
-    error: CheckboxesProps<T>['error'],
+    error: Required<CheckboxesProps<T>>['error'],
     required: boolean
-  ): Promise<string | undefined> {
+  ): Promise<boolean | string> {
+    if (error === true) return true
+
     if (required) {
       if (!shouldValidate) {
-        return undefined
+        return false
+      } else if (error === false) {
+        return selected.size === 0
       } else if (typeof error === 'string') {
         if (selected.size > 0) {
-          return undefined
+          return false
         } else {
           return error
         }
       } else {
-        const result = await error?.(selected)
-        if (selected.size > 0) {
-          return result ?? undefined
-        } else {
-          return result ?? ''
-        }
+        const result = await error(selected)
+        if (selected.size === 0 && result === false) return true
+
+        return result
       }
     } else {
-      if (typeof error === 'string') {
+      if (error === false || typeof error === 'string') {
         return error
       } else if (!shouldValidate) {
-        return undefined
+        return false
       } else {
-        const result = await error?.(selected)
-        return result ?? undefined
+        return await error(selected)
       }
     }
   }
@@ -128,7 +130,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
         '--solid-design-parts-Checkboxes_gap': props.gap,
         '--solid-design-parts-Checkboxes_grid-columns-count': props.gridColumnsCount,
       })}
-      aria-invalid={errorSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== false}
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
@@ -138,7 +140,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
             <Checkbox
               checked={selectedSignal.value.has(value)}
               disabled={isDisabled(value)}
-              error={errorSignal.value !== undefined ? '' : undefined}
+              error={errorSignal.value !== false}
               onChangeChecked={(checked) => {
                 isEditedSignal.value = true
                 if (checked) {
