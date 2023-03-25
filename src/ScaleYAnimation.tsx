@@ -4,14 +4,14 @@ import { Slot } from './utility/Slot'
 
 export type ScaleYAnimationProps<T> = Props<{
   shown?: T | undefined | null
-  options?: number | KeyframeAnimationOptions
+  durationMs?: number
   onFinishEnterAnimation?: () => void
   onFinishExitAnimation?: () => void
   children?: SlotProp<T>
 }>
 
 export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
-  const [props, restProps] = prepareProps(rawProps, { options: 250 }, [
+  const [props, restProps] = prepareProps(rawProps, { durationMs: 250 }, [
     'shown',
     'onFinishEnterAnimation',
     'onFinishExitAnimation',
@@ -42,9 +42,11 @@ export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
   function changeShown(newShown: boolean) {
     if (newShown === Boolean(shown())) return
 
+    const options: KeyframeAnimationOptions = { duration: props.durationMs }
+
     if (!newShown) {
       if (element !== undefined) {
-        const animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], props.options)
+        const animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], options)
         animation.addEventListener('finish', () => {
           setShown(newShown)
           props.onFinishExitAnimation?.()
@@ -52,7 +54,7 @@ export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
       }
     } else {
       setShown(newShown)
-      const animation = element?.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], props.options)
+      const animation = element?.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], options)
       animation?.addEventListener('finish', () => {
         props.onFinishEnterAnimation?.()
       })

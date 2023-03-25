@@ -25,7 +25,7 @@ import { NumberInputCatalog } from './NumberInputCatalog'
 import { PopoverCatalog } from './PopoverCatalog'
 import { RadioButtonsCatalog } from './RadioButtonsCatalog'
 import { ResizableCatalog } from './ResizableCatalog'
-import { ScaleYCatalog } from './ScaleYAnimationCatalog'
+import { ScaleYAnimationCatalog } from './ScaleYAnimationCatalog'
 import { ScrollableCatalog } from './ScrollableCatalog'
 import { SelectCatalog } from './SelectCatalog'
 import { SliderCatalog } from './SliderCatalog'
@@ -82,7 +82,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   TriangleCatalog,
   SpeechBubbleCatalog,
   FadeAnimationCatalog,
-  ScaleYCatalog,
+  ScaleYAnimationCatalog,
   AwaitCatalog,
   UrlToLinkCatalog,
 }))

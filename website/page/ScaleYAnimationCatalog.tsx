@@ -7,7 +7,7 @@ import { Catalog } from './ComponentCatalogPage'
 
 const [shown, setShown] = createSignal(true)
 
-export const ScaleYCatalog: Catalog = createRoot(() => ({
+export const ScaleYAnimationCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
@@ -29,7 +29,7 @@ export const ScaleYCatalog: Catalog = createRoot(() => ({
             return (
               <>
                 <Button onClick={() => setShown(!shown())}>Toggle</Button>
-                <ScaleYAnimation shown={shown()} options={1000}>
+                <ScaleYAnimation shown={shown()} durationMs={1000}>
                   <div>Content</div>
                 </ScaleYAnimation>
               </>

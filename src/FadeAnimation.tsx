@@ -4,14 +4,14 @@ import { Slot } from './utility/Slot'
 
 export type FadeAnimationProps<T> = Props<{
   shown?: T | undefined | null
-  options?: number | KeyframeAnimationOptions
+  durationMs?: number
   onFinishEnterAnimation?: () => void
   onFinishExitAnimation?: () => void
   children?: SlotProp<T>
 }>
 
 export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
-  const [props, restProps] = prepareProps(rawProps, { options: 250 }, [
+  const [props, restProps] = prepareProps(rawProps, { durationMs: 250 }, [
     'shown',
     'onFinishEnterAnimation',
     'onFinishExitAnimation',
@@ -42,15 +42,17 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
   function changeShown(newShown: boolean) {
     if (newShown === Boolean(shown())) return
 
+    const options: KeyframeAnimationOptions = { duration: props.durationMs }
+
     if (!newShown) {
-      const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], props.options)
+      const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], options)
       animation?.addEventListener('finish', () => {
         setShown(newShown)
         props.onFinishExitAnimation?.()
       })
     } else {
       setShown(newShown)
-      const animation = element?.animate([{ opacity: 0 }, { opacity: 1 }], props.options)
+      const animation = element?.animate([{ opacity: 0 }, { opacity: 1 }], options)
       animation?.addEventListener('finish', () => {
         props.onFinishEnterAnimation?.()
       })

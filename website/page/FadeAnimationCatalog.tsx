@@ -29,7 +29,7 @@ export const FadeAnimationCatalog: Catalog = createRoot(() => ({
             return (
               <>
                 <Button onClick={() => setShown(!shown())}>Toggle</Button>
-                <FadeAnimation shown={shown()} options={1000}>
+                <FadeAnimation shown={shown()} durationMs={1000}>
                   <div>Content</div>
                 </FadeAnimation>
               </>
