@@ -15,12 +15,12 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'minValue and maxValue',
+      title: 'min and max',
       children: (
         <>
-          <Slider minValue={-1} />
-          <Slider maxValue={100} value={30} />
-          <Slider minValue={-2} maxValue={2} value={0} />
+          <Slider min={-1} />
+          <Slider max={100} value={30} />
+          <Slider min={-2} max={2} value={0} />
         </>
       ),
     },
@@ -29,9 +29,9 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       description: 'Specifying stops or steps prop will make it a discrete slider.',
       children: (
         <>
-          <Slider stops={[25, 50, 75]} maxValue={100} />
-          <Slider step={0.1} maxValue={10} />
-          <Slider step={10} offset={3} maxValue={50} />
+          <Slider stops={[25, 50, 75]} max={100} />
+          <Slider step={0.1} max={10} />
+          <Slider step={10} offset={3} max={50} />
         </>
       ),
     },

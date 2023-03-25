@@ -9,8 +9,8 @@ registerCss(css)
 
 export type SliderProps = Props<{
   value?: number
-  minValue?: number
-  maxValue?: number
+  min?: number
+  max?: number
   stops?: readonly number[]
   step?: number
   offset?: number
@@ -26,9 +26,9 @@ export function Slider(rawProps: SliderProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      minValue: 0,
-      maxValue: 1,
-      value: rawProps.minValue ?? 0,
+      min: 0,
+      max: 1,
+      value: rawProps.min ?? 0,
       trackColor: 'var(--solid-design-parts-Slider_track-default-color)',
       trackFillColor: 'var(--solid-design-parts-Slider_track-default-fill-color)',
       thumbWidth: 'var(--solid-design-parts-Slider_thumb-default-width)',
@@ -39,14 +39,14 @@ export function Slider(rawProps: SliderProps) {
   )
 
   const stops = createMemo(() => {
-    if (props.stops !== undefined) return [props.minValue, ...props.stops, props.maxValue]
+    if (props.stops !== undefined) return [props.min, ...props.stops, props.max]
 
     if (props.step !== undefined) {
       const result = []
-      for (let i = props.minValue + (props.offset ?? 0); i < props.maxValue; i += props.step) {
+      for (let i = props.min + (props.offset ?? 0); i < props.max; i += props.step) {
         result.push(i)
       }
-      result.push(props.maxValue)
+      result.push(props.max)
       return result
     }
 
@@ -55,7 +55,7 @@ export function Slider(rawProps: SliderProps) {
 
   const [value, setValue] = createSignal(props.value)
   createRenderEffect(() => setValue(correctValue(props.value)))
-  const ratio = () => (value() - props.minValue) / (props.maxValue - props.minValue)
+  const ratio = () => (value() - props.min) / (props.max - props.min)
 
   // Change internal state and callback it.
   // For discrete sliders, the value is corrected to the nearest stop.
@@ -112,7 +112,7 @@ export function Slider(rawProps: SliderProps) {
   function convertOffsetXToValue(offsetX: number): number {
     const validOffsetX = Math.max(thumbWidthPx() / 2, Math.min(offsetX, trackWidthPx() - thumbWidthPx() / 2))
     const ratio = (validOffsetX - thumbWidthPx() / 2) / (trackWidthPx() - thumbWidthPx())
-    return props.minValue + ratio * (props.maxValue - props.minValue)
+    return props.min + ratio * (props.max - props.min)
   }
 
   onMount(() => {
