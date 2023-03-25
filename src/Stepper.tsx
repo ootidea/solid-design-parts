@@ -35,7 +35,7 @@ export function Stepper(rawProps: StepperProps) {
                 />
               </Show>
               <div
-                class="solid-design-parts-Stepper_circle"
+                class="solid-design-parts-Stepper_stop"
                 classList={{
                   'solid-design-parts-Stepper_reached': i <= props.currentStep,
                 }}
