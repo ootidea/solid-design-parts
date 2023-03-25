@@ -31,7 +31,11 @@ export const TabsCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Passive',
-      description: 'If the passive flag is set, tab clicks will not change the active tab.',
+      description: (
+        <>
+          If the <code>passive</code> option is set, tab clicks will not change the active tab.
+        </>
+      ),
       children: (
         <>
           <Tabs passive names={['tab1', 'tab2', 'tab3']} onClickTab={(tabName) => showToast('success', tabName)}></Tabs>

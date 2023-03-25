@@ -72,7 +72,11 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Validate initial value',
-      description: 'If validateImmediately option is set, it perform validation even if the user did not edit it.',
+      description: (
+        <>
+          If <code>validateImmediately</code> option is set, it perform validation even if the user did not edit it.
+        </>
+      ),
       children: (
         <>
           <MultiSelect

@@ -26,7 +26,11 @@ export const SliderCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Discrete sliders',
-      description: 'Specifying stops or steps prop will make it a discrete slider.',
+      description: (
+        <>
+          Specifying <code>stops</code> or <code>steps</code> prop will make it a discrete slider.
+        </>
+      ),
       children: (
         <>
           <Slider stops={[25, 50, 75]} max={100} />
