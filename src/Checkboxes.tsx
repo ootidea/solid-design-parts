@@ -8,25 +8,25 @@ import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
-export type CheckboxesProps<T extends string> = Props<{
-  values: readonly T[]
-  labels?: Partial<Record<T, JSX.Element>>
-  selected?: ReadonlySet<T>
+export type CheckboxesProps<T extends readonly (string | number)[]> = Props<{
+  values: T
+  labels?: Partial<Record<T[number], JSX.Element>>
+  selected?: ReadonlySet<T[number]>
   placeholder?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
   gridColumnsCount?: number | undefined
-  disabled?: boolean | ReadonlySet<string>
+  disabled?: boolean | ReadonlySet<T[number]>
   required?: boolean
-  error?: boolean | string | ((selected: ReadonlySet<T>) => Promisable<boolean | string>)
+  error?: boolean | string | ((selected: ReadonlySet<T[number]>) => Promisable<boolean | string>)
   validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
-  onChangeSelected?: (selected: Set<T>) => void
-  onChangeValidSelected?: (selected: Set<T>) => void
+  onChangeSelected?: (selected: Set<T[number]>) => void
+  onChangeValidSelected?: (selected: Set<T[number]>) => void
 }>
 
-export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
+export function Checkboxes<T extends readonly (string | number)[]>(rawProps: CheckboxesProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -45,13 +45,13 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
     ['values', 'gridColumnsCount', 'onChangeSelected']
   )
 
-  function getLabel(value: T): JSX.Element {
+  function getLabel(value: T[number]): JSX.Element {
     return props.labels?.[value] ?? value
   }
 
   const selectedSignal = createSignalObject(new Set(props.selected), { equals: false })
   createRenderEffect(() => (selectedSignal.value = new Set(props.selected)))
-  async function changeSelected(newSelected: Set<T>) {
+  async function changeSelected(newSelected: Set<T[number]>) {
     selectedSignal.value = newSelected
     props.onChangeSelected?.(newSelected)
 
@@ -81,7 +81,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
 
   async function deriveError(
     shouldValidate: boolean,
-    selected: ReadonlySet<T>,
+    selected: ReadonlySet<T[number]>,
     error: Required<CheckboxesProps<T>>['error'],
     required: boolean
   ): Promise<boolean | string> {
@@ -115,7 +115,7 @@ export function Checkboxes<T extends string>(rawProps: CheckboxesProps<T>) {
     }
   }
 
-  function isDisabled(value: string): boolean {
+  function isDisabled(value: T[number]): boolean {
     if (typeof props.disabled === 'boolean') return props.disabled
 
     return props.disabled.has(value)
