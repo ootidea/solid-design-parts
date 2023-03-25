@@ -39,8 +39,8 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       title: 'Error message',
       children: (
         <>
-          <NumberInput placeholder="placeholder" errorMessage="Invalid value" />
-          <NumberInput value={1999} errorMessage="Error" />
+          <NumberInput placeholder="placeholder" error="Invalid value" />
+          <NumberInput value={1999} error="Error" />
         </>
       ),
     },
@@ -50,7 +50,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
         <>
           <NumberInput
             placeholder="placeholder"
-            errorMessage={(value) => {
+            error={(value) => {
               if (value === undefined) return 'Required'
 
               return
@@ -58,7 +58,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
           />
           <NumberInput
             value={100}
-            errorMessage={(value) => {
+            error={(value) => {
               if (value === undefined) return 'Required'
               if (value < 0) return 'Please enter a non-negative number'
 
@@ -75,7 +75,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
         <>
           <NumberInput
             placeholder="placeholder"
-            errorMessage={(value) => {
+            error={(value) => {
               if (value === undefined) return 'Required'
 
               return
@@ -84,7 +84,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
           />
           <NumberInput
             value={100}
-            errorMessage={(value) => {
+            error={(value) => {
               if (value === undefined) return 'Required'
               if (value < 0) return 'Please enter a non-negative number'
 
@@ -99,8 +99,8 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       title: 'Required',
       children: (
         <>
-          <NumberInput placeholder="placeholder" required errorMessage="Required" />
-          <NumberInput placeholder="placeholder" required errorMessage="Required" validateImmediately />
+          <NumberInput placeholder="placeholder" required error="Required" />
+          <NumberInput placeholder="placeholder" required error="Required" validateImmediately />
           <NumberInput placeholder="Empty error message" required />
         </>
       ),

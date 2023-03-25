@@ -172,7 +172,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
                       class="solid-design-parts-Select_search-box"
                       placeholder="search"
                       value={searchQuerySignal.value}
-                      errorMessage={(value) => {
+                      error={(value) => {
                         if (search(props.values, value).length === 0) return ''
 
                         return

@@ -16,7 +16,7 @@ export type NumberInputProps = Props<{
   inputMode?: 'decimal' | 'numeric'
   disabled?: boolean
   required?: boolean
-  errorMessage?: string | ((value: number | undefined) => Promisable<string | void>)
+  error?: string | ((value: number | undefined) => Promisable<string | void>)
   validateImmediately?: boolean
   radius?: string
   prepend?: JSX.Element
@@ -35,7 +35,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['value', 'placeholder', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    ['value', 'placeholder', 'error', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const stringSignal = createSignalObject(stringify(props.value))
@@ -57,25 +57,15 @@ export function NumberInput(rawProps: NumberInputProps) {
 
   const hasInputElementFocusSignal = createSignalObject(false)
 
-  const errorMessageSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    errorMessageSignal.value = await deriveErrorMessage(
-      shouldValidate(),
-      untrack(numberSignal.get),
-      props.errorMessage,
-      props.required
-    )
+    errorSignal.value = await deriveError(shouldValidate(), untrack(numberSignal.get), props.error, props.required)
   })
   createRenderEffect(
     on(
       () => props.value,
       async () => {
-        errorMessageSignal.value = await deriveErrorMessage(
-          shouldValidate(),
-          props.value,
-          props.errorMessage,
-          props.required
-        )
+        errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
       },
       { defer: true }
     )
@@ -91,9 +81,9 @@ export function NumberInput(rawProps: NumberInputProps) {
     numberSignal.value = newValue
     props.onChangeValue?.(newValue)
 
-    const nextErrorMessage = await deriveErrorMessage(shouldValidate(), newValue, props.errorMessage, props.required)
-    errorMessageSignal.value = nextErrorMessage
-    if (nextErrorMessage === undefined) {
+    const nextError = await deriveError(shouldValidate(), newValue, props.error, props.required)
+    errorSignal.value = nextError
+    if (nextError === undefined) {
       props.onChangeValidValue?.(newValue)
     }
   }
@@ -110,23 +100,23 @@ export function NumberInput(rawProps: NumberInputProps) {
     return Number.isFinite(value) ? String(value) : ''
   }
 
-  async function deriveErrorMessage(
+  async function deriveError(
     shouldValidate: boolean,
     value: number | undefined,
-    errorMessage: NumberInputProps['errorMessage'],
+    error: NumberInputProps['error'],
     required: boolean
   ): Promise<string | undefined> {
     if (required) {
       if (!shouldValidate) {
         return undefined
-      } else if (typeof errorMessage === 'string') {
+      } else if (typeof error === 'string') {
         if (value !== undefined) {
           return undefined
         } else {
-          return errorMessage
+          return error
         }
       } else {
-        const result = await errorMessage?.(value)
+        const result = await error?.(value)
         if (value !== undefined) {
           return result ?? undefined
         } else {
@@ -134,12 +124,12 @@ export function NumberInput(rawProps: NumberInputProps) {
         }
       }
     } else {
-      if (typeof errorMessage === 'string') {
-        return errorMessage
+      if (typeof error === 'string') {
+        return error
       } else if (!shouldValidate) {
         return undefined
       } else {
-        const result = await errorMessage?.(value)
+        const result = await error?.(value)
         return result ?? undefined
       }
     }
@@ -152,7 +142,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       })}
       style={joinStyle(rawProps.style, { '--solid-design-parts-NumberInput_radius': props.radius })}
       aria-disabled={props.disabled}
-      aria-invalid={errorMessageSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== undefined}
       aria-required={props.required}
       {...restProps}
     >
@@ -174,7 +164,7 @@ export function NumberInput(rawProps: NumberInputProps) {
         />
         <Gravity class="solid-design-parts-NumberInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
-      <p class="solid-design-parts-NumberInput_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-NumberInput_error-message">{errorSignal.value}</p>
     </div>
   )
 }

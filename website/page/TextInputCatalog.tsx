@@ -65,8 +65,8 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       title: 'Error message',
       children: (
         <>
-          <TextInput placeholder="placeholder" errorMessage="Invalid value" />
-          <TextInput value="default value" errorMessage="Error" />
+          <TextInput placeholder="placeholder" error="Invalid value" />
+          <TextInput value="default value" error="Error" />
         </>
       ),
     },
@@ -76,7 +76,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
         <>
           <TextInput
             placeholder="placeholder"
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.length === 0) return 'Required'
 
               return
@@ -84,7 +84,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           />
           <TextInput
             value="Default value"
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
               return
@@ -102,7 +102,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           <TextInput
             placeholder="placeholder"
             validateImmediately
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.length === 0) return 'Required'
 
               return
@@ -111,7 +111,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           <TextInput
             value="Default value"
             validateImmediately
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
               return
@@ -124,8 +124,8 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       title: 'Required',
       children: (
         <>
-          <TextInput placeholder="placeholder" required errorMessage="Required" />
-          <TextInput placeholder="placeholder" required errorMessage="Required" validateImmediately />
+          <TextInput placeholder="placeholder" required error="Required" />
+          <TextInput placeholder="placeholder" required error="Required" validateImmediately />
           <TextInput placeholder="Empty error message" required />
         </>
       ),

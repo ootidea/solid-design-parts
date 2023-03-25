@@ -41,8 +41,8 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Error message',
       children: (
         <>
-          <Checkbox errorMessage="Something went wrong">Auto-update</Checkbox>
-          <Checkbox errorMessage="">Keep me signed in</Checkbox>
+          <Checkbox error="Something went wrong">Auto-update</Checkbox>
+          <Checkbox error="">Keep me signed in</Checkbox>
         </>
       ),
     },
@@ -50,10 +50,10 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Validation',
       children: (
         <>
-          <Checkbox errorMessage={(checked) => !checked && 'This checkbox is required'}>
+          <Checkbox error={(checked) => !checked && 'This checkbox is required'}>
             I agree to the terms of service
           </Checkbox>
-          <Checkbox errorMessage={(checked) => checked && 'Cannot be used with other options'}>Auto-update</Checkbox>
+          <Checkbox error={(checked) => checked && 'Cannot be used with other options'}>Auto-update</Checkbox>
         </>
       ),
     },
@@ -61,14 +61,10 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Validate initial value',
       children: (
         <>
-          <Checkbox errorMessage={(checked) => !checked && 'This checkbox is required'} validateImmediately>
+          <Checkbox error={(checked) => !checked && 'This checkbox is required'} validateImmediately>
             I agree to the terms of service
           </Checkbox>
-          <Checkbox
-            checked
-            errorMessage={(checked) => checked && 'Cannot be used with other options'}
-            validateImmediately
-          >
+          <Checkbox checked error={(checked) => checked && 'Cannot be used with other options'} validateImmediately>
             Auto-update
           </Checkbox>
         </>
@@ -81,7 +77,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
           <Checkbox required validateImmediately>
             I agree to the terms of service
           </Checkbox>
-          <Checkbox required errorMessage="Required under the new policy">
+          <Checkbox required error="Required under the new policy">
             Auto-update
           </Checkbox>
         </>

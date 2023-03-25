@@ -13,7 +13,7 @@ export type CheckboxProps = Props<{
   value?: string | undefined
   disabled?: boolean
   required?: boolean
-  errorMessage?: boolean | string | ((checked: boolean) => Promisable<boolean | string>)
+  error?: boolean | string | ((checked: boolean) => Promisable<boolean | string>)
   validateImmediately?: boolean
   radius?: string
   onChangeChecked?: (checked: boolean) => void
@@ -28,7 +28,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       value: undefined,
       disabled: false,
       required: false,
-      errorMessage: false as Required<CheckboxProps>['errorMessage'],
+      error: false as Required<CheckboxProps>['error'],
       validateImmediately: false,
       radius: 'var(--solid-design-parts-Checkbox_checkbox-default-radius)',
     },
@@ -40,25 +40,15 @@ export function Checkbox(rawProps: CheckboxProps) {
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
-  const errorMessageSignal = createSignalObject<boolean | string>(false)
+  const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorMessageSignal.value = await deriveErrorMessage(
-      shouldValidate(),
-      untrack(checkedSignal.get),
-      props.errorMessage,
-      props.required
-    )
+    errorSignal.value = await deriveError(shouldValidate(), untrack(checkedSignal.get), props.error, props.required)
   })
   createRenderEffect(
     on(
       () => props.checked,
       async () => {
-        errorMessageSignal.value = await deriveErrorMessage(
-          shouldValidate(),
-          props.checked,
-          props.errorMessage,
-          props.required
-        )
+        errorSignal.value = await deriveError(shouldValidate(), props.checked, props.error, props.required)
       },
       { defer: true }
     )
@@ -72,45 +62,45 @@ export function Checkbox(rawProps: CheckboxProps) {
     checkedSignal.value = checked
     props.onChangeChecked?.(checked)
 
-    const newErrorMessage = await deriveErrorMessage(shouldValidate(), checked, props.errorMessage, props.required)
-    errorMessageSignal.value = newErrorMessage
-    if (newErrorMessage === false) {
+    const newError = await deriveError(shouldValidate(), checked, props.error, props.required)
+    errorSignal.value = newError
+    if (newError === false) {
       props.onChangeValidChecked?.(checked)
     }
   }
 
-  async function deriveErrorMessage(
+  async function deriveError(
     shouldValidate: boolean,
     checked: boolean,
-    errorMessage: Required<CheckboxProps>['errorMessage'],
+    error: Required<CheckboxProps>['error'],
     required: boolean
   ): Promise<boolean | string> {
-    if (errorMessage === true) return true
+    if (error === true) return true
 
     if (required) {
       if (!shouldValidate) {
         return false
-      } else if (errorMessage === false) {
+      } else if (error === false) {
         return !checked
-      } else if (typeof errorMessage === 'string') {
+      } else if (typeof error === 'string') {
         if (checked) {
           return false
         } else {
-          return errorMessage
+          return error
         }
       } else {
-        const result = await errorMessage(checked)
+        const result = await error(checked)
         if (!checked && result === false) return true
 
         return result
       }
     } else {
-      if (errorMessage === false || typeof errorMessage === 'string') {
-        return errorMessage
+      if (error === false || typeof error === 'string') {
+        return error
       } else if (!shouldValidate) {
         return false
       } else {
-        return await errorMessage(checked)
+        return await error(checked)
       }
     }
   }
@@ -120,7 +110,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       class={joinClasses(rawProps, 'solid-design-parts-Checkbox_root')}
       style={joinStyle(rawProps.style, { '--solid-design-parts-Checkbox_checkbox-radius': props.radius })}
       aria-disabled={props.disabled}
-      aria-invalid={errorMessageSignal.value !== false}
+      aria-invalid={errorSignal.value !== false}
       {...restProps}
     >
       <label class="solid-design-parts-Checkbox_label">
@@ -134,7 +124,7 @@ export function Checkbox(rawProps: CheckboxProps) {
         />
         <div class="solid-design-parts-Checkbox_children">{rawProps.children}</div>
       </label>
-      <p class="solid-design-parts-Checkbox_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-Checkbox_error-message">{errorSignal.value}</p>
     </div>
   )
 }

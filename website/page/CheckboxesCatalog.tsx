@@ -108,8 +108,8 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       title: 'Error message',
       children: (
         <>
-          <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} errorMessage="Something went wrong" />
-          <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} errorMessage="" />
+          <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} error="Something went wrong" />
+          <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} error="" />
         </>
       ),
     },
@@ -118,7 +118,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} required />
-          <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} required errorMessage="Required" />
+          <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} required error="Required" />
         </>
       ),
     },
@@ -128,7 +128,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
         <>
           <Checkboxes
             values={['Windows', 'macOS', 'Linux']}
-            errorMessage={(selected) => {
+            error={(selected) => {
               if (selected.size === 2) return
               return 'Select two options.'
             }}
@@ -143,7 +143,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
           <Checkboxes values={['PC', 'Smartphone']} required validateImmediately />
           <Checkboxes
             values={['Windows', 'macOS', 'Linux']}
-            errorMessage={(selected) => {
+            error={(selected) => {
               if (selected.size === 2) return
               return 'Select two options.'
             }}

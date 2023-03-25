@@ -49,7 +49,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
         <>
           <AutoSizeTextArea
             placeholder="placeholder"
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.length === 0) return 'Required'
 
               return
@@ -57,7 +57,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
           />
           <AutoSizeTextArea
             value="Default value"
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
               return
@@ -74,7 +74,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
           <AutoSizeTextArea
             placeholder="placeholder"
             validateImmediately
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.length === 0) return 'Required'
 
               return
@@ -83,7 +83,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
           <AutoSizeTextArea
             value="Default value"
             validateImmediately
-            errorMessage={(value) => {
+            error={(value) => {
               if (value.toLowerCase() !== value) return 'Uppercase letters are not allowed.'
 
               return
@@ -97,12 +97,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <AutoSizeTextArea placeholder="placeholder" required />
-          <AutoSizeTextArea
-            placeholder="placeholder"
-            required
-            errorMessage="This field is required"
-            validateImmediately
-          />
+          <AutoSizeTextArea placeholder="placeholder" required error="This field is required" validateImmediately />
         </>
       ),
     },

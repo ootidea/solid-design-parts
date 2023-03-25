@@ -30,7 +30,7 @@ export type TextInputProps = Props<{
   >
   disabled?: boolean
   required?: boolean
-  errorMessage?: string | ((value: string) => Promisable<string | void>)
+  error?: string | ((value: string) => Promisable<string | void>)
   validateImmediately?: boolean
   radius?: string
   prepend?: JSX.Element
@@ -49,7 +49,7 @@ export function TextInput(rawProps: TextInputProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['placeholder', 'type', 'errorMessage', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    ['placeholder', 'type', 'error', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
   )
 
   const valueSignal = createInjectableSignalObject(props, 'value')
@@ -58,25 +58,15 @@ export function TextInput(rawProps: TextInputProps) {
 
   const hasInputElementFocusSignal = createSignalObject(false)
 
-  const errorMessageSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    errorMessageSignal.value = await deriveErrorMessage(
-      shouldValidate(),
-      untrack(valueSignal.get),
-      props.errorMessage,
-      props.required
-    )
+    errorSignal.value = await deriveError(shouldValidate(), untrack(valueSignal.get), props.error, props.required)
   })
   createRenderEffect(
     on(
       () => props.value,
       async () => {
-        errorMessageSignal.value = await deriveErrorMessage(
-          shouldValidate(),
-          props.value,
-          props.errorMessage,
-          props.required
-        )
+        errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
       },
       { defer: true }
     )
@@ -91,30 +81,30 @@ export function TextInput(rawProps: TextInputProps) {
     valueSignal.value = newValue
     props.onChangeValue?.(newValue)
 
-    const nextErrorMessage = await deriveErrorMessage(shouldValidate(), newValue, props.errorMessage, props.required)
-    errorMessageSignal.value = nextErrorMessage
-    if (nextErrorMessage === undefined) {
+    const nextError = await deriveError(shouldValidate(), newValue, props.error, props.required)
+    errorSignal.value = nextError
+    if (nextError === undefined) {
       props.onChangeValidValue?.(newValue)
     }
   }
 
-  async function deriveErrorMessage(
+  async function deriveError(
     shouldValidate: boolean,
     value: string,
-    errorMessage: TextInputProps['errorMessage'],
+    error: TextInputProps['error'],
     required: boolean
   ): Promise<string | undefined> {
     if (required) {
       if (!shouldValidate) {
         return undefined
-      } else if (typeof errorMessage === 'string') {
+      } else if (typeof error === 'string') {
         if (value) {
           return undefined
         } else {
-          return errorMessage
+          return error
         }
       } else {
-        const result = await errorMessage?.(value)
+        const result = await error?.(value)
         if (value) {
           return result ?? undefined
         } else {
@@ -122,12 +112,12 @@ export function TextInput(rawProps: TextInputProps) {
         }
       }
     } else {
-      if (typeof errorMessage === 'string') {
-        return errorMessage
+      if (typeof error === 'string') {
+        return error
       } else if (!shouldValidate) {
         return undefined
       } else {
-        const result = await errorMessage?.(value)
+        const result = await error?.(value)
         return result ?? undefined
       }
     }
@@ -140,7 +130,7 @@ export function TextInput(rawProps: TextInputProps) {
       })}
       style={joinStyle(rawProps.style, { '--solid-design-parts-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
-      aria-invalid={errorMessageSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== undefined}
       aria-required={props.required}
       {...restProps}
     >
@@ -161,7 +151,7 @@ export function TextInput(rawProps: TextInputProps) {
         />
         <Gravity class="solid-design-parts-TextInput_append">{rawProps.append}</Gravity>
       </StretchLayout>
-      <p class="solid-design-parts-TextInput_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
     </div>
   )
 }

@@ -46,7 +46,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Error message',
       children: (
         <>
-          <MultiSelect values={['Windows', 'macOS', 'Linux']} errorMessage="Invalid value" />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} error="Invalid value" />
         </>
       ),
     },
@@ -56,7 +56,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
         <>
           <MultiSelect
             values={['Windows', 'macOS', 'Linux']}
-            errorMessage={(selected) => {
+            error={(selected) => {
               if (selected.size < 2) return 'Select multiple options'
 
               return
@@ -73,7 +73,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
           <MultiSelect
             values={['Windows', 'macOS', 'Linux']}
             validateImmediately
-            errorMessage={(selected) => {
+            error={(selected) => {
               if (selected.size < 2) return 'Select multiple options'
 
               return
@@ -91,7 +91,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
             values={['Windows', 'macOS', 'Linux']}
             required
             validateImmediately
-            errorMessage="One or more selections required"
+            error="One or more selections required"
           />
         </>
       ),

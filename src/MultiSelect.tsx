@@ -22,7 +22,7 @@ export type MultiSelectProps<T extends string> = Props<{
   placeholder?: string
   disabled?: boolean
   required?: boolean
-  errorMessage?: string | ((selected: ReadonlySet<T>) => Promisable<string | void>)
+  error?: string | ((selected: ReadonlySet<T>) => Promisable<string | void>)
   validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
@@ -43,7 +43,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
       fullWidth: false,
       showSearchBox: false,
     },
-    ['values', 'errorMessage', 'onChangeSelected']
+    ['values', 'error', 'onChangeSelected']
   )
 
   function getLabel(value: T): JSX.Element {
@@ -56,9 +56,9 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     selectedSignal.value = newSelected
     props.onChangeSelected?.(newSelected)
 
-    const newErrorMessage = await deriveErrorMessage(shouldValidate(), newSelected, props.errorMessage, props.required)
-    errorMessageSignal.value = newErrorMessage
-    if (newErrorMessage === undefined) {
+    const newError = await deriveError(shouldValidate(), newSelected, props.error, props.required)
+    errorSignal.value = newError
+    if (newError === undefined) {
       props.onChangeValidSelected?.(newSelected)
     }
   }
@@ -66,47 +66,37 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
-  const errorMessageSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    errorMessageSignal.value = await deriveErrorMessage(
-      shouldValidate(),
-      untrack(selectedSignal.get),
-      props.errorMessage,
-      props.required
-    )
+    errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
   })
   createRenderEffect(
     on(
       () => props.selected,
       async () => {
-        errorMessageSignal.value = await deriveErrorMessage(
-          shouldValidate(),
-          props.selected,
-          props.errorMessage,
-          props.required
-        )
+        errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
       },
       { defer: true }
     )
   )
 
-  async function deriveErrorMessage(
+  async function deriveError(
     shouldValidate: boolean,
     selected: ReadonlySet<T>,
-    errorMessage: MultiSelectProps<T>['errorMessage'],
+    error: MultiSelectProps<T>['error'],
     required: boolean
   ): Promise<string | undefined> {
     if (required) {
       if (!shouldValidate) {
         return undefined
-      } else if (typeof errorMessage === 'string') {
+      } else if (typeof error === 'string') {
         if (selected.size > 0) {
           return undefined
         } else {
-          return errorMessage
+          return error
         }
       } else {
-        const result = await errorMessage?.(selected)
+        const result = await error?.(selected)
         if (selected.size > 0) {
           return result ?? undefined
         } else {
@@ -114,12 +104,12 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
         }
       }
     } else {
-      if (typeof errorMessage === 'string') {
-        return errorMessage
+      if (typeof error === 'string') {
+        return error
       } else if (!shouldValidate) {
         return undefined
       } else {
-        const result = await errorMessage?.(selected)
+        const result = await error?.(selected)
         return result ?? undefined
       }
     }
@@ -194,7 +184,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
           class="solid-design-parts-MultiSelect_launcher"
           type="button"
           disabled={props.disabled}
-          aria-invalid={errorMessageSignal.value !== undefined}
+          aria-invalid={errorSignal.value !== undefined}
           onClick={onClickLauncher}
         >
           <div class="solid-design-parts-MultiSelect_preview-area">
@@ -238,7 +228,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
           </div>
           <Icon class="solid-design-parts-MultiSelect_icon" src={chevronDownIcon} />
         </button>
-        <p class="solid-design-parts-MultiSelect_error-message">{errorMessageSignal.value}</p>
+        <p class="solid-design-parts-MultiSelect_error-message">{errorSignal.value}</p>
       </div>
       {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
       <Show when={dropdownInfoSignal.value}>
@@ -268,7 +258,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                       class="solid-design-parts-MultiSelect_search-box"
                       placeholder="search"
                       value={searchQuerySignal.value}
-                      errorMessage={(value) => {
+                      error={(value) => {
                         if (search(props.values, value).length === 0) return ''
 
                         return

@@ -18,7 +18,7 @@ export type RadioButtonsProps<T extends string> = Props<{
   gridColumnsCount?: number | undefined
   disabled?: boolean | ReadonlySet<string>
   required?: boolean
-  errorMessage?: string | ((selected: T | undefined) => Promisable<string | void>)
+  error?: string | ((selected: T | undefined) => Promisable<string | void>)
   validateImmediately?: boolean
   enableDeselection?: boolean
   onChangeSelected?: (selected: T | undefined) => void
@@ -37,7 +37,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
       validateImmediately: false,
       enableDeselection: false,
     },
-    ['values', 'selected', 'labels', 'gridColumnsCount', 'errorMessage', 'onChangeSelected', 'onChangeValidSelected']
+    ['values', 'selected', 'labels', 'gridColumnsCount', 'error', 'onChangeSelected', 'onChangeValidSelected']
   )
 
   const selectedSignal = createInjectableSignalObject(props, 'selected')
@@ -45,25 +45,15 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
-  const errorMessageSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<string | undefined>()
   createRenderEffect(async () => {
-    errorMessageSignal.value = await deriveErrorMessage(
-      shouldValidate(),
-      untrack(selectedSignal.get),
-      props.errorMessage,
-      props.required
-    )
+    errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
   })
   createRenderEffect(
     on(
       () => props.selected,
       async () => {
-        errorMessageSignal.value = await deriveErrorMessage(
-          shouldValidate(),
-          props.selected,
-          props.errorMessage,
-          props.required
-        )
+        errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
       },
       { defer: true }
     )
@@ -93,35 +83,30 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
     selectedSignal.value = nextSelected
     props.onChangeSelected?.(nextSelected)
 
-    const nextErrorMessage = await deriveErrorMessage(
-      shouldValidate(),
-      nextSelected,
-      props.errorMessage,
-      props.required
-    )
-    errorMessageSignal.value = nextErrorMessage
-    if (nextErrorMessage === undefined) {
+    const nextError = await deriveError(shouldValidate(), nextSelected, props.error, props.required)
+    errorSignal.value = nextError
+    if (nextError === undefined) {
       props.onChangeValidSelected?.(nextSelected)
     }
   }
 
-  async function deriveErrorMessage(
+  async function deriveError(
     shouldValidate: boolean,
     selected: T | undefined,
-    errorMessage: RadioButtonsProps<T>['errorMessage'],
+    error: RadioButtonsProps<T>['error'],
     required: boolean
   ): Promise<string | undefined> {
     if (required) {
       if (!shouldValidate) {
         return undefined
-      } else if (typeof errorMessage === 'string') {
+      } else if (typeof error === 'string') {
         if (selected !== undefined) {
           return undefined
         } else {
-          return errorMessage
+          return error
         }
       } else {
-        const result = await errorMessage?.(selected)
+        const result = await error?.(selected)
         if (selected !== undefined) {
           return result ?? undefined
         } else {
@@ -129,12 +114,12 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
         }
       }
     } else {
-      if (typeof errorMessage === 'string') {
-        return errorMessage
+      if (typeof error === 'string') {
+        return error
       } else if (!shouldValidate) {
         return undefined
       } else {
-        const result = await errorMessage?.(selected)
+        const result = await error?.(selected)
         return result ?? undefined
       }
     }
@@ -148,7 +133,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
         '--solid-design-parts-RadioButtons_gap': props.gap,
         '--solid-design-parts-RadioButtons_grid-columns-count': props.gridColumnsCount,
       }}
-      aria-invalid={errorMessageSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== undefined}
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
@@ -174,7 +159,7 @@ export function RadioButtons<T extends string>(rawProps: RadioButtonsProps<T>) {
           )}
         </For>
       </div>
-      <p class="solid-design-parts-RadioButtons_error-message">{errorMessageSignal.value}</p>
+      <p class="solid-design-parts-RadioButtons_error-message">{errorSignal.value}</p>
     </div>
   )
 }
