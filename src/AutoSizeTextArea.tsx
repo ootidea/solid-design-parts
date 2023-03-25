@@ -12,7 +12,7 @@ export type AutoSizeTextAreaProps = Props<
   {
     value?: string
     required?: boolean
-    error?: string | ((value: string) => Promisable<string | void>)
+    error?: boolean | string | ((value: string) => Promisable<boolean | string>)
     validateImmediately?: boolean
     onChangeValue?: (value: string) => void
     onChangeValidValue?: (value: string) => void
@@ -21,17 +21,23 @@ export type AutoSizeTextAreaProps = Props<
 >
 
 export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
-  const [props, restProps] = prepareProps(rawProps, { value: '', required: false, validateImmediately: false }, [
-    'error',
-    'onChangeValue',
-  ])
+  const [props, restProps] = prepareProps(
+    rawProps,
+    {
+      value: '',
+      required: false,
+      error: false as Required<AutoSizeTextAreaProps>['error'],
+      validateImmediately: false,
+    },
+    ['error', 'onChangeValue']
+  )
 
   const valueSignal = createInjectableSignalObject(props, 'value')
 
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
 
-  const errorSignal = createSignalObject<string | undefined>()
+  const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(valueSignal.get), props.error, props.required)
   })
@@ -64,34 +70,35 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   async function deriveError(
     shouldValidate: boolean,
     value: string,
-    error: AutoSizeTextAreaProps['error'],
+    error: Required<AutoSizeTextAreaProps>['error'],
     required: boolean
-  ): Promise<string | undefined> {
+  ): Promise<boolean | string> {
+    if (error === true) return true
+
     if (required) {
       if (!shouldValidate) {
-        return undefined
+        return false
+      } else if (error === false) {
+        return value.length === 0
       } else if (typeof error === 'string') {
-        if (value) {
-          return undefined
+        if (value.length > 0) {
+          return false
         } else {
           return error
         }
       } else {
-        const result = await error?.(value)
-        if (value) {
-          return result ?? undefined
-        } else {
-          return result ?? ''
-        }
+        const result = await error(value)
+        if (value.length === 0 && result === false) return true
+
+        return result
       }
     } else {
-      if (typeof error === 'string') {
+      if (error === false || typeof error === 'string') {
         return error
       } else if (!shouldValidate) {
-        return undefined
+        return false
       } else {
-        const result = await error?.(value)
-        return result ?? undefined
+        return await error(value)
       }
     }
   }
@@ -102,7 +109,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     <div
       class="solid-design-parts-AutoSizeTextArea_root"
       aria-disabled={props.disabled}
-      aria-invalid={errorSignal.value !== undefined}
+      aria-invalid={errorSignal.value !== false}
       aria-required={props.required}
     >
       <div class="solid-design-parts-AutoSizeTextArea_body">
