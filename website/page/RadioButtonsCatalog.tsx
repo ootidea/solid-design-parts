@@ -42,6 +42,11 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Enable deselection',
+      description: (
+        <>
+          If the <code>enableDeselection</code> option is set, clicking the selected option again will deselect it.
+        </>
+      ),
       children: (
         <>
           <RadioButtons values={['left', 'center', 'right']} enableDeselection />
