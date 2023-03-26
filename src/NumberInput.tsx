@@ -19,8 +19,8 @@ export type NumberInputProps = Props<{
   error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
   radius?: string
-  prepend?: JSX.Element
-  append?: JSX.Element
+  prefix?: JSX.Element
+  suffix?: JSX.Element
   onChangeValue?: (value: number | undefined) => void
   onChangeValidValue?: (value: number | undefined) => void
 }>
@@ -36,7 +36,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['value', 'placeholder', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    ['value', 'placeholder', 'prefix', 'suffix', 'onChangeValue', 'onChangeValidValue']
   )
 
   const stringSignal = createSignalObject(stringify(props.value))
@@ -149,7 +149,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       {...restProps}
     >
       <StretchLayout class="solid-design-parts-NumberInput_body" stretchAt={1}>
-        <Gravity class="solid-design-parts-NumberInput_prepend">{rawProps.prepend}</Gravity>
+        <Gravity class="solid-design-parts-NumberInput_prefix">{rawProps.prefix}</Gravity>
         <input
           class="solid-design-parts-NumberInput_input"
           type="text"
@@ -164,7 +164,7 @@ export function NumberInput(rawProps: NumberInputProps) {
             hasInputElementFocusSignal.value = false
           }}
         />
-        <Gravity class="solid-design-parts-NumberInput_append">{rawProps.append}</Gravity>
+        <Gravity class="solid-design-parts-NumberInput_suffix">{rawProps.suffix}</Gravity>
       </StretchLayout>
       <p class="solid-design-parts-NumberInput_error-message">{errorSignal.value}</p>
     </div>

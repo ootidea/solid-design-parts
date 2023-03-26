@@ -5,11 +5,11 @@
   border: 1px solid var(--solid-design-parts-input-border-color);
   background-color: var(--solid-design-parts-background-color);
 
-  // Reason for this configuration: when setting a background color to append or prepend, it may overflow from the rounded corners.
+  // Reason for this configuration: when setting a background color to suffix or prefix, it may overflow from the rounded corners.
   // Here is an example:
   // <TextInput
   //   placeholder="your.domain"
-  //   prepend={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>https://</Gravity>}
+  //   prefix={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>https://</Gravity>}
   // />
   overflow: hidden;
 
@@ -27,8 +27,8 @@
   }
 }
 
-.solid-design-parts-TextInput_prepend,
-.solid-design-parts-TextInput_append {
+.solid-design-parts-TextInput_prefix,
+.solid-design-parts-TextInput_suffix {
   display: grid;
   place-items: center;
 }

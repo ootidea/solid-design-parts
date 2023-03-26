@@ -32,8 +32,8 @@ export type TextInputProps = Props<{
   error?: boolean | string | ((value: string) => Promisable<boolean | string>)
   validateImmediately?: boolean
   radius?: string
-  prepend?: JSX.Element
-  append?: JSX.Element
+  prefix?: JSX.Element
+  suffix?: JSX.Element
   onChangeValue?: (value: string) => void
   onChangeValidValue?: (value: string) => void
 }>
@@ -49,7 +49,7 @@ export function TextInput(rawProps: TextInputProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['placeholder', 'type', 'prepend', 'append', 'onChangeValue', 'onChangeValidValue']
+    ['placeholder', 'type', 'prefix', 'suffix', 'onChangeValue', 'onChangeValidValue']
   )
 
   const valueSignal = createInjectableSignalObject(props, 'value')
@@ -136,7 +136,7 @@ export function TextInput(rawProps: TextInputProps) {
       {...restProps}
     >
       <StretchLayout class="solid-design-parts-TextInput_body" stretchAt={1}>
-        <div class="solid-design-parts-TextInput_prepend">{rawProps.prepend}</div>
+        <div class="solid-design-parts-TextInput_prefix">{rawProps.prefix}</div>
         <input
           class="solid-design-parts-TextInput_input"
           value={valueSignal.value}
@@ -150,7 +150,7 @@ export function TextInput(rawProps: TextInputProps) {
             hasInputElementFocusSignal.value = false
           }}
         />
-        <div class="solid-design-parts-TextInput_append">{rawProps.append}</div>
+        <div class="solid-design-parts-TextInput_suffix">{rawProps.suffix}</div>
       </StretchLayout>
       <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
     </div>

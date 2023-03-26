@@ -42,18 +42,18 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Append and prepend',
+      title: 'Prefix and suffix',
       children: (
         <>
-          <TextInput placeholder="Search..." prepend={<Icon src={searchIcon} style={{ 'margin-left': '0.5em' }} />} />
+          <TextInput placeholder="Search..." prefix={<Icon src={searchIcon} style={{ 'margin-left': '0.5em' }} />} />
           <TextInput
             placeholder="Input by keyboard or voice"
-            append={<IconButton src={microphoneIcon} style={{ 'margin-right': '0.5em' }} />}
+            suffix={<IconButton src={microphoneIcon} style={{ 'margin-right': '0.5em' }} />}
           />
           <TextInput
             placeholder="your.domain"
-            prepend={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>https://</Gravity>}
-            append={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>.com</Gravity>}
+            prefix={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>https://</Gravity>}
+            suffix={<Gravity style={{ padding: '0 0.5em', background: '#eee' }}>.com</Gravity>}
           />
         </>
       ),
