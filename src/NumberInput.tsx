@@ -2,7 +2,6 @@ import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
 import { createMemo, createRenderEffect, JSX, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Gravity } from './Gravity'
 import css from './NumberInput.scss'
 import { StretchLayout } from './StretchLayout'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
@@ -149,7 +148,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       {...restProps}
     >
       <StretchLayout class="solid-design-parts-NumberInput_body" stretchAt={1}>
-        <Gravity class="solid-design-parts-NumberInput_prefix">{rawProps.prefix}</Gravity>
+        <div class="solid-design-parts-NumberInput_prefix">{rawProps.prefix}</div>
         <input
           class="solid-design-parts-NumberInput_input"
           type="text"
@@ -164,7 +163,7 @@ export function NumberInput(rawProps: NumberInputProps) {
             hasInputElementFocusSignal.value = false
           }}
         />
-        <Gravity class="solid-design-parts-NumberInput_suffix">{rawProps.suffix}</Gravity>
+        <div class="solid-design-parts-NumberInput_suffix">{rawProps.suffix}</div>
       </StretchLayout>
       <p class="solid-design-parts-NumberInput_error-message">{errorSignal.value}</p>
     </div>

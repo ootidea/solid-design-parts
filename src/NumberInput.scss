@@ -19,20 +19,10 @@
   }
 }
 
-.solid-design-parts-NumberInput_prefix {
-  padding-left: 0.3em;
-
-  &:empty {
-    padding: 0;
-  }
-}
-
+.solid-design-parts-NumberInput_prefix,
 .solid-design-parts-NumberInput_suffix {
-  padding-right: 0.3em;
-
-  &:empty {
-    padding: 0;
-  }
+  display: grid;
+  place-items: center;
 }
 
 .solid-design-parts-NumberInput_input {
