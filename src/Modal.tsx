@@ -6,8 +6,9 @@ import closeIcon from './image/close.svg'
 import css from './Modal.scss'
 import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
+import { CssColor } from './utility/color'
 import { setupFocusTrap } from './utility/others'
-import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
+import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
 
@@ -23,6 +24,7 @@ export type ModalProps = Props<{
   title?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
   children?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
   footer?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  overlayBackgroundColor?: CssColor
 }>
 
 export function Modal(rawProps: ModalProps) {
@@ -33,6 +35,7 @@ export function Modal(rawProps: ModalProps) {
       opened: false,
       showCloseButton: false,
       ignoreEscKey: false,
+      overlayBackgroundColor: 'var(--solid-design-parts-Modal_overlay-background-default-color)',
     },
     ['onChangeOpened', 'launcher', 'title', 'footer']
   )
@@ -72,6 +75,9 @@ export function Modal(rawProps: ModalProps) {
         <FadeAnimation shown={opened()}>
           <div
             class={joinClasses(rawProps, 'solid-design-parts-Modal_root')}
+            style={joinStyle(rawProps.style, {
+              '--solid-design-parts-Modal_overlay-background-color': props.overlayBackgroundColor,
+            })}
             tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
             onClick={onClickOverlay}

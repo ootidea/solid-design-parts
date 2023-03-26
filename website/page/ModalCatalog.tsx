@@ -79,5 +79,22 @@ export const ModalCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Background color of overlay',
+      children: (
+        <>
+          <Modal overlayBackgroundColor="transparent" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+            <div style="padding: 1em">This is sample text for Modal component.</div>
+          </Modal>
+          <br />
+          <Modal
+            overlayBackgroundColor="rgba(0 0 0 / 30%)"
+            launcher={({ open }) => <Button onClick={open}>Open</Button>}
+          >
+            <div style="padding: 1em">This is sample text for Modal component.</div>
+          </Modal>
+        </>
+      ),
+    },
   ],
 }))

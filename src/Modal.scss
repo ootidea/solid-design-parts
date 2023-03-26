@@ -1,3 +1,7 @@
+:root {
+  --solid-design-parts-Modal_overlay-background-default-color: oklch(0% 0 0 / 10%);
+}
+
 .solid-design-parts-Modal_root {
   position: fixed;
   top: 0;
@@ -10,7 +14,7 @@
   align-items: center;
   justify-content: center;
 
-  background-color: oklch(0% 0 0 / 20%);
+  background-color: var(--solid-design-parts-Modal_overlay-background-color);
   outline: none;
 }
 
