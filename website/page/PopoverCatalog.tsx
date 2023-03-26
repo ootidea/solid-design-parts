@@ -15,14 +15,6 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Persistent',
-      children: (
-        <Popover persistent launcher={({ toggle }) => <Button onClick={toggle}>Open</Button>}>
-          {({ close }) => <Button onClick={close}>Close</Button>}
-        </Popover>
-      ),
-    },
-    {
       title: 'Simple position',
       children: (
         <Popover on="top right" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
@@ -43,6 +35,14 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
           )}
         >
           <div style="padding: 0.2em 0.4em">Pop up text</div>
+        </Popover>
+      ),
+    },
+    {
+      title: 'Persistent',
+      children: (
+        <Popover persistent launcher={({ toggle }) => <Button onClick={toggle}>Open</Button>}>
+          {({ close }) => <Button onClick={close}>Close</Button>}
         </Popover>
       ),
     },
