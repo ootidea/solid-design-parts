@@ -12,10 +12,10 @@ export const GravityCatalog: Catalog = createRoot(() => ({
             <Gravity>center</Gravity>
           </div>
           <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>
-            <Gravity to="bottom">center</Gravity>
+            <Gravity to="bottom">bottom</Gravity>
           </div>
           <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>
-            <Gravity to="left">center</Gravity>
+            <Gravity to="left">left</Gravity>
           </div>
         </>
       ),
@@ -25,10 +25,10 @@ export const GravityCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>
-            <Gravity to="top right">center</Gravity>
+            <Gravity to="top right">top right</Gravity>
           </div>
           <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>
-            <Gravity to="bottom left">center</Gravity>
+            <Gravity to="bottom left">bottom left</Gravity>
           </div>
         </>
       ),
