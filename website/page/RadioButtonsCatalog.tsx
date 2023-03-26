@@ -176,7 +176,7 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <RadioButtons values={['left', 'center', 'right']} enableDeselection />
+          <RadioButtons values={['left', 'center', 'right']} enableDeselection selected="left" />
         </>
       ),
     },
