@@ -54,6 +54,16 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Radius',
+      direction: 'horizontal',
+      children: (
+        <>
+          <IconButton src={chevronLeftIcon} radius="0" backgroundColor="hsl(0 0% 90%)" />
+          <IconButton src={chevronLeftIcon} radius="0.6em" backgroundColor="hsl(0 0% 90%)" />
+        </>
+      ),
+    },
+    {
       title: 'Button size',
       direction: 'horizontal',
       children: (

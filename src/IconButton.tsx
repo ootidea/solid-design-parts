@@ -12,6 +12,7 @@ export type IconButtonProps = Props<
   {
     src: string
     size?: string
+    radius?: string
     iconSize?: string
     iconColor?: CssColor
     backgroundColor?: CssColor
@@ -28,6 +29,7 @@ export function IconButton(rawProps: IconButtonProps) {
     rawProps,
     {
       size: 'var(--solid-design-parts-IconButton_default-size)',
+      radius: 'var(--solid-design-parts-IconButton_default-radius)',
       iconSize: 'var(--solid-design-parts-IconButton_icon-default-size)',
       iconColor: 'var(--solid-design-parts-Icon_default-color)',
       backgroundColor: 'transparent',
@@ -55,6 +57,7 @@ export function IconButton(rawProps: IconButtonProps) {
       class={joinClasses(rawProps, 'solid-design-parts-IconButton_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-IconButton_size': props.size,
+        '--solid-design-parts-IconButton_radius': props.radius,
         '--solid-design-parts-IconButton_icon-size': props.iconSize,
         '--solid-design-parts-IconButton_background-color': backgroundColor(),
         '--solid-design-parts-IconButton_background-hover-color': calculateHoverColor(backgroundColor()),

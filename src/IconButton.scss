@@ -1,5 +1,6 @@
 :root {
   --solid-design-parts-IconButton_default-size: 1.8em;
+  --solid-design-parts-IconButton_default-radius: 999vh;
   --solid-design-parts-IconButton_icon-default-size: 80%;
   --solid-design-parts-IconButton_disabled-default-color: oklch(70% 0 0);
 }
@@ -19,7 +20,7 @@
   width: var(--solid-design-parts-IconButton_size);
   height: var(--solid-design-parts-IconButton_size);
   box-sizing: border-box;
-  border-radius: 50%;
+  border-radius: var(--solid-design-parts-IconButton_radius);
   overflow: hidden;
 
   user-select: none;
