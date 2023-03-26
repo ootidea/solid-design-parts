@@ -6,6 +6,7 @@ import { Divider } from './Divider'
 import { Gravity } from './Gravity'
 import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
+import { CssColor } from './utility/color'
 import { i18n } from './utility/i18n'
 import { isNestedClickEvent, LiteralAutoComplete } from './utility/others'
 import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
@@ -39,8 +40,8 @@ export type DataTableProps<
   columns: readonly Column[]
   rows: readonly Row[]
   fullWidth?: boolean
-  evenRowBackgroundColor?: string
-  oddRowBackgroundColor?: string
+  evenRowBackgroundColor?: CssColor
+  oddRowBackgroundColor?: CssColor
   rowHref?: (row: Row) => string | undefined
   onClickRow?: (row: Row) => void
   sortingState?: { columnId: ColumnId; reversed: boolean } | undefined

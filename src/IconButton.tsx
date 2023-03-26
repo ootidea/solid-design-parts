@@ -2,7 +2,7 @@ import { createMemo, createSignal } from 'solid-js'
 import { Icon } from './Icon'
 import css from './IconButton.scss'
 import { Spinner } from './Spinner'
-import { calculateActiveColor, calculateHoverColor, resolveColorOnBodyElement } from './utility/color'
+import { calculateActiveColor, calculateHoverColor, CssColor, resolveColorOnBodyElement } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -13,9 +13,9 @@ export type IconButtonProps = Props<
     src: string
     size?: string
     iconSize?: string
-    iconColor?: string
-    backgroundColor?: string
-    disabledColor?: string
+    iconColor?: CssColor
+    backgroundColor?: CssColor
+    disabledColor?: CssColor
     type?: 'submit' | 'button' | 'reset'
     rotate?: string
     onClick?: (event: MouseEvent) => unknown

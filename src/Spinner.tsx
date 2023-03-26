@@ -1,5 +1,6 @@
 import { createMemo } from 'solid-js'
 import css from './Spinner.scss'
+import { CssColor } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -9,7 +10,7 @@ export type SpinnerProps = Props<{
   size?: string
   thickness?: number
   frequency?: number
-  color?: string
+  color?: CssColor
 }>
 
 export function Spinner(rawProps: SpinnerProps) {

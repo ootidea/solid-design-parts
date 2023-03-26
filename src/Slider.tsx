@@ -1,6 +1,7 @@
 import { assert, isNotUndefined, minBy } from 'base-up'
 import { createMemo, createRenderEffect, createSignal, onMount } from 'solid-js'
 import css from './Slider.scss'
+import { CssColor } from './utility/color'
 import { observeWidthPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -14,11 +15,11 @@ export type SliderProps = Props<{
   stops?: readonly number[]
   step?: number
   offset?: number
-  trackColor?: string
-  trackFillColor?: string
+  trackColor?: CssColor
+  trackFillColor?: CssColor
   thumbWidth?: string
   thumbHeight?: string
-  thumbColor?: string
+  thumbColor?: CssColor
   onChangeValue?: (value: number) => void
 }>
 

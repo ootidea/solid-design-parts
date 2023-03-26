@@ -5,6 +5,7 @@ import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import { StretchLayout } from './StretchLayout'
+import { CssColor } from './utility/color'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
@@ -16,8 +17,8 @@ export type FoldableProps = Props<{
   title?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
   icon?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void; unfolded: boolean }>
   children?: SlotProp<{ fold: () => void; unfold: () => void; toggle: () => void }>
-  headerBackgroundColor?: string
-  borderColor?: string
+  headerBackgroundColor?: CssColor
+  borderColor?: CssColor
   onChangeUnfolded?: (unfolded: boolean) => void
 }>
 

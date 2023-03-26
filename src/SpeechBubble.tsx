@@ -1,11 +1,12 @@
 import css from './SpeechBubble.scss'
+import { CssColor } from './utility/color'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
 
 export type SpeechBubbleProps = Props<{
-  backgroundColor?: string
+  backgroundColor?: CssColor
   radius?: string
   triangleHeight?: string
   triangleAngle?: string

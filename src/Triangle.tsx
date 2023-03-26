@@ -1,4 +1,5 @@
 import css from './Triangle.scss'
+import { CssColor } from './utility/color'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -7,7 +8,7 @@ registerCss(css)
 export type TriangleProps = Props<{
   height: string
   baseLength: string
-  color?: string
+  color?: CssColor
   direction?: 'top' | 'bottom' | 'left' | 'right'
 }>
 
