@@ -90,6 +90,22 @@ export function observeWidthPx(element: HTMLElement, callback: (widthPx: number)
 }
 
 /**
+ * Observe element height in px using ResizeObserver.
+ * Callback immediately when this function is called.
+ */
+export function observeHeightPx(element: HTMLElement, callback: (heightPx: number) => void) {
+  callback(element.getBoundingClientRect().height)
+  const resizeObserver = new ResizeObserver(() => {
+    callback(element.getBoundingClientRect().height)
+  })
+  resizeObserver.observe(element)
+
+  onCleanup(() => {
+    resizeObserver.unobserve(element)
+  })
+}
+
+/**
  * Confine focus under the given element.
  * Calling this function will focus the element, so the element must be focusable.
  * It is recommended that tabindex="-1" and outline:none be specified for the element.

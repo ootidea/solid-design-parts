@@ -1,6 +1,7 @@
 import { assert, isNotUndefined } from 'base-up'
 import { createMemo, createSignal, onCleanup, onMount } from 'solid-js'
 import css from './Scrollable.scss'
+import { observeHeightPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -118,16 +119,4 @@ export function Scrollable(rawProps: ScrollableProps) {
       </div>
     </div>
   )
-}
-
-function observeHeightPx(element: HTMLElement, callback: (heightPx: number) => void) {
-  callback(element.getBoundingClientRect().height)
-  const resizeObserver = new ResizeObserver(() => {
-    callback(element.getBoundingClientRect().height)
-  })
-  resizeObserver.observe(element)
-
-  onCleanup(() => {
-    resizeObserver.unobserve(element)
-  })
 }
