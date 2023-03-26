@@ -171,12 +171,10 @@ export function calculateHoverColor(baseCssColor: string): string {
   }
 
   const oklch = color.oklch
-  const maxChroma = calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
-  const chromaRatio = oklch.chroma / maxChroma
-
   const newLightness =
     oklch.lightness > MIDDLE_LIGHTNESS ? oklch.lightness - 0.05 / oklch.lightness : 1 - (1 - oklch.lightness) * 0.8
 
+  const chromaRatio = calculateChromaRatio(color)
   return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue).to('hsl').toString()
 }
 
@@ -187,12 +185,10 @@ export function calculateActiveColor(baseCssColor: string): string {
   }
 
   const oklch = color.oklch
-  const maxChroma = calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
-  const chromaRatio = oklch.chroma / maxChroma
-
   const newLightness =
     oklch.lightness > MIDDLE_LIGHTNESS ? oklch.lightness - 0.1 / oklch.lightness : 1 - (1 - oklch.lightness) * 0.7
 
+  const chromaRatio = calculateChromaRatio(color)
   return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue).to('hsl').toString()
 }
 
@@ -221,6 +217,11 @@ export function calculateMaxChromaInGamut(lightness: number, hue: number, delta:
     }
   }
   return (maxChromaMemos[memoKey] = lowerBound)
+}
+
+export function calculateChromaRatio(color: Color): number {
+  const oklch = color.oklch
+  return oklch.chroma / calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
 }
 
 function createColorUsingChromaRatio(lightness: number, chromaRatio: number, hue: number) {
