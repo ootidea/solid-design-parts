@@ -19,10 +19,9 @@ export function DatePicker(rawProps: DatePickerProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      value: undefined,
       month: startOfMonth(new Date()),
     },
-    ['disabled', 'onChangeValue', 'onChangeMonth']
+    ['value', 'disabled', 'onChangeValue', 'onChangeMonth']
   )
 
   const [value, setValue] = createSignal<Date | undefined>(props.value)
