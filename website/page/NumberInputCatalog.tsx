@@ -105,6 +105,15 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Prefix and suffix',
+      children: (
+        <>
+          <NumberInput placeholder="transfer amount" prefix={<div style={{ 'margin-left': '0.5em' }}>$</div>} />
+          <NumberInput value={100} suffix={<div style={{ 'margin-right': '0.5em' }}>%</div>} />
+        </>
+      ),
+    },
+    {
       title: 'Radius',
       children: (
         <>
