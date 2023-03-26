@@ -33,5 +33,18 @@ export const GravityCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Shorthand notation',
+      children: (
+        <>
+          <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>
+            <Gravity.top>top</Gravity.top>
+          </div>
+          <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>
+            <Gravity.bottomRight>top right</Gravity.bottomRight>
+          </div>
+        </>
+      ),
+    },
   ],
 }))
