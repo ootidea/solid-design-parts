@@ -51,8 +51,8 @@ export const LayerLayoutCatalog: Catalog = createRoot(() => ({
                 'pointer-events': 'auto',
               }}
             >
-              <IconButton src={chevronLeftIcon} size="2em" iconColor="white" backgroundColor="hsla(0 0% 40% 0.5)" />
-              <IconButton src={chevronRightIcon} size="2em" iconColor="white" backgroundColor="hsla(0 0% 40% 0.5)" />
+              <IconButton src={chevronLeftIcon} size="2em" iconColor="white" backgroundColor="hsla(0 0% 40% / 0.5)" />
+              <IconButton src={chevronRightIcon} size="2em" iconColor="white" backgroundColor="hsla(0 0% 40% / 0.5)" />
             </div>
           </LayerLayout>
         </>
