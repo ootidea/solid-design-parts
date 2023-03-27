@@ -35,9 +35,9 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       title: 'Tail width',
       children: (
         <>
-          <SpeechBubble tailWidth="5px">Triangle width</SpeechBubble>
-          <SpeechBubble tailWidth="2em">Triangle width</SpeechBubble>
-          <SpeechBubble tailWidth="50%">Triangle width</SpeechBubble>
+          <SpeechBubble tailWidth="5px">Tail width</SpeechBubble>
+          <SpeechBubble tailWidth="2em">Tail width</SpeechBubble>
+          <SpeechBubble tailWidth="50%">Tail width</SpeechBubble>
         </>
       ),
     },
@@ -45,8 +45,17 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       title: 'Tail height',
       children: (
         <>
-          <SpeechBubble tailHeight="5px">Triangle height</SpeechBubble>
-          <SpeechBubble tailHeight="1.2em">Triangle height</SpeechBubble>
+          <SpeechBubble tailHeight="5px">Tail height</SpeechBubble>
+          <SpeechBubble tailHeight="1.2em">Tail height</SpeechBubble>
+        </>
+      ),
+    },
+    {
+      title: 'Tail offset',
+      children: (
+        <>
+          <SpeechBubble tailOffsetPercent={80}>Tail offset</SpeechBubble>
+          <SpeechBubble tailOffsetPercent={-30}>Tail offset</SpeechBubble>
         </>
       ),
     },
@@ -54,8 +63,8 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       title: 'Tail skew',
       children: (
         <>
-          <SpeechBubble tailSkew="0.16turn">Triangle skew</SpeechBubble>
-          <SpeechBubble tailSkew="-45deg">Triangle skew</SpeechBubble>
+          <SpeechBubble tailSkew="0.16turn">Tail skew</SpeechBubble>
+          <SpeechBubble tailSkew="-45deg">Tail skew</SpeechBubble>
         </>
       ),
     },

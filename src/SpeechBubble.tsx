@@ -12,6 +12,7 @@ export type SpeechBubbleProps = Props<{
   tailWidth?: string
   tailHeight?: string
   tailSkew?: string
+  tailOffsetPercent?: number
 }>
 
 export function SpeechBubble(rawProps: SpeechBubbleProps) {
@@ -23,6 +24,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       tailWidth: '10px',
       tailHeight: '10px',
       tailSkew: '0rad',
+      tailOffsetPercent: 0,
     },
     ['children']
   )
@@ -33,6 +35,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       style={{
         '--solid-design-parts-SpeechBubble_background-color': props.backgroundColor,
         '--solid-design-parts-SpeechBubble_radius': props.radius,
+        '--solid-design-parts-SpeechBubble_tail-offset-percent': props.tailOffsetPercent,
       }}
       {...restProps}
     >

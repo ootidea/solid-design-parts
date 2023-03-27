@@ -25,7 +25,14 @@
   &:after {
     content: '';
     display: inline-block;
-    flex: 1 0 0;
+  }
+
+  &:before {
+    flex: calc(100 + var(--solid-design-parts-SpeechBubble_tail-offset-percent)) 0 0;
+  }
+
+  &:after {
+    flex: calc(100 - var(--solid-design-parts-SpeechBubble_tail-offset-percent)) 0 0;
   }
 }
 
