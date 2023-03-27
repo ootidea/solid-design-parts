@@ -1,5 +1,5 @@
+import { LiteralAutoComplete } from 'base-up'
 import css from './Icon.scss'
-import { LiteralAutoComplete } from './utility/others'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 

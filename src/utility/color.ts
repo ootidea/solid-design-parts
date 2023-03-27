@@ -1,5 +1,5 @@
+import { LiteralAutoComplete } from 'base-up'
 import Color from 'colorjs.io'
-import { LiteralAutoComplete } from './others'
 
 export type CssColor = LiteralAutoComplete<
   | 'currentColor'

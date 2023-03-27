@@ -3,12 +3,6 @@ import { createFocusTrap } from 'focus-trap'
 import { JSX, onCleanup } from 'solid-js'
 
 /**
- * A utility for autocompletion.
- * https://github.com/sindresorhus/type-fest/blob/main/source/literal-union.d.ts
- */
-export type LiteralAutoComplete<Literals extends Base, Base = string> = Literals | (Base & Record<never, never>)
-
-/**
  * Utility for defining tagged union types.
  * Note that can't define recursive types.
  * @example

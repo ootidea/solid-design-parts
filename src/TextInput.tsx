@@ -1,10 +1,9 @@
-import { isInstanceOf, Promisable } from 'base-up'
+import { isInstanceOf, LiteralAutoComplete, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import css from './TextInput.scss'
-import { LiteralAutoComplete } from './utility/others'
 import {
   createDeferEffect,
   createInjectableSignalObject,
