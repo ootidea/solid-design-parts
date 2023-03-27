@@ -1,5 +1,6 @@
 import { assert, isNotUndefined, minBy } from 'base-up'
 import { createMemo, createRenderEffect, createSignal, onMount } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './Slider.scss'
 import { CssColor } from './utility/color'
 import { observeWidthPx } from './utility/others'
@@ -54,15 +55,15 @@ export function Slider(rawProps: SliderProps) {
     return undefined
   })
 
-  const [value, setValue] = createSignal(props.value)
-  createRenderEffect(() => setValue(correctValue(props.value)))
-  const ratio = () => (value() - props.min) / (props.max - props.min)
+  const valueSignal = createSignalObject(props.value)
+  createRenderEffect(() => (valueSignal.value = correctValue(props.value)))
+  const ratio = createMemo(() => (valueSignal.value - props.min) / (props.max - props.min))
 
   // Change internal state and callback it.
   // For discrete sliders, the value is corrected to the nearest stop.
   function changeValue(newValue: number) {
     const value = correctValue(newValue)
-    setValue(value)
+    valueSignal.value = value
     props.onChangeValue?.(value)
   }
 
