@@ -5,17 +5,24 @@ import { Catalog } from './ComponentCatalogPage'
 export const TriangleCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: 'Size',
       direction: 'horizontal',
-      children: <Triangle height="1.4em" baseLength="2em" />,
+      children: (
+        <>
+          <Triangle width="1rem" height="50px" />
+          <Triangle width="4%" />
+          <Triangle height="1em" />
+        </>
+      ),
     },
     {
       title: 'Color',
       direction: 'horizontal',
       children: (
         <>
-          <Triangle height="1.4em" baseLength="2em" color="hsl(0 0% 70%)" />
-          <Triangle height="1.4em" baseLength="2em" color="lightgreen" />
+          <Triangle width="30px" color="#A1B2C3" />
+          <Triangle width="30px" color="lightgreen" />
+          <Triangle width="30px" color="hsla(0 40% 50% / 30%)" />
         </>
       ),
     },
@@ -24,9 +31,9 @@ export const TriangleCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <Triangle height="1.5em" baseLength="1.5em" color="gray" direction="right" />
-          <Triangle height="1.5em" baseLength="1.5em" color="gray" direction="bottom" />
-          <Triangle height="1.5em" baseLength="1.5em" color="gray" direction="left" />
+          <Triangle width="1em" direction="right" color="gray" />
+          <Triangle width="1em" direction="down" color="gray" />
+          <Triangle width="1em" direction="left" color="gray" />
         </>
       ),
     },

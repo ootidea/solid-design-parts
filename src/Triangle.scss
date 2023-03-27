@@ -2,27 +2,11 @@
   display: inline-block;
   vertical-align: top;
 
-  &[data-direction='top'] {
-    border-bottom: var(--solid-design-parts-Triangle_height) solid var(--solid-design-parts-Triangle_color);
-    border-left: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-    border-right: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-  }
+  box-sizing: border-box;
+  width: var(--solid-design-parts-Triangle_width);
+  height: var(--solid-design-parts-Triangle_height);
+}
 
-  &[data-direction='bottom'] {
-    border-top: var(--solid-design-parts-Triangle_height) solid var(--solid-design-parts-Triangle_color);
-    border-left: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-    border-right: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-  }
-
-  &[data-direction='left'] {
-    border-right: var(--solid-design-parts-Triangle_height) solid var(--solid-design-parts-Triangle_color);
-    border-top: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-    border-bottom: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-  }
-
-  &[data-direction='right'] {
-    border-left: var(--solid-design-parts-Triangle_height) solid var(--solid-design-parts-Triangle_color);
-    border-top: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-    border-bottom: calc(var(--solid-design-parts-Triangle_base-length) / 2) solid transparent;
-  }
+.solid-design-parts-Triangle_path {
+  fill: var(--solid-design-parts-Triangle_color);
 }
