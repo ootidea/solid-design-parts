@@ -1,6 +1,6 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, untrack } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createRenderEffect, untrack } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './AutoSizeTextArea.scss'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -34,16 +34,16 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const valueSignal = createInjectableSignalObject(props, 'value')
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate(), untrack(valueSignal.get), props.error, props.required)
+    errorSignal.value = await deriveError(shouldValidate.value, untrack(valueSignal.get), props.error, props.required)
   })
   createDeferEffect(
     () => props.value,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
+      errorSignal.value = await deriveError(shouldValidate.value, props.value, props.error, props.required)
     }
   )
 
@@ -56,7 +56,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     valueSignal.value = newValue
     props.onChangeValue?.(newValue)
 
-    const nextError = await deriveError(shouldValidate(), newValue, props.error, props.required)
+    const nextError = await deriveError(shouldValidate.value, newValue, props.error, props.required)
     errorSignal.value = nextError
     if (nextError === undefined) {
       props.onChangeValidValue?.(newValue)

@@ -1,4 +1,5 @@
-import { createMemo, createSignal } from 'solid-js'
+import { createSignal } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import { Icon } from './Icon'
 import css from './IconButton.scss'
 import { Spinner } from './Spinner'
@@ -39,7 +40,7 @@ export function IconButton(rawProps: IconButtonProps) {
     ['src', 'disabled', 'rotate', 'onClick']
   )
 
-  const backgroundColor = createMemo(() => resolveColorOnBodyElement(props.backgroundColor))
+  const backgroundColor = createMemoObject(() => resolveColorOnBodyElement(props.backgroundColor))
   const [isInProgress, setIsInProgress] = createSignal(false)
 
   function clickEventHandler(event: MouseEvent) {
@@ -59,9 +60,9 @@ export function IconButton(rawProps: IconButtonProps) {
         '--solid-design-parts-IconButton_size': props.size,
         '--solid-design-parts-IconButton_radius': props.radius,
         '--solid-design-parts-IconButton_icon-size': props.iconSize,
-        '--solid-design-parts-IconButton_background-color': backgroundColor(),
-        '--solid-design-parts-IconButton_background-hover-color': calculateHoverColor(backgroundColor()),
-        '--solid-design-parts-IconButton_background-active-color': calculateActiveColor(backgroundColor()),
+        '--solid-design-parts-IconButton_background-color': backgroundColor.value,
+        '--solid-design-parts-IconButton_background-hover-color': calculateHoverColor(backgroundColor.value),
+        '--solid-design-parts-IconButton_background-active-color': calculateActiveColor(backgroundColor.value),
       })}
       type={props.type}
       disabled={props.disabled}

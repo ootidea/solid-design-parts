@@ -1,6 +1,6 @@
 import { call, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, For, JSX, untrack } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createRenderEffect, For, JSX, untrack } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './RadioButtons.scss'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -43,16 +43,21 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
   const selectedSignal = createInjectableSignalObject(props, 'selected')
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
+    errorSignal.value = await deriveError(
+      shouldValidate.value,
+      untrack(selectedSignal.get),
+      props.error,
+      props.required
+    )
   })
   createDeferEffect(
     () => props.selected,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
+      errorSignal.value = await deriveError(shouldValidate.value, props.selected, props.error, props.required)
     }
   )
 
@@ -80,7 +85,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
     selectedSignal.value = nextSelected
     props.onChangeSelected?.(nextSelected)
 
-    const nextError = await deriveError(shouldValidate(), nextSelected, props.error, props.required)
+    const nextError = await deriveError(shouldValidate.value, nextSelected, props.error, props.required)
     errorSignal.value = nextError
     if (nextError === undefined) {
       props.onChangeValidSelected?.(nextSelected)

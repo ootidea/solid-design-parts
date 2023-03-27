@@ -1,6 +1,6 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, untrack } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createRenderEffect, untrack } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './Checkbox.scss'
 import {
   createDeferEffect,
@@ -44,16 +44,16 @@ export function Checkbox(rawProps: CheckboxProps) {
   const checkedSignal = createInjectableSignalObject(props, 'checked')
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate(), untrack(checkedSignal.get), props.error, props.required)
+    errorSignal.value = await deriveError(shouldValidate.value, untrack(checkedSignal.get), props.error, props.required)
   })
   createDeferEffect(
     () => props.checked,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate(), props.checked, props.error, props.required)
+      errorSignal.value = await deriveError(shouldValidate.value, props.checked, props.error, props.required)
     }
   )
 
@@ -65,7 +65,7 @@ export function Checkbox(rawProps: CheckboxProps) {
     checkedSignal.value = checked
     props.onChangeChecked?.(checked)
 
-    const newError = await deriveError(shouldValidate(), checked, props.error, props.required)
+    const newError = await deriveError(shouldValidate.value, checked, props.error, props.required)
     errorSignal.value = newError
     if (newError === false) {
       props.onChangeValidChecked?.(checked)

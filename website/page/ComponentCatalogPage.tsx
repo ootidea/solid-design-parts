@@ -1,5 +1,6 @@
 import { useLocation } from '@solidjs/router'
-import { createMemo, createRoot, For, JSX, Show } from 'solid-js'
+import { createRoot, For, JSX, Show } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
 import { AutoSizeTextAreaCatalog } from './AutoSizeTextAreaCatalog'
@@ -88,7 +89,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
 }))
 
 export function ComponentCatalogPage() {
-  const pageInfo = createMemo(() => {
+  const pageInfo = createMemoObject(() => {
     const urlComponentName = useLocation().pathname.match(/\/components\/(\w+)/)?.[1]
     if (urlComponentName === undefined) return undefined
 
@@ -100,7 +101,7 @@ export function ComponentCatalogPage() {
 
   return (
     <article>
-      <Show when={pageInfo()} keyed={true}>
+      <Show when={pageInfo.value} keyed={true}>
         {({ catalog, componentName }) => (
           <>
             <PageTitle>{componentName}</PageTitle>

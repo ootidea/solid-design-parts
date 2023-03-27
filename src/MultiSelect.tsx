@@ -1,7 +1,7 @@
 import { call, isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
+import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { createSignalObject } from 'solid-signal-object'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkboxes } from './Checkboxes'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
@@ -56,7 +56,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     selectedSignal.value = newSelected
     props.onChangeSelected?.(newSelected)
 
-    const newError = await deriveError(shouldValidate(), newSelected, props.error, props.required)
+    const newError = await deriveError(shouldValidate.value, newSelected, props.error, props.required)
     errorSignal.value = newError
     if (newError === undefined) {
       props.onChangeValidSelected?.(newSelected)
@@ -64,16 +64,21 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   }
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
+    errorSignal.value = await deriveError(
+      shouldValidate.value,
+      untrack(selectedSignal.get),
+      props.error,
+      props.required
+    )
   })
   createDeferEffect(
     () => props.selected,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
+      errorSignal.value = await deriveError(shouldValidate.value, props.selected, props.error, props.required)
     }
   )
 
@@ -113,7 +118,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     }
   }
 
-  const followingCount = createMemo(() => selectedSignal.value.size - 1)
+  const followingCount = createMemoObject(() => selectedSignal.value.size - 1)
 
   const searchQuerySignal = createSignalObject('')
   function search(values: readonly T[], searchQuery: string): readonly T[] {
@@ -193,8 +198,8 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                   {previewValue !== undefined ? (
                     <div class="solid-design-parts-MultiSelect_preview">
                       <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(previewValue)}</div>
-                      <Show when={followingCount() > 0}>
-                        <div class="solid-design-parts-MultiSelect_following-count">+{followingCount()}</div>
+                      <Show when={followingCount.value > 0}>
+                        <div class="solid-design-parts-MultiSelect_following-count">+{followingCount.value}</div>
                       </Show>
                     </div>
                   ) : null}

@@ -1,6 +1,7 @@
 import { rangeTo } from 'base-up'
 import { addDays, addMonths, addWeeks, format, isSameMonth, setDate, subDays, subMonths } from 'date-fns'
-import { createMemo, For } from 'solid-js'
+import { For } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import css from './Calendar.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
@@ -97,17 +98,19 @@ export function Calendar(rawProps: CalendarProps) {
             <div class="solid-design-parts-Calendar_date-row">
               <For each={dayNames}>
                 {(_, day) => {
-                  const date = createMemo(() => addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day()))
+                  const date = createMemoObject(() =>
+                    addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day())
+                  )
                   return (
                     <div
                       class="solid-design-parts-Calendar_cell"
                       classList={{
-                        'solid-design-parts-Calendar_other-month': !isSameMonth(date(), selectedMonth()),
+                        'solid-design-parts-Calendar_other-month': !isSameMonth(date.value, selectedMonth()),
                       }}
                       data-day={day()}
                     >
-                      <Slot content={rawProps.children} params={{ date: date() }}>
-                        {date().getDate()}
+                      <Slot content={rawProps.children} params={{ date: date.value }}>
+                        {date.value.getDate()}
                       </Slot>
                     </div>
                   )

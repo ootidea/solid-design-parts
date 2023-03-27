@@ -1,4 +1,5 @@
-import { createMemo, JSX } from 'solid-js'
+import { JSX } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import css from './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
@@ -13,14 +14,14 @@ export type DataTableCellProps<T extends string> = Props<{ value: unknown }>
 export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>) {
   const [props, restProps] = prepareProps(rawProps, {}, ['value'])
 
-  const analysisResult = createMemo(() => analyze(props.value))
+  const analysisResult = createMemoObject(() => analyze(props.value))
   return (
     <div
       class={joinClasses(props, 'solid-design-parts-DataTableCell_root')}
-      data-type={analysisResult().type}
+      data-type={analysisResult.value.type}
       {...restProps}
     >
-      {render(analysisResult())}
+      {render(analysisResult.value)}
     </div>
   )
 }

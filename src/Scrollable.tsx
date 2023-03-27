@@ -1,5 +1,6 @@
 import { assert, isNotUndefined } from 'base-up'
-import { createMemo, createSignal, onCleanup, onMount } from 'solid-js'
+import { createSignal, onCleanup, onMount } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import css from './Scrollable.scss'
 import { observeHeightPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
@@ -22,7 +23,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   let outerElement: HTMLDivElement | undefined
   let thumbElement: HTMLDivElement | undefined
 
-  const isOverflow = createMemo(() => rootHeightPx() < innerHeightPx())
+  const isOverflow = createMemoObject(() => rootHeightPx() < innerHeightPx())
 
   onMount(() => {
     assert(thumbElement, isNotUndefined)
@@ -83,7 +84,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   }
 
   function showThumbTemporarily() {
-    if (isOverflow()) {
+    if (isOverflow.value) {
       thumbElement?.animate([{ opacity: 1, visibility: 'initial' }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], 800)
     }
   }
@@ -92,7 +93,7 @@ export function Scrollable(rawProps: ScrollableProps) {
     <div
       class="solid-design-parts-Scrollable_root"
       classList={{
-        'solid-design-parts-Scrollable_overflow': isOverflow(),
+        'solid-design-parts-Scrollable_overflow': isOverflow.value,
         'solid-design-parts-Scrollable_dragging': dragState() !== undefined,
       }}
       style={{

@@ -1,6 +1,6 @@
 import { Promisable } from 'base-up'
-import { createMemo, createRenderEffect, For, JSX, untrack } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createRenderEffect, For, JSX, untrack } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import css from './Checkboxes.scss'
 import { createDeferEffect, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
@@ -55,7 +55,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     selectedSignal.value = newSelected
     props.onChangeSelected?.(newSelected)
 
-    const newError = await deriveError(shouldValidate(), newSelected, props.error, props.required)
+    const newError = await deriveError(shouldValidate.value, newSelected, props.error, props.required)
     errorSignal.value = newError
     if (newError === undefined) {
       props.onChangeValidSelected?.(newSelected)
@@ -63,16 +63,21 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
   }
 
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
+    errorSignal.value = await deriveError(
+      shouldValidate.value,
+      untrack(selectedSignal.get),
+      props.error,
+      props.required
+    )
   })
   createDeferEffect(
     () => props.selected,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
+      errorSignal.value = await deriveError(shouldValidate.value, props.selected, props.error, props.required)
     }
   )
 

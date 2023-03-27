@@ -1,4 +1,4 @@
-import { createMemo } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import css from './Spinner.scss'
 import { CssColor } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
@@ -25,7 +25,7 @@ export function Spinner(rawProps: SpinnerProps) {
     ['style']
   )
 
-  const svgUrl = createMemo(
+  const svgUrl = createMemoObject(
     () =>
       `url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="${
         100 - props.thickness / 2
@@ -37,7 +37,7 @@ export function Spinner(rawProps: SpinnerProps) {
       class={joinClasses(rawProps, 'solid-design-parts-Spinner_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Spinner_size': props.size,
-        '--solid-design-parts-Spinner_svg-url': svgUrl(),
+        '--solid-design-parts-Spinner_svg-url': svgUrl.value,
         '--solid-design-parts-Spinner_period': `${1 / props.frequency}s`,
         '--solid-design-parts-Spinner_color': props.color,
       })}

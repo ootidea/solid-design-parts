@@ -1,6 +1,6 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, JSX, Show, untrack } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import css from './NumberInput.scss'
@@ -52,18 +52,18 @@ export function NumberInput(rawProps: NumberInputProps) {
   )
   const numberSignal = createSignalObject(props.value)
   const isEditedSignal = createSignalObject(false)
-  const shouldValidate = createMemo(() => isEditedSignal.value || props.validateImmediately)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const hasInputElementFocusSignal = createSignalObject(false)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate(), untrack(numberSignal.get), props.error, props.required)
+    errorSignal.value = await deriveError(shouldValidate.value, untrack(numberSignal.get), props.error, props.required)
   })
   createDeferEffect(
     () => props.value,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
+      errorSignal.value = await deriveError(shouldValidate.value, props.value, props.error, props.required)
     }
   )
 
@@ -81,7 +81,7 @@ export function NumberInput(rawProps: NumberInputProps) {
     numberSignal.value = newValue
     props.onChangeValue?.(newValue)
 
-    const nextError = await deriveError(shouldValidate(), newValue, props.error, props.required)
+    const nextError = await deriveError(shouldValidate.value, newValue, props.error, props.required)
     errorSignal.value = nextError
     if (nextError === undefined) {
       props.onChangeValidValue?.(newValue)

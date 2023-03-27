@@ -1,5 +1,6 @@
 import { fromEntries, modeOf } from 'base-up'
-import { Accessor, createMemo, For, JSX, Show } from 'solid-js'
+import { For, JSX, Show } from 'solid-js'
+import { AccessorObject, createMemoObject } from 'solid-signal-object'
 import css from './DataTable.scss'
 import { DataTableCell } from './DataTableCell'
 import { Divider } from './Divider'
@@ -79,7 +80,7 @@ export function DataTable<
     ['columns', 'rows', 'horizontalRuledLine', 'verticalRuledLine', 'headerCell', 'emptyState', 'rowHref', 'onClickRow']
   )
 
-  const aligns: Accessor<Record<ColumnId, ColumnAlign>> = createMemo(() => {
+  const aligns: AccessorObject<Record<ColumnId, ColumnAlign>> = createMemoObject(() => {
     return fromEntries(props.columns.map((column) => [column.id, determineAlign(column)]))
   })
   function determineAlign(column: Column): ColumnAlign {
@@ -104,7 +105,7 @@ export function DataTable<
 
   const sortingState = createInjectableSignalObject(props, 'sortingState')
 
-  const sortedRows = createMemo(() => {
+  const sortedRows = createMemoObject(() => {
     const result = props.rows.slice()
     if (sortingState.value === undefined) return result
 
@@ -213,7 +214,7 @@ export function DataTable<
               </div>
 
               <Gravity
-                to={aligns()[column.id]}
+                to={aligns.value[column.id]}
                 class="solid-design-parts-DataTable_cell"
                 role="columnheader"
                 data-column-id={column.id}
@@ -262,7 +263,7 @@ export function DataTable<
       </div>
 
       <For
-        each={sortedRows()}
+        each={sortedRows.value}
         fallback={
           <>
             <div class="solid-design-parts-DataTable_horizontal-ruled-line">
@@ -333,7 +334,7 @@ export function DataTable<
                       </div>
 
                       <Gravity
-                        to={aligns()[column.id]}
+                        to={aligns.value[column.id]}
                         class="solid-design-parts-DataTable_cell"
                         style={{
                           '--solid-design-parts-DataTable_cell-min-width': getColumnMinWidth(column),

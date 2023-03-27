@@ -1,6 +1,6 @@
 import { assert, clamp, isNotUndefined, minBy } from 'base-up'
-import { createMemo, createSignal, onMount } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createSignal, onMount } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './Slider.scss'
 import { CssColor } from './utility/color'
 import { observeWidthPx } from './utility/others'
@@ -40,7 +40,7 @@ export function Slider(rawProps: SliderProps) {
     ['stops', 'step', 'offset', 'onChangeValue']
   )
 
-  const stops = createMemo(() => {
+  const stops = createMemoObject(() => {
     if (props.stops !== undefined) return [props.min, ...props.stops, props.max]
 
     if (props.step !== undefined) {
@@ -61,7 +61,7 @@ export function Slider(rawProps: SliderProps) {
     () => (valueSignal.value = correctValue(props.value))
   )
   // A variable between 0 and 1 that indicates where the 'value' is positioned between 'min' and 'max'.
-  const ratio = createMemo(() => (valueSignal.value - props.min) / (props.max - props.min))
+  const ratio = createMemoObject(() => (valueSignal.value - props.min) / (props.max - props.min))
 
   // Update the internal state and notify it.
   // If it is a discrete slider, the value will be the nearest stop.
@@ -73,11 +73,10 @@ export function Slider(rawProps: SliderProps) {
 
   // If it is a discrete slider, it is corrected to the nearest stop.
   function correctValue(value: number): number {
-    if (stops() === undefined) {
+    if (stops.value === undefined) {
       return clamp(props.min, value, props.max)
     } else {
-      // stops() is now neither undefined nor empty. So ! can be used.
-      return minBy(stops()!, (stop) => Math.abs(stop - value))!
+      return minBy(stops.value, (stop) => Math.abs(stop - value))!
     }
   }
 
@@ -132,12 +131,12 @@ export function Slider(rawProps: SliderProps) {
       style={{
         '--solid-design-parts-Slider_track-height': 'var(--solid-design-parts-Slider_track-default-height)',
         '--solid-design-parts-Slider_track-background': `linear-gradient(to right, ${props.trackFillColor} ${
-          100 * ratio()
-        }%, ${props.trackColor} ${100 * ratio()}%)`,
+          100 * ratio.value
+        }%, ${props.trackColor} ${100 * ratio.value}%)`,
         '--solid-design-parts-Slider_thumb-width': props.thumbWidth,
         '--solid-design-parts-Slider_thumb-height': props.thumbHeight,
         '--solid-design-parts-Slider_thumb-color': props.thumbColor,
-        '--solid-design-parts-Slider_thumb-x': `${ratio() * (trackWidthPx() - thumbWidthPx())}px`,
+        '--solid-design-parts-Slider_thumb-x': `${ratio.value * (trackWidthPx() - thumbWidthPx())}px`,
       }}
       role="slider"
       {...restProps}
