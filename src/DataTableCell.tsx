@@ -1,9 +1,9 @@
+import { DiscriminatedUnion } from 'base-up'
 import { JSX } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
 import css from './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
-import { DiscriminatedUnion } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
