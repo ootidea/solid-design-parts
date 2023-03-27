@@ -26,9 +26,18 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <SpeechBubble radius="0">Sample</SpeechBubble>
-          <SpeechBubble radius="10px">Sample</SpeechBubble>
           <SpeechBubble radius="999vh">Sample</SpeechBubble>
-          <SpeechBubble radius="1em 0 1em 0">Sample</SpeechBubble>
+          <SpeechBubble radius="8px 0 8px 0">Sample</SpeechBubble>
+        </>
+      ),
+    },
+    {
+      title: 'Triangle width',
+      children: (
+        <>
+          <SpeechBubble triangleWidth="5px">Triangle width</SpeechBubble>
+          <SpeechBubble triangleWidth="2em">Triangle width</SpeechBubble>
+          <SpeechBubble triangleWidth="50%">Triangle width</SpeechBubble>
         </>
       ),
     },
@@ -36,28 +45,8 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       title: 'Triangle height',
       children: (
         <>
-          <SpeechBubble triangleHeight="0.5em">Triangle height</SpeechBubble>
-          <SpeechBubble triangleHeight="1.4em">Triangle height</SpeechBubble>
-          <SpeechBubble triangleHeight="3em">Triangle height</SpeechBubble>
-        </>
-      ),
-    },
-    {
-      title: 'Triangle angle',
-      children: (
-        <>
-          <SpeechBubble triangleAngle="20deg">Triangle angle</SpeechBubble>
-          <SpeechBubble triangleAngle="2rad">Triangle angle</SpeechBubble>
-          <SpeechBubble triangleAngle="0.4turn">Triangle angle</SpeechBubble>
-        </>
-      ),
-    },
-    {
-      title: 'Triangle x-coordinate',
-      children: (
-        <>
-          <SpeechBubble triangleX="20%">Triangle x-coordinate</SpeechBubble>
-          <SpeechBubble triangleX="70%">Triangle x-coordinate</SpeechBubble>
+          <SpeechBubble triangleHeight="5px">Triangle height</SpeechBubble>
+          <SpeechBubble triangleHeight="1.2em">Triangle height</SpeechBubble>
         </>
       ),
     },

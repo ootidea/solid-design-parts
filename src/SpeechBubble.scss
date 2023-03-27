@@ -1,6 +1,6 @@
 :root {
   --solid-design-parts-SpeechBubble_background-default-color: var(--solid-design-parts-background-color);
-  --solid-design-parts-SpeechBubble_default-radius: 1em;
+  --solid-design-parts-SpeechBubble_default-radius: 0.3em;
 }
 
 .solid-design-parts-SpeechBubble_root {
@@ -12,26 +12,23 @@
 .solid-design-parts-SpeechBubble_message-box {
   background-color: var(--solid-design-parts-SpeechBubble_background-color);
   border-radius: var(--solid-design-parts-SpeechBubble_radius);
-  padding: 1em;
+  padding: 0.4em 0.6em;
   box-sizing: border-box;
   width: max-content;
   white-space: pre-wrap;
 }
 
+.solid-design-parts-SpeechBubble_triangle-area {
+  display: flex;
+
+  &:before,
+  &:after {
+    content: '';
+    display: inline-block;
+    flex: 1 0 0;
+  }
+}
+
 .solid-design-parts-SpeechBubble_triangle {
-  --solid-design-parts-SpeechBubble_triangle-width: calc(
-    var(--solid-design-parts-SpeechBubble_triangle-height) * var(--solid-design-parts-SpeechBubble_triangle-tangent) * 2
-  );
-
-  margin-left: var(--solid-design-parts-SpeechBubble_triangle-x);
-  transform-origin: top;
-  transform: translateX(-50%) skewX(var(--solid-design-parts-SpeechBubble_triangle-skew));
-
-  box-sizing: border-box;
-  width: 0;
-  height: 0;
-  border-top: var(--solid-design-parts-SpeechBubble_triangle-height) solid
-    var(--solid-design-parts-SpeechBubble_background-color);
-  border-left: calc(var(--solid-design-parts-SpeechBubble_triangle-width) / 2) solid transparent;
-  border-right: calc(var(--solid-design-parts-SpeechBubble_triangle-width) / 2) solid transparent;
+  flex: 0 0 auto;
 }
