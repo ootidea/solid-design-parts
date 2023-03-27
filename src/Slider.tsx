@@ -1,5 +1,5 @@
 import { assert, isNotUndefined, minBy } from 'base-up'
-import { createMemo, createRenderEffect, createSignal, onMount } from 'solid-js'
+import { createMemo, createRenderEffect, createSignal, on, onMount } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './Slider.scss'
 import { CssColor } from './utility/color'
@@ -55,12 +55,19 @@ export function Slider(rawProps: SliderProps) {
     return undefined
   })
 
-  const valueSignal = createSignalObject(props.value)
-  createRenderEffect(() => (valueSignal.value = correctValue(props.value)))
+  const valueSignal = createSignalObject(correctValue(props.value))
+  createRenderEffect(
+    on(
+      () => props.value,
+      () => (valueSignal.value = correctValue(props.value)),
+      { defer: true }
+    )
+  )
+  // A variable between 0 and 1 that indicates where the 'value' is positioned between 'min' and 'max'.
   const ratio = createMemo(() => (valueSignal.value - props.min) / (props.max - props.min))
 
-  // Change internal state and callback it.
-  // For discrete sliders, the value is corrected to the nearest stop.
+  // Update the internal state and notify it.
+  // If it is a discrete slider, the value will be the nearest stop.
   function changeValue(newValue: number) {
     const value = correctValue(newValue)
     valueSignal.value = value
@@ -70,6 +77,7 @@ export function Slider(rawProps: SliderProps) {
   // If it is a discrete slider, it is corrected to the nearest stop.
   function correctValue(value: number): number {
     if (stops() === undefined) {
+      // TODO: clamp
       return value
     } else {
       // stops() is now neither undefined nor empty. So ! can be used.
