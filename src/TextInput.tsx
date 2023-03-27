@@ -1,8 +1,9 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, JSX, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, JSX, on, Show, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { StretchLayout } from './StretchLayout'
+import { IconButton } from './IconButton'
+import closeCircleIcon from './image/close-circle.svg'
 import css from './TextInput.scss'
 import { LiteralAutoComplete } from './utility/others'
 import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
@@ -28,6 +29,7 @@ export type TextInputProps = Props<{
     | 'week'
   >
   disabled?: boolean
+  showClearButton?: boolean
   required?: boolean
   error?: boolean | string | ((value: string) => Promisable<boolean | string>)
   validateImmediately?: boolean
@@ -44,6 +46,7 @@ export function TextInput(rawProps: TextInputProps) {
     {
       value: '',
       disabled: false,
+      showClearButton: false,
       required: false,
       error: false as Required<TextInputProps>['error'],
       validateImmediately: false,
@@ -73,11 +76,14 @@ export function TextInput(rawProps: TextInputProps) {
   )
 
   async function onInput(event: InputEvent) {
-    isEditedSignal.value = true
-
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
-    const newValue = event.target.value
+    await changeValue(event.target.value)
+  }
+
+  async function changeValue(newValue: string) {
+    isEditedSignal.value = true
+
     valueSignal.value = newValue
     props.onChangeValue?.(newValue)
 
@@ -135,23 +141,36 @@ export function TextInput(rawProps: TextInputProps) {
       aria-required={props.required}
       {...restProps}
     >
-      <StretchLayout class="solid-design-parts-TextInput_body" stretchAt={1}>
+      <div class="solid-design-parts-TextInput_frame">
         <div class="solid-design-parts-TextInput_prefix">{rawProps.prefix}</div>
-        <input
-          class="solid-design-parts-TextInput_input"
-          value={valueSignal.value}
-          placeholder={props.placeholder}
-          type={props.type}
-          disabled={props.disabled}
-          onInput={onInput}
-          onFocus={() => (hasInputElementFocusSignal.value = true)}
-          onBlur={() => {
-            isEditedSignal.value = true
-            hasInputElementFocusSignal.value = false
-          }}
-        />
+        <div class="solid-design-parts-TextInput_body">
+          <input
+            class="solid-design-parts-TextInput_input"
+            value={valueSignal.value}
+            placeholder={props.placeholder}
+            type={props.type}
+            disabled={props.disabled}
+            onInput={onInput}
+            onFocus={() => (hasInputElementFocusSignal.value = true)}
+            onBlur={() => {
+              isEditedSignal.value = true
+              hasInputElementFocusSignal.value = false
+            }}
+          />
+          <Show when={props.showClearButton}>
+            <IconButton
+              class="solid-design-parts-TextInput_clear-button"
+              src={closeCircleIcon}
+              size="1.6em"
+              iconSize="1.25em"
+              iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
+              aria-hidden={valueSignal.value.length === 0}
+              onClick={() => changeValue('')}
+            />
+          </Show>
+        </div>
         <div class="solid-design-parts-TextInput_suffix">{rawProps.suffix}</div>
-      </StretchLayout>
+      </div>
       <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
     </div>
   )

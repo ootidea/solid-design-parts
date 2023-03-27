@@ -1,4 +1,8 @@
-:where(.solid-design-parts-TextInput_body) {
+:where(.solid-design-parts-TextInput_frame) {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
   box-sizing: border-box;
   min-height: var(--solid-design-parts-one-line-input-height);
   border-radius: var(--solid-design-parts-TextInput_radius);
@@ -31,10 +35,22 @@
 .solid-design-parts-TextInput_suffix {
   display: grid;
   place-items: center;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.solid-design-parts-TextInput_body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3em;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 0 0.6em;
 }
 
 .solid-design-parts-TextInput_input {
-  padding: 0.4em 0.6em;
+  padding: 0.4em 0;
   border: none;
   outline: none;
   appearance: none;
@@ -46,6 +62,12 @@
 
   &::placeholder {
     color: var(--solid-design-parts-placeholder-text-color);
+  }
+}
+
+.solid-design-parts-TextInput_clear-button {
+  &[aria-hidden='true'] {
+    visibility: hidden;
   }
 }
 

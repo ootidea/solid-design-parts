@@ -42,6 +42,18 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Clear button',
+      children: (
+        <>
+          <TextInput
+            placeholder="Sample text"
+            value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            showClearButton
+          />
+        </>
+      ),
+    },
+    {
       title: 'Prefix and suffix',
       children: (
         <>
