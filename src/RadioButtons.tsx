@@ -1,5 +1,4 @@
-import { call } from 'base-up'
-import { Promisable } from 'base-up/dist/types/Promise'
+import { call, Promisable } from 'base-up'
 import { createMemo, createRenderEffect, For, JSX, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './RadioButtons.scss'

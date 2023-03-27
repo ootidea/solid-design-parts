@@ -1,4 +1,4 @@
-import { Promisable } from 'base-up/dist/types/Promise'
+import { Promisable } from 'base-up'
 import { createMemo, createRenderEffect, For, JSX, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'

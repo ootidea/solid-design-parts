@@ -1,5 +1,4 @@
-import { isInstanceOf } from 'base-up'
-import { Promisable } from 'base-up/dist/types/Promise'
+import { isInstanceOf, Promisable } from 'base-up'
 import { createMemo, createRenderEffect, on, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './AutoSizeTextArea.scss'

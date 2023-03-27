@@ -1,5 +1,4 @@
-import { call, isInstanceOf } from 'base-up'
-import { Promisable } from 'base-up/dist/types/Promise'
+import { call, isInstanceOf, Promisable } from 'base-up'
 import { createMemo, createRenderEffect, For, JSX, on, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
