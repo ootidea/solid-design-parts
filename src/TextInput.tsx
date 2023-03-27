@@ -29,10 +29,10 @@ export type TextInputProps = Props<{
     | 'week'
   >
   disabled?: boolean
-  showClearButton?: boolean
   required?: boolean
   error?: boolean | string | ((value: string) => Promisable<boolean | string>)
   validateImmediately?: boolean
+  showClearButton?: boolean
   radius?: string
   prefix?: JSX.Element
   suffix?: JSX.Element
@@ -46,10 +46,10 @@ export function TextInput(rawProps: TextInputProps) {
     {
       value: '',
       disabled: false,
-      showClearButton: false,
       required: false,
       error: false as Required<TextInputProps>['error'],
       validateImmediately: false,
+      showClearButton: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
     ['placeholder', 'type', 'prefix', 'suffix', 'onChangeValue', 'onChangeValidValue']

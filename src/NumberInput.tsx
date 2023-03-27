@@ -1,9 +1,10 @@
 import { isInstanceOf } from 'base-up'
 import { Promisable } from 'base-up/dist/types/Promise'
-import { createMemo, createRenderEffect, JSX, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, JSX, on, Show, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
+import { IconButton } from './IconButton'
+import closeCircleIcon from './image/close-circle.svg'
 import css from './NumberInput.scss'
-import { StretchLayout } from './StretchLayout'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
@@ -17,6 +18,7 @@ export type NumberInputProps = Props<{
   required?: boolean
   error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
+  showClearButton?: boolean
   radius?: string
   prefix?: JSX.Element
   suffix?: JSX.Element
@@ -33,6 +35,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       required: false,
       error: false as Required<NumberInputProps>['error'],
       validateImmediately: false,
+      showClearButton: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
     ['value', 'placeholder', 'prefix', 'suffix', 'onChangeValue', 'onChangeValidValue']
@@ -72,12 +75,16 @@ export function NumberInput(rawProps: NumberInputProps) {
   )
 
   async function onInput(event: InputEvent) {
-    isEditedSignal.value = true
-
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
-    stringSignal.value = event.target.value
-    const newValue = defaultParser(stringSignal.value)
+    await changeValue(event.target.value)
+  }
+
+  async function changeValue(newString: string) {
+    isEditedSignal.value = true
+
+    stringSignal.value = newString
+    const newValue = defaultParser(newString)
     numberSignal.value = newValue
     props.onChangeValue?.(newValue)
 
@@ -147,24 +154,37 @@ export function NumberInput(rawProps: NumberInputProps) {
       aria-required={props.required}
       {...restProps}
     >
-      <StretchLayout class="solid-design-parts-NumberInput_body" stretchAt={1}>
+      <div class="solid-design-parts-NumberInput_frame">
         <div class="solid-design-parts-NumberInput_prefix">{rawProps.prefix}</div>
-        <input
-          class="solid-design-parts-NumberInput_input"
-          type="text"
-          value={stringSignal.value}
-          inputMode={props.inputMode}
-          placeholder={props.placeholder}
-          disabled={props.disabled}
-          onInput={onInput}
-          onFocus={() => (hasInputElementFocusSignal.value = true)}
-          onBlur={() => {
-            isEditedSignal.value = true
-            hasInputElementFocusSignal.value = false
-          }}
-        />
+        <div class="solid-design-parts-NumberInput_body">
+          <input
+            class="solid-design-parts-NumberInput_input"
+            type="text"
+            value={stringSignal.value}
+            inputMode={props.inputMode}
+            placeholder={props.placeholder}
+            disabled={props.disabled}
+            onInput={onInput}
+            onFocus={() => (hasInputElementFocusSignal.value = true)}
+            onBlur={() => {
+              isEditedSignal.value = true
+              hasInputElementFocusSignal.value = false
+            }}
+          />
+          <Show when={props.showClearButton}>
+            <IconButton
+              class="solid-design-parts-TextInput_clear-button"
+              src={closeCircleIcon}
+              size="1.6em"
+              iconSize="1.25em"
+              iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
+              aria-hidden={stringSignal.value.length === 0}
+              onClick={() => changeValue('')}
+            />
+          </Show>
+        </div>
         <div class="solid-design-parts-NumberInput_suffix">{rawProps.suffix}</div>
-      </StretchLayout>
+      </div>
       <p class="solid-design-parts-NumberInput_error-message">{errorSignal.value}</p>
     </div>
   )

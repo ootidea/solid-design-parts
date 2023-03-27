@@ -105,6 +105,14 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Clear button',
+      children: (
+        <>
+          <NumberInput value={3.14159} showClearButton />
+        </>
+      ),
+    },
+    {
       title: 'Prefix and suffix',
       children: (
         <>
@@ -117,7 +125,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       title: 'Radius',
       children: (
         <>
-          <NumberInput value={3.14159} radius="0" />
+          <NumberInput value={-3.14159} radius="0" />
           <NumberInput placeholder="placeholder" radius="9999px" />
         </>
       ),

@@ -1,4 +1,8 @@
-:where(.solid-design-parts-NumberInput_body) {
+:where(.solid-design-parts-NumberInput_frame) {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
   box-sizing: border-box;
   min-height: var(--solid-design-parts-one-line-input-height);
   border-radius: var(--solid-design-parts-NumberInput_radius);
@@ -23,10 +27,23 @@
 .solid-design-parts-NumberInput_suffix {
   display: grid;
   place-items: center;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.solid-design-parts-NumberInput_body {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3em;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 0 0.6em;
 }
 
 .solid-design-parts-NumberInput_input {
-  padding: 0.4em 0.6em;
+  box-sizing: border-box;
+  padding: 0.4em 0;
   border: none;
   outline: none;
   appearance: none;
@@ -38,6 +55,12 @@
 
   &::placeholder {
     color: var(--solid-design-parts-placeholder-text-color);
+  }
+}
+
+.solid-design-parts-NumberInput_clear-button {
+  &[aria-hidden='true'] {
+    visibility: hidden;
   }
 }
 
