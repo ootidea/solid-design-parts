@@ -1,8 +1,15 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './Checkbox.scss'
-import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import {
+  createDeferEffect,
+  createInjectableSignalObject,
+  joinClasses,
+  joinStyle,
+  prepareProps,
+  Props,
+} from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -43,14 +50,11 @@ export function Checkbox(rawProps: CheckboxProps) {
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(checkedSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.checked,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.checked, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.checked,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.checked, props.error, props.required)
+    }
   )
 
   async function onChange(event: Event) {

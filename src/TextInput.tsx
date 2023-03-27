@@ -1,11 +1,18 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, JSX, on, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import css from './TextInput.scss'
 import { LiteralAutoComplete } from './utility/others'
-import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import {
+  createDeferEffect,
+  createInjectableSignalObject,
+  joinClasses,
+  joinStyle,
+  prepareProps,
+  Props,
+} from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -64,14 +71,11 @@ export function TextInput(rawProps: TextInputProps) {
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(valueSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.value,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.value,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
+    }
   )
 
   async function onInput(event: InputEvent) {

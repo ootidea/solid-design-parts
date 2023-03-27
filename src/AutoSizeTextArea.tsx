@@ -1,8 +1,8 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './AutoSizeTextArea.scss'
-import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -40,14 +40,11 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(valueSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.value,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.value,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
+    }
   )
 
   async function onInput(event: InputEvent) {

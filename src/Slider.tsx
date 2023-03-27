@@ -1,10 +1,10 @@
 import { assert, clamp, isNotUndefined, minBy } from 'base-up'
-import { createMemo, createRenderEffect, createSignal, on, onMount } from 'solid-js'
+import { createMemo, createSignal, onMount } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './Slider.scss'
 import { CssColor } from './utility/color'
 import { observeWidthPx } from './utility/others'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -56,12 +56,9 @@ export function Slider(rawProps: SliderProps) {
   })
 
   const valueSignal = createSignalObject(correctValue(props.value))
-  createRenderEffect(
-    on(
-      () => props.value,
-      () => (valueSignal.value = correctValue(props.value)),
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.value,
+    () => (valueSignal.value = correctValue(props.value))
   )
   // A variable between 0 and 1 that indicates where the 'value' is positioned between 'min' and 'max'.
   const ratio = createMemo(() => (valueSignal.value - props.min) / (props.max - props.min))

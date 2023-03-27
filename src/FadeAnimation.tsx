@@ -1,5 +1,5 @@
-import { createRenderEffect, createSignal, on, Show } from 'solid-js'
-import { prepareProps, Props, SlotProp } from './utility/props'
+import { createSignal, Show } from 'solid-js'
+import { createDeferEffect, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type FadeAnimationProps<T> = Props<{
@@ -25,18 +25,15 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
 
   // A variable required to render props.children until animation is complete.
   let lastNonFalsyShown = props.shown
-  createRenderEffect(
-    on(
-      () => props.shown,
-      () => {
-        if (props.shown) {
-          lastNonFalsyShown = props.shown
-        }
+  createDeferEffect(
+    () => props.shown,
+    () => {
+      if (props.shown) {
+        lastNonFalsyShown = props.shown
+      }
 
-        changeShown(Boolean(props.shown))
-      },
-      { defer: true }
-    )
+      changeShown(Boolean(props.shown))
+    }
   )
 
   function changeShown(newShown: boolean) {

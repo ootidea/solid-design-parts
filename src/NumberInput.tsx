@@ -1,10 +1,10 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, JSX, on, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import css from './NumberInput.scss'
-import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -41,17 +41,14 @@ export function NumberInput(rawProps: NumberInputProps) {
   )
 
   const stringSignal = createSignalObject(stringify(props.value))
-  createRenderEffect(
-    on(
-      () => props.value,
-      () => {
-        if (props.value !== numberSignal.value) {
-          stringSignal.value = stringify(props.value)
-          numberSignal.value = props.value
-        }
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.value,
+    () => {
+      if (props.value !== numberSignal.value) {
+        stringSignal.value = stringify(props.value)
+        numberSignal.value = props.value
+      }
+    }
   )
   const numberSignal = createSignalObject(props.value)
   const isEditedSignal = createSignalObject(false)
@@ -63,14 +60,11 @@ export function NumberInput(rawProps: NumberInputProps) {
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(numberSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.value,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.value,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.value, props.error, props.required)
+    }
   )
 
   async function onInput(event: InputEvent) {

@@ -1,7 +1,7 @@
 import { call } from 'base-up'
-import { createRenderEffect, createSignal, JSX, on } from 'solid-js'
+import { createSignal, JSX } from 'solid-js'
 
-import { prepareProps, SlotProp } from './utility/props'
+import { createDeferEffect, prepareProps, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type AwaitProps<T> = {
@@ -20,18 +20,15 @@ export function Await<T>(rawProps: AwaitProps<T>) {
     (value) => setState({ status: 'then', value }),
     (value) => setState({ status: 'catch', value })
   )
-  createRenderEffect(
-    on(
-      () => props.promise,
-      () => {
-        setState({ status: 'loading' })
-        props.promise.then(
-          (value) => setState({ status: 'then', value }),
-          (value) => setState({ status: 'catch', value })
-        )
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.promise,
+    () => {
+      setState({ status: 'loading' })
+      props.promise.then(
+        (value) => setState({ status: 'then', value }),
+        (value) => setState({ status: 'catch', value })
+      )
+    }
   )
 
   return (

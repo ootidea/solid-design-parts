@@ -1,9 +1,9 @@
 import { Promisable } from 'base-up'
-import { createMemo, createRenderEffect, For, JSX, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import css from './Checkboxes.scss'
-import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -69,14 +69,11 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.selected,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.selected,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
+    }
   )
 
   async function deriveError(

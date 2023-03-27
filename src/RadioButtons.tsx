@@ -1,8 +1,8 @@
 import { call, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, For, JSX, on, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './RadioButtons.scss'
-import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -49,14 +49,11 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.selected,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.selected,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
+    }
   )
 
   function getLabel(value: T[number]): JSX.Element {

@@ -1,5 +1,16 @@
 import { keysOf } from 'base-up'
-import { ComponentProps, createRenderEffect, createSignal, JSX, mergeProps, on, Signal, splitProps } from 'solid-js'
+import {
+  ComponentProps,
+  createEffect,
+  createRenderEffect,
+  createSignal,
+  JSX,
+  mergeProps,
+  on,
+  Signal,
+  splitProps,
+} from 'solid-js'
+import { Accessor, AccessorArray } from 'solid-js/types/reactive/signal'
 import { Component } from 'solid-js/types/render/component'
 import { createSignalObject, SignalObject } from 'solid-signal-object'
 
@@ -42,6 +53,10 @@ export function createInjectableSignalObject<T, K extends keyof T>(
     )
   )
   return signalObject
+}
+
+export function createDeferEffect<S>(deps: AccessorArray<S> | Accessor<S>, fn: () => unknown) {
+  createEffect(on(deps, fn, { defer: true }))
 }
 
 /**

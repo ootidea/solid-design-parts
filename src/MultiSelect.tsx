@@ -1,5 +1,5 @@
 import { call, isInstanceOf, Promisable } from 'base-up'
-import { createMemo, createRenderEffect, For, JSX, on, Show, untrack } from 'solid-js'
+import { createMemo, createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkboxes } from './Checkboxes'
@@ -9,7 +9,7 @@ import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -70,14 +70,11 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   createRenderEffect(async () => {
     errorSignal.value = await deriveError(shouldValidate(), untrack(selectedSignal.get), props.error, props.required)
   })
-  createRenderEffect(
-    on(
-      () => props.selected,
-      async () => {
-        errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
-      },
-      { defer: true }
-    )
+  createDeferEffect(
+    () => props.selected,
+    async () => {
+      errorSignal.value = await deriveError(shouldValidate(), props.selected, props.error, props.required)
+    }
   )
 
   async function deriveError(
