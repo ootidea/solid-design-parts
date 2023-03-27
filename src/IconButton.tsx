@@ -1,5 +1,4 @@
-import { createSignal } from 'solid-js'
-import { createMemoObject } from 'solid-signal-object'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Icon } from './Icon'
 import css from './IconButton.scss'
 import { Spinner } from './Spinner'
@@ -41,15 +40,15 @@ export function IconButton(rawProps: IconButtonProps) {
   )
 
   const backgroundColor = createMemoObject(() => resolveColorOnBodyElement(props.backgroundColor))
-  const [isInProgress, setIsInProgress] = createSignal(false)
+  const isInProgress = createSignalObject(false)
 
   function clickEventHandler(event: MouseEvent) {
-    if (isInProgress()) return
+    if (isInProgress.value) return
 
     const promise = props.onClick?.(event)
     if (promise instanceof Promise) {
-      setIsInProgress(true)
-      promise.finally(() => setIsInProgress(false))
+      isInProgress.value = true
+      promise.finally(() => (isInProgress.value = false))
     }
   }
 
@@ -70,7 +69,7 @@ export function IconButton(rawProps: IconButtonProps) {
       onClick={clickEventHandler}
       {...restProps}
     >
-      {isInProgress() ? (
+      {isInProgress.value ? (
         <Spinner size="65%" color={props.disabled ? props.disabledColor : props.iconColor} />
       ) : (
         <Icon

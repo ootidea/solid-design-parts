@@ -1,6 +1,6 @@
 import { assert, isNotUndefined } from 'base-up'
-import { createSignal, onCleanup, onMount } from 'solid-js'
-import { createMemoObject } from 'solid-signal-object'
+import { onCleanup, onMount } from 'solid-js'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './Scrollable.scss'
 import { observeHeightPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
@@ -13,17 +13,15 @@ export type ScrollableProps = Props<{}>
 export function Scrollable(rawProps: ScrollableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['children'])
 
-  const [rootHeightPx, setRootHeightPx] = createSignal(0)
-  const [innerHeightPx, setInnerHeightPx] = createSignal(0)
-  const [thumbTopPx, setThumbTopPx] = createSignal(0)
-  const [dragState, setDragState] = createSignal<{ initialMouseY: number; initialScrollTop: number } | undefined>(
-    undefined
-  )
+  const rootHeightPx = createSignalObject(0)
+  const innerHeightPx = createSignalObject(0)
+  const thumbTopPx = createSignalObject(0)
+  const dragState = createSignalObject<{ initialMouseY: number; initialScrollTop: number } | undefined>(undefined)
 
   let outerElement: HTMLDivElement | undefined
   let thumbElement: HTMLDivElement | undefined
 
-  const isOverflow = createMemoObject(() => rootHeightPx() < innerHeightPx())
+  const isOverflow = createMemoObject(() => rootHeightPx.value < innerHeightPx.value)
 
   onMount(() => {
     assert(thumbElement, isNotUndefined)
@@ -47,18 +45,17 @@ export function Scrollable(rawProps: ScrollableProps) {
       event.preventDefault()
       if (outerElement === undefined) return
 
-      setDragState({ initialMouseY: event.clientY, initialScrollTop: outerElement.scrollTop })
+      dragState.value = { initialMouseY: event.clientY, initialScrollTop: outerElement.scrollTop }
       document.body.addEventListener('mousemove', onMouseMove)
     }
 
     function onMouseMove(event: MouseEvent) {
       // if left mouse button is not pressed
       if ((event.buttons & 1) === 0) {
-        setDragState(undefined)
+        dragState.value = undefined
       }
 
-      const dragStateSnapshot = dragState()
-      if (dragStateSnapshot === undefined) {
+      if (dragState.value === undefined) {
         document.body.removeEventListener('mousemove', onMouseMove)
         return
       }
@@ -66,18 +63,18 @@ export function Scrollable(rawProps: ScrollableProps) {
       if (outerElement === undefined) return
 
       outerElement.scrollTop =
-        dragStateSnapshot.initialScrollTop +
-        ((event.clientY - dragStateSnapshot.initialMouseY) * innerHeightPx()) / rootHeightPx()
+        dragState.value.initialScrollTop +
+        ((event.clientY - dragState.value.initialMouseY) * innerHeightPx.value) / rootHeightPx.value
     }
   }
 
   function onScroll(event: Event) {
     const element = event.target
     if (element instanceof HTMLElement) {
-      if (innerHeightPx() === 0) return
+      if (innerHeightPx.value === 0) return
 
-      const scrollRatio = element.scrollTop / innerHeightPx()
-      setThumbTopPx(rootHeightPx() * scrollRatio)
+      const scrollRatio = element.scrollTop / innerHeightPx.value
+      thumbTopPx.value = rootHeightPx.value * scrollRatio
     }
 
     showThumbTemporarily()
@@ -94,19 +91,19 @@ export function Scrollable(rawProps: ScrollableProps) {
       class="solid-design-parts-Scrollable_root"
       classList={{
         'solid-design-parts-Scrollable_overflow': isOverflow.value,
-        'solid-design-parts-Scrollable_dragging': dragState() !== undefined,
+        'solid-design-parts-Scrollable_dragging': dragState.value !== undefined,
       }}
       style={{
-        '--solid-design-parts-Scrollable_thumb-height': `${(100 * rootHeightPx()) / innerHeightPx()}%`,
-        '--solid-design-parts-Scrollable_thumb-top': `${thumbTopPx()}px`,
+        '--solid-design-parts-Scrollable_thumb-height': `${(100 * rootHeightPx.value) / innerHeightPx.value}%`,
+        '--solid-design-parts-Scrollable_thumb-top': `${thumbTopPx.value}px`,
       }}
-      ref={(element) => observeHeightPx(element, setRootHeightPx)}
+      ref={(element) => observeHeightPx(element, rootHeightPx.set)}
       onMouseEnter={showThumbTemporarily}
     >
       <div class="solid-design-parts-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
         <div
           class={joinClasses(rawProps, 'solid-design-parts-Scrollable_inner')}
-          ref={(element) => observeHeightPx(element, setInnerHeightPx)}
+          ref={(element) => observeHeightPx(element, innerHeightPx.set)}
           {...restProps}
         >
           {props.children}

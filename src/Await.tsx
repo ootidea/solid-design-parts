@@ -1,5 +1,6 @@
 import { call } from 'base-up'
-import { createSignal, JSX } from 'solid-js'
+import { JSX } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 
 import { createDeferEffect, prepareProps, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
@@ -15,18 +16,18 @@ export function Await<T>(rawProps: AwaitProps<T>) {
   const [props, restProps] = prepareProps(rawProps, {}, ['promise', 'children', 'loading', 'catch'])
 
   type State = { status: 'loading' } | { status: 'then'; value: T } | { status: 'catch'; value: any }
-  const [state, setState] = createSignal<State>({ status: 'loading' })
+  const state = createSignalObject<State>({ status: 'loading' })
   props.promise.then(
-    (value) => setState({ status: 'then', value }),
-    (value) => setState({ status: 'catch', value })
+    (value) => (state.value = { status: 'then', value }),
+    (value) => (state.value = { status: 'catch', value })
   )
   createDeferEffect(
     () => props.promise,
     () => {
-      setState({ status: 'loading' })
+      state.value = { status: 'loading' }
       props.promise.then(
-        (value) => setState({ status: 'then', value }),
-        (value) => setState({ status: 'catch', value })
+        (value) => (state.value = { status: 'then', value }),
+        (value) => (state.value = { status: 'catch', value })
       )
     }
   )
@@ -34,14 +35,13 @@ export function Await<T>(rawProps: AwaitProps<T>) {
   return (
     <>
       {call(() => {
-        const currentState = state()
-        switch (currentState.status) {
+        switch (state.value.status) {
           case 'loading':
             return props.loading
           case 'then':
-            return <Slot content={props.children} params={currentState.value} />
+            return <Slot content={props.children} params={state.value.value} />
           case 'catch':
-            return <Slot content={props.catch} params={currentState.value} />
+            return <Slot content={props.catch} params={state.value.value} />
         }
       })}
     </>

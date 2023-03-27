@@ -1,5 +1,5 @@
 import { assert, clamp, isNotUndefined, minBy } from 'base-up'
-import { createSignal, onMount } from 'solid-js'
+import { onMount } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './Slider.scss'
 import { CssColor } from './utility/color'
@@ -80,8 +80,8 @@ export function Slider(rawProps: SliderProps) {
     }
   }
 
-  const [trackWidthPx, setTrackWidthPx] = createSignal(0)
-  const [thumbWidthPx, setThumbWidthPx] = createSignal(0)
+  const trackWidthPx = createSignalObject(0)
+  const thumbWidthPx = createSignalObject(0)
   let trackElement: HTMLDivElement | undefined = undefined
 
   function onMouseDownTrack(event: MouseEvent) {
@@ -115,14 +115,14 @@ export function Slider(rawProps: SliderProps) {
   }
 
   function convertOffsetXToValue(offsetX: number): number {
-    const clampedOffsetX = clamp(thumbWidthPx() / 2, offsetX, trackWidthPx() - thumbWidthPx() / 2)
-    const ratio = (clampedOffsetX - thumbWidthPx() / 2) / (trackWidthPx() - thumbWidthPx())
+    const clampedOffsetX = clamp(thumbWidthPx.value / 2, offsetX, trackWidthPx.value - thumbWidthPx.value / 2)
+    const ratio = (clampedOffsetX - thumbWidthPx.value / 2) / (trackWidthPx.value - thumbWidthPx.value)
     return props.min + ratio * (props.max - props.min)
   }
 
   onMount(() => {
     assert(trackElement, isNotUndefined)
-    observeWidthPx(trackElement, setTrackWidthPx)
+    observeWidthPx(trackElement, trackWidthPx.set)
   })
 
   return (
@@ -136,7 +136,7 @@ export function Slider(rawProps: SliderProps) {
         '--solid-design-parts-Slider_thumb-width': props.thumbWidth,
         '--solid-design-parts-Slider_thumb-height': props.thumbHeight,
         '--solid-design-parts-Slider_thumb-color': props.thumbColor,
-        '--solid-design-parts-Slider_thumb-x': `${ratio.value * (trackWidthPx() - thumbWidthPx())}px`,
+        '--solid-design-parts-Slider_thumb-x': `${ratio.value * (trackWidthPx.value - thumbWidthPx.value)}px`,
       }}
       role="slider"
       {...restProps}
@@ -144,7 +144,7 @@ export function Slider(rawProps: SliderProps) {
       <div class="solid-design-parts-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
       <div
         class="solid-design-parts-Slider_thumb"
-        ref={(element) => observeWidthPx(element, setThumbWidthPx)}
+        ref={(element) => observeWidthPx(element, thumbWidthPx.set)}
         onMouseDown={onMouseDownThumb}
       />
     </div>

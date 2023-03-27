@@ -1,9 +1,10 @@
-import { createRoot, createSignal } from 'solid-js'
+import { createRoot } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Foldable } from '../../src/Foldable'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 
-const [unfolded, setUnfolded] = createSignal(false)
+const unfolded = createSignalObject(false)
 
 export const FoldableCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -22,10 +23,10 @@ export const FoldableCatalog: Catalog = createRoot(() => ({
       title: 'Bind to signal',
       children: (
         <>
-          <Foldable title="Title" unfolded={unfolded()} onChangeUnfolded={setUnfolded}>
+          <Foldable title="Title" unfolded={unfolded.value} onChangeUnfolded={unfolded.set}>
             content
           </Foldable>
-          <div>unfolded: {toLiteral(unfolded())}</div>
+          <div>unfolded: {toLiteral(unfolded.value)}</div>
         </>
       ),
     },

@@ -1,4 +1,5 @@
-import { createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './Button.scss'
 import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
@@ -33,18 +34,18 @@ export function Button(rawProps: ButtonProps) {
     ['href', 'onClick']
   )
 
-  const [isInProgress, setIsInProgress] = createSignal(false)
+  const isInProgress = createSignalObject(false)
 
   function clickEventHandler(event: MouseEvent) {
     const promise = props.onClick?.(event)
     if (promise instanceof Promise) {
-      setIsInProgress(true)
-      promise.finally(() => setIsInProgress(false))
+      isInProgress.value = true
+      promise.finally(() => (isInProgress.value = false))
     }
   }
 
   const content = (
-    <Show when={isInProgress()} fallback={rawProps.children}>
+    <Show when={isInProgress.value} fallback={rawProps.children}>
       <LayerLayout>
         <div class="solid-design-parts-Button_invisible">{rawProps.children}</div>
         <Gravity>
@@ -84,7 +85,7 @@ export function Button(rawProps: ButtonProps) {
       type={props.type}
       data-variant={props.variant}
       data-color={props.color}
-      disabled={props.disabled || isInProgress()}
+      disabled={props.disabled || isInProgress.value}
       aria-disabled={props.disabled}
       onClick={clickEventHandler}
       {...restProps}

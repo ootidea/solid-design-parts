@@ -1,9 +1,10 @@
-import { createRoot, createSignal } from 'solid-js'
+import { createRoot } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Button } from '../../src/Button'
 import { Calendar } from '../../src/Calendar'
 import { Catalog } from './ComponentCatalogPage'
 
-const [date, setDate] = createSignal(new Date(), { equals: false })
+const date = createSignalObject(new Date(), { equals: false })
 
 export const CalendarCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -16,8 +17,8 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
       title: 'Bind to signal',
       children: (
         <>
-          <Calendar month={date()} onChangeMonth={setDate} />
-          <Button onClick={() => setDate(new Date(2 * date().getTime()))}>Change month</Button>
+          <Calendar month={date.value} onChangeMonth={date.set} />
+          <Button onClick={() => (date.value = new Date(2 * date.value.getTime()))}>Change month</Button>
         </>
       ),
     },

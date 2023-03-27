@@ -1,8 +1,9 @@
-import { createRoot, createSignal } from 'solid-js'
+import { createRoot } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Checkboxes } from '../../src/Checkboxes'
 import { Catalog } from './ComponentCatalogPage'
 
-const [selected, setSelected] = createSignal(new Set(['PC']), { equals: false })
+const selected = createSignalObject(new Set(['PC']), { equals: false })
 
 export const CheckboxesCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -19,8 +20,12 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       title: 'Bind to signal',
       children: (
         <>
-          <Checkboxes values={['PC', 'Smartphone', 'Tablet']} selected={selected()} onChangeSelected={setSelected} />
-          <div>{`selected: {${[...selected()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
+          <Checkboxes
+            values={['PC', 'Smartphone', 'Tablet']}
+            selected={selected.value}
+            onChangeSelected={selected.set}
+          />
+          <div>{`selected: {${[...selected.value].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
         </>
       ),
     },

@@ -1,5 +1,6 @@
 import { assert, isNotUndefined } from 'base-up'
-import { createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './Resizable.scss'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
@@ -11,7 +12,7 @@ export type ResizableProps = Props<{ onChangeWidthPx?: (width: number) => void }
 export function Resizable(rawProps: ResizableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidthPx', 'style'])
 
-  const [widthPx, setWidthPx] = createSignal<number | undefined>(undefined)
+  const widthPx = createSignalObject<number | undefined>(undefined)
 
   let rootElement: HTMLDivElement | undefined = undefined
   let dragState: { deltaX: number } | undefined = undefined
@@ -38,15 +39,15 @@ export function Resizable(rawProps: ResizableProps) {
     assert(rootElement, isNotUndefined)
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
-    const widthPx = right - left - dragState.deltaX
-    props.onChangeWidthPx?.(widthPx)
-    setWidthPx(widthPx)
+    const newWidthPx = right - left - dragState.deltaX
+    props.onChangeWidthPx?.(newWidthPx)
+    widthPx.value = newWidthPx
   }
 
   return (
     <div
       class={joinClasses(rawProps, 'solid-design-parts-Resizable_root')}
-      style={joinStyle(rawProps.style, { width: widthPx() !== undefined ? `${widthPx()}px` : 'max-content' })}
+      style={joinStyle(rawProps.style, { width: widthPx.value !== undefined ? `${widthPx.value}px` : 'max-content' })}
       ref={rootElement}
       {...restProps}
     >

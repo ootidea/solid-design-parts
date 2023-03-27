@@ -1,4 +1,5 @@
-import { createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { createDeferEffect, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
@@ -21,7 +22,7 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
   let element: HTMLDivElement | undefined
 
   // Signal variable indicating whether props.children should be present on the DOM.
-  const [shown, setShown] = createSignal(Boolean(props.shown))
+  const shown = createSignalObject(Boolean(props.shown))
 
   // A variable required to render props.children until animation is complete.
   let lastNonFalsyShown = props.shown
@@ -37,18 +38,18 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
   )
 
   function changeShown(newShown: boolean) {
-    if (newShown === Boolean(shown())) return
+    if (newShown === Boolean(shown.value)) return
 
     const options: KeyframeAnimationOptions = { duration: props.durationMs }
 
     if (!newShown) {
       const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], options)
       animation?.addEventListener('finish', () => {
-        setShown(newShown)
+        shown.value = newShown
         props.onFinishExitAnimation?.()
       })
     } else {
-      setShown(newShown)
+      shown.value = newShown
       const animation = element?.animate([{ opacity: 0 }, { opacity: 1 }], options)
       animation?.addEventListener('finish', () => {
         props.onFinishEnterAnimation?.()
@@ -58,7 +59,7 @@ export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
 
   return (
     <div class="solid-design-parts-FadeAnimation_root" ref={element}>
-      <Show when={shown()}>
+      <Show when={shown.value}>
         <Slot content={props.children} params={lastNonFalsyShown!} />
       </Show>
     </div>

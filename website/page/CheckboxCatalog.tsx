@@ -1,8 +1,9 @@
-import { createRoot, createSignal } from 'solid-js'
+import { createRoot } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Checkbox } from '../../src/Checkbox'
 import { Catalog } from './ComponentCatalogPage'
 
-const [checked, setChecked] = createSignal(true)
+const checked = createSignalObject(true)
 
 export const CheckboxCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -19,10 +20,10 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Bind to signal',
       children: (
         <>
-          <Checkbox checked={checked()} onChangeChecked={setChecked}>
+          <Checkbox checked={checked.value} onChangeChecked={checked.set}>
             Send me weekly summary
           </Checkbox>
-          <div>checked: {String(checked())}</div>
+          <div>checked: {String(checked.value)}</div>
         </>
       ),
     },

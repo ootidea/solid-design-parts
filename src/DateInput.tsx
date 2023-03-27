@@ -1,4 +1,5 @@
-import { createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import css from './DateInput.scss'
 import { DatePicker } from './DatePicker'
 import { Icon } from './Icon'
@@ -28,9 +29,9 @@ export function DateInput(rawProps: DateInputProps) {
     { disabled: false as Required<DateInputProps>['disabled'], showClearButton: false },
     ['value', 'placeholder', 'onChangeValue', 'format']
   )
-  const [value, setValue] = createSignal<Date | undefined>(props.value)
+  const value = createSignalObject<Date | undefined>(props.value)
   function changeValue(newValue: Date | undefined) {
-    setValue(newValue)
+    value.value = newValue
     props.onChangeValue?.(newValue)
   }
 
@@ -51,16 +52,16 @@ export function DateInput(rawProps: DateInputProps) {
           {...restProps}
         >
           <div class="solid-design-parts-DateInput_preview-area">
-            <Show when={value() !== undefined}>
+            <Show when={value.value !== undefined}>
               <div class="solid-design-parts-DateInput_format">
-                <Slot content={props.format} params={{ value: value() }}>
-                  {value()!.toLocaleDateString()}
+                <Slot content={props.format} params={{ value: value.value }}>
+                  {value.value!.toLocaleDateString()}
                 </Slot>
               </div>
             </Show>
             <div
               class="solid-design-parts-DateInput_placeholder"
-              classList={{ 'solid-design-parts-DateInput_invisible': value() !== undefined }}
+              classList={{ 'solid-design-parts-DateInput_invisible': value.value !== undefined }}
             >
               {props.placeholder}
             </div>
@@ -78,7 +79,7 @@ export function DateInput(rawProps: DateInputProps) {
               size="1.6em"
               iconSize="1.25em"
               iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
-              aria-hidden={value() === undefined}
+              aria-hidden={value.value === undefined}
               onClick={() => changeValue(undefined)}
             />
           </Show>
@@ -89,7 +90,7 @@ export function DateInput(rawProps: DateInputProps) {
       {({ toggle }) => (
         <DatePicker
           class="solid-design-parts-DateInput_date-picker"
-          value={value()}
+          value={value.value}
           disabled={props.disabled instanceof Function ? props.disabled : undefined}
           onChangeValue={(value) => {
             toggle()

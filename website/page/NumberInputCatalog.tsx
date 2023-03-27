@@ -1,9 +1,10 @@
-import { createRoot, createSignal } from 'solid-js'
+import { createRoot } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Button } from '../../src/Button'
 import { NumberInput } from '../../src/NumberInput'
 import { Catalog } from './ComponentCatalogPage'
 
-const [value, setValue] = createSignal(0)
+const value = createSignalObject(0)
 
 export const NumberInputCatalog: Catalog = createRoot(() => ({
   introduction: (
@@ -28,8 +29,8 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       title: 'Bind to signal',
       children: (
         <>
-          <NumberInput value={value()} onChangeValue={setValue} />
-          <div>value: {String(value())}</div>
+          <NumberInput value={value.value} onChangeValue={value.set} />
+          <div>value: {String(value.value)}</div>
         </>
       ),
     },

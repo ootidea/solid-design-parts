@@ -1,5 +1,6 @@
-import { createSignal, Show } from 'solid-js'
+import { Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
+import { createSignalObject } from 'solid-signal-object'
 import css from './Popover.scss'
 import { setupFocusTrap } from './utility/others'
 import {
@@ -39,7 +40,7 @@ export function Popover(rawProps: PopoverProps) {
     ['style']
   )
 
-  const [opened, setOpened] = createSignal(false)
+  const opened = createSignalObject(false)
 
   function open() {
     if (launcher === undefined) return
@@ -47,16 +48,16 @@ export function Popover(rawProps: PopoverProps) {
     const range = document.createRange()
     range.selectNodeContents(launcher)
     launcherRect = range.getBoundingClientRect()
-    setOpened(true)
+    opened.value = true
   }
 
   function close() {
-    setOpened(false)
+    opened.value = false
     props.onClose?.()
   }
 
   function toggle() {
-    if (opened()) {
+    if (opened.value) {
       close()
     } else {
       open()
@@ -77,7 +78,7 @@ export function Popover(rawProps: PopoverProps) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && opened() && !props.persistent && !props.ignoreEscKey) {
+    if (event.code === 'Escape' && opened.value && !props.persistent && !props.ignoreEscKey) {
       event.preventDefault()
       close()
     }
@@ -88,7 +89,7 @@ export function Popover(rawProps: PopoverProps) {
       <div class="solid-design-parts-Popover_launcher" ref={launcher}>
         <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
       </div>
-      <Show when={opened()}>
+      <Show when={opened.value}>
         <Portal>
           <div
             class="solid-design-parts-Popover_overlay"
