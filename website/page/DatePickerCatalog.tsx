@@ -40,5 +40,18 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Enable deselection',
+      description: (
+        <>
+          If the <code>enableDeselection</code> option is set, clicking the selected date again will deselect it.
+        </>
+      ),
+      children: (
+        <>
+          <DatePicker value={new Date()} enableDeselection />
+        </>
+      ),
+    },
   ],
 }))

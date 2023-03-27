@@ -1,5 +1,5 @@
 import { isSameDay, startOfMonth } from 'date-fns'
-import { createSignal } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 import { Calendar } from './Calendar'
 import css from './DatePicker.scss'
 import { joinClasses, prepareProps, Props } from './utility/props'
@@ -11,7 +11,8 @@ export type DatePickerProps = Props<{
   value?: Date | undefined
   month?: Date
   disabled?: (date: Date) => boolean
-  onChangeValue?: (value: Date) => void
+  enableDeselection?: boolean
+  onChangeValue?: (value: Date | undefined) => void
   onChangeMonth?: (month: Date) => void
 }>
 
@@ -20,14 +21,19 @@ export function DatePicker(rawProps: DatePickerProps) {
     rawProps,
     {
       month: startOfMonth(new Date()),
+      enableDeselection: false,
     },
     ['value', 'disabled', 'onChangeValue', 'onChangeMonth']
   )
 
-  const [value, setValue] = createSignal<Date | undefined>(props.value)
+  const valueSignal = createSignalObject<Date | undefined>(props.value)
   function changeValue(value: Date) {
-    setValue(value)
-    props.onChangeValue?.(value)
+    if (props.enableDeselection && valueSignal.value !== undefined && isSameDay(value, valueSignal.value)) {
+      valueSignal.value = undefined
+    } else {
+      valueSignal.value = value
+    }
+    props.onChangeValue?.(valueSignal.value)
   }
 
   return (
@@ -41,7 +47,7 @@ export function DatePicker(rawProps: DatePickerProps) {
         <button
           class="solid-design-parts-DatePicker_date-cell"
           type="button"
-          aria-selected={value() !== undefined && isSameDay(date, value() ?? Number.NaN)}
+          aria-selected={valueSignal.value !== undefined && isSameDay(date, valueSignal.value)}
           disabled={props.disabled?.(date)}
           onClick={() => changeValue(date)}
         >
