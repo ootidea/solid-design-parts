@@ -1,4 +1,4 @@
-import { assert, isNotUndefined, minBy } from 'base-up'
+import { assert, clamp, isNotUndefined, minBy } from 'base-up'
 import { createMemo, createRenderEffect, createSignal, on, onMount } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import css from './Slider.scss'
@@ -77,8 +77,7 @@ export function Slider(rawProps: SliderProps) {
   // If it is a discrete slider, it is corrected to the nearest stop.
   function correctValue(value: number): number {
     if (stops() === undefined) {
-      // TODO: clamp
-      return value
+      return clamp(props.min, value, props.max)
     } else {
       // stops() is now neither undefined nor empty. So ! can be used.
       return minBy(stops()!, (stop) => Math.abs(stop - value))!
@@ -120,8 +119,8 @@ export function Slider(rawProps: SliderProps) {
   }
 
   function convertOffsetXToValue(offsetX: number): number {
-    const validOffsetX = Math.max(thumbWidthPx() / 2, Math.min(offsetX, trackWidthPx() - thumbWidthPx() / 2))
-    const ratio = (validOffsetX - thumbWidthPx() / 2) / (trackWidthPx() - thumbWidthPx())
+    const clampedOffsetX = clamp(thumbWidthPx() / 2, offsetX, trackWidthPx() - thumbWidthPx() / 2)
+    const ratio = (clampedOffsetX - thumbWidthPx() / 2) / (trackWidthPx() - thumbWidthPx())
     return props.min + ratio * (props.max - props.min)
   }
 
