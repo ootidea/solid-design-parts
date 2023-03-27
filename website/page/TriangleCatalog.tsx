@@ -20,9 +20,9 @@ export const TriangleCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <Triangle width="30px" color="#A1B2C3" />
-          <Triangle width="30px" color="lightgreen" />
-          <Triangle width="30px" color="hsla(0 40% 50% / 30%)" />
+          <Triangle color="#A1B2C3" width="30px" />
+          <Triangle color="lightgreen" width="30px" />
+          <Triangle color="hsla(0 40% 50% / 30%)" width="30px" />
         </>
       ),
     },
@@ -31,9 +31,40 @@ export const TriangleCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <Triangle width="1em" direction="right" color="gray" />
-          <Triangle width="1em" direction="down" color="gray" />
-          <Triangle width="1em" direction="left" color="gray" />
+          <Triangle direction="right" width="1em" color="gray" />
+          <Triangle direction="down" width="1em" color="gray" />
+          <Triangle direction="left" width="1em" color="gray" />
+        </>
+      ),
+    },
+    {
+      title: 'Skew',
+      direction: 'horizontal',
+      children: (
+        <>
+          <Triangle skew="40deg" width="2em" color="gray" />
+          <Triangle skew="-0.1turn" width="1em" height="2em" color="gray" />
+          <Triangle skew="0.6rad" width="2em" direction="left" />
+        </>
+      ),
+    },
+    {
+      title: 'The origin of skew transformation',
+      description: (
+        <>
+          By default, the center of skew transformation is the midpoint of the base. This can be changed by setting the
+          <code>transformOrigin</code>. The vertex of the triangle can be particularly useful in pointing out other
+          elements when specified.
+        </>
+      ),
+      children: (
+        <>
+          <div style={{ width: '3em', border: '1px dashed gray' }}>
+            <Triangle skew="40deg" color="rgba(0 0 0 /30%)" />
+          </div>
+          <div style={{ width: '3em', border: '1px dashed gray' }}>
+            <Triangle skew="40deg" transformOrigin="top" color="rgba(0 0 0 /30%)" />
+          </div>
         </>
       ),
     },

@@ -5,6 +5,18 @@
   box-sizing: border-box;
   width: var(--solid-design-parts-Triangle_width);
   height: var(--solid-design-parts-Triangle_height);
+
+  transform-origin: var(--solid-design-parts-Triangle_transform-origin);
+
+  &[data-direction='up'],
+  &[data-direction='down'] {
+    transform: skewX(var(--solid-design-parts-Triangle_skew));
+  }
+
+  &[data-direction='left'],
+  &[data-direction='right'] {
+    transform: skewY(var(--solid-design-parts-Triangle_skew));
+  }
 }
 
 .solid-design-parts-Triangle_path {
