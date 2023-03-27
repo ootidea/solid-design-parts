@@ -27,7 +27,7 @@ export function Spinner(rawProps: SpinnerProps) {
 
   const svgUrl = createMemo(
     () =>
-      `url('data:image/svg+xml;utf8,<svg width="200mm" height="200mm" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="${
+      `url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="${
         100 - props.thickness / 2
       }" fill="none" stroke="black" stroke-width="${props.thickness}" /></svg>')`
   )
