@@ -9,9 +9,9 @@ registerCss(css)
 export type SpeechBubbleProps = Props<{
   backgroundColor?: CssColor
   radius?: string
-  triangleWidth?: string
-  triangleHeight?: string
-  triangleSkew?: string
+  tailWidth?: string
+  tailHeight?: string
+  tailSkew?: string
 }>
 
 export function SpeechBubble(rawProps: SpeechBubbleProps) {
@@ -20,9 +20,9 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
     {
       backgroundColor: 'var(--solid-design-parts-SpeechBubble_background-default-color)',
       radius: 'var(--solid-design-parts-SpeechBubble_default-radius)',
-      triangleWidth: '10px',
-      triangleHeight: '10px',
-      triangleSkew: '0rad',
+      tailWidth: '10px',
+      tailHeight: '10px',
+      tailSkew: '0rad',
     },
     ['children']
   )
@@ -37,14 +37,14 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       {...restProps}
     >
       <div class="solid-design-parts-SpeechBubble_message-box">{props.children}</div>
-      <div class="solid-design-parts-SpeechBubble_triangle-area">
+      <div class="solid-design-parts-SpeechBubble_tail-area">
         <Triangle
-          class="solid-design-parts-SpeechBubble_triangle"
+          class="solid-design-parts-SpeechBubble_tail"
           direction="down"
           color={props.backgroundColor}
-          width={props.triangleWidth}
-          height={props.triangleHeight}
-          skew={props.triangleSkew}
+          width={props.tailWidth}
+          height={props.tailHeight}
+          skew={props.tailSkew}
         />
       </div>
     </div>

@@ -32,30 +32,30 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Triangle width',
+      title: 'Tail width',
       children: (
         <>
-          <SpeechBubble triangleWidth="5px">Triangle width</SpeechBubble>
-          <SpeechBubble triangleWidth="2em">Triangle width</SpeechBubble>
-          <SpeechBubble triangleWidth="50%">Triangle width</SpeechBubble>
+          <SpeechBubble tailWidth="5px">Triangle width</SpeechBubble>
+          <SpeechBubble tailWidth="2em">Triangle width</SpeechBubble>
+          <SpeechBubble tailWidth="50%">Triangle width</SpeechBubble>
         </>
       ),
     },
     {
-      title: 'Triangle height',
+      title: 'Tail height',
       children: (
         <>
-          <SpeechBubble triangleHeight="5px">Triangle height</SpeechBubble>
-          <SpeechBubble triangleHeight="1.2em">Triangle height</SpeechBubble>
+          <SpeechBubble tailHeight="5px">Triangle height</SpeechBubble>
+          <SpeechBubble tailHeight="1.2em">Triangle height</SpeechBubble>
         </>
       ),
     },
     {
-      title: 'Triangle skew',
+      title: 'Tail skew',
       children: (
         <>
-          <SpeechBubble triangleSkew="0.16turn">Triangle skew</SpeechBubble>
-          <SpeechBubble triangleSkew="-45deg">Triangle skew</SpeechBubble>
+          <SpeechBubble tailSkew="0.16turn">Triangle skew</SpeechBubble>
+          <SpeechBubble tailSkew="-45deg">Triangle skew</SpeechBubble>
         </>
       ),
     },
