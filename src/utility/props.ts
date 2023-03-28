@@ -138,11 +138,11 @@ export function prepareProps<T, U extends Partial<T>, Ks extends readonly (keyof
 }
 
 export function joinClasses(
-  props: { class?: string | undefined; classList?: Record<string, boolean | undefined> | undefined },
+  props: { class?: string | undefined; classList?: Record<string, boolean | undefined> | undefined } | undefined,
   baseClass: string,
   baseClassList?: Record<string, boolean | undefined>
 ) {
-  const joinedClassList = Object.entries(props.classList ?? {})
+  const joinedClassList = Object.entries(props?.classList ?? {})
     .filter(([, value]) => Boolean(value))
     .map(([key]) => key)
     .join(' ')
@@ -150,7 +150,7 @@ export function joinClasses(
     .filter(([, value]) => Boolean(value))
     .map(([key]) => key)
     .join(' ')
-  return [baseClass, props.class ?? '', joinedBaseClassList, joinedClassList].join(' ').trim()
+  return [baseClass, props?.class ?? '', joinedBaseClassList, joinedClassList].join(' ').trim()
 }
 
 export function joinStyle(injectedStyle: JSX.CSSProperties | string | undefined, baseStyle: JSX.CSSProperties): string {

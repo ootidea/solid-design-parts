@@ -277,7 +277,9 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                         <Checkbox
                           checked={selectedSignal.value.has(value)}
                           disabled={props.disabled}
-                          labelProps={{ style: { padding: '0.5em 0.8em', width: '100%' } }}
+                          labelProps={{
+                            class: 'solid-design-parts-MultiSelect_checkbox-label',
+                          }}
                           onChangeChecked={() => {
                             // TODO: use toggle function of base-up
                             if (selectedSignal.value.has(value)) {

@@ -117,7 +117,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       aria-invalid={errorSignal.value !== false}
       {...restProps}
     >
-      <label class="solid-design-parts-Checkbox_label" {...props.labelProps}>
+      <label {...props.labelProps} class={joinClasses(props.labelProps, 'solid-design-parts-Checkbox_label')}>
         <input
           type="checkbox"
           class="solid-design-parts-Checkbox_checkbox"
