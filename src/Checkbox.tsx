@@ -1,5 +1,5 @@
 import { isInstanceOf, Promisable } from 'base-up'
-import { createRenderEffect, untrack } from 'solid-js'
+import { ComponentProps, createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './Checkbox.scss'
 import {
@@ -24,6 +24,7 @@ export type CheckboxProps = Props<{
   radius?: string
   onChangeChecked?: (checked: boolean) => void
   onChangeValidChecked?: (checked: boolean) => void
+  labelProps?: ComponentProps<'label'>
 }>
 
 export function Checkbox(rawProps: CheckboxProps) {
@@ -38,7 +39,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-Checkbox_checkbox-default-radius)',
     },
-    ['onChangeChecked', 'onChangeValidChecked']
+    ['onChangeChecked', 'onChangeValidChecked', 'labelProps']
   )
 
   const checkedSignal = createInjectableSignalObject(props, 'checked')
@@ -116,7 +117,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       aria-invalid={errorSignal.value !== false}
       {...restProps}
     >
-      <label class="solid-design-parts-Checkbox_label">
+      <label class="solid-design-parts-Checkbox_label" {...props.labelProps}>
         <input
           type="checkbox"
           class="solid-design-parts-Checkbox_checkbox"
