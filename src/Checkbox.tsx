@@ -111,11 +111,11 @@ export function Checkbox(rawProps: CheckboxProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Checkbox_root')}
       style={joinStyle(rawProps.style, { '--solid-design-parts-Checkbox_checkbox-radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
-      {...restProps}
     >
       <label {...props.labelProps} class={joinClasses(props.labelProps, 'solid-design-parts-Checkbox_label')}>
         <input

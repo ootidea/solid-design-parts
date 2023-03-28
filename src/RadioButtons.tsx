@@ -144,9 +144,9 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
         <For each={props.values}>
           {(value) => (
             <label
+              {...restProps}
               class={joinClasses(rawProps, 'solid-design-parts-RadioButtons_label')}
               aria-disabled={isDisabled(value)}
-              {...restProps}
             >
               <input
                 type="radio"

@@ -12,7 +12,7 @@ export function LayerLayout(rawProps: LayerLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {})
 
   return (
-    <div class={joinClasses(rawProps, 'solid-design-parts-LayerLayout_root')} {...restProps}>
+    <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-LayerLayout_root')}>
       <For each={toArray(rawProps.children)}>
         {(child, i) => {
           if (i() === 0) {

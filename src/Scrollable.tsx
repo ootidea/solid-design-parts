@@ -102,9 +102,9 @@ export function Scrollable(rawProps: ScrollableProps) {
     >
       <div class="solid-design-parts-Scrollable_outer" ref={outerElement} onScroll={onScroll}>
         <div
+          {...restProps}
           class={joinClasses(rawProps, 'solid-design-parts-Scrollable_inner')}
           ref={(element) => observeHeightPx(element, innerHeightPx.set)}
-          {...restProps}
         >
           {props.children}
         </div>

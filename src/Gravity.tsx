@@ -14,10 +14,10 @@ export function Gravity(rawProps: GravityProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Gravity_root')}
       data-horizontal-position={toHorizontalPosition(props.to)}
       data-vertical-position={toVerticalPosition(props.to)}
-      {...restProps}
     >
       <div class="solid-design-parts-Gravity_cage">{rawProps.children}</div>
     </div>

@@ -41,6 +41,7 @@ export function DateInput(rawProps: DateInputProps) {
     <Modal
       launcher={({ toggle }) => (
         <button
+          {...restProps}
           class={joinClasses(props, 'solid-design-parts-DateInput_launcher')}
           type="button"
           disabled={props.disabled === true}
@@ -49,7 +50,6 @@ export function DateInput(rawProps: DateInputProps) {
 
             toggle()
           }}
-          {...restProps}
         >
           <div class="solid-design-parts-DateInput_preview-area">
             <Show when={value.value !== undefined}>

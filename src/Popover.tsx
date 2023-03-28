@@ -92,6 +92,7 @@ export function Popover(rawProps: PopoverProps) {
       <Show when={opened.value}>
         <Portal>
           <div
+            {...restProps}
             class="solid-design-parts-Popover_overlay"
             style={{
               '--solid-design-parts-Popover_left': launcherRect ? `${launcherRect.left}px` : '0',
@@ -110,7 +111,6 @@ export function Popover(rawProps: PopoverProps) {
             onTouchMove={onOperateOverlay}
             onMouseWheel={onOperateOverlay}
             onKeyDown={onKeyDown}
-            {...restProps}
           >
             <Slot content={rawProps.frame} params={{ open, close, toggle }}>
               <div class="solid-design-parts-Popover_frame">

@@ -38,6 +38,7 @@ export function Triangle(rawProps: TriangleProps) {
 
   return (
     <svg
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Triangle_root')}
       style={{
         '--solid-design-parts-Triangle_width': props.width,
@@ -49,7 +50,6 @@ export function Triangle(rawProps: TriangleProps) {
       preserveAspectRatio="none"
       viewBox="0 0 100 100"
       data-direction={props.direction}
-      {...restProps}
     >
       <path class="solid-design-parts-Triangle_path" d={paths[props.direction]} />
     </svg>

@@ -54,6 +54,7 @@ export function IconButton(rawProps: IconButtonProps) {
 
   return (
     <button
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-IconButton_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-IconButton_size': props.size,
@@ -67,7 +68,6 @@ export function IconButton(rawProps: IconButtonProps) {
       disabled={props.disabled}
       aria-disabled={props.disabled}
       onClick={clickEventHandler}
-      {...restProps}
     >
       {isInProgress.value ? (
         <Spinner size="65%" color={props.disabled ? props.disabledColor : props.iconColor} />

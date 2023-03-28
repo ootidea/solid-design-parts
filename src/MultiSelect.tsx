@@ -178,11 +178,11 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   return (
     <>
       <div
+        {...restProps}
         class={joinClasses(rawProps, 'solid-design-parts-MultiSelect_error-message-layout', {
           'solid-design-parts-MultiSelect_opened': dropdownInfoSignal.value !== undefined,
           'solid-design-parts-MultiSelect_full-width': props.fullWidth,
         })}
-        {...restProps}
       >
         <button
           class="solid-design-parts-MultiSelect_launcher"

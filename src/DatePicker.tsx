@@ -54,10 +54,10 @@ export function DatePicker(rawProps: DatePickerProps) {
 
   return (
     <Calendar
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-DatePicker_root')}
       month={props.month}
       onChangeMonth={props.onChangeMonth}
-      {...restProps}
     >
       {({ date }) => (
         <button

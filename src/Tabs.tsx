@@ -33,10 +33,10 @@ export function Tabs<T extends string>(rawProps: TabsProps<T>) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Tabs_root')}
       style={{ '--solid-design-parts-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
       data-type={props.type}
-      {...restProps}
     >
       <div class="solid-design-parts-Tabs_tab-bar" role="tablist">
         <For each={props.names}>

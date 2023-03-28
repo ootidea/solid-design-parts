@@ -183,6 +183,7 @@ export function DataTable<
 
   return (
     <div
+      {...restProps}
       class={joinClasses(props, 'solid-design-parts-DataTable_root', {
         'solid-design-parts-DataTable_full-width': props.fullWidth,
       })}
@@ -192,7 +193,6 @@ export function DataTable<
         '--solid-design-parts-DataTable_even-row-background-color': props.evenRowBackgroundColor,
         '--solid-design-parts-DataTable_odd-row-background-color': props.oddRowBackgroundColor,
       })}
-      {...restProps}
     >
       <div class="solid-design-parts-DataTable_horizontal-ruled-line">
         <Slot content={props.horizontalRuledLine} params={{ verticalIndex: 0 }}>

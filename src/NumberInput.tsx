@@ -138,6 +138,7 @@ export function NumberInput(rawProps: NumberInputProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-NumberInput_root', {
         'solid-design-parts-NumberInput_input-element-has-focus': hasInputElementFocusSignal.value,
       })}
@@ -145,7 +146,6 @@ export function NumberInput(rawProps: NumberInputProps) {
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
       aria-required={props.required}
-      {...restProps}
     >
       <div class="solid-design-parts-NumberInput_frame">
         <div class="solid-design-parts-NumberInput_prefix">{rawProps.prefix}</div>

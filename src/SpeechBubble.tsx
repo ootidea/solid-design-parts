@@ -31,13 +31,13 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-SpeechBubble_root')}
       style={{
         '--solid-design-parts-SpeechBubble_background-color': props.backgroundColor,
         '--solid-design-parts-SpeechBubble_radius': props.radius,
         '--solid-design-parts-SpeechBubble_tail-offset-percent': props.tailOffsetPercent,
       }}
-      {...restProps}
     >
       <div class="solid-design-parts-SpeechBubble_message-box">{props.children}</div>
       <div class="solid-design-parts-SpeechBubble_tail-area">

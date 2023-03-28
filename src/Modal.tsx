@@ -98,7 +98,7 @@ export function Modal(rawProps: ModalProps) {
                   </div>
                 </TitleBarLayout>
               </Show>
-              <Scrollable class="solid-design-parts-Modal_body" {...restProps}>
+              <Scrollable {...restProps} class="solid-design-parts-Modal_body">
                 <Slot content={rawProps.children} params={{ open, close, toggle }} />
               </Scrollable>
               <div class="solid-design-parts-Modal_footer">

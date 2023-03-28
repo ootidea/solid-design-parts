@@ -97,11 +97,11 @@ export function ToggleButtons<T extends string | number>(rawProps: ToggleButtons
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-ToggleButtons_root', {
         'solid-design-parts-ToggleButtons_full-width': props.fullWidth,
         'solid-design-parts-ToggleButtons_exclusive': props.exclusive,
       })}
-      {...restProps}
     >
       <For each={props.values}>
         {(value: T) => (

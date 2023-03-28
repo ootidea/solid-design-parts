@@ -58,6 +58,7 @@ export function Button(rawProps: ButtonProps) {
   if (props.href !== undefined) {
     return (
       <a
+        {...restProps}
         class={joinClasses(rawProps, 'solid-design-parts-Button_root', {
           'solid-design-parts-Button_full-width': props.fullWidth,
         })}
@@ -69,7 +70,6 @@ export function Button(rawProps: ButtonProps) {
         data-variant={props.variant}
         data-color={props.color}
         onClick={clickEventHandler}
-        {...restProps}
       >
         {content}
       </a>
@@ -78,6 +78,7 @@ export function Button(rawProps: ButtonProps) {
 
   return (
     <button
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Button_root', {
         'solid-design-parts-Button_full-width': props.fullWidth,
       })}
@@ -88,7 +89,6 @@ export function Button(rawProps: ButtonProps) {
       disabled={props.disabled || isInProgress.value}
       aria-disabled={props.disabled}
       onClick={clickEventHandler}
-      {...restProps}
     >
       {content}
     </button>

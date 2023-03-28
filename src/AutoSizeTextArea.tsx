@@ -114,11 +114,11 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
           {ZERO_WIDTH_SPACE}
         </div>
         <textarea
+          {...restProps}
           class={joinClasses(rawProps, 'solid-design-parts-AutoSizeTextArea_text-area')}
           value={valueSignal.value}
           onInput={onInput}
           onBlur={() => (isEditedSignal.value = true)}
-          {...restProps}
         />
       </div>
       <p class="solid-design-parts-AutoSizeTextArea_error-message">{errorSignal.value}</p>

@@ -127,6 +127,7 @@ export function Slider(rawProps: SliderProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Slider_root')}
       style={{
         '--solid-design-parts-Slider_track-height': 'var(--solid-design-parts-Slider_track-default-height)',
@@ -139,7 +140,6 @@ export function Slider(rawProps: SliderProps) {
         '--solid-design-parts-Slider_thumb-x': `${ratio.value * (trackWidthPx.value - thumbWidthPx.value)}px`,
       }}
       role="slider"
-      {...restProps}
     >
       <div class="solid-design-parts-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
       <div

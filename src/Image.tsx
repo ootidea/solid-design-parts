@@ -39,12 +39,12 @@ export function Image(rawProps: ImageProps) {
       when={loadingState.value === 'failed' && props.fallback}
       fallback={
         <img
+          {...restProps}
           class={joinClasses(rawProps, 'solid-design-parts-Image_root')}
           alt={props.alt}
           draggable={false}
           onLoad={onLoad}
           onError={onError}
-          {...restProps}
         />
       }
     >

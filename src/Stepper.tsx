@@ -15,9 +15,9 @@ export function Stepper(rawProps: StepperProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Stepper_root')}
       style={{ '--solid-design-parts-Stepper_circle-size': '2.5rem' }}
-      {...restProps}
     >
       <div
         class="solid-design-parts-Stepper_diagram"

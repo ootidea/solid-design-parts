@@ -134,6 +134,7 @@ export function TextInput(rawProps: TextInputProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-TextInput_root', {
         'solid-design-parts-TextInput_input-element-has-focus': hasInputElementFocusSignal.value,
       })}
@@ -141,7 +142,6 @@ export function TextInput(rawProps: TextInputProps) {
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
       aria-required={props.required}
-      {...restProps}
     >
       <div class="solid-design-parts-TextInput_frame">
         <div class="solid-design-parts-TextInput_prefix">{rawProps.prefix}</div>

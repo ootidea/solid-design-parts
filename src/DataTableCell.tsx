@@ -17,9 +17,9 @@ export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>)
   const analysisResult = createMemoObject(() => analyze(props.value))
   return (
     <div
+      {...restProps}
       class={joinClasses(props, 'solid-design-parts-DataTableCell_root')}
       data-type={analysisResult.value.type}
-      {...restProps}
     >
       {render(analysisResult.value)}
     </div>

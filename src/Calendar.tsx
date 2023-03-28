@@ -51,11 +51,11 @@ export function Calendar(rawProps: CalendarProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Calendar_root')}
       style={joinStyle(props.style, {
         '--solid-design-parts-Calendar_year-month-order': i18n.literals.calendarYearMonthOrder,
       })}
-      {...restProps}
     >
       <div class="solid-design-parts-Calendar_year-month-area">
         <IconButton

@@ -46,10 +46,10 @@ export function Resizable(rawProps: ResizableProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Resizable_root')}
       style={joinStyle(rawProps.style, { width: widthPx.value !== undefined ? `${widthPx.value}px` : 'max-content' })}
       ref={rootElement}
-      {...restProps}
     >
       <Show when={rawProps.children instanceof Array} fallback={rawProps.children}>
         <div>{rawProps.children}</div>

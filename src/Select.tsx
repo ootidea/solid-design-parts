@@ -118,6 +118,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
   return (
     <>
       <button
+        {...restProps}
         class={joinClasses(rawProps, 'solid-design-parts-Select_launcher', {
           'solid-design-parts-Select_opened': dropdownInfoSignal.value !== undefined,
           'solid-design-parts-Select_full-width': props.fullWidth,
@@ -125,7 +126,6 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
         type="button"
         disabled={props.disabled}
         onClick={onClickLauncher}
-        {...restProps}
       >
         <div class="solid-design-parts-Select_preview-area">
           {selectedSignal.value !== undefined ? (

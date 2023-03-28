@@ -25,6 +25,7 @@ export function Icon(rawProps: IconProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Icon_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Icon_url': `url('${props.src}')`,
@@ -33,7 +34,6 @@ export function Icon(rawProps: IconProps) {
         '--solid-design-parts-Icon_rotate': props.rotate,
       })}
       role="img"
-      {...restProps}
     />
   )
 }

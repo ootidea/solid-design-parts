@@ -44,13 +44,13 @@ export function Foldable(rawProps: FoldableProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Foldable_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Foldable_header-background-color': props.headerBackgroundColor,
         '--solid-design-parts-Foldable_border-color': props.borderColor,
       })}
       data-unfolded={unfolded()}
-      {...restProps}
     >
       <StretchLayout class="solid-design-parts-Foldable_header" direction="horizontal" onClick={toggle}>
         <div class="solid-design-parts-Foldable_title">

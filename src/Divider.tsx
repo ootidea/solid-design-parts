@@ -24,6 +24,7 @@ export function Divider(rawProps: DividerProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Divider_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Divider_thickness': props.thickness,
@@ -31,7 +32,6 @@ export function Divider(rawProps: DividerProps) {
       })}
       role="separator"
       data-direction={props.direction}
-      {...restProps}
     />
   )
 }

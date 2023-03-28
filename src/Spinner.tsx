@@ -34,6 +34,7 @@ export function Spinner(rawProps: SpinnerProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Spinner_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Spinner_size': props.size,
@@ -41,7 +42,6 @@ export function Spinner(rawProps: SpinnerProps) {
         '--solid-design-parts-Spinner_period': `${1 / props.frequency}s`,
         '--solid-design-parts-Spinner_color': props.color,
       })}
-      {...restProps}
     />
   )
 }

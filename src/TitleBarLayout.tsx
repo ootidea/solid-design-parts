@@ -12,7 +12,7 @@ export function TitleBarLayout(rawProps: TitleBarLayoutProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['left', 'right', 'children'])
 
   return (
-    <div class={joinClasses(rawProps, 'solid-design-parts-TitleBarLayout_root')} {...restProps}>
+    <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-TitleBarLayout_root')}>
       <div class="solid-design-parts-TitleBarLayout_left-area">
         <div class="solid-design-parts-TitleBarLayout_left">{props.left}</div>
         <div class="solid-design-parts-TitleBarLayout_right" aria-hidden="true">

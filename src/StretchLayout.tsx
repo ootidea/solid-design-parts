@@ -30,13 +30,13 @@ export function StretchLayout(rawProps: StretchLayoutProps) {
 
   return (
     <div
+      {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-StretchLayout_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-StretchLayout_template':
           'auto '.repeat(normalizeIndex(Number(props.stretchAt))) + 'minmax(0, 1fr)',
       })}
       data-direction={props.direction}
-      {...restProps}
     >
       {rawProps.children}
     </div>
