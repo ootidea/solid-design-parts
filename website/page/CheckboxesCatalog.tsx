@@ -6,6 +6,12 @@ import { Catalog } from './ComponentCatalogPage'
 const selected = createSignalObject(new Set(['PC']), { equals: false })
 
 export const CheckboxesCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Checkboxes</code> is a component that displays a group of checkboxes. The state of the input field is
+      treated as a single <code>Set</code> object, not as multiple boolean values.
+    </>
+  ),
   samples: [
     {
       title: 'Basic sample',

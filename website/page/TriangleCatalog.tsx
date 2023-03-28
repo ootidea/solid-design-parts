@@ -3,6 +3,12 @@ import { Triangle } from '../../src/Triangle'
 import { Catalog } from './ComponentCatalogPage'
 
 export const TriangleCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Triangle</code> is a component that dynamically generates and displays an SVG triangle. Unlike
+      implementation with border, you can use % for width and height.
+    </>
+  ),
   samples: [
     {
       title: 'Size',
