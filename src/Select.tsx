@@ -1,5 +1,5 @@
 import { isInstanceOf } from 'base-up'
-import { createRenderEffect, For, JSX, Show } from 'solid-js'
+import { For, JSX, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
 import { Divider } from './Divider'
@@ -11,7 +11,7 @@ import { Scrollable } from './Scrollable'
 import css from './Select.scss'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -46,15 +46,26 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
     return props.labels?.[value] ?? value
   }
 
-  const selectedSignal = createSignalObject<T[number] | undefined>(undefined)
-  createRenderEffect(() => {
-    // Treat as undefined if props.selected is out of range.
-    if (props.selected !== undefined && !props.values.includes(props.selected)) {
-      changeSelected(undefined)
-    } else {
-      selectedSignal.value = props.selected
+  const initialSelected =
+    props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected
+  if (initialSelected !== props.selected) {
+    props.onChangeSelected?.(initialSelected)
+  }
+
+  const selectedSignal = createSignalObject<T[number] | undefined>(initialSelected)
+  createDeferEffect(
+    () => props.selected,
+    () => {
+      // Treat as undefined if props.selected is out of range.
+      const newSelected =
+        props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected
+      selectedSignal.value = newSelected
+      if (newSelected !== props.selected) {
+        props.onChangeSelected?.(newSelected)
+      }
     }
-  })
+  )
+
   function changeSelected(selected: T[number] | undefined) {
     selectedSignal.value = selected
     props.onChangeSelected?.(selected)
