@@ -2,7 +2,7 @@ import { isSameDay, startOfMonth } from 'date-fns'
 import { createSignalObject } from 'solid-signal-object'
 import { Calendar } from './Calendar'
 import css from './DatePicker.scss'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -27,6 +27,11 @@ export function DatePicker(rawProps: DatePickerProps) {
   )
 
   const valueSignal = createSignalObject<Date | undefined>(props.value)
+  createDeferEffect(
+    () => props.value,
+    () => (valueSignal.value = props.value)
+  )
+
   function changeValue(value: Date) {
     if (props.enableDeselection && valueSignal.value !== undefined && isSameDay(value, valueSignal.value)) {
       valueSignal.value = undefined
