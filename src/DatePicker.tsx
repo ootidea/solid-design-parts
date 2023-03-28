@@ -26,10 +26,21 @@ export function DatePicker(rawProps: DatePickerProps) {
     ['value', 'disabled', 'onChangeValue', 'onChangeMonth']
   )
 
-  const valueSignal = createSignalObject<Date | undefined>(props.value)
+  const initialValue = props.value !== undefined && props.disabled?.(props.value) ? undefined : props.value
+  if (initialValue?.getTime() !== props.value?.getTime()) {
+    props.onChangeValue?.(initialValue)
+  }
+
+  const valueSignal = createSignalObject(initialValue)
   createDeferEffect(
     () => props.value,
-    () => (valueSignal.value = props.value)
+    () => {
+      const newValue = props.value !== undefined && props.disabled?.(props.value) ? undefined : props.value
+      valueSignal.value = newValue
+      if (newValue?.getTime() !== props.value?.getTime()) {
+        props.onChangeValue?.(newValue)
+      }
+    }
   )
 
   function changeValue(value: Date) {
