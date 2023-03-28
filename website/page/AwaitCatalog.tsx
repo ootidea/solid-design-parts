@@ -35,7 +35,7 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Catch error',
+      title: 'Catch an error',
       children: (
         <>
           <Await
@@ -51,7 +51,7 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Reassign promise',
+      title: 'Reassign a promise',
       children: (
         <>
           <Await promise={promise()} loading={<p>loading</p>}>
@@ -68,6 +68,16 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
           >
             Refresh
           </Button>
+        </>
+      ),
+    },
+    {
+      title: 'Await a non-promise value',
+      children: (
+        <>
+          <Await promise={Math.random()} loading={<Spinner />} catch="🤔 An error occurred.">
+            {(value) => <p>result: {value}</p>}
+          </Await>
         </>
       ),
     },
