@@ -5,7 +5,7 @@ import { SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type AwaitProps<T> = {
-  promise: Promisable<T>
+  value: Promisable<T>
   children?: SlotProp<T>
   loading?: JSX.Element
   catch?: SlotProp<any>
@@ -21,7 +21,7 @@ export function Await<T>(props: AwaitProps<T>) {
     }
 
     try {
-      const params = await props.promise
+      const params = await props.value
       result.value = <Slot content={props.children} params={params} />
     } catch (error) {
       result.value = <Slot content={props.catch} params={error} />

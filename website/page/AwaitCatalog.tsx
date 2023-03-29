@@ -30,7 +30,7 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <Await promise={new Promise((resolve) => setTimeout(resolve, 2000))}>
+          <Await value={new Promise((resolve) => setTimeout(resolve, 2000))}>
             <p>resolved</p>
           </Await>
         </>
@@ -40,18 +40,18 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       title: 'Loading state',
       children: (
         <>
-          <Await promise={new Promise(() => {})} loading={<p>loading</p>}>
+          <Await value={new Promise(() => {})} loading={<p>loading</p>}>
             <p>resolved</p>
           </Await>
         </>
       ),
     },
     {
-      title: 'Catch an error',
+      title: 'Catching an error',
       children: (
         <>
           <Await
-            promise={new Promise((_, reject) => setTimeout(() => reject('error'), 5000))}
+            value={new Promise((_, reject) => setTimeout(() => reject('error'), 5000))}
             loading={<Spinner />}
             catch={(error) => <p>{error}</p>}
           />
@@ -59,11 +59,11 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Reassign a promise',
+      title: 'Reassigning a promise',
       children: (
         <>
           <div>
-            <Await promise={promise()} loading={<Spinner />}>
+            <Await value={promise()} loading={<Spinner />}>
               resolved
             </Await>
           </div>
@@ -76,7 +76,7 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <div>
-            <Await promise={idPromise()} loading={<Spinner />} showPreviousValueDuringAwait>
+            <Await value={idPromise()} loading={<Spinner />} showPreviousValueDuringAwait>
               {(value) => <div>ID: {value}</div>}
             </Await>
           </div>
@@ -85,10 +85,10 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Await a non-promise value',
+      title: 'Awaiting a non-promise value',
       children: (
         <>
-          <Await promise={Math.PI} loading={<Spinner />} catch="🤔 An error occurred.">
+          <Await value={Math.PI} loading={<Spinner />} catch="🤔 An error occurred.">
             {(value) => <p>result: {value}</p>}
           </Await>
         </>
