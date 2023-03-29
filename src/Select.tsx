@@ -57,19 +57,14 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
     () => props.selected,
     () => {
       // Treat as undefined if props.selected is out of range.
-      const newSelected =
+      selectedSignal.value =
         props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected
-      selectedSignal.value = newSelected
-      if (newSelected !== props.selected) {
-        props.onChangeSelected?.(newSelected)
-      }
     }
   )
 
-  function changeSelected(selected: T[number] | undefined) {
-    selectedSignal.value = selected
-    props.onChangeSelected?.(selected)
-  }
+  createDeferEffect(selectedSignal.get, () => {
+    props.onChangeSelected?.(selectedSignal.value)
+  })
 
   const searchQuerySignal = createSignalObject('')
   function search(values: T, searchQuery: string): readonly T[number][] {
@@ -150,7 +145,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
             iconSize="1.25em"
             iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
             aria-hidden={selectedSignal.value === undefined}
-            onClick={() => changeSelected(undefined)}
+            onClick={() => (selectedSignal.value = undefined)}
           />
         </Show>
         <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
@@ -201,7 +196,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
                           role="menuitem"
                           aria-selected={selectedSignal.value === value}
                           onClick={() => {
-                            changeSelected(value)
+                            selectedSignal.value = value
                             dropdownInfoSignal.value = undefined
                           }}
                         >
