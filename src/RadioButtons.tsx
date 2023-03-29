@@ -1,4 +1,4 @@
-import { call, Promisable } from 'base-up'
+import { Promisable } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import css from './RadioButtons.scss'
@@ -21,7 +21,7 @@ export type RadioButtonsProps<T extends readonly (string | number)[]> = Props<{
   validateImmediately?: boolean
   enableDeselection?: boolean
   onChangeSelected?: (selected: T[number] | undefined) => void
-  onChangeValidSelected?: (selected: T[number] | undefined) => void
+  onValid?: (selected: T[number] | undefined) => void
 }>
 
 export function RadioButtons<T extends readonly (string | number)[]>(rawProps: RadioButtonsProps<T>) {
@@ -37,7 +37,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
       validateImmediately: false,
       enableDeselection: false,
     },
-    ['values', 'selected', 'labels', 'gridColumnsCount', 'onChangeSelected', 'onChangeValidSelected']
+    ['values', 'selected', 'labels', 'gridColumnsCount', 'onChangeSelected', 'onValid']
   )
 
   const selectedSignal = createInjectableSignalObject(props, 'selected')
@@ -47,19 +47,22 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(
-      shouldValidate.value,
-      untrack(selectedSignal.get),
-      props.error,
-      props.required
-    )
-  })
-  createDeferEffect(
-    () => props.selected,
-    async () => {
-      errorSignal.value = await deriveError(shouldValidate.value, props.selected, props.error, props.required)
+    const selected = untrack(selectedSignal.get)
+    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(selected)
     }
-  )
+  })
+  createDeferEffect(selectedSignal.get, async () => {
+    const selected = selectedSignal.value
+    props.onChangeSelected?.(selected)
+    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(selected)
+    }
+  })
 
   function getLabel(value: T[number]): JSX.Element {
     if (props.labels instanceof Function) return props.labels(value)
@@ -74,21 +77,11 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
 
   async function onClick(value: T[number]) {
     isEditedSignal.value = true
-    const nextSelected = call(() => {
-      if (selectedSignal.value === value && props.enableDeselection) {
-        return undefined
-      } else {
-        return value
-      }
-    })
 
-    selectedSignal.value = nextSelected
-    props.onChangeSelected?.(nextSelected)
-
-    const nextError = await deriveError(shouldValidate.value, nextSelected, props.error, props.required)
-    errorSignal.value = nextError
-    if (nextError === undefined) {
-      props.onChangeValidSelected?.(nextSelected)
+    if (selectedSignal.value === value && props.enableDeselection) {
+      selectedSignal.value = undefined
+    } else {
+      selectedSignal.value = value
     }
   }
 
