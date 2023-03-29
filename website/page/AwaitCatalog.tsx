@@ -10,6 +10,15 @@ const [promise, setPromise] = createSignal(
   })
 )
 
+let id = 0
+async function requestNextId() {
+  return new Promise<number>((resolve) => {
+    setTimeout(() => resolve(id++), 500)
+  })
+}
+
+const [idPromise, setIdPromise] = createSignal(requestNextId())
+
 export const AwaitCatalog: Catalog = createRoot(() => ({
   introduction: (
     <>
@@ -21,14 +30,17 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <Await
-            promise={
-              new Promise((resolve) => {
-                setTimeout(resolve, 2000)
-              })
-            }
-            loading={<Spinner />}
-          >
+          <Await promise={new Promise((resolve) => setTimeout(resolve, 2000))}>
+            <p>resolved</p>
+          </Await>
+        </>
+      ),
+    },
+    {
+      title: 'Loading state',
+      children: (
+        <>
+          <Await promise={new Promise(() => {})} loading={<p>loading</p>}>
             <p>resolved</p>
           </Await>
         </>
@@ -39,13 +51,9 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Await
-            promise={
-              new Promise((_, reject) => {
-                setTimeout(reject, 5000)
-              })
-            }
+            promise={new Promise((_, reject) => setTimeout(() => reject('error'), 5000))}
             loading={<Spinner />}
-            catch="🤔 An error occurred."
+            catch={(error) => <p>{error}</p>}
           />
         </>
       ),
@@ -54,20 +62,25 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       title: 'Reassign a promise',
       children: (
         <>
-          <Await promise={promise()} loading={<p>loading</p>}>
-            <p>resolved</p>
-          </Await>
-          <Button
-            onClick={() =>
-              setPromise(
-                new Promise((resolve) => {
-                  setTimeout(resolve, 2000)
-                })
-              )
-            }
-          >
-            Refresh
-          </Button>
+          <div>
+            <Await promise={promise()} loading={<Spinner />}>
+              resolved
+            </Await>
+          </div>
+          <Button onClick={() => setPromise(new Promise((resolve) => setTimeout(resolve, 1000)))}>Refresh</Button>
+        </>
+      ),
+    },
+    {
+      title: 'Preventing the display of the loading state when reassigning a Promise',
+      children: (
+        <>
+          <div>
+            <Await promise={idPromise()} loading={<Spinner />} showPreviousValueDuringAwait>
+              {(value) => <div>ID: {value}</div>}
+            </Await>
+          </div>
+          <Button onClick={() => setIdPromise(requestNextId())}>Refresh</Button>
         </>
       ),
     },
@@ -75,7 +88,7 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
       title: 'Await a non-promise value',
       children: (
         <>
-          <Await promise={Math.random()} loading={<Spinner />} catch="🤔 An error occurred.">
+          <Await promise={Math.PI} loading={<Spinner />} catch="🤔 An error occurred.">
             {(value) => <p>result: {value}</p>}
           </Await>
         </>
