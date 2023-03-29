@@ -23,7 +23,7 @@ export type CheckboxProps = Props<{
   validateImmediately?: boolean
   radius?: string
   onChangeChecked?: (checked: boolean) => void
-  onChangeValidChecked?: (checked: boolean) => void
+  onValid?: (checked: boolean) => void
   labelProps?: ComponentProps<'label'>
 }>
 
@@ -39,7 +39,7 @@ export function Checkbox(rawProps: CheckboxProps) {
       validateImmediately: false,
       radius: 'var(--solid-design-parts-Checkbox_checkbox-default-radius)',
     },
-    ['onChangeChecked', 'onChangeValidChecked', 'labelProps']
+    ['onChangeChecked', 'onValid', 'labelProps']
   )
 
   const checkedSignal = createInjectableSignalObject(props, 'checked')
@@ -53,17 +53,16 @@ export function Checkbox(rawProps: CheckboxProps) {
     const error = await deriveError(shouldValidate.value, checked, props.error, props.required)
     errorSignal.value = error
     if (error === false) {
-      props.onChangeValidChecked?.(checked)
+      props.onValid?.(checked)
     }
   })
   createDeferEffect(checkedSignal.get, async () => {
-    props.onChangeChecked?.(checkedSignal.value)
-
     const checked = checkedSignal.value
+    props.onChangeChecked?.(checked)
     const error = await deriveError(shouldValidate.value, checked, props.error, props.required)
     errorSignal.value = error
     if (error === false) {
-      props.onChangeValidChecked?.(checked)
+      props.onValid?.(checked)
     }
   })
 
