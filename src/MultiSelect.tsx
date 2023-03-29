@@ -1,4 +1,4 @@
-import { call, isInstanceOf, Promisable } from 'base-up'
+import { call, isInstanceOf, Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
@@ -281,13 +281,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                             class: 'solid-design-parts-MultiSelect_checkbox-label',
                           }}
                           onChangeChecked={() => {
-                            // TODO: use toggle function of base-up
-                            if (selectedSignal.value.has(value)) {
-                              selectedSignal.value.delete(value)
-                            } else {
-                              selectedSignal.value.add(value)
-                            }
-                            changeSelected(selectedSignal.value)
+                            changeSelected(toggle(selectedSignal.value, value))
                           }}
                         >
                           {getLabel(value)}

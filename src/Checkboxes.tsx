@@ -1,4 +1,4 @@
-import { Promisable } from 'base-up'
+import { Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
@@ -143,14 +143,10 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
               checked={selectedSignal.value.has(value)}
               disabled={isDisabled(value)}
               error={errorSignal.value !== false}
-              onChangeChecked={(checked) => {
+              onChangeChecked={() => {
                 isEditedSignal.value = true
-                if (checked) {
-                  selectedSignal.value.add(value)
-                } else {
-                  selectedSignal.value.delete(value)
-                }
-                changeSelected(selectedSignal.value)
+
+                changeSelected(toggle(selectedSignal.value, value))
               }}
             >
               {getLabel(value)}
