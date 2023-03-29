@@ -49,28 +49,29 @@ export function Checkbox(rawProps: CheckboxProps) {
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate.value, untrack(checkedSignal.get), props.error, props.required)
-  })
-  createDeferEffect(
-    () => props.checked,
-    async () => {
-      errorSignal.value = await deriveError(shouldValidate.value, props.checked, props.error, props.required)
+    const checked = untrack(checkedSignal.get)
+    const error = await deriveError(shouldValidate.value, checked, props.error, props.required)
+    errorSignal.value = error
+    if (error === false) {
+      props.onChangeValidChecked?.(checked)
     }
-  )
+  })
+  createDeferEffect(checkedSignal.get, async () => {
+    props.onChangeChecked?.(checkedSignal.value)
+
+    const checked = checkedSignal.value
+    const error = await deriveError(shouldValidate.value, checked, props.error, props.required)
+    errorSignal.value = error
+    if (error === false) {
+      props.onChangeValidChecked?.(checked)
+    }
+  })
 
   async function onChange(event: Event) {
     isEditedSignal.value = true
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
-    const checked = event.target.checked
-    checkedSignal.value = checked
-    props.onChangeChecked?.(checked)
-
-    const newError = await deriveError(shouldValidate.value, checked, props.error, props.required)
-    errorSignal.value = newError
-    if (newError === false) {
-      props.onChangeValidChecked?.(checked)
-    }
+    checkedSignal.value = event.target.checked
   }
 
   async function deriveError(
