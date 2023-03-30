@@ -39,7 +39,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     const value = untrack(valueSignal.get)
     const error = await deriveError(shouldValidate.value, value, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(value)
     }
   })
@@ -50,7 +50,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       props.onChangeValue?.(value)
       const error = await deriveError(shouldValidate.value, value, props.error, props.required)
       errorSignal.value = error
-      if (error === undefined) {
+      if (error === false) {
         props.onValid?.(value)
       }
     }

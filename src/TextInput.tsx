@@ -69,7 +69,7 @@ export function TextInput(rawProps: TextInputProps) {
     const value = untrack(valueSignal.get)
     const error = await deriveError(shouldValidate.value, value, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(value)
     }
   })
@@ -78,7 +78,7 @@ export function TextInput(rawProps: TextInputProps) {
     props.onChangeValue?.(value)
     const error = await deriveError(shouldValidate.value, value, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(value)
     }
   })

@@ -60,7 +60,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     const selected = untrack(selectedSignal.get)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(selected)
     }
   })
@@ -69,7 +69,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     props.onChangeSelected?.(selected)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(selected)
     }
   })

@@ -65,7 +65,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     const selected = untrack(selectedSignal.get)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(selected)
     }
   })
@@ -74,7 +74,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     props.onChangeSelected?.(selected)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(selected)
     }
   })

@@ -48,7 +48,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
     const selected = untrack(selectedSignal.get)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(selected)
     }
   })
@@ -57,7 +57,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
     props.onChangeSelected?.(selected)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(selected)
     }
   })

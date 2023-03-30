@@ -59,7 +59,7 @@ export function NumberInput(rawProps: NumberInputProps) {
     const value = untrack(numberSignal.get)
     const error = await deriveError(shouldValidate.value, value, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(value)
     }
   })
@@ -68,7 +68,7 @@ export function NumberInput(rawProps: NumberInputProps) {
     props.onChangeValue?.(value)
     const error = await deriveError(shouldValidate.value, value, props.error, props.required)
     errorSignal.value = error
-    if (error === undefined) {
+    if (error === false) {
       props.onValid?.(value)
     }
   })
@@ -76,10 +76,10 @@ export function NumberInput(rawProps: NumberInputProps) {
   async function onInput(event: InputEvent) {
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
-    await changeValue(event.target.value)
+    changeValue(event.target.value)
   }
 
-  async function changeValue(newString: string) {
+  function changeValue(newString: string) {
     isEditedSignal.value = true
 
     stringSignal.value = newString
