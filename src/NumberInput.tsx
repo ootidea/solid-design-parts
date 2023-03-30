@@ -22,7 +22,7 @@ export type NumberInputProps = Props<{
   prefix?: JSX.Element
   suffix?: JSX.Element
   onChangeValue?: (value: number | undefined) => void
-  onChangeValidValue?: (value: number | undefined) => void
+  onValid?: (value: number | undefined) => void
 }>
 
 export function NumberInput(rawProps: NumberInputProps) {
@@ -37,7 +37,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       showClearButton: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['value', 'placeholder', 'prefix', 'suffix', 'onChangeValue', 'onChangeValidValue']
+    ['value', 'placeholder', 'prefix', 'suffix', 'onChangeValue', 'onValid']
   )
 
   const stringSignal = createSignalObject(stringify(props.value))
@@ -58,14 +58,22 @@ export function NumberInput(rawProps: NumberInputProps) {
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate.value, untrack(numberSignal.get), props.error, props.required)
-  })
-  createDeferEffect(
-    () => props.value,
-    async () => {
-      errorSignal.value = await deriveError(shouldValidate.value, props.value, props.error, props.required)
+    const value = untrack(numberSignal.get)
+    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(value)
     }
-  )
+  })
+  createDeferEffect(numberSignal.get, async () => {
+    const value = numberSignal.value
+    props.onChangeValue?.(value)
+    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(value)
+    }
+  })
 
   async function onInput(event: InputEvent) {
     if (!isInstanceOf(event.target, HTMLInputElement)) return
@@ -77,15 +85,7 @@ export function NumberInput(rawProps: NumberInputProps) {
     isEditedSignal.value = true
 
     stringSignal.value = newString
-    const newValue = defaultParser(newString)
-    numberSignal.value = newValue
-    props.onChangeValue?.(newValue)
-
-    const nextError = await deriveError(shouldValidate.value, newValue, props.error, props.required)
-    errorSignal.value = nextError
-    if (nextError === undefined) {
-      props.onChangeValidValue?.(newValue)
-    }
+    numberSignal.value = defaultParser(newString)
   }
 
   function defaultParser(text: string): number | undefined {
