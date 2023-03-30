@@ -14,7 +14,7 @@ export type AutoSizeTextAreaProps = Props<
     error?: boolean | string | ((value: string) => Promisable<boolean | string>)
     validateImmediately?: boolean
     onChangeValue?: (value: string) => void
-    onChangeValidValue?: (value: string) => void
+    onValid?: (value: string) => void
   },
   'textarea'
 >
@@ -38,29 +38,31 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate.value, untrack(valueSignal.get), props.error, props.required)
+    const value = untrack(valueSignal.get)
+    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(value)
+    }
   })
   createDeferEffect(
     () => props.value,
     async () => {
-      errorSignal.value = await deriveError(shouldValidate.value, props.value, props.error, props.required)
+      const value = props.value
+      props.onChangeValue?.(value)
+      const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+      errorSignal.value = error
+      if (error === undefined) {
+        props.onValid?.(value)
+      }
     }
   )
 
   async function onInput(event: InputEvent) {
-    isEditedSignal.value = true
-
     if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
 
-    const newValue = event.target.value
-    valueSignal.value = newValue
-    props.onChangeValue?.(newValue)
-
-    const nextError = await deriveError(shouldValidate.value, newValue, props.error, props.required)
-    errorSignal.value = nextError
-    if (nextError === undefined) {
-      props.onChangeValidValue?.(newValue)
-    }
+    isEditedSignal.value = true
+    valueSignal.value = event.target.value
   }
 
   async function deriveError(
