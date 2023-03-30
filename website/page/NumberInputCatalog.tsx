@@ -67,10 +67,10 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
         <>
           <NumberInput placeholder="placeholder" error={(value) => value === undefined && 'Required'} />
           <NumberInput
-            value={100}
+            value={15}
             error={(value) => {
               if (value === undefined) return 'Required'
-              if (value < 0) return 'Please enter a non-negative number'
+              if (value % 10 !== 0) return 'Please enter a number in increments of 10.'
 
               return false
             }}
@@ -93,10 +93,10 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
             validateImmediately
           />
           <NumberInput
-            value={100}
+            value={15}
             error={(value) => {
               if (value === undefined) return 'Required'
-              if (value < 0) return 'Please enter a non-negative number'
+              if (value % 10 !== 0) return 'Please enter a number in increments of 10.'
 
               return false
             }}
