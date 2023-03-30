@@ -1,5 +1,4 @@
 import { Show } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './DateInput.scss'
 import { DatePicker } from './DatePicker'
@@ -9,7 +8,14 @@ import calendarIcon from './image/calendar.svg'
 import closeCircleIcon from './image/close-circle.svg'
 import { Modal } from './Modal'
 import { isNestedClickEvent } from './utility/others'
-import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
+import {
+  createDeferEffect,
+  createNormalizedSignalObject,
+  joinClasses,
+  prepareProps,
+  Props,
+  SlotProp,
+} from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type DateInputProps = Props<{
@@ -27,11 +33,18 @@ export function DateInput(rawProps: DateInputProps) {
     { disabled: false as Required<DateInputProps>['disabled'], showClearButton: false },
     ['value', 'placeholder', 'onChangeValue', 'format']
   )
-  const value = createSignalObject<Date | undefined>(props.value)
-  function changeValue(newValue: Date | undefined) {
-    value.value = newValue
-    props.onChangeValue?.(newValue)
-  }
+
+  const valueSignal = createNormalizedSignalObject(
+    props.value,
+    () => {
+      if (props.value !== undefined && props.disabled instanceof Function && props.disabled(props.value)) {
+        return undefined
+      }
+      return props.value
+    },
+    props.onChangeValue
+  )
+  createDeferEffect(valueSignal.get, () => props.onChangeValue?.(valueSignal.value))
 
   const dummyDate = new Date(9999, 11, 29, 23, 59, 59, 999)
 
@@ -50,16 +63,16 @@ export function DateInput(rawProps: DateInputProps) {
           }}
         >
           <div class="solid-design-parts-DateInput_preview-area">
-            <Show when={value.value !== undefined}>
+            <Show when={valueSignal.value !== undefined}>
               <div class="solid-design-parts-DateInput_format">
-                <Slot content={props.format} params={{ value: value.value }}>
-                  {value.value!.toLocaleDateString()}
+                <Slot content={props.format} params={{ value: valueSignal.value }}>
+                  {valueSignal.value!.toLocaleDateString()}
                 </Slot>
               </div>
             </Show>
             <div
               class="solid-design-parts-DateInput_placeholder"
-              classList={{ 'solid-design-parts-DateInput_invisible': value.value !== undefined }}
+              classList={{ 'solid-design-parts-DateInput_invisible': valueSignal.value !== undefined }}
             >
               {props.placeholder}
             </div>
@@ -77,22 +90,22 @@ export function DateInput(rawProps: DateInputProps) {
               size="1.6em"
               iconSize="1.25em"
               iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
-              aria-hidden={value.value === undefined}
-              onClick={() => changeValue(undefined)}
+              aria-hidden={valueSignal.value === undefined}
+              onClick={() => (valueSignal.value = undefined)}
             />
           </Show>
           <Icon class="solid-design-parts-DateInput_icon" src={calendarIcon} size="1.3em" />
         </button>
       )}
     >
-      {({ toggle }) => (
+      {({ close }) => (
         <DatePicker
           class="solid-design-parts-DateInput_date-picker"
-          value={value.value}
+          value={valueSignal.value}
           disabled={props.disabled instanceof Function ? props.disabled : undefined}
           onChangeValue={(value) => {
-            toggle()
-            changeValue(value)
+            valueSignal.value = value
+            close()
           }}
         />
       )}
