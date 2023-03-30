@@ -2,7 +2,8 @@ import { Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
-import css from './Checkboxes.scss'
+import './Checkboxes.scss'
+import './common.scss'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -11,9 +12,6 @@ import {
   prepareProps,
   Props,
 } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type CheckboxesProps<T extends readonly (string | number)[]> = Props<{
   values: T

@@ -1,11 +1,9 @@
 import { isSameDay, startOfMonth } from 'date-fns'
 import { createSignalObject } from 'solid-signal-object'
 import { Calendar } from './Calendar'
-import css from './DatePicker.scss'
+import './common.scss'
+import './DatePicker.scss'
 import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type DatePickerProps = Props<{
   value?: Date | undefined

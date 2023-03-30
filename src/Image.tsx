@@ -1,11 +1,9 @@
 import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import css from './Image.scss'
+import './common.scss'
+import './Image.scss'
 import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type ImageProps = Props<
   {

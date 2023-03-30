@@ -1,12 +1,10 @@
 import { rangeTo } from 'base-up'
 import { For, JSX, Show } from 'solid-js'
+import './common.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
-import css from './Stepper.scss'
+import './Stepper.scss'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type StepperProps = Props<{ titles: JSX.Element[]; currentStep: number }>
 

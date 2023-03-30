@@ -1,11 +1,9 @@
 import { Promisable } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
-import css from './RadioButtons.scss'
+import './common.scss'
+import './RadioButtons.scss'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type RadioButtonsProps<T extends readonly (string | number)[]> = Props<{
   values: T

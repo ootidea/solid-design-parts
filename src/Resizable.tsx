@@ -1,11 +1,9 @@
 import { assert, isNotUndefined } from 'base-up'
 import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import css from './Resizable.scss'
+import './common.scss'
+import './Resizable.scss'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type ResizableProps = Props<{ onChangeWidthPx?: (width: number) => void }>
 

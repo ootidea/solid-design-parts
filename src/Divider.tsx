@@ -1,9 +1,7 @@
-import css from './Divider.scss'
+import './common.scss'
+import './Divider.scss'
 import { CssColor } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type DividerProps = Props<{
   direction?: 'horizontal' | 'vertical'

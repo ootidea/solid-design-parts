@@ -1,10 +1,8 @@
 import { createMemoObject } from 'solid-signal-object'
-import css from './Spinner.scss'
+import './common.scss'
+import './Spinner.scss'
 import { CssColor } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type SpinnerProps = Props<{
   size?: string

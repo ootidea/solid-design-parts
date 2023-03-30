@@ -1,18 +1,16 @@
 import { Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
+import './common.scss'
 import { FadeAnimation } from './FadeAnimation'
 import { IconButton } from './IconButton'
 import closeIcon from './image/close.svg'
-import css from './Modal.scss'
+import './Modal.scss'
 import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
 import { CssColor } from './utility/color'
 import { setupFocusTrap } from './utility/others'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type ModalProps = Props<{
   opened?: boolean

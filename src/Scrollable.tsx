@@ -1,12 +1,10 @@
 import { assert, isNotUndefined } from 'base-up'
 import { onCleanup, onMount } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
-import css from './Scrollable.scss'
+import './common.scss'
+import './Scrollable.scss'
 import { observeHeightPx } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type ScrollableProps = Props<{}>
 

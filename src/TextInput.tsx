@@ -1,9 +1,10 @@
 import { isInstanceOf, LiteralAutoComplete, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
+import './common.scss'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
-import css from './TextInput.scss'
+import './TextInput.scss'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -12,9 +13,6 @@ import {
   prepareProps,
   Props,
 } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type TextInputProps = Props<{
   value?: string

@@ -1,9 +1,7 @@
 import { LiteralAutoComplete } from 'base-up'
-import css from './Icon.scss'
+import './common.scss'
+import './Icon.scss'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type IconProps = Props<{
   src: string

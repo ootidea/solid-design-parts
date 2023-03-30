@@ -1,11 +1,9 @@
 import { For, JSX } from 'solid-js'
 import { render } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
+import './common.scss'
 import { Toast, ToastProps } from './Toast'
-import css from './Toasts.scss'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
+import './Toasts.scss'
 
 export type ToastOptions = Partial<Omit<ToastProps, 'type' | 'message'>>
 type ToastModel = { id: symbol } & ToastProps

@@ -2,16 +2,14 @@ import { rangeTo } from 'base-up'
 import { addDays, addMonths, addWeeks, format, isSameMonth, setDate, subDays, subMonths } from 'date-fns'
 import { For } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
-import css from './Calendar.scss'
+import './Calendar.scss'
+import './common.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { i18n } from './utility/i18n'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type CalendarProps = Props<{
   month?: Date

@@ -1,10 +1,8 @@
 import { chunk, rangeTo } from 'base-up'
 import { JSX } from 'solid-js'
-import css from './UrlToLink.scss'
+import './common.scss'
+import './UrlToLink.scss'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type UrlToLinkProps = Props<{
   children?: string

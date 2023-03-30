@@ -1,12 +1,10 @@
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
+import './common.scss'
 import { Icon } from './Icon'
-import css from './IconButton.scss'
+import './IconButton.scss'
 import { Spinner } from './Spinner'
 import { calculateActiveColor, calculateHoverColor, CssColor, resolveColorOnBodyElement } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type IconButtonProps = Props<
   {

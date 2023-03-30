@@ -3,17 +3,15 @@ import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
+import './common.scss'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
-import css from './MultiSelect.scss'
+import './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type MultiSelectProps<T extends string> = Props<{
   values: readonly T[]

@@ -1,13 +1,11 @@
 import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import css from './Button.scss'
+import './Button.scss'
+import './common.scss'
 import { Gravity } from './Gravity'
 import { LayerLayout } from './LayerLayout'
 import { Spinner } from './Spinner'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type ButtonProps = Props<{
   color?: 'primary' | 'achromatic' | 'error'

@@ -1,7 +1,8 @@
 import { Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
-import css from './Popover.scss'
+import './common.scss'
+import './Popover.scss'
 import { setupFocusTrap } from './utility/others'
 import {
   EnneaPosition,
@@ -12,10 +13,7 @@ import {
   toYPercent,
 } from './utility/position'
 import { prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type PopoverProps = Props<{
   on?: EnneaPosition

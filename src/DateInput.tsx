@@ -1,6 +1,7 @@
 import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import css from './DateInput.scss'
+import './common.scss'
+import './DateInput.scss'
 import { DatePicker } from './DatePicker'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
@@ -9,10 +10,7 @@ import closeCircleIcon from './image/close-circle.svg'
 import { Modal } from './Modal'
 import { isNestedClickEvent } from './utility/others'
 import { joinClasses, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type DateInputProps = Props<{
   value?: Date | undefined

@@ -1,16 +1,14 @@
 import { Show } from 'solid-js'
+import './common.scss'
 import { Divider } from './Divider'
-import css from './Foldable.scss'
+import './Foldable.scss'
 import { Gravity } from './Gravity'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import { StretchLayout } from './StretchLayout'
 import { CssColor } from './utility/color'
 import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type FoldableProps = Props<{
   unfolded?: boolean

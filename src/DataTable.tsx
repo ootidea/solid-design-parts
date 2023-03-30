@@ -1,7 +1,8 @@
 import { fromEntries, LiteralAutoComplete, modeOf } from 'base-up'
 import { For, JSX, Show } from 'solid-js'
 import { AccessorObject, createMemoObject } from 'solid-signal-object'
-import css from './DataTable.scss'
+import './common.scss'
+import './DataTable.scss'
 import { DataTableCell } from './DataTableCell'
 import { Divider } from './Divider'
 import { Gravity } from './Gravity'
@@ -11,10 +12,7 @@ import { CssColor } from './utility/color'
 import { i18n } from './utility/i18n'
 import { isNestedClickEvent } from './utility/others'
 import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 type ColumnAlign = 'left' | 'center' | 'right'
 type CompareFunction<Row extends Record<string, unknown>> = (value1: any, value2: any, row1: Row, row2: Row) => number

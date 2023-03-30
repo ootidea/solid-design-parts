@@ -2,19 +2,17 @@ import { isInstanceOf } from 'base-up'
 import { For, JSX, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
+import './common.scss'
 import { Divider } from './Divider'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
 import chevronDownIcon from './image/chevron-down.svg'
 import closeCircleIcon from './image/close-circle.svg'
 import { Scrollable } from './Scrollable'
-import css from './Select.scss'
+import './Select.scss'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type SelectProps<T extends readonly (string | number)[]> = Props<{
   values: T

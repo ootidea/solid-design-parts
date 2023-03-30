@@ -1,10 +1,8 @@
 import { For } from 'solid-js'
-import css from './LayerLayout.scss'
+import './common.scss'
+import './LayerLayout.scss'
 import { toArray } from './utility/others'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type LayerLayoutProps = Props<{}>
 

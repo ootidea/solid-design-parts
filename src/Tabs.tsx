@@ -1,10 +1,8 @@
 import { For, Show } from 'solid-js'
-import css from './Tabs.scss'
+import './common.scss'
+import './Tabs.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type TabsProps<T extends string> = Props<{
   names: readonly T[]

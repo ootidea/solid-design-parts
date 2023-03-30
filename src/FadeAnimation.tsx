@@ -1,5 +1,6 @@
 import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
+import './common.scss'
 import { createDeferEffect, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 

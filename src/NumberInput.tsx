@@ -1,13 +1,11 @@
 import { isInstanceOf, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
+import './common.scss'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
-import css from './NumberInput.scss'
+import './NumberInput.scss'
 import { createDeferEffect, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type NumberInputProps = Props<{
   value?: number | undefined

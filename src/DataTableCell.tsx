@@ -1,13 +1,11 @@
 import { DiscriminatedUnion } from 'base-up'
 import { JSX } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
-import css from './DataTableCell.scss'
+import './common.scss'
+import './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type DataTableCellProps<T extends string> = Props<{ value: unknown }>
 

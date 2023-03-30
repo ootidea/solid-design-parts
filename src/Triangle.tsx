@@ -1,10 +1,8 @@
 import { LiteralAutoComplete } from 'base-up'
-import css from './Triangle.scss'
+import './common.scss'
+import './Triangle.scss'
 import { CssColor } from './utility/color'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type TriangleProps = Props<{
   width?: string

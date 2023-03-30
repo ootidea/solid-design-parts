@@ -1,13 +1,11 @@
 import { assert, clamp, isNotUndefined, minBy } from 'base-up'
 import { onMount } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
-import css from './Slider.scss'
+import './common.scss'
+import './Slider.scss'
 import { CssColor } from './utility/color'
 import { observeWidthPx } from './utility/others'
 import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type SliderProps = Props<{
   value?: number

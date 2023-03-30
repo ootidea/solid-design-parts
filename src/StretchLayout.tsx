@@ -1,9 +1,7 @@
-import css from './StretchLayout.scss'
+import './common.scss'
+import './StretchLayout.scss'
 import { toArray } from './utility/others'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type StretchLayoutProps = Props<{
   stretchAt?: number | `${number}`

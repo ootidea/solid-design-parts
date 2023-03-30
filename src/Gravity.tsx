@@ -1,9 +1,7 @@
-import css from './Gravity.scss'
+import './common.scss'
+import './Gravity.scss'
 import { EnneaPosition, toHorizontalPosition, toVerticalPosition } from './utility/position'
 import { joinClasses, prepareProps, Props } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type GravityProps = Props<{ to?: EnneaPosition }>
 

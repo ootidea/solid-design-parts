@@ -1,11 +1,9 @@
 import { call } from 'base-up'
 import { createRenderEffect, createSignal, For } from 'solid-js'
-import css from './ToggleButtons.scss'
+import './common.scss'
+import './ToggleButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
-import { registerCss } from './utility/registerCss'
 import { Slot } from './utility/Slot'
-
-registerCss(css)
 
 export type ToggleButtonsProps<T extends string | number> = Props<
   (

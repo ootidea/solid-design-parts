@@ -1,15 +1,13 @@
 import { call } from 'base-up'
 import { JSX } from 'solid-js'
+import './common.scss'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
 import alertIcon from './image/alert.svg'
 import checkCircleIcon from './image/check-circle.svg'
 import closeIcon from './image/close.svg'
 import informationIcon from './image/information.svg'
-import css from './Toast.scss'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
+import './Toast.scss'
 
 export type ToastProps = {
   type: 'success' | 'error' | 'info'

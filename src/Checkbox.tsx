@@ -1,7 +1,8 @@
 import { isInstanceOf, Promisable } from 'base-up'
 import { ComponentProps, createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
-import css from './Checkbox.scss'
+import './Checkbox.scss'
+import './common.scss'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -10,9 +11,6 @@ import {
   prepareProps,
   Props,
 } from './utility/props'
-import { registerCss } from './utility/registerCss'
-
-registerCss(css)
 
 export type CheckboxProps = Props<{
   checked?: boolean
