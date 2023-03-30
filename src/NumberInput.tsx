@@ -90,7 +90,7 @@ export function NumberInput(rawProps: NumberInputProps) {
 
   function defaultParser(text: string): number | undefined {
     // Since Number('') returns 0, not NaN
-    if (text.length === 0) return undefined
+    if (text.trim() === '') return undefined
 
     const asNumber = Number(text)
     return Number.isFinite(asNumber) ? asNumber : undefined
