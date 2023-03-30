@@ -1,9 +1,8 @@
 import { isSameDay, startOfMonth } from 'date-fns'
-import { createSignalObject } from 'solid-signal-object'
 import { Calendar } from './Calendar'
 import './common.scss'
 import './DatePicker.scss'
-import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type DatePickerProps = Props<{
   value?: Date | undefined
@@ -24,31 +23,14 @@ export function DatePicker(rawProps: DatePickerProps) {
     ['value', 'disabled', 'onChangeValue', 'onChangeMonth']
   )
 
-  const initialValue = props.value !== undefined && props.disabled?.(props.value) ? undefined : props.value
-  if (initialValue?.getTime() !== props.value?.getTime()) {
-    props.onChangeValue?.(initialValue)
-  }
-
-  const valueSignal = createSignalObject(initialValue)
-  createDeferEffect(
-    () => props.value,
-    () => {
-      const newValue = props.value !== undefined && props.disabled?.(props.value) ? undefined : props.value
-      valueSignal.value = newValue
-      if (newValue?.getTime() !== props.value?.getTime()) {
-        props.onChangeValue?.(newValue)
-      }
-    }
+  const valueSignal = createNormalizedSignalObject(
+    props.value,
+    () => (props.value !== undefined && props.disabled?.(props.value) ? undefined : props.value),
+    props.onChangeValue
   )
-
-  function changeValue(value: Date) {
-    if (props.enableDeselection && valueSignal.value !== undefined && isSameDay(value, valueSignal.value)) {
-      valueSignal.value = undefined
-    } else {
-      valueSignal.value = value
-    }
+  createDeferEffect(valueSignal.get, () => {
     props.onChangeValue?.(valueSignal.value)
-  }
+  })
 
   return (
     <Calendar
@@ -63,7 +45,13 @@ export function DatePicker(rawProps: DatePickerProps) {
           type="button"
           aria-selected={valueSignal.value !== undefined && isSameDay(date, valueSignal.value)}
           disabled={props.disabled?.(date)}
-          onClick={() => changeValue(date)}
+          onClick={() => {
+            if (props.enableDeselection && valueSignal.value !== undefined && isSameDay(date, valueSignal.value)) {
+              valueSignal.value = undefined
+            } else {
+              valueSignal.value = date
+            }
+          }}
         >
           {date.getDate()}
         </button>
