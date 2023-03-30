@@ -9,7 +9,15 @@ import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
 import { CssColor } from './utility/color'
 import { setupFocusTrap } from './utility/others'
-import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import {
+  createDeferEffect,
+  createInjectableSignalObject,
+  joinClasses,
+  joinStyle,
+  prepareProps,
+  Props,
+  SlotProp,
+} from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type ModalProps = Props<{
@@ -38,15 +46,12 @@ export function Modal(rawProps: ModalProps) {
     ['onChangeOpened', 'launcher', 'title', 'footer']
   )
 
-  const [opened, setOpened] = createInjectableSignal(props, 'opened')
-  function changeOpened(opened: boolean) {
-    setOpened(opened)
-    props.onChangeOpened?.(opened)
-  }
+  const openedSignal = createInjectableSignalObject(props, 'opened')
+  createDeferEffect(openedSignal.get, () => props.onChangeOpened?.(openedSignal.value))
 
-  const open = () => changeOpened(true)
-  const close = () => changeOpened(false)
-  const toggle = () => changeOpened(!opened())
+  const open = () => (openedSignal.value = true)
+  const close = () => (openedSignal.value = false)
+  const toggle = () => (openedSignal.value = !openedSignal.value)
 
   function onClickOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
@@ -60,7 +65,7 @@ export function Modal(rawProps: ModalProps) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && opened() && !props.persistent && !props.ignoreEscKey) {
+    if (event.code === 'Escape' && openedSignal.value && !props.persistent && !props.ignoreEscKey) {
       event.preventDefault()
       close()
     }
@@ -70,7 +75,7 @@ export function Modal(rawProps: ModalProps) {
     <>
       <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
       <Portal>
-        <FadeAnimation shown={opened()}>
+        <FadeAnimation shown={openedSignal.value}>
           <div
             class={joinClasses(rawProps, 'solid-design-parts-Modal_root')}
             style={joinStyle(rawProps.style, {
