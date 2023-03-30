@@ -7,7 +7,15 @@ import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import { StretchLayout } from './StretchLayout'
 import { CssColor } from './utility/color'
-import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import {
+  createDeferEffect,
+  createInjectableSignalObject,
+  joinClasses,
+  joinStyle,
+  prepareProps,
+  Props,
+  SlotProp,
+} from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type FoldableProps = Props<{
@@ -31,14 +39,12 @@ export function Foldable(rawProps: FoldableProps) {
     ['title', 'icon', 'onChangeUnfolded']
   )
 
-  const [unfolded, setUnfolded] = createInjectableSignal(props, 'unfolded')
-  function changeUnfolded(newUnfolded: boolean) {
-    setUnfolded(newUnfolded)
-    props.onChangeUnfolded?.(newUnfolded)
-  }
-  const fold = () => changeUnfolded(false)
-  const unfold = () => changeUnfolded(true)
-  const toggle = () => changeUnfolded(!unfolded())
+  const unfoldedSignal = createInjectableSignalObject(props, 'unfolded')
+  createDeferEffect(unfoldedSignal.get, () => props.onChangeUnfolded?.(unfoldedSignal.value))
+
+  const fold = () => (unfoldedSignal.value = false)
+  const unfold = () => (unfoldedSignal.value = true)
+  const toggle = () => (unfoldedSignal.value = !unfoldedSignal.value)
 
   return (
     <div
@@ -48,19 +54,19 @@ export function Foldable(rawProps: FoldableProps) {
         '--solid-design-parts-Foldable_header-background-color': props.headerBackgroundColor,
         '--solid-design-parts-Foldable_border-color': props.borderColor,
       })}
-      data-unfolded={unfolded()}
+      data-unfolded={unfoldedSignal.value}
     >
       <StretchLayout class="solid-design-parts-Foldable_header" direction="horizontal" onClick={toggle}>
         <div class="solid-design-parts-Foldable_title">
-          <Slot content={rawProps.title} params={{ fold, unfold, toggle, unfolded: unfolded() }} />
+          <Slot content={rawProps.title} params={{ fold, unfold, toggle, unfolded: unfoldedSignal.value }} />
         </div>
         <Gravity>
-          <Slot content={rawProps.icon} params={{ fold, unfold, toggle, unfolded: unfolded() }}>
+          <Slot content={rawProps.icon} params={{ fold, unfold, toggle, unfolded: unfoldedSignal.value }}>
             <Icon class="solid-design-parts-Foldable_icon" src={chevronDownIcon} />
           </Slot>
         </Gravity>
       </StretchLayout>
-      <Show when={unfolded()}>
+      <Show when={unfoldedSignal.value}>
         <Divider color="var(--solid-design-parts-Foldable_border-color)" />
         <div class="solid-design-parts-Foldable_content-area">
           <Slot content={rawProps.children} params={{ fold, unfold, toggle }} />
