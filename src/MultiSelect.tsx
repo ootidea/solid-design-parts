@@ -10,7 +10,7 @@ import css from './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
-import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { registerCss } from './utility/registerCss'
 
 registerCss(css)
@@ -27,7 +27,7 @@ export type MultiSelectProps<T extends string> = Props<{
   fullWidth?: boolean
   showSearchBox?: boolean
   onChangeSelected?: (selected: Set<T>) => void
-  onChangeValidSelected?: (selected: Set<T>) => void
+  onValid?: (selected: Set<T>) => void
 }>
 
 export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
@@ -51,37 +51,30 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     return props.labels?.[value] ?? value
   }
 
-  const selectedSignal = createSignalObject(new Set(props.selected), { equals: false })
-  createRenderEffect(() => (selectedSignal.value = new Set(props.selected)))
-  async function changeSelected(newSelected: Set<T>) {
-    selectedSignal.value = newSelected
-    props.onChangeSelected?.(newSelected)
-
-    const newError = await deriveError(shouldValidate.value, newSelected, props.error, props.required)
-    errorSignal.value = newError
-    if (newError === undefined) {
-      props.onChangeValidSelected?.(newSelected)
-    }
-  }
+  // We swear to manipulate Set immutably
+  const selectedSignal = createInjectableSignalObject(props, 'selected')
 
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(
-      shouldValidate.value,
-      untrack(selectedSignal.get),
-      props.error,
-      props.required
-    )
-  })
-  createDeferEffect(
-    () => props.selected,
-    async () => {
-      errorSignal.value = await deriveError(shouldValidate.value, props.selected, props.error, props.required)
+    const selected = untrack(selectedSignal.get)
+    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(selected)
     }
-  )
+  })
+  createDeferEffect(selectedSignal.get, async () => {
+    const selected = selectedSignal.value
+    props.onChangeSelected?.(selected)
+    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(selected)
+    }
+  })
 
   async function deriveError(
     shouldValidate: boolean,
@@ -281,7 +274,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
                             class: 'solid-design-parts-MultiSelect_checkbox-label',
                           }}
                           onChangeChecked={() => {
-                            changeSelected(toggle(selectedSignal.value, value))
+                            selectedSignal.value = toggle(selectedSignal.value, value)
                           }}
                         >
                           {getLabel(value)}
