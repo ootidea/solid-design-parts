@@ -12,7 +12,7 @@ import { Scrollable } from './Scrollable'
 import './Select.scss'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
-import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type SelectProps<T extends readonly (string | number)[]> = Props<{
   values: T
@@ -44,20 +44,10 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
     return props.labels?.[value] ?? value
   }
 
-  const initialSelected =
-    props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected
-  if (initialSelected !== props.selected) {
-    props.onChangeSelected?.(initialSelected)
-  }
-
-  const selectedSignal = createSignalObject<T[number] | undefined>(initialSelected)
-  createDeferEffect(
-    () => props.selected,
-    () => {
-      // Treat as undefined if props.selected is out of range.
-      selectedSignal.value =
-        props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected
-    }
+  const selectedSignal = createNormalizedSignalObject(
+    props.selected,
+    () => (props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected),
+    props.onChangeSelected
   )
 
   createDeferEffect(selectedSignal.get, () => {

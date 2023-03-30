@@ -59,6 +59,23 @@ export function createDeferEffect<S>(deps: AccessorArray<S> | Accessor<S>, fn: (
   createEffect(on(deps, fn, { defer: true }))
 }
 
+export function createNormalizedSignalObject<T>(
+  rawValue: T,
+  normalizedValue: Accessor<T>,
+  onChangeValue: ((value: T) => void) | undefined
+) {
+  const initialValue = normalizedValue()
+  if (initialValue !== rawValue) {
+    onChangeValue?.(initialValue)
+  }
+
+  const valueSignal = createSignalObject(initialValue)
+  createDeferEffect(normalizedValue, () => {
+    valueSignal.value = normalizedValue()
+  })
+  return valueSignal
+}
+
 /**
  * Convert all nullary function properties to getters immutably.
  * TODO: Define return type.
