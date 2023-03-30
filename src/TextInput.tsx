@@ -42,7 +42,7 @@ export type TextInputProps = Props<{
   prefix?: JSX.Element
   suffix?: JSX.Element
   onChangeValue?: (value: string) => void
-  onChangeValidValue?: (value: string) => void
+  onValid?: (value: string) => void
 }>
 
 export function TextInput(rawProps: TextInputProps) {
@@ -57,7 +57,7 @@ export function TextInput(rawProps: TextInputProps) {
       showClearButton: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['placeholder', 'type', 'prefix', 'suffix', 'onChangeValue', 'onChangeValidValue']
+    ['placeholder', 'type', 'prefix', 'suffix', 'onChangeValue', 'onValid']
   )
 
   const valueSignal = createInjectableSignalObject(props, 'value')
@@ -68,32 +68,28 @@ export function TextInput(rawProps: TextInputProps) {
 
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
-    errorSignal.value = await deriveError(shouldValidate.value, untrack(valueSignal.get), props.error, props.required)
-  })
-  createDeferEffect(
-    () => props.value,
-    async () => {
-      errorSignal.value = await deriveError(shouldValidate.value, props.value, props.error, props.required)
+    const value = untrack(valueSignal.get)
+    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(value)
     }
-  )
+  })
+  createDeferEffect(valueSignal.get, async () => {
+    const value = valueSignal.value
+    props.onChangeValue?.(value)
+    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    errorSignal.value = error
+    if (error === undefined) {
+      props.onValid?.(value)
+    }
+  })
 
   async function onInput(event: InputEvent) {
     if (!isInstanceOf(event.target, HTMLInputElement)) return
 
-    await changeValue(event.target.value)
-  }
-
-  async function changeValue(newValue: string) {
     isEditedSignal.value = true
-
-    valueSignal.value = newValue
-    props.onChangeValue?.(newValue)
-
-    const nextError = await deriveError(shouldValidate.value, newValue, props.error, props.required)
-    errorSignal.value = nextError
-    if (nextError === undefined) {
-      props.onChangeValidValue?.(newValue)
-    }
+    valueSignal.value = event.target.value
   }
 
   async function deriveError(
@@ -167,7 +163,10 @@ export function TextInput(rawProps: TextInputProps) {
               iconSize="1.25em"
               iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
               aria-hidden={valueSignal.value.length === 0}
-              onClick={() => changeValue('')}
+              onClick={() => {
+                isEditedSignal.value = true
+                valueSignal.value = ''
+              }}
             />
           </Show>
         </div>
