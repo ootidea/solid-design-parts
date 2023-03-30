@@ -8,7 +8,15 @@ import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { i18n } from './utility/i18n'
-import { createInjectableSignal, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import {
+  createDeferEffect,
+  createInjectableSignalObject,
+  joinClasses,
+  joinStyle,
+  prepareProps,
+  Props,
+  SlotProp,
+} from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type CalendarProps = Props<{
@@ -28,13 +36,10 @@ export function Calendar(rawProps: CalendarProps) {
     ['onChangeMonth', 'style']
   )
 
-  const [selectedMonth, setSelectedMonth] = createInjectableSignal(props, 'month', false)
-  function changeMonth(month: Date) {
-    setSelectedMonth(month)
-    props.onChangeMonth?.(month)
-  }
+  const monthSignal = createInjectableSignalObject(props, 'month', false)
+  createDeferEffect(monthSignal.get, () => props.onChangeMonth?.(monthSignal.value))
 
-  const firstDateOfSelectedMonth = () => setDate(selectedMonth(), 1)
+  const firstDateOfSelectedMonth = () => setDate(monthSignal.value, 1)
   const firstDateOfSelectedCalendar = () => subDays(firstDateOfSelectedMonth(), firstDateOfSelectedMonth().getDay())
 
   const dayNames = [
@@ -60,22 +65,22 @@ export function Calendar(rawProps: CalendarProps) {
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_prev-month-button"
           classList={{ 'solid-design-parts-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronLeftIcon}
-          onClick={() => changeMonth(subMonths(selectedMonth(), 1))}
+          onClick={() => (monthSignal.value = subMonths(monthSignal.value, 1))}
           size="1.6em"
         />
         <div class="solid-design-parts-Calendar_year-month">
           <span class="solid-design-parts-Calendar_year">
-            {format(selectedMonth(), i18n.literals.calendarYearTemplate)}
+            {format(monthSignal.value, i18n.literals.calendarYearTemplate)}
           </span>
           <span class="solid-design-parts-Calendar_month">
-            {format(selectedMonth(), i18n.literals.calendarMonthTemplate)}
+            {format(monthSignal.value, i18n.literals.calendarMonthTemplate)}
           </span>
         </div>
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
           classList={{ 'solid-design-parts-Calendar_hidden': props.hideMonthMoveButton }}
           src={chevronRightIcon}
-          onClick={() => changeMonth(addMonths(selectedMonth(), 1))}
+          onClick={() => (monthSignal.value = addMonths(monthSignal.value, 1))}
           size="1.6em"
         />
       </div>
@@ -103,7 +108,7 @@ export function Calendar(rawProps: CalendarProps) {
                     <div
                       class="solid-design-parts-Calendar_cell"
                       classList={{
-                        'solid-design-parts-Calendar_other-month': !isSameMonth(date.value, selectedMonth()),
+                        'solid-design-parts-Calendar_other-month': !isSameMonth(date.value, monthSignal.value),
                       }}
                       data-day={day()}
                     >
