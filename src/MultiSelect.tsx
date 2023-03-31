@@ -13,22 +13,22 @@ import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
-export type MultiSelectProps<T extends string> = Props<{
-  values: readonly T[]
-  labels?: Partial<Record<T, JSX.Element>>
-  selected?: ReadonlySet<T>
+export type MultiSelectProps<T extends readonly (string | number)[]> = Props<{
+  values: T
+  labels?: Partial<Record<T[number], JSX.Element>>
+  selected?: ReadonlySet<T[number]>
   placeholder?: string
   disabled?: boolean
   required?: boolean
-  error?: boolean | string | ((selected: ReadonlySet<T>) => Promisable<boolean | string>)
+  error?: boolean | string | ((selected: ReadonlySet<T[number]>) => Promisable<boolean | string>)
   validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
-  onChangeSelected?: (selected: Set<T>) => void
-  onValid?: (selected: Set<T>) => void
+  onChangeSelected?: (selected: Set<T[number]>) => void
+  onValid?: (selected: Set<T[number]>) => void
 }>
 
-export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
+export function MultiSelect<T extends readonly (string | number)[]>(rawProps: MultiSelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -45,7 +45,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     ['values', 'onChangeSelected']
   )
 
-  function getLabel(value: T): JSX.Element {
+  function getLabel(value: T[number]): JSX.Element {
     return props.labels?.[value] ?? value
   }
 
@@ -76,7 +76,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
 
   async function deriveError(
     shouldValidate: boolean,
-    selected: ReadonlySet<T>,
+    selected: ReadonlySet<T[number]>,
     error: Required<MultiSelectProps<T>>['error'],
     required: boolean
   ): Promise<boolean | string> {
@@ -113,7 +113,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
   const followingCount = createMemoObject(() => selectedSignal.value.size - 1)
 
   const searchQuerySignal = createSignalObject('')
-  function search(values: readonly T[], searchQuery: string): readonly T[] {
+  function search(values: T, searchQuery: string) {
     // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
     return values.filter((value) => {
@@ -147,7 +147,7 @@ export function MultiSelect<T extends string>(rawProps: MultiSelectProps<T>) {
     closeDropdown()
   }
 
-  function getPrimarySelectedValue(selected: ReadonlySet<T>): T | undefined {
+  function getPrimarySelectedValue(selected: ReadonlySet<T[number]>): T[number] | undefined {
     const [firstValue] = selected.values()
     return firstValue
   }
