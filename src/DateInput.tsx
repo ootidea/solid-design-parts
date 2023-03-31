@@ -21,23 +21,26 @@ import { Slot } from './utility/Slot'
 export type DateInputProps = Props<{
   value?: Date | undefined
   placeholder?: string
-  disabled?: boolean | ((date: Date) => boolean)
+  disabled?: boolean
+  disabledDate?: (date: Date) => boolean
   showClearButton?: boolean
   onChangeValue?: ((value: Date | undefined) => void) | undefined
   format?: SlotProp<{ value: Date | undefined }>
 }>
 
 export function DateInput(rawProps: DateInputProps) {
-  const [props, restProps] = prepareProps(
-    rawProps,
-    { disabled: false as Required<DateInputProps>['disabled'], showClearButton: false },
-    ['value', 'placeholder', 'onChangeValue', 'format']
-  )
+  const [props, restProps] = prepareProps(rawProps, { disabled: false, showClearButton: false }, [
+    'value',
+    'placeholder',
+    'disabledDate',
+    'onChangeValue',
+    'format',
+  ])
 
   const valueSignal = createNormalizedSignalObject(
     props.value,
     () => {
-      if (props.value !== undefined && props.disabled instanceof Function && props.disabled(props.value)) {
+      if (props.value !== undefined && props.disabledDate?.(props.value)) {
         return undefined
       }
       return props.value
@@ -55,7 +58,7 @@ export function DateInput(rawProps: DateInputProps) {
           {...restProps}
           class={joinClasses(props, 'solid-design-parts-DateInput_launcher')}
           type="button"
-          disabled={props.disabled === true}
+          disabled={props.disabled}
           onClick={(event) => {
             if (isNestedClickEvent(event)) return
 
@@ -102,7 +105,7 @@ export function DateInput(rawProps: DateInputProps) {
         <DatePicker
           class="solid-design-parts-DateInput_date-picker"
           value={valueSignal.value}
-          disabled={props.disabled instanceof Function ? props.disabled : undefined}
+          disabled={props.disabledDate}
           onChangeValue={(value) => {
             valueSignal.value = value
             close()

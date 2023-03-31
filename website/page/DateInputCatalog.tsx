@@ -37,11 +37,11 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disable by date',
+      title: 'Disable date',
       direction: 'horizontal',
       children: (
         <>
-          <DateInput disabled={(date) => date.getTime() < Date.now()} />
+          <DateInput disabledDate={(date) => date.getDay() % 3 === 0} />
         </>
       ),
     },
