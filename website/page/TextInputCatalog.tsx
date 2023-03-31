@@ -98,6 +98,15 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Minimum and maximum character count',
+      children: (
+        <>
+          <TextInput type="password" placeholder="password" min={8} />
+          <TextInput max={2} error="Up to a maximum of 2 characters" />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>
