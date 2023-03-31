@@ -33,10 +33,19 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Minimum and maximum date',
+      children: (
+        <>
+          <DatePicker min={new Date()} />
+          <DatePicker max={new Date()} />
+        </>
+      ),
+    },
+    {
       title: 'Disabled',
       children: (
         <>
-          <DatePicker disabled={(date) => date.getTime() < Date.now()} />
+          <DatePicker disabled={(date) => date.getDay() % 3 === 0} />
         </>
       ),
     },
