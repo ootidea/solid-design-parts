@@ -19,7 +19,7 @@ export function DatePicker(rawProps: DatePickerProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      month: startOfMonth(new Date()),
+      month: startOfMonth(rawProps.value ?? new Date()),
       enableDeselection: false,
     },
     ['value', 'min', 'max', 'disabled', 'onChangeValue', 'onChangeMonth']
