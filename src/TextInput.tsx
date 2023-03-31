@@ -62,9 +62,9 @@ export function TextInput(rawProps: TextInputProps) {
 
   const synthesizedPredicateFunction = createMemoObject(() => {
     const predicateFunctions = {
-      required: (value: string) => 0 < value.length,
-      min: (value: string) => props.min! <= value.length,
-      max: (value: string) => value.length <= props.max!,
+      required: (value: string) => 0 < countCharacters(value),
+      min: (value: string) => props.min! <= countCharacters(value),
+      max: (value: string) => countCharacters(value) <= props.max!,
     } as const
 
     const filteredPredicateFunctions = entriesOf(predicateFunctions)
@@ -190,4 +190,13 @@ export function TextInput(rawProps: TextInputProps) {
       <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
     </div>
   )
+}
+
+function countCharacters(text: string): number {
+  if (Intl?.Segmenter !== undefined) {
+    const segmenter = new Intl.Segmenter([], { granularity: 'grapheme' })
+    return [...segmenter.segment(text)].length
+  } else {
+    return [...text].length
+  }
 }
