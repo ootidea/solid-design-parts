@@ -22,14 +22,12 @@
     &:hover {
       // TODO: Make customizable
       background-color: oklch(96% 0 0);
-      transition: var(--solid-design-parts-forward-transition);
     }
   }
 
   &:active {
     // TODO: Make customizable
     background-color: oklch(94% 0 0);
-    transition: var(--solid-design-parts-forward-transition);
   }
 }
 
