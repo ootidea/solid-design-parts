@@ -26,8 +26,8 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
       title: 'Minimum and maximum month',
       children: (
         <>
-          <Calendar min={new Date(2029, 9)} max={new Date(2030, 0)} />
-          <Button onClick={() => (date.value = new Date(2 * date.value.getTime()))}>Change month</Button>
+          <Calendar min={new Date()} />
+          <Calendar max={new Date()} />
         </>
       ),
     },
