@@ -5,7 +5,7 @@ import './common.scss'
 import './Slider.scss'
 import { CssColor } from './utility/color'
 import { observeWidthPx } from './utility/others'
-import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type SliderProps = Props<{
   value?: number
@@ -53,24 +53,14 @@ export function Slider(rawProps: SliderProps) {
     return undefined
   })
 
-  const valueSignal = createSignalObject(correctValue(props.value))
-  createDeferEffect(
-    () => props.value,
-    () => (valueSignal.value = correctValue(props.value))
-  )
+  const valueSignal = createNormalizedSignalObject(props.value, () => normalizeValue(props.value), props.onChangeValue)
+  createDeferEffect(valueSignal.get, () => props.onChangeValue?.(valueSignal.value))
+
   // A variable between 0 and 1 that indicates where the 'value' is positioned between 'min' and 'max'.
   const ratio = createMemoObject(() => (valueSignal.value - props.min) / (props.max - props.min))
 
-  // Update the internal state and notify it.
-  // If it is a discrete slider, the value will be the nearest stop.
-  function changeValue(newValue: number) {
-    const value = correctValue(newValue)
-    valueSignal.value = value
-    props.onChangeValue?.(value)
-  }
-
   // If it is a discrete slider, it is corrected to the nearest stop.
-  function correctValue(value: number): number {
+  function normalizeValue(value: number): number {
     if (stops.value === undefined) {
       return clamp(props.min, value, props.max)
     } else {
@@ -84,7 +74,7 @@ export function Slider(rawProps: SliderProps) {
 
   function onMouseDownTrack(event: MouseEvent) {
     event.preventDefault()
-    changeValue(convertOffsetXToValue(event.offsetX))
+    valueSignal.value = normalizeValue(convertOffsetXToValue(event.offsetX))
     document.body.addEventListener('mousemove', onMouseMove)
   }
 
@@ -98,7 +88,7 @@ export function Slider(rawProps: SliderProps) {
     if (trackElement === undefined) return
 
     const offsetX = event.clientX - trackElement.getBoundingClientRect().x
-    changeValue(convertOffsetXToValue(offsetX))
+    valueSignal.value = normalizeValue(convertOffsetXToValue(offsetX))
   }
 
   function onMouseDownThumb(event: MouseEvent) {
@@ -107,14 +97,17 @@ export function Slider(rawProps: SliderProps) {
     if (trackElement === undefined) return
 
     const offsetX = event.clientX - trackElement.getBoundingClientRect().x
-    changeValue(convertOffsetXToValue(offsetX))
+    valueSignal.value = normalizeValue(convertOffsetXToValue(offsetX))
 
     document.body.addEventListener('mousemove', onMouseMove)
   }
 
+  /**
+   * Converting from track offset coordinate system to value coordinate system.
+   * It may return values less than min or greater than max.
+   */
   function convertOffsetXToValue(offsetX: number): number {
-    const clampedOffsetX = clamp(thumbWidthPx.value / 2, offsetX, trackWidthPx.value - thumbWidthPx.value / 2)
-    const ratio = (clampedOffsetX - thumbWidthPx.value / 2) / (trackWidthPx.value - thumbWidthPx.value)
+    const ratio = (offsetX - thumbWidthPx.value / 2) / (trackWidthPx.value - thumbWidthPx.value)
     return props.min + ratio * (props.max - props.min)
   }
 
