@@ -63,7 +63,7 @@ export function createNormalizedSignalObject<T>(
   rawValue: T,
   normalizedValue: Accessor<T>,
   onChangeValue: ((value: T) => void) | undefined
-) {
+): SignalObject<T> {
   const initialValue = normalizedValue()
   if (initialValue !== rawValue) {
     onChangeValue?.(initialValue)
@@ -71,7 +71,11 @@ export function createNormalizedSignalObject<T>(
 
   const valueSignal = createSignalObject(initialValue)
   createDeferEffect(normalizedValue, () => {
-    valueSignal.value = normalizedValue()
+    const newValue = normalizedValue()
+    valueSignal.value = newValue
+    if (newValue !== rawValue) {
+      onChangeValue?.(newValue)
+    }
   })
   return valueSignal
 }
