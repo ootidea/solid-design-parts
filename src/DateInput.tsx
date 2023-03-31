@@ -1,3 +1,4 @@
+import { endOfDay, isBefore, startOfDay } from 'date-fns'
 import { Show } from 'solid-js'
 import './common.scss'
 import './DateInput.scss'
@@ -21,6 +22,8 @@ import { Slot } from './utility/Slot'
 export type DateInputProps = Props<{
   value?: Date | undefined
   placeholder?: string
+  min?: Date
+  max?: Date
   disabled?: boolean
   disabledDate?: (date: Date) => boolean
   showClearButton?: boolean
@@ -32,6 +35,8 @@ export function DateInput(rawProps: DateInputProps) {
   const [props, restProps] = prepareProps(rawProps, { disabled: false, showClearButton: false }, [
     'value',
     'placeholder',
+    'min',
+    'max',
     'disabledDate',
     'onChangeValue',
     'format',
@@ -39,15 +44,20 @@ export function DateInput(rawProps: DateInputProps) {
 
   const valueSignal = createNormalizedSignalObject(
     props.value,
-    () => {
-      if (props.value !== undefined && props.disabledDate?.(props.value)) {
-        return undefined
-      }
-      return props.value
-    },
+    () => (props.value !== undefined && isDisabled(props.value) ? undefined : props.value),
     props.onChangeValue
   )
   createDeferEffect(valueSignal.get, () => props.onChangeValue?.(valueSignal.value))
+
+  function isDisabled(date: Date): boolean {
+    if (props.min !== undefined && isBefore(date, startOfDay(props.min))) {
+      return true
+    }
+    if (props.max !== undefined && isBefore(endOfDay(props.max), date)) {
+      return true
+    }
+    return Boolean(props.disabledDate?.(date))
+  }
 
   const dummyDate = new Date(9999, 11, 29, 23, 59, 59, 999)
 
@@ -105,6 +115,8 @@ export function DateInput(rawProps: DateInputProps) {
         <DatePicker
           class="solid-design-parts-DateInput_date-picker"
           value={valueSignal.value}
+          min={props.min}
+          max={props.max}
           disabled={props.disabledDate}
           onChangeValue={(value) => {
             valueSignal.value = value

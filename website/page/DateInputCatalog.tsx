@@ -2,7 +2,7 @@ import { createRoot, createSignal } from 'solid-js'
 import { DateInput } from '../../src/DateInput'
 import { Catalog } from './ComponentCatalogPage'
 
-const [value, setValue] = createSignal(new Date())
+const [value, setValue] = createSignal<Date | undefined>(new Date())
 
 export const DateInputCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -27,12 +27,12 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disabled',
+      title: 'Minimum and maximum date',
       direction: 'horizontal',
       children: (
         <>
-          <DateInput placeholder="placeholder" disabled />
-          <DateInput value={new Date()} disabled />
+          <DateInput min={new Date()} />
+          <DateInput max={new Date()} />
         </>
       ),
     },
@@ -42,6 +42,16 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <DateInput disabledDate={(date) => date.getDay() % 3 === 0} />
+        </>
+      ),
+    },
+    {
+      title: 'Disabled',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput placeholder="placeholder" disabled />
+          <DateInput value={new Date()} disabled />
         </>
       ),
     },
