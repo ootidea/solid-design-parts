@@ -1,5 +1,16 @@
 import { rangeTo } from 'base-up'
-import { addDays, addMonths, addWeeks, format, isSameMonth, setDate, subDays, subMonths } from 'date-fns'
+import {
+  addDays,
+  addMonths,
+  addWeeks,
+  format,
+  isSameMonth,
+  max as maxOf,
+  min as minOf,
+  setDate,
+  subDays,
+  subMonths,
+} from 'date-fns'
 import { For } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
 import './Calendar.scss'
@@ -8,19 +19,13 @@ import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { i18n } from './utility/i18n'
-import {
-  createDeferEffect,
-  createInjectableSignalObject,
-  joinClasses,
-  joinStyle,
-  prepareProps,
-  Props,
-  SlotProp,
-} from './utility/props'
+import { createNormalizedSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type CalendarProps = Props<{
   month?: Date
+  min?: Date
+  max?: Date
   hideMonthMoveButton?: boolean
   onChangeMonth?: (month: Date) => void
   children?: SlotProp<{ date: Date }>
@@ -33,12 +38,14 @@ export function Calendar(rawProps: CalendarProps) {
       month: new Date(),
       hideMonthMoveButton: false,
     },
-    ['onChangeMonth', 'style']
+    ['min', 'max', 'onChangeMonth', 'style']
   )
 
-  // We swear to manipulate Date immutably
-  const monthSignal = createInjectableSignalObject(props, 'month')
-  createDeferEffect(monthSignal.get, () => props.onChangeMonth?.(monthSignal.value))
+  const monthSignal = createNormalizedSignalObject(
+    props.month,
+    () => clampMonth(props.min, props.month, props.max),
+    props.onChangeMonth
+  )
 
   const firstDateOfSelectedMonth = () => setDate(monthSignal.value, 1)
   const firstDateOfSelectedCalendar = () => subDays(firstDateOfSelectedMonth(), firstDateOfSelectedMonth().getDay())
@@ -64,7 +71,10 @@ export function Calendar(rawProps: CalendarProps) {
       <div class="solid-design-parts-Calendar_year-month-area">
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_prev-month-button"
-          classList={{ 'solid-design-parts-Calendar_hidden': props.hideMonthMoveButton }}
+          classList={{
+            'solid-design-parts-Calendar_hidden':
+              props.hideMonthMoveButton || (props.min !== undefined && isSameMonth(props.min, monthSignal.value)),
+          }}
           src={chevronLeftIcon}
           onClick={() => (monthSignal.value = subMonths(monthSignal.value, 1))}
           size="1.6em"
@@ -79,7 +89,10 @@ export function Calendar(rawProps: CalendarProps) {
         </div>
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
-          classList={{ 'solid-design-parts-Calendar_hidden': props.hideMonthMoveButton }}
+          classList={{
+            'solid-design-parts-Calendar_hidden':
+              props.hideMonthMoveButton || (props.max !== undefined && isSameMonth(monthSignal.value, props.max)),
+          }}
           src={chevronRightIcon}
           onClick={() => (monthSignal.value = addMonths(monthSignal.value, 1))}
           size="1.6em"
@@ -126,4 +139,20 @@ export function Calendar(rawProps: CalendarProps) {
       </div>
     </div>
   )
+}
+
+function clampMonth(min: Date | undefined, month: Date, max: Date | undefined): Date {
+  if (min !== undefined) {
+    if (max !== undefined) {
+      return maxOf([min, minOf([month, max])])
+    } else {
+      return maxOf([min, month])
+    }
+  } else {
+    if (max !== undefined) {
+      return minOf([month, max])
+    } else {
+      return month
+    }
+  }
 }
