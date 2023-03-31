@@ -1,4 +1,4 @@
-import { Promisable, toggle } from 'base-up'
+import { entriesOf, Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
@@ -23,6 +23,8 @@ export type CheckboxesProps<T extends readonly (string | number)[]> = Props<{
   gridColumnsCount?: number | undefined
   disabled?: boolean | ReadonlySet<T[number]>
   required?: boolean
+  min?: number
+  max?: number
   error?: boolean | string | ((selected: ReadonlySet<T[number]>) => Promisable<boolean | string>)
   validateImmediately?: boolean
   fullWidth?: boolean
@@ -47,12 +49,27 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
       fullWidth: false,
       showSearchBox: false,
     },
-    ['values', 'gridColumnsCount', 'onChangeSelected']
+    ['values', 'gridColumnsCount', 'min', 'max', 'onChangeSelected']
   )
 
   function getLabel(value: T[number]): JSX.Element {
     return props.labels?.[value] ?? value
   }
+
+  const synthesizedPredicateFunction = createMemoObject(() => {
+    const predicateFunctions = {
+      required: (selected: ReadonlySet<T[number]>) => 0 < selected.size,
+      min: (selected: ReadonlySet<T[number]>) => props.min! <= selected.size,
+      max: (selected: ReadonlySet<T[number]>) => selected.size <= props.max!,
+    } as const
+
+    const filteredPredicateFunctions = entriesOf(predicateFunctions)
+      .filter(([key]) => rawProps[key] !== undefined)
+      .map(([, value]) => value)
+    if (filteredPredicateFunctions.length === 0) return undefined
+
+    return (selected: ReadonlySet<T[number]>) => filteredPredicateFunctions.every((f) => f(selected))
+  })
 
   // We swear to manipulate Set immutably
   const selectedSignal = createInjectableSignalObject(props, 'selected')
@@ -63,7 +80,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     const selected = untrack(selectedSignal.get)
-    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    const error = await deriveError(shouldValidate.value, selected, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(selected)
@@ -72,7 +89,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
   createDeferEffect(selectedSignal.get, async () => {
     const selected = selectedSignal.value
     props.onChangeSelected?.(selected)
-    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    const error = await deriveError(shouldValidate.value, selected, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(selected)
@@ -83,24 +100,24 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     shouldValidate: boolean,
     selected: ReadonlySet<T[number]>,
     error: Required<CheckboxesProps<T>>['error'],
-    required: boolean
+    synthesizedPredicateFunction: ((selected: ReadonlySet<T[number]>) => boolean) | undefined
   ): Promise<boolean | string> {
     if (error === true) return true
 
-    if (required) {
+    if (synthesizedPredicateFunction !== undefined) {
       if (!shouldValidate) {
         return false
       } else if (error === false) {
-        return selected.size === 0
+        return !synthesizedPredicateFunction(selected)
       } else if (typeof error === 'string') {
-        if (selected.size > 0) {
+        if (synthesizedPredicateFunction(selected)) {
           return false
         } else {
           return error
         }
       } else {
         const result = await error(selected)
-        if (selected.size === 0 && result === false) return true
+        if (!synthesizedPredicateFunction(selected) && result === false) return true
 
         return result
       }
