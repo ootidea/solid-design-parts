@@ -24,8 +24,8 @@ export type MultiSelectProps<T extends readonly (string | number)[]> = Props<{
   validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
-  onChangeSelected?: (selected: Set<T[number]>) => void
-  onValid?: (selected: Set<T[number]>) => void
+  onChangeSelected?: (selected: ReadonlySet<T[number]>) => void
+  onValid?: (selected: ReadonlySet<T[number]>) => void
 }>
 
 export function MultiSelect<T extends readonly (string | number)[]>(rawProps: MultiSelectProps<T>) {
@@ -49,7 +49,6 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     return props.labels?.[value] ?? value
   }
 
-  // We swear to manipulate Set immutably
   const selectedSignal = createInjectableSignalObject(props, 'selected')
 
   const isEditedSignal = createSignalObject(false)

@@ -71,7 +71,6 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     return (selected: ReadonlySet<T[number]>) => filteredPredicateFunctions.every((f) => f(selected))
   })
 
-  // We swear to manipulate Set immutably
   const selectedSignal = createInjectableSignalObject(props, 'selected')
 
   const isEditedSignal = createSignalObject(false)
