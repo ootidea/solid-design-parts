@@ -36,7 +36,8 @@ export function Calendar(rawProps: CalendarProps) {
     ['onChangeMonth', 'style']
   )
 
-  const monthSignal = createInjectableSignalObject(props, 'month', false)
+  // We swear to manipulate Date immutably
+  const monthSignal = createInjectableSignalObject(props, 'month')
   createDeferEffect(monthSignal.get, () => props.onChangeMonth?.(monthSignal.value))
 
   const firstDateOfSelectedMonth = () => setDate(monthSignal.value, 1)
