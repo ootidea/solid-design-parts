@@ -94,7 +94,7 @@ export function Button(rawProps: ButtonProps) {
 }
 
 /** <Button.ghost ...> is shorthand for <Button variant="ghost" ...> */
-Button.ghost = (rawProps: Omit<ButtonProps, 'variant'>) => <Button variant="ghost" {...rawProps} />
+Button.ghost = (props: ButtonProps) => <Button variant="ghost" {...props} />
 
 /** <Button.solid ...> is shorthand for <Button variant="solid" ...> */
-Button.solid = (rawProps: Omit<ButtonProps, 'variant'>) => <Button variant="solid" {...rawProps} />
+Button.solid = (props: ButtonProps) => <Button variant="solid" {...props} />
