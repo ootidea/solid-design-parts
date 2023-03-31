@@ -23,7 +23,7 @@ export function App() {
     { title: 'Text input', children: ['TextInput', 'AutoSizeTextArea', 'NumberInput'] },
     {
       title: 'Date and time',
-      children: ['DateInput', 'Calendar', 'DatePicker'],
+      children: ['DateInput', 'DatePicker', 'Calendar'],
     },
     { title: 'Other inputs', children: ['Slider'] },
     {

@@ -26,7 +26,6 @@ export type CalendarProps = Props<{
   month?: Date
   min?: Date
   max?: Date
-  hideMonthMoveButton?: boolean
   onChangeMonth?: (month: Date) => void
   children?: SlotProp<{ date: Date }>
 }>
@@ -36,7 +35,6 @@ export function Calendar(rawProps: CalendarProps) {
     rawProps,
     {
       month: new Date(),
-      hideMonthMoveButton: false,
     },
     ['min', 'max', 'onChangeMonth', 'style']
   )
@@ -72,8 +70,7 @@ export function Calendar(rawProps: CalendarProps) {
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_prev-month-button"
           classList={{
-            'solid-design-parts-Calendar_hidden':
-              props.hideMonthMoveButton || (props.min !== undefined && isSameMonth(props.min, monthSignal.value)),
+            'solid-design-parts-Calendar_hidden': props.min !== undefined && isSameMonth(props.min, monthSignal.value),
           }}
           src={chevronLeftIcon}
           onClick={() => (monthSignal.value = subMonths(monthSignal.value, 1))}
@@ -90,8 +87,7 @@ export function Calendar(rawProps: CalendarProps) {
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
           classList={{
-            'solid-design-parts-Calendar_hidden':
-              props.hideMonthMoveButton || (props.max !== undefined && isSameMonth(monthSignal.value, props.max)),
+            'solid-design-parts-Calendar_hidden': props.max !== undefined && isSameMonth(monthSignal.value, props.max),
           }}
           src={chevronRightIcon}
           onClick={() => (monthSignal.value = addMonths(monthSignal.value, 1))}

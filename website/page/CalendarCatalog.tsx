@@ -32,14 +32,6 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Hide month move buttons',
-      children: (
-        <>
-          <Calendar hideMonthMoveButton />
-        </>
-      ),
-    },
-    {
       title: 'Overwrite cell',
       children: (
         <>
