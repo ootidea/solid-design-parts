@@ -60,6 +60,15 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Minimum and maximum selection count',
+      children: (
+        <>
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} min={2} error="Select two or more" />
+          <MultiSelect values={['PC', 'Smartphone', 'Tablet', 'Smartwatch']} max={2} />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>

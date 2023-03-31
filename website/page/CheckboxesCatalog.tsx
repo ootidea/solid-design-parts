@@ -137,8 +137,8 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       title: 'Minimum and maximum selection count',
       children: (
         <>
-          <Checkboxes values={['Windows', 'macOS', 'Linux']} min={2} />
-          <Checkboxes values={['PC', 'Smartphone', 'Tablet', 'Smartwatch']} max={2} error="Select up to two" />
+          <Checkboxes values={['Windows', 'macOS', 'Linux']} min={2} error="Select two or more" />
+          <Checkboxes values={['PC', 'Smartphone', 'Tablet', 'Smartwatch']} max={2} />
         </>
       ),
     },
