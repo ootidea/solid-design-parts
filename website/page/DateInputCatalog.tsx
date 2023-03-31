@@ -31,8 +31,8 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <DateInput min={new Date()} />
-          <DateInput max={new Date()} />
+          <DateInput min={new Date()} placeholder="next reservation date" />
+          <DateInput max={new Date()} placeholder="previous reservation date" />
         </>
       ),
     },
