@@ -62,6 +62,15 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Minimum and maximum value',
+      children: (
+        <>
+          <NumberInput placeholder="consumption point" min={1} />
+          <NumberInput placeholder="percent" min={0} max={100} error="Please enter a number between 0 and 100." />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>

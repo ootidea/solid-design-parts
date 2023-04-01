@@ -1,4 +1,4 @@
-import { isInstanceOf, Promisable } from 'base-up'
+import { entriesOf, isInstanceOf, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
@@ -13,6 +13,8 @@ export type NumberInputProps = Props<{
   inputMode?: 'decimal' | 'numeric'
   disabled?: boolean
   required?: boolean
+  min?: number
+  max?: number
   error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
   showClearButton?: boolean
@@ -35,8 +37,23 @@ export function NumberInput(rawProps: NumberInputProps) {
       showClearButton: false,
       radius: 'var(--solid-design-parts-input-border-radius)',
     },
-    ['value', 'placeholder', 'prefix', 'suffix', 'onChangeValue', 'onValid']
+    ['value', 'placeholder', 'min', 'max', 'prefix', 'suffix', 'onChangeValue', 'onValid']
   )
+
+  const synthesizedPredicateFunction = createMemoObject(() => {
+    const predicateFunctions = {
+      required: (value: number | undefined) => value !== undefined,
+      min: (value: number | undefined) => value === undefined || props.min! <= value,
+      max: (value: number | undefined) => value === undefined || value <= props.max!,
+    } as const
+
+    const filteredPredicateFunctions = entriesOf(predicateFunctions)
+      .filter(([key]) => rawProps[key] !== undefined)
+      .map(([, value]) => value)
+    if (filteredPredicateFunctions.length === 0) return undefined
+
+    return (value: number | undefined) => filteredPredicateFunctions.every((f) => f(value))
+  })
 
   const stringSignal = createSignalObject(stringify(props.value))
   createDeferEffect(
@@ -57,7 +74,7 @@ export function NumberInput(rawProps: NumberInputProps) {
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     const value = untrack(numberSignal.get)
-    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    const error = await deriveError(shouldValidate.value, value, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(value)
@@ -66,7 +83,7 @@ export function NumberInput(rawProps: NumberInputProps) {
   createDeferEffect(numberSignal.get, async () => {
     const value = numberSignal.value
     props.onChangeValue?.(value)
-    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    const error = await deriveError(shouldValidate.value, value, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(value)
@@ -102,24 +119,24 @@ export function NumberInput(rawProps: NumberInputProps) {
     shouldValidate: boolean,
     value: number | undefined,
     error: Required<NumberInputProps>['error'],
-    required: boolean
+    synthesizedPredicateFunction: ((value: number | undefined) => boolean) | undefined
   ): Promise<boolean | string> {
     if (error === true) return true
 
-    if (required) {
+    if (synthesizedPredicateFunction !== undefined) {
       if (!shouldValidate) {
         return false
       } else if (error === false) {
-        return value === undefined
+        return !synthesizedPredicateFunction(value)
       } else if (typeof error === 'string') {
-        if (value !== undefined) {
+        if (synthesizedPredicateFunction(value)) {
           return false
         } else {
           return error
         }
       } else {
         const result = await error(value)
-        if (value === undefined && result === false) return true
+        if (!synthesizedPredicateFunction(value) && result === false) return true
 
         return result
       }
