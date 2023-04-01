@@ -69,6 +69,18 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Changing of the method for counting length',
+      children: (
+        <>
+          <AutoSizeTextArea
+            max={3}
+            lengthCounter={(text) => text.split('\n').length}
+            error="Up to three lines can be entered."
+          />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>
