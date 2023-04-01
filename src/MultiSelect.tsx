@@ -221,26 +221,21 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
                       </Show>
                     </div>
                   ) : null}
-                  <div
-                    class="solid-design-parts-MultiSelect_placeholder"
-                    classList={{ 'solid-design-parts-MultiSelect_invisible': previewValue !== undefined }}
-                  >
+                  <div class="solid-design-parts-MultiSelect_placeholder" aria-hidden={previewValue !== undefined}>
                     {props.placeholder}
                   </div>
-                  <div class="solid-design-parts-MultiSelect_invisible">
-                    <div class="solid-design-parts-MultiSelect_preview">
-                      <div>
-                        <For each={props.values}>
-                          {(value) => (
-                            <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(value)}</div>
-                          )}
-                        </For>
-                      </div>
-                      <div>
-                        <For each={[...Array(props.values.length - 2).keys()]}>
-                          {(i) => <div class="solid-design-parts-MultiSelect_following-count">+{i + 1}</div>}
-                        </For>
-                      </div>
+                  <div class="solid-design-parts-MultiSelect_preview" aria-hidden={true}>
+                    <div>
+                      <For each={props.values}>
+                        {(value) => (
+                          <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(value)}</div>
+                        )}
+                      </For>
+                    </div>
+                    <div>
+                      <For each={[...Array(props.values.length - 2).keys()]}>
+                        {(i) => <div class="solid-design-parts-MultiSelect_following-count">+{i + 1}</div>}
+                      </For>
                     </div>
                   </div>
                 </>

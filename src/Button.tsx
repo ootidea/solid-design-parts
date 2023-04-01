@@ -45,7 +45,9 @@ export function Button(rawProps: ButtonProps) {
   const content = (
     <Show when={isInProgress.value} fallback={rawProps.children}>
       <LayerLayout>
-        <div class="solid-design-parts-Button_invisible">{rawProps.children}</div>
+        <div class="solid-design-parts-Button_invisible-children" aria-hidden={true}>
+          {rawProps.children}
+        </div>
         <Gravity>
           <Spinner color="currentColor" />
         </Gravity>

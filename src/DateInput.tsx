@@ -83,13 +83,10 @@ export function DateInput(rawProps: DateInputProps) {
                 </Slot>
               </div>
             </Show>
-            <div
-              class="solid-design-parts-DateInput_placeholder"
-              classList={{ 'solid-design-parts-DateInput_invisible': valueSignal.value !== undefined }}
-            >
+            <div class="solid-design-parts-DateInput_placeholder" aria-hidden={valueSignal.value !== undefined}>
               {props.placeholder}
             </div>
-            <div class="solid-design-parts-DateInput_format solid-design-parts-DateInput_invisible">
+            <div class="solid-design-parts-DateInput_format" aria-hidden={true}>
               {/* Intended to be the maximum rendering width */}
               <Slot content={props.format} params={{ value: dummyDate }}>
                 {dummyDate.toLocaleDateString()}

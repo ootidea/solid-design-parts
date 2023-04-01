@@ -30,12 +30,6 @@
   }
 }
 
-.solid-design-parts-DateInput_invisible {
-  visibility: hidden;
-  height: 0;
-  overflow: hidden;
-}
-
 .solid-design-parts-DateInput_clear-button {
   margin-right: 0.3em;
 
@@ -55,4 +49,18 @@
 .solid-design-parts-DateInput_placeholder {
   color: var(--solid-design-parts-placeholder-text-color);
   user-select: none;
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+.solid-design-parts-DateInput_format {
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
 }

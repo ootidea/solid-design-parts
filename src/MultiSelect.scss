@@ -41,22 +41,28 @@
   grid-template-columns: auto auto;
   align-items: center;
   gap: 0.5em;
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
 }
 
 .solid-design-parts-MultiSelect_primary-selected-value {
   white-space: pre-wrap;
 }
 
-.solid-design-parts-MultiSelect_invisible {
-  visibility: hidden;
-  height: 0;
-  overflow: hidden;
-}
-
 .solid-design-parts-MultiSelect_placeholder {
   color: var(--solid-design-parts-placeholder-text-color);
   white-space: pre-wrap;
   user-select: none;
+
+  &[aria-hidden='true'] {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
 }
 
 .solid-design-parts-MultiSelect_following-count {

@@ -145,8 +145,10 @@
   }
 }
 
-.solid-design-parts-Button_invisible {
-  visibility: hidden;
+.solid-design-parts-Button_invisible-children {
+  &[aria-hidden='true'] {
+    visibility: hidden;
+  }
 }
 
 .solid-design-parts-Button_full-width {
