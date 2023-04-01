@@ -1,14 +1,18 @@
-import { isInstanceOf, Promisable } from 'base-up'
+import { entriesOf, isInstanceOf, Promisable } from 'base-up'
 import { createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './AutoSizeTextArea.scss'
 import './common.scss'
+import { TextInputProps } from './TextInput'
+import { countCharacters } from './utility/other'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type AutoSizeTextAreaProps = Props<
   {
     value?: string
     required?: boolean
+    min?: number
+    max?: number
     error?: boolean | string | ((value: string) => Promisable<boolean | string>)
     validateImmediately?: boolean
     onChangeValue?: (value: string) => void
@@ -26,8 +30,23 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       error: false as Required<AutoSizeTextAreaProps>['error'],
       validateImmediately: false,
     },
-    ['onChangeValue']
+    ['min', 'max', 'onChangeValue']
   )
+
+  const synthesizedPredicateFunction = createMemoObject(() => {
+    const predicateFunctions = {
+      required: (value: string) => 0 < countCharacters(value),
+      min: (value: string) => props.min! <= countCharacters(value),
+      max: (value: string) => countCharacters(value) <= props.max!,
+    } as const
+
+    const filteredPredicateFunctions = entriesOf(predicateFunctions)
+      .filter(([key]) => rawProps[key] !== undefined)
+      .map(([, value]) => value)
+    if (filteredPredicateFunctions.length === 0) return undefined
+
+    return (value: string) => filteredPredicateFunctions.every((f) => f(value))
+  })
 
   const valueSignal = createInjectableSignalObject(props, 'value')
 
@@ -37,7 +56,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   const errorSignal = createSignalObject<boolean | string>(false)
   createRenderEffect(async () => {
     const value = untrack(valueSignal.get)
-    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    const error = await deriveError(shouldValidate.value, value, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(value)
@@ -46,7 +65,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   createDeferEffect(valueSignal.get, async () => {
     const value = valueSignal.value
     props.onChangeValue?.(value)
-    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    const error = await deriveError(shouldValidate.value, value, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(value)
@@ -63,25 +82,25 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
   async function deriveError(
     shouldValidate: boolean,
     value: string,
-    error: Required<AutoSizeTextAreaProps>['error'],
-    required: boolean
+    error: Required<TextInputProps>['error'],
+    synthesizedPredicateFunction: ((value: string) => boolean) | undefined
   ): Promise<boolean | string> {
     if (error === true) return true
 
-    if (required) {
+    if (synthesizedPredicateFunction !== undefined) {
       if (!shouldValidate) {
         return false
       } else if (error === false) {
-        return value.length === 0
+        return !synthesizedPredicateFunction(value)
       } else if (typeof error === 'string') {
-        if (value.length > 0) {
+        if (synthesizedPredicateFunction(value)) {
           return false
         } else {
           return error
         }
       } else {
         const result = await error(value)
-        if (value.length === 0 && result === false) return true
+        if (!synthesizedPredicateFunction(value) && result === false) return true
 
         return result
       }

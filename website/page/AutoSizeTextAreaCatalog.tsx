@@ -60,6 +60,15 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Minimum and maximum character count',
+      children: (
+        <>
+          <AutoSizeTextArea min={10} />
+          <AutoSizeTextArea value="123456789" max={9} error="Up to a maximum of 9 characters" />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>
