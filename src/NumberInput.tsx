@@ -15,6 +15,7 @@ export type NumberInputProps = Props<{
   required?: boolean
   min?: number
   max?: number
+  integerOnly?: boolean
   error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
   showClearButton?: boolean
@@ -29,9 +30,10 @@ export function NumberInput(rawProps: NumberInputProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      inputMode: 'numeric',
+      inputMode: rawProps.integerOnly ? 'numeric' : 'decimal',
       disabled: false,
       required: false,
+      integerOnly: false,
       error: false as Required<NumberInputProps>['error'],
       validateImmediately: false,
       showClearButton: false,
@@ -45,6 +47,7 @@ export function NumberInput(rawProps: NumberInputProps) {
       required: (value: number | undefined) => value !== undefined,
       min: (value: number | undefined) => value === undefined || props.min! <= value,
       max: (value: number | undefined) => value === undefined || value <= props.max!,
+      integerOnly: (value: number | undefined) => value === undefined || Number.isInteger(value),
     } as const
 
     const filteredPredicateFunctions = entriesOf(predicateFunctions)

@@ -71,6 +71,14 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Integer only',
+      children: (
+        <>
+          <NumberInput placeholder="number of days" integerOnly />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>
