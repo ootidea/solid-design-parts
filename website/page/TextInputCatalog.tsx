@@ -107,6 +107,18 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Changing of the method for counting length',
+      children: (
+        <>
+          <TextInput
+            min={4}
+            lengthCounter={(text) => text.replace(/\s/g, '').length}
+            error="4 or more letters is required"
+          />
+        </>
+      ),
+    },
+    {
       title: 'Validation function',
       children: (
         <>
