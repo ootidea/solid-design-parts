@@ -138,8 +138,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
         </Show>
         <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
       </button>
-      {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
-      <Show when={dropdownInfoSignal.value}>
+      <Show when={dropdownInfoSignal.value} keyed>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
             <div

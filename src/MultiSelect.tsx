@@ -1,4 +1,4 @@
-import { call, entriesOf, isInstanceOf, Promisable, toggle } from 'base-up'
+import { assert, call, entriesOf, isInstanceOf, isNotUndefined, Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
@@ -36,7 +36,7 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     rawProps,
     {
       labels: {} as Required<MultiSelectProps<T>>['labels'],
-      selected: new Set(),
+      selected: new Set() as Required<MultiSelectProps<T>>['selected'],
       placeholder: '',
       disabled: false,
       required: false,
@@ -140,7 +140,13 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     })
   }
 
-  type DropdownInfo = { leftPx: number; topPx: number; widthPx: number; maxHeightPx: number }
+  type DropdownInfo = {
+    leftPx: number
+    topPx: number
+    widthPx: number
+    maxHeightPx: number
+    selected: ReadonlySet<T[number]>
+  }
   const dropdownInfoSignal = createSignalObject<DropdownInfo | undefined>(undefined, {
     equals: false,
   })
@@ -155,6 +161,7 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
       topPx: rect.bottom,
       widthPx: rect.width,
       maxHeightPx: window.innerHeight - rect.bottom,
+      selected: selectedSignal.value,
     }
   }
 
@@ -180,6 +187,8 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
 
   function closeDropdown() {
     isEditedSignal.value = true
+    assert(dropdownInfoSignal.value, isNotUndefined)
+    selectedSignal.value = dropdownInfoSignal.value.selected
     dropdownInfoSignal.value = undefined
   }
 
@@ -242,8 +251,7 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
         </button>
         <p class="solid-design-parts-MultiSelect_error-message">{errorSignal.value}</p>
       </div>
-      {/* @ts-ignore For some reason, a type error occurs because it is typed as <Show keyed ...>...</Showed> */}
-      <Show when={dropdownInfoSignal.value}>
+      <Show when={dropdownInfoSignal.value} keyed>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
             <div
@@ -283,13 +291,13 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
                           <Divider />
                         </Show>
                         <Checkbox
-                          checked={selectedSignal.value.has(value)}
+                          checked={dropdownInfo.selected.has(value)}
                           disabled={props.disabled}
                           labelProps={{
                             class: 'solid-design-parts-MultiSelect_checkbox-label',
                           }}
                           onChangeChecked={() => {
-                            selectedSignal.value = toggle(selectedSignal.value, value)
+                            dropdownInfo.selected = toggle(dropdownInfo.selected, value)
                           }}
                         >
                           {getLabel(value)}
