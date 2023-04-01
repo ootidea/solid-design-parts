@@ -5,6 +5,7 @@ import './common.scss'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import './TextInput.scss'
+import { countCharacters } from './utility/other'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -190,13 +191,4 @@ export function TextInput(rawProps: TextInputProps) {
       <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
     </div>
   )
-}
-
-function countCharacters(text: string): number {
-  if (Intl?.Segmenter !== undefined) {
-    const segmenter = new Intl.Segmenter([], { granularity: 'grapheme' })
-    return [...segmenter.segment(text)].length
-  } else {
-    return [...text].length
-  }
 }
