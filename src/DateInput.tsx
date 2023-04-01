@@ -8,7 +8,7 @@ import { IconButton } from './IconButton'
 import calendarIcon from './image/calendar.svg'
 import closeCircleIcon from './image/close-circle.svg'
 import { Modal } from './Modal'
-import { isNestedClickEvent } from './utility/others'
+import { isNestedClickEvent } from './utility/dom'
 import {
   createDeferEffect,
   createNormalizedSignalObject,

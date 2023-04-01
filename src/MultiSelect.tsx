@@ -11,7 +11,7 @@ import chevronDownIcon from './image/chevron-down.svg'
 import './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
-import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
+import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/dom'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type MultiSelectProps<T extends readonly (string | number)[]> = Props<{

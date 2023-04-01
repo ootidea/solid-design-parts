@@ -8,7 +8,7 @@ import './Modal.scss'
 import { Scrollable } from './Scrollable'
 import { TitleBarLayout } from './TitleBarLayout'
 import { CssColor } from './utility/color'
-import { setupFocusTrap } from './utility/others'
+import { setupFocusTrap } from './utility/dom'
 import {
   createDeferEffect,
   createInjectableSignalObject,

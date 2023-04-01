@@ -4,7 +4,7 @@ import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './Slider.scss'
 import { CssColor } from './utility/color'
-import { observeWidthPx } from './utility/others'
+import { observeWidthPx } from './utility/dom'
 import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type SliderProps = Props<{

@@ -3,7 +3,7 @@ import { onCleanup, onMount } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './Scrollable.scss'
-import { observeHeightPx } from './utility/others'
+import { observeHeightPx } from './utility/dom'
 import { joinClasses, prepareProps, Props } from './utility/props'
 
 export type ScrollableProps = Props<{}>

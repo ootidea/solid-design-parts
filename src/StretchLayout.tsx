@@ -1,6 +1,6 @@
 import './common.scss'
 import './StretchLayout.scss'
-import { toArray } from './utility/others'
+import { toArray } from './utility/dom'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
 export type StretchLayoutProps = Props<{

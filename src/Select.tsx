@@ -11,7 +11,7 @@ import closeCircleIcon from './image/close-circle.svg'
 import { Scrollable } from './Scrollable'
 import './Select.scss'
 import { TextInput } from './TextInput'
-import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/others'
+import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/dom'
 import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type SelectProps<T extends readonly (string | number)[]> = Props<{

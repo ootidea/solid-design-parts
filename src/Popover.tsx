@@ -3,7 +3,7 @@ import { Portal } from 'solid-js/web'
 import { createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './Popover.scss'
-import { setupFocusTrap } from './utility/others'
+import { setupFocusTrap } from './utility/dom'
 import {
   EnneaPosition,
   toHorizontalPosition,
