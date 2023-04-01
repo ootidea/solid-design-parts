@@ -43,18 +43,15 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
       props.onValid?.(value)
     }
   })
-  createDeferEffect(
-    () => props.value,
-    async () => {
-      const value = props.value
-      props.onChangeValue?.(value)
-      const error = await deriveError(shouldValidate.value, value, props.error, props.required)
-      errorSignal.value = error
-      if (error === false) {
-        props.onValid?.(value)
-      }
+  createDeferEffect(valueSignal.get, async () => {
+    const value = valueSignal.value
+    props.onChangeValue?.(value)
+    const error = await deriveError(shouldValidate.value, value, props.error, props.required)
+    errorSignal.value = error
+    if (error === false) {
+      props.onValid?.(value)
     }
-  )
+  })
 
   async function onInput(event: InputEvent) {
     if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
