@@ -69,9 +69,7 @@ export function Calendar(rawProps: CalendarProps) {
       <div class="solid-design-parts-Calendar_year-month-area">
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_prev-month-button"
-          classList={{
-            'solid-design-parts-Calendar_hidden': props.min !== undefined && isSameMonth(props.min, monthSignal.value),
-          }}
+          aria-hidden={props.min !== undefined && isSameMonth(props.min, monthSignal.value)}
           src={chevronLeftIcon}
           onClick={() => (monthSignal.value = subMonths(monthSignal.value, 1))}
           size="1.6em"
@@ -86,9 +84,7 @@ export function Calendar(rawProps: CalendarProps) {
         </div>
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
-          classList={{
-            'solid-design-parts-Calendar_hidden': props.max !== undefined && isSameMonth(monthSignal.value, props.max),
-          }}
+          aria-hidden={props.max !== undefined && isSameMonth(monthSignal.value, props.max)}
           src={chevronRightIcon}
           onClick={() => (monthSignal.value = addMonths(monthSignal.value, 1))}
           size="1.6em"

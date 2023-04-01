@@ -16,7 +16,7 @@
 }
 
 .solid-design-parts-Calendar_month-move-button {
-  &.solid-design-parts-Calendar_hidden {
+  &[aria-hidden='true'] {
     visibility: hidden;
   }
 }
