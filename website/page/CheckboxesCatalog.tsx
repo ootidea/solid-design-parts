@@ -93,7 +93,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Gap',
+      title: 'Gap between options',
       description: 'Note that flex gap is not supported on iOS versions earlier than 15.4.',
       children: (
         <>

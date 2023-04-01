@@ -65,7 +65,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Change date format',
+      title: 'Changing date format',
       direction: 'horizontal',
       children: (
         <>

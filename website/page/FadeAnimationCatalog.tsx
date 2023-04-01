@@ -39,7 +39,7 @@ export const FadeAnimationCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Control by non boolean value',
+      title: 'Controlling by non boolean value',
       children: (
         <>
           {call(() => {
