@@ -3,7 +3,7 @@ import { createSignalObject } from 'solid-signal-object'
 import { Checkboxes } from '../../src/Checkboxes'
 import { Catalog } from './ComponentCatalogPage'
 
-const selected = createSignalObject(new Set(['PC']), { equals: false })
+const selected = createSignalObject(new Set(['PC']))
 
 export const CheckboxesCatalog: Catalog = createRoot(() => ({
   introduction: (

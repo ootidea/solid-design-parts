@@ -1,4 +1,4 @@
-import { entriesOf, Promisable, toggle } from 'base-up'
+import { entriesOf, intersectionOf, isSubset, Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
@@ -6,7 +6,7 @@ import './Checkboxes.scss'
 import './common.scss'
 import {
   createDeferEffect,
-  createInjectableSignalObject,
+  createNormalizedSignalObject,
   joinClasses,
   joinStyle,
   prepareProps,
@@ -71,7 +71,15 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     return (selected: ReadonlySet<T[number]>) => filteredPredicateFunctions.every((f) => f(selected))
   })
 
-  const selectedSignal = createInjectableSignalObject(props, 'selected')
+  const selectedSignal = createNormalizedSignalObject(
+    props.selected,
+    () => {
+      const valueSet = new Set(props.values)
+      // Avoid cloning for equivalence testing in createNormalizedSignalObject.
+      return isSubset(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
+    },
+    props.onChangeSelected
+  )
 
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
@@ -157,9 +165,12 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
               checked={selectedSignal.value.has(value)}
               disabled={isDisabled(value)}
               error={errorSignal.value !== false}
-              onChangeChecked={() => {
-                isEditedSignal.value = true
-                selectedSignal.value = toggle(selectedSignal.value, value)
+              onChangeChecked={(checked) => {
+                // If props.selected changes, this condition is not satisfied.
+                if (checked !== selectedSignal.value.has(value)) {
+                  isEditedSignal.value = true
+                  selectedSignal.value = toggle(selectedSignal.value, value)
+                }
               }}
             >
               {getLabel(value)}
