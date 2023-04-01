@@ -36,11 +36,13 @@
 }
 
 .solid-design-parts-MultiSelect_preview {
-  display: inline-grid;
-  vertical-align: top;
+  display: grid;
   grid-template-columns: auto auto;
   align-items: center;
   gap: 0.5em;
+
+  width: max-content;
+  box-sizing: border-box;
 
   &[aria-hidden='true'] {
     visibility: hidden;
