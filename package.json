@@ -36,7 +36,7 @@
     "format": "run-p format:*",
     "format:prettier": "prettier -w \"src/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"website/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
     "format:package-json": "sort-package-json",
-    "postversion": "git push && git push --tags",
+    "postversion": "git push && git push --tags && npm publish ./",
     "prepublishOnly": "npm run build",
     "update-deps": "taze -w && npm i",
     "typecheck": "tsc --noEmit"
