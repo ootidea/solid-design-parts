@@ -1,4 +1,14 @@
-import { assert, call, entriesOf, isInstanceOf, isNotUndefined, Promisable, toggle } from 'base-up'
+import {
+  assert,
+  call,
+  entriesOf,
+  intersectionOf,
+  isInstanceOf,
+  isNotUndefined,
+  isSubset,
+  Promisable,
+  toggle,
+} from 'base-up'
 import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
@@ -12,7 +22,7 @@ import './MultiSelect.scss'
 import { Scrollable } from './Scrollable'
 import { TextInput } from './TextInput'
 import { extractContainedTexts, isNestedClickEvent, setupFocusTrap } from './utility/dom'
-import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type MultiSelectProps<T extends readonly (string | number)[]> = Props<{
   values: T
@@ -67,7 +77,15 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     return (selected: ReadonlySet<T[number]>) => filteredPredicateFunctions.every((f) => f(selected))
   })
 
-  const selectedSignal = createInjectableSignalObject(props, 'selected')
+  const selectedSignal = createNormalizedSignalObject(
+    props.selected,
+    () => {
+      const valueSet = new Set(props.values)
+      // Avoid cloning for equivalence testing in createNormalizedSignalObject.
+      return isSubset(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
+    },
+    props.onChangeSelected
+  )
 
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
