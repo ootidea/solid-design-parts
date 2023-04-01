@@ -3,7 +3,7 @@ import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './RadioButtons.scss'
-import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type RadioButtonsProps<T extends readonly (string | number)[]> = Props<{
   values: T
@@ -38,7 +38,11 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
     ['values', 'selected', 'labels', 'gridColumnsCount', 'onChangeSelected', 'onValid']
   )
 
-  const selectedSignal = createInjectableSignalObject(props, 'selected')
+  const selectedSignal = createNormalizedSignalObject(
+    props.selected,
+    () => (props.selected !== undefined && !props.values.includes(props.selected) ? undefined : props.selected),
+    props.onChangeSelected
+  )
 
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
