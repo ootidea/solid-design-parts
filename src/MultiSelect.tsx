@@ -1,14 +1,4 @@
-import {
-  assert,
-  call,
-  entriesOf,
-  intersectionOf,
-  isInstanceOf,
-  isNotUndefined,
-  isSubset,
-  Promisable,
-  toggle,
-} from 'base-up'
+import { assert, entriesOf, intersectionOf, isInstanceOf, isNotUndefined, isSubset, Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
@@ -87,6 +77,8 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     },
     props.onChangeSelected
   )
+
+  const previewValueMemo = createMemoObject(() => props.values.find((value) => selectedSignal.value.has(value)))
 
   const isEditedSignal = createSignalObject(false)
   const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
@@ -190,10 +182,6 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     closeDropdown()
   }
 
-  function getTopmostSelectedValue(selected: ReadonlySet<T[number]>): T[number] | undefined {
-    return props.values.find((value) => selected.has(value))
-  }
-
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
@@ -227,38 +215,33 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
           onClick={onClickLauncher}
         >
           <div class="solid-design-parts-MultiSelect_preview-area">
-            {call(() => {
-              const previewValue = getTopmostSelectedValue(selectedSignal.value)
-              return (
-                <>
-                  {previewValue !== undefined ? (
-                    <div class="solid-design-parts-MultiSelect_preview">
-                      <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(previewValue)}</div>
-                      <Show when={followingCount.value > 0}>
-                        <div class="solid-design-parts-MultiSelect_following-count">+{followingCount.value}</div>
-                      </Show>
-                    </div>
-                  ) : null}
-                  <div class="solid-design-parts-MultiSelect_placeholder" aria-hidden={previewValue !== undefined}>
-                    {props.placeholder}
-                  </div>
-                  <div class="solid-design-parts-MultiSelect_preview" aria-hidden={true}>
-                    <div>
-                      <For each={props.values}>
-                        {(value) => (
-                          <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(value)}</div>
-                        )}
-                      </For>
-                    </div>
-                    <div>
-                      <For each={[...Array(props.values.length - 2).keys()]}>
-                        {(i) => <div class="solid-design-parts-MultiSelect_following-count">+{i + 1}</div>}
-                      </For>
-                    </div>
-                  </div>
-                </>
-              )
-            })}
+            <Show when={previewValueMemo.value} keyed>
+              {(previewValue) => (
+                <div class="solid-design-parts-MultiSelect_preview">
+                  <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(previewValue)}</div>
+                  <Show when={followingCount.value > 0}>
+                    <div class="solid-design-parts-MultiSelect_following-count">+{followingCount.value}</div>
+                  </Show>
+                </div>
+              )}
+            </Show>
+            <div class="solid-design-parts-MultiSelect_placeholder" aria-hidden={previewValueMemo.value !== undefined}>
+              {props.placeholder}
+            </div>
+            <div class="solid-design-parts-MultiSelect_preview" aria-hidden={true}>
+              <div>
+                <For each={props.values}>
+                  {(value) => (
+                    <div class="solid-design-parts-MultiSelect_primary-selected-value">{getLabel(value)}</div>
+                  )}
+                </For>
+              </div>
+              <div>
+                <For each={[...Array(props.values.length - 2).keys()]}>
+                  {(i) => <div class="solid-design-parts-MultiSelect_following-count">+{i + 1}</div>}
+                </For>
+              </div>
+            </div>
           </div>
           <Icon class="solid-design-parts-MultiSelect_icon" src={chevronDownIcon} />
         </button>
