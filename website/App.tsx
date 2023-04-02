@@ -35,7 +35,7 @@ export function App() {
     { title: 'Animations', children: ['FadeAnimation', 'ScaleYAnimation'] },
     {
       title: 'Others',
-      children: ['Icon', 'Image', 'Divider', 'Spinner', 'Triangle', 'Stepper', 'SpeechBubble'],
+      children: ['Icon', 'Image', 'Divider', 'Spinner', 'Triangle', 'Stepper', 'SpeechBubble', 'Link'],
     },
     { title: 'Utility', children: ['Await', 'UrlToLink'] },
   ]
