@@ -190,9 +190,8 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
     closeDropdown()
   }
 
-  function getPrimarySelectedValue(selected: ReadonlySet<T[number]>): T[number] | undefined {
-    const [firstValue] = selected.values()
-    return firstValue
+  function getTopmostSelectedValue(selected: ReadonlySet<T[number]>): T[number] | undefined {
+    return props.values.find((value) => selected.has(value))
   }
 
   function onKeyDown(event: KeyboardEvent) {
@@ -229,7 +228,7 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
         >
           <div class="solid-design-parts-MultiSelect_preview-area">
             {call(() => {
-              const previewValue = getPrimarySelectedValue(selectedSignal.value)
+              const previewValue = getTopmostSelectedValue(selectedSignal.value)
               return (
                 <>
                   {previewValue !== undefined ? (
