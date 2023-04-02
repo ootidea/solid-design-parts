@@ -2,6 +2,7 @@ import { Promisable } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
+import { ErrorMessage } from './ErrorMessage'
 import './RadioButtons.scss'
 import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
@@ -157,7 +158,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
           )}
         </For>
       </div>
-      <p class="solid-design-parts-RadioButtons_error-message">{errorSignal.value}</p>
+      <ErrorMessage>{errorSignal.value}</ErrorMessage>
     </div>
   )
 }

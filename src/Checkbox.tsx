@@ -3,6 +3,7 @@ import { ComponentProps, createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './Checkbox.scss'
 import './common.scss'
+import { ErrorMessage } from './ErrorMessage'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -126,7 +127,7 @@ export function Checkbox(rawProps: CheckboxProps) {
         />
         <div class="solid-design-parts-Checkbox_children">{rawProps.children}</div>
       </label>
-      <p class="solid-design-parts-Checkbox_error-message">{errorSignal.value}</p>
+      <ErrorMessage>{errorSignal.value}</ErrorMessage>
     </div>
   )
 }

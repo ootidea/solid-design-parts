@@ -2,6 +2,7 @@ import { entriesOf, isInstanceOf, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
+import { ErrorMessage } from './ErrorMessage'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import './NumberInput.scss'
@@ -196,7 +197,7 @@ export function NumberInput(rawProps: NumberInputProps) {
         </div>
         <div class="solid-design-parts-NumberInput_suffix">{rawProps.suffix}</div>
       </div>
-      <p class="solid-design-parts-NumberInput_error-message">{errorSignal.value}</p>
+      <ErrorMessage>{errorSignal.value}</ErrorMessage>
     </div>
   )
 }

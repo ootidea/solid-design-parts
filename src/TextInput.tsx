@@ -2,6 +2,7 @@ import { entriesOf, isInstanceOf, LiteralAutoComplete, Promisable } from 'base-u
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
+import { ErrorMessage } from './ErrorMessage'
 import { IconButton } from './IconButton'
 import closeCircleIcon from './image/close-circle.svg'
 import './TextInput.scss'
@@ -190,7 +191,7 @@ export function TextInput(rawProps: TextInputProps) {
         </div>
         <div class="solid-design-parts-TextInput_suffix">{rawProps.suffix}</div>
       </div>
-      <p class="solid-design-parts-TextInput_error-message">{errorSignal.value}</p>
+      <ErrorMessage>{errorSignal.value}</ErrorMessage>
     </div>
   )
 }

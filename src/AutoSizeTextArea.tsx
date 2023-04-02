@@ -3,6 +3,7 @@ import { createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './AutoSizeTextArea.scss'
 import './common.scss'
+import { ErrorMessage } from './ErrorMessage'
 import { TextInputProps } from './TextInput'
 import { countCharacters } from './utility/other'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
@@ -139,7 +140,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
           onBlur={() => (isEditedSignal.value = true)}
         />
       </div>
-      <p class="solid-design-parts-AutoSizeTextArea_error-message">{errorSignal.value}</p>
+      <ErrorMessage>{errorSignal.value}</ErrorMessage>
     </div>
   )
 }

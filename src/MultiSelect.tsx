@@ -16,6 +16,7 @@ import { Checkbox } from './Checkbox'
 import { CheckboxesProps } from './Checkboxes'
 import './common.scss'
 import { Divider } from './Divider'
+import { ErrorMessage } from './ErrorMessage'
 import { Icon } from './Icon'
 import chevronDownIcon from './image/chevron-down.svg'
 import './MultiSelect.scss'
@@ -262,7 +263,7 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
           </div>
           <Icon class="solid-design-parts-MultiSelect_icon" src={chevronDownIcon} />
         </button>
-        <p class="solid-design-parts-MultiSelect_error-message">{errorSignal.value}</p>
+        <ErrorMessage>{errorSignal.value}</ErrorMessage>
       </div>
       <Show when={dropdownInfoSignal.value} keyed>
         {(dropdownInfo: DropdownInfo) => (

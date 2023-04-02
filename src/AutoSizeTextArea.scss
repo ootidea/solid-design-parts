@@ -55,13 +55,3 @@
     border-color: var(--solid-design-parts-error-color);
   }
 }
-
-.solid-design-parts-AutoSizeTextArea_error-message {
-  margin: 0.5em 0 0;
-  color: var(--solid-design-parts-error-color);
-  white-space: pre-wrap;
-
-  &:empty {
-    display: none;
-  }
-}

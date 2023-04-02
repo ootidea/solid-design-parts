@@ -4,6 +4,7 @@ import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import './Checkboxes.scss'
 import './common.scss'
+import { ErrorMessage } from './ErrorMessage'
 import {
   createDeferEffect,
   createNormalizedSignalObject,
@@ -178,7 +179,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
           )}
         </For>
       </div>
-      <p class="solid-design-parts-Checkboxes_error-message">{errorSignal.value}</p>
+      <ErrorMessage>{errorSignal.value}</ErrorMessage>
     </div>
   )
 }

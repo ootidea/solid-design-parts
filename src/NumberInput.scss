@@ -63,13 +63,3 @@
     visibility: hidden;
   }
 }
-
-.solid-design-parts-NumberInput_error-message {
-  margin: 0.5em 0 0;
-  color: var(--solid-design-parts-error-color);
-  white-space: pre-wrap;
-
-  &:empty {
-    display: none;
-  }
-}
