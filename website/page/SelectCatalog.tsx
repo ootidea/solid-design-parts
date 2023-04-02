@@ -44,6 +44,51 @@ export const SelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Error state',
+      children: (
+        <>
+          <Select placeholder="gender" values={['Female', 'Male', 'Other']} error="Something went wrong" />
+          <Select placeholder="gender" values={['Female', 'Male', 'Other']} error />
+        </>
+      ),
+    },
+    {
+      title: 'Required',
+      children: (
+        <>
+          <Select values={['Female', 'Male', 'Other']} selected="Male" required showClearButton />
+        </>
+      ),
+    },
+    {
+      title: 'Validation function',
+      children: (
+        <>
+          <Select
+            values={['left', 'center', 'right']}
+            error={(selected) => selected === 'center' && 'Currently, center is not available.'}
+          />
+        </>
+      ),
+    },
+    {
+      title: 'Validate initial value',
+      description: (
+        <>
+          If <code>validateImmediately</code> option is set, it perform validation even if the user did not edit it.
+        </>
+      ),
+      children: (
+        <>
+          <Select
+            values={['left', 'center', 'right']}
+            error={(selected) => selected !== 'center' && 'Must be center'}
+            validateImmediately
+          />
+        </>
+      ),
+    },
+    {
       title: 'Search',
       children: (
         <>

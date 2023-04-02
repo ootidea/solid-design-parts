@@ -1,13 +1,15 @@
-import { isInstanceOf } from 'base-up'
-import { For, JSX, Show } from 'solid-js'
+import { isInstanceOf, Promisable } from 'base-up'
+import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { createSignalObject } from 'solid-signal-object'
+import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import { Divider } from './Divider'
+import { ErrorMessage } from './ErrorMessage'
 import { Icon } from './Icon'
 import { IconButton } from './IconButton'
 import chevronDownIcon from './image/chevron-down.svg'
 import closeCircleIcon from './image/close-circle.svg'
+import { RadioButtonsProps } from './RadioButtons'
 import { Scrollable } from './Scrollable'
 import './Select.scss'
 import { TextInput } from './TextInput'
@@ -20,10 +22,14 @@ export type SelectProps<T extends readonly (string | number)[]> = Props<{
   selected?: T[number] | undefined
   placeholder?: string
   disabled?: boolean
+  required?: boolean
+  error?: boolean | string | ((selected: T[number] | undefined) => Promisable<boolean | string>)
+  validateImmediately?: boolean
   fullWidth?: boolean
   showSearchBox?: boolean
   showClearButton?: boolean
   onChangeSelected?: (selected: T[number] | undefined) => void
+  onValid?: (selected: T[number] | undefined) => void
 }>
 
 export function Select<T extends readonly (string | number)[]>(rawProps: SelectProps<T>) {
@@ -33,11 +39,14 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
       labels: {} as Required<SelectProps<T>>['labels'],
       placeholder: '',
       disabled: false,
+      required: false,
+      error: false as Required<SelectProps<T>>['error'],
+      validateImmediately: false,
       fullWidth: false,
       showSearchBox: false,
       showClearButton: false,
     },
-    ['values', 'selected', 'onChangeSelected']
+    ['values', 'selected', 'onChangeSelected', 'onValid']
   )
 
   function getLabel(value: T[number]): JSX.Element {
@@ -50,9 +59,64 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
     props.onChangeSelected
   )
 
-  createDeferEffect(selectedSignal.get, () => {
-    props.onChangeSelected?.(selectedSignal.value)
+  const isEditedSignal = createSignalObject(false)
+  const shouldValidate = createMemoObject(() => isEditedSignal.value || props.validateImmediately)
+
+  const errorSignal = createSignalObject<boolean | string>(false)
+  createRenderEffect(async () => {
+    const selected = untrack(selectedSignal.get)
+    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    errorSignal.value = error
+    if (error === false) {
+      props.onValid?.(selected)
+    }
   })
+  createDeferEffect(selectedSignal.get, async () => {
+    const selected = selectedSignal.value
+    props.onChangeSelected?.(selected)
+    const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
+    console.log(error, selected)
+    errorSignal.value = error
+    if (error === false) {
+      props.onValid?.(selected)
+    }
+  })
+
+  async function deriveError(
+    shouldValidate: boolean,
+    selected: T[number] | undefined,
+    error: Required<RadioButtonsProps<T>>['error'],
+    required: boolean
+  ): Promise<boolean | string> {
+    if (error === true) return true
+
+    if (required) {
+      if (!shouldValidate) {
+        return false
+      } else if (error === false) {
+        return selected === undefined
+      } else if (typeof error === 'string') {
+        if (selected !== undefined) {
+          return false
+        } else {
+          return error
+        }
+      } else {
+        const result = await error(selected)
+        if (selected === undefined && result === false) return true
+
+        return result
+      }
+    } else {
+      if (error === false || typeof error === 'string') {
+        return error
+      } else if (!shouldValidate) {
+        return false
+      } else {
+        return await error(selected)
+      }
+    }
+  }
 
   const searchQuerySignal = createSignalObject('')
   function search(values: T, searchQuery: string): readonly T[number][] {
@@ -86,7 +150,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
   function onOperateOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
-    dropdownInfoSignal.value = undefined
+    closeDropdown()
   }
 
   function onKeyDown(event: KeyboardEvent) {
@@ -94,50 +158,64 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
 
     if (event.code === 'Escape' && dropdownInfoSignal.value !== undefined) {
       event.preventDefault()
-      dropdownInfoSignal.value = undefined
+      closeDropdown()
     }
+  }
+
+  function closeDropdown() {
+    isEditedSignal.value = true
+    dropdownInfoSignal.value = undefined
   }
 
   return (
     <>
-      <button
+      <div
         {...restProps}
-        class={joinClasses(rawProps, 'solid-design-parts-Select_launcher', {
+        class={joinClasses(rawProps, 'solid-design-parts-Select_error-message-layout', {
           'solid-design-parts-Select_opened': dropdownInfoSignal.value !== undefined,
           'solid-design-parts-Select_full-width': props.fullWidth,
         })}
-        type="button"
-        disabled={props.disabled}
-        onClick={onClickLauncher}
       >
-        <div class="solid-design-parts-Select_preview-area">
-          {selectedSignal.value !== undefined ? (
-            <div class="solid-design-parts-Select_preview">{getLabel(selectedSignal.value)}</div>
-          ) : null}
-          <div class="solid-design-parts-Select_placeholder" aria-hidden={selectedSignal.value !== undefined}>
-            {props.placeholder}
+        <button
+          class="solid-design-parts-Select_launcher"
+          type="button"
+          disabled={props.disabled}
+          aria-invalid={errorSignal.value !== false}
+          onClick={onClickLauncher}
+        >
+          <div class="solid-design-parts-Select_preview-area">
+            {selectedSignal.value !== undefined ? (
+              <div class="solid-design-parts-Select_preview">{getLabel(selectedSignal.value)}</div>
+            ) : null}
+            <div class="solid-design-parts-Select_placeholder" aria-hidden={selectedSignal.value !== undefined}>
+              {props.placeholder}
+            </div>
+            <For each={props.values}>
+              {(value) => (
+                <div class="solid-design-parts-Select_preview" aria-hidden="true">
+                  {getLabel(value)}
+                </div>
+              )}
+            </For>
           </div>
-          <For each={props.values}>
-            {(value) => (
-              <div class="solid-design-parts-Select_preview" aria-hidden="true">
-                {getLabel(value)}
-              </div>
-            )}
-          </For>
-        </div>
-        <Show when={props.showClearButton}>
-          <IconButton
-            class="solid-design-parts-Select_clear-button"
-            src={closeCircleIcon}
-            size="1.6em"
-            iconSize="1.25em"
-            iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
-            aria-hidden={selectedSignal.value === undefined}
-            onClick={() => (selectedSignal.value = undefined)}
-          />
-        </Show>
-        <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
-      </button>
+          <Show when={props.showClearButton}>
+            <IconButton
+              class="solid-design-parts-Select_clear-button"
+              src={closeCircleIcon}
+              size="1.6em"
+              iconSize="1.25em"
+              iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
+              aria-hidden={selectedSignal.value === undefined}
+              onClick={() => {
+                selectedSignal.value = undefined
+                isEditedSignal.value = true
+              }}
+            />
+          </Show>
+          <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
+        </button>
+        <ErrorMessage>{errorSignal.value}</ErrorMessage>
+      </div>
       <Show when={dropdownInfoSignal.value} keyed>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
@@ -184,7 +262,7 @@ export function Select<T extends readonly (string | number)[]>(rawProps: SelectP
                           aria-selected={selectedSignal.value === value}
                           onClick={() => {
                             selectedSignal.value = value
-                            dropdownInfoSignal.value = undefined
+                            closeDropdown()
                           }}
                         >
                           {getLabel(value)}

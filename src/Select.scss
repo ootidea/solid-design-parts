@@ -26,8 +26,12 @@
     outline: none;
   }
 
-  &.solid-design-parts-Select_full-width {
+  .solid-design-parts-Select_full-width & {
     width: 100%;
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--solid-design-parts-error-color);
   }
 }
 
