@@ -14,7 +14,8 @@ export type RadioButtonsProps<T extends readonly (string | number)[]> = Props<{
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
   gridColumnsCount?: number | undefined
-  disabled?: boolean | ReadonlySet<T[number]>
+  disabled?: boolean
+  disabledValues?: ReadonlySet<T[number]>
   required?: boolean
   error?: boolean | string | ((selected: T[number] | undefined) => Promisable<boolean | string>)
   validateImmediately?: boolean
@@ -31,6 +32,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
       layout: 'horizontal',
       gap: '0.2em 1em',
       disabled: false,
+      disabledValues: new Set(),
       required: false,
       error: false as Required<RadioButtonsProps<T>>['error'],
       validateImmediately: false,
@@ -73,9 +75,7 @@ export function RadioButtons<T extends readonly (string | number)[]>(rawProps: R
   }
 
   function isDisabled(value: T[number]): boolean {
-    if (typeof props.disabled === 'boolean') return props.disabled
-
-    return props.disabled.has(value)
+    return props.disabled || props.disabledValues.has(value)
   }
 
   async function onClick(value: T[number]) {
