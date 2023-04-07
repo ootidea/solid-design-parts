@@ -111,7 +111,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} disabled />
-          <Checkboxes values={['Windows', 'macOS', 'Linux']} disabled={new Set(['macOS'])} />
+          <Checkboxes values={['Windows', 'macOS', 'Linux']} disabledValues={new Set(['macOS'])} />
         </>
       ),
     },

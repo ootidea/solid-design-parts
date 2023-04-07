@@ -22,7 +22,8 @@ export type CheckboxesProps<T extends readonly (string | number)[]> = Props<{
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
   gap?: string
   gridColumnsCount?: number | undefined
-  disabled?: boolean | ReadonlySet<T[number]>
+  disabled?: boolean
+  disabledValues?: ReadonlySet<T[number]>
   required?: boolean
   min?: number
   max?: number
@@ -44,6 +45,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
       layout: 'horizontal',
       gap: '0.2em 1em',
       disabled: false,
+      disabledValues: new Set(),
       required: false,
       error: false as Required<CheckboxesProps<T>>['error'],
       validateImmediately: false,
@@ -140,12 +142,6 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
     }
   }
 
-  function isDisabled(value: T[number]): boolean {
-    if (typeof props.disabled === 'boolean') return props.disabled
-
-    return props.disabled.has(value)
-  }
-
   return (
     <div
       class={joinClasses(rawProps, 'solid-design-parts-Checkboxes_root', {
@@ -164,7 +160,7 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
           {(value) => (
             <Checkbox
               checked={selectedSignal.value.has(value)}
-              disabled={isDisabled(value)}
+              disabled={props.disabled || props.disabledValues.has(value)}
               error={errorSignal.value !== false}
               onChangeChecked={(checked) => {
                 // If props.selected changes, this condition is not satisfied.
