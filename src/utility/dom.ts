@@ -1,5 +1,4 @@
-import { assertInstanceOf } from 'base-up'
-import { includes } from 'base-up/dist/types/collectionPredicate'
+import { assertInstanceOf, includes } from 'base-up'
 import { createFocusTrap } from 'focus-trap'
 import { JSX, onCleanup } from 'solid-js'
 
