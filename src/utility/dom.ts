@@ -1,4 +1,5 @@
-import { assertInstanceOf, isOneOf } from 'base-up'
+import { assertInstanceOf } from 'base-up'
+import { includes } from 'base-up/dist/types/collectionPredicate'
 import { createFocusTrap } from 'focus-trap'
 import { JSX, onCleanup } from 'solid-js'
 
@@ -21,24 +22,27 @@ function isClickable(element: Element): boolean {
   if (contenteditable && contenteditable !== 'false') return true
 
   return (
-    isOneOf('A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION')(element.tagName) ||
-    isOneOf(
-      'link',
-      'menuitem',
-      'button',
-      'spinbutton',
-      'slider',
-      'scrollbar',
-      'textbox',
-      'option',
-      'radio',
-      'menuitemradio',
-      'checkbox',
-      'menuitemcheckbox',
-      'treeitem',
-      'switch',
-      'tab'
-    )(element.getAttribute('role'))
+    includes(['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION'], element.tagName) ||
+    includes(
+      [
+        'link',
+        'menuitem',
+        'button',
+        'spinbutton',
+        'slider',
+        'scrollbar',
+        'textbox',
+        'option',
+        'radio',
+        'menuitemradio',
+        'checkbox',
+        'menuitemcheckbox',
+        'treeitem',
+        'switch',
+        'tab',
+      ],
+      element.getAttribute('role')
+    )
   )
 }
 
