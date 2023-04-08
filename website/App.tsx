@@ -1,9 +1,11 @@
 import { Route, Router, Routes } from '@solidjs/router'
 import { For } from 'solid-js'
+import { Gravity, Select } from '../src'
 import { Divider } from '../src/Divider'
 import { Foldable } from '../src/Foldable'
 import { Scrollable } from '../src/Scrollable'
 import { StretchLayout } from '../src/StretchLayout'
+import { i18n } from '../src/utility/i18n'
 import classes from './App.module.scss'
 import { ComponentCatalogPage } from './page/ComponentCatalogPage'
 import { SidebarMenu } from './SidebarMenu'
@@ -42,26 +44,39 @@ export function App() {
 
   return (
     <Router>
-      <StretchLayout style={{ height: '100%' }} stretchAt={2}>
-        <nav class={classes.sidebar}>
-          <Scrollable class={classes.sidebarContent}>
-            <For each={menuItems}>
-              {(menuItem) => (
-                <Foldable title={menuItem.title} unfolded>
-                  <For each={menuItem.children}>{(name) => <SidebarMenu componentName={name} />}</For>
-                </Foldable>
-              )}
-            </For>
-          </Scrollable>
-        </nav>
-        <Divider direction="vertical" />
-        <main class={classes.main}>
-          <Scrollable style="padding: 1rem 4rem 10rem;">
-            <Routes>
-              <Route path="components/*" element={ComponentCatalogPage} />
-            </Routes>
-          </Scrollable>
-        </main>
+      <StretchLayout direction="vertical" stretchAt={2} style={{ height: '100%' }}>
+        <header class={classes.header}>
+          <Gravity.right>
+            <Select
+              placeholder="language"
+              values={['en', 'ja']}
+              showClearButton
+              onChangeSelected={(selected) => i18n.forceLanguage(selected)}
+            />
+          </Gravity.right>
+        </header>
+        <Divider />
+        <StretchLayout stretchAt={2} style={{ height: '100%' }}>
+          <nav class={classes.sidebar}>
+            <Scrollable class={classes.sidebarContent}>
+              <For each={menuItems}>
+                {(menuItem) => (
+                  <Foldable title={menuItem.title} unfolded>
+                    <For each={menuItem.children}>{(name) => <SidebarMenu componentName={name} />}</For>
+                  </Foldable>
+                )}
+              </For>
+            </Scrollable>
+          </nav>
+          <Divider direction="vertical" />
+          <main class={classes.main}>
+            <Scrollable style="padding: 1rem 4rem 10rem;">
+              <Routes>
+                <Route path="components/*" element={ComponentCatalogPage} />
+              </Routes>
+            </Scrollable>
+          </main>
+        </StretchLayout>
       </StretchLayout>
     </Router>
   )

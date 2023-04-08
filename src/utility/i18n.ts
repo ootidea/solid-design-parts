@@ -1,4 +1,6 @@
 import { keysOf } from 'base-up'
+import { createRoot } from 'solid-js'
+import { createSignalObject } from 'solid-signal-object'
 
 export namespace i18n {
   export const literals = defineGetters({
@@ -12,14 +14,14 @@ export namespace i18n {
     calendarYearTemplate: { default: 'yyyy', ja: 'yyyy年' },
   })
 
-  export function forceLanguage(language: string) {
-    forcedLanguage = language
+  export function forceLanguage(language: string | undefined) {
+    forcedLanguage.value = language
   }
 
-  let forcedLanguage: string | undefined
+  const forcedLanguage = createRoot(() => createSignalObject<string | undefined>())
 
   function getLanguages(): readonly string[] {
-    if (forcedLanguage !== undefined) return [forcedLanguage]
+    if (forcedLanguage.value !== undefined) return [forcedLanguage.value]
 
     return navigator.languages
   }
