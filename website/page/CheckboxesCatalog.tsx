@@ -126,6 +126,11 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Required',
+      description: (
+        <>
+          Using <code>required</code> makes one or more selections mandatory.
+        </>
+      ),
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} required />

@@ -52,6 +52,11 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Required',
+      description: (
+        <>
+          Using <code>required</code> makes one or more characters of input mandatory.
+        </>
+      ),
       children: (
         <>
           <AutoSizeTextArea placeholder="placeholder" required />

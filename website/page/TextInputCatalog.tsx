@@ -90,6 +90,11 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Required',
+      description: (
+        <>
+          Using <code>required</code> makes one or more characters of input mandatory.
+        </>
+      ),
       children: (
         <>
           <TextInput placeholder="Empty error message" required />

@@ -52,6 +52,11 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Required',
+      description: (
+        <>
+          Using <code>required</code> makes one or more selections mandatory.
+        </>
+      ),
       children: (
         <>
           <MultiSelect values={['Windows', 'macOS', 'Linux']} required />

@@ -49,6 +49,11 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Required',
+      description: (
+        <>
+          Using <code>required</code> makes checking the box mandatory.
+        </>
+      ),
       children: (
         <>
           <Checkbox required>I agree to the terms of service</Checkbox>
