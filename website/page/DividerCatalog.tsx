@@ -14,7 +14,6 @@ export const DividerCatalog: Catalog = createRoot(() => ({
             <Divider direction="vertical" />
             <Divider direction="vertical" />
           </div>
-          ,
         </>
       ),
     },
@@ -22,9 +21,9 @@ export const DividerCatalog: Catalog = createRoot(() => ({
       title: 'Color',
       children: (
         <>
-          <Divider color="green" />,
-          <Divider color="hsl(0 0% 0%)" />,
-          <Divider color="linear-gradient(to right, red, blue)" />,
+          <Divider color="green" />
+          <Divider color="hsl(0 0% 0%)" />
+          <Divider color="linear-gradient(to right, red, blue)" />
         </>
       ),
     },
