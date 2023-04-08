@@ -27,9 +27,11 @@ export namespace i18n {
     return navigator.languages
   }
 
-  function defineGetters<T extends Record<string, { default: string } & Record<string, string>>>(
+  function defineGetters<T extends Record<string, { default: unknown } & Record<string, unknown>>>(
     source: T
-  ): Record<keyof T, string> {
+  ): {
+    [K in keyof T]: T[K][keyof T[K]]
+  } {
     const result = {}
     for (const key of keysOf(source)) {
       Object.defineProperty(result, key, {
@@ -42,6 +44,6 @@ export namespace i18n {
         configurable: true,
       })
     }
-    return result as Record<keyof T, string>
+    return result as any
   }
 }
