@@ -48,16 +48,6 @@ export function Calendar(rawProps: CalendarProps) {
   const firstDateOfSelectedMonth = () => setDate(monthSignal.value, 1)
   const firstDateOfSelectedCalendar = () => subDays(firstDateOfSelectedMonth(), firstDateOfSelectedMonth().getDay())
 
-  const dayNames = [
-    i18n.literals.calendarSunday,
-    i18n.literals.calendarMonday,
-    i18n.literals.calendarTuesday,
-    i18n.literals.calendarWednesday,
-    i18n.literals.calendarThursday,
-    i18n.literals.calendarFriday,
-    i18n.literals.calendarSaturday,
-  ]
-
   return (
     <div
       {...restProps}
@@ -93,7 +83,7 @@ export function Calendar(rawProps: CalendarProps) {
 
       <div class="solid-design-parts-Calendar_grid">
         <div class="solid-design-parts-Calendar_day-row">
-          <For each={dayNames}>
+          <For each={i18n.literals.calendarDayNames}>
             {(dayName, day) => (
               <div class="solid-design-parts-Calendar_cell" data-day={day()}>
                 {dayName}
@@ -105,7 +95,7 @@ export function Calendar(rawProps: CalendarProps) {
         <For each={rangeTo(6)}>
           {(weakIndex) => (
             <div class="solid-design-parts-Calendar_date-row">
-              <For each={dayNames}>
+              <For each={i18n.literals.calendarDayNames}>
                 {(_, day) => {
                   const date = createMemoObject(() =>
                     addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day())

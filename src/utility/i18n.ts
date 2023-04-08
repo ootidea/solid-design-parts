@@ -3,13 +3,10 @@ import { keysOf } from 'base-up'
 export namespace i18n {
   export const literals = defineGetters({
     dataTableEmptyMessage: { default: 'No data', ja: 'データがありません' },
-    calendarSunday: { default: 'Su', ja: '日' },
-    calendarMonday: { default: 'Mo', ja: '月' },
-    calendarTuesday: { default: 'Tu', ja: '火' },
-    calendarWednesday: { default: 'We', ja: '水' },
-    calendarThursday: { default: 'Th', ja: '木' },
-    calendarFriday: { default: 'Fr', ja: '金' },
-    calendarSaturday: { default: 'Sa', ja: '土' },
+    calendarDayNames: {
+      default: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+      ja: ['日', '月', '火', '水', '木', '金', '土'],
+    },
     calendarYearMonthOrder: { default: `"month year"`, ja: `"year month"` },
     calendarMonthTemplate: { default: 'MMMM', ja: 'M月' },
     calendarYearTemplate: { default: 'yyyy', ja: 'yyyy年' },
@@ -27,7 +24,7 @@ export namespace i18n {
     return navigator.languages
   }
 
-  function defineGetters<T extends Record<string, { default: unknown } & Record<string, unknown>>>(
+  function defineGetters<const T extends Record<string, { default: unknown } & Record<string, unknown>>>(
     source: T
   ): {
     [K in keyof T]: T[K][keyof T[K]]
