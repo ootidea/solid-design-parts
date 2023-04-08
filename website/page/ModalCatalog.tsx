@@ -11,7 +11,7 @@ export const ModalCatalog: Catalog = createRoot(() => ({
     {
       title: 'Basic example',
       children: (
-        <Modal launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+        <Modal launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
           <div style="padding: 1em">This is sample text for Modal component.</div>
         </Modal>
       ),
@@ -19,8 +19,8 @@ export const ModalCatalog: Catalog = createRoot(() => ({
     {
       title: 'Persistent',
       children: (
-        <Modal persistent launcher={({ open }) => <Button onClick={open}>Open</Button>}>
-          {({ close }) => <Button onClick={close}>Close</Button>}
+        <Modal persistent launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
+          {({ closeModal }) => <Button onClick={closeModal}>Close</Button>}
         </Modal>
       ),
     },
@@ -40,7 +40,7 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       title: 'Close button',
       children: (
         <>
-          <Modal showCloseButton launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+          <Modal showCloseButton launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
             <div style="padding: 1em">This is sample text for Modal component.</div>
           </Modal>
         </>
@@ -50,7 +50,7 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       title: 'Title',
       children: (
         <>
-          <Modal title="Title" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+          <Modal title="Title" launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
             <div style="padding: 1em">
               This is sample text for Modal component.
               <For each={[...Array(30).keys()]}>{(i) => <p>{i}</p>}</For>
@@ -64,10 +64,10 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Modal
-            launcher={({ open }) => <Button onClick={open}>Open</Button>}
-            footer={({ close }) => (
+            launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}
+            footer={({ closeModal }) => (
               <Gravity to="right" style="padding: 0.5em;">
-                <Button onClick={close}>Close</Button>
+                <Button onClick={closeModal}>Close</Button>
               </Gravity>
             )}
           >
@@ -83,13 +83,16 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       title: 'Background color of overlay',
       children: (
         <>
-          <Modal overlayBackgroundColor="transparent" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+          <Modal
+            overlayBackgroundColor="transparent"
+            launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}
+          >
             <div style="padding: 1em">This is sample text for Modal component.</div>
           </Modal>
           <br />
           <Modal
             overlayBackgroundColor="rgba(0 0 0 / 30%)"
-            launcher={({ open }) => <Button onClick={open}>Open</Button>}
+            launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}
           >
             <div style="padding: 1em">This is sample text for Modal component.</div>
           </Modal>

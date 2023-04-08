@@ -26,10 +26,10 @@ export type ModalProps = Props<{
   showCloseButton?: boolean
   ignoreEscKey?: boolean
   onChangeOpened?: (opened: boolean) => void
-  launcher?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
-  title?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
-  children?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
-  footer?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  launcher?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  title?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  children?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  footer?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
   overlayBackgroundColor?: CssColor
 }>
 
@@ -49,16 +49,16 @@ export function Modal(rawProps: ModalProps) {
   const openedSignal = createInjectableSignalObject(props, 'opened')
   createDeferEffect(openedSignal.get, () => props.onChangeOpened?.(openedSignal.value))
 
-  const open = () => (openedSignal.value = true)
-  const close = () => (openedSignal.value = false)
-  const toggle = () => (openedSignal.value = !openedSignal.value)
+  const openModal = () => (openedSignal.value = true)
+  const closeModal = () => (openedSignal.value = false)
+  const toggleModal = () => (openedSignal.value = !openedSignal.value)
 
   function onClickOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
     event.preventDefault()
     if (!props.persistent) {
-      close()
+      closeModal()
     }
   }
 
@@ -67,13 +67,13 @@ export function Modal(rawProps: ModalProps) {
 
     if (event.code === 'Escape' && openedSignal.value && !props.persistent && !props.ignoreEscKey) {
       event.preventDefault()
-      close()
+      closeModal()
     }
   }
 
   return (
     <>
-      <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
+      <Slot content={rawProps.launcher} params={{ openModal, closeModal, toggleModal }} />
       <Portal>
         <FadeAnimation shown={openedSignal.value}>
           <div
@@ -92,20 +92,20 @@ export function Modal(rawProps: ModalProps) {
                   class="solid-design-parts-Modal_header"
                   right={
                     <Show when={props.showCloseButton}>
-                      <IconButton src={closeIcon} onClick={close} />
+                      <IconButton src={closeIcon} onClick={closeModal} />
                     </Show>
                   }
                 >
                   <div class="solid-design-parts-Modal_title">
-                    <Slot content={rawProps.title} params={{ open, close, toggle }} />
+                    <Slot content={rawProps.title} params={{ openModal, closeModal, toggleModal }} />
                   </div>
                 </TitleBarLayout>
               </Show>
               <Scrollable {...restProps} class="solid-design-parts-Modal_body">
-                <Slot content={rawProps.children} params={{ open, close, toggle }} />
+                <Slot content={rawProps.children} params={{ openModal, closeModal, toggleModal }} />
               </Scrollable>
               <div class="solid-design-parts-Modal_footer">
-                <Slot content={props.footer} params={{ open, close, toggle }} />
+                <Slot content={props.footer} params={{ openModal, closeModal, toggleModal }} />
               </div>
             </div>
           </div>

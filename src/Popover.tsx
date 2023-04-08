@@ -21,9 +21,9 @@ export type PopoverProps = Props<{
   persistent?: boolean
   ignoreEscKey?: boolean
   onClose?: () => void
-  launcher?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
-  frame?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
-  children?: SlotProp<{ open: () => void; close: () => void; toggle: () => void }>
+  launcher?: SlotProp<{ openPopover: () => void; closePopover: () => void; togglePopover: () => void }>
+  frame?: SlotProp<{ openPopover: () => void; closePopover: () => void; togglePopover: () => void }>
+  children?: SlotProp<{ openPopover: () => void; closePopover: () => void; togglePopover: () => void }>
 }>
 
 export function Popover(rawProps: PopoverProps) {
@@ -40,7 +40,7 @@ export function Popover(rawProps: PopoverProps) {
 
   const opened = createSignalObject(false)
 
-  function open() {
+  function openPopover() {
     if (launcher === undefined) return
 
     const range = document.createRange()
@@ -49,16 +49,16 @@ export function Popover(rawProps: PopoverProps) {
     opened.value = true
   }
 
-  function close() {
+  function closePopover() {
     opened.value = false
     props.onClose?.()
   }
 
-  function toggle() {
+  function togglePopover() {
     if (opened.value) {
-      close()
+      closePopover()
     } else {
-      open()
+      openPopover()
     }
   }
 
@@ -69,7 +69,7 @@ export function Popover(rawProps: PopoverProps) {
     if (event.target !== event.currentTarget) return
 
     if (!props.persistent) {
-      close()
+      closePopover()
     }
   }
 
@@ -78,14 +78,14 @@ export function Popover(rawProps: PopoverProps) {
 
     if (event.code === 'Escape' && opened.value && !props.persistent && !props.ignoreEscKey) {
       event.preventDefault()
-      close()
+      closePopover()
     }
   }
 
   return (
     <>
       <div class="solid-design-parts-Popover_launcher" ref={launcher}>
-        <Slot content={rawProps.launcher} params={{ open, close, toggle }} />
+        <Slot content={rawProps.launcher} params={{ openPopover, closePopover, togglePopover }} />
       </div>
       <Show when={opened.value}>
         <Portal>
@@ -110,9 +110,9 @@ export function Popover(rawProps: PopoverProps) {
             onMouseWheel={onOperateOverlay}
             onKeyDown={onKeyDown}
           >
-            <Slot content={rawProps.frame} params={{ open, close, toggle }}>
+            <Slot content={rawProps.frame} params={{ openPopover, closePopover, togglePopover }}>
               <div class="solid-design-parts-Popover_frame">
-                <Slot content={rawProps.children} params={{ open, close, toggle }} />
+                <Slot content={rawProps.children} params={{ openPopover, closePopover, togglePopover }} />
               </div>
             </Slot>
           </div>

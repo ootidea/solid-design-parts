@@ -8,7 +8,7 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
     {
       title: 'Basic example',
       children: (
-        <Popover launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+        <Popover launcher={({ openPopover }) => <Button onClick={openPopover}>Open</Button>}>
           <h1>Title</h1>
           <p>contents</p>
         </Popover>
@@ -17,7 +17,7 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
     {
       title: 'Simple position',
       children: (
-        <Popover on="top right" launcher={({ open }) => <Button onClick={open}>Open</Button>}>
+        <Popover on="top right" launcher={({ openPopover }) => <Button onClick={openPopover}>Open</Button>}>
           <div style="padding: 0.5em 1em">Pop up text</div>
         </Popover>
       ),
@@ -28,9 +28,9 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
         <Popover
           on="bottom right"
           joint="bottom right"
-          launcher={({ toggle }) => (
+          launcher={({ togglePopover }) => (
             <div style="width: 20rem; height: 10rem; background-color: aliceblue">
-              <Button onClick={toggle}>Open in right bottom</Button>
+              <Button onClick={togglePopover}>Open in right bottom</Button>
             </div>
           )}
         >
@@ -41,8 +41,8 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
     {
       title: 'Persistent',
       children: (
-        <Popover persistent launcher={({ toggle }) => <Button onClick={toggle}>Open</Button>}>
-          {({ close }) => <Button onClick={close}>Close</Button>}
+        <Popover persistent launcher={({ togglePopover }) => <Button onClick={togglePopover}>Open</Button>}>
+          {({ closePopover }) => <Button onClick={closePopover}>Close</Button>}
         </Popover>
       ),
     },
