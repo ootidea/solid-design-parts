@@ -4,6 +4,12 @@ import chevronLeftIcon from './chevron-left.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 export const IconCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      The <code>Icon</code> component displays a monochrome icon. The colors of icons are styled using CSS. In other
+      words, the color information in the image file is ignored, and only the shape of the icon is referenced.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
