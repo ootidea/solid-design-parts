@@ -51,7 +51,7 @@ export function Modal(rawProps: ModalProps) {
 
   const openModal = () => (openedSignal.value = true)
   const closeModal = () => (openedSignal.value = false)
-  const toggleModal = () => (openedSignal.value = !openedSignal.value)
+  const toggleModal = () => (openedSignal.value ? closeModal() : openModal())
 
   function onClickOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
