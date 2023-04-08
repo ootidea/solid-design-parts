@@ -16,7 +16,7 @@ import {
 
 export type CheckboxesProps<T extends readonly (string | number)[]> = Props<{
   values: T
-  labels?: Partial<Record<T[number], JSX.Element>>
+  labels?: Partial<Record<T[number], JSX.Element>> | ((value: T[number]) => JSX.Element)
   selected?: ReadonlySet<T[number]>
   placeholder?: string
   layout?: 'horizontal' | 'vertical' | 'flex-wrap' | 'space-between' | 'space-around' | 'space-evenly'
@@ -56,7 +56,8 @@ export function Checkboxes<T extends readonly (string | number)[]>(rawProps: Che
   )
 
   function getLabel(value: T[number]): JSX.Element {
-    return props.labels?.[value] ?? value
+    if (props.labels instanceof Function) return props.labels(value)
+    else return props.labels?.[value] ?? value
   }
 
   const synthesizedPredicateFunction = createMemoObject(() => {

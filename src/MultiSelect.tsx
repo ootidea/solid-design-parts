@@ -17,7 +17,7 @@ import { createDeferEffect, createNormalizedSignalObject, joinClasses, preparePr
 
 export type MultiSelectProps<T extends readonly (string | number)[]> = Props<{
   values: T
-  labels?: Partial<Record<T[number], JSX.Element>>
+  labels?: Partial<Record<T[number], JSX.Element>> | ((value: T[number]) => JSX.Element)
   selected?: ReadonlySet<T[number]>
   placeholder?: string
   disabled?: boolean
@@ -50,7 +50,8 @@ export function MultiSelect<T extends readonly (string | number)[]>(rawProps: Mu
   )
 
   function getLabel(value: T[number]): JSX.Element {
-    return props.labels?.[value] ?? value
+    if (props.labels instanceof Function) return props.labels(value)
+    else return props.labels?.[value] ?? value
   }
 
   const synthesizedPredicateFunction = createMemoObject(() => {
