@@ -5,8 +5,8 @@ import { Catalog } from './ComponentCatalogPage'
 export const TriangleCatalog: Catalog = createRoot(() => ({
   introduction: (
     <>
-      <code>Triangle</code> is a component that dynamically generates and displays an SVG triangle. Unlike
-      implementation with border, you can use % for width and height.
+      <code>Triangle</code> is a component that displays a dynamically generated triangular SVG. Unlike implementation
+      with border, you can use % for width and height.
     </>
   ),
   samples: [
