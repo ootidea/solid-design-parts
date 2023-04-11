@@ -36,7 +36,7 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <RadioButtons values={['left', 'center', 'right']} selected="right" disabled />
-          <RadioButtons values={['left', 'center', 'right']} disabled={new Set(['center'])} />
+          <RadioButtons values={['left', 'center', 'right']} disabledValues={new Set(['center'])} />
         </>
       ),
     },

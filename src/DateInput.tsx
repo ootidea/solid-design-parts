@@ -63,7 +63,7 @@ export function DateInput(rawProps: DateInputProps) {
 
   return (
     <Modal
-      launcher={({ toggle }) => (
+      launcher={({ toggleModal }) => (
         <button
           {...restProps}
           class={joinClasses(props, 'solid-design-parts-DateInput_launcher')}
@@ -72,7 +72,7 @@ export function DateInput(rawProps: DateInputProps) {
           onClick={(event) => {
             if (isNestedClickEvent(event)) return
 
-            toggle()
+            toggleModal()
           }}
         >
           <div class="solid-design-parts-DateInput_preview-area">
@@ -108,7 +108,7 @@ export function DateInput(rawProps: DateInputProps) {
         </button>
       )}
     >
-      {({ close }) => (
+      {({ closeModal }) => (
         <DatePicker
           class="solid-design-parts-DateInput_date-picker"
           value={valueSignal.value}
@@ -117,7 +117,7 @@ export function DateInput(rawProps: DateInputProps) {
           disabled={props.disabledDate}
           onChangeValue={(value) => {
             valueSignal.value = value
-            close()
+            closeModal()
           }}
         />
       )}
