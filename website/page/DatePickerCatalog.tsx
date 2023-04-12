@@ -5,6 +5,11 @@ import { Catalog } from './ComponentCatalogPage'
 const [value, setValue] = createSignal<Date | undefined>(undefined)
 
 export const DatePickerCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>DatePicker</code> is a component for selecting a date from a calendar.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
@@ -16,7 +21,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Specify default month',
+      title: 'Displaying the specified month',
       children: (
         <>
           <DatePicker month={new Date(1999, 0)} />
@@ -24,7 +29,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: 'Binding the value to signal',
       children: (
         <>
           <DatePicker value={value()} onChangeValue={setValue} />
@@ -42,7 +47,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disabled',
+      title: 'Disabled DatePicker',
       children: (
         <>
           <DatePicker disabled={(date) => date.getDay() % 3 === 0} />
@@ -50,7 +55,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Enable deselection',
+      title: 'Enabling deselection',
       description: (
         <>
           If the <code>enableDeselection</code> option is set, clicking the selected date again will deselect it.

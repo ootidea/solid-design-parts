@@ -5,6 +5,11 @@ import { Catalog } from './ComponentCatalogPage'
 const [value, setValue] = createSignal<Date | undefined>(new Date())
 
 export const DateInputCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>DateInput</code> is a component for inputting dates, specifically year, month, and day.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',

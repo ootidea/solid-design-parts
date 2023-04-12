@@ -23,7 +23,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Icon color',
+      title: 'Changing the icon color',
       direction: 'horizontal',
       children: (
         <>
@@ -33,7 +33,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Background color',
+      title: 'Changing the background color',
       direction: 'horizontal',
       children: (
         <>
@@ -54,7 +54,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Radius',
+      title: 'Changing the button radius',
       direction: 'horizontal',
       children: (
         <>
@@ -64,7 +64,12 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Button size',
+      title: 'Change the button size',
+      description: (
+        <>
+          Using <code>size</code> changes the button size. The <code>size</code> sets both the width and height.
+        </>
+      ),
       direction: 'horizontal',
       children: (
         <>
@@ -74,7 +79,12 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Icon size (without button size)',
+      title: 'Change the icon size (without changing the button size).',
+      description: (
+        <>
+          Using <code>iconSize</code> changes the icon size, but the clickable area remains unchanged.
+        </>
+      ),
       direction: 'horizontal',
       children: (
         <>
@@ -84,7 +94,13 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'onClick function that returns a Promise',
+      title: 'Async onClick handlers',
+      description: (
+        <>
+          If the <code>onClick</code> handler returns a <code>Promise</code>, the button will be disabled and show a{' '}
+          <code>Spinner</code> until the <code>Promise</code> is resolved.
+        </>
+      ),
       direction: 'horizontal',
       children: (
         <>
