@@ -30,6 +30,7 @@ import { ResizableCatalog } from './ResizableCatalog'
 import { ScaleYAnimationCatalog } from './ScaleYAnimationCatalog'
 import { ScrollableCatalog } from './ScrollableCatalog'
 import { SelectCatalog } from './SelectCatalog'
+import { SingleSelectToggleButtonsCatalog } from './SingleSelectToggleButtonsCatalog'
 import { SliderCatalog } from './SliderCatalog'
 import { SpeechBubbleCatalog } from './SpeechBubbleCatalog'
 import { SpinnerCatalog } from './SpinnerCatalog'
@@ -57,6 +58,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   SelectCatalog,
   MultiSelectCatalog,
   ToggleButtonsCatalog,
+  SingleSelectToggleButtonsCatalog,
   TextInputCatalog,
   NumberInputCatalog,
   AutoSizeTextAreaCatalog,

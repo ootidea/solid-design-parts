@@ -20,7 +20,15 @@ export function App() {
     { title: 'Action buttons', children: ['Button', 'IconButton'] },
     {
       title: 'Selection',
-      children: ['Checkbox', 'Checkboxes', 'RadioButtons', 'ToggleButtons', 'Select', 'MultiSelect'],
+      children: [
+        'Checkbox',
+        'Checkboxes',
+        'RadioButtons',
+        'ToggleButtons',
+        'SingleSelectToggleButtons',
+        'Select',
+        'MultiSelect',
+      ],
     },
     { title: 'Text input', children: ['TextInput', 'AutoSizeTextArea', 'NumberInput'] },
     {
