@@ -23,6 +23,7 @@ import { LayerLayoutCatalog } from './LayerLayoutCatalog'
 import { LinkCatalog } from './LinkCatalog'
 import { ModalCatalog } from './ModalCatalog'
 import { MultiSelectCatalog } from './MultiSelectCatalog'
+import { MultiSelectToggleButtonsCatalog } from './MultiSelectToggleButtonsCatalog'
 import { NumberInputCatalog } from './NumberInputCatalog'
 import { PopoverCatalog } from './PopoverCatalog'
 import { RadioButtonsCatalog } from './RadioButtonsCatalog'
@@ -40,7 +41,6 @@ import { TabsCatalog } from './TabsCatalog'
 import { TextInputCatalog } from './TextInputCatalog'
 import { TitleBarLayoutCatalog } from './TitleBarLayoutCatalog'
 import { ToastCatalog } from './ToastCatalog'
-import { ToggleButtonsCatalog } from './ToggleButtonsCatalog'
 import { TriangleCatalog } from './TriangleCatalog'
 import { UrlToLinkCatalog } from './UrlToLinkCatalog'
 
@@ -57,7 +57,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   CheckboxesCatalog,
   SelectCatalog,
   MultiSelectCatalog,
-  ToggleButtonsCatalog,
+  MultiSelectToggleButtonsCatalog,
   SingleSelectToggleButtonsCatalog,
   TextInputCatalog,
   NumberInputCatalog,

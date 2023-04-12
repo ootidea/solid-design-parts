@@ -1,11 +1,11 @@
 import { call } from 'base-up'
 import { createRenderEffect, createSignal, For } from 'solid-js'
 import './common.scss'
-import './ToggleButtons.scss'
+import './MultiSelectToggleButtons.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type ToggleButtonsProps<T extends string | number> = Props<
+export type MultiSelectToggleButtonsProps<T extends string | number> = Props<
   (
     | {
         exclusive: true
@@ -24,7 +24,7 @@ export type ToggleButtonsProps<T extends string | number> = Props<
   }
 >
 
-export function ToggleButtons<const T extends string | number>(rawProps: ToggleButtonsProps<T>) {
+export function MultiSelectToggleButtons<const T extends string | number>(rawProps: MultiSelectToggleButtonsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
@@ -96,15 +96,15 @@ export function ToggleButtons<const T extends string | number>(rawProps: ToggleB
   return (
     <div
       {...restProps}
-      class={joinClasses(rawProps, 'solid-design-parts-ToggleButtons_root', {
-        'solid-design-parts-ToggleButtons_full-width': props.fullWidth,
-        'solid-design-parts-ToggleButtons_exclusive': props.exclusive,
+      class={joinClasses(rawProps, 'solid-design-parts-MultiSelectToggleButtons_root', {
+        'solid-design-parts-MultiSelectToggleButtons_full-width': props.fullWidth,
+        'solid-design-parts-MultiSelectToggleButtons_exclusive': props.exclusive,
       })}
     >
       <For each={props.values}>
         {(value: T) => (
           <button
-            class="solid-design-parts-ToggleButtons_button"
+            class="solid-design-parts-MultiSelectToggleButtons_button"
             type="button"
             aria-selected={isSelected(value)}
             onClick={() => clickEventHandler(value)}

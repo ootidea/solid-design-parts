@@ -1,0 +1,93 @@
+:root {
+  --solid-design-parts-MultiSelectToggleButtons_border-radius: 0.4em;
+  --solid-design-parts-MultiSelectToggleButtons_border: 1px solid
+    var(--solid-design-parts-MultiSelectToggleButtons_border-color);
+  --solid-design-parts-MultiSelectToggleButtons_border-color: oklch(75% 0 0);
+  --solid-design-parts-MultiSelectToggleButtons_text-color: oklch(50% 0 0);
+  --solid-design-parts-MultiSelectToggleButtons_selected-border-color: oklch(70% 0.08 255.4);
+  --solid-design-parts-MultiSelectToggleButtons_selected-text-color: oklch(50% 0.22 255.4);
+  --solid-design-parts-MultiSelectToggleButtons_selected-background-color: var(
+    --solid-design-parts-primary-selected-background-color
+  );
+  --solid-design-parts-MultiSelectToggleButtons_selected-font-weight: inherit;
+}
+
+.solid-design-parts-MultiSelectToggleButtons_root {
+  display: grid;
+  grid-auto-flow: column;
+  width: max-content;
+
+  &.solid-design-parts-MultiSelectToggleButtons_full-width {
+    width: initial;
+  }
+}
+
+.solid-design-parts-MultiSelectToggleButtons_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.3em 0.5em;
+  border: var(--solid-design-parts-MultiSelectToggleButtons_border);
+  border-right: none;
+
+  background: transparent;
+  color: var(--solid-design-parts-MultiSelectToggleButtons_text-color);
+  font: inherit;
+  white-space: pre-wrap;
+
+  cursor: pointer;
+
+  transition: all 140ms ease-out;
+
+  &:first-of-type {
+    border-top-left-radius: var(--solid-design-parts-MultiSelectToggleButtons_border-radius);
+    border-bottom-left-radius: var(--solid-design-parts-MultiSelectToggleButtons_border-radius);
+  }
+
+  &:last-of-type {
+    border-top-right-radius: var(--solid-design-parts-MultiSelectToggleButtons_border-radius);
+    border-bottom-right-radius: var(--solid-design-parts-MultiSelectToggleButtons_border-radius);
+
+    border-right: var(--solid-design-parts-MultiSelectToggleButtons_border);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: oklch(97% 0 0);
+      transition: all 140ms ease-out;
+    }
+  }
+
+  &:active {
+    background-color: oklch(94% 0 0);
+    transition: all 140ms ease-out;
+  }
+
+  &[aria-selected='true'] {
+    border-color: var(--solid-design-parts-MultiSelectToggleButtons_selected-border-color);
+
+    & + .solid-design-parts-MultiSelectToggleButtons_button {
+      border-left-color: var(--solid-design-parts-MultiSelectToggleButtons_selected-border-color);
+    }
+
+    background-color: var(--solid-design-parts-primary-selected-background-color);
+    color: var(--solid-design-parts-MultiSelectToggleButtons_selected-text-color);
+    font-weight: var(--solid-design-parts-MultiSelectToggleButtons_selected-font-weight);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--solid-design-parts-primary-selected-background-hover-color);
+      }
+    }
+
+    &:active {
+      background-color: var(--solid-design-parts-primary-selected-background-active-color);
+    }
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+    outline: 2px solid var(--solid-design-parts-primary-color);
+  }
+}

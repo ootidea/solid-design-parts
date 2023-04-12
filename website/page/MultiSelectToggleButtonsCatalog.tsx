@@ -1,6 +1,6 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Icon } from '../../src/Icon'
-import { ToggleButtons } from '../../src/ToggleButtons'
+import { MultiSelectToggleButtons } from '../../src/MultiSelectToggleButtons'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 import formatAlignLeftIcon from './format-align-left.svg'
@@ -9,14 +9,14 @@ import formatAlignRightIcon from './format-align-right.svg'
 const [selected1, setSelected1] = createSignal<'en' | 'zh' | undefined>('en')
 const [selected2, setSelected2] = createSignal<Set<'en' | 'zh'>>(new Set(), { equals: false })
 
-export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
+export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
       title: 'Basic example',
       children: (
         <>
-          <ToggleButtons values={['Dog', 'Cat']} />
-          <ToggleButtons values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
+          <MultiSelectToggleButtons values={['Dog', 'Cat']} />
+          <MultiSelectToggleButtons values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
         </>
       ),
     },
@@ -24,8 +24,8 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Exclusive (single select)',
       children: (
         <>
-          <ToggleButtons exclusive values={['Dog', 'Cat']} />
-          <ToggleButtons exclusive values={['Female', 'Male', 'Other']} selected="Male" />
+          <MultiSelectToggleButtons exclusive values={['Dog', 'Cat']} />
+          <MultiSelectToggleButtons exclusive values={['Female', 'Male', 'Other']} selected="Male" />
         </>
       ),
     },
@@ -33,8 +33,8 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Titles',
       children: (
         <>
-          <ToggleButtons values={['en', 'zh']} labels={{ en: 'English', zh: 'Chinese' }} />
-          <ToggleButtons values={['en', 'zh', 'jp']} labels={{ en: 'English', zh: 'Chinese' }} />
+          <MultiSelectToggleButtons values={['en', 'zh']} labels={{ en: 'English', zh: 'Chinese' }} />
+          <MultiSelectToggleButtons values={['en', 'zh', 'jp']} labels={{ en: 'English', zh: 'Chinese' }} />
         </>
       ),
     },
@@ -42,11 +42,11 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Icons',
       children: (
         <>
-          <ToggleButtons values={['left', 'right']}>
+          <MultiSelectToggleButtons values={['left', 'right']}>
             {({ value }) => (
               <Icon src={{ left: formatAlignLeftIcon, right: formatAlignRightIcon }[value]} color="currentColor" />
             )}
-          </ToggleButtons>
+          </MultiSelectToggleButtons>
         </>
       ),
     },
@@ -58,9 +58,14 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <ToggleButtons exclusive values={['en', 'zh']} selected={selected1()} onChangeSelected={setSelected1} />
+          <MultiSelectToggleButtons
+            exclusive
+            values={['en', 'zh']}
+            selected={selected1()}
+            onChangeSelected={setSelected1}
+          />
           <div>selected1: {toLiteral(selected1())}</div>
-          <ToggleButtons values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
+          <MultiSelectToggleButtons values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
           <div>{`selected: {${[...selected2()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
         </>
       ),
@@ -70,7 +75,7 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       description: 'Disable deselection that occurs when clicking on a selected option.',
       children: (
         <>
-          <ToggleButtons exclusive values={['Male', 'Female']} disableDeselection />
+          <MultiSelectToggleButtons exclusive values={['Male', 'Female']} disableDeselection />
         </>
       ),
     },
@@ -78,7 +83,7 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Full width',
       children: (
         <>
-          <ToggleButtons fullWidth values={['Female', 'Male', 'LGBTQQIAAPPO2S']} />
+          <MultiSelectToggleButtons fullWidth values={['Female', 'Male', 'LGBTQQIAAPPO2S']} />
         </>
       ),
     },
