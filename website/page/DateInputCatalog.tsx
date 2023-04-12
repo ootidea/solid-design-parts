@@ -7,7 +7,7 @@ const [value, setValue] = createSignal<Date | undefined>(new Date())
 export const DateInputCatalog: Catalog = createRoot(() => ({
   introduction: (
     <>
-      <code>DateInput</code> is a component for inputting dates, specifically year, month, and day.
+      <code>DateInput</code> is a component for inputting a date, specifically year, month, and day.
     </>
   ),
   samples: [

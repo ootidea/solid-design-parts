@@ -47,7 +47,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disabled DatePicker',
+      title: 'Disabled dates',
       children: (
         <>
           <DatePicker disabled={(date) => date.getDay() % 3 === 0} />

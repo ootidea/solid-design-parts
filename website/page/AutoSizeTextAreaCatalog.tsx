@@ -8,7 +8,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
   introduction: (
     <>
       <code>AutoSizeTextArea</code> is a component for inputting multiline text. The height is automatically adjusted
-      according to the content, unlike the textarea element. If you want to input single-line text, please use
+      according to the content, unlike the textarea element. If you want to input single-line text, please use{' '}
       <code>TextInput</code> instead.
     </>
   ),
