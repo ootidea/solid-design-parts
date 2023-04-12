@@ -32,7 +32,7 @@ export type MultiSelectProps<T extends readonly (string | number)[]> = Props<{
   onValid?: (selected: ReadonlySet<T[number]>) => void
 }>
 
-export function MultiSelect<T extends readonly (string | number)[]>(rawProps: MultiSelectProps<T>) {
+export function MultiSelect<const T extends readonly (string | number)[]>(rawProps: MultiSelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

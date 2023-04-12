@@ -24,7 +24,7 @@ export type RadioButtonsProps<T extends readonly (string | number)[]> = Props<{
   onValid?: (selected: T[number] | undefined) => void
 }>
 
-export function RadioButtons<T extends readonly (string | number)[]>(rawProps: RadioButtonsProps<T>) {
+export function RadioButtons<const T extends readonly (string | number)[]>(rawProps: RadioButtonsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

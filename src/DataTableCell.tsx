@@ -9,7 +9,7 @@ import { joinClasses, prepareProps, Props } from './utility/props'
 
 export type DataTableCellProps<T extends string> = Props<{ value: unknown }>
 
-export function DataTableCell<T extends string>(rawProps: DataTableCellProps<T>) {
+export function DataTableCell<const T extends string>(rawProps: DataTableCellProps<T>) {
   const [props, restProps] = prepareProps(rawProps, {}, ['value'])
 
   const analysisResult = createMemoObject(() => analyze(props.value))

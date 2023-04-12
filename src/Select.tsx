@@ -32,7 +32,7 @@ export type SelectProps<T extends readonly (string | number)[]> = Props<{
   onValid?: (selected: T[number] | undefined) => void
 }>
 
-export function Select<T extends readonly (string | number)[]>(rawProps: SelectProps<T>) {
+export function Select<const T extends readonly (string | number)[]>(rawProps: SelectProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

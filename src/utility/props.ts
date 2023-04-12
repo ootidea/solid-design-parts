@@ -84,7 +84,7 @@ export function createNormalizedSignalObject<T>(
  * Convert all nullary function properties to getters immutably.
  * TODO: Define return type.
  */
-export function toGetters<T extends Record<string, () => unknown>>(functions: T) {
+export function toGetters<const T extends Record<string, () => unknown>>(functions: T) {
   const result = {}
   for (const objectKey of keysOf(functions)) {
     Object.defineProperty(result, objectKey, {

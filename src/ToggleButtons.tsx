@@ -24,7 +24,7 @@ export type ToggleButtonsProps<T extends string | number> = Props<
   }
 >
 
-export function ToggleButtons<T extends string | number>(rawProps: ToggleButtonsProps<T>) {
+export function ToggleButtons<const T extends string | number>(rawProps: ToggleButtonsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {

@@ -13,7 +13,7 @@ export type TabsProps<T extends string> = Props<{
   onClickTab?: (tabName: T) => void
 }>
 
-export function Tabs<T extends string>(rawProps: TabsProps<T>) {
+export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     { activeTab: rawProps.names[0], type: 'Colored tab and border', passive: false },

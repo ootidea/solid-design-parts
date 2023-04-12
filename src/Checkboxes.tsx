@@ -35,7 +35,7 @@ export type CheckboxesProps<T extends readonly (string | number)[]> = Props<{
   onValid?: (selected: ReadonlySet<T[number]>) => void
 }>
 
-export function Checkboxes<T extends readonly (string | number)[]>(rawProps: CheckboxesProps<T>) {
+export function Checkboxes<const T extends readonly (string | number)[]>(rawProps: CheckboxesProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
