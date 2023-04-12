@@ -23,7 +23,11 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>value</code> to signal
+        </>
+      ),
       children: (
         <>
           <DateInput value={value()} onChangeValue={setValue} />
@@ -61,7 +65,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Clear button',
+      title: 'Showing the clear button',
       direction: 'horizontal',
       children: (
         <>

@@ -21,7 +21,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Displaying the specified month',
+      title: 'Showing the specified month',
       children: (
         <>
           <DatePicker month={new Date(1999, 0)} />

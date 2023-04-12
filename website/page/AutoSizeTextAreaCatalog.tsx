@@ -24,7 +24,11 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>value</code> to signal
+        </>
+      ),
       children: (
         <>
           <AutoSizeTextArea value={value()} onChangeValue={setValue} />

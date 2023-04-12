@@ -20,7 +20,11 @@ export const FoldableCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>unfolded</code> to signal
+        </>
+      ),
       children: (
         <>
           <Foldable title="Title" unfolded={unfolded.value} onChangeUnfolded={unfolded.set}>

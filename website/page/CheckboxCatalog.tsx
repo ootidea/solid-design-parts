@@ -17,7 +17,11 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>checked</code> to signal
+        </>
+      ),
       children: (
         <>
           <Checkbox checked={checked.value} onChangeChecked={checked.set}>

@@ -17,7 +17,7 @@ export function Sample(rawProps: SampleProps) {
     <section>
       <Show when={props.title}>
         <h2 id={id()} class={classes.title}>
-          {props.title}
+          <span>{props.title}</span>
           <a class={classes.fragment} href={`#${id()}`}>
             #
           </a>

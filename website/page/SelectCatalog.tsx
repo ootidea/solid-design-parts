@@ -18,7 +18,11 @@ export const SelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>selected</code> to signal
+        </>
+      ),
       children: (
         <>
           <Select values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />
@@ -36,7 +40,7 @@ export const SelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Clear button',
+      title: 'Showing the clear button',
       children: (
         <>
           <Select placeholder="gender" values={['Female', 'Male', 'Other']} selected="Female" showClearButton />

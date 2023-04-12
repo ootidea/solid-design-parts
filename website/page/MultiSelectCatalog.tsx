@@ -25,7 +25,11 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>selected</code> to signal
+        </>
+      ),
       children: (
         <>
           <MultiSelect values={['Windows', 'macOS', 'Linux']} selected={selected()} onChangeSelected={setSelected} />

@@ -17,16 +17,18 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>selected</code> to signal
+        </>
+      ),
       children: (
         <>
-          <div style="display: grid; grid-template-columns: auto auto; gap: 1em; width: max-content;">
-            <RadioButtons
-              values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
-              selected={selected()}
-              onChangeSelected={setSelected}
-            />
-          </div>
+          <RadioButtons
+            values={['Python', 'TypeScript', 'Kotlin', 'Swift']}
+            selected={selected()}
+            onChangeSelected={setSelected}
+          />
           <div>selected: {toLiteral(selected())}</div>
         </>
       ),

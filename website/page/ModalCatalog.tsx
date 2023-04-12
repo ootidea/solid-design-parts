@@ -25,7 +25,11 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>opened</code> to signal
+        </>
+      ),
       children: (
         <>
           <Button onClick={() => setOpened(true)}>Open</Button>

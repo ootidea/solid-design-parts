@@ -26,7 +26,11 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>value</code> to signal
+        </>
+      ),
       children: (
         <>
           <NumberInput value={value.value} onChangeValue={value.set} />
@@ -123,7 +127,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Clear button',
+      title: 'Showing the clear button',
       children: (
         <>
           <NumberInput value={3.14159} showClearButton />

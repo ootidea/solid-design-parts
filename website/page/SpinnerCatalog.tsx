@@ -14,7 +14,7 @@ export const SpinnerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Size',
+      title: 'Changing the size',
       direction: 'horizontal',
       children: (
         <>
@@ -25,8 +25,7 @@ export const SpinnerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Frequency',
-      description: 'Change the number of rotations per seconds.',
+      title: 'Changing the frequency of rotation',
       direction: 'horizontal',
       children: (
         <>
@@ -38,7 +37,7 @@ export const SpinnerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Thickness',
+      title: 'Changing the thickness',
       direction: 'horizontal',
       children: (
         <>
@@ -50,7 +49,7 @@ export const SpinnerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Color',
+      title: 'Changing the color',
       direction: 'horizontal',
       children: (
         <>

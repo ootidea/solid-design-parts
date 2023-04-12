@@ -10,11 +10,15 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
   samples: [
     { title: 'Basic example', children: <Calendar /> },
     {
-      title: 'Specify default month',
+      title: 'Showing the specified month',
       children: <Calendar month={new Date(1999, 0)} />,
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>month</code> to signal
+        </>
+      ),
       children: (
         <>
           <Calendar month={date.value} onChangeMonth={date.set} />

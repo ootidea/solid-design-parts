@@ -51,7 +51,11 @@ export const ToggleButtonsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>selected</code> to signal
+        </>
+      ),
       children: (
         <>
           <ToggleButtons exclusive values={['en', 'zh']} selected={selected1()} onChangeSelected={setSelected1} />

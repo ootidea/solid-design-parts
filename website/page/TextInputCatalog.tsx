@@ -10,6 +10,11 @@ import searchIcon from './search.svg'
 const [value, setValue] = createSignal('default value')
 
 export const TextInputCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>TextInput</code> is a component for entering a single line of text.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
@@ -22,7 +27,11 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>value</code> to signal
+        </>
+      ),
       children: (
         <>
           <TextInput value={value()} onChangeValue={setValue} />
@@ -42,7 +51,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Clear button',
+      title: 'Showing the clear button',
       children: (
         <>
           <TextInput

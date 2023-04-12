@@ -51,7 +51,11 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Bind to signal',
+      title: (
+        <>
+          Binding <code>value</code> to signal
+        </>
+      ),
       children: (
         <>
           <Slider value={value()} onChangeValue={setValue} />
