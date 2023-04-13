@@ -1,9 +1,10 @@
+import { setOf } from 'base-up'
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { Checkboxes } from '../../src/Checkboxes'
 import { Catalog } from './ComponentCatalogPage'
 
-const selected = createSignalObject(new Set(['PC']))
+const selected = createSignalObject(setOf('PC'))
 
 export const CheckboxesCatalog: Catalog = createRoot(() => ({
   introduction: (

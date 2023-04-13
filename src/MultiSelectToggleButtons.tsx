@@ -1,116 +1,67 @@
-import { call } from 'base-up'
-import { createRenderEffect, createSignal, For } from 'solid-js'
+import { intersectionOf, isSubset, toggle } from 'base-up'
+import { For, JSX } from 'solid-js'
 import './common.scss'
 import './MultiSelectToggleButtons.scss'
-import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
+import { createDeferEffect, createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type MultiSelectToggleButtonsProps<T extends string | number> = Props<
-  (
-    | {
-        exclusive: true
-        selected?: T | undefined
-        onChangeSelected?: (state: T | undefined) => void
-        disableDeselection?: boolean
-      }
-    | { exclusive?: false; selected?: Set<T>; onChangeSelected?: (state: Set<T>) => void }
-  ) & {
-    values: readonly T[]
-    labels?: Partial<Record<string, string>>
-    fullWidth?: boolean
-    children?: SlotProp<{ value: T }>
-    onSelect?: (selected: T) => void
-    onDeselect?: (selected: T) => void
-  }
->
+export type MultiSelectToggleButtonsProps<T extends readonly (string | number)[]> = Props<{
+  values: T
+  labels?: Partial<Record<T[number], JSX.Element>> | ((value: T[number]) => JSX.Element)
+  selected?: ReadonlySet<T[number]>
+  fullWidth?: boolean
+  onChangeSelected?: (selected: ReadonlySet<T[number]>) => void
+}>
 
-export function MultiSelectToggleButtons<const T extends string | number>(rawProps: MultiSelectToggleButtonsProps<T>) {
+export function MultiSelectToggleButtons<const T extends readonly (string | number)[]>(
+  rawProps: MultiSelectToggleButtonsProps<T>
+) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
+      selected: new Set(),
       fullWidth: false,
-      disableDeselection: false,
-      exclusive: false,
     },
-    ['values', 'labels', 'selected', 'onSelect', 'children']
+    ['values', 'labels', 'onChangeSelected']
   )
 
-  const union = call(() => {
-    if (rawProps.exclusive) {
-      const [selected, setSelected] = createInjectableSignal(rawProps, 'selected')
-      return {
-        exclusive: true,
-        selected,
-        setSelected,
-        onChangeSelected: rawProps.onChangeSelected,
-        disableDeselection: rawProps.disableDeselection,
-      } as const
-    } else {
-      const [selected, setSelected] = createSignal(rawProps.selected ?? new Set<T>(), {
-        equals: false,
-      })
-      createRenderEffect(() => setSelected(rawProps.selected ?? new Set<T>()))
-      return {
-        exclusive: false,
-        selected,
-        setSelected,
-        onChangeSelected: rawProps.onChangeSelected,
-      } as const
-    }
+  function getLabel(value: T[number]): JSX.Element {
+    if (props.labels instanceof Function) return props.labels(value)
+    else return props.labels?.[value] ?? value
+  }
+
+  const selectedSignal = createNormalizedSignalObject(
+    props.selected,
+    () => {
+      const valueSet = new Set(props.values)
+      // Avoid cloning for equivalence testing in createNormalizedSignalObject.
+      return isSubset(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
+    },
+    props.onChangeSelected
+  )
+
+  createDeferEffect(selectedSignal.get, async () => {
+    const selected = selectedSignal.value
+    props.onChangeSelected?.(selected)
   })
-
-  function isSelected(value: T) {
-    if (union.exclusive) {
-      return union.selected() === value
-    } else {
-      return union.selected().has(value)
-    }
-  }
-
-  function clickEventHandler(value: T) {
-    if (union.exclusive) {
-      if (union.selected() !== value) {
-        union.setSelected(() => value)
-        union.onChangeSelected?.(value)
-        props.onSelect?.(value)
-      } else if (!union.disableDeselection) {
-        union.setSelected(undefined)
-        union.onChangeSelected?.(undefined)
-        props.onDeselect?.(value)
-      }
-    } else {
-      if (union.selected().has(value)) {
-        union.selected().delete(value)
-        union.setSelected(union.selected())
-        union.onChangeSelected?.(union.selected())
-        props.onDeselect?.(value)
-      } else {
-        union.selected().add(value)
-        union.setSelected(union.selected())
-        union.onChangeSelected?.(union.selected())
-        props.onSelect?.(value)
-      }
-    }
-  }
 
   return (
     <div
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-MultiSelectToggleButtons_root', {
         'solid-design-parts-MultiSelectToggleButtons_full-width': props.fullWidth,
-        'solid-design-parts-MultiSelectToggleButtons_exclusive': props.exclusive,
       })}
     >
       <For each={props.values}>
-        {(value: T) => (
+        {(value: T[number]) => (
           <button
             class="solid-design-parts-MultiSelectToggleButtons_button"
             type="button"
-            aria-selected={isSelected(value)}
-            onClick={() => clickEventHandler(value)}
+            aria-selected={selectedSignal.value.has(value)}
+            onClick={() => (selectedSignal.value = toggle(selectedSignal.value, value))}
           >
             <Slot content={props.children} params={{ value }}>
-              {props.labels?.[String(value)] ?? value}
+              {getLabel(value)}
             </Slot>
           </button>
         )}

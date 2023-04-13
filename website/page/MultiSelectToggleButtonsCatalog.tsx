@@ -1,13 +1,11 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Icon } from '../../src/Icon'
 import { MultiSelectToggleButtons } from '../../src/MultiSelectToggleButtons'
-import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 import formatAlignLeftIcon from './format-align-left.svg'
 import formatAlignRightIcon from './format-align-right.svg'
 
-const [selected1, setSelected1] = createSignal<'en' | 'zh' | undefined>('en')
-const [selected2, setSelected2] = createSignal<Set<'en' | 'zh'>>(new Set(), { equals: false })
+const [selected, setSelected] = createSignal<Set<'Walking' | 'Bicycle' | 'Car' | 'Train'>>(new Set())
 
 export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -16,16 +14,7 @@ export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <MultiSelectToggleButtons values={['Dog', 'Cat']} />
-          <MultiSelectToggleButtons values={['Female', 'Male', 'Other']} selected={new Set(['Female', 'Male'])} />
-        </>
-      ),
-    },
-    {
-      title: 'Exclusive (single select)',
-      children: (
-        <>
-          <MultiSelectToggleButtons exclusive values={['Dog', 'Cat']} />
-          <MultiSelectToggleButtons exclusive values={['Female', 'Male', 'Other']} selected="Male" />
+          <MultiSelectToggleButtons values={['PC', 'Smartphone', 'Tablet']} selected={new Set(['PC', 'Smartphone'])} />
         </>
       ),
     },
@@ -42,11 +31,12 @@ export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Icons',
       children: (
         <>
-          <MultiSelectToggleButtons values={['left', 'right']}>
-            {({ value }) => (
+          <MultiSelectToggleButtons
+            values={['left', 'right']}
+            labels={(value) => (
               <Icon src={{ left: formatAlignLeftIcon, right: formatAlignRightIcon }[value]} color="currentColor" />
             )}
-          </MultiSelectToggleButtons>
+          />
         </>
       ),
     },
@@ -59,23 +49,11 @@ export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <MultiSelectToggleButtons
-            exclusive
-            values={['en', 'zh']}
-            selected={selected1()}
-            onChangeSelected={setSelected1}
+            values={['Walking', 'Bicycle', 'Car', 'Train']}
+            selected={selected()}
+            onChangeSelected={setSelected}
           />
-          <div>selected1: {toLiteral(selected1())}</div>
-          <MultiSelectToggleButtons values={['en', 'zh']} selected={selected2()} onChangeSelected={setSelected2} />
-          <div>{`selected: {${[...selected2()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
-        </>
-      ),
-    },
-    {
-      title: 'Disable deselection',
-      description: 'Disable deselection that occurs when clicking on a selected option.',
-      children: (
-        <>
-          <MultiSelectToggleButtons exclusive values={['Male', 'Female']} disableDeselection />
+          <div>{`selected: {${[...selected()].map((value) => JSON.stringify(value)).join(', ')}}`}</div>
         </>
       ),
     },
@@ -83,7 +61,7 @@ export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Full width',
       children: (
         <>
-          <MultiSelectToggleButtons fullWidth values={['Female', 'Male', 'LGBTQQIAAPPO2S']} />
+          <MultiSelectToggleButtons fullWidth values={['Walking', 'Bicycle', 'Car', 'Train']} />
         </>
       ),
     },
