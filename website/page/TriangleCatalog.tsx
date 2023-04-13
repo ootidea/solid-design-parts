@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Triangle } from '../../src/Triangle'
+import { Triangle } from '../../library/Triangle'
 import { Catalog } from './ComponentCatalogPage'
 
 export const TriangleCatalog: Catalog = createRoot(() => ({

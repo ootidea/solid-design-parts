@@ -1,6 +1,6 @@
 import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
-import { extractContainedTexts } from '../src/utility/dom'
+import { extractContainedTexts } from '../library/utility/dom'
 import classes from './Sample.module.scss'
 
 export type SampleProps = ParentProps<{

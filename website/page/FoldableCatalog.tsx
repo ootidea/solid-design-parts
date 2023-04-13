@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Foldable } from '../../src/Foldable'
+import { Foldable } from '../../library/Foldable'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 

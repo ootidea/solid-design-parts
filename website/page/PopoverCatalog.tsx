@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
-import { Button } from '../../src/Button'
-import { Popover } from '../../src/Popover'
+import { Button } from '../../library/Button'
+import { Popover } from '../../library/Popover'
 import { Catalog } from './ComponentCatalogPage'
 
 export const PopoverCatalog: Catalog = createRoot(() => ({

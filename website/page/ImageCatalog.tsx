@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Image } from '../../src/Image'
+import { Image } from '../../library/Image'
 import { Catalog } from './ComponentCatalogPage'
 
 export const ImageCatalog: Catalog = createRoot(() => ({

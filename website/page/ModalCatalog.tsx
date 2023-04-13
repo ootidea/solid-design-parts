@@ -1,7 +1,7 @@
 import { createRoot, createSignal, For } from 'solid-js'
-import { Button } from '../../src/Button'
-import { Gravity } from '../../src/Gravity'
-import { Modal } from '../../src/Modal'
+import { Button } from '../../library/Button'
+import { Gravity } from '../../library/Gravity'
+import { Modal } from '../../library/Modal'
 import { Catalog } from './ComponentCatalogPage'
 
 const [opened, setOpened] = createSignal(false)

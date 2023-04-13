@@ -18,6 +18,6 @@
     "baseUrl": ".",
     "noErrorTruncation": true
   },
-  "include": ["src"],
+  "include": ["library"],
   "exclude": ["node_modules", "dist"]
 }

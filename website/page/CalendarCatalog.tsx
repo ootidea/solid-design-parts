@@ -1,7 +1,7 @@
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Button } from '../../src/Button'
-import { Calendar } from '../../src/Calendar'
+import { Button } from '../../library/Button'
+import { Calendar } from '../../library/Calendar'
 import { Catalog } from './ComponentCatalogPage'
 
 const date = createSignalObject(new Date(), { equals: false })

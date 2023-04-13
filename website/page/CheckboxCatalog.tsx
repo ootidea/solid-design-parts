@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Checkbox } from '../../src/Checkbox'
+import { Checkbox } from '../../library/Checkbox'
 import { Catalog } from './ComponentCatalogPage'
 
 const checked = createSignalObject(true)

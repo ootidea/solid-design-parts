@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { UrlToLink } from '../../src/UrlToLink'
+import { UrlToLink } from '../../library/UrlToLink'
 import { Catalog } from './ComponentCatalogPage'
 
 const text = `https://lp.example.com/pc/001.php?waad=aBcDXxXx&utm_medium=cpc#description contains fragment(hash).

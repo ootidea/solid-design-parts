@@ -1,5 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { AutoSizeTextArea } from '../../src/AutoSizeTextArea'
+import { AutoSizeTextArea } from '../../library/AutoSizeTextArea'
 import { Catalog } from './ComponentCatalogPage'
 
 const [value, setValue] = createSignal('default value')

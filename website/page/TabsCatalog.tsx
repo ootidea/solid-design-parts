@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
-import { Tabs } from '../../src/Tabs'
-import { showToast } from '../../src/Toasts'
+import { Tabs } from '../../library/Tabs'
+import { showToast } from '../../library/Toasts'
 import { Catalog } from './ComponentCatalogPage'
 
 export const TabsCatalog: Catalog = createRoot(() => ({

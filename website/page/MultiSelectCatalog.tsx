@@ -1,5 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { MultiSelect } from '../../src/MultiSelect'
+import { MultiSelect } from '../../library/MultiSelect'
 import { Catalog } from './ComponentCatalogPage'
 
 const [selected, setSelected] = createSignal(new Set(['macOS', 'Linux']))

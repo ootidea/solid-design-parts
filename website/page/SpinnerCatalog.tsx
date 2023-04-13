@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Spinner } from '../../src/Spinner'
+import { Spinner } from '../../library/Spinner'
 import { Catalog } from './ComponentCatalogPage'
 
 export const SpinnerCatalog: Catalog = createRoot(() => ({

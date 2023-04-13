@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Divider } from '../../src/Divider'
+import { Divider } from '../../library/Divider'
 import { Catalog } from './ComponentCatalogPage'
 
 export const DividerCatalog: Catalog = createRoot(() => ({
