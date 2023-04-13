@@ -5,6 +5,12 @@ import { Catalog } from './ComponentCatalogPage'
 const [value, setValue] = createSignal(0)
 
 export const SliderCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Slider</code> is a component for inputting a numerical value within a certain range through intuitive
+      interaction.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',

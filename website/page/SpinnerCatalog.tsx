@@ -3,6 +3,11 @@ import { Spinner } from '../../library/Spinner'
 import { Catalog } from './ComponentCatalogPage'
 
 export const SpinnerCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Spinner</code> is a component that indicates to the user that a process is currently in progress.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',

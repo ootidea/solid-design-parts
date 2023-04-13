@@ -3,6 +3,11 @@ import { Stepper } from '../../library/Stepper'
 import { Catalog } from './ComponentCatalogPage'
 
 export const StepperCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Stepper</code> is a component that displays the progress in a series of steps.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
