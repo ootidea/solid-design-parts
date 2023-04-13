@@ -1,3 +1,4 @@
+import { isInstanceOf } from 'base-up'
 import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
 import { extractContainedTexts } from '../library/utility/dom'
@@ -13,12 +14,22 @@ export function Sample(rawProps: SampleProps) {
   const props = mergeProps({ direction: 'vertical' }, rawProps)
   const id = () => extractContainedTexts(props.title).join(' ').replaceAll(' ', '-')
 
+  /** Smooth scroll */
+  function onClick(event: MouseEvent) {
+    if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return
+
+    if (!isInstanceOf(event.target, HTMLElement)) return
+
+    event.preventDefault()
+    event.target.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <section>
       <Show when={props.title}>
         <h2 id={id()} class={classes.title}>
           <span>{props.title}</span>
-          <a class={classes.fragment} href={`#${id()}`}>
+          <a class={classes.fragment} href={`#${id()}`} onClick={onClick}>
             #
           </a>
         </h2>
