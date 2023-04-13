@@ -33,6 +33,7 @@
   "scripts": {
     "dev": "vite serve website",
     "build": "rollup -c",
+    "build-website": "vite build website",
     "format": "run-p format:*",
     "format:prettier": "prettier -w \"library/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"website/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
     "format:package-json": "sort-package-json",
