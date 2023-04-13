@@ -58,6 +58,7 @@ export function App() {
             <Select
               placeholder="language"
               values={['en', 'ja']}
+              labels={{ en: 'English', ja: '日本語' }}
               showClearButton
               onChangeSelected={(selected) => i18n.forceLanguage(selected)}
             />
