@@ -44,7 +44,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       title: 'Layout',
       children: (
         <>
-          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="vertical" values={['PC', 'Smartphone', 'Tablet']} />
           </div>
           <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
@@ -66,13 +66,13 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
               ]}
             />
           </div>
-          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '28em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="space-between" values={['PC', 'Smartphone', 'Tablet']} />
           </div>
-          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '28em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="space-evenly" values={['PC', 'Smartphone', 'Tablet']} />
           </div>
-          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '28em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="space-around" values={['PC', 'Smartphone', 'Tablet']} />
           </div>
         </>
@@ -82,16 +82,16 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       title: 'Grid layout',
       children: (
         <>
-          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes gridColumnsCount={2} values={['Walking', 'Bicycle', 'Car', 'Train']} />
           </div>
-          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="space-between" gridColumnsCount={2} values={['Walking', 'Bicycle', 'Car', 'Train']} />
           </div>
-          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="space-evenly" gridColumnsCount={2} values={['Walking', 'Bicycle', 'Car', 'Train']} />
           </div>
-          <div style={{ width: '16em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="space-around" gridColumnsCount={2} values={['Walking', 'Bicycle', 'Car', 'Train']} />
           </div>
         </>
@@ -102,10 +102,10 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       description: 'Note that flex gap is not supported on iOS versions earlier than 15.4.',
       children: (
         <>
-          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes layout="vertical" gap="14px" values={['Walking', 'Bicycle', 'Car', 'Train']} />
           </div>
-          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>
             <Checkboxes gridColumnsCount={2} gap="0.5em 2em" values={['Walking', 'Bicycle', 'Car', 'Train']} />
           </div>
         </>

@@ -46,7 +46,7 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       title: 'Layout',
       children: (
         <>
-          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>
             <RadioButtons layout="vertical" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
           </div>
           <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
@@ -116,10 +116,10 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       description: 'Note that flex gap is not supported on iOS versions earlier than 15.4.',
       children: (
         <>
-          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>
             <RadioButtons layout="vertical" gap="14px" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
           </div>
-          <div style={{ width: '50em', border: '1px dashed gray', padding: '1em' }}>
+          <div style={{ border: '1px dashed gray', padding: '1em' }}>
             <RadioButtons gridColumnsCount={2} gap="0.5em 2em" values={['Python', 'TypeScript', 'Kotlin', 'Swift']} />
           </div>
         </>
