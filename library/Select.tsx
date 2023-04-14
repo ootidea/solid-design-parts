@@ -76,7 +76,6 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
     const selected = selectedSignal.value
     props.onChangeSelected?.(selected)
     const error = await deriveError(shouldValidate.value, selected, props.error, props.required)
-    console.log(error, selected)
     errorSignal.value = error
     if (error === false) {
       props.onValid?.(selected)
