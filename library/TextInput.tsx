@@ -37,7 +37,7 @@ export type TextInputProps = Props<{
   required?: boolean
   min?: number
   max?: number
-  lengthCounter?: (text: string) => number
+  lengthMeasure?: (text: string) => number
   error?: boolean | string | ((value: string) => Promisable<boolean | string>)
   validateImmediately?: boolean
   showClearButton?: boolean
@@ -55,7 +55,7 @@ export function TextInput(rawProps: TextInputProps) {
       value: '',
       disabled: false,
       required: false,
-      lengthCounter: countCharacters,
+      lengthMeasure: countCharacters,
       error: false as Required<TextInputProps>['error'],
       validateImmediately: false,
       showClearButton: false,
@@ -66,9 +66,9 @@ export function TextInput(rawProps: TextInputProps) {
 
   const synthesizedPredicateFunction = createMemoObject(() => {
     const predicateFunctions = {
-      required: (value: string) => 0 < props.lengthCounter(value),
-      min: (value: string) => props.min! <= props.lengthCounter(value),
-      max: (value: string) => props.lengthCounter(value) <= props.max!,
+      required: (value: string) => 0 < props.lengthMeasure(value),
+      min: (value: string) => props.min! <= props.lengthMeasure(value),
+      max: (value: string) => props.lengthMeasure(value) <= props.max!,
     } as const
 
     const filteredPredicateFunctions = entriesOf(predicateFunctions)

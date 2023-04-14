@@ -83,7 +83,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
         <>
           <AutoSizeTextArea
             max={3}
-            lengthCounter={(text) => text.split('\n').length}
+            lengthMeasure={(text) => text.split('\n').length}
             error="Up to three lines can be entered."
           />
         </>

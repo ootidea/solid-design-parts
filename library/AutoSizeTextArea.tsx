@@ -14,7 +14,7 @@ export type AutoSizeTextAreaProps = Props<
     required?: boolean
     min?: number
     max?: number
-    lengthCounter?: (text: string) => number
+    lengthMeasure?: (text: string) => number
     error?: boolean | string | ((value: string) => Promisable<boolean | string>)
     validateImmediately?: boolean
     onChangeValue?: (value: string) => void
@@ -29,7 +29,7 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
     {
       value: '',
       required: false,
-      lengthCounter: countCharacters,
+      lengthMeasure: countCharacters,
       error: false as Required<AutoSizeTextAreaProps>['error'],
       validateImmediately: false,
     },
@@ -38,9 +38,9 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   const synthesizedPredicateFunction = createMemoObject(() => {
     const predicateFunctions = {
-      required: (value: string) => 0 < props.lengthCounter(value),
-      min: (value: string) => props.min! <= props.lengthCounter(value),
-      max: (value: string) => props.lengthCounter(value) <= props.max!,
+      required: (value: string) => 0 < props.lengthMeasure(value),
+      min: (value: string) => props.min! <= props.lengthMeasure(value),
+      max: (value: string) => props.lengthMeasure(value) <= props.max!,
     } as const
 
     const filteredPredicateFunctions = entriesOf(predicateFunctions)

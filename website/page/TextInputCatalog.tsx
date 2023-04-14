@@ -126,7 +126,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
         <>
           <TextInput
             min={4}
-            lengthCounter={(text) => text.replace(/\s/g, '').length}
+            lengthMeasure={(text) => text.replace(/\s/g, '').length}
             error="4 or more letters is required"
           />
         </>
