@@ -12,10 +12,9 @@
   color: inherit;
   font: inherit;
 
-  display: inline-flex;
+  display: inline-grid;
   vertical-align: top;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
 
   width: var(--solid-design-parts-IconButton_size);
   height: var(--solid-design-parts-IconButton_size);

@@ -27,9 +27,8 @@
 .solid-design-parts-Checkbox_checkbox {
   appearance: none;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
 
   width: utility.toIntegerPx(var(--solid-design-parts-Checkbox_checkbox-size));
   height: utility.toIntegerPx(var(--solid-design-parts-Checkbox_checkbox-size));

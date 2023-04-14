@@ -85,9 +85,8 @@
 .solid-design-parts-RadioButtons_radio {
   appearance: none;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
 
   width: utility.toEvenPx(var(--solid-design-parts-RadioButtons_radio-size));
   height: utility.toEvenPx(var(--solid-design-parts-RadioButtons_radio-size));

@@ -3,9 +3,8 @@
 }
 
 .solid-design-parts-DatePicker_date-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 
   padding: 0;
   box-sizing: border-box;

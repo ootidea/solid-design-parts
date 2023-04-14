@@ -55,9 +55,8 @@
 }
 
 .solid-design-parts-Calendar_cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 
   .solid-design-parts-Calendar_day-row & {
     color: oklch(50% 0 0);

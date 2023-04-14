@@ -10,9 +10,8 @@
   right: 0;
   z-index: var(--solid-design-parts-overlay-z-index);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 
   background-color: var(--solid-design-parts-Modal_overlay-background-color);
   outline: none;

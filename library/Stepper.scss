@@ -28,9 +28,8 @@
 }
 
 .solid-design-parts-Stepper_stop {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   box-sizing: border-box;
   width: var(--solid-design-parts-Stepper_circle-size);
   height: var(--solid-design-parts-Stepper_circle-size);
