@@ -1,6 +1,7 @@
 import { chunk, rangeTo } from 'base-up'
 import { JSX } from 'solid-js'
 import './common.scss'
+import { Link } from './Link'
 import './UrlToLink.scss'
 import { joinClasses, prepareProps, Props } from './utility/props'
 
@@ -10,7 +11,7 @@ export type UrlToLinkProps = Props<{
 }>
 
 export function UrlToLink(rawProps: UrlToLinkProps) {
-  const [props, restProps] = prepareProps(rawProps, { children: '', link: (url) => <a href={url}>{url}</a> })
+  const [props, restProps] = prepareProps(rawProps, { children: '', link: (url) => <Link href={url} /> })
 
   const regexp = /([a-zA-Z]{2,20}):\/\/([\w_-]+(?:(?:\.[\w_-]+)?))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/g
 

@@ -1,6 +1,7 @@
 import { isInstanceOf } from 'base-up'
 import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
+import { Link } from '../library/Link'
 import { extractContainedTexts } from '../library/utility/dom'
 import classes from './Sample.module.scss'
 
@@ -30,9 +31,9 @@ export function Sample(rawProps: SampleProps) {
       <Show when={props.title}>
         <h2 id={id()} class={classes.title}>
           <span>{props.title}</span>
-          <a class={classes.fragment} href={`#${id()}`} onClick={onClick}>
+          <Link class={classes.fragment} href={`#${id()}`} onClick={onClick}>
             #
-          </a>
+          </Link>
         </h2>
       </Show>
       <Show when={props.description}>

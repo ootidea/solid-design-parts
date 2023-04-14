@@ -5,6 +5,7 @@ import './common.scss'
 import './DataTableCell.scss'
 import { Icon } from './Icon'
 import checkIcon from './image/check.svg'
+import { Link } from './Link'
 import { joinClasses, prepareProps, Props } from './utility/props'
 
 export type DataTableCellProps<T extends string> = Props<{ value: unknown }>
@@ -29,7 +30,7 @@ function render(analysisResult: AnalysisResult): JSX.Element {
     case 'Date':
       return analysisResult.value.toLocaleDateString()
     case 'URL':
-      return <a href={String(analysisResult.value)}>{String(analysisResult.value)}</a>
+      return <Link href={String(analysisResult.value)} />
     case 'boolean':
       if (analysisResult.value) return <Icon src={checkIcon} color="currentColor" />
       else return <Icon style="visibility: hidden" src={checkIcon} color="currentColor" />
