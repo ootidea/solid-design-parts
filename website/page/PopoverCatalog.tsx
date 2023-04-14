@@ -16,18 +16,18 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Simple position',
+      title: 'Simple placement',
       children: (
-        <Popover on="top right" launcher={({ openPopover }) => <Button onClick={openPopover}>Open</Button>}>
+        <Popover placement="top right" launcher={({ openPopover }) => <Button onClick={openPopover}>Open</Button>}>
           <div style="padding: 0.5em 1em">Pop up text</div>
         </Popover>
       ),
     },
     {
-      title: 'Detail position',
+      title: 'Advanced placement',
       children: (
         <Popover
-          on="bottom right"
+          placement="bottom right"
           joint="top right"
           launcher={({ togglePopover }) => <IconButton src={verticalEllipsisIcon} onClick={togglePopover} />}
         >

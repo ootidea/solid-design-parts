@@ -16,7 +16,7 @@ import { prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type PopoverProps = Props<{
-  on?: EnneaPosition
+  placement?: EnneaPosition
   joint?: EnneaPosition | undefined
   persistent?: boolean
   ignoreEscKey?: boolean
@@ -30,7 +30,7 @@ export function Popover(rawProps: PopoverProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      on: 'bottom',
+      placement: 'bottom',
       joint: undefined,
       persistent: false,
       ignoreEscKey: false,
@@ -98,11 +98,11 @@ export function Popover(rawProps: PopoverProps) {
               '--solid-design-parts-Popover_top': launcherRect ? `${launcherRect.top}px` : '0',
               '--solid-design-parts-Popover_bottom': launcherRect ? `${launcherRect.bottom}px` : '0',
               '--solid-design-parts-Popover_transform': `translate(-${toXPercent(
-                props.joint ?? toOpposite(props.on)
-              )}, -${toYPercent(props.joint ?? toOpposite(props.on))})`,
+                props.joint ?? toOpposite(props.placement)
+              )}, -${toYPercent(props.joint ?? toOpposite(props.placement))})`,
             }}
-            data-horizontal-position={toHorizontalPosition(props.on)}
-            data-vertical-position={toVerticalPosition(props.on)}
+            data-horizontal-position={toHorizontalPosition(props.placement)}
+            data-vertical-position={toVerticalPosition(props.placement)}
             tabindex={-1}
             ref={(element) => setupFocusTrap(element)}
             onClick={onOperateOverlay}
