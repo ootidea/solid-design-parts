@@ -79,11 +79,9 @@ export function App() {
           </nav>
           <Divider direction="vertical" />
           <main class={classes.main}>
-            <Scrollable style="padding: 1rem 4rem 10rem;">
-              <Routes>
-                <Route path="components/*" element={ComponentCatalogPage} />
-              </Routes>
-            </Scrollable>
+            <Routes>
+              <Route path="components/*" element={ComponentCatalogPage} />
+            </Routes>
           </main>
         </StretchLayout>
       </StretchLayout>

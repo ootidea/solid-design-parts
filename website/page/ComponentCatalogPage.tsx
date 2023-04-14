@@ -1,6 +1,7 @@
 import { useLocation } from '@solidjs/router'
 import { createRoot, For, JSX, Show } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
+import { Scrollable } from '../../library'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
 import { AutoSizeTextAreaCatalog } from './AutoSizeTextAreaCatalog'
@@ -104,19 +105,19 @@ export function ComponentCatalogPage() {
   })
 
   return (
-    <article>
-      <Show when={pageInfo.value} keyed={true}>
-        {({ catalog, componentName }) => (
-          <>
+    <Show when={pageInfo.value} keyed={true}>
+      {({ catalog, componentName }) => (
+        <Scrollable style="padding: 1rem 4rem 10rem;">
+          <article>
             <PageTitle>{componentName}</PageTitle>
             <Show when={catalog.introduction}>
               <p>{catalog.introduction}</p>
             </Show>
 
             <For each={catalog.samples}>{(sample) => <Sample {...sample} />}</For>
-          </>
-        )}
-      </Show>
-    </article>
+          </article>
+        </Scrollable>
+      )}
+    </Show>
   )
 }
