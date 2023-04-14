@@ -35,7 +35,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Specify href',
+      title: 'Link buttons',
       direction: 'horizontal',
       children: (
         <>
@@ -75,7 +75,13 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'onClick function that returns a Promise',
+      title: 'Async onClick handlers',
+      description: (
+        <>
+          If the <code>onClick</code> handler returns a <code>Promise</code>, the button will be disabled and show a{' '}
+          <code>Spinner</code> until the <code>Promise</code> is resolved.
+        </>
+      ),
       direction: 'horizontal',
       children: (
         <>
@@ -107,7 +113,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Radius',
+      title: 'Changing the radius',
       direction: 'horizontal',
       children: (
         <>
