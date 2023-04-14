@@ -1,7 +1,9 @@
 import { createRoot } from 'solid-js'
+import { Divider, IconButton } from '../../library'
 import { Button } from '../../library/Button'
 import { Popover } from '../../library/Popover'
 import { Catalog } from './ComponentCatalogPage'
+import verticalEllipsisIcon from './vertical-ellipsis.svg'
 
 export const PopoverCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -9,8 +11,7 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <Popover launcher={({ openPopover }) => <Button onClick={openPopover}>Open</Button>}>
-          <h1>Title</h1>
-          <p>contents</p>
+          <p style={{ padding: '2em' }}>contents</p>
         </Popover>
       ),
     },
@@ -27,14 +28,12 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       children: (
         <Popover
           on="bottom right"
-          joint="bottom right"
-          launcher={({ togglePopover }) => (
-            <div style="width: 20rem; height: 10rem; background-color: aliceblue">
-              <Button onClick={togglePopover}>Open in right bottom</Button>
-            </div>
-          )}
+          joint="top right"
+          launcher={({ togglePopover }) => <IconButton src={verticalEllipsisIcon} onClick={togglePopover} />}
         >
-          <div style="padding: 0.2em 0.4em">Pop up text</div>
+          <div style="padding: 0.5em 1em">Dropdown menu</div>
+          <Divider />
+          <div style="padding: 0.5em 1em">Dropdown menu</div>
         </Popover>
       ),
     },
@@ -42,7 +41,11 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       title: 'Persistent',
       children: (
         <Popover persistent launcher={({ togglePopover }) => <Button onClick={togglePopover}>Open</Button>}>
-          {({ closePopover }) => <Button onClick={closePopover}>Close</Button>}
+          {({ closePopover }) => (
+            <div style={{ padding: '0.8em 1.8em', cursor: 'pointer' }} onClick={closePopover}>
+              Close
+            </div>
+          )}
         </Popover>
       ),
     },
