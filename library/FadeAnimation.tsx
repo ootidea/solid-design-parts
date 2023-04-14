@@ -12,7 +12,7 @@ export type FadeAnimationProps<T> = Props<{
   children?: SlotProp<T>
 }>
 
-export function FadeAnimation<T>(rawProps: FadeAnimationProps<T>) {
+export function FadeAnimation<const T>(rawProps: FadeAnimationProps<T>) {
   const [props, restProps] = prepareProps(rawProps, { durationMs: 250 }, [
     'shown',
     'onFinishEnterAnimation',

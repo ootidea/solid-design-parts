@@ -51,7 +51,7 @@ export type DataTableProps<
 }>
 
 export function DataTable<
-  Column extends {
+  const Column extends {
     id: ColumnId
     title?: JSX.Element
     sortable?: boolean | CompareFunction<Row>
@@ -65,8 +65,8 @@ export function DataTable<
       columnId: ColumnId
     }>
   },
-  ColumnId extends string,
-  Row extends Record<string, unknown>
+  const ColumnId extends string,
+  const Row extends Record<string, unknown>
 >(rawProps: DataTableProps<Column, ColumnId, Row>) {
   const [props, restProps] = prepareProps(
     rawProps,

@@ -12,7 +12,7 @@ export type ScaleYAnimationProps<T> = Props<{
   children?: SlotProp<T>
 }>
 
-export function ScaleYAnimation<T>(rawProps: ScaleYAnimationProps<T>) {
+export function ScaleYAnimation<const T>(rawProps: ScaleYAnimationProps<T>) {
   const [props, restProps] = prepareProps(rawProps, { durationMs: 250 }, [
     'shown',
     'onFinishEnterAnimation',

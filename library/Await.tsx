@@ -12,7 +12,7 @@ export type AwaitProps<T> = {
   showPreviousValueDuringAwait?: boolean
 }
 
-export function Await<T>(props: AwaitProps<T>) {
+export function Await<const T>(props: AwaitProps<T>) {
   const result = createSignalObject<JSX.Element>(undefined)
 
   createRenderEffect(async () => {
