@@ -46,7 +46,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Error state',
       children: (
         <>
-          <Checkbox error="Something went wrong">Auto-update</Checkbox>
+          <Checkbox error="Something went wrong.">Auto-update</Checkbox>
           <Checkbox error>Keep me signed in</Checkbox>
         </>
       ),
@@ -61,7 +61,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Checkbox required>I agree to the terms of service</Checkbox>
-          <Checkbox required error="Required under the new policy">
+          <Checkbox required error="Required under the new policy.">
             Auto-update
           </Checkbox>
         </>
@@ -71,10 +71,10 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Validation function',
       children: (
         <>
-          <Checkbox error={(checked) => !checked && 'This checkbox is required'}>
+          <Checkbox error={(checked) => !checked && 'This checkbox is required.'}>
             I agree to the terms of service
           </Checkbox>
-          <Checkbox error={(checked) => checked && 'Cannot be used with other options'}>Auto-update</Checkbox>
+          <Checkbox error={(checked) => checked && 'Cannot be used with other options.'}>Auto-update</Checkbox>
         </>
       ),
     },
@@ -82,10 +82,10 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       title: 'Validate initial value',
       children: (
         <>
-          <Checkbox error={(checked) => !checked && 'This checkbox is required'} validateImmediately>
+          <Checkbox error={(checked) => !checked && 'This checkbox is required.'} validateImmediately>
             I agree to the terms of service
           </Checkbox>
-          <Checkbox checked error={(checked) => checked && 'Cannot be used with other options'} validateImmediately>
+          <Checkbox checked error={(checked) => checked && 'Cannot be used with other options.'} validateImmediately>
             Auto-update
           </Checkbox>
         </>

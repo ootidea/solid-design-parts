@@ -116,7 +116,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <TextInput type="password" placeholder="password" min={8} />
-          <TextInput max={2} error="Up to a maximum of 2 characters" />
+          <TextInput max={2} error="Up to a maximum of 2 characters." />
         </>
       ),
     },
@@ -127,7 +127,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           <TextInput
             min={4}
             lengthMeasure={(text) => text.replace(/\s/g, '').length}
-            error="4 or more letters is required"
+            error="4 or more letters is required."
           />
         </>
       ),
@@ -139,7 +139,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           <TextInput placeholder="placeholder" error={(value) => value.length % 2 === 0} />
           <TextInput
             placeholder="verification code"
-            error={(value) => !/[0-9]{5}/.test(value) && 'Please enter 5 digits'}
+            error={(value) => !/[0-9]{5}/.test(value) && 'Please enter 5 digits.'}
           />
         </>
       ),
@@ -156,7 +156,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
           <TextInput placeholder="placeholder" error={(value) => value.length % 2 === 0} validateImmediately />
           <TextInput
             placeholder="verification code"
-            error={(value) => !/[0-9]{5}/.test(value) && 'Please enter 5 digits'}
+            error={(value) => !/[0-9]{5}/.test(value) && 'Please enter 5 digits.'}
             validateImmediately
           />
         </>

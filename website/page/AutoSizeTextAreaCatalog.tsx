@@ -64,7 +64,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <AutoSizeTextArea placeholder="placeholder" required />
-          <AutoSizeTextArea placeholder="placeholder" required error="This field is required" />
+          <AutoSizeTextArea placeholder="placeholder" required error="This field is required." />
         </>
       ),
     },
@@ -73,7 +73,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <AutoSizeTextArea min={10} />
-          <AutoSizeTextArea value="123456789" max={9} error="Up to a maximum of 9 characters" />
+          <AutoSizeTextArea value="123456789" max={9} error="Up to a maximum of 9 characters." />
         </>
       ),
     },

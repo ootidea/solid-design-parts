@@ -64,7 +64,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <MultiSelect values={['Windows', 'macOS', 'Linux']} required />
-          <MultiSelect values={['Windows', 'macOS', 'Linux']} required error="One or more selections required" />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} required error="One or more selections required." />
         </>
       ),
     },
@@ -72,7 +72,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Minimum and maximum selection count',
       children: (
         <>
-          <MultiSelect values={['Windows', 'macOS', 'Linux']} min={2} error="Select two or more" />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} min={2} error="Select two or more." />
           <MultiSelect values={['PC', 'Smartphone', 'Tablet', 'Smartwatch']} max={2} />
         </>
       ),
@@ -83,7 +83,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
         <>
           <MultiSelect
             values={['Windows', 'macOS', 'Linux']}
-            error={(selected) => selected.size < 2 && 'Select multiple options'}
+            error={(selected) => selected.size < 2 && 'Select multiple options.'}
           />
         </>
       ),
@@ -100,7 +100,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
           <MultiSelect
             values={['Windows', 'macOS', 'Linux']}
             validateImmediately
-            error={(selected) => selected.size < 2 && 'Select multiple options'}
+            error={(selected) => selected.size < 2 && 'Select multiple options.'}
           />
         </>
       ),

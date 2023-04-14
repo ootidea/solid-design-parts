@@ -51,7 +51,7 @@ export const SelectCatalog: Catalog = createRoot(() => ({
       title: 'Error state',
       children: (
         <>
-          <Select placeholder="gender" values={['Female', 'Male', 'Other']} error="Something went wrong" />
+          <Select placeholder="gender" values={['Female', 'Male', 'Other']} error="Something went wrong." />
           <Select placeholder="gender" values={['Female', 'Male', 'Other']} error />
         </>
       ),
