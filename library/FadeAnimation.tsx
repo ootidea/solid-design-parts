@@ -38,20 +38,20 @@ export function FadeAnimation<const T>(rawProps: FadeAnimationProps<T>) {
     }
   )
 
+  let animation: Animation | undefined
   function changeShown(newShown: boolean) {
-    if (newShown === Boolean(shown.value)) return
-
     const options: KeyframeAnimationOptions = { duration: props.durationMs }
 
+    animation?.cancel()
     if (!newShown) {
-      const animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], options)
+      animation = element?.animate([{ opacity: 1 }, { opacity: 0 }], options)
       animation?.addEventListener('finish', () => {
         shown.value = newShown
         props.onFinishExitAnimation?.()
       })
     } else {
       shown.value = newShown
-      const animation = element?.animate([{ opacity: 0 }, { opacity: 1 }], options)
+      animation = element?.animate([{ opacity: 0 }, { opacity: 1 }], options)
       animation?.addEventListener('finish', () => {
         props.onFinishEnterAnimation?.()
       })

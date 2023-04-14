@@ -38,14 +38,14 @@ export function ScaleYAnimation<const T>(rawProps: ScaleYAnimationProps<T>) {
     }
   )
 
+  let animation: Animation | undefined
   function changeShown(newShown: boolean) {
-    if (newShown === Boolean(shown.value)) return
-
     const options: KeyframeAnimationOptions = { duration: props.durationMs }
 
+    animation?.cancel()
     if (!newShown) {
       if (element !== undefined) {
-        const animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], options)
+        animation = element.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(0)' }], options)
         animation.addEventListener('finish', () => {
           shown.value = newShown
           props.onFinishExitAnimation?.()
@@ -53,7 +53,7 @@ export function ScaleYAnimation<const T>(rawProps: ScaleYAnimationProps<T>) {
       }
     } else {
       shown.value = newShown
-      const animation = element?.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], options)
+      animation = element?.animate([{ transform: 'scaleY(0)' }, { transform: 'scaleY(1)' }], options)
       animation?.addEventListener('finish', () => {
         props.onFinishEnterAnimation?.()
       })
