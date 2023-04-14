@@ -4,20 +4,8 @@
 
 # solid-design-parts
 
-## Quick start
+`solid-design-parts` is a thoughtful component library for SolidJS.
 
-Install it:
+The component catalog page is located at https://solid-design-parts.pages.dev
 
-```bash
-npm i solid-design-parts
-# or
-yarn add solid-design-parts
-# or
-pnpm add solid-design-parts
-```
-
-Use it:
-
-```tsx
-import solid-design-parts from 'solid-design-parts'
-```
+The library and website are currently under development, and a considerable period of time is required before the 1.0.0 release 😅.
