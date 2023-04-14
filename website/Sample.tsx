@@ -21,6 +21,7 @@ export function Sample(rawProps: SampleProps) {
     if (!isInstanceOf(event.target, HTMLElement)) return
 
     event.preventDefault()
+    history.pushState(undefined, '', `#${id()}`)
     event.target.scrollIntoView({ behavior: 'smooth' })
   }
 
