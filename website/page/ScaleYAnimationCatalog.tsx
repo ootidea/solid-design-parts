@@ -1,5 +1,6 @@
 import { call } from 'base-up'
 import { createRoot, createSignal } from 'solid-js'
+import { Divider } from '../../library'
 import { Button } from '../../library/Button'
 import { ScaleYAnimation } from '../../library/ScaleYAnimation'
 import { showToast } from '../../library/Toasts'
@@ -31,6 +32,30 @@ export const ScaleYAnimationCatalog: Catalog = createRoot(() => ({
                 <Button onClick={() => setShown(!shown())}>Toggle</Button>
                 <ScaleYAnimation shown={shown()} durationMs={1000}>
                   <div>Content</div>
+                </ScaleYAnimation>
+              </>
+            )
+          })}
+        </>
+      ),
+    },
+    {
+      title: 'Changing the alignment of the animation',
+      children: (
+        <>
+          {call(() => {
+            const [shown, setShown] = createSignal(true)
+            return (
+              <>
+                <Button onClick={() => setShown(!shown())}>Toggle</Button>
+                <ScaleYAnimation shown={shown()} align="top">
+                  <p>Content</p>
+                  <Divider />
+                  <p>Content</p>
+                  <Divider />
+                  <p>Content</p>
+                  <Divider />
+                  <p>Content</p>
                 </ScaleYAnimation>
               </>
             )
