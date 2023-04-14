@@ -30,14 +30,14 @@ export const SpinnerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the frequency of rotation',
+      title: 'Changing the RPM (rotations per minute)',
       direction: 'horizontal',
       children: (
         <>
-          <Spinner frequency={0.7} />
-          <Spinner frequency={1.4} />
-          <Spinner frequency={2.1} />
-          <Spinner frequency={2.8} />
+          <Spinner rpm={40} />
+          <Spinner rpm={80} />
+          <Spinner rpm={120} />
+          <Spinner rpm={160} />
         </>
       ),
     },

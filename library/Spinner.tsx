@@ -7,7 +7,7 @@ import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 export type SpinnerProps = Props<{
   size?: string
   thickness?: number
-  frequency?: number
+  rpm?: number
   color?: CssColor
 }>
 
@@ -17,7 +17,7 @@ export function Spinner(rawProps: SpinnerProps) {
     {
       size: 'var(--solid-design-parts-Spinner_default-size)',
       thickness: 25,
-      frequency: 1.4,
+      rpm: 84,
       color: 'var(--solid-design-parts-primary-color)',
     },
     ['style']
@@ -37,7 +37,7 @@ export function Spinner(rawProps: SpinnerProps) {
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Spinner_size': props.size,
         '--solid-design-parts-Spinner_svg-url': svgUrl.value,
-        '--solid-design-parts-Spinner_period': `${1 / props.frequency}s`,
+        '--solid-design-parts-Spinner_period': `${60 / props.rpm}s`,
         '--solid-design-parts-Spinner_color': props.color,
       })}
     />
