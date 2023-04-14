@@ -19,7 +19,7 @@ export const DataTableCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Sort',
+      title: 'Showing sort button',
       children: (
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name', sortable: true }, { id: 'age', sortable: true }]}
