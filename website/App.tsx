@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from '@solidjs/router'
+import { Navigate, Route, Router, Routes } from '@solidjs/router'
 import { For } from 'solid-js'
 import { Gravity, Select } from '../library'
 import { Divider } from '../library/Divider'
@@ -81,6 +81,8 @@ export function App() {
           <main class={classes.main}>
             <Routes>
               <Route path="components/*" element={ComponentCatalogPage} />
+              {/* TODO: Since there is no homepage, a temporary redirect is in place. */}
+              <Route path="/" element={<Navigate href="components/Button" />} />
             </Routes>
           </main>
         </StretchLayout>
