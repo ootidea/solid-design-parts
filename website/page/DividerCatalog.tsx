@@ -19,9 +19,9 @@ export const DividerCatalog: Catalog = createRoot(() => ({
       title: 'Thickness',
       children: (
         <>
-          <Divider thickness="1px" />
-          <Divider thickness="0.2em" />
-          <Divider thickness="0.5rem" />
+          <Divider thickness="2px" />
+          <Divider thickness="0.1em" />
+          <Divider thickness="0.5vh" />
         </>
       ),
     },
