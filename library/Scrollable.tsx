@@ -80,7 +80,7 @@ export function Scrollable(rawProps: ScrollableProps) {
 
   function showThumbTemporarily() {
     if (isOverflow.value) {
-      thumbElement?.animate([{ opacity: 1, visibility: 'initial' }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], 800)
+      thumbElement?.animate([{ opacity: 1, visibility: 'initial' }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], 1200)
     }
   }
 
