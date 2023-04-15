@@ -10,12 +10,12 @@ import { ButtonCatalog } from './ButtonCatalog'
 import { CalendarCatalog } from './CalendarCatalog'
 import { CheckboxCatalog } from './CheckboxCatalog'
 import { CheckboxesCatalog } from './CheckboxesCatalog'
+import { CollapsibleCatalog } from './CollapsibleCatalog'
 import { DataTableCatalog } from './DataTableCatalog'
 import { DateInputCatalog } from './DateInputCatalog'
 import { DatePickerCatalog } from './DatePickerCatalog'
 import { DividerCatalog } from './DividerCatalog'
 import { FadeAnimationCatalog } from './FadeAnimationCatalog'
-import { FoldableCatalog } from './FoldableCatalog'
 import { GravityCatalog } from './GravityCatalog'
 import { IconButtonCatalog } from './IconButtonCatalog'
 import { IconCatalog } from './IconCatalog'
@@ -78,7 +78,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   TitleBarLayoutCatalog,
   ScrollableCatalog,
   ResizableCatalog,
-  FoldableCatalog,
+  CollapsibleCatalog: CollapsibleCatalog,
   IconCatalog,
   DividerCatalog,
   ImageCatalog,

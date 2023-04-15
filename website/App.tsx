@@ -1,8 +1,8 @@
 import { Navigate, Route, Router, Routes } from '@solidjs/router'
 import { For } from 'solid-js'
 import { Gravity, Select } from '../library'
+import { Collapsible } from '../library/Collapsible'
 import { Divider } from '../library/Divider'
-import { Foldable } from '../library/Foldable'
 import { Scrollable } from '../library/Scrollable'
 import { StretchLayout } from '../library/StretchLayout'
 import { i18n } from '../library/utility/i18n'
@@ -38,7 +38,7 @@ export function App() {
     { title: 'Other inputs', children: ['Slider'] },
     {
       title: 'Layout',
-      children: ['Gravity', 'StretchLayout', 'LayerLayout', 'TitleBarLayout', 'Scrollable', 'Resizable', 'Foldable'],
+      children: ['Gravity', 'StretchLayout', 'LayerLayout', 'TitleBarLayout', 'Scrollable', 'Resizable', 'Collapsible'],
     },
     { title: 'Floating', children: ['Modal', 'Popover', 'Toast'] },
     { title: 'Data collections', children: ['DataTable', 'Tabs'] },
@@ -70,9 +70,9 @@ export function App() {
             <Scrollable class={classes.sidebarContent}>
               <For each={menuItems}>
                 {(menuItem) => (
-                  <Foldable title={menuItem.title} unfolded>
+                  <Collapsible title={menuItem.title}>
                     <For each={menuItem.children}>{(name) => <SidebarMenu componentName={name} />}</For>
-                  </Foldable>
+                  </Collapsible>
                 )}
               </For>
             </Scrollable>
