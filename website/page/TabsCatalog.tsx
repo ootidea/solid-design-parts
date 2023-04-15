@@ -10,10 +10,10 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs names={['tab1', 'tab2', 'tab3']}>{({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}</Tabs>
-          <Tabs type="Surrounded by border" names={['tab1', 'tab2', 'tab3']}>
+          <Tabs variant="bordered tab" names={['tab1', 'tab2', 'tab3']}>
             {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
           </Tabs>
-          <Tabs type="Active underline" names={['tab1', 'tab2', 'tab3']}>
+          <Tabs variant="underlined tab" names={['tab1', 'tab2', 'tab3']}>
             {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
           </Tabs>
         </>

@@ -8,7 +8,7 @@ export type TabsProps<T extends string> = Props<{
   names: readonly T[]
   activeTab?: T
   children?: SlotProp<{ activeTab: T }>
-  type?: 'Colored tab and border' | 'Surrounded by border' | 'Plain background' | 'Active underline'
+  variant?: 'colored tab and divider' | 'bordered tab' | 'underlined tab'
   passive?: boolean
   onClickTab?: (tabName: T) => void
 }>
@@ -16,7 +16,7 @@ export type TabsProps<T extends string> = Props<{
 export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { activeTab: rawProps.names[0], type: 'Colored tab and border', passive: false },
+    { activeTab: rawProps.names[0], variant: 'colored tab and divider', passive: false },
     ['names', 'onClickTab', 'children']
   )
 
@@ -34,7 +34,7 @@ export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Tabs_root')}
       style={{ '--solid-design-parts-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
-      data-type={props.type}
+      data-variant={props.variant}
     >
       <div class="solid-design-parts-Tabs_tab-bar" role="tablist">
         <For each={props.names}>
@@ -50,7 +50,7 @@ export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
             </button>
           )}
         </For>
-        <Show when={props.type === 'Surrounded by border'}>
+        <Show when={props.variant === 'bordered tab'}>
           <div class="solid-design-parts-Tabs_dummy-tab-for-border" />
         </Show>
       </div>
