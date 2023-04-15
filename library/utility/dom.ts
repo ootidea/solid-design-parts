@@ -21,7 +21,7 @@ function isClickable(element: Element): boolean {
   if (contenteditable && contenteditable !== 'false') return true
 
   return (
-    includes(['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION'], element.tagName) ||
+    includes(['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'SUMMARY'], element.tagName) ||
     includes(
       [
         'link',
