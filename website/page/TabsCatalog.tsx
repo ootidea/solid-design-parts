@@ -10,6 +10,13 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs names={['tab1', 'tab2', 'tab3']}>{({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}</Tabs>
+        </>
+      ),
+    },
+    {
+      title: 'Variants',
+      children: (
+        <>
           <Tabs variant="bordered tab" names={['tab1', 'tab2', 'tab3']}>
             {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
           </Tabs>
@@ -20,7 +27,7 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Default tab',
+      title: 'Changing default tab',
       children: (
         <>
           <Tabs names={['tab1', 'tab2', 'tab3']} activeTab="tab2">
@@ -30,7 +37,7 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Passive',
+      title: 'Passive tabs',
       description: (
         <>
           If the <code>passive</code> option is set, tab clicks will not change the active tab.
