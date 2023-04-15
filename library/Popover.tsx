@@ -121,3 +121,13 @@ export function Popover(rawProps: PopoverProps) {
     </>
   )
 }
+
+Popover.top = (props: PopoverProps) => <Popover placement="top" {...props} />
+Popover.bottom = (props: PopoverProps) => <Popover placement="bottom" {...props} />
+Popover.left = (props: PopoverProps) => <Popover placement="left" {...props} />
+Popover.right = (props: PopoverProps) => <Popover placement="right" {...props} />
+Popover.center = (props: PopoverProps) => <Popover placement="center" {...props} />
+Popover.topLeft = (props: PopoverProps) => <Popover placement="top left" {...props} />
+Popover.topRight = (props: PopoverProps) => <Popover placement="top right" {...props} />
+Popover.bottomLeft = (props: PopoverProps) => <Popover placement="bottom left" {...props} />
+Popover.bottomRight = (props: PopoverProps) => <Popover placement="bottom right" {...props} />
