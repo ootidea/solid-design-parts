@@ -12,6 +12,12 @@
   padding-bottom: 8rem;
 }
 
+.sideBarCollapsibleSummary {
+  padding: 0.5em;
+  font-weight: bold;
+  color: oklch(50% 0 0);
+}
+
 .main {
   box-sizing: border-box;
   height: 100%;

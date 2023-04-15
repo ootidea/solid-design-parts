@@ -1,4 +1,5 @@
 import { isInstanceOf } from 'base-up'
+import { ComponentProps } from 'solid-js'
 import './Collapsible.scss'
 import './common.scss'
 import { Icon } from './Icon'
@@ -19,6 +20,7 @@ export type CollapsibleProps = Props<{
   icon?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; collapsed: boolean }>
   children?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void }>
   onChangeCollapsed?: (collapsed: boolean) => void
+  summaryProps?: ComponentProps<'summary'>
 }>
 
 export function Collapsible(rawProps: CollapsibleProps) {
@@ -27,7 +29,7 @@ export function Collapsible(rawProps: CollapsibleProps) {
     {
       collapsed: false,
     },
-    ['title', 'icon', 'onChangeCollapsed']
+    ['title', 'icon', 'onChangeCollapsed', 'summaryProps']
   )
 
   const collapsedSignal = createInjectableSignalObject(props, 'collapsed')
@@ -50,7 +52,10 @@ export function Collapsible(rawProps: CollapsibleProps) {
       open={!collapsedSignal.value}
       onToggle={onToggle}
     >
-      <summary class="solid-design-parts-Collapsible_summary">
+      <summary
+        {...props.summaryProps}
+        class={joinClasses(props.summaryProps, 'solid-design-parts-Collapsible_summary')}
+      >
         <Slot content={rawProps.icon} params={{ collapse, expand, toggle, collapsed: collapsedSignal.value }}>
           <Icon class="solid-design-parts-Collapsible_icon" src={chevronRightIcon} />
         </Slot>

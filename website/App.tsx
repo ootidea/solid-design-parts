@@ -70,7 +70,12 @@ export function App() {
             <Scrollable class={classes.sidebarContent}>
               <For each={menuItems}>
                 {(menuItem) => (
-                  <Collapsible title={menuItem.title}>
+                  <Collapsible
+                    title={menuItem.title}
+                    summaryProps={{
+                      class: classes.sideBarCollapsibleSummary,
+                    }}
+                  >
                     <For each={menuItem.children}>{(name) => <SidebarMenu componentName={name} />}</For>
                   </Collapsible>
                 )}
