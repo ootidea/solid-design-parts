@@ -19,10 +19,9 @@ export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Titles',
+      title: 'Labels',
       children: (
         <>
-          <MultiSelectToggleButtons values={['en', 'zh']} labels={{ en: 'English', zh: 'Chinese' }} />
           <MultiSelectToggleButtons values={['en', 'zh', 'jp']} labels={{ en: 'English', zh: 'Chinese' }} />
         </>
       ),
