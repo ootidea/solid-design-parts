@@ -1,6 +1,7 @@
 .solid-design-parts-Button_root {
-  display: inline-grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 
   box-sizing: border-box;
