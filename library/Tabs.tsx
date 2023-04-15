@@ -60,3 +60,9 @@ export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
     </div>
   )
 }
+
+Tabs.coloredTabAndDivider = <const T extends string>(props: TabsProps<T>) => (
+  <Tabs variant="colored tab and divider" {...props} />
+)
+Tabs.borderedTab = <const T extends string>(props: TabsProps<T>) => <Tabs variant="bordered tab" {...props} />
+Tabs.underlinedTab = <const T extends string>(props: TabsProps<T>) => <Tabs variant="underlined tab" {...props} />
