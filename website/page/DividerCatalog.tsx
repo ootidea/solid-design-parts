@@ -6,18 +6,6 @@ export const DividerCatalog: Catalog = createRoot(() => ({
   samples: [
     { title: 'Basic example', children: <Divider /> },
     {
-      title: 'Vertical divider',
-      children: (
-        <>
-          <div style="height: 100px; width: 100%; display: flex; justify-content: space-evenly;">
-            <Divider direction="vertical" />
-            <Divider direction="vertical" />
-            <Divider direction="vertical" />
-          </div>
-        </>
-      ),
-    },
-    {
       title: 'Color',
       children: (
         <>
@@ -34,6 +22,16 @@ export const DividerCatalog: Catalog = createRoot(() => ({
           <Divider thickness="1px" />
           <Divider thickness="0.2em" />
           <Divider thickness="0.5rem" />
+        </>
+      ),
+    },
+    {
+      title: 'Vertical divider',
+      children: (
+        <>
+          <div style="height: 80px; display: grid; place-items: center;">
+            <Divider direction="vertical" />
+          </div>
         </>
       ),
     },
