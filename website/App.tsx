@@ -54,15 +54,16 @@ export function App() {
     <Router>
       <StretchLayout direction="vertical" stretchAt={2} style={{ height: '100%' }}>
         <header class={classes.header}>
-          <Gravity.right>
-            <Select
-              placeholder="language"
-              values={['en', 'ja']}
-              labels={{ en: 'English', ja: '日本語' }}
-              showClearButton
-              onChangeSelected={(selected) => i18n.forceLanguage(selected)}
-            />
-          </Gravity.right>
+          <a class={classes.libraryLogo} href="/">
+            solid-design-parts
+          </a>
+          <Select
+            placeholder="language"
+            values={['en', 'ja']}
+            labels={{ en: 'English', ja: '日本語' }}
+            showClearButton
+            onChangeSelected={(selected) => i18n.forceLanguage(selected)}
+          />
         </header>
         <Divider />
         <StretchLayout stretchAt={2} style={{ height: '100%' }}>

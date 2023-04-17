@@ -1,5 +1,19 @@
 .header {
   padding: 0.4em 1em;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.libraryLogo {
+  margin: 0 0.5em;
+  font-size: 1.3em;
+  font-weight: bold;
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+  color: oklch(50% 0 0);
+  text-decoration: none;
 }
 
 .sidebar {
