@@ -1,7 +1,7 @@
 import { createRoot } from 'solid-js'
 import { IconButton, TitleBarLayout } from '../../library'
-import chevronLeftIcon from './chevron-left.svg'
-import chevronRightIcon from './chevron-right.svg'
+import chevronLeftIcon from '../images/chevron-left.svg'
+import chevronRightIcon from '../images/chevron-right.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 export const TitleBarLayoutCatalog: Catalog = createRoot(() => ({

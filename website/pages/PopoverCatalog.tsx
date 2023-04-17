@@ -1,7 +1,7 @@
 import { createRoot } from 'solid-js'
 import { Button, Divider, IconButton, Popover } from '../../library'
+import verticalEllipsisIcon from '../images/vertical-ellipsis.svg'
 import { Catalog } from './ComponentCatalogPage'
-import verticalEllipsisIcon from './vertical-ellipsis.svg'
 
 export const PopoverCatalog: Catalog = createRoot(() => ({
   samples: [

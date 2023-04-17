@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
 import { Icon } from '../../library'
-import chevronLeftIcon from './chevron-left.svg'
+import chevronLeftIcon from '../images/chevron-left.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 export const IconCatalog: Catalog = createRoot(() => ({

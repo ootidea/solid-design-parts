@@ -1,8 +1,8 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Icon, MultiSelectToggleButtons } from '../../library'
+import formatAlignLeftIcon from '../images/format-align-left.svg'
+import formatAlignRightIcon from '../images/format-align-right.svg'
 import { Catalog } from './ComponentCatalogPage'
-import formatAlignLeftIcon from './format-align-left.svg'
-import formatAlignRightIcon from './format-align-right.svg'
 
 const [selected, setSelected] = createSignal<Set<'Walking' | 'Bicycle' | 'Car' | 'Train'>>(new Set())
 

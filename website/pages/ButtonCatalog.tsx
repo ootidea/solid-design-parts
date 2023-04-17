@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
 import { Button, Icon } from '../../library'
-import calendarIcon from './calendar.svg'
+import calendarIcon from '../images/calendar.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 async function awaitSomeSeconds() {

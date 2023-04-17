@@ -1,8 +1,8 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Button, Gravity, Icon, IconButton, TextInput } from '../../library'
+import microphoneIcon from '../images/microphone.svg'
+import searchIcon from '../images/search.svg'
 import { Catalog } from './ComponentCatalogPage'
-import microphoneIcon from './microphone.svg'
-import searchIcon from './search.svg'
 
 const [value, setValue] = createSignal('default value')
 

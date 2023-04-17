@@ -1,4 +1,8 @@
 .root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   margin-bottom: 1em;
   font-size: 1.8em;
   color: hsl(0 0% 40%);

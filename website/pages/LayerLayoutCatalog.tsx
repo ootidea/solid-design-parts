@@ -1,9 +1,9 @@
 import { createRoot } from 'solid-js'
 import { Gravity, IconButton, LayerLayout } from '../../library'
-import chevronLeftIcon from './chevron-left.svg'
-import chevronRightIcon from './chevron-right.svg'
+import chevronLeftIcon from '../images/chevron-left.svg'
+import chevronRightIcon from '../images/chevron-right.svg'
+import searchIcon from '../images/search.svg'
 import { Catalog } from './ComponentCatalogPage'
-import searchIcon from './search.svg'
 
 export const LayerLayoutCatalog: Catalog = createRoot(() => ({
   samples: [
