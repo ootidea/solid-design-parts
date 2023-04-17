@@ -9,9 +9,9 @@ const value = createSignalObject(0)
 export const NumberInputCatalog: Catalog = createRoot(() => ({
   introduction: (
     <>
-      <code>NumberInput</code> is a component used to input numerical values in text format. It can be easily bound with
-      a signal of number type. Unlike <code>&lt;input type=&#039;number&#039;&gt;</code>, the text is not changed during
-      text editing.
+      <code>NumberInput</code> is a component used to input a numerical value in text format. It can be easily bound
+      with a signal of number type. Unlike <code>&lt;input type=&#039;number&#039;&gt;</code>, the text is not changed
+      during text editing.
     </>
   ),
   samples: [
