@@ -12,9 +12,8 @@ export const CollapsibleCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <Collapsible title="Title">content</Collapsible>
-          <Collapsible title="Title" collapsed>
-            content
+          <Collapsible title="Title">
+            <p>content</p>
           </Collapsible>
         </>
       ),
@@ -28,7 +27,7 @@ export const CollapsibleCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Collapsible title="Title" collapsed={collapsed.value} onChangeCollapsed={collapsed.set}>
-            content
+            <p>content</p>
           </Collapsible>
           <div>collapsed: {toLiteral(collapsed.value)}</div>
         </>
@@ -39,8 +38,12 @@ export const CollapsibleCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Collapsible title="1">
-            <Collapsible title="1.1">...</Collapsible>
-            <Collapsible title="1.2">...</Collapsible>
+            <Collapsible title="1.1">
+              <p>…</p>
+            </Collapsible>
+            <Collapsible title="1.2">
+              <p>…</p>
+            </Collapsible>
           </Collapsible>
         </>
       ),
