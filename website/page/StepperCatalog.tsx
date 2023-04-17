@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Stepper } from '../../library/Stepper'
+import { Stepper } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const StepperCatalog: Catalog = createRoot(() => ({

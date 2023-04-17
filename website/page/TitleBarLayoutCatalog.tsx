@@ -1,6 +1,5 @@
 import { createRoot } from 'solid-js'
-import { IconButton } from '../../library/IconButton'
-import { TitleBarLayout } from '../../library/TitleBarLayout'
+import { IconButton, TitleBarLayout } from '../../library'
 import chevronLeftIcon from './chevron-left.svg'
 import chevronRightIcon from './chevron-right.svg'
 import { Catalog } from './ComponentCatalogPage'

@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { StretchLayout } from '../../library/StretchLayout'
+import { StretchLayout } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const StretchLayoutCatalog: Catalog = createRoot(() => ({

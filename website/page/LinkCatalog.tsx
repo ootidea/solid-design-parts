@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Link } from '../../library/Link'
+import { Link } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const LinkCatalog: Catalog = createRoot(() => ({

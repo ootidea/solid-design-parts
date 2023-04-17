@@ -1,5 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { DatePicker } from '../../library/DatePicker'
+import { DatePicker } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const [value, setValue] = createSignal<Date | undefined>(undefined)

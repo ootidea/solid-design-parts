@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { SpeechBubble } from '../../library/SpeechBubble'
+import { SpeechBubble } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const SpeechBubbleCatalog: Catalog = createRoot(() => ({

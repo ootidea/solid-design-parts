@@ -1,5 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { RadioButtons } from '../../library/RadioButtons'
+import { RadioButtons } from '../../library'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 

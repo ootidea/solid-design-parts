@@ -1,6 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { Icon } from '../../library/Icon'
-import { MultiSelectToggleButtons } from '../../library/MultiSelectToggleButtons'
+import { Icon, MultiSelectToggleButtons } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 import formatAlignLeftIcon from './format-align-left.svg'
 import formatAlignRightIcon from './format-align-right.svg'

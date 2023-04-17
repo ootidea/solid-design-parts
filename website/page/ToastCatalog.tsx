@@ -1,6 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Button } from '../../library/Button'
-import { showToast } from '../../library/Toasts'
+import { Button, showToast } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const ToastCatalog: Catalog = createRoot(() => ({

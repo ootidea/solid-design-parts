@@ -1,7 +1,7 @@
 import { isInstanceOf } from 'base-up'
 import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
-import { Link } from '../library/Link'
+import { Link } from '../library'
 import { extractContainedTexts } from '../library/utility/dom'
 import classes from './Sample.module.scss'
 

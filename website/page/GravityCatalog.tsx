@@ -1,5 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Gravity } from '../../library/Gravity'
+import { Gravity } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const GravityCatalog: Catalog = createRoot(() => ({

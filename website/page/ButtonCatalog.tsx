@@ -1,6 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Button } from '../../library/Button'
-import { Icon } from '../../library/Icon'
+import { Button, Icon } from '../../library'
 import calendarIcon from './calendar.svg'
 import { Catalog } from './ComponentCatalogPage'
 

@@ -1,7 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { Await } from '../../library/Await'
-import { Button } from '../../library/Button'
-import { Spinner } from '../../library/Spinner'
+import { Await, Button, Spinner } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const [promise, setPromise] = createSignal(

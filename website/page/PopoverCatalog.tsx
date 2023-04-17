@@ -1,7 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Divider, IconButton } from '../../library'
-import { Button } from '../../library/Button'
-import { Popover } from '../../library/Popover'
+import { Button, Divider, IconButton, Popover } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 import verticalEllipsisIcon from './vertical-ellipsis.svg'
 

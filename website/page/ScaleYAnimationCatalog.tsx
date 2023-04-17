@@ -1,9 +1,6 @@
 import { call } from 'base-up'
 import { createRoot, createSignal } from 'solid-js'
-import { Divider } from '../../library'
-import { Button } from '../../library/Button'
-import { ScaleYAnimation } from '../../library/ScaleYAnimation'
-import { showToast } from '../../library/Toasts'
+import { Button, Divider, ScaleYAnimation, showToast } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const [shown, setShown] = createSignal(true)

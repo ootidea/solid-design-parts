@@ -1,5 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { Slider } from '../../library/Slider'
+import { Slider } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const [value, setValue] = createSignal(0)

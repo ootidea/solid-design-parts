@@ -1,7 +1,7 @@
 import { setOf } from 'base-up'
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Checkboxes } from '../../library/Checkboxes'
+import { Checkboxes } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const selected = createSignalObject(setOf('PC'))

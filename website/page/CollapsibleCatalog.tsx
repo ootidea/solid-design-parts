@@ -1,6 +1,6 @@
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Collapsible } from '../../library/Collapsible'
+import { Collapsible } from '../../library'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 

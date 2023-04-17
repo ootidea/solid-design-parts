@@ -1,7 +1,6 @@
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
-import { Button } from '../../library/Button'
-import { NumberInput } from '../../library/NumberInput'
+import { Button, NumberInput } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const value = createSignalObject(0)

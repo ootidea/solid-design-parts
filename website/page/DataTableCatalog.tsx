@@ -1,7 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Button } from '../../library/Button'
-import { DataTable } from '../../library/DataTable'
-import { showToast } from '../../library/Toasts'
+import { Button, DataTable, showToast } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const DataTableCatalog: Catalog = createRoot(() => ({

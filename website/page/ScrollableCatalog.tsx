@@ -1,6 +1,5 @@
 import { createRoot, For } from 'solid-js'
-import { Image } from '../../library/Image'
-import { Scrollable } from '../../library/Scrollable'
+import { Image, Scrollable } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const ScrollableCatalog: Catalog = createRoot(() => ({

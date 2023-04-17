@@ -1,5 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { Select } from '../../library/Select'
+import { Select } from '../../library'
 import { toLiteral } from '../other'
 import { Catalog } from './ComponentCatalogPage'
 

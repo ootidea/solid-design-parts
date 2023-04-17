@@ -1,7 +1,5 @@
 import { createRoot } from 'solid-js'
-import { Gravity } from '../../library/Gravity'
-import { IconButton } from '../../library/IconButton'
-import { LayerLayout } from '../../library/LayerLayout'
+import { Gravity, IconButton, LayerLayout } from '../../library'
 import chevronLeftIcon from './chevron-left.svg'
 import chevronRightIcon from './chevron-right.svg'
 import { Catalog } from './ComponentCatalogPage'

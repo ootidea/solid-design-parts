@@ -1,6 +1,5 @@
 import { createRoot, createSignal } from 'solid-js'
-import { Image } from '../../library/Image'
-import { Resizable } from '../../library/Resizable'
+import { Image, Resizable } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const [widthPx, setWidthPx] = createSignal(500)
