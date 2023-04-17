@@ -1,14 +1,14 @@
 import { entriesOf, isInstanceOf, Promisable } from 'base-up'
 import { createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
-import './AutoSizeTextArea.scss'
 import './common.scss'
 import { ErrorMessage } from './ErrorMessage'
+import './TextArea.scss'
 import { TextInputProps } from './TextInput'
 import { countCharacters } from './utility/other'
 import { createDeferEffect, createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
-export type AutoSizeTextAreaProps = Props<
+export type TextAreaProps = Props<
   {
     value?: string
     required?: boolean
@@ -23,14 +23,14 @@ export type AutoSizeTextAreaProps = Props<
   'textarea'
 >
 
-export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
+export function TextArea(rawProps: TextAreaProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
       value: '',
       required: false,
       lengthMeasure: countCharacters,
-      error: false as Required<AutoSizeTextAreaProps>['error'],
+      error: false as Required<TextAreaProps>['error'],
       validateImmediately: false,
     },
     ['min', 'max', 'onChangeValue']
@@ -122,19 +122,19 @@ export function AutoSizeTextArea(rawProps: AutoSizeTextAreaProps) {
 
   return (
     <div
-      class="solid-design-parts-AutoSizeTextArea_root"
+      class="solid-design-parts-TextArea_root"
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
       aria-required={props.required}
     >
-      <div class="solid-design-parts-AutoSizeTextArea_body">
-        <div class="solid-design-parts-AutoSizeTextArea_dummy" aria-hidden="true">
+      <div class="solid-design-parts-TextArea_body">
+        <div class="solid-design-parts-TextArea_dummy" aria-hidden="true">
           {valueSignal.value || rawProps.placeholder}
           {ZERO_WIDTH_SPACE}
         </div>
         <textarea
           {...restProps}
-          class={joinClasses(rawProps, 'solid-design-parts-AutoSizeTextArea_text-area')}
+          class={joinClasses(rawProps, 'solid-design-parts-TextArea_text-area')}
           value={valueSignal.value}
           onInput={onInput}
           onBlur={() => (isEditedSignal.value = true)}

@@ -1,4 +1,4 @@
-export { AutoSizeTextArea } from './AutoSizeTextArea'
+export { TextArea } from './TextArea'
 export { Await } from './Await'
 export { Button } from './Button'
 export { Calendar } from './Calendar'

@@ -26,7 +26,7 @@ export function App() {
         'MultiSelect',
       ],
     },
-    { title: 'Text input', children: ['TextInput', 'AutoSizeTextArea', 'NumberInput'] },
+    { title: 'Text input', children: ['TextInput', 'TextArea', 'NumberInput'] },
     {
       title: 'Date and time',
       children: ['DateInput', 'DatePicker', 'Calendar'],

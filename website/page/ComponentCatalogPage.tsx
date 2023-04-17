@@ -4,7 +4,6 @@ import { createMemoObject } from 'solid-signal-object'
 import { Scrollable } from '../../library'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
-import { AutoSizeTextAreaCatalog } from './AutoSizeTextAreaCatalog'
 import { AwaitCatalog } from './AwaitCatalog'
 import { ButtonCatalog } from './ButtonCatalog'
 import { CalendarCatalog } from './CalendarCatalog'
@@ -39,6 +38,7 @@ import { SpinnerCatalog } from './SpinnerCatalog'
 import { StepperCatalog } from './StepperCatalog'
 import { StretchLayoutCatalog } from './StretchLayoutCatalog'
 import { TabsCatalog } from './TabsCatalog'
+import { TextAreaCatalog } from './TextAreaCatalog'
 import { TextInputCatalog } from './TextInputCatalog'
 import { TitleBarLayoutCatalog } from './TitleBarLayoutCatalog'
 import { ToastCatalog } from './ToastCatalog'
@@ -62,7 +62,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   SingleSelectToggleButtonsCatalog,
   TextInputCatalog,
   NumberInputCatalog,
-  AutoSizeTextAreaCatalog,
+  TextAreaCatalog,
   CalendarCatalog,
   DatePickerCatalog,
   DateInputCatalog,

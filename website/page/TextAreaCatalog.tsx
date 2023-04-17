@@ -1,14 +1,14 @@
 import { createRoot, createSignal } from 'solid-js'
-import { AutoSizeTextArea } from '../../library'
+import { TextArea } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 const [value, setValue] = createSignal('default value')
 
-export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
+export const TextAreaCatalog: Catalog = createRoot(() => ({
   introduction: (
     <>
-      <code>AutoSizeTextArea</code> is a component for inputting multiline text. The height is automatically adjusted
-      according to the content, unlike the textarea element. If you want to input single-line text, please use{' '}
+      <code>TextArea</code> is a component for inputting multiline text. The height is automatically adjusted according
+      to the content, unlike the textarea element. If you want to input single-line text, please use{' '}
       <code>TextInput</code> instead.
     </>
   ),
@@ -17,9 +17,9 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <AutoSizeTextArea />
-          <AutoSizeTextArea placeholder="placeholder" />
-          <AutoSizeTextArea value="default value" />
+          <TextArea />
+          <TextArea placeholder="placeholder" />
+          <TextArea value="default value" />
         </>
       ),
     },
@@ -31,7 +31,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <AutoSizeTextArea value={value()} onChangeValue={setValue} />
+          <TextArea value={value()} onChangeValue={setValue} />
           <div style={{ 'white-space': 'pre-wrap' }}>value: {JSON.stringify(value())}</div>
         </>
       ),
@@ -40,8 +40,8 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       title: 'Disabled',
       children: (
         <>
-          <AutoSizeTextArea placeholder="placeholder" disabled />
-          <AutoSizeTextArea value="default value" disabled />
+          <TextArea placeholder="placeholder" disabled />
+          <TextArea value="default value" disabled />
         </>
       ),
     },
@@ -49,8 +49,8 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       title: 'Error state',
       children: (
         <>
-          <AutoSizeTextArea placeholder="placeholder" error />
-          <AutoSizeTextArea error="Error message" />
+          <TextArea placeholder="placeholder" error />
+          <TextArea error="Error message" />
         </>
       ),
     },
@@ -63,8 +63,8 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <AutoSizeTextArea placeholder="placeholder" required />
-          <AutoSizeTextArea placeholder="placeholder" required error="This field is required." />
+          <TextArea placeholder="placeholder" required />
+          <TextArea placeholder="placeholder" required error="This field is required." />
         </>
       ),
     },
@@ -72,8 +72,8 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       title: 'Minimum and maximum character count',
       children: (
         <>
-          <AutoSizeTextArea min={10} />
-          <AutoSizeTextArea value="123456789" max={9} error="Up to a maximum of 9 characters." />
+          <TextArea min={10} />
+          <TextArea value="123456789" max={9} error="Up to a maximum of 9 characters." />
         </>
       ),
     },
@@ -81,7 +81,7 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       title: 'Changing of the method for counting length',
       children: (
         <>
-          <AutoSizeTextArea
+          <TextArea
             max={3}
             lengthMeasure={(text) => text.split('\n').length}
             error="Up to three lines can be entered."
@@ -93,8 +93,8 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       title: 'Validation function',
       children: (
         <>
-          <AutoSizeTextArea placeholder="placeholder" error={(value) => value.length === 0 && 'Required'} />
-          <AutoSizeTextArea
+          <TextArea placeholder="placeholder" error={(value) => value.length === 0 && 'Required'} />
+          <TextArea
             value="Default value"
             error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
           />
@@ -110,12 +110,8 @@ export const AutoSizeTextAreaCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <AutoSizeTextArea
-            placeholder="placeholder"
-            validateImmediately
-            error={(value) => value.length === 0 && 'Required'}
-          />
-          <AutoSizeTextArea
+          <TextArea placeholder="placeholder" validateImmediately error={(value) => value.length === 0 && 'Required'} />
+          <TextArea
             value="Default value"
             validateImmediately
             error={(value) => value.toLowerCase() !== value && 'Uppercase letters are not allowed.'}
