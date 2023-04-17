@@ -8,24 +8,33 @@ import closeCircleIcon from './image/close-circle.svg'
 import './NumberInput.scss'
 import { createDeferEffect, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
-export type NumberInputProps = Props<{
-  value?: number | undefined
-  placeholder?: string
-  inputMode?: 'decimal' | 'numeric'
-  disabled?: boolean
-  required?: boolean
-  min?: number
-  max?: number
-  integerOnly?: boolean
-  error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
-  validateImmediately?: boolean
-  showClearButton?: boolean
-  radius?: string
-  prefix?: JSX.Element
-  suffix?: JSX.Element
-  onChangeValue?: (value: number | undefined) => void
-  onValid?: (value: number | undefined) => void
-}>
+export type NumberInputProps = Props<
+  {
+    value?: number | undefined
+    placeholder?: string
+    inputMode?: 'decimal' | 'numeric'
+    disabled?: boolean
+    min?: number
+    max?: number
+    integerOnly?: boolean
+    error?: boolean | string | ((value: number | undefined) => Promisable<boolean | string>)
+    validateImmediately?: boolean
+    showClearButton?: boolean
+    radius?: string
+    prefix?: JSX.Element
+    suffix?: JSX.Element
+    onChangeValue?: (value: number | undefined) => void
+  } & (
+    | {
+        required?: boolean
+        onValid?: (value: number | undefined) => void
+      }
+    | {
+        required: true
+        onValid?: (value: number) => void
+      }
+  )
+>
 
 export function NumberInput(rawProps: NumberInputProps) {
   const [props, restProps] = prepareProps(
@@ -81,6 +90,7 @@ export function NumberInput(rawProps: NumberInputProps) {
     const error = await deriveError(shouldValidate.value, value, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
+      // @ts-ignore - If props.required is true and value is undefined, then deriveError returns something other than false.
       props.onValid?.(value)
     }
   })
@@ -90,6 +100,7 @@ export function NumberInput(rawProps: NumberInputProps) {
     const error = await deriveError(shouldValidate.value, value, props.error, synthesizedPredicateFunction.value)
     errorSignal.value = error
     if (error === false) {
+      // @ts-ignore - If props.required is true and value is undefined, then deriveError returns something other than false.
       props.onValid?.(value)
     }
   })
