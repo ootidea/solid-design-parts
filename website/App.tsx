@@ -3,7 +3,7 @@ import { For } from 'solid-js'
 import { Collapsible, Divider, Gravity, Scrollable, Select, StretchLayout } from '../library'
 import { i18n } from '../library/utility/i18n'
 import classes from './App.module.scss'
-import { ComponentCatalogPage } from './page/ComponentCatalogPage'
+import { ComponentCatalogPage } from './pages/ComponentCatalogPage'
 import { SidebarMenu } from './SidebarMenu'
 
 type MenuItem = {
