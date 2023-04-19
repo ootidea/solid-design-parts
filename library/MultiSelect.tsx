@@ -1,4 +1,13 @@
-import { assert, entriesOf, intersectionOf, isInstanceOf, isNotUndefined, isSubset, Promisable, toggle } from 'base-up'
+import {
+  assert,
+  entriesOf,
+  intersectionOf,
+  isInstanceOf,
+  isNotUndefined,
+  isSubsetOf,
+  Promisable,
+  toggle,
+} from 'base-up'
 import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
@@ -74,7 +83,7 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
     () => {
       const valueSet = new Set(props.values)
       // Avoid cloning for equivalence testing in createNormalizedSignalObject.
-      return isSubset(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
+      return isSubsetOf(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
     },
     props.onChangeSelected
   )

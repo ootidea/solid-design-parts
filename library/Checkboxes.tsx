@@ -1,4 +1,4 @@
-import { entriesOf, intersectionOf, isSubset, Promisable, toggle } from 'base-up'
+import { entriesOf, intersectionOf, isSubsetOf, Promisable, toggle } from 'base-up'
 import { createRenderEffect, For, JSX, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
@@ -80,7 +80,7 @@ export function Checkboxes<const T extends readonly (string | number)[]>(rawProp
     () => {
       const valueSet = new Set(props.values)
       // Avoid cloning for equivalence testing in createNormalizedSignalObject.
-      return isSubset(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
+      return isSubsetOf(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
     },
     props.onChangeSelected
   )

@@ -1,4 +1,4 @@
-import { chunk, rangeTo } from 'base-up'
+import { chunk, rangeUntil } from 'base-up'
 import { JSX } from 'solid-js'
 import './common.scss'
 import { Link } from './Link'
@@ -29,7 +29,7 @@ export function UrlToLink(rawProps: UrlToLinkProps) {
 
   return (
     <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-UrlToLink_root')}>
-      {rangeTo(texts.length).map((i) => (
+      {rangeUntil(texts.length).map((i) => (
         <>
           {texts[i]}
           {i < urls.length && props.link(urls[i])}

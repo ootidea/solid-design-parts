@@ -1,4 +1,4 @@
-import { intersectionOf, isSubset, toggle } from 'base-up'
+import { intersectionOf, isSubsetOf, toggle } from 'base-up'
 import { For, JSX } from 'solid-js'
 import './common.scss'
 import './MultiSelectToggleButtons.scss'
@@ -35,7 +35,7 @@ export function MultiSelectToggleButtons<const T extends readonly (string | numb
     () => {
       const valueSet = new Set(props.values)
       // Avoid cloning for equivalence testing in createNormalizedSignalObject.
-      return isSubset(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
+      return isSubsetOf(props.selected, valueSet) ? props.selected : intersectionOf(props.selected, valueSet)
     },
     props.onChangeSelected
   )

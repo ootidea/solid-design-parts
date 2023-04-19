@@ -1,4 +1,4 @@
-import { rangeTo } from 'base-up'
+import { rangeUntil } from 'base-up'
 import { For, JSX, Show } from 'solid-js'
 import './common.scss'
 import { Icon } from './Icon'
@@ -23,7 +23,7 @@ export function Stepper(rawProps: StepperProps) {
       >
         {/* dummy element for grid layout */}
         <div />
-        <For each={rangeTo(props.titles.length)}>
+        <For each={rangeUntil(props.titles.length)}>
           {(i) => (
             <>
               <Show when={i > 0}>

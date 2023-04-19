@@ -117,25 +117,24 @@ export function setupFocusTrap(element: HTMLElement) {
  * extractContainedTexts(<>{undefined}{false}</>) results []
  */
 export function extractContainedTexts(element: JSX.Element): string[] {
+  if (element === null) return []
+
+  if (element instanceof Array) return element.flatMap(extractContainedTexts)
+
+  if (element instanceof Node) {
+    if (element.nodeType === element.TEXT_NODE) {
+      return element.textContent === null ? [] : [element.textContent]
+    }
+
+    return [...element.childNodes].flatMap(extractContainedTexts)
+  }
+
   switch (typeof element) {
-    case 'undefined':
-    case 'boolean':
-      return []
     case 'string':
       return [element]
     case 'number':
       return [String(element)]
-    case 'function':
-      return extractContainedTexts(element())
-    case 'object':
-      if (element === null) return []
-
-      if (element instanceof Array) return element.flatMap(extractContainedTexts)
-
-      if (element.nodeType === element.TEXT_NODE) {
-        return element.textContent === null ? [] : [element.textContent]
-      }
-
-      return [...element.childNodes].flatMap(extractContainedTexts)
+    default:
+      return []
   }
 }

@@ -1,8 +1,9 @@
+import { setOf } from 'base-up'
 import { createRoot, createSignal } from 'solid-js'
 import { MultiSelect } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
-const [selected, setSelected] = createSignal(new Set(['macOS', 'Linux']))
+const [selected, setSelected] = createSignal(setOf('macOS', 'Linux'))
 
 export const MultiSelectCatalog: Catalog = createRoot(() => ({
   samples: [

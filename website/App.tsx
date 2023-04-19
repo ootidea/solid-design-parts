@@ -82,7 +82,7 @@ export function App() {
           <Divider direction="vertical" />
           <main class={classes.main}>
             <Routes>
-              <Route path="components/*" element={ComponentCatalogPage} />
+              <Route path="components/*" component={ComponentCatalogPage} />
               {/* TODO: Since there is no homepage, a temporary redirect is in place. */}
               <Route path="/" element={<Navigate href="components/Button" />} />
             </Routes>

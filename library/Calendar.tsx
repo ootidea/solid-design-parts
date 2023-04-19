@@ -1,4 +1,4 @@
-import { rangeTo } from 'base-up'
+import { rangeUntil } from 'base-up'
 import {
   addDays,
   addMonths,
@@ -92,7 +92,7 @@ export function Calendar(rawProps: CalendarProps) {
           </For>
         </div>
 
-        <For each={rangeTo(6)}>
+        <For each={rangeUntil(6)}>
           {(weakIndex) => (
             <div class="solid-design-parts-Calendar_date-row">
               <For each={i18n.literals.calendarDayNames}>
