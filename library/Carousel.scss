@@ -1,0 +1,53 @@
+.solid-design-parts-Carousel_item-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--solid-design-parts-Carousel_item-width);
+
+  overflow: auto hidden;
+  scroll-snap-type: x mandatory;
+  box-sizing: border-box;
+
+  // Hide the browser's default scrollbar
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.solid-design-parts-Carousel_item {
+  scroll-snap-align: center;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  // Note that only one child element is allowed
+  & > * {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+  }
+}
+
+.solid-design-parts-Carousel_indicator-list {
+  margin-top: 1em;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 1em;
+}
+
+.solid-design-parts-Carousel_indicator {
+  box-sizing: border-box;
+  width: 0.5em;
+  height: 0.5em;
+  border-radius: 999vh;
+
+  background-color: oklch(80% 0 0);
+
+  &[aria-current='true'] {
+    background-color: oklch(60% 0 0);
+  }
+}

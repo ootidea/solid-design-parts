@@ -37,7 +37,7 @@ export function App() {
       children: ['Gravity', 'StretchLayout', 'LayerLayout', 'TitleBarLayout', 'Scrollable', 'Resizable', 'Collapsible'],
     },
     { title: 'Floating', children: ['Modal', 'Popover', 'Toast'] },
-    { title: 'Data collections', children: ['DataTable', 'Tabs'] },
+    { title: 'Data collections', children: ['DataTable', 'Tabs', 'Carousel'] },
     { title: 'Animations', children: ['FadeAnimation', 'ScaleYAnimation'] },
     {
       title: 'Others',

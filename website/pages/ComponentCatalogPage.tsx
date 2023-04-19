@@ -7,6 +7,7 @@ import { Sample, SampleProps } from '../Sample'
 import { AwaitCatalog } from './AwaitCatalog'
 import { ButtonCatalog } from './ButtonCatalog'
 import { CalendarCatalog } from './CalendarCatalog'
+import { CarouselCatalog } from './CarouselCatalog'
 import { CheckboxCatalog } from './CheckboxCatalog'
 import { CheckboxesCatalog } from './CheckboxesCatalog'
 import { CollapsibleCatalog } from './CollapsibleCatalog'
@@ -72,6 +73,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   ToastCatalog,
   DataTableCatalog,
   TabsCatalog,
+  CarouselCatalog,
   GravityCatalog,
   LayerLayoutCatalog,
   StretchLayoutCatalog,
