@@ -104,7 +104,7 @@ export function DateInput(rawProps: DateInputProps) {
               onClick={() => (valueSignal.value = undefined)}
             />
           </Show>
-          <Icon class="solid-design-parts-DateInput_icon" src={calendarIcon} size="1.3em" />
+          <Icon class="solid-design-parts-DateInput_icon" src={calendarIcon} size="1.2em" />
         </button>
       )}
     >

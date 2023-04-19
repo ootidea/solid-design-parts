@@ -4,7 +4,7 @@
   align-items: center;
 
   box-sizing: border-box;
-  min-height: var(--solid-design-parts-one-line-input-height);
+  height: 100%;
   border-radius: var(--solid-design-parts-TextInput_radius);
   border: 1px solid var(--solid-design-parts-input-border-color);
   background-color: var(--solid-design-parts-background-color);
@@ -51,7 +51,8 @@
 
 .solid-design-parts-TextInput_input {
   box-sizing: border-box;
-  padding: 0.4em 0;
+  height: 100%;
+  padding: 0.35em 0;
   border: none;
   outline: none;
   appearance: none;

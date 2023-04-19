@@ -6,10 +6,10 @@
 
   box-sizing: border-box;
   width: max-content;
-  min-height: var(--solid-design-parts-one-line-input-height);
+  height: 100%;
   border-radius: 0.3em;
   border: 1px solid var(--solid-design-parts-input-border-color);
-  padding: 0.4em 0.7em;
+  padding: 0.35em 0.7em;
 
   background-color: var(--solid-design-parts-background-color);
   color: inherit;
