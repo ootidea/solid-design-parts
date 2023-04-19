@@ -1,6 +1,6 @@
 :where(.solid-design-parts-TextInput_frame) {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
 
   box-sizing: border-box;
@@ -41,7 +41,7 @@
 
 .solid-design-parts-TextInput_body {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.3em;
   align-items: center;
 
