@@ -1,5 +1,5 @@
 import { assert, isNotNull, isNotNullish, rangeUntil } from 'base-up'
-import { children, For } from 'solid-js'
+import { children, For, Show } from 'solid-js'
 import { createMutable } from 'solid-js/store'
 import './Carousel.scss'
 import './common.scss'
@@ -63,26 +63,32 @@ export function Carousel(rawProps: CarouselProps) {
           )}
         </For>
       </div>
-      <div class="solid-design-parts-Carousel_indicator-list">
-        <For each={rangeUntil(childrenMemo.toArray().length)}>
-          {(i) => (
-            <button
-              class="solid-design-parts-Carousel_indicator"
-              aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
-              onClick={() => {
-                assert(itemListElement, isNotNullish)
-                const itemRect = itemListElement.children.item(i)?.getBoundingClientRect()
-                assert(itemRect, isNotNullish)
-                const itemListRect = itemListElement.getBoundingClientRect()
-                itemListElement.scrollTo({
-                  left: i * itemRect.width - itemListRect.width / 2 + itemRect.width / 2,
-                  behavior: 'smooth',
-                })
-              }}
-            />
-          )}
-        </For>
-      </div>
+      <Show
+        when={
+          !rangeUntil(childrenMemo.toArray().length).every((i) => flagsThatIndicateWhetherItemIsWithinScrollRange[i])
+        }
+      >
+        <div class="solid-design-parts-Carousel_indicator-list">
+          <For each={rangeUntil(childrenMemo.toArray().length)}>
+            {(i) => (
+              <button
+                class="solid-design-parts-Carousel_indicator"
+                aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
+                onClick={() => {
+                  assert(itemListElement, isNotNullish)
+                  const itemRect = itemListElement.children.item(i)?.getBoundingClientRect()
+                  assert(itemRect, isNotNullish)
+                  const itemListRect = itemListElement.getBoundingClientRect()
+                  itemListElement.scrollTo({
+                    left: i * itemRect.width - itemListRect.width / 2 + itemRect.width / 2,
+                    behavior: 'smooth',
+                  })
+                }}
+              />
+            )}
+          </For>
+        </div>
+      </Show>
     </div>
   )
 }
