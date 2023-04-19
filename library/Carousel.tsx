@@ -1,6 +1,6 @@
 import { assert, isNotNull, rangeUntil } from 'base-up'
 import { children, For } from 'solid-js'
-import { createSignalObject } from 'solid-signal-object'
+import { createMutable } from 'solid-js/store'
 import './Carousel.scss'
 import './common.scss'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
@@ -11,7 +11,8 @@ export function Carousel(rawProps: CarouselProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['itemWidth', 'children'])
   const childrenMemo = children(() => props.children)
 
-  const currentIndex = createSignalObject<number | undefined>()
+  /** A Record with the key as the item's index and the value indicating whether the item is within the scroll range */
+  const flagsThatIndicateWhetherItemIsWithinScrollRange = createMutable<Record<number, boolean>>({})
 
   /** Set up IntersectionObserver to identify the item displayed at the center of the carousel. */
   function setupIntersectionObserver(element: HTMLElement, index: number) {
@@ -20,11 +21,11 @@ export function Carousel(rawProps: CarouselProps) {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries.find((entry) => entry.target === element)
-        if (entry?.isIntersecting) {
-          currentIndex.value = index
+        if (entry !== undefined) {
+          flagsThatIndicateWhetherItemIsWithinScrollRange[index] = entry.isIntersecting
         }
       },
-      { root: element.parentElement, rootMargin: '0px -50%' }
+      { root: element.parentElement, threshold: 0.5 }
     )
     observer.observe(element)
   }
@@ -60,7 +61,12 @@ export function Carousel(rawProps: CarouselProps) {
       </div>
       <div class="solid-design-parts-Carousel_indicator-list">
         <For each={rangeUntil(childrenMemo.toArray().length)}>
-          {(i) => <div class="solid-design-parts-Carousel_indicator" aria-current={currentIndex.value === i} />}
+          {(i) => (
+            <div
+              class="solid-design-parts-Carousel_indicator"
+              aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
+            />
+          )}
         </For>
       </div>
     </div>
