@@ -36,18 +36,28 @@
   display: grid;
   grid-auto-flow: column;
   justify-content: center;
-  gap: 1em;
 }
 
 .solid-design-parts-Carousel_indicator {
-  box-sizing: border-box;
-  width: 0.5em;
-  height: 0.5em;
-  border-radius: 999vh;
+  padding: 0.5em;
+  // Reset the button style
+  border: none;
+  background-color: transparent;
+  font-size: inherit;
 
-  background-color: oklch(80% 0 0);
+  cursor: pointer;
 
-  &[aria-current='true'] {
+  &:before {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 999vh;
+    background-color: oklch(80% 0 0);
+  }
+
+  &[aria-current='true']:before {
     background-color: oklch(60% 0 0);
   }
 }

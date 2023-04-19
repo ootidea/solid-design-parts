@@ -1,4 +1,4 @@
-import { assert, isNotNull, rangeUntil } from 'base-up'
+import { assert, isNotNull, isNotNullish, rangeUntil } from 'base-up'
 import { children, For } from 'solid-js'
 import { createMutable } from 'solid-js/store'
 import './Carousel.scss'
@@ -13,6 +13,8 @@ export function Carousel(rawProps: CarouselProps) {
 
   /** A Record with the key as the item's index and the value indicating whether the item is within the scroll range */
   const flagsThatIndicateWhetherItemIsWithinScrollRange = createMutable<Record<number, boolean>>({})
+
+  let itemListElement: HTMLDivElement | undefined
 
   /** Set up IntersectionObserver to identify the item displayed at the center of the carousel. */
   function setupIntersectionObserver(element: HTMLElement, index: number) {
@@ -41,6 +43,8 @@ export function Carousel(rawProps: CarouselProps) {
       <div
         class="solid-design-parts-Carousel_item-list"
         ref={(element) => {
+          itemListElement = element
+
           const observer = new MutationObserver((mutations) => {
             for (const addedNodes of mutations.flatMap((mutation) => Array.from(mutation.addedNodes))) {
               if (addedNodes instanceof HTMLElement) {
@@ -62,9 +66,19 @@ export function Carousel(rawProps: CarouselProps) {
       <div class="solid-design-parts-Carousel_indicator-list">
         <For each={rangeUntil(childrenMemo.toArray().length)}>
           {(i) => (
-            <div
+            <button
               class="solid-design-parts-Carousel_indicator"
               aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
+              onClick={() => {
+                assert(itemListElement, isNotNullish)
+                const itemRect = itemListElement.children.item(i)?.getBoundingClientRect()
+                assert(itemRect, isNotNullish)
+                const itemListRect = itemListElement.getBoundingClientRect()
+                itemListElement.scrollTo({
+                  left: i * itemRect.width - itemListRect.width / 2 + itemRect.width / 2,
+                  behavior: 'smooth',
+                })
+              }}
             />
           )}
         </For>
