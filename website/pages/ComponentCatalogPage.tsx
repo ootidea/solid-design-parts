@@ -78,7 +78,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   TitleBarLayoutCatalog,
   ScrollableCatalog,
   ResizableCatalog,
-  CollapsibleCatalog: CollapsibleCatalog,
+  CollapsibleCatalog,
   IconCatalog,
   DividerCatalog,
   ImageCatalog,
