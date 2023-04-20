@@ -14,12 +14,13 @@ export type CarouselProps = Props<{
   autoScroll?: boolean
   autoScrollIntervalMs?: number
   hideNavigationButtons?: boolean
+  hideIndicators?: boolean
 }>
 
 export function Carousel(rawProps: CarouselProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { autoScroll: false, autoScrollIntervalMs: 5000, hideNavigationButtons: false },
+    { autoScroll: false, autoScrollIntervalMs: 5000, hideNavigationButtons: false, hideIndicators: false },
     ['itemWidth', 'children']
   )
   const childrenMemo = children(() => props.children)
@@ -91,6 +92,8 @@ export function Carousel(rawProps: CarouselProps) {
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Carousel_root', {
         'solid-design-parts-Carousel_is-overflowing': isOverflowing.value,
+        'solid-design-parts-Carousel_hide-navigation-buttons': props.hideNavigationButtons,
+        'solid-design-parts-Carousel_hide-indicators': props.hideIndicators,
       })}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Carousel_item-width': props.itemWidth,
@@ -99,7 +102,6 @@ export function Carousel(rawProps: CarouselProps) {
       <div class="solid-design-parts-Carousel_navigation-button-layout">
         <IconButton
           class="solid-design-parts-Carousel_prev-button"
-          classList={{ 'solid-design-parts-Carousel_hide-navigation-buttons': props.hideNavigationButtons }}
           src={chevronLeftIcon}
           backgroundColor="var(--solid-design-parts-Carousel_navigation-button-background-color)"
           iconColor="var(--solid-design-parts-Carousel_navigation-button-icon-color)"
@@ -168,7 +170,6 @@ export function Carousel(rawProps: CarouselProps) {
         </div>
         <IconButton
           class="solid-design-parts-Carousel_next-button"
-          classList={{ 'solid-design-parts-Carousel_hide-navigation-buttons': props.hideNavigationButtons }}
           src={chevronRightIcon}
           backgroundColor="var(--solid-design-parts-Carousel_navigation-button-background-color)"
           iconColor="var(--solid-design-parts-Carousel_navigation-button-icon-color)"

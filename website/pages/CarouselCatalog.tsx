@@ -93,5 +93,20 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Hiding indicators',
+      children: (
+        <>
+          <Carousel itemWidth="22rem" hideIndicators>
+            <img src="https://source.unsplash.com/600x300/?dog" alt="" />
+            <img src="https://source.unsplash.com/600x300/?desk" alt="" />
+            <img src="https://source.unsplash.com/600x300/?cat" alt="" />
+            <img src="https://source.unsplash.com/600x300/?sky" alt="" />
+            <img src="https://source.unsplash.com/600x300/?leaf" alt="" />
+            <img src="https://source.unsplash.com/600x300/?device" alt="" />
+          </Carousel>
+        </>
+      ),
+    },
   ],
 }))

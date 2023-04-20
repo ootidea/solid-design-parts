@@ -53,7 +53,7 @@
     display: none;
   }
 
-  &.solid-design-parts-Carousel_hide-navigation-buttons {
+  .solid-design-parts-Carousel_hide-navigation-buttons & {
     display: none;
   }
 }
@@ -74,6 +74,10 @@
   justify-content: center;
 
   .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
+    display: none;
+  }
+
+  .solid-design-parts-Carousel_hide-indicators & {
     display: none;
   }
 }
