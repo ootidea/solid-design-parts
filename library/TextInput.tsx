@@ -1,4 +1,4 @@
-import { entriesOf, isInstanceOf, LiteralAutoComplete, Promisable } from 'base-up'
+import { entriesOf, LiteralAutoComplete, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
@@ -104,13 +104,6 @@ export function TextInput(rawProps: TextInputProps) {
     }
   })
 
-  async function onInput(event: InputEvent) {
-    if (!isInstanceOf(event.target, HTMLInputElement)) return
-
-    isEditedSignal.value = true
-    valueSignal.value = event.target.value
-  }
-
   async function deriveError(
     shouldValidate: boolean,
     value: string,
@@ -167,7 +160,10 @@ export function TextInput(rawProps: TextInputProps) {
             placeholder={props.placeholder}
             type={props.type}
             disabled={props.disabled}
-            onInput={onInput}
+            onInput={(event) => {
+              isEditedSignal.value = true
+              valueSignal.value = event.target.value
+            }}
             onFocus={() => (hasInputElementFocusSignal.value = true)}
             onBlur={() => {
               isEditedSignal.value = true

@@ -1,4 +1,4 @@
-import { isInstanceOf, Promisable } from 'base-up'
+import { Promisable } from 'base-up'
 import { ComponentProps, createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './Checkbox.scss'
@@ -65,13 +65,6 @@ export function Checkbox(rawProps: CheckboxProps) {
     }
   })
 
-  async function onChange(event: Event) {
-    isEditedSignal.value = true
-    if (!isInstanceOf(event.target, HTMLInputElement)) return
-
-    checkedSignal.value = event.target.checked
-  }
-
   async function deriveError(
     shouldValidate: boolean,
     checked: boolean,
@@ -123,7 +116,10 @@ export function Checkbox(rawProps: CheckboxProps) {
           value={props.value}
           checked={checkedSignal.value}
           disabled={props.disabled}
-          onChange={onChange}
+          onChange={async (event) => {
+            isEditedSignal.value = true
+            checkedSignal.value = event.target.checked
+          }}
         />
         <div class="solid-design-parts-Checkbox_children">{rawProps.children}</div>
       </label>

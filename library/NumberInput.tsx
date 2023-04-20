@@ -1,4 +1,4 @@
-import { entriesOf, isInstanceOf, Promisable } from 'base-up'
+import { entriesOf, Promisable } from 'base-up'
 import { createRenderEffect, JSX, Show, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
@@ -105,12 +105,6 @@ export function NumberInput(rawProps: NumberInputProps) {
     }
   })
 
-  async function onInput(event: InputEvent) {
-    if (!isInstanceOf(event.target, HTMLInputElement)) return
-
-    changeValue(event.target.value)
-  }
-
   function changeValue(newString: string) {
     isEditedSignal.value = true
 
@@ -187,7 +181,7 @@ export function NumberInput(rawProps: NumberInputProps) {
             inputMode={props.inputMode}
             placeholder={props.placeholder}
             disabled={props.disabled}
-            onInput={onInput}
+            onInput={(event) => changeValue(event.target.value)}
             onFocus={() => (hasInputElementFocusSignal.value = true)}
             onBlur={() => {
               isEditedSignal.value = true

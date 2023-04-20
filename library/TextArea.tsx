@@ -1,4 +1,4 @@
-import { entriesOf, isInstanceOf, Promisable } from 'base-up'
+import { entriesOf, Promisable } from 'base-up'
 import { createRenderEffect, untrack } from 'solid-js'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
@@ -75,13 +75,6 @@ export function TextArea(rawProps: TextAreaProps) {
     }
   })
 
-  async function onInput(event: InputEvent) {
-    if (!isInstanceOf(event.target, HTMLTextAreaElement)) return
-
-    isEditedSignal.value = true
-    valueSignal.value = event.target.value
-  }
-
   async function deriveError(
     shouldValidate: boolean,
     value: string,
@@ -136,7 +129,10 @@ export function TextArea(rawProps: TextAreaProps) {
           {...restProps}
           class={joinClasses(rawProps, 'solid-design-parts-TextArea_text-area')}
           value={valueSignal.value}
-          onInput={onInput}
+          onInput={(event) => {
+            isEditedSignal.value = true
+            valueSignal.value = event.target.value
+          }}
           onBlur={() => (isEditedSignal.value = true)}
         />
       </div>
