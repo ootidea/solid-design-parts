@@ -3,6 +3,7 @@ import { createRenderEffect, For, JSX, Show, untrack } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
+import { Const } from './Const'
 import { Divider } from './Divider'
 import { ErrorMessage } from './ErrorMessage'
 import { Icon } from './Icon'
@@ -118,7 +119,6 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
     }
   }
 
-  const searchQuerySignal = createSignalObject('')
   function search(values: T, searchQuery: string): readonly T[number][] {
     // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
@@ -219,60 +219,64 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
       <Show when={dropdownInfoSignal.value} keyed>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
-            <div
-              class="solid-design-parts-Select_overlay"
-              tabindex={-1}
-              ref={(element) => setupFocusTrap(element)}
-              onClick={onOperateOverlay}
-              onTouchMove={onOperateOverlay}
-              onMouseWheel={onOperateOverlay}
-              onKeyDown={onKeyDown}
-            >
-              <div
-                class="solid-design-parts-Select_dropdown"
-                style={{
-                  '--solid-design-parts-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
-                  '--solid-design-parts-Select_dropdown-top': `${dropdownInfo.topPx}px`,
-                  '--solid-design-parts-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
-                  '--solid-design-parts-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
-                }}
-              >
-                <Show when={props.showSearchBox}>
-                  <div class="solid-design-parts-Select_search-box-area">
-                    <TextInput
-                      class="solid-design-parts-Select_search-box"
-                      placeholder="search"
-                      value={searchQuerySignal.value}
-                      error={(value) => search(props.values, value).length === 0}
-                      onChangeValue={searchQuerySignal.set}
-                    />
+            <Const value={createSignalObject('')}>
+              {(searchQuerySignal) => (
+                <div
+                  class="solid-design-parts-Select_overlay"
+                  tabindex={-1}
+                  ref={(element) => setupFocusTrap(element)}
+                  onClick={onOperateOverlay}
+                  onTouchMove={onOperateOverlay}
+                  onMouseWheel={onOperateOverlay}
+                  onKeyDown={onKeyDown}
+                >
+                  <div
+                    class="solid-design-parts-Select_dropdown"
+                    style={{
+                      '--solid-design-parts-Select_dropdown-left': `${dropdownInfo.leftPx}px`,
+                      '--solid-design-parts-Select_dropdown-top': `${dropdownInfo.topPx}px`,
+                      '--solid-design-parts-Select_dropdown-width': `${dropdownInfo.widthPx}px`,
+                      '--solid-design-parts-Select_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
+                    }}
+                  >
+                    <Show when={props.showSearchBox}>
+                      <div class="solid-design-parts-Select_search-box-area">
+                        <TextInput
+                          class="solid-design-parts-Select_search-box"
+                          placeholder="search"
+                          value={searchQuerySignal.value}
+                          error={(value) => search(props.values, value).length === 0}
+                          onChangeValue={searchQuerySignal.set}
+                        />
+                      </div>
+                    </Show>
+                    <Scrollable role="menu">
+                      <For each={search(props.values, searchQuerySignal.value)}>
+                        {(value, i) => (
+                          <>
+                            <Show when={i() > 0}>
+                              <Divider />
+                            </Show>
+                            <button
+                              class="solid-design-parts-Select_option"
+                              type="button"
+                              role="menuitem"
+                              aria-selected={selectedSignal.value === value}
+                              onClick={() => {
+                                selectedSignal.value = value
+                                closeDropdown()
+                              }}
+                            >
+                              {getLabel(value)}
+                            </button>
+                          </>
+                        )}
+                      </For>
+                    </Scrollable>
                   </div>
-                </Show>
-                <Scrollable role="menu">
-                  <For each={search(props.values, searchQuerySignal.value)}>
-                    {(value, i) => (
-                      <>
-                        <Show when={i() > 0}>
-                          <Divider />
-                        </Show>
-                        <button
-                          class="solid-design-parts-Select_option"
-                          type="button"
-                          role="menuitem"
-                          aria-selected={selectedSignal.value === value}
-                          onClick={() => {
-                            selectedSignal.value = value
-                            closeDropdown()
-                          }}
-                        >
-                          {getLabel(value)}
-                        </button>
-                      </>
-                    )}
-                  </For>
-                </Scrollable>
-              </div>
-            </div>
+                </div>
+              )}
+            </Const>
           </Portal>
         )}
       </Show>

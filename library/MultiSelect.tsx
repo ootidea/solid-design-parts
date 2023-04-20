@@ -14,6 +14,7 @@ import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import { Checkbox } from './Checkbox'
 import { CheckboxesProps } from './Checkboxes'
 import './common.scss'
+import { Const } from './Const'
 import { Divider } from './Divider'
 import { ErrorMessage } from './ErrorMessage'
 import { Icon } from './Icon'
@@ -150,7 +151,6 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
 
   const followingCount = createMemoObject(() => selectedSignal.value.size - 1)
 
-  const searchQuerySignal = createSignalObject('')
   function search(values: T, searchQuery: string) {
     // AND-search
     const searchWords = searchQuery.split(/[ 　]/)
@@ -260,60 +260,64 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
       <Show when={dropdownInfoSignal.value} keyed>
         {(dropdownInfo: DropdownInfo) => (
           <Portal>
-            <div
-              class="solid-design-parts-MultiSelect_overlay"
-              tabindex={-1}
-              ref={(element) => setupFocusTrap(element)}
-              onClick={onOperateOverlay}
-              onTouchMove={onOperateOverlay}
-              onMouseWheel={onOperateOverlay}
-              onKeyDown={onKeyDown}
-            >
-              <div
-                class="solid-design-parts-MultiSelect_dropdown"
-                style={{
-                  '--solid-design-parts-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
-                  '--solid-design-parts-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
-                  '--solid-design-parts-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
-                  '--solid-design-parts-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
-                }}
-              >
-                <Show when={props.showSearchBox}>
-                  <div class="solid-design-parts-MultiSelect_search-box-area">
-                    <TextInput
-                      class="solid-design-parts-MultiSelect_search-box"
-                      placeholder="search"
-                      value={searchQuerySignal.value}
-                      error={(value) => search(props.values, value).length === 0}
-                      onChangeValue={searchQuerySignal.set}
-                    />
+            <Const value={createSignalObject('')}>
+              {(searchQuerySignal) => (
+                <div
+                  class="solid-design-parts-MultiSelect_overlay"
+                  tabindex={-1}
+                  ref={(element) => setupFocusTrap(element)}
+                  onClick={onOperateOverlay}
+                  onTouchMove={onOperateOverlay}
+                  onMouseWheel={onOperateOverlay}
+                  onKeyDown={onKeyDown}
+                >
+                  <div
+                    class="solid-design-parts-MultiSelect_dropdown"
+                    style={{
+                      '--solid-design-parts-MultiSelect_dropdown-left': `${dropdownInfo.leftPx}px`,
+                      '--solid-design-parts-MultiSelect_dropdown-top': `${dropdownInfo.topPx}px`,
+                      '--solid-design-parts-MultiSelect_dropdown-width': `${dropdownInfo.widthPx}px`,
+                      '--solid-design-parts-MultiSelect_dropdown-max-height': `${dropdownInfo.maxHeightPx}px`,
+                    }}
+                  >
+                    <Show when={props.showSearchBox}>
+                      <div class="solid-design-parts-MultiSelect_search-box-area">
+                        <TextInput
+                          class="solid-design-parts-MultiSelect_search-box"
+                          placeholder="search"
+                          value={searchQuerySignal.value}
+                          error={(value) => search(props.values, value).length === 0}
+                          onChangeValue={searchQuerySignal.set}
+                        />
+                      </div>
+                    </Show>
+                    <Scrollable role="menu">
+                      <For each={search(props.values, searchQuerySignal.value)}>
+                        {(value, i) => (
+                          <>
+                            <Show when={i() > 0}>
+                              <Divider />
+                            </Show>
+                            <Checkbox
+                              checked={dropdownInfo.selected.has(value)}
+                              disabled={props.disabled}
+                              labelProps={{
+                                class: 'solid-design-parts-MultiSelect_checkbox-label',
+                              }}
+                              onChangeChecked={() => {
+                                dropdownInfo.selected = toggle(dropdownInfo.selected, value)
+                              }}
+                            >
+                              {getLabel(value)}
+                            </Checkbox>
+                          </>
+                        )}
+                      </For>
+                    </Scrollable>
                   </div>
-                </Show>
-                <Scrollable role="menu">
-                  <For each={search(props.values, searchQuerySignal.value)}>
-                    {(value, i) => (
-                      <>
-                        <Show when={i() > 0}>
-                          <Divider />
-                        </Show>
-                        <Checkbox
-                          checked={dropdownInfo.selected.has(value)}
-                          disabled={props.disabled}
-                          labelProps={{
-                            class: 'solid-design-parts-MultiSelect_checkbox-label',
-                          }}
-                          onChangeChecked={() => {
-                            dropdownInfo.selected = toggle(dropdownInfo.selected, value)
-                          }}
-                        >
-                          {getLabel(value)}
-                        </Checkbox>
-                      </>
-                    )}
-                  </For>
-                </Scrollable>
-              </div>
-            </div>
+                </div>
+              )}
+            </Const>
           </Portal>
         )}
       </Show>
