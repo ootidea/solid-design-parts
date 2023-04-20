@@ -14,12 +14,12 @@ export function Resizable(rawProps: ResizableProps) {
   if (initialWidthPx !== props.widthPx && initialWidthPx !== undefined) {
     props.onChangeWidthPx?.(initialWidthPx)
   }
-  const widthPx = createSignalObject(initialWidthPx)
+  const widthPxSignal = createSignalObject(initialWidthPx)
   createDeferEffect(
     () => props.widthPx,
     () => {
       const newWidthPx = props.widthPx !== undefined ? Math.max(0, props.widthPx) : undefined
-      widthPx.value = newWidthPx
+      widthPxSignal.value = newWidthPx
     }
   )
 
@@ -50,14 +50,16 @@ export function Resizable(rawProps: ResizableProps) {
     const left = rootElement.getBoundingClientRect().left
     const newWidthPx = Math.max(0, right - left - dragState.deltaX)
     props.onChangeWidthPx?.(newWidthPx)
-    widthPx.value = newWidthPx
+    widthPxSignal.value = newWidthPx
   }
 
   return (
     <div
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Resizable_root')}
-      style={joinStyle(rawProps.style, { width: widthPx.value !== undefined ? `${widthPx.value}px` : 'max-content' })}
+      style={joinStyle(rawProps.style, {
+        width: widthPxSignal.value !== undefined ? `${widthPxSignal.value}px` : 'max-content',
+      })}
       ref={rootElement}
     >
       <Show when={rawProps.children instanceof Array} fallback={rawProps.children}>
