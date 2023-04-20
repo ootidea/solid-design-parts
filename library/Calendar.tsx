@@ -18,7 +18,7 @@ import './common.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
-import { i18n } from './utility/i18n'
+import { i18nGetters } from './utility/i18n'
 import { createNormalizedSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
@@ -53,7 +53,7 @@ export function Calendar(rawProps: CalendarProps) {
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Calendar_root')}
       style={joinStyle(props.style, {
-        '--solid-design-parts-Calendar_year-month-order': i18n.literals.calendarYearMonthOrder,
+        '--solid-design-parts-Calendar_year-month-order': i18nGetters.calendarYearMonthOrder,
       })}
     >
       <div class="solid-design-parts-Calendar_year-month-area">
@@ -66,10 +66,10 @@ export function Calendar(rawProps: CalendarProps) {
         />
         <div class="solid-design-parts-Calendar_year-month">
           <span class="solid-design-parts-Calendar_year">
-            {format(monthSignal.value, i18n.literals.calendarYearTemplate)}
+            {format(monthSignal.value, i18nGetters.calendarYearTemplate)}
           </span>
           <span class="solid-design-parts-Calendar_month">
-            {format(monthSignal.value, i18n.literals.calendarMonthTemplate)}
+            {format(monthSignal.value, i18nGetters.calendarMonthTemplate)}
           </span>
         </div>
         <IconButton
@@ -83,7 +83,7 @@ export function Calendar(rawProps: CalendarProps) {
 
       <div class="solid-design-parts-Calendar_grid">
         <div class="solid-design-parts-Calendar_day-row">
-          <For each={i18n.literals.calendarDayNames}>
+          <For each={i18nGetters.calendarDayNames}>
             {(dayName, day) => (
               <div class="solid-design-parts-Calendar_cell" data-day={day()}>
                 {dayName}
@@ -95,7 +95,7 @@ export function Calendar(rawProps: CalendarProps) {
         <For each={rangeUntil(6)}>
           {(weakIndex) => (
             <div class="solid-design-parts-Calendar_date-row">
-              <For each={i18n.literals.calendarDayNames}>
+              <For each={i18nGetters.calendarDayNames}>
                 {(_, day) => {
                   const date = createMemoObject(() =>
                     addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day())

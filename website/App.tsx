@@ -1,7 +1,7 @@
 import { Navigate, Route, Router, Routes } from '@solidjs/router'
 import { For } from 'solid-js'
 import { Collapsible, Divider, Gravity, Scrollable, Select, StretchLayout } from '../library'
-import { i18n } from '../library/utility/i18n'
+import { forceCurrentLanguage } from '../library/utility/i18n'
 import classes from './App.module.scss'
 import { ComponentCatalogPage } from './pages/ComponentCatalogPage'
 import { SidebarMenu } from './SidebarMenu'
@@ -58,7 +58,7 @@ export function App() {
             values={['en', 'ja']}
             labels={{ en: 'English', ja: '日本語' }}
             showClearButton
-            onChangeSelected={(selected) => i18n.forceLanguage(selected)}
+            onChangeSelected={(selected) => forceCurrentLanguage(selected)}
           />
         </header>
         <Divider />

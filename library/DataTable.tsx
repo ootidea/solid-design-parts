@@ -10,7 +10,7 @@ import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { CssColor } from './utility/color'
 import { isNestedClickEvent } from './utility/dom'
-import { i18n } from './utility/i18n'
+import { i18nGetters } from './utility/i18n'
 import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
@@ -278,7 +278,7 @@ export function DataTable<
               <div class="solid-design-parts-DataTable_empty-state-cell">
                 <Slot content={props.emptyState} params={{}}>
                   <Gravity class="solid-design-parts-DataTable_empty-message">
-                    {i18n.literals.dataTableEmptyMessage}
+                    {i18nGetters.dataTableEmptyMessage}
                   </Gravity>
                 </Slot>
               </div>
