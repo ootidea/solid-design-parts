@@ -34,18 +34,13 @@ export function Scrollable(rawProps: ScrollableProps) {
   })
 
   function setupDragAndDrop(element: HTMLDivElement) {
-    element.addEventListener('mousedown', onMouseDown)
-    onCleanup(() => {
-      element.removeEventListener('mousedown', onMouseDown)
-    })
-
-    function onMouseDown(event: MouseEvent) {
+    element.addEventListener('mousedown', (event: MouseEvent) => {
       event.preventDefault()
       if (outerElement === undefined) return
 
       dragState.value = { initialMouseY: event.clientY, initialScrollTop: outerElement.scrollTop }
       document.body.addEventListener('mousemove', onMouseMove)
-    }
+    })
 
     function onMouseMove(event: MouseEvent) {
       // if left mouse button is not pressed
