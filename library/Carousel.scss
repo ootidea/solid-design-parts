@@ -57,7 +57,17 @@
     background-color: oklch(80% 0 0);
   }
 
-  &[aria-current='true']:before {
+  @media (hover: hover) {
+    &:hover::before {
+      background-color: oklch(75% 0 0);
+    }
+  }
+
+  &:active::before {
+    background-color: oklch(70% 0 0);
+  }
+
+  &[aria-current='true']::before {
     background-color: oklch(60% 0 0);
   }
 }
