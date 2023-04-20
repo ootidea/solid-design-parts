@@ -175,7 +175,7 @@ export function calculateHoverColor(baseCssColor: string): string {
     oklch.lightness > MIDDLE_LIGHTNESS ? oklch.lightness - 0.05 / oklch.lightness : 1 - (1 - oklch.lightness) * 0.8
 
   const chromaRatio = calculateChromaRatio(color)
-  return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue).to('hsl').toString()
+  return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue, color.alpha).to('hsl').toString()
 }
 
 export function calculateActiveColor(baseCssColor: string): string {
@@ -221,10 +221,15 @@ export function calculateMaxChromaInGamut(lightness: number, hue: number, delta:
 
 export function calculateChromaRatio(color: Color): number {
   const oklch = color.oklch
-  return oklch.chroma / calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
+  const maxChroma = calculateMaxChromaInGamut(oklch.lightness, oklch.hue)
+  if (maxChroma === 0) {
+    return 0
+  } else {
+    return oklch.chroma / maxChroma
+  }
 }
 
-function createColorUsingChromaRatio(lightness: number, chromaRatio: number, hue: number) {
+function createColorUsingChromaRatio(lightness: number, chromaRatio: number, hue: number, alpha: number = 1) {
   const maxChroma = calculateMaxChromaInGamut(lightness, hue)
-  return new Color('oklch', [lightness, maxChroma * chromaRatio, hue], 1)
+  return new Color('oklch', [lightness, maxChroma * chromaRatio, hue], alpha)
 }
