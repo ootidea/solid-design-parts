@@ -3,6 +3,12 @@ import { Carousel } from '../../library/Carousel'
 import { Catalog } from './ComponentCatalogPage'
 
 export const CarouselCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Carousel</code> is a component that displays multiple contents in a slideshow format. Not only images, but
+      any JSX.Element can be displayed.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
