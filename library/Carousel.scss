@@ -1,13 +1,13 @@
 :root {
-  --solid-design-parts-Carousel_button-background-color: oklch(100% 0 0 / 50%);
-  --solid-design-parts-Carousel_button-icon-color: oklch(30% 0 0);
+  --solid-design-parts-Carousel_navigation-button-background-color: oklch(100% 0 0 / 50%);
+  --solid-design-parts-Carousel_navigation-button-icon-color: oklch(30% 0 0);
 }
 
 .solid-design-parts-Carousel_root {
   position: relative;
 }
 
-.solid-design-parts-Carousel_button-layout {
+.solid-design-parts-Carousel_navigation-button-layout {
   position: relative;
 }
 
@@ -50,6 +50,10 @@
   transform: translateY(-50%);
 
   .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
+    display: none;
+  }
+
+  &.solid-design-parts-Carousel_hide-navigation-buttons {
     display: none;
   }
 }

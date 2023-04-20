@@ -14,8 +14,9 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <Carousel itemWidth="20rem">
+          <Carousel itemWidth="22rem">
             <img src="https://source.unsplash.com/600x300/?dog" alt="" />
+            <img src="https://source.unsplash.com/600x300/?desk" alt="" />
             <img src="https://source.unsplash.com/600x300/?cat" alt="" />
             <img src="https://source.unsplash.com/600x300/?sky" alt="" />
             <img src="https://source.unsplash.com/600x300/?leaf" alt="" />
@@ -71,8 +72,22 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       description: 'The buttons and indicators will not be displayed if there is no overflow.',
       children: (
         <>
-          <Carousel itemWidth="18rem">
+          <Carousel itemWidth="22rem">
+            <img src="https://source.unsplash.com/600x300/?dog" alt="" />
+          </Carousel>
+        </>
+      ),
+    },
+    {
+      title: 'Hiding navigation buttons',
+      children: (
+        <>
+          <Carousel itemWidth="22rem" hideNavigationButtons>
+            <img src="https://source.unsplash.com/600x300/?dog" alt="" />
+            <img src="https://source.unsplash.com/600x300/?desk" alt="" />
+            <img src="https://source.unsplash.com/600x300/?cat" alt="" />
             <img src="https://source.unsplash.com/600x300/?sky" alt="" />
+            <img src="https://source.unsplash.com/600x300/?leaf" alt="" />
             <img src="https://source.unsplash.com/600x300/?device" alt="" />
           </Carousel>
         </>

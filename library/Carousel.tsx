@@ -9,13 +9,19 @@ import './common.scss'
 import { IconButton } from './IconButton'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
-export type CarouselProps = Props<{ itemWidth: string; autoScroll?: boolean; autoScrollIntervalMs?: number }>
+export type CarouselProps = Props<{
+  itemWidth: string
+  autoScroll?: boolean
+  autoScrollIntervalMs?: number
+  hideNavigationButtons?: boolean
+}>
 
 export function Carousel(rawProps: CarouselProps) {
-  const [props, restProps] = prepareProps(rawProps, { autoScroll: false, autoScrollIntervalMs: 5000 }, [
-    'itemWidth',
-    'children',
-  ])
+  const [props, restProps] = prepareProps(
+    rawProps,
+    { autoScroll: false, autoScrollIntervalMs: 5000, hideNavigationButtons: false },
+    ['itemWidth', 'children']
+  )
   const childrenMemo = children(() => props.children)
 
   const isOverflowing = createSignalObject(false)
@@ -90,12 +96,13 @@ export function Carousel(rawProps: CarouselProps) {
         '--solid-design-parts-Carousel_item-width': props.itemWidth,
       })}
     >
-      <div class="solid-design-parts-Carousel_button-layout">
+      <div class="solid-design-parts-Carousel_navigation-button-layout">
         <IconButton
           class="solid-design-parts-Carousel_prev-button"
+          classList={{ 'solid-design-parts-Carousel_hide-navigation-buttons': props.hideNavigationButtons }}
           src={chevronLeftIcon}
-          backgroundColor="var(--solid-design-parts-Carousel_button-background-color)"
-          iconColor="var(--solid-design-parts-Carousel_button-icon-color)"
+          backgroundColor="var(--solid-design-parts-Carousel_navigation-button-background-color)"
+          iconColor="var(--solid-design-parts-Carousel_navigation-button-icon-color)"
           onClick={() => {
             if (props.autoScroll) {
               restartAutoScrollTimer()
@@ -161,9 +168,10 @@ export function Carousel(rawProps: CarouselProps) {
         </div>
         <IconButton
           class="solid-design-parts-Carousel_next-button"
+          classList={{ 'solid-design-parts-Carousel_hide-navigation-buttons': props.hideNavigationButtons }}
           src={chevronRightIcon}
-          backgroundColor="var(--solid-design-parts-Carousel_button-background-color)"
-          iconColor="var(--solid-design-parts-Carousel_button-icon-color)"
+          backgroundColor="var(--solid-design-parts-Carousel_navigation-button-background-color)"
+          iconColor="var(--solid-design-parts-Carousel_navigation-button-icon-color)"
           onClick={() => {
             if (props.autoScroll) {
               restartAutoScrollTimer()
