@@ -28,7 +28,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
     {
       title: (
         <>
-          Binding <code>selected</code> to signal
+          Binding <code>selected</code> to a signal
         </>
       ),
       children: (

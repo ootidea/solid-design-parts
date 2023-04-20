@@ -29,7 +29,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Binding the value to signal',
+      title: 'Binding the value to a signal',
       children: (
         <>
           <DatePicker value={value()} onChangeValue={setValue} />

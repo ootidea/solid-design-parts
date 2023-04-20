@@ -26,7 +26,7 @@ export const ResizableCatalog: Catalog = createRoot(() => ({
     {
       title: (
         <>
-          Binding <code>widthPx</code> to signal
+          Binding <code>widthPx</code> to a signal
         </>
       ),
       children: (

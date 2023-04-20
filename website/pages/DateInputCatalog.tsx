@@ -25,7 +25,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
     {
       title: (
         <>
-          Binding <code>value</code> to signal
+          Binding <code>value</code> to a signal
         </>
       ),
       children: (

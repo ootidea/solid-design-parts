@@ -15,7 +15,7 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
     {
       title: (
         <>
-          Binding <code>month</code> to signal
+          Binding <code>month</code> to a signal
         </>
       ),
       children: (

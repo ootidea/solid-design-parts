@@ -21,7 +21,7 @@ export const CollapsibleCatalog: Catalog = createRoot(() => ({
     {
       title: (
         <>
-          Binding <code>collapsed</code> to signal
+          Binding <code>collapsed</code> to a signal
         </>
       ),
       children: (
