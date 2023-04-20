@@ -10,9 +10,13 @@ import { IconButton } from './IconButton'
 import arrowDownIcon from './image/arrow-down.svg'
 import { CssColor } from './utility/color'
 import { isNestedClickEvent } from './utility/dom'
-import { i18nGetters } from './utility/i18n'
+import { createI18nGetters } from './utility/i18n'
 import { createInjectableSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
+
+const i18nGetters = createI18nGetters({
+  emptyMessage: { default: 'No data', ja: 'データがありません' },
+})
 
 type ColumnAlign = 'left' | 'center' | 'right'
 type CompareFunction<Row extends Record<string, unknown>> = (value1: any, value2: any, row1: Row, row2: Row) => number
@@ -277,9 +281,7 @@ export function DataTable<
               </div>
               <div class="solid-design-parts-DataTable_empty-state-cell">
                 <Slot content={props.emptyState} params={{}}>
-                  <Gravity class="solid-design-parts-DataTable_empty-message">
-                    {i18nGetters.dataTableEmptyMessage}
-                  </Gravity>
+                  <Gravity class="solid-design-parts-DataTable_empty-message">{i18nGetters.emptyMessage}</Gravity>
                 </Slot>
               </div>
               <div class="solid-design-parts-DataTable_vertical-ruled-line">

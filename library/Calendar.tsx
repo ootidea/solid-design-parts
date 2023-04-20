@@ -18,7 +18,7 @@ import './common.scss'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
-import { i18nGetters } from './utility/i18n'
+import { createI18nGetters } from './utility/i18n'
 import { createNormalizedSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
@@ -29,6 +29,16 @@ export type CalendarProps = Props<{
   onChangeMonth?: (month: Date) => void
   children?: SlotProp<{ date: Date }>
 }>
+
+const i18nGetters = createI18nGetters({
+  dayNames: {
+    default: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+    ja: ['日', '月', '火', '水', '木', '金', '土'],
+  },
+  yearMonthOrder: { default: `"month year"`, ja: `"year month"` },
+  monthTemplate: { default: 'MMMM', ja: 'M月' },
+  yearTemplate: { default: 'yyyy', ja: 'yyyy年' },
+})
 
 export function Calendar(rawProps: CalendarProps) {
   const [props, restProps] = prepareProps(
@@ -53,7 +63,7 @@ export function Calendar(rawProps: CalendarProps) {
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Calendar_root')}
       style={joinStyle(props.style, {
-        '--solid-design-parts-Calendar_year-month-order': i18nGetters.calendarYearMonthOrder,
+        '--solid-design-parts-Calendar_year-month-order': i18nGetters.yearMonthOrder,
       })}
     >
       <div class="solid-design-parts-Calendar_year-month-area">
@@ -65,12 +75,8 @@ export function Calendar(rawProps: CalendarProps) {
           size="1.6em"
         />
         <div class="solid-design-parts-Calendar_year-month">
-          <span class="solid-design-parts-Calendar_year">
-            {format(monthSignal.value, i18nGetters.calendarYearTemplate)}
-          </span>
-          <span class="solid-design-parts-Calendar_month">
-            {format(monthSignal.value, i18nGetters.calendarMonthTemplate)}
-          </span>
+          <span class="solid-design-parts-Calendar_year">{format(monthSignal.value, i18nGetters.yearTemplate)}</span>
+          <span class="solid-design-parts-Calendar_month">{format(monthSignal.value, i18nGetters.monthTemplate)}</span>
         </div>
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
@@ -83,7 +89,7 @@ export function Calendar(rawProps: CalendarProps) {
 
       <div class="solid-design-parts-Calendar_grid">
         <div class="solid-design-parts-Calendar_day-row">
-          <For each={i18nGetters.calendarDayNames}>
+          <For each={i18nGetters.dayNames}>
             {(dayName, day) => (
               <div class="solid-design-parts-Calendar_cell" data-day={day()}>
                 {dayName}
@@ -95,7 +101,7 @@ export function Calendar(rawProps: CalendarProps) {
         <For each={rangeUntil(6)}>
           {(weakIndex) => (
             <div class="solid-design-parts-Calendar_date-row">
-              <For each={i18nGetters.calendarDayNames}>
+              <For each={i18nGetters.dayNames}>
                 {(_, day) => {
                   const date = createMemoObject(() =>
                     addDays(addWeeks(firstDateOfSelectedCalendar(), weakIndex), day())
