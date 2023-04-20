@@ -1,7 +1,9 @@
 import { createRoot } from 'solid-js'
 import { IconButton } from '../../library'
+import badIcon from '../images/bad.svg'
 import chevronLeftIcon from '../images/chevron-left.svg'
 import chevronRightIcon from '../images/chevron-right.svg'
+import goodIcon from '../images/good.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 async function awaitSomeSeconds() {
@@ -27,8 +29,8 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <IconButton src={chevronLeftIcon} iconColor="#F05A4D" />
-          <IconButton src={chevronRightIcon} iconColor="hsl(180, 60%, 40%)" />
+          <IconButton src={goodIcon} iconColor="hsl(132 39% 63%)" />
+          <IconButton src={badIcon} iconColor="#ea777a" />
         </>
       ),
     },
@@ -64,7 +66,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Change the button size',
+      title: 'Changing the button size',
       description: (
         <>
           Using <code>size</code> changes the button size. The <code>size</code> sets both the width and height.
@@ -79,7 +81,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Change the icon size (without changing the button size).',
+      title: 'Changing the icon size (without changing the button size).',
       description: (
         <>
           Using <code>iconSize</code> changes the icon size, but the clickable area remains unchanged.
