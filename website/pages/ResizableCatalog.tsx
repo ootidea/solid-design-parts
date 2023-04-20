@@ -48,5 +48,20 @@ export const ResizableCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Split layout',
+      children: (
+        <>
+          <div style={{ display: 'grid', 'grid-template-columns': 'auto minmax(0, 1fr)' }}>
+            <Resizable>
+              <div style={{ display: 'grid', 'place-items': 'center', background: 'hsl(0 50% 97%)', padding: '3em' }}>
+                left side
+              </div>
+            </Resizable>
+            <div style={{ display: 'grid', 'place-items': 'center', background: 'hsl(120 50% 97%)' }}>right side</div>
+          </div>
+        </>
+      ),
+    },
   ],
 }))
