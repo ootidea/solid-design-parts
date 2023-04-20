@@ -95,6 +95,7 @@ export function Carousel(rawProps: CarouselProps) {
           class="solid-design-parts-Carousel_prev-button"
           src={chevronLeftIcon}
           backgroundColor="var(--solid-design-parts-Carousel_button-background-color)"
+          iconColor="var(--solid-design-parts-Carousel_button-icon-color)"
           onClick={() => {
             if (props.autoScroll) {
               restartAutoScrollTimer()
@@ -162,6 +163,7 @@ export function Carousel(rawProps: CarouselProps) {
           class="solid-design-parts-Carousel_next-button"
           src={chevronRightIcon}
           backgroundColor="var(--solid-design-parts-Carousel_button-background-color)"
+          iconColor="var(--solid-design-parts-Carousel_button-icon-color)"
           onClick={() => {
             if (props.autoScroll) {
               restartAutoScrollTimer()

@@ -189,7 +189,7 @@ export function calculateActiveColor(baseCssColor: string): string {
     oklch.lightness > MIDDLE_LIGHTNESS ? oklch.lightness - 0.1 / oklch.lightness : 1 - (1 - oklch.lightness) * 0.7
 
   const chromaRatio = calculateChromaRatio(color)
-  return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue).to('hsl').toString()
+  return createColorUsingChromaRatio(newLightness, chromaRatio, oklch.hue, color.alpha).to('hsl').toString()
 }
 
 // An object to cache the return value of the calculateMaxChromaInGamut function.
