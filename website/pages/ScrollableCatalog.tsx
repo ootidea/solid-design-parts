@@ -22,7 +22,7 @@ export const ScrollableCatalog: Catalog = createRoot(() => ({
 
           <div style={{ height: '7rem', width: 'max-content' }}>
             <Scrollable>
-              <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polar_Bear_ANWR_1.jpg/320px-Polar_Bear_ANWR_1.jpg" />
+              <Image src="https://source.unsplash.com/400x300/?random" />,
             </Scrollable>
           </div>
         </>

@@ -15,10 +15,7 @@ export const ResizableCatalog: Catalog = createRoot(() => ({
           </Resizable>
 
           <Resizable>
-            <Image
-              width="100%"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polar_Bear_ANWR_1.jpg/320px-Polar_Bear_ANWR_1.jpg"
-            />
+            <Image width="100%" src="https://source.unsplash.com/200x200/?white" />
           </Resizable>
         </>
       ),

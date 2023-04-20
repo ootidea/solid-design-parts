@@ -36,10 +36,7 @@ export const LayerLayoutCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <LayerLayout>
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Polar_Bear_ANWR_1.jpg/320px-Polar_Bear_ANWR_1.jpg"
-              alt="polar bear"
-            />
+            <img src="https://source.unsplash.com/400x300/?white" alt="" />
             <div
               style={{
                 display: 'flex',
