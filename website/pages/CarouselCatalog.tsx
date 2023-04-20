@@ -108,5 +108,20 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Changing indicator position',
+      children: (
+        <>
+          <Carousel itemWidth="22rem" indicatorPosition="inside">
+            <img src="https://source.unsplash.com/600x300/?dog" alt="" />
+            <img src="https://source.unsplash.com/600x300/?desk" alt="" />
+            <img src="https://source.unsplash.com/600x300/?cat" alt="" />
+            <img src="https://source.unsplash.com/600x300/?sky" alt="" />
+            <img src="https://source.unsplash.com/600x300/?leaf" alt="" />
+            <img src="https://source.unsplash.com/600x300/?device" alt="" />
+          </Carousel>
+        </>
+      ),
+    },
   ],
 }))

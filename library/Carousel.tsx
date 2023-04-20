@@ -15,12 +15,19 @@ export type CarouselProps = Props<{
   autoScrollIntervalMs?: number
   hideNavigationButtons?: boolean
   hideIndicators?: boolean
+  indicatorPosition?: 'outside' | 'inside'
 }>
 
 export function Carousel(rawProps: CarouselProps) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { autoScroll: false, autoScrollIntervalMs: 5000, hideNavigationButtons: false, hideIndicators: false },
+    {
+      autoScroll: false,
+      autoScrollIntervalMs: 5000,
+      hideNavigationButtons: false,
+      hideIndicators: false,
+      indicatorPosition: 'outside',
+    },
     ['itemWidth', 'children']
   )
   const childrenMemo = children(() => props.children)
@@ -98,6 +105,7 @@ export function Carousel(rawProps: CarouselProps) {
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Carousel_item-width': props.itemWidth,
       })}
+      data-indicator-position={props.indicatorPosition}
     >
       <div class="solid-design-parts-Carousel_navigation-button-layout">
         <IconButton

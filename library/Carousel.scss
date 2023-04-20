@@ -67,11 +67,20 @@
 }
 
 .solid-design-parts-Carousel_indicator-list {
-  margin-top: 1em;
-
   display: grid;
   grid-auto-flow: column;
   justify-content: center;
+
+  .solid-design-parts-Carousel_root[data-indicator-position='outside'] & {
+    margin-top: 1em;
+  }
+
+  .solid-design-parts-Carousel_root[data-indicator-position='inside'] & {
+    position: absolute;
+    top: 80%;
+    left: 0;
+    right: 0;
+  }
 
   .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
     display: none;
