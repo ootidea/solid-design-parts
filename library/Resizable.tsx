@@ -3,14 +3,25 @@ import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './Resizable.scss'
-import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
-export type ResizableProps = Props<{ onChangeWidthPx?: (width: number) => void }>
+export type ResizableProps = Props<{ widthPx?: number; onChangeWidthPx?: (width: number) => void }>
 
 export function Resizable(rawProps: ResizableProps) {
-  const [props, restProps] = prepareProps(rawProps, {}, ['onChangeWidthPx', 'style'])
+  const [props, restProps] = prepareProps(rawProps, {}, ['widthPx', 'onChangeWidthPx', 'style'])
 
-  const widthPx = createSignalObject<number | undefined>(undefined)
+  const initialWidthPx = props.widthPx !== undefined ? Math.max(0, props.widthPx) : undefined
+  if (initialWidthPx !== props.widthPx && initialWidthPx !== undefined) {
+    props.onChangeWidthPx?.(initialWidthPx)
+  }
+  const widthPx = createSignalObject(initialWidthPx)
+  createDeferEffect(
+    () => props.widthPx,
+    () => {
+      const newWidthPx = props.widthPx !== undefined ? Math.max(0, props.widthPx) : undefined
+      widthPx.value = newWidthPx
+    }
+  )
 
   let rootElement: HTMLDivElement | undefined = undefined
   let dragState: { deltaX: number } | undefined = undefined
@@ -37,7 +48,7 @@ export function Resizable(rawProps: ResizableProps) {
     assert(rootElement, isNotUndefined)
     const right = event.clientX
     const left = rootElement.getBoundingClientRect().left
-    const newWidthPx = right - left - dragState.deltaX
+    const newWidthPx = Math.max(0, right - left - dragState.deltaX)
     props.onChangeWidthPx?.(newWidthPx)
     widthPx.value = newWidthPx
   }

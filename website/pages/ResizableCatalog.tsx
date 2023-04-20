@@ -31,12 +31,8 @@ export const ResizableCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <Resizable onChangeWidthPx={setWidthPx}>
-            <div
-              style={{ width: `${widthPx()}px`, border: '1px dashed gray', padding: '1em', 'box-sizing': 'border-box' }}
-            >
-              widthPx: {widthPx()}
-            </div>
+          <Resizable widthPx={widthPx()} onChangeWidthPx={setWidthPx}>
+            <div style={{ border: '1px dashed gray', padding: '1em' }}>widthPx: {widthPx()}</div>
           </Resizable>
         </>
       ),
