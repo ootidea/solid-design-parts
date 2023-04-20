@@ -1,6 +1,7 @@
 import { assert, isNotNull, isNotNullish, rangeUntil } from 'base-up'
 import { children, createEffect, For, Show } from 'solid-js'
 import { createMutable } from 'solid-js/store'
+import { createSignalObject } from 'solid-signal-object'
 import './Carousel.scss'
 import './common.scss'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
@@ -13,6 +14,8 @@ export function Carousel(rawProps: CarouselProps) {
     'children',
   ])
   const childrenMemo = children(() => props.children)
+
+  const isOverflowing = createSignalObject(false)
 
   createEffect(() => {
     if (props.autoScroll) {
@@ -94,6 +97,14 @@ export function Carousel(rawProps: CarouselProps) {
         ref={(element) => {
           itemListElement = element
 
+          isOverflowing.value = element.clientWidth < element.scrollWidth
+          const resizeObserver = new ResizeObserver((entries) => {
+            const found = entries.find((entry) => entry.target === element)
+            assert(found, isNotNullish)
+            isOverflowing.value = found.target.clientWidth < found.target.scrollWidth
+          })
+          resizeObserver.observe(element)
+
           // Set up IntersectionObserver for each item
           const observer = new MutationObserver((mutations) => {
             for (const addedNodes of mutations.flatMap((mutation) => Array.from(mutation.addedNodes))) {
@@ -123,11 +134,7 @@ export function Carousel(rawProps: CarouselProps) {
           )}
         </For>
       </div>
-      <Show
-        when={
-          !rangeUntil(childrenMemo.toArray().length).every((i) => flagsThatIndicateWhetherItemIsWithinScrollRange[i])
-        }
-      >
+      <Show when={isOverflowing.value}>
         <div class="solid-design-parts-Carousel_indicator-list">
           <For each={rangeUntil(childrenMemo.toArray().length)}>
             {(i) => (

@@ -60,5 +60,17 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'In cases with few items',
+      description: 'Indicators will not be displayed if there is no overflow.',
+      children: (
+        <>
+          <Carousel itemWidth="18rem">
+            <img src="https://source.unsplash.com/600x300/?sky" alt="" />
+            <img src="https://source.unsplash.com/600x300/?device" alt="" />
+          </Carousel>
+        </>
+      ),
+    },
   ],
 }))
