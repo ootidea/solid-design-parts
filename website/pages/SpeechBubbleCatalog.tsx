@@ -32,6 +32,16 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Direction',
+      children: (
+        <>
+          <SpeechBubble direction="up">Direction: up</SpeechBubble>
+          <SpeechBubble direction="left">Direction: left</SpeechBubble>
+          <SpeechBubble direction="right">Direction: right</SpeechBubble>
+        </>
+      ),
+    },
+    {
       title: 'Tail width',
       children: (
         <>

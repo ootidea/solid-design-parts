@@ -7,6 +7,7 @@ import { joinClasses, prepareProps, Props } from './utility/props'
 export type SpeechBubbleProps = Props<{
   backgroundColor?: CssColor
   radius?: string
+  direction?: 'down' | 'up' | 'left' | 'right'
   tailWidth?: string
   tailHeight?: string
   tailSkew?: string
@@ -19,6 +20,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
     {
       backgroundColor: 'var(--solid-design-parts-SpeechBubble_background-default-color)',
       radius: 'var(--solid-design-parts-SpeechBubble_default-radius)',
+      direction: 'down',
       tailWidth: '10px',
       tailHeight: '10px',
       tailSkew: '0rad',
@@ -36,12 +38,13 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
         '--solid-design-parts-SpeechBubble_radius': props.radius,
         '--solid-design-parts-SpeechBubble_tail-offset-percent': props.tailOffsetPercent,
       }}
+      data-direction={props.direction}
     >
       <div class="solid-design-parts-SpeechBubble_message-box">{props.children}</div>
       <div class="solid-design-parts-SpeechBubble_tail-area">
         <Triangle
           class="solid-design-parts-SpeechBubble_tail"
-          direction="down"
+          direction={props.direction}
           color={props.backgroundColor}
           width={props.tailWidth}
           height={props.tailHeight}

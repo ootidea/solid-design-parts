@@ -4,12 +4,30 @@
 }
 
 .solid-design-parts-SpeechBubble_root {
+  display: flex;
   box-sizing: border-box;
   width: max-content;
   filter: drop-shadow(0 0 1px oklch(0% 0 0));
+
+  &[data-direction='down'] {
+    flex-direction: column;
+  }
+
+  &[data-direction='up'] {
+    flex-direction: column-reverse;
+  }
+
+  &[data-direction='right'] {
+    flex-direction: row;
+  }
+
+  &[data-direction='left'] {
+    flex-direction: row-reverse;
+  }
 }
 
 .solid-design-parts-SpeechBubble_message-box {
+  flex: 1 0 0;
   background-color: var(--solid-design-parts-SpeechBubble_background-color);
   border-radius: var(--solid-design-parts-SpeechBubble_radius);
   padding: 0.4em 0.6em;
@@ -19,7 +37,13 @@
 }
 
 .solid-design-parts-SpeechBubble_tail-area {
+  flex: 0 0 0;
   display: flex;
+
+  .solid-design-parts-SpeechBubble_root[data-direction='left'] &,
+  .solid-design-parts-SpeechBubble_root[data-direction='right'] & {
+    flex-direction: column;
+  }
 
   &:before,
   &:after {
