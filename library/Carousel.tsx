@@ -1,9 +1,12 @@
 import { assert, isNotNull, isNotNullish, rangeUntil } from 'base-up'
-import { children, createEffect, For, Show } from 'solid-js'
+import { children, createEffect, For } from 'solid-js'
 import { createMutable } from 'solid-js/store'
 import { createSignalObject } from 'solid-signal-object'
+import chevronLeftIcon from '../website/images/chevron-left.svg'
+import chevronRightIcon from '../website/images/chevron-right.svg'
 import './Carousel.scss'
 import './common.scss'
+import { IconButton } from './IconButton'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
 export type CarouselProps = Props<{ itemWidth: string; autoScroll?: boolean; autoScrollIntervalMs?: number }>
@@ -80,86 +83,123 @@ export function Carousel(rawProps: CarouselProps) {
   return (
     <div
       {...restProps}
-      class={joinClasses(rawProps, 'solid-design-parts-Carousel_root')}
+      class={joinClasses(rawProps, 'solid-design-parts-Carousel_root', {
+        'solid-design-parts-Carousel_is-overflowing': isOverflowing.value,
+      })}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Carousel_item-width': props.itemWidth,
       })}
     >
-      <div
-        class="solid-design-parts-Carousel_item-list"
-        onMouseWheel={(event: WheelEvent) => {
-          if (event.deltaX !== 0 || (event.shiftKey && event.deltaY !== 0)) {
+      <div class="solid-design-parts-Carousel_button-layout">
+        <IconButton
+          class="solid-design-parts-Carousel_prev-button"
+          src={chevronLeftIcon}
+          backgroundColor="var(--solid-design-parts-Carousel_button-background-color)"
+          onClick={() => {
             if (props.autoScroll) {
               restartAutoScrollTimer()
             }
-          }
-        }}
-        ref={(element) => {
-          itemListElement = element
 
-          isOverflowing.value = element.clientWidth < element.scrollWidth
-          const resizeObserver = new ResizeObserver((entries) => {
-            const found = entries.find((entry) => entry.target === element)
-            assert(found, isNotNullish)
-            isOverflowing.value = found.target.clientWidth < found.target.scrollWidth
-          })
-          resizeObserver.observe(element)
+            if (itemListElement === undefined) return
 
-          // Set up IntersectionObserver for each item
-          const observer = new MutationObserver((mutations) => {
-            for (const addedNodes of mutations.flatMap((mutation) => Array.from(mutation.addedNodes))) {
-              if (addedNodes instanceof HTMLElement) {
-                setUpIntersectionObserver(addedNodes, Number(addedNodes.dataset.index))
+            const itemWidthPx = itemListElement.firstElementChild?.getBoundingClientRect()?.width
+            if (itemWidthPx === undefined) return
+
+            itemListElement.scrollBy({ left: -itemWidthPx, behavior: 'smooth' })
+          }}
+        />
+        <div
+          class="solid-design-parts-Carousel_item-list"
+          onMouseWheel={(event: WheelEvent) => {
+            if (event.deltaX !== 0 || (event.shiftKey && event.deltaY !== 0)) {
+              if (props.autoScroll) {
+                restartAutoScrollTimer()
               }
             }
-          })
-          observer.observe(element, { childList: true })
+          }}
+          ref={(element) => {
+            itemListElement = element
 
-          // The timer restarts when a horizontal scroll is performed using touch operation
-          element.addEventListener('touchstart', () => element.addEventListener('touchmove', onTouchMove))
-          element.addEventListener('touchend', () => element.removeEventListener('touchmove', onTouchMove))
-          element.addEventListener('touchcancel', () => element.removeEventListener('touchmove', onTouchMove))
-          function onTouchMove() {
-            if (props.autoScroll) {
-              restartAutoScrollTimer()
+            // Set up ResizeObserver to detect overflow
+            isOverflowing.value = element.clientWidth < element.scrollWidth
+            const resizeObserver = new ResizeObserver((entries) => {
+              const found = entries.find((entry) => entry.target === element)
+              assert(found, isNotNullish)
+              isOverflowing.value = found.target.clientWidth < found.target.scrollWidth
+            })
+            resizeObserver.observe(element)
+
+            // Set up IntersectionObserver for each item
+            const observer = new MutationObserver((mutations) => {
+              for (const addedNodes of mutations.flatMap((mutation) => Array.from(mutation.addedNodes))) {
+                if (addedNodes instanceof HTMLElement) {
+                  setUpIntersectionObserver(addedNodes, Number(addedNodes.dataset.index))
+                }
+              }
+            })
+            observer.observe(element, { childList: true })
+
+            // The timer restarts when a horizontal scroll is performed using touch operation
+            element.addEventListener('touchstart', () => element.addEventListener('touchmove', onTouchMove))
+            element.addEventListener('touchend', () => element.removeEventListener('touchmove', onTouchMove))
+            element.addEventListener('touchcancel', () => element.removeEventListener('touchmove', onTouchMove))
+            function onTouchMove() {
+              if (props.autoScroll) {
+                restartAutoScrollTimer()
+              }
             }
-          }
-        }}
-      >
-        <For each={childrenMemo.toArray()}>
-          {(child, i) => (
-            <div class="solid-design-parts-Carousel_item" data-index={i()}>
-              {child}
-            </div>
-          )}
-        </For>
-      </div>
-      <Show when={isOverflowing.value}>
-        <div class="solid-design-parts-Carousel_indicator-list">
-          <For each={rangeUntil(childrenMemo.toArray().length)}>
-            {(i) => (
-              <button
-                class="solid-design-parts-Carousel_indicator"
-                aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
-                onClick={() => {
-                  if (props.autoScroll) {
-                    restartAutoScrollTimer()
-                  }
-
-                  assert(itemListElement, isNotNullish)
-                  const itemRect = itemListElement.children.item(i)?.getBoundingClientRect()
-                  assert(itemRect, isNotNullish)
-                  const itemListRect = itemListElement.getBoundingClientRect()
-                  itemListElement.scrollTo({
-                    left: i * itemRect.width - itemListRect.width / 2 + itemRect.width / 2,
-                    behavior: 'smooth',
-                  })
-                }}
-              />
+          }}
+        >
+          <For each={childrenMemo.toArray()}>
+            {(child, i) => (
+              <div class="solid-design-parts-Carousel_item" data-index={i()}>
+                {child}
+              </div>
             )}
           </For>
         </div>
-      </Show>
+        <IconButton
+          class="solid-design-parts-Carousel_next-button"
+          src={chevronRightIcon}
+          backgroundColor="var(--solid-design-parts-Carousel_button-background-color)"
+          onClick={() => {
+            if (props.autoScroll) {
+              restartAutoScrollTimer()
+            }
+
+            if (itemListElement === undefined) return
+
+            const itemWidthPx = itemListElement.firstElementChild?.getBoundingClientRect()?.width
+            if (itemWidthPx === undefined) return
+
+            itemListElement.scrollBy({ left: itemWidthPx, behavior: 'smooth' })
+          }}
+        />
+      </div>
+      <div class="solid-design-parts-Carousel_indicator-list">
+        <For each={rangeUntil(childrenMemo.toArray().length)}>
+          {(i) => (
+            <button
+              class="solid-design-parts-Carousel_indicator"
+              aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
+              onClick={() => {
+                if (props.autoScroll) {
+                  restartAutoScrollTimer()
+                }
+
+                assert(itemListElement, isNotNullish)
+                const itemRect = itemListElement.children.item(i)?.getBoundingClientRect()
+                assert(itemRect, isNotNullish)
+                const itemListRect = itemListElement.getBoundingClientRect()
+                itemListElement.scrollTo({
+                  left: i * itemRect.width - itemListRect.width / 2 + itemRect.width / 2,
+                  behavior: 'smooth',
+                })
+              }}
+            />
+          )}
+        </For>
+      </div>
     </div>
   )
 }

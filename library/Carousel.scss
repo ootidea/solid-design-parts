@@ -1,3 +1,15 @@
+:root {
+  --solid-design-parts-Carousel_button-background-color: oklch(100% 0 0 / 70%);
+}
+
+.solid-design-parts-Carousel_root {
+  position: relative;
+}
+
+.solid-design-parts-Carousel_button-layout {
+  position: relative;
+}
+
 .solid-design-parts-Carousel_item-list {
   display: grid;
   grid-auto-flow: column;
@@ -30,12 +42,35 @@
   }
 }
 
+.solid-design-parts-Carousel_prev-button,
+.solid-design-parts-Carousel_next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
+    display: none;
+  }
+}
+
+.solid-design-parts-Carousel_prev-button {
+  left: 0;
+}
+
+.solid-design-parts-Carousel_next-button {
+  right: 0;
+}
+
 .solid-design-parts-Carousel_indicator-list {
   margin-top: 1em;
 
   display: grid;
   grid-auto-flow: column;
   justify-content: center;
+
+  .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
+    display: none;
+  }
 }
 
 .solid-design-parts-Carousel_indicator {
