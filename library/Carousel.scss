@@ -49,7 +49,7 @@
   top: 50%;
   transform: translateY(-50%);
 
-  .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
+  .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_overflowed) & {
     display: none;
   }
 
@@ -82,7 +82,7 @@
     right: 0;
   }
 
-  .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_is-overflowing) & {
+  .solid-design-parts-Carousel_root:not(.solid-design-parts-Carousel_overflowed) & {
     display: none;
   }
 

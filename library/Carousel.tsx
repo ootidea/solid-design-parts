@@ -98,7 +98,7 @@ export function Carousel(rawProps: CarouselProps) {
     <div
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Carousel_root', {
-        'solid-design-parts-Carousel_is-overflowing': isOverflowing.value,
+        'solid-design-parts-Carousel_overflowed': isOverflowing.value,
         'solid-design-parts-Carousel_hide-navigation-buttons': props.hideNavigationButtons,
         'solid-design-parts-Carousel_hide-indicators': props.hideIndicators,
       })}
