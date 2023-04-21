@@ -123,7 +123,16 @@ export function Carousel(rawProps: CarouselProps) {
             const itemWidthPx = itemListElement.firstElementChild?.getBoundingClientRect()?.width
             if (itemWidthPx === undefined) return
 
-            itemListElement.scrollBy({ left: -itemWidthPx, behavior: 'smooth' })
+            if (itemListElement.scrollLeft > 0) {
+              // Scroll to the prev item
+              itemListElement.scrollBy({ left: -itemWidthPx, behavior: 'smooth' })
+            } else {
+              // Scroll from the first item back to the last item
+              itemListElement.scrollTo({
+                left: itemListElement.scrollWidth - itemListElement.clientWidth,
+                behavior: 'smooth',
+              })
+            }
           }}
         />
         <div
@@ -191,7 +200,13 @@ export function Carousel(rawProps: CarouselProps) {
             const itemWidthPx = itemListElement.firstElementChild?.getBoundingClientRect()?.width
             if (itemWidthPx === undefined) return
 
-            itemListElement.scrollBy({ left: itemWidthPx, behavior: 'smooth' })
+            if (itemListElement.scrollLeft + itemListElement.clientWidth < itemListElement.scrollWidth) {
+              // Scroll to the next item
+              itemListElement.scrollBy({ left: itemWidthPx, behavior: 'smooth' })
+            } else {
+              // Scroll from the last item back to the first item
+              itemListElement.scrollTo({ left: 0, behavior: 'smooth' })
+            }
           }}
         />
       </div>
