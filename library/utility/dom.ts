@@ -54,12 +54,6 @@ export function isInsideOf(x: number, y: number, rect: DOMRect): boolean {
   return true
 }
 
-export function toArray(children: JSX.Element): JSX.Element[] {
-  if (children instanceof Array) return children
-
-  return [children]
-}
-
 /**
  * Observe element width in px using ResizeObserver.
  * Callback immediately when this function is called.

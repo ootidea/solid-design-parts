@@ -1,6 +1,6 @@
+import { children } from 'solid-js'
 import './common.scss'
 import './StretchLayout.scss'
-import { toArray } from './utility/dom'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
 export type StretchLayoutProps = Props<{
@@ -18,12 +18,14 @@ export function StretchLayout(rawProps: StretchLayoutProps) {
     ['style']
   )
 
+  const childrenMemo = children(() => rawProps.children)
+
   function normalizeIndex(index: number) {
     if (index >= 0) {
       return index
     }
 
-    return toArray(rawProps.children).length + index
+    return childrenMemo.toArray().length + index
   }
 
   return (
@@ -36,7 +38,7 @@ export function StretchLayout(rawProps: StretchLayoutProps) {
       })}
       data-direction={props.direction}
     >
-      {rawProps.children}
+      {childrenMemo()}
     </div>
   )
 }

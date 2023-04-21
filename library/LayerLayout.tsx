@@ -1,7 +1,6 @@
-import { For } from 'solid-js'
+import { children, For } from 'solid-js'
 import './common.scss'
 import './LayerLayout.scss'
-import { toArray } from './utility/dom'
 import { joinClasses, prepareProps, Props } from './utility/props'
 
 export type LayerLayoutProps = Props<{}>
@@ -11,7 +10,7 @@ export function LayerLayout(rawProps: LayerLayoutProps) {
 
   return (
     <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-LayerLayout_root')}>
-      <For each={toArray(rawProps.children)}>
+      <For each={children(() => rawProps.children).toArray()}>
         {(child, i) => {
           if (i() === 0) {
             return child
