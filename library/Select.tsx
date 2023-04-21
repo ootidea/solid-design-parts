@@ -184,34 +184,33 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
           onClick={onClickLauncher}
         >
           <div class="solid-design-parts-Select_preview-area">
-            {selectedSignal.value !== undefined ? (
-              <div class="solid-design-parts-Select_preview">{getLabel(selectedSignal.value)}</div>
-            ) : null}
             <div class="solid-design-parts-Select_placeholder" aria-hidden={selectedSignal.value !== undefined}>
               {props.placeholder}
             </div>
             <For each={props.values}>
               {(value) => (
-                <div class="solid-design-parts-Select_preview" aria-hidden="true">
-                  {getLabel(value)}
+                <div
+                  class="solid-design-parts-Select_preview-and-clear-button"
+                  aria-hidden={value !== selectedSignal.value}
+                >
+                  <div class="solid-design-parts-Select_preview">{getLabel(value)}</div>
+                  <Show when={props.showClearButton}>
+                    <IconButton
+                      class="solid-design-parts-Select_clear-button"
+                      src={closeCircleIcon}
+                      size="1.6em"
+                      iconSize="1.25em"
+                      iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
+                      onClick={() => {
+                        selectedSignal.value = undefined
+                        isEditedSignal.value = true
+                      }}
+                    />
+                  </Show>
                 </div>
               )}
             </For>
           </div>
-          <Show when={props.showClearButton}>
-            <IconButton
-              class="solid-design-parts-Select_clear-button"
-              src={closeCircleIcon}
-              size="1.6em"
-              iconSize="1.25em"
-              iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
-              aria-hidden={selectedSignal.value === undefined}
-              onClick={() => {
-                selectedSignal.value = undefined
-                isEditedSignal.value = true
-              }}
-            />
-          </Show>
           <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
         </button>
         <ErrorMessage>{errorSignal.value}</ErrorMessage>

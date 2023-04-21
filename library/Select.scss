@@ -35,12 +35,10 @@
   }
 }
 
-.solid-design-parts-Select_preview-area {
-  margin-right: 0.8em;
-}
-
-.solid-design-parts-Select_preview {
-  white-space: pre-wrap;
+.solid-design-parts-Select_preview-and-clear-button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
 
   &[aria-hidden='true'] {
     visibility: hidden;
@@ -49,7 +47,15 @@
   }
 }
 
+.solid-design-parts-Select_preview {
+  box-sizing: border-box;
+  margin-right: 0.3em;
+  white-space: pre-wrap;
+}
+
 .solid-design-parts-Select_placeholder {
+  box-sizing: border-box;
+  margin-right: 0.3em;
   color: var(--solid-design-parts-placeholder-text-color);
   white-space: pre-wrap;
   user-select: none;
