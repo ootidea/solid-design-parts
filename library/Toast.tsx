@@ -25,6 +25,7 @@ export function Toast(props: ToastProps) {
       class="solid-design-parts-Toast_root"
       classList={{ 'solid-design-parts-Toast_clickable': props.onClick !== undefined }}
       href={props.href}
+      role={props.type === 'error' ? 'alert' : 'status'}
       onClick={props.onClick}
     >
       <div class="solid-design-parts-Toast_icon-area">
