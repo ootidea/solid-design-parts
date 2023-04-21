@@ -34,7 +34,7 @@ export function App() {
     { title: 'Other inputs', children: ['Slider'] },
     {
       title: 'Layout',
-      children: ['Gravity', 'StretchLayout', 'LayerLayout', 'TitleBarLayout', 'Scrollable', 'Resizable', 'Collapsible'],
+      children: ['Gravity', 'StretchLayout', 'TitleBarLayout', 'Scrollable', 'Resizable', 'Collapsible'],
     },
     { title: 'Floating', children: ['Modal', 'Popover', 'Toast'] },
     { title: 'Data collections', children: ['DataTable', 'Tabs', 'Carousel'] },

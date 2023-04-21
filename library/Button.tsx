@@ -2,8 +2,6 @@ import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import './Button.scss'
 import './common.scss'
-import { Gravity } from './Gravity'
-import { LayerLayout } from './LayerLayout'
 import { Spinner } from './Spinner'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
@@ -44,14 +42,12 @@ export function Button(rawProps: ButtonProps) {
 
   const content = (
     <Show when={isInProgress.value} fallback={rawProps.children}>
-      <LayerLayout>
-        <div class="solid-design-parts-Button_invisible-children" aria-hidden={true}>
+      <div style={{ display: 'grid', width: 'max-content', 'place-items': 'center' }}>
+        <div class="solid-design-parts-Button_invisible-children" style={{ 'grid-area': '1/2' }} aria-hidden={true}>
           {rawProps.children}
         </div>
-        <Gravity>
-          <Spinner color="currentColor" />
-        </Gravity>
-      </LayerLayout>
+        <Spinner style={{ 'grid-area': '1/2' }} color="currentColor" />
+      </div>
     </Show>
   )
 

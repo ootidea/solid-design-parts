@@ -20,7 +20,6 @@ import { GravityCatalog } from './GravityCatalog'
 import { IconButtonCatalog } from './IconButtonCatalog'
 import { IconCatalog } from './IconCatalog'
 import { ImageCatalog } from './ImageCatalog'
-import { LayerLayoutCatalog } from './LayerLayoutCatalog'
 import { LinkCatalog } from './LinkCatalog'
 import { ModalCatalog } from './ModalCatalog'
 import { MultiSelectCatalog } from './MultiSelectCatalog'
@@ -75,7 +74,6 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   TabsCatalog,
   CarouselCatalog,
   GravityCatalog,
-  LayerLayoutCatalog,
   StretchLayoutCatalog,
   TitleBarLayoutCatalog,
   ScrollableCatalog,
