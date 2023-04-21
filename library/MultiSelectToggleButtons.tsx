@@ -51,6 +51,7 @@ export function MultiSelectToggleButtons<const T extends readonly (string | numb
       class={joinClasses(rawProps, 'solid-design-parts-MultiSelectToggleButtons_root', {
         'solid-design-parts-MultiSelectToggleButtons_full-width': props.fullWidth,
       })}
+      aria-multiselectable="true"
     >
       <For each={props.values}>
         {(value: T[number]) => (

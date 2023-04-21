@@ -156,7 +156,12 @@ export function Checkboxes<const T extends readonly (string | number)[]>(rawProp
       data-layout={props.layout}
       data-grid-columns-count={props.gridColumnsCount}
     >
-      <div class="solid-design-parts-Checkboxes_checkboxes" role="group" aria-required={props.required}>
+      <div
+        class="solid-design-parts-Checkboxes_checkboxes"
+        role="group"
+        aria-required={props.required}
+        aria-multiselectable="true"
+      >
         <For each={props.values}>
           {(value) => (
             <Checkbox
