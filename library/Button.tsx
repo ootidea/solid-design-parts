@@ -1,4 +1,3 @@
-import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import './Button.scss'
 import './common.scss'
@@ -41,14 +40,14 @@ export function Button(rawProps: ButtonProps) {
   }
 
   const content = (
-    <Show when={isInProgress.value} fallback={rawProps.children}>
-      <div style={{ display: 'grid', width: 'max-content', 'place-items': 'center' }}>
-        <div class="solid-design-parts-Button_invisible-children" style={{ 'grid-area': '1/2' }} aria-hidden={true}>
-          {rawProps.children}
-        </div>
-        <Spinner style={{ 'grid-area': '1/2' }} color="currentColor" />
+    <div class="solid-design-parts-Button_overlay-layout">
+      <div class="solid-design-parts-Button_children" aria-hidden={isInProgress.value}>
+        {rawProps.children}
       </div>
-    </Show>
+      <div class="solid-design-parts-Button_waiting-state" aria-hidden={!isInProgress.value}>
+        <Spinner color="currentColor" />
+      </div>
+    </div>
   )
 
   if (props.href !== undefined) {

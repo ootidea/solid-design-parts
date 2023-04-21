@@ -1,5 +1,6 @@
 .solid-design-parts-Button_root {
   display: inline-flex;
+  vertical-align: top;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -145,10 +146,23 @@
   }
 }
 
-.solid-design-parts-Button_invisible-children {
+.solid-design-parts-Button_overlay-layout {
+  display: grid;
+  place-items: center;
+}
+
+.solid-design-parts-Button_waiting-state,
+.solid-design-parts-Button_children {
+  grid-area: 1 / 1;
+
   &[aria-hidden='true'] {
     visibility: hidden;
   }
+}
+
+.solid-design-parts-Button_waiting-state {
+  display: grid;
+  place-items: center;
 }
 
 .solid-design-parts-Button_full-width {
