@@ -107,20 +107,48 @@
     width: 0.5em;
     height: 0.5em;
     border-radius: 999vh;
-    background-color: oklch(80% 0 0);
+
+    .solid-design-parts-Carousel_root[data-indicator-position='outside'] & {
+      background-color: oklch(80% 0 0);
+    }
+
+    .solid-design-parts-Carousel_root[data-indicator-position='inside'] & {
+      border: 1px solid oklch(100% 0 0 / 80%);
+      background-color: oklch(0% 0 0 / 20%);
+    }
   }
 
   @media (hover: hover) {
     &:hover::before {
-      background-color: oklch(75% 0 0);
+      .solid-design-parts-Carousel_root[data-indicator-position='outside'] & {
+        background-color: oklch(75% 0 0);
+      }
+
+      .solid-design-parts-Carousel_root[data-indicator-position='inside'] & {
+        background-color: oklch(0% 0 0 / 40%);
+      }
     }
   }
 
   &:active::before {
-    background-color: oklch(70% 0 0);
+    .solid-design-parts-Carousel_root[data-indicator-position='outside'] & {
+      background-color: oklch(70% 0 0);
+    }
+
+    .solid-design-parts-Carousel_root[data-indicator-position='inside'] & {
+      background-color: oklch(0% 0 0 / 50%);
+    }
   }
 
   &[aria-current='true']::before {
-    background-color: oklch(60% 0 0);
+    .solid-design-parts-Carousel_root[data-indicator-position='outside'] & {
+      background-color: oklch(60% 0 0);
+    }
+
+    .solid-design-parts-Carousel_root[data-indicator-position='inside'] & {
+      border-color: oklch(0% 0 0 / 50%);
+      background-color: oklch(100% 0 0);
+      box-sizing: content-box;
+    }
   }
 }
