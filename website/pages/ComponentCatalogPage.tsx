@@ -4,6 +4,7 @@ import { createMemoObject } from 'solid-signal-object'
 import { Scrollable } from '../../library'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
+import { AnimatedShowCatalog } from './AnimateShowCatalog'
 import { AwaitCatalog } from './AwaitCatalog'
 import { ButtonCatalog } from './ButtonCatalog'
 import { CalendarCatalog } from './CalendarCatalog'
@@ -15,7 +16,6 @@ import { DataTableCatalog } from './DataTableCatalog'
 import { DateInputCatalog } from './DateInputCatalog'
 import { DatePickerCatalog } from './DatePickerCatalog'
 import { DividerCatalog } from './DividerCatalog'
-import { FadeAnimationCatalog } from './FadeAnimationCatalog'
 import { GravityCatalog } from './GravityCatalog'
 import { IconButtonCatalog } from './IconButtonCatalog'
 import { IconCatalog } from './IconCatalog'
@@ -28,7 +28,6 @@ import { NumberInputCatalog } from './NumberInputCatalog'
 import { PopoverCatalog } from './PopoverCatalog'
 import { RadioButtonsCatalog } from './RadioButtonsCatalog'
 import { ResizableCatalog } from './ResizableCatalog'
-import { ScaleYAnimationCatalog } from './ScaleYAnimationCatalog'
 import { ScrollableCatalog } from './ScrollableCatalog'
 import { SelectCatalog } from './SelectCatalog'
 import { SingleSelectToggleButtonsCatalog } from './SingleSelectToggleButtonsCatalog'
@@ -86,8 +85,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   StepperCatalog,
   TriangleCatalog,
   SpeechBubbleCatalog,
-  FadeAnimationCatalog,
-  ScaleYAnimationCatalog,
+  AnimatedShowCatalog,
   AwaitCatalog,
   UrlToLinkCatalog,
   LinkCatalog,

@@ -1,11 +1,12 @@
 import { Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
+import { AnimatedShow } from './AnimatedShow'
 import './common.scss'
-import { FadeAnimation } from './FadeAnimation'
 import { IconButton } from './IconButton'
 import closeIcon from './image/close.svg'
 import './Modal.scss'
 import { Scrollable } from './Scrollable'
+import { createFadeAnimation } from './SolidDesignPartsAnimation'
 import { TitleBarLayout } from './TitleBarLayout'
 import { CssColor } from './utility/color'
 import { setupFocusTrap } from './utility/dom'
@@ -75,7 +76,7 @@ export function Modal(rawProps: ModalProps) {
     <>
       <Slot content={rawProps.launcher} params={{ openModal, closeModal, toggleModal }} />
       <Portal>
-        <FadeAnimation shown={openedSignal.value}>
+        <AnimatedShow when={openedSignal.value} animation={createFadeAnimation()}>
           <div
             class={joinClasses(rawProps, 'solid-design-parts-Modal_root')}
             style={joinStyle(rawProps.style, {
@@ -109,7 +110,7 @@ export function Modal(rawProps: ModalProps) {
               </div>
             </div>
           </div>
-        </FadeAnimation>
+        </AnimatedShow>
       </Portal>
     </>
   )
