@@ -1,5 +1,9 @@
 @use 'utility/utility.scss';
 
+.solid-design-parts-Checkboxes_root {
+  position: relative;
+}
+
 .solid-design-parts-Checkboxes_checkboxes {
   gap: var(--solid-design-parts-Checkboxes_gap);
 

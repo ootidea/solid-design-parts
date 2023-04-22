@@ -1,3 +1,7 @@
+.solid-design-parts-TextInput_root {
+  position: relative;
+}
+
 :where(.solid-design-parts-TextInput_frame) {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;

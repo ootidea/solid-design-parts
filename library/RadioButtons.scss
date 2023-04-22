@@ -5,6 +5,10 @@
   --solid-design-parts-RadioButtons_inner-circle-size: 0.6em;
 }
 
+.solid-design-parts-RadioButtons_root {
+  position: relative;
+}
+
 .solid-design-parts-RadioButtons_radio-buttons {
   gap: var(--solid-design-parts-RadioButtons_gap);
 

@@ -6,6 +6,10 @@
   --solid-design-parts-Checkbox_checkbox-default-radius: 0.25em;
 }
 
+.solid-design-parts-Checkbox_root {
+  position: relative;
+}
+
 .solid-design-parts-Checkbox_label {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);

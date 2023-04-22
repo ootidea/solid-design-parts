@@ -1,7 +1,10 @@
 .solid-design-parts-ErrorMessage_root {
-  margin: 0.5em 0 0;
+  position: absolute;
+  margin-top: 0.2em;
   color: var(--solid-design-parts-error-color);
   white-space: pre-wrap;
+  font-size: 90%;
+  z-index: 200;
 
   &:empty {
     display: none;
