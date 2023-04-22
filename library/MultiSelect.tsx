@@ -202,10 +202,10 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
   }
 
   function closeDropdown() {
-    isEditedSignal.value = true
     assert(dropdownInfoSignal.value, isNotUndefined)
     selectedSignal.value = dropdownInfoSignal.value.selected
     dropdownInfoSignal.value = undefined
+    isEditedSignal.value = true
   }
 
   return (

@@ -130,8 +130,8 @@ export function TextArea(rawProps: TextAreaProps) {
           class={joinClasses(rawProps, 'solid-design-parts-TextArea_text-area')}
           value={valueSignal.value}
           onInput={(event) => {
-            isEditedSignal.value = true
             valueSignal.value = event.target.value
+            isEditedSignal.value = true
           }}
           onBlur={() => (isEditedSignal.value = true)}
         />

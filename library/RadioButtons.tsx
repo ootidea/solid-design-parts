@@ -79,13 +79,13 @@ export function RadioButtons<const T extends readonly (string | number)[]>(rawPr
   }
 
   async function onClick(value: T[number]) {
-    isEditedSignal.value = true
-
     if (selectedSignal.value === value && props.enableDeselection) {
       selectedSignal.value = undefined
     } else {
       selectedSignal.value = value
     }
+
+    isEditedSignal.value = true
   }
 
   async function deriveError(

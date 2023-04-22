@@ -163,8 +163,8 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
   }
 
   function closeDropdown() {
-    isEditedSignal.value = true
     dropdownInfoSignal.value = undefined
+    isEditedSignal.value = true
   }
 
   const clearButton = () => (

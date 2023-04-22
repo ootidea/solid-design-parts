@@ -106,10 +106,9 @@ export function NumberInput(rawProps: NumberInputProps) {
   })
 
   function changeValue(newString: string) {
-    isEditedSignal.value = true
-
     stringSignal.value = newString
     numberSignal.value = defaultParser(newString)
+    isEditedSignal.value = true
   }
 
   function defaultParser(text: string): number | undefined {

@@ -161,13 +161,13 @@ export function TextInput(rawProps: TextInputProps) {
             type={props.type}
             disabled={props.disabled}
             onInput={(event) => {
-              isEditedSignal.value = true
               valueSignal.value = event.target.value
+              isEditedSignal.value = true
             }}
             onFocus={() => (hasInputElementFocusSignal.value = true)}
             onBlur={() => {
-              isEditedSignal.value = true
               hasInputElementFocusSignal.value = false
+              isEditedSignal.value = true
             }}
           />
           <Show when={props.showClearButton}>
@@ -179,8 +179,8 @@ export function TextInput(rawProps: TextInputProps) {
               iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
               aria-hidden={valueSignal.value.length === 0}
               onClick={() => {
-                isEditedSignal.value = true
                 valueSignal.value = ''
+                isEditedSignal.value = true
               }}
             />
           </Show>

@@ -171,8 +171,8 @@ export function Checkboxes<const T extends readonly (string | number)[]>(rawProp
               onChangeChecked={(checked) => {
                 // If props.selected changes, this condition is not satisfied.
                 if (checked !== selectedSignal.value.has(value)) {
-                  isEditedSignal.value = true
                   selectedSignal.value = toggle(selectedSignal.value, value)
+                  isEditedSignal.value = true
                 }
               }}
             >

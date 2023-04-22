@@ -117,8 +117,8 @@ export function Checkbox(rawProps: CheckboxProps) {
           checked={checkedSignal.value}
           disabled={props.disabled}
           onChange={async (event) => {
-            isEditedSignal.value = true
             checkedSignal.value = event.target.checked
+            isEditedSignal.value = true
           }}
         />
         <div class="solid-design-parts-Checkbox_children">{rawProps.children}</div>
