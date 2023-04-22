@@ -55,12 +55,6 @@
   user-select: none;
 }
 
-.solid-design-parts-Select_clear-button {
-  &[aria-hidden='true'] {
-    visibility: hidden;
-  }
-}
-
 .solid-design-parts-Select_icon {
   transform-origin: center;
   transition: all 140ms ease-out;
