@@ -4,7 +4,8 @@ import { createMemoObject } from 'solid-signal-object'
 import { Scrollable } from '../../library'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
-import { AnimatedShowCatalog } from './AnimateShowCatalog'
+import { AnimatedShowCatalog } from './AnimatedShowCatalog'
+import { AnimateOnViewCatalog } from './AnimateOnViewCatalog'
 import { AwaitCatalog } from './AwaitCatalog'
 import { ButtonCatalog } from './ButtonCatalog'
 import { CalendarCatalog } from './CalendarCatalog'
@@ -86,6 +87,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   TriangleCatalog,
   SpeechBubbleCatalog,
   AnimatedShowCatalog,
+  AnimateOnViewCatalog,
   AwaitCatalog,
   UrlToLinkCatalog,
   LinkCatalog,

@@ -7,7 +7,7 @@ const DEFAULT_DURATION = 300
 
 export function createFadeAnimation(options: KeyframeAnimationOptions = {}): SolidDesignPartsAnimation {
   return {
-    keyframes: [{ opacity: 1 }, { opacity: 0 }],
+    keyframes: [{ opacity: 0 }, { opacity: 1 }],
     options: Object.assign({ duration: DEFAULT_DURATION }, options),
   }
 }
@@ -20,8 +20,8 @@ export function createScaleYAnimation(
 ): SolidDesignPartsAnimation {
   return {
     keyframes: [
-      { transform: 'translateY(0%) scaleY(1)' },
       { transform: `translateY(${TRANSLATE_Y[align]}) scaleY(0)` },
+      { transform: 'translateY(0%) scaleY(1)' },
     ],
     options: Object.assign({ duration: DEFAULT_DURATION }, options),
   }

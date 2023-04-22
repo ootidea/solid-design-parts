@@ -1,5 +1,6 @@
 export { TextArea } from './TextArea'
 export { AnimatedShow } from './AnimatedShow'
+export { AnimateOnView } from './AnimateOnView'
 export { Await } from './Await'
 export { Button } from './Button'
 export { Calendar } from './Calendar'

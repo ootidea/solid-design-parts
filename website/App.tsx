@@ -38,7 +38,7 @@ export function App() {
     },
     { title: 'Floating', children: ['Modal', 'Popover', 'Toast'] },
     { title: 'Data collections', children: ['DataTable', 'Tabs', 'Carousel'] },
-    { title: 'Animations', children: ['AnimatedShow'] },
+    { title: 'Animations', children: ['AnimatedShow', 'AnimateOnView'] },
     {
       title: 'Others',
       children: ['Icon', 'Image', 'Divider', 'Spinner', 'Triangle', 'Stepper', 'SpeechBubble', 'Link'],

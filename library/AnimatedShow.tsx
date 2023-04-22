@@ -42,17 +42,17 @@ export function AnimatedShow<const T>(rawProps: AnimatedShowProps<T>) {
   let animation: Animation | undefined
   function changeShown(newWhen: boolean) {
     animation?.cancel()
-    if (!newWhen) {
+    if (newWhen) {
+      shouldBeInDomSignal.value = true
       animation = element?.animate(props.animation.keyframes, props.animation.options)
+      animation?.addEventListener('finish', () => {
+        props.onFinishEnterAnimation?.()
+      })
+    } else {
+      animation = element?.animate(props.animation.keyframes, { ...props.animation.options, direction: 'reverse' })
       animation?.addEventListener('finish', () => {
         shouldBeInDomSignal.value = false
         props.onFinishExitAnimation?.()
-      })
-    } else {
-      shouldBeInDomSignal.value = true
-      animation = element?.animate(props.animation.keyframes, { ...props.animation.options, direction: 'reverse' })
-      animation?.addEventListener('finish', () => {
-        props.onFinishEnterAnimation?.()
       })
     }
   }
