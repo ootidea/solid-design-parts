@@ -167,6 +167,20 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
     dropdownInfoSignal.value = undefined
   }
 
+  const clearButton = () => (
+    <IconButton
+      class="solid-design-parts-Select_clear-button"
+      src={closeCircleIcon}
+      size="1.6em"
+      iconSize="1.25em"
+      iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
+      onClick={() => {
+        selectedSignal.value = undefined
+        isEditedSignal.value = true
+      }}
+    />
+  )
+
   return (
     <>
       <div
@@ -199,24 +213,21 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
                   aria-hidden={value !== selectedSignal.value}
                 >
                   <div class="solid-design-parts-Select_preview">{getLabel(value)}</div>
-                  <Show when={props.showClearButton}>
-                    <IconButton
-                      class="solid-design-parts-Select_clear-button"
-                      src={closeCircleIcon}
-                      size="1.6em"
-                      iconSize="1.25em"
-                      iconColor="var(--solid-design-parts-clear-button-icon-default-color)"
-                      onClick={() => {
-                        selectedSignal.value = undefined
-                        isEditedSignal.value = true
-                      }}
-                    />
-                  </Show>
+                  <Show when={props.showClearButton}>{clearButton()}</Show>
                 </div>
               )}
             </For>
           </div>
           <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
+          <div
+            class="solid-design-parts-Select_placeholder solid-design-parts_hidden-but-keep-height"
+            aria-hidden={true}
+          >
+            {props.placeholder}&nbsp;
+          </div>
+          <div class="solid-design-parts_hidden-but-keep-height" aria-hidden={true}>
+            {clearButton()}
+          </div>
         </button>
         <ErrorMessage>{errorSignal.value}</ErrorMessage>
       </div>

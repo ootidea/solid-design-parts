@@ -30,3 +30,10 @@
   height: 0;
   overflow: hidden;
 }
+
+.solid-design-parts_hidden-but-keep-height {
+  visibility: hidden;
+  box-sizing: border-box;
+  width: 0;
+  overflow: hidden;
+}
