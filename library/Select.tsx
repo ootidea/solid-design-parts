@@ -219,12 +219,14 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
             </For>
           </div>
           <Icon class="solid-design-parts-Select_icon" src={chevronDownIcon} />
+          {/* Dummy element to reserve the height for one line. */}
           <div
             class="solid-design-parts-Select_placeholder solid-design-parts_hidden-but-keep-height"
             aria-hidden={true}
           >
             {props.placeholder}&nbsp;
           </div>
+          {/* Dummy element to prevent the launcher height from changing when the clear button is displayed. */}
           <div class="solid-design-parts_hidden-but-keep-height" aria-hidden={true}>
             {clearButton()}
           </div>
