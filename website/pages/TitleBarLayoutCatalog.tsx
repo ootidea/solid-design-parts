@@ -10,11 +10,39 @@ export const TitleBarLayoutCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <TitleBarLayout right={<IconButton src={chevronRightIcon} iconSize="100%" />}>Sample title</TitleBarLayout>
-          <TitleBarLayout left={<IconButton src={chevronLeftIcon} iconSize="100%" />}>Sample title</TitleBarLayout>
           <TitleBarLayout
-            left={<IconButton src={chevronLeftIcon} iconSize="100%" />}
-            right={<IconButton src={chevronRightIcon} iconSize="100%" />}
+            right={
+              <>
+                next
+                <IconButton src={chevronRightIcon} iconSize="100%" />
+              </>
+            }
+          >
+            Sample title
+          </TitleBarLayout>
+          <TitleBarLayout
+            left={
+              <>
+                <IconButton src={chevronLeftIcon} iconSize="100%" />
+                previous
+              </>
+            }
+          >
+            Sample title
+          </TitleBarLayout>
+          <TitleBarLayout
+            left={
+              <>
+                <IconButton src={chevronLeftIcon} iconSize="100%" />
+                previous
+              </>
+            }
+            right={
+              <>
+                next
+                <IconButton src={chevronRightIcon} iconSize="100%" />
+              </>
+            }
           >
             Sample title
           </TitleBarLayout>

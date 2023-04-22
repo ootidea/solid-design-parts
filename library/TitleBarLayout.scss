@@ -8,20 +8,27 @@
   font-size: larger;
 }
 
+.solid-design-parts-TitleBarLayout_left-area {
+  display: grid;
+  place-items: center start;
+  box-sizing: border-box;
+  width: max-content;
+}
+
+.solid-design-parts-TitleBarLayout_right-area {
+  display: grid;
+  place-items: center end;
+  box-sizing: border-box;
+  width: max-content;
+}
+
 .solid-design-parts-TitleBarLayout_left,
 .solid-design-parts-TitleBarLayout_right {
+  grid-area: 1 / 1;
   display: flex;
   align-items: center;
 
   &[aria-hidden='true'] {
     visibility: hidden;
-    height: 0;
-    overflow: hidden;
   }
-}
-
-.solid-design-parts-TitleBarLayout_right-area {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 }
