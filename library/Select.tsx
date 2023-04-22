@@ -184,13 +184,18 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
           onClick={onClickLauncher}
         >
           <div class="solid-design-parts-Select_preview-area">
-            <div class="solid-design-parts-Select_placeholder" aria-hidden={selectedSignal.value !== undefined}>
+            <div
+              class="solid-design-parts-Select_placeholder"
+              classList={{ 'solid-design-parts_hidden-but-keep-width': selectedSignal.value !== undefined }}
+              aria-hidden={selectedSignal.value !== undefined}
+            >
               {props.placeholder}
             </div>
             <For each={props.values}>
               {(value) => (
                 <div
                   class="solid-design-parts-Select_preview-and-clear-button"
+                  classList={{ 'solid-design-parts_hidden-but-keep-width': value !== selectedSignal.value }}
                   aria-hidden={value !== selectedSignal.value}
                 >
                   <div class="solid-design-parts-Select_preview">{getLabel(value)}</div>

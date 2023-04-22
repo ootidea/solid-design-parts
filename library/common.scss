@@ -23,3 +23,10 @@
   --solid-design-parts-clear-button-icon-default-color: oklch(86% 0 0);
   --solid-design-parts-overlay-z-index: 1000;
 }
+
+.solid-design-parts_hidden-but-keep-width {
+  visibility: hidden;
+  box-sizing: border-box;
+  height: 0;
+  overflow: hidden;
+}

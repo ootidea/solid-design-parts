@@ -43,12 +43,6 @@
 
   width: max-content;
   box-sizing: border-box;
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-  }
 }
 
 .solid-design-parts-MultiSelect_primary-selected-value {
@@ -59,12 +53,6 @@
   color: var(--solid-design-parts-placeholder-text-color);
   white-space: pre-wrap;
   user-select: none;
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-  }
 }
 
 .solid-design-parts-MultiSelect_following-count {

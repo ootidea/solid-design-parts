@@ -53,18 +53,4 @@
     // nbsp
     content: '\00a0';
   }
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-  }
-}
-
-.solid-design-parts-DateInput_format {
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-  }
 }

@@ -235,10 +235,17 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
                 </div>
               )}
             </Show>
-            <div class="solid-design-parts-MultiSelect_placeholder" aria-hidden={previewValueMemo.value !== undefined}>
+            <div
+              class="solid-design-parts-MultiSelect_placeholder"
+              classList={{ 'solid-design-parts_hidden-but-keep-width': previewValueMemo.value !== undefined }}
+              aria-hidden={previewValueMemo.value !== undefined}
+            >
               {props.placeholder}
             </div>
-            <div class="solid-design-parts-MultiSelect_preview" aria-hidden={true}>
+            <div
+              class="solid-design-parts-MultiSelect_preview solid-design-parts_hidden-but-keep-width"
+              aria-hidden={true}
+            >
               <div>
                 <For each={props.values}>
                   {(value) => (

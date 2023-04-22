@@ -39,12 +39,6 @@
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-  }
 }
 
 .solid-design-parts-Select_preview {
@@ -59,12 +53,6 @@
   color: var(--solid-design-parts-placeholder-text-color);
   white-space: pre-wrap;
   user-select: none;
-
-  &[aria-hidden='true'] {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-  }
 }
 
 .solid-design-parts-Select_clear-button {
