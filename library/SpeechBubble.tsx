@@ -6,6 +6,7 @@ import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
 export type SpeechBubbleProps = Props<{
   backgroundColor?: CssColor
+  padding?: string
   radius?: string
   direction?: 'down' | 'up' | 'left' | 'right'
   tailWidth?: string
@@ -19,6 +20,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
     rawProps,
     {
       backgroundColor: 'var(--solid-design-parts-SpeechBubble_background-default-color)',
+      padding: 'var(--solid-design-parts-SpeechBubble_default-padding)',
       radius: 'var(--solid-design-parts-SpeechBubble_default-radius)',
       direction: 'down',
       tailWidth: '0.5em',
@@ -35,6 +37,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       class={joinClasses(rawProps, 'solid-design-parts-SpeechBubble_root')}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-SpeechBubble_background-color': props.backgroundColor,
+        '--solid-design-parts-SpeechBubble_padding': props.padding,
         '--solid-design-parts-SpeechBubble_radius': props.radius,
         '--solid-design-parts-SpeechBubble_tail-offset-percent': props.tailOffsetPercent,
       })}
