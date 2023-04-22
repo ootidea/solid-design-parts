@@ -1,4 +1,3 @@
-import { isInstanceOf } from 'base-up'
 import { ComponentProps } from 'solid-js'
 import './Collapsible.scss'
 import './common.scss'
@@ -39,18 +38,12 @@ export function Collapsible(rawProps: CollapsibleProps) {
   const expand = () => (collapsedSignal.value = false)
   const toggle = () => (collapsedSignal.value = !collapsedSignal.value)
 
-  function onToggle(event: Event) {
-    if (isInstanceOf(event.target, HTMLDetailsElement)) {
-      collapsedSignal.value = !event.target.open
-    }
-  }
-
   return (
     <details
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Collapsible_root')}
       open={!collapsedSignal.value}
-      onToggle={onToggle}
+      onToggle={(event) => (collapsedSignal.value = !event.currentTarget.open)}
     >
       <summary
         {...props.summaryProps}
