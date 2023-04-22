@@ -1,4 +1,3 @@
-import { isBoolean, isNullish } from 'base-up'
 import { children, createMemo } from 'solid-js'
 import { AnimatedShow } from './AnimatedShow'
 import './common.scss'
@@ -13,7 +12,7 @@ export function ErrorMessage(rawProps: ErrorMessageProps) {
 
   const childrenMemo = children(() => rawProps.children)
   const convertTruthy = createMemo(() => {
-    if (isNullish(childrenMemo()) || isBoolean(childrenMemo())) return false
+    if (childrenMemo() === true) return false
 
     return childrenMemo()
   })
