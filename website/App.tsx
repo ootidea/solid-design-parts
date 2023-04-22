@@ -1,4 +1,4 @@
-import { Route, Router, Routes } from '@solidjs/router'
+import { Route, Router, Routes, useNavigate } from '@solidjs/router'
 import { For } from 'solid-js'
 import { Collapsible, Divider, Gravity, Scrollable, Select, StretchLayout } from '../library'
 import { forceCurrentLanguage } from '../library/utility/i18n'
@@ -87,8 +87,8 @@ export function App() {
               <Route
                 path="/"
                 component={() => {
-                  // const navigator = useNavigate()
-                  // navigator('components/Button', { resolve: true })
+                  const navigator = useNavigate()
+                  navigator('components/Button', { resolve: true })
                   return <></>
                 }}
               />
