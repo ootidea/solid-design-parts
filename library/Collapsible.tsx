@@ -15,8 +15,8 @@ import { Slot } from './utility/Slot'
 
 export type CollapsibleProps = Props<{
   collapsed?: boolean
-  title?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; collapsed: boolean }>
-  icon?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; collapsed: boolean }>
+  title?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; isCollapsed: boolean }>
+  icon?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; isCollapsed: boolean }>
   children?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void }>
   onChangeCollapsed?: (collapsed: boolean) => void
   summaryProps?: ComponentProps<'summary'>
@@ -49,11 +49,11 @@ export function Collapsible(rawProps: CollapsibleProps) {
         {...props.summaryProps}
         class={joinClasses(props.summaryProps, 'solid-design-parts-Collapsible_summary')}
       >
-        <Slot content={rawProps.icon} params={{ collapse, expand, toggle, collapsed: collapsedSignal.value }}>
+        <Slot content={rawProps.icon} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }}>
           <Icon class="solid-design-parts-Collapsible_icon" src={chevronRightIcon} />
         </Slot>
         <div class="solid-design-parts-Collapsible_title">
-          <Slot content={rawProps.title} params={{ collapse, expand, toggle, collapsed: collapsedSignal.value }} />
+          <Slot content={rawProps.title} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }} />
         </div>
       </summary>
       <div class="solid-design-parts-Collapsible_detail-area">
