@@ -123,5 +123,20 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
         </>
       ),
     },
+    {
+      title: 'Changing gap',
+      children: (
+        <>
+          <Carousel itemWidth="22rem" gap="50px">
+            <img src="https://source.unsplash.com/600x300/?dog" alt="" />
+            <img src="https://source.unsplash.com/600x300/?desk" alt="" />
+            <img src="https://source.unsplash.com/600x300/?cat" alt="" />
+            <img src="https://source.unsplash.com/600x300/?sky" alt="" />
+            <img src="https://source.unsplash.com/600x300/?leaf" alt="" />
+            <img src="https://source.unsplash.com/600x300/?device" alt="" />
+          </Carousel>
+        </>
+      ),
+    },
   ],
 }))

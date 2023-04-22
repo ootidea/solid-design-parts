@@ -13,6 +13,7 @@ export type CarouselProps = Props<{
   itemWidth: string
   autoScroll?: boolean
   autoScrollIntervalMs?: number
+  gap?: string
   hideNavigationButtons?: boolean
   hideIndicators?: boolean
   indicatorPosition?: 'outside' | 'inside'
@@ -24,6 +25,7 @@ export function Carousel(rawProps: CarouselProps) {
     {
       autoScroll: false,
       autoScrollIntervalMs: 5000,
+      gap: '0',
       hideNavigationButtons: false,
       hideIndicators: false,
       indicatorPosition: 'outside',
@@ -104,6 +106,7 @@ export function Carousel(rawProps: CarouselProps) {
       })}
       style={joinStyle(rawProps.style, {
         '--solid-design-parts-Carousel_item-width': props.itemWidth,
+        '--solid-design-parts-Carousel_gap': props.gap,
       })}
       data-indicator-position={props.indicatorPosition}
     >
@@ -222,11 +225,14 @@ export function Carousel(rawProps: CarouselProps) {
                 }
 
                 assert(itemListElement, isNotNullish)
+
+                const firstItemRect = itemListElement.children.item(0)?.getBoundingClientRect()
+                assert(firstItemRect, isNotNullish)
                 const itemRect = itemListElement.children.item(i)?.getBoundingClientRect()
                 assert(itemRect, isNotNullish)
                 const itemListRect = itemListElement.getBoundingClientRect()
                 itemListElement.scrollTo({
-                  left: i * itemRect.width - itemListRect.width / 2 + itemRect.width / 2,
+                  left: itemRect.left - firstItemRect.left + itemRect.width / 2 - itemListRect.width / 2,
                   behavior: 'smooth',
                 })
               }}
