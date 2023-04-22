@@ -22,24 +22,8 @@
 }
 
 .solid-design-parts-Calendar_year-month {
-  display: grid;
-  grid-template-areas: var(--solid-design-parts-Calendar_year-month-order);
-  align-items: center;
-  gap: 0.3em;
-}
-
-.solid-design-parts-Calendar_year,
-.solid-design-parts-Calendar_month {
   font-weight: bold;
   color: oklch(50% 0 0);
-}
-
-.solid-design-parts-Calendar_year {
-  grid-area: year;
-}
-
-.solid-design-parts-Calendar_month {
-  grid-area: month;
 }
 
 .solid-design-parts-Calendar_grid {

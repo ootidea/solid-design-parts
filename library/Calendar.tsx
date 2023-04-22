@@ -19,7 +19,7 @@ import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import { createI18nGetters } from './utility/i18n'
-import { createNormalizedSignalObject, joinClasses, joinStyle, prepareProps, Props, SlotProp } from './utility/props'
+import { createNormalizedSignalObject, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type CalendarProps = Props<{
@@ -35,9 +35,7 @@ const i18nGetters = createI18nGetters({
     default: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
     ja: ['日', '月', '火', '水', '木', '金', '土'],
   },
-  yearMonthOrder: { default: `"month year"`, ja: `"year month"` },
-  monthTemplate: { default: 'MMMM', ja: 'M月' },
-  yearTemplate: { default: 'yyyy', ja: 'yyyy年' },
+  yearMonth: { default: (date: Date) => format(date, 'MMMM yyyy'), ja: (date: Date) => format(date, 'yyyy年 M月') },
 })
 
 export function Calendar(rawProps: CalendarProps) {
@@ -59,13 +57,7 @@ export function Calendar(rawProps: CalendarProps) {
   const firstDateOfSelectedCalendar = () => subDays(firstDateOfSelectedMonth(), firstDateOfSelectedMonth().getDay())
 
   return (
-    <div
-      {...restProps}
-      class={joinClasses(rawProps, 'solid-design-parts-Calendar_root')}
-      style={joinStyle(props.style, {
-        '--solid-design-parts-Calendar_year-month-order': i18nGetters.yearMonthOrder,
-      })}
-    >
+    <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-Calendar_root')}>
       <div class="solid-design-parts-Calendar_year-month-area">
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_prev-month-button"
@@ -74,10 +66,7 @@ export function Calendar(rawProps: CalendarProps) {
           onClick={() => (monthSignal.value = subMonths(monthSignal.value, 1))}
           size="1.6em"
         />
-        <div class="solid-design-parts-Calendar_year-month">
-          <span class="solid-design-parts-Calendar_year">{format(monthSignal.value, i18nGetters.yearTemplate)}</span>
-          <span class="solid-design-parts-Calendar_month">{format(monthSignal.value, i18nGetters.monthTemplate)}</span>
-        </div>
+        <div class="solid-design-parts-Calendar_year-month">{i18nGetters.yearMonth(monthSignal.value)}</div>
         <IconButton
           class="solid-design-parts-Calendar_month-move-button solid-design-parts-Calendar_next-month-button"
           aria-hidden={props.max !== undefined && isSameMonth(monthSignal.value, props.max)}
