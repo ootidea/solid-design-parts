@@ -27,30 +27,30 @@ export function AnimatedShow<const T>(rawProps: AnimatedShowProps<T>) {
   const shouldBeInDomSignal = createSignalObject(Boolean(props.when))
 
   // A variable required to render props.children until animation is complete.
-  let lastNonFalsyWhen = props.when
+  let lastTruthyValue = props.when
   createDeferEffect(
     () => props.when,
     () => {
       if (props.when) {
-        lastNonFalsyWhen = props.when
+        lastTruthyValue = props.when
       }
 
       changeShown(Boolean(props.when))
     }
   )
 
-  let animation: Animation | undefined
+  let lastAnimation: Animation | undefined
   function changeShown(newWhen: boolean) {
-    animation?.cancel()
+    lastAnimation?.cancel()
     if (newWhen) {
       shouldBeInDomSignal.value = true
-      animation = element?.animate(props.animation.keyframes, props.animation.options)
-      animation?.addEventListener('finish', () => {
+      lastAnimation = element?.animate(props.animation.keyframes, props.animation.options)
+      lastAnimation?.addEventListener('finish', () => {
         props.onFinishEnterAnimation?.()
       })
     } else {
-      animation = element?.animate(props.animation.keyframes, { ...props.animation.options, direction: 'reverse' })
-      animation?.addEventListener('finish', () => {
+      lastAnimation = element?.animate(props.animation.keyframes, { ...props.animation.options, direction: 'reverse' })
+      lastAnimation?.addEventListener('finish', () => {
         shouldBeInDomSignal.value = false
         props.onFinishExitAnimation?.()
       })
@@ -60,7 +60,7 @@ export function AnimatedShow<const T>(rawProps: AnimatedShowProps<T>) {
   return (
     <div class="solid-design-parts-AnimatedShow_root" ref={element}>
       <Show when={shouldBeInDomSignal.value}>
-        <Slot content={props.children} params={lastNonFalsyWhen!} />
+        <Slot content={props.children} params={lastTruthyValue!} />
       </Show>
     </div>
   )
