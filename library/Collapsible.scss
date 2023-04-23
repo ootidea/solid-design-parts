@@ -2,17 +2,20 @@
   box-sizing: border-box;
 }
 
-.solid-design-parts-Collapsible_summary {
-  &::-webkit-details-marker {
-    // Hide browser's default icon.
-    display: none;
-  }
-
+.solid-design-parts-Collapsible_title-area {
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
 
   box-sizing: border-box;
+  padding: 0;
+  border: none;
+  width: 100%;
+
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  color: inherit;
   cursor: pointer;
 
   @media (hover: hover) {
@@ -30,12 +33,12 @@
   transform-origin: center;
   transition: all 140ms ease-out;
 
-  .solid-design-parts-Collapsible_root[open] & {
+  .solid-design-parts-Collapsible_title-area[aria-expanded='true'] & {
     transform: rotate(90deg);
   }
 
   // Need for nested Collapsible
-  .solid-design-parts-Collapsible_root:not([open]) & {
+  .solid-design-parts-Collapsible_title-area:not([aria-expanded='true']) & {
     transform: rotate(0deg);
   }
 }

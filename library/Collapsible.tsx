@@ -1,8 +1,10 @@
 import { ComponentProps } from 'solid-js'
+import { AnimatedShow } from './AnimatedShow'
 import './Collapsible.scss'
 import './common.scss'
 import { Icon } from './Icon'
 import chevronRightIcon from './image/chevron-right.svg'
+import { createScaleYAnimation } from './SolidDesignPartsAnimation'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -19,7 +21,7 @@ export type CollapsibleProps = Props<{
   icon?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; isCollapsed: boolean }>
   children?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void }>
   onChangeCollapsed?: (collapsed: boolean) => void
-  summaryProps?: ComponentProps<'summary'>
+  titleAreaProps?: ComponentProps<'button'>
 }>
 
 export function Collapsible(rawProps: CollapsibleProps) {
@@ -28,7 +30,7 @@ export function Collapsible(rawProps: CollapsibleProps) {
     {
       collapsed: false,
     },
-    ['title', 'icon', 'onChangeCollapsed', 'summaryProps']
+    ['title', 'icon', 'onChangeCollapsed', 'titleAreaProps']
   )
 
   const collapsedSignal = createInjectableSignalObject(props, 'collapsed')
@@ -39,15 +41,12 @@ export function Collapsible(rawProps: CollapsibleProps) {
   const toggle = () => (collapsedSignal.value = !collapsedSignal.value)
 
   return (
-    <details
-      {...restProps}
-      class={joinClasses(rawProps, 'solid-design-parts-Collapsible_root')}
-      open={!collapsedSignal.value}
-      onToggle={(event) => (collapsedSignal.value = !event.currentTarget.open)}
-    >
-      <summary
-        {...props.summaryProps}
-        class={joinClasses(props.summaryProps, 'solid-design-parts-Collapsible_summary')}
+    <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-Collapsible_root')}>
+      <button
+        {...props.titleAreaProps}
+        class={joinClasses(props.titleAreaProps, 'solid-design-parts-Collapsible_title-area')}
+        aria-expanded={!collapsedSignal.value}
+        onClick={() => (collapsedSignal.value = !collapsedSignal.value)}
       >
         <Slot content={rawProps.icon} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }}>
           <Icon class="solid-design-parts-Collapsible_icon" src={chevronRightIcon} />
@@ -55,10 +54,12 @@ export function Collapsible(rawProps: CollapsibleProps) {
         <div class="solid-design-parts-Collapsible_title">
           <Slot content={rawProps.title} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }} />
         </div>
-      </summary>
-      <div class="solid-design-parts-Collapsible_detail-area">
-        <Slot content={rawProps.children} params={{ collapse, expand, toggle }} />
-      </div>
-    </details>
+      </button>
+      <AnimatedShow when={!collapsedSignal.value} animation={createScaleYAnimation({ duration: 140 }, 'top')}>
+        <div class="solid-design-parts-Collapsible_detail-area">
+          <Slot content={rawProps.children} params={{ collapse, expand, toggle }} />
+        </div>
+      </AnimatedShow>
+    </div>
   )
 }

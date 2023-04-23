@@ -69,7 +69,7 @@ export function App() {
                 {(menuItem) => (
                   <Collapsible
                     title={menuItem.title}
-                    summaryProps={{
+                    titleAreaProps={{
                       class: classes.sideBarCollapsibleSummary,
                     }}
                   >
