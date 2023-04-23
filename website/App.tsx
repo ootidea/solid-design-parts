@@ -32,16 +32,16 @@ export function App() {
       children: ['DateInput', 'DatePicker', 'Calendar'],
     },
     { title: 'Other inputs', children: ['Slider'] },
-    {
-      title: 'Layout',
-      children: ['Gravity', 'StretchLayout', 'TitleBarLayout', 'Scrollable', 'Resizable', 'Collapsible'],
-    },
     { title: 'Floating', children: ['Modal', 'Popover', 'Toast'] },
     { title: 'Data collections', children: ['DataTable', 'Tabs', 'Carousel'] },
     { title: 'Animations', children: ['AnimatedShow', 'AnimateOnView'] },
     {
+      title: 'Layout',
+      children: ['Scrollable', 'Collapsible', 'Resizable', 'Gravity', 'TitleBarLayout', 'StretchLayout'],
+    },
+    {
       title: 'Others',
-      children: ['Icon', 'Image', 'Divider', 'Spinner', 'Triangle', 'Stepper', 'SpeechBubble', 'Link'],
+      children: ['Icon', 'Divider', 'Spinner', 'Triangle', 'SpeechBubble', 'Stepper', 'Link', 'Image'],
     },
     { title: 'Utility', children: ['Await', 'UrlToLink'] },
   ]
