@@ -5,6 +5,7 @@ import './common.scss'
 import { Icon } from './Icon'
 import chevronRightIcon from './image/chevron-right.svg'
 import { createScaleYAnimation } from './SolidDesignPartsAnimation'
+import { isNestedClickEvent } from './utility/dom'
 import {
   createDeferEffect,
   createInjectableSignalObject,
@@ -46,7 +47,11 @@ export function Collapsible(rawProps: CollapsibleProps) {
         {...props.titleAreaProps}
         class={joinClasses(props.titleAreaProps, 'solid-design-parts-Collapsible_title-area')}
         aria-expanded={!collapsedSignal.value}
-        onClick={() => (collapsedSignal.value = !collapsedSignal.value)}
+        onClick={(event) => {
+          if (isNestedClickEvent(event)) return
+
+          collapsedSignal.value = !collapsedSignal.value
+        }}
       >
         <Slot content={rawProps.icon} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }}>
           <Icon class="solid-design-parts-Collapsible_icon" src={chevronRightIcon} />
