@@ -1,52 +1,59 @@
-import { For, Show } from 'solid-js'
+import { For, JSX, Show } from 'solid-js'
 import './common.scss'
 import './Tabs.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type TabsProps<T extends string> = Props<{
-  names: readonly T[]
-  activeTab?: T
-  children?: SlotProp<{ activeTab: T }>
+export type TabsProps<T extends readonly string[]> = Props<{
+  tabNames: T
+  tabTitles?: Partial<Record<T[number], JSX.Element>> | ((tabName: T[number]) => JSX.Element)
+  activeTabName?: T[number]
+  children?: SlotProp<{ activeTabName: T[number] }>
   variant?: 'colored tab and divider' | 'bordered tab' | 'underlined tab'
   passive?: boolean
-  onClickTab?: (tabName: T) => void
+  onClickTab?: (tabName: T[number]) => void
 }>
 
-export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
+export function Tabs<const T extends readonly string[]>(rawProps: TabsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
-    { activeTab: rawProps.names[0], variant: 'colored tab and divider', passive: false },
-    ['names', 'onClickTab', 'children']
+    { activeTabName: rawProps.tabNames[0], variant: 'colored tab and divider', passive: false },
+    ['tabNames', 'tabTitles', 'onClickTab', 'children']
   )
 
-  const [activeTab, setActiveTab] = createInjectableSignal(props, 'activeTab')
+  const [activeTabName, setActiveTabName] = createInjectableSignal(props, 'activeTabName')
 
-  function onClick(name: T) {
+  function onClick(tabName: T[number]) {
     if (!props.passive) {
-      setActiveTab(() => name)
+      setActiveTabName(() => tabName)
     }
-    props.onClickTab?.(name)
+    props.onClickTab?.(tabName)
+  }
+
+  function getTabTitle(tabName: T[number]) {
+    if (props.tabTitles instanceof Function) return props.tabTitles(tabName)
+
+    return props.tabTitles?.[tabName] ?? tabName
   }
 
   return (
     <div
       {...restProps}
       class={joinClasses(rawProps, 'solid-design-parts-Tabs_root')}
-      style={{ '--solid-design-parts-Tabs_template': `repeat(${props.names.length}, auto) minmax(0, 1fr)` }}
+      style={{ '--solid-design-parts-Tabs_template': `repeat(${props.tabNames.length}, auto) minmax(0, 1fr)` }}
       data-variant={props.variant}
     >
       <div class="solid-design-parts-Tabs_tab-bar" role="tablist">
-        <For each={props.names}>
+        <For each={props.tabNames}>
           {(name) => (
             <button
               class="solid-design-parts-Tabs_tab"
-              classList={{ 'solid-design-parts-Tabs_active': activeTab() === name }}
+              classList={{ 'solid-design-parts-Tabs_active': activeTabName() === name }}
               role="tab"
               type="button"
               onClick={() => onClick(name)}
             >
-              {name}
+              {getTabTitle(name)}
             </button>
           )}
         </For>
@@ -55,14 +62,18 @@ export function Tabs<const T extends string>(rawProps: TabsProps<T>) {
         </Show>
       </div>
       <div class="solid-design-parts-Tabs_content" role="tabpanel">
-        <Slot content={props.children} params={{ activeTab: activeTab() }} />
+        <Slot content={props.children} params={{ activeTabName: activeTabName() }} />
       </div>
     </div>
   )
 }
 
-Tabs.coloredTabAndDivider = <const T extends string>(props: TabsProps<T>) => (
+Tabs.coloredTabAndDivider = <const T extends readonly string[]>(props: TabsProps<T>) => (
   <Tabs variant="colored tab and divider" {...props} />
 )
-Tabs.borderedTab = <const T extends string>(props: TabsProps<T>) => <Tabs variant="bordered tab" {...props} />
-Tabs.underlinedTab = <const T extends string>(props: TabsProps<T>) => <Tabs variant="underlined tab" {...props} />
+Tabs.borderedTab = <const T extends readonly string[]>(props: TabsProps<T>) => (
+  <Tabs variant="bordered tab" {...props} />
+)
+Tabs.underlinedTab = <const T extends readonly string[]>(props: TabsProps<T>) => (
+  <Tabs variant="underlined tab" {...props} />
+)

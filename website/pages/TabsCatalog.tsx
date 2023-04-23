@@ -8,7 +8,9 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       title: 'Basic example',
       children: (
         <>
-          <Tabs names={['tab1', 'tab2', 'tab3']}>{({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}</Tabs>
+          <Tabs tabNames={['tab1', 'tab2', 'tab3']}>
+            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
+          </Tabs>
         </>
       ),
     },
@@ -16,11 +18,11 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       title: 'Variants',
       children: (
         <>
-          <Tabs variant="bordered tab" names={['tab1', 'tab2', 'tab3']}>
-            {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
+          <Tabs variant="bordered tab" tabNames={['tab1', 'tab2', 'tab3']}>
+            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
-          <Tabs variant="underlined tab" names={['tab1', 'tab2', 'tab3']}>
-            {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
+          <Tabs variant="underlined tab" tabNames={['tab1', 'tab2', 'tab3']}>
+            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
         </>
       ),
@@ -29,8 +31,8 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       title: 'Changing default tab',
       children: (
         <>
-          <Tabs names={['tab1', 'tab2', 'tab3']} activeTab="tab2">
-            {({ activeTab }) => <div style="padding: 2em">{activeTab}</div>}
+          <Tabs tabNames={['tab1', 'tab2', 'tab3']} activeTabName="tab2">
+            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
         </>
       ),
@@ -44,7 +46,11 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <Tabs passive names={['tab1', 'tab2', 'tab3']} onClickTab={(tabName) => showToast('success', tabName)}></Tabs>
+          <Tabs
+            passive
+            tabNames={['tab1', 'tab2', 'tab3']}
+            onClickTab={(tabName) => showToast('success', tabName)}
+          ></Tabs>
         </>
       ),
     },
