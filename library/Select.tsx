@@ -260,6 +260,7 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
                       <div class="solid-design-parts-Select_search-box-area">
                         <TextInput
                           class="solid-design-parts-Select_search-box"
+                          type="search"
                           placeholder="search"
                           value={searchQuerySignal.value}
                           error={(value) => search(props.values, value).length === 0}

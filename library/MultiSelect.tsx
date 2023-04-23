@@ -291,6 +291,7 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
                       <div class="solid-design-parts-MultiSelect_search-box-area">
                         <TextInput
                           class="solid-design-parts-MultiSelect_search-box"
+                          type="search"
                           placeholder="search"
                           value={searchQuerySignal.value}
                           error={(value) => search(props.values, value).length === 0}
