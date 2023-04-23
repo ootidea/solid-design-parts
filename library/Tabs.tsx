@@ -53,7 +53,7 @@ export function Tabs<const T extends readonly string[]>(rawProps: TabsProps<T>) 
               type="button"
               onClick={() => onClick(name)}
             >
-              {getTabTitle(name)}
+              <div class="solid-design-parts-Tabs_tab-title">{getTabTitle(name)}</div>
             </button>
           )}
         </For>

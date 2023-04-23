@@ -8,9 +8,8 @@
 }
 
 .solid-design-parts-Tabs_tab {
-  display: inline-grid;
+  display: grid;
   place-items: center;
-  vertical-align: top;
 
   padding: 0.5em 1em;
   box-sizing: border-box;
