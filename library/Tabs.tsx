@@ -1,8 +1,9 @@
+import { fromEntries, map } from 'base-up'
 import { For, JSX, Show } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
 import './common.scss'
 import './Tabs.scss'
-import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
-import { Slot } from './utility/Slot'
+import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
 
 export type TabsProps<T extends readonly (string | number)[]> = Props<{
   tabNames: T
@@ -13,7 +14,7 @@ export type TabsProps<T extends readonly (string | number)[]> = Props<{
   tabTitles?: Partial<Record<T[number], JSX.Element>> | ((tabName: T[number]) => JSX.Element)
   /** The name of the tab selected initially. If omitted, the first tab will be selected by default. */
   activeTabName?: T[number]
-  children?: SlotProp<{ activeTabName: T[number] }>
+  children?: Record<T[number], JSX.Element> | ((tabName: T[number]) => JSX.Element)
   /** Appearance types */
   variant?: 'colored tab and divider' | 'bordered tab' | 'underlined tab'
   /** When set to true, clicking on a tab will not change its state. However, onClickTab will still be called. */
@@ -43,6 +44,15 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
     return props.tabTitles?.[tabName] ?? tabName
   }
 
+  const tabContentsMemo = createMemoObject(() => {
+    const children = props.children
+    if (children instanceof Function) {
+      return fromEntries(map(props.tabNames, (tabName) => [tabName, children(tabName)] as const))
+    }
+
+    return children ?? {}
+  })
+
   return (
     <div
       {...restProps}
@@ -69,7 +79,7 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
         </Show>
       </div>
       <div class="solid-design-parts-Tabs_content" role="tabpanel">
-        <Slot content={props.children} params={{ activeTabName: activeTabName() }} />
+        {tabContentsMemo.value[activeTabName()]}
       </div>
     </div>
   )

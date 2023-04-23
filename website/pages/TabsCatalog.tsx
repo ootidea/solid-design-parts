@@ -9,7 +9,7 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs tabNames={['tab1', 'tab2', 'tab3']}>
-            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
+            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
         </>
       ),
@@ -19,10 +19,10 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs variant="bordered tab" tabNames={['tab1', 'tab2', 'tab3']}>
-            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
+            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
           <Tabs variant="underlined tab" tabNames={['tab1', 'tab2', 'tab3']}>
-            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
+            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
         </>
       ),
@@ -32,7 +32,7 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs tabNames={['tab1', 'tab2', 'tab3']} activeTabName="tab2">
-            {({ activeTabName }) => <div style="padding: 2em">{activeTabName}</div>}
+            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
           </Tabs>
         </>
       ),
