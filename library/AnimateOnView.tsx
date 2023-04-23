@@ -4,12 +4,12 @@ import { prepareProps, Props } from './utility/props'
 
 export type AnimateOnViewProps<T> = Props<{
   animation?: SolidDesignPartsAnimation
-  onFinishEnterAnimation?: () => void
+  onFinishAnimation?: () => void
 }>
 
 export function AnimateOnView<const T>(rawProps: AnimateOnViewProps<T>) {
   const [props, restProps] = prepareProps(rawProps, { animation: createFadeAnimation() }, [
-    'onFinishEnterAnimation',
+    'onFinishAnimation',
     'children',
   ])
 
@@ -20,7 +20,10 @@ export function AnimateOnView<const T>(rawProps: AnimateOnViewProps<T>) {
         const observer = new IntersectionObserver((entries) => {
           const entry = entries.find((entry) => entry.target === element)
           if (entry?.isIntersecting) {
-            element.animate(props.animation.keyframes, props.animation.options)
+            const animation = element.animate(props.animation.keyframes, props.animation.options)
+            animation.addEventListener('finish', () => {
+              props.onFinishAnimation?.()
+            })
           }
         })
         observer.observe(element)
