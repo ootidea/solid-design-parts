@@ -5,6 +5,12 @@ import { createFadeAnimation, createScaleYAnimation } from '../../library/SolidD
 import { Catalog } from './ComponentCatalogPage'
 
 export const AnimatedShowCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>AnimatedShow</code> is a component that execute an animation when elements appear and disappear. It has an
+      interface almost identical to <code>Show</code>.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',

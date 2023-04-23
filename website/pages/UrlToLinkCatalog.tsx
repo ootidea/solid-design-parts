@@ -10,5 +10,10 @@ Domain is not a link: google.com
 file:///C:/something.txt`
 
 export const UrlToLinkCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>UrlToLink</code> is a component that replaces URLs within content with clickable links.
+    </>
+  ),
   samples: [{ title: 'Basic example', children: <UrlToLink>{text}</UrlToLink> }],
 }))

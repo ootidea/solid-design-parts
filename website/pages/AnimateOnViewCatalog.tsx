@@ -4,6 +4,12 @@ import { createScaleYAnimation } from '../../library/SolidDesignPartsAnimation'
 import { Catalog } from './ComponentCatalogPage'
 
 export const AnimateOnViewCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>AnimateOnView</code> is a component that performs an animation when an element is displayed on the screen.
+      Being displayed on the screen is detected by IntersectionObserver.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
