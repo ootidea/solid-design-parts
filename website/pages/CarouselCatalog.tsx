@@ -57,7 +57,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
             <img src="https://source.unsplash.com/600x300/?leaf" alt="" />
             <img src="https://source.unsplash.com/600x300/?device" alt="" />
           </Carousel>
-          <Carousel style={{ width: '22rem' }} itemWidth="22rem" autoScroll autoScrollIntervalMs={3000}>
+          <Carousel itemWidth="22rem" autoScroll autoScrollIntervalMs={3000}>
             <img src="https://source.unsplash.com/600x300/?dog" alt="" />
             <img src="https://source.unsplash.com/600x300/?cat" alt="" />
             <img src="https://source.unsplash.com/600x300/?sky" alt="" />
