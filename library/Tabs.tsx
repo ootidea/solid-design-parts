@@ -4,7 +4,7 @@ import './Tabs.scss'
 import { createInjectableSignal, joinClasses, prepareProps, Props, SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
-export type TabsProps<T extends readonly string[]> = Props<{
+export type TabsProps<T extends readonly (string | number)[]> = Props<{
   tabNames: T
   tabTitles?: Partial<Record<T[number], JSX.Element>> | ((tabName: T[number]) => JSX.Element)
   activeTabName?: T[number]
@@ -14,7 +14,7 @@ export type TabsProps<T extends readonly string[]> = Props<{
   onClickTab?: (tabName: T[number]) => void
 }>
 
-export function Tabs<const T extends readonly string[]>(rawProps: TabsProps<T>) {
+export function Tabs<const T extends readonly (string | number)[]>(rawProps: TabsProps<T>) {
   const [props, restProps] = prepareProps(
     rawProps,
     { activeTabName: rawProps.tabNames[0], variant: 'colored tab and divider', passive: false },
@@ -68,12 +68,12 @@ export function Tabs<const T extends readonly string[]>(rawProps: TabsProps<T>) 
   )
 }
 
-Tabs.coloredTabAndDivider = <const T extends readonly string[]>(props: TabsProps<T>) => (
+Tabs.coloredTabAndDivider = <const T extends readonly (string | number)[]>(props: TabsProps<T>) => (
   <Tabs variant="colored tab and divider" {...props} />
 )
-Tabs.borderedTab = <const T extends readonly string[]>(props: TabsProps<T>) => (
+Tabs.borderedTab = <const T extends readonly (string | number)[]>(props: TabsProps<T>) => (
   <Tabs variant="bordered tab" {...props} />
 )
-Tabs.underlinedTab = <const T extends readonly string[]>(props: TabsProps<T>) => (
+Tabs.underlinedTab = <const T extends readonly (string | number)[]>(props: TabsProps<T>) => (
   <Tabs variant="underlined tab" {...props} />
 )
