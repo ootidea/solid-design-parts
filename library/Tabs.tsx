@@ -44,6 +44,7 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
     return props.tabTitles?.[tabName] ?? tabName
   }
 
+  // DOM elements of each tab content are not recreated when the active tab is changed.
   const tabContentsMemo = createMemoObject(() => {
     const children = props.children
     if (children instanceof Function) {
