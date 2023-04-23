@@ -6,10 +6,17 @@ import { Slot } from './utility/Slot'
 
 export type TabsProps<T extends readonly (string | number)[]> = Props<{
   tabNames: T
+  /**
+   * The content displayed within each tab in the tab bar.
+   * If omitted, the tab name will be displayed.
+   */
   tabTitles?: Partial<Record<T[number], JSX.Element>> | ((tabName: T[number]) => JSX.Element)
+  /** The name of the tab selected initially. If omitted, the first tab will be selected by default. */
   activeTabName?: T[number]
   children?: SlotProp<{ activeTabName: T[number] }>
+  /** Appearance types */
   variant?: 'colored tab and divider' | 'bordered tab' | 'underlined tab'
+  /** When set to true, clicking on a tab will not change its state. However, onClickTab will still be called. */
   passive?: boolean
   onClickTab?: (tabName: T[number]) => void
 }>
