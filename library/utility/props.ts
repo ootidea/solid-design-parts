@@ -1,4 +1,4 @@
-import { keysOf } from 'base-up'
+import { filter, isNotOneOf, keysOf } from 'base-up'
 import {
   ComponentProps,
   createEffect,
@@ -10,7 +10,7 @@ import {
   Signal,
   splitProps,
 } from 'solid-js'
-import { Accessor, AccessorArray } from 'solid-js/types/reactive/signal'
+import { Accessor, AccessorArray, ChildrenReturn } from 'solid-js/types/reactive/signal'
 import { Component } from 'solid-js/types/render/component'
 import { createSignalObject, SignalObject } from 'solid-signal-object'
 
@@ -78,6 +78,10 @@ export function createNormalizedSignalObject<T>(
     }
   })
   return valueSignal
+}
+
+export function filterShowableChildren(childrenMemo: ChildrenReturn): (number | string | Node)[] {
+  return filter(childrenMemo.toArray(), isNotOneOf(true, false, null, undefined))
 }
 
 /**
