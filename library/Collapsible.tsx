@@ -1,5 +1,5 @@
 import { ComponentProps } from 'solid-js'
-import { AnimatedShow } from './AnimatedShow'
+import { createSignalObject } from 'solid-signal-object'
 import './Collapsible.scss'
 import './common.scss'
 import { Icon } from './Icon'
@@ -41,6 +41,31 @@ export function Collapsible(rawProps: CollapsibleProps) {
   const expand = () => (collapsedSignal.value = false)
   const toggle = () => (collapsedSignal.value = !collapsedSignal.value)
 
+  // The duration should be the same length as the transition of solid-design-parts-Collapsible_icon
+  const animation = createScaleYAnimation({ duration: 140 }, 'top')
+
+  const isHiddenSignal = createSignalObject(collapsedSignal.value)
+  let lastAnimation: Animation | undefined
+  let detailAreaElement: HTMLDivElement | undefined
+  createDeferEffect(
+    () => collapsedSignal.value,
+    () => {
+      lastAnimation?.cancel()
+      if (collapsedSignal.value) {
+        lastAnimation = detailAreaElement?.animate(animation.keyframes, {
+          ...animation.options,
+          direction: 'reverse',
+        })
+        lastAnimation?.addEventListener('finish', () => {
+          isHiddenSignal.value = true
+        })
+      } else {
+        isHiddenSignal.value = false
+        lastAnimation = detailAreaElement?.animate(animation.keyframes, animation.options)
+      }
+    }
+  )
+
   return (
     <div {...restProps} class={joinClasses(rawProps, 'solid-design-parts-Collapsible_root')}>
       <button
@@ -60,11 +85,14 @@ export function Collapsible(rawProps: CollapsibleProps) {
           <Slot content={rawProps.title} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }} />
         </div>
       </button>
-      <AnimatedShow when={!collapsedSignal.value} animation={createScaleYAnimation({ duration: 140 }, 'top')}>
-        <div class="solid-design-parts-Collapsible_detail-area">
-          <Slot content={rawProps.children} params={{ collapse, expand, toggle }} />
-        </div>
-      </AnimatedShow>
+      <div
+        class="solid-design-parts-Collapsible_detail-area"
+        classList={{ 'solid-design-parts_hidden-but-keep-width': isHiddenSignal.value }}
+        aria-hidden={isHiddenSignal.value}
+        ref={detailAreaElement}
+      >
+        <Slot content={rawProps.children} params={{ collapse, expand, toggle }} />
+      </div>
     </div>
   )
 }
