@@ -16,6 +16,12 @@ export const ModalCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Persistent',
+      description: (
+        <>
+          When <code>persistent</code> is set, the modal will not close upon pressing the Esc key or clicking outside
+          the modal.
+        </>
+      ),
       children: (
         <Modal persistent launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
           {({ closeModal }) => <Button onClick={closeModal}>Close</Button>}
