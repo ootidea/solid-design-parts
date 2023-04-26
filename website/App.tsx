@@ -43,7 +43,7 @@ export function App() {
       title: 'Others',
       children: ['Icon', 'Divider', 'Spinner', 'Triangle', 'SpeechBubble', 'Stepper', 'Link', 'Image'],
     },
-    { title: 'Utility', children: ['Await', 'UrlToLink'] },
+    { title: 'Utility', children: ['Await', 'Const', 'UrlToLink'] },
   ]
 
   return (

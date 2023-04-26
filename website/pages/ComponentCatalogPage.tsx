@@ -13,6 +13,7 @@ import { CarouselCatalog } from './CarouselCatalog'
 import { CheckboxCatalog } from './CheckboxCatalog'
 import { CheckboxesCatalog } from './CheckboxesCatalog'
 import { CollapsibleCatalog } from './CollapsibleCatalog'
+import { ConstCatalog } from './ConstCatalog'
 import { DataTableCatalog } from './DataTableCatalog'
 import { DateInputCatalog } from './DateInputCatalog'
 import { DatePickerCatalog } from './DatePickerCatalog'
@@ -79,6 +80,8 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   ScrollableCatalog,
   ResizableCatalog,
   CollapsibleCatalog,
+  AnimatedShowCatalog,
+  AnimateOnViewCatalog,
   IconCatalog,
   DividerCatalog,
   ImageCatalog,
@@ -86,11 +89,10 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   StepperCatalog,
   TriangleCatalog,
   SpeechBubbleCatalog,
-  AnimatedShowCatalog,
-  AnimateOnViewCatalog,
-  AwaitCatalog,
-  UrlToLinkCatalog,
   LinkCatalog,
+  AwaitCatalog,
+  ConstCatalog,
+  UrlToLinkCatalog,
 }))
 
 export function ComponentCatalogPage() {
