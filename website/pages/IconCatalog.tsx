@@ -1,6 +1,8 @@
 import { createRoot } from 'solid-js'
 import { Icon } from '../../library'
+import badOutlineIcon from '../images/bad-outline.svg'
 import chevronLeftIcon from '../images/chevron-left.svg'
+import goodOutlineIcon from '../images/good-outline.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 export const IconCatalog: Catalog = createRoot(() => ({
@@ -36,8 +38,8 @@ export const IconCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <Icon src={chevronLeftIcon} color="red" />
-          <Icon src={chevronLeftIcon} color="green" />
+          <Icon src={goodOutlineIcon} color="green" />
+          <Icon src={badOutlineIcon} color="hsl(0 60% 50%)" />
         </>
       ),
     },
