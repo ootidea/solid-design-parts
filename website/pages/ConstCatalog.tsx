@@ -10,7 +10,7 @@ export const ConstCatalog: Catalog = createRoot(() => ({
       children: <Const value={Math.random()}>{(value) => <div>value: {value}</div>}</Const>,
     },
     {
-      title: 'Dynamic local scope variable',
+      title: 'Temporal state',
       children: (
         <Modal launcher={({ openModal }) => <Button onClick={openModal}>Open modal</Button>}>
           <Const value={createSignal('Initial value')}>
