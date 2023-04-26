@@ -15,15 +15,15 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Persistent',
+      title: 'Disabling auto close',
       description: (
         <>
-          When <code>persistent</code> is set, the modal will not close upon pressing the Esc key or clicking outside
-          the modal.
+          When <code>disableAutoClose</code> is set, the modal will not close upon pressing the Esc key or clicking
+          outside the modal.
         </>
       ),
       children: (
-        <Modal persistent launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
+        <Modal disableAutoClose launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
           {({ closeModal }) => <Button onClick={closeModal}>Close</Button>}
         </Modal>
       ),

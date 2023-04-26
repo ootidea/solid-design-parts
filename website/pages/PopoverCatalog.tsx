@@ -36,15 +36,15 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Persistent',
+      title: 'Disabling auto close',
       description: (
         <>
-          When <code>persistent</code> is set, the popover will not close upon pressing the Esc key or clicking outside
-          the popover.
+          When <code>disableAutoClose</code> is set, the popover will not close upon pressing the Esc key or clicking
+          outside the popover.
         </>
       ),
       children: (
-        <Popover persistent launcher={({ togglePopover }) => <Button onClick={togglePopover}>Open</Button>}>
+        <Popover disableAutoClose launcher={({ togglePopover }) => <Button onClick={togglePopover}>Open</Button>}>
           {({ closePopover }) => (
             <div style={{ padding: '0.8em 1.8em', cursor: 'pointer' }} onClick={closePopover}>
               Close

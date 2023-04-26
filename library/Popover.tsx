@@ -18,7 +18,7 @@ import { Slot } from './utility/Slot'
 export type PopoverProps = Props<{
   placement?: EnneaPosition
   joint?: EnneaPosition | undefined
-  persistent?: boolean
+  disableAutoClose?: boolean
   ignoreEscKey?: boolean
   onClose?: () => void
   launcher?: SlotProp<{ openPopover: () => void; closePopover: () => void; togglePopover: () => void }>
@@ -32,7 +32,7 @@ export function Popover(rawProps: PopoverProps) {
     {
       placement: 'bottom',
       joint: undefined,
-      persistent: false,
+      disableAutoClose: false,
       ignoreEscKey: false,
     },
     ['style']
@@ -68,7 +68,7 @@ export function Popover(rawProps: PopoverProps) {
   function onOperateOverlay(event: Event) {
     if (event.target !== event.currentTarget) return
 
-    if (!props.persistent) {
+    if (!props.disableAutoClose) {
       closePopover()
     }
   }
@@ -76,7 +76,7 @@ export function Popover(rawProps: PopoverProps) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && opened.value && !props.persistent && !props.ignoreEscKey) {
+    if (event.code === 'Escape' && opened.value && !props.disableAutoClose && !props.ignoreEscKey) {
       event.preventDefault()
       closePopover()
     }

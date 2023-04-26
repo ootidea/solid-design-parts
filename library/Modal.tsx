@@ -23,7 +23,7 @@ import { Slot } from './utility/Slot'
 
 export type ModalProps = Props<{
   opened?: boolean
-  persistent?: boolean
+  disableAutoClose?: boolean
   showCloseButton?: boolean
   ignoreEscKey?: boolean
   onChangeOpened?: (opened: boolean) => void
@@ -38,7 +38,7 @@ export function Modal(rawProps: ModalProps) {
   const [props, restProps] = prepareProps(
     rawProps,
     {
-      persistent: false,
+      disableAutoClose: false,
       opened: false,
       showCloseButton: false,
       ignoreEscKey: false,
@@ -58,7 +58,7 @@ export function Modal(rawProps: ModalProps) {
     if (event.target !== event.currentTarget) return
 
     event.preventDefault()
-    if (!props.persistent) {
+    if (!props.disableAutoClose) {
       closeModal()
     }
   }
@@ -66,7 +66,7 @@ export function Modal(rawProps: ModalProps) {
   function onKeyDown(event: KeyboardEvent) {
     if (event.isComposing || event.defaultPrevented) return
 
-    if (event.code === 'Escape' && openedSignal.value && !props.persistent && !props.ignoreEscKey) {
+    if (event.code === 'Escape' && openedSignal.value && !props.disableAutoClose && !props.ignoreEscKey) {
       event.preventDefault()
       closeModal()
     }
