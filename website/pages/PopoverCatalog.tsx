@@ -46,8 +46,9 @@ export const PopoverCatalog: Catalog = createRoot(() => ({
       children: (
         <Popover disableAutoClose launcher={({ togglePopover }) => <Button onClick={togglePopover}>Open</Button>}>
           {({ closePopover }) => (
-            <div style={{ padding: '0.8em 1.8em', cursor: 'pointer' }} onClick={closePopover}>
-              Close
+            <div style={{ padding: '1em', display: 'grid', 'grid-auto-flow': 'row' }}>
+              <p>It can only be closed by pressing the button below.</p>
+              <Button onClick={closePopover}>Close</Button>
             </div>
           )}
         </Popover>

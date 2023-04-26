@@ -15,20 +15,6 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disabling auto close',
-      description: (
-        <>
-          When <code>disableAutoClose</code> is set, the modal will not close upon pressing the Esc key or clicking
-          outside the modal.
-        </>
-      ),
-      children: (
-        <Modal disableAutoClose launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
-          {({ closeModal }) => <Button onClick={closeModal}>Close</Button>}
-        </Modal>
-      ),
-    },
-    {
       title: (
         <>
           Binding <code>opened</code> to a signal
@@ -105,6 +91,25 @@ export const ModalCatalog: Catalog = createRoot(() => ({
             <div style="padding: 1em">This is sample text for Modal component.</div>
           </Modal>
         </>
+      ),
+    },
+    {
+      title: 'Disabling auto close',
+      description: (
+        <>
+          When <code>disableAutoClose</code> is set, the modal will not close upon pressing the Esc key or clicking
+          outside the modal.
+        </>
+      ),
+      children: (
+        <Modal disableAutoClose launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
+          {({ closeModal }) => (
+            <div style={{ padding: '1em', display: 'grid', 'grid-auto-flow': 'row' }}>
+              <p>It can only be closed by pressing the button below.</p>
+              <Button onClick={closeModal}>Close</Button>
+            </div>
+          )}
+        </Modal>
       ),
     },
   ],
