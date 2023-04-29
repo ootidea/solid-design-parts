@@ -20,7 +20,7 @@ export type CollapsibleProps = Props<{
   collapsed?: boolean
   title?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; isCollapsed: boolean }>
   icon?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; isCollapsed: boolean }>
-  children?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void }>
+  children?: SlotProp<{ collapse: () => void; expand: () => void; toggle: () => void; isCollapsed: boolean }>
   onChangeCollapsed?: (collapsed: boolean) => void
   titleAreaProps?: ComponentProps<'button'>
 }>
@@ -31,7 +31,7 @@ export function Collapsible(rawProps: CollapsibleProps) {
     {
       collapsed: false,
     },
-    ['title', 'icon', 'onChangeCollapsed', 'titleAreaProps']
+    ['title', 'icon', 'onChangeCollapsed', 'titleAreaProps', 'children']
   )
 
   const collapsedSignal = createInjectableSignalObject(props, 'collapsed')
@@ -78,11 +78,11 @@ export function Collapsible(rawProps: CollapsibleProps) {
           collapsedSignal.value = !collapsedSignal.value
         }}
       >
-        <Slot content={rawProps.icon} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }}>
+        <Slot content={props.icon} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }}>
           <Icon class="solid-design-parts-Collapsible_icon" src={chevronRightIcon} />
         </Slot>
         <div class="solid-design-parts-Collapsible_title">
-          <Slot content={rawProps.title} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }} />
+          <Slot content={props.title} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }} />
         </div>
       </button>
       <div
@@ -91,7 +91,7 @@ export function Collapsible(rawProps: CollapsibleProps) {
         aria-hidden={isHiddenSignal.value}
         ref={detailAreaElement}
       >
-        <Slot content={rawProps.children} params={{ collapse, expand, toggle }} />
+        <Slot content={props.children} params={{ collapse, expand, toggle, isCollapsed: collapsedSignal.value }} />
       </div>
     </div>
   )
