@@ -40,7 +40,7 @@ export function IconButton(rawProps: IconButtonProps) {
   const backgroundColor = createMemoObject(() => resolveColorOnBodyElement(props.backgroundColor))
   const isInProgress = createSignalObject(false)
 
-  function clickEventHandler(event: MouseEvent) {
+  function onClick(event: MouseEvent) {
     if (isInProgress.value) return
 
     const promise = props.onClick?.(event)
@@ -65,7 +65,7 @@ export function IconButton(rawProps: IconButtonProps) {
       type={props.type}
       disabled={props.disabled}
       aria-disabled={props.disabled}
-      onClick={clickEventHandler}
+      onClick={onClick}
     >
       {isInProgress.value ? (
         <Spinner size="65%" color={props.disabled ? props.disabledColor : props.iconColor} />

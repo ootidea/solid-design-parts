@@ -31,7 +31,7 @@ export function Button(rawProps: ButtonProps) {
 
   const isInProgress = createSignalObject(false)
 
-  function clickEventHandler(event: MouseEvent) {
+  function onClick(event: MouseEvent) {
     const promise = props.onClick?.(event)
     if (promise instanceof Promise) {
       isInProgress.value = true
@@ -64,7 +64,7 @@ export function Button(rawProps: ButtonProps) {
         aria-disabled={props.disabled}
         data-variant={props.variant}
         data-color={props.color}
-        onClick={clickEventHandler}
+        onClick={onClick}
       >
         {content}
       </a>
@@ -83,7 +83,7 @@ export function Button(rawProps: ButtonProps) {
       data-color={props.color}
       disabled={props.disabled || isInProgress.value}
       aria-disabled={props.disabled}
-      onClick={clickEventHandler}
+      onClick={onClick}
     >
       {content}
     </button>
