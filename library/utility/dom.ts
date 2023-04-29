@@ -20,8 +20,13 @@ function isClickable(element: Element): boolean {
   const contenteditable = element.getAttribute('contenteditable')
   if (contenteditable && contenteditable !== 'false') return true
 
+  if (element.getAttribute('tabindex') !== null) return true
+
   return (
-    includes(['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'SUMMARY'], element.tagName) ||
+    includes(
+      ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION', 'OPTGROUP', 'LABEL', 'SUMMARY'],
+      element.tagName
+    ) ||
     includes(
       [
         'link',
