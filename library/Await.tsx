@@ -1,12 +1,11 @@
-import { Promisable } from 'base-up'
 import { createRenderEffect, JSX, untrack } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import { SlotProp } from './utility/props'
 import { Slot } from './utility/Slot'
 
 export type AwaitProps<T> = {
-  value: Promisable<T>
-  children?: SlotProp<T>
+  value: T
+  children?: SlotProp<Awaited<T>>
   loading?: JSX.Element
   catch?: SlotProp<any>
   showPreviousValueDuringAwait?: boolean
