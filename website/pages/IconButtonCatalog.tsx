@@ -114,6 +114,12 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Link buttons',
+      description: (
+        <>
+          When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
+          <code>&lt;button&gt;</code>-based.
+        </>
+      ),
       direction: 'horizontal',
       children: (
         <>

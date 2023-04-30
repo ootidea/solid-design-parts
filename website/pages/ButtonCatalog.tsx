@@ -35,13 +35,13 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
     },
     {
       title: 'Link buttons',
-      direction: 'horizontal',
       description: (
         <>
           When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
           <code>&lt;button&gt;</code>-based.
         </>
       ),
+      direction: 'horizontal',
       children: (
         <>
           <Button href="https://google.com">Google</Button>
