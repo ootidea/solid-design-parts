@@ -180,7 +180,7 @@ export function NumberInput(rawProps: NumberInputProps) {
             inputMode={props.inputMode}
             placeholder={props.placeholder}
             disabled={props.disabled}
-            onInput={(event) => changeValue(event.target.value)}
+            onInput={(event) => changeValue(event.currentTarget.value)}
             onFocus={() => (hasInputElementFocusSignal.value = true)}
             onBlur={() => {
               isEditedSignal.value = true

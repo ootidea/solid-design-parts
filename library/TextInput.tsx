@@ -161,7 +161,7 @@ export function TextInput(rawProps: TextInputProps) {
             type={props.type}
             disabled={props.disabled}
             onInput={(event) => {
-              valueSignal.value = event.target.value
+              valueSignal.value = event.currentTarget.value
               isEditedSignal.value = true
             }}
             onFocus={() => (hasInputElementFocusSignal.value = true)}

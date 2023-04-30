@@ -116,8 +116,8 @@ export function Checkbox(rawProps: CheckboxProps) {
           value={props.value}
           checked={checkedSignal.value}
           disabled={props.disabled}
-          onChange={async (event) => {
-            checkedSignal.value = event.target.checked
+          onChange={(event) => {
+            checkedSignal.value = event.currentTarget.checked
             isEditedSignal.value = true
           }}
         />

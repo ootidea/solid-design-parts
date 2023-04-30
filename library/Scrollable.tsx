@@ -62,7 +62,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   }
 
   function onScroll(event: Event) {
-    const element = event.target
+    const element = event.currentTarget
     if (element instanceof HTMLElement) {
       if (innerHeightPx.value === 0) return
 
