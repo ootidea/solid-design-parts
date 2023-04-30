@@ -1,20 +1,28 @@
-import { Show } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 import './Button.scss'
 import './common.scss'
 import { Spinner } from './Spinner'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
-export type ButtonProps = Props<{
-  color?: 'primary' | 'achromatic' | 'error'
-  variant?: 'solid' | 'ghost'
-  disabled?: boolean
-  fullWidth?: boolean
-  type?: 'submit' | 'button' | 'reset'
-  href?: string
-  radius?: string
-  onClick?: (event: MouseEvent) => unknown
-}>
+export type ButtonProps = Props<
+  {
+    color?: 'primary' | 'achromatic' | 'error'
+    variant?: 'solid' | 'ghost'
+    disabled?: boolean
+    fullWidth?: boolean
+    radius?: string
+    onClick?: (event: MouseEvent) => unknown
+  } & (
+    | {
+        href?: never
+        type?: 'submit' | 'button' | 'reset'
+      }
+    | {
+        href: string
+        type?: string
+      }
+  )
+>
 
 export function Button(rawProps: ButtonProps) {
   const [props, restProps] = prepareProps(
@@ -24,10 +32,9 @@ export function Button(rawProps: ButtonProps) {
       variant: 'solid',
       disabled: false,
       fullWidth: false,
-      type: 'button',
       radius: '0.3em',
     },
-    ['href', 'onClick']
+    ['href', 'type', 'onClick']
   )
 
   const isInProgress = createSignalObject(false)
@@ -52,9 +59,24 @@ export function Button(rawProps: ButtonProps) {
   )
 
   return (
-    <Show
-      when={props.href === undefined}
-      fallback={
+    <>
+      {typeof rawProps.href !== 'string' ? (
+        <button
+          {...restProps}
+          class={joinClasses(rawProps, 'solid-design-parts-Button_root', {
+            'solid-design-parts-Button_full-width': props.fullWidth,
+          })}
+          style={joinStyle(rawProps.style, { '--solid-design-parts-Button_radius': props.radius })}
+          type={rawProps.type ?? 'button'}
+          data-variant={props.variant}
+          data-color={props.color}
+          disabled={props.disabled || isInProgress.value}
+          aria-disabled={props.disabled}
+          onClick={onClick}
+        >
+          {content}
+        </button>
+      ) : (
         <a
           {...restProps}
           class={joinClasses(rawProps, 'solid-design-parts-Button_root', {
@@ -62,6 +84,7 @@ export function Button(rawProps: ButtonProps) {
           })}
           style={joinStyle(rawProps.style, { '--solid-design-parts-Button_radius': props.radius })}
           href={props.href}
+          type={rawProps.type}
           role="button"
           tabindex={props.disabled ? -1 : 0}
           aria-disabled={props.disabled}
@@ -71,24 +94,8 @@ export function Button(rawProps: ButtonProps) {
         >
           {content}
         </a>
-      }
-    >
-      <button
-        {...restProps}
-        class={joinClasses(rawProps, 'solid-design-parts-Button_root', {
-          'solid-design-parts-Button_full-width': props.fullWidth,
-        })}
-        style={joinStyle(rawProps.style, { '--solid-design-parts-Button_radius': props.radius })}
-        type={props.type}
-        data-variant={props.variant}
-        data-color={props.color}
-        disabled={props.disabled || isInProgress.value}
-        aria-disabled={props.disabled}
-        onClick={onClick}
-      >
-        {content}
-      </button>
-    </Show>
+      )}
+    </>
   )
 }
 
