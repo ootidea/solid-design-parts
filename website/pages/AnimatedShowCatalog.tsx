@@ -28,6 +28,16 @@ export const AnimatedShowCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
+      title: 'Animate on mount',
+      children: (
+        <>
+          <AnimatedShow when={true} animateOnMount animation={createScaleYAnimation({ duration: 2000 })}>
+            <div>Content</div>
+          </AnimatedShow>
+        </>
+      ),
+    },
+    {
       title: 'Controlling by non boolean value',
       children: (
         <>
