@@ -4,25 +4,30 @@ import './common.scss'
 import { Spinner } from './Spinner'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
-export type ButtonProps = Props<
-  {
-    color?: 'primary' | 'achromatic' | 'error'
-    variant?: 'solid' | 'ghost'
-    disabled?: boolean
-    fullWidth?: boolean
-    radius?: string
-    onClick?: (event: MouseEvent) => unknown
-  } & (
-    | {
+type CommonOwnProps = {
+  color?: 'primary' | 'achromatic' | 'error'
+  variant?: 'solid' | 'ghost'
+  disabled?: boolean
+  fullWidth?: boolean
+  radius?: string
+  onClick?: (event: MouseEvent) => unknown
+}
+
+export type ButtonProps =
+  | Props<
+      CommonOwnProps & {
         href?: never
         type?: 'submit' | 'button' | 'reset'
-      }
-    | {
+      },
+      'button'
+    >
+  | Props<
+      CommonOwnProps & {
         href: string
         type?: string
-      }
-  )
->
+      },
+      'a'
+    >
 
 export function Button(rawProps: ButtonProps) {
   const [props, restProps] = prepareProps(
