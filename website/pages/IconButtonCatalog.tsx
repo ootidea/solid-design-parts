@@ -3,6 +3,7 @@ import { IconButton } from '../../library'
 import badIcon from '../images/bad.svg'
 import chevronLeftIcon from '../images/chevron-left.svg'
 import chevronRightIcon from '../images/chevron-right.svg'
+import gitHubIcon from '../images/github.svg'
 import goodIcon from '../images/good.svg'
 import { Catalog } from './ComponentCatalogPage'
 
@@ -108,6 +109,15 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
         <>
           <IconButton src={chevronLeftIcon} onClick={awaitSomeSeconds} />
           <IconButton src={chevronRightIcon} onClick={awaitSomeSeconds} />
+        </>
+      ),
+    },
+    {
+      title: 'Link buttons',
+      direction: 'horizontal',
+      children: (
+        <>
+          <IconButton src={gitHubIcon} href={`https://github.com/ootidea/solid-design-parts/`} />
         </>
       ),
     },
