@@ -26,7 +26,7 @@ export function SpeechBubble(rawProps: SpeechBubbleProps) {
       tailWidth: '0.5em',
       tailHeight: '0.5em',
       tailSkew: '0rad',
-      tailOffsetPercent: 0,
+      tailOffsetPercent: 50,
     },
     ['children']
   )

@@ -53,7 +53,7 @@
   }
 
   &:before {
-    flex: calc(100 + var(--solid-design-parts-SpeechBubble_tail-offset-percent)) 0 0;
+    flex: calc(var(--solid-design-parts-SpeechBubble_tail-offset-percent)) 0 0;
   }
 
   &:after {

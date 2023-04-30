@@ -100,11 +100,11 @@ export const SpeechBubbleCatalog: Catalog = createRoot(() => ({
       title: 'Tail offset',
       children: (
         <>
-          <SpeechBubble padding="0.3em 0.6em" tailOffsetPercent={80}>
-            Tail offset: 80%
+          <SpeechBubble padding="0.3em 0.6em" tailOffsetPercent={10}>
+            Tail offset: 10%
           </SpeechBubble>
-          <SpeechBubble padding="0.3em 0.6em" tailOffsetPercent={-30}>
-            Tail offset: -30%
+          <SpeechBubble padding="0.3em 0.6em" tailOffsetPercent={75}>
+            Tail offset: 75%
           </SpeechBubble>
         </>
       ),

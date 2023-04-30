@@ -27,7 +27,7 @@ export function ErrorMessage(rawProps: ErrorMessageProps) {
             filter: 'drop-shadow(0 0 1px var(--solid-design-parts-error-color));',
           }}
           direction="up"
-          tailOffsetPercent={-50}
+          tailOffsetPercent={25}
           tailHeight="0.3em"
           tailWidth="0.8em"
           padding="0.2em 0.4em"
