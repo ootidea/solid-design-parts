@@ -4,6 +4,7 @@ import {
   addMonths,
   addWeeks,
   format,
+  isSameDay,
   isSameMonth,
   max as maxOf,
   min as minOf,
@@ -102,6 +103,7 @@ export function Calendar(rawProps: CalendarProps) {
                         'solid-design-parts-Calendar_other-month': !isSameMonth(date.value, monthSignal.value),
                       }}
                       data-day={day()}
+                      aria-current={isSameDay(date.value, new Date()) ? 'date' : undefined}
                     >
                       <Slot content={rawProps.children} params={{ date: date.value }}>
                         {date.value.getDate()}
