@@ -19,13 +19,13 @@ const i18nGetters = createI18nGetters({
 })
 
 type ColumnAlign = 'left' | 'center' | 'right'
-type CompareFunction<Row extends Record<string, unknown>> = (value1: any, value2: any, row1: Row, row2: Row) => number
+type Comparator<Row extends Record<string, unknown>> = (value1: any, value2: any, row1: Row, row2: Row) => number
 
 export type DataTableProps<
   Column extends {
     id: ColumnId
     title?: JSX.Element
-    sortable?: boolean | CompareFunction<Row>
+    sortable?: boolean | Comparator<Row>
     width?: LiteralAutoComplete<'auto' | 'max-content'>
     minWidth?: string
     maxWidth?: string
@@ -58,7 +58,7 @@ export function DataTable<
   const Column extends {
     id: ColumnId
     title?: JSX.Element
-    sortable?: boolean | CompareFunction<Row>
+    sortable?: boolean | Comparator<Row>
     width?: LiteralAutoComplete<'auto' | 'max-content'>
     minWidth?: string
     maxWidth?: string
@@ -118,8 +118,8 @@ export function DataTable<
     result.sort((row1, row2) => {
       const value1 = row1[sortingColumnId]
       const value2 = row2[sortingColumnId]
-      const compareFunction = getCompareFunction(sortingColumn)
-      return compareFunction(value1, value2, row1, row2)
+      const comparator = getComparator(sortingColumn)
+      return comparator(value1, value2, row1, row2)
     })
 
     if (sortingState.value.reversed) {
@@ -129,7 +129,7 @@ export function DataTable<
     return result
   })
 
-  function compareInStandardWay(value1: unknown, value2: unknown, row1: Row, row2: Row): number {
+  function defaultComparator(value1: unknown, value2: unknown, row1: Row, row2: Row): number {
     if (typeof value1 === typeof value2) {
       if (typeof value1 === 'number') {
         return value1 - (value2 as number)
@@ -171,8 +171,8 @@ export function DataTable<
     return typeof column === 'string' ? 'initial' : column.maxWidth ?? 'initial'
   }
 
-  function getCompareFunction(column: Column): CompareFunction<Row> {
-    return typeof column.sortable === 'function' ? column.sortable : compareInStandardWay
+  function getComparator(column: Column): Comparator<Row> {
+    return typeof column.sortable === 'function' ? column.sortable : defaultComparator
   }
 
   function onClickSortButton(columnId: ColumnId) {
