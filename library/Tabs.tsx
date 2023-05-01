@@ -3,7 +3,7 @@ import { For, JSX, Show } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
 import './common.scss'
 import './Tabs.scss'
-import { createInjectableSignal, joinClasses, prepareProps, Props } from './utility/props'
+import { createInjectableSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type TabsProps<T extends readonly (string | number)[]> = Props<{
   tabNames: T
@@ -29,11 +29,11 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
     ['tabNames', 'tabTitles', 'onClickTab', 'children']
   )
 
-  const [activeTabName, setActiveTabName] = createInjectableSignal(props, 'activeTabName')
+  const currentTabNameSignal = createInjectableSignalObject(props, 'activeTabName')
 
   function onClick(tabName: T[number]) {
     if (!props.passive) {
-      setActiveTabName(() => tabName)
+      currentTabNameSignal.value = tabName
     }
     props.onClickTab?.(tabName)
   }
@@ -66,9 +66,9 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
           {(name) => (
             <button
               class="solid-design-parts-Tabs_tab"
-              classList={{ 'solid-design-parts-Tabs_active': activeTabName() === name }}
               role="tab"
               type="button"
+              aria-current={currentTabNameSignal.value === name}
               onClick={() => onClick(name)}
             >
               <div class="solid-design-parts-Tabs_tab-title">{getTabTitle(name)}</div>
@@ -80,7 +80,7 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
         </Show>
       </div>
       <div class="solid-design-parts-Tabs_content" role="tabpanel">
-        {tabContentsMemo.value[activeTabName()]}
+        {tabContentsMemo.value[currentTabNameSignal.value]}
       </div>
     </div>
   )
