@@ -23,6 +23,7 @@ export function AnimatedShow<const T>(rawProps: AnimatedShowProps<T>) {
   ])
 
   let rootElement: HTMLDivElement | undefined
+  let isFirstRendering = true
 
   // Signal variable indicating whether props.children should be present on the DOM.
   const shouldBeInDomSignal = createSignalObject(Boolean(props.when))
@@ -33,24 +34,19 @@ export function AnimatedShow<const T>(rawProps: AnimatedShowProps<T>) {
   createDeferEffect(
     () => props.when,
     () => {
-      lastAnimation?.cancel()
       if (props.when) {
         lastTruthyValueSignal.value = props.when
-
-        if (!shouldBeInDomSignal.value) {
-          shouldBeInDomSignal.value = true
-          lastAnimation = rootElement?.animate(props.animation.keyframes, props.animation.options)
-          lastAnimation?.addEventListener('finish', () => {
-            props.onFinishEnterAnimation?.()
-          })
-        }
+        shouldBeInDomSignal.value = true
       } else {
+        lastAnimation?.cancel()
         lastAnimation = rootElement?.animate(props.animation.keyframes, {
           ...props.animation.options,
           direction: 'reverse',
         })
         lastAnimation?.addEventListener('finish', () => {
+          lastAnimation = undefined
           shouldBeInDomSignal.value = false
+          rootElement = undefined
           props.onFinishExitAnimation?.()
         })
       }
@@ -58,21 +54,25 @@ export function AnimatedShow<const T>(rawProps: AnimatedShowProps<T>) {
   )
 
   return (
-    <div
-      class="solid-design-parts-AnimatedShow_root"
-      ref={(element) => {
-        rootElement = element
-        if (props.animateOnMount && props.when) {
-          lastAnimation = rootElement?.animate(props.animation.keyframes, props.animation.options)
-          lastAnimation?.addEventListener('finish', () => {
-            props.onFinishEnterAnimation?.()
-          })
-        }
-      }}
-    >
-      <Show when={shouldBeInDomSignal.value}>
+    <Show when={shouldBeInDomSignal.value}>
+      <div
+        class="solid-design-parts-AnimatedShow_root"
+        ref={(element) => {
+          rootElement = element
+
+          if (!isFirstRendering || props.animateOnMount) {
+            lastAnimation = rootElement?.animate(props.animation.keyframes, props.animation.options)
+            lastAnimation?.addEventListener('finish', () => {
+              lastAnimation = undefined
+              props.onFinishEnterAnimation?.()
+            })
+          }
+
+          isFirstRendering = false
+        }}
+      >
         <Slot content={props.children} params={lastTruthyValueSignal.value!} />
-      </Show>
-    </div>
+      </div>
+    </Show>
   )
 }
