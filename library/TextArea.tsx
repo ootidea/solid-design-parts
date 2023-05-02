@@ -118,7 +118,7 @@ export function TextArea(rawProps: TextAreaProps) {
       class="solid-design-parts-TextArea_root"
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
-      aria-required={props.required}
+      aria-required={props.required || (props.min ?? 0) > 0}
     >
       <div class="solid-design-parts-TextArea_body">
         <div class="solid-design-parts-TextArea_dummy" aria-hidden="true">

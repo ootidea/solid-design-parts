@@ -149,7 +149,7 @@ export function TextInput(rawProps: TextInputProps) {
       style={joinStyle(rawProps.style, { '--solid-design-parts-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
-      aria-required={props.required}
+      aria-required={props.required || (props.min ?? 0) > 0}
     >
       <div class="solid-design-parts-TextInput_frame">
         <div class="solid-design-parts-TextInput_prefix">{rawProps.prefix}</div>
