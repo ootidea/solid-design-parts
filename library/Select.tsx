@@ -268,7 +268,7 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
                         />
                       </div>
                     </Show>
-                    <Scrollable role="menu">
+                    <Scrollable role="menu" aria-required={props.required}>
                       <For each={search(props.values, searchQuerySignal.value)}>
                         {(value, i) => (
                           <>

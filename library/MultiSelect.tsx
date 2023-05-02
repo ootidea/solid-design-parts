@@ -299,7 +299,7 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
                         />
                       </div>
                     </Show>
-                    <Scrollable role="menu" aria-multiselectable="true">
+                    <Scrollable role="menu" aria-required={props.required} aria-multiselectable="true">
                       <For each={search(props.values, searchQuerySignal.value)}>
                         {(value, i) => (
                           <>

@@ -149,7 +149,6 @@ export function TextInput(rawProps: TextInputProps) {
       style={joinStyle(rawProps.style, { '--solid-design-parts-TextInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
-      aria-required={props.required || (props.min ?? 0) > 0}
     >
       <div class="solid-design-parts-TextInput_frame">
         <div class="solid-design-parts-TextInput_prefix">{rawProps.prefix}</div>
@@ -160,6 +159,7 @@ export function TextInput(rawProps: TextInputProps) {
             placeholder={props.placeholder}
             type={props.type}
             disabled={props.disabled}
+            aria-required={props.required || (props.min ?? 0) > 0}
             onInput={(event) => {
               valueSignal.value = event.currentTarget.value
               isEditedSignal.value = true

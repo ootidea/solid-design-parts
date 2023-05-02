@@ -168,7 +168,6 @@ export function NumberInput(rawProps: NumberInputProps) {
       style={joinStyle(rawProps.style, { '--solid-design-parts-NumberInput_radius': props.radius })}
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
-      aria-required={props.required}
     >
       <div class="solid-design-parts-NumberInput_frame">
         <div class="solid-design-parts-NumberInput_prefix">{rawProps.prefix}</div>
@@ -180,6 +179,7 @@ export function NumberInput(rawProps: NumberInputProps) {
             inputMode={props.inputMode}
             placeholder={props.placeholder}
             disabled={props.disabled}
+            aria-required={props.required}
             onInput={(event) => changeValue(event.currentTarget.value)}
             onFocus={() => (hasInputElementFocusSignal.value = true)}
             onBlur={() => {

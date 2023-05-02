@@ -118,7 +118,6 @@ export function TextArea(rawProps: TextAreaProps) {
       class="solid-design-parts-TextArea_root"
       aria-disabled={props.disabled}
       aria-invalid={errorSignal.value !== false}
-      aria-required={props.required || (props.min ?? 0) > 0}
     >
       <div class="solid-design-parts-TextArea_body">
         <div class="solid-design-parts-TextArea_dummy" aria-hidden="true">
@@ -129,6 +128,7 @@ export function TextArea(rawProps: TextAreaProps) {
           {...restProps}
           class={joinClasses(rawProps, 'solid-design-parts-TextArea_text-area')}
           value={valueSignal.value}
+          aria-required={props.required || (props.min ?? 0) > 0}
           onInput={(event) => {
             valueSignal.value = event.currentTarget.value
             isEditedSignal.value = true
