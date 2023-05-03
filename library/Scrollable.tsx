@@ -4,9 +4,11 @@ import { createMemoObject, createSignalObject } from 'solid-signal-object'
 import './common.scss'
 import './Scrollable.scss'
 import { observeHeightPx } from './utility/dom'
-import { joinClasses, prepareProps, Props } from './utility/props'
+import { createDeferEffect, joinClasses, prepareProps, Props } from './utility/props'
 
-export type ScrollableProps = Props<{}>
+export type ScrollableProps = Props<{
+  onChangeOverflowed?: (overflowed: boolean) => void
+}>
 
 export function Scrollable(rawProps: ScrollableProps) {
   const [props, restProps] = prepareProps(rawProps, {}, ['children'])
@@ -19,7 +21,9 @@ export function Scrollable(rawProps: ScrollableProps) {
   let outerElement: HTMLDivElement | undefined
   let thumbElement: HTMLDivElement | undefined
 
-  const isOverflow = createMemoObject(() => rootHeightPx.value < innerHeightPx.value)
+  const isOverflowMemoObject = createMemoObject(() => rootHeightPx.value < innerHeightPx.value)
+
+  createDeferEffect(isOverflowMemoObject.get, () => props.onChangeOverflowed?.(isOverflowMemoObject.value))
 
   onMount(() => {
     assert(thumbElement, isNotUndefined)
@@ -74,7 +78,7 @@ export function Scrollable(rawProps: ScrollableProps) {
   }
 
   function showThumbTemporarily() {
-    if (isOverflow.value) {
+    if (isOverflowMemoObject.value) {
       thumbElement?.animate([{ opacity: 1, visibility: 'initial' }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], 1200)
     }
   }
@@ -83,7 +87,7 @@ export function Scrollable(rawProps: ScrollableProps) {
     <div
       class="solid-design-parts-Scrollable_root"
       classList={{
-        'solid-design-parts-Scrollable_overflow': isOverflow.value,
+        'solid-design-parts-Scrollable_overflow': isOverflowMemoObject.value,
         'solid-design-parts-Scrollable_dragging': dragState.value !== undefined,
       }}
       style={{
