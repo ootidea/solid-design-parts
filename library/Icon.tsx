@@ -7,6 +7,15 @@ export type IconProps = Props<{
   src: string
   size?: string
   color?: CssColor
+  /**
+   * Icon rotation mount.
+   * @example
+   * rotate="90deg"
+   * @example
+   * rotate="-0.5turn"
+   * @example
+   * rotate="3.14159rad"
+   */
   rotate?: string
 }>
 

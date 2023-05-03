@@ -10,12 +10,33 @@ import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 type CommonOwnProps = {
   src: string
   size?: string
+  /**
+   * The border-radius of the button.
+   * @example
+   * radius="0.5rem"
+   * @example
+   * radius="50%"
+   * @example
+   * radius="0"
+   * @example
+   * radius="0 1em 1em 0"
+   */
   radius?: string
   iconSize?: string
   iconColor?: CssColor
   disabled?: boolean
   backgroundColor?: CssColor
+  /** @deprecated */
   disabledColor?: CssColor
+  /**
+   * Icon rotation mount.
+   * @example
+   * rotate="90deg"
+   * @example
+   * rotate="-0.5turn"
+   * @example
+   * rotate="3.14159rad"
+   */
   rotate?: string
   onClick?: (event: MouseEvent) => unknown
 }
