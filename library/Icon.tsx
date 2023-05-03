@@ -1,12 +1,12 @@
-import { LiteralAutoComplete } from 'base-up'
 import './common.scss'
 import './Icon.scss'
+import { CssColor } from './utility/color'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
 
 export type IconProps = Props<{
   src: string
   size?: string
-  color?: LiteralAutoComplete<'currentColor' | 'transparent'>
+  color?: CssColor
   rotate?: string
 }>
 
