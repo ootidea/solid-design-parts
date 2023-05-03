@@ -21,7 +21,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Change titles',
       children: (
         <>
-          <MultiSelect values={['dog', 'cat', 'rabbit']} labels={{ dog: '🐶', cat: '😺', rabbit: '🐰' }} />
+          <MultiSelect values={['dog', 'cat', 'rabbit']} labels={{ dog: 'Dog🐶', cat: 'Cat😺', rabbit: 'Rabbit🐰' }} />
         </>
       ),
     },
@@ -51,7 +51,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Error state',
       children: (
         <>
-          <MultiSelect values={['Windows', 'macOS', 'Linux']} error="Invalid value" />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} error="Something went wrong." />
         </>
       ),
     },
@@ -73,8 +73,12 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       title: 'Minimum and maximum selection count',
       children: (
         <>
+          <MultiSelect
+            placeholder="Select up to two devices"
+            values={['PC', 'Smartphone', 'Tablet', 'Smartwatch']}
+            max={2}
+          />
           <MultiSelect values={['Windows', 'macOS', 'Linux']} min={2} error="Select two or more." />
-          <MultiSelect values={['PC', 'Smartphone', 'Tablet', 'Smartwatch']} max={2} />
         </>
       ),
     },
@@ -83,8 +87,9 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <MultiSelect
+            placeholder="Select an odd number of items"
             values={['Windows', 'macOS', 'Linux']}
-            error={(selected) => selected.size < 2 && 'Select multiple options.'}
+            error={(selected) => selected.size % 2 !== 1 && 'Select an odd number of items.'}
           />
         </>
       ),
@@ -98,11 +103,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
       children: (
         <>
-          <MultiSelect
-            values={['Windows', 'macOS', 'Linux']}
-            validateImmediately
-            error={(selected) => selected.size < 2 && 'Select multiple options.'}
-          />
+          <MultiSelect values={['Windows', 'macOS', 'Linux']} required validateImmediately />
         </>
       ),
     },
