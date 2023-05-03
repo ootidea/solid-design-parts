@@ -7,7 +7,7 @@ import './Toasts.scss'
 
 export type ToastOptions = Partial<Omit<ToastProps, 'type' | 'message'>>
 type ToastModel = { id: symbol } & ToastProps
-const toastModels = createSignalObject<ToastModel[]>([], { equals: false })
+const toastModelsSignal = createSignalObject<ToastModel[]>([], { equals: false })
 
 export function showToast(type: ToastProps['type'], message: JSX.Element, options?: ToastOptions) {
   const durationMs: number = options?.durationMs ?? 3000
@@ -22,11 +22,14 @@ export function showToast(type: ToastProps['type'], message: JSX.Element, option
 
   const newToastId = Symbol()
 
-  if (toastModels.value.every((toastModel) => !Number.isFinite(toastModel.durationMs)) && Number.isFinite(durationMs)) {
+  if (
+    toastModelsSignal.value.every((toastModel) => !Number.isFinite(toastModel.durationMs)) &&
+    Number.isFinite(durationMs)
+  ) {
     setTimeout(() => removeToast(newToastId), durationMs)
   }
 
-  toastModels.update((toastModels) => {
+  toastModelsSignal.update((toastModels) => {
     toastModels.push({
       ...options,
       id: newToastId,
@@ -40,18 +43,19 @@ export function showToast(type: ToastProps['type'], message: JSX.Element, option
 }
 
 function removeToast(toastId: symbol) {
-  const index = toastModels.value.findIndex((model) => model.id === toastId)
+  const index = toastModelsSignal.value.findIndex((model) => model.id === toastId)
   if (index === -1) return
 
-  const isFirstFiniteToast = toastId === toastModels.value.find(({ durationMs }) => Number.isFinite(durationMs))?.id
+  const isFirstFiniteToast =
+    toastId === toastModelsSignal.value.find(({ durationMs }) => Number.isFinite(durationMs))?.id
 
-  toastModels.update((toastModels) => {
+  toastModelsSignal.update((toastModels) => {
     toastModels.splice(index, 1)
     return toastModels
   })
 
   if (isFirstFiniteToast) {
-    const nextFiniteToast = toastModels.value.find(({ durationMs }) => Number.isFinite(durationMs))
+    const nextFiniteToast = toastModelsSignal.value.find(({ durationMs }) => Number.isFinite(durationMs))
     if (nextFiniteToast !== undefined) {
       setTimeout(() => removeToast(nextFiniteToast.id), nextFiniteToast.durationMs)
     }
@@ -61,7 +65,7 @@ function removeToast(toastId: symbol) {
 export function Toasts() {
   return (
     <div class="solid-design-parts-Toasts_root">
-      <For each={toastModels.value}>{(toastModel) => <Toast {...toastModel} />}</For>
+      <For each={toastModelsSignal.value}>{(toastModel) => <Toast {...toastModel} />}</For>
     </div>
   )
 }
