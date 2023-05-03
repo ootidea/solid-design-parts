@@ -19,7 +19,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} />
-          <Checkboxes values={['dog', 'cat']} labels={{ dog: '🐶Dog', cat: '😺Cat' }} />
+          <Checkboxes values={['dog', 'cat', 'rabbit']} labels={{ dog: 'Dog🐶', cat: 'Cat😺', rabbit: 'Rabbit🐰' }} />
         </>
       ),
     },
