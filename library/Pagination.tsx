@@ -14,7 +14,9 @@ export type PaginationProps = Props<{
   totalPages: number
   visibilityDistance?: number
   activePageNumber?: number
+  passive?: boolean
   onChangeActivePageNumber?: (pageNumber: number) => void
+  onClickPageNumber?: (pageNumber: number) => void
 }>
 
 export function Pagination(rawProps: PaginationProps) {
@@ -23,8 +25,9 @@ export function Pagination(rawProps: PaginationProps) {
     {
       visibilityDistance: 2,
       activePageNumber: 1,
+      passive: false,
     },
-    ['totalPages', 'onChangeActivePageNumber']
+    ['totalPages', 'onChangeActivePageNumber', 'onClickPageNumber']
   )
 
   const activePageNumberSignal = createNormalizedSignalObject(
@@ -32,6 +35,14 @@ export function Pagination(rawProps: PaginationProps) {
     () => clamp(1, props.activePageNumber, props.totalPages),
     props.onChangeActivePageNumber
   )
+
+  function changeActivePageNumber(pageNumber: number) {
+    props.onClickPageNumber?.(pageNumber)
+
+    if (!props.passive) {
+      activePageNumberSignal.value = pageNumber
+    }
+  }
 
   const surroundingRangeMemo = createMemoObject(() =>
     rangeThrough(
@@ -46,10 +57,10 @@ export function Pagination(rawProps: PaginationProps) {
         src={chevronLeftIcon}
         disabled={activePageNumberSignal.value <= 1}
         radius="var(--solid-design-parts-Pagination_button-default-radius)"
-        onClick={() => activePageNumberSignal.value--}
+        onClick={() => changeActivePageNumber(activePageNumberSignal.value - 1)}
       />
       <Show when={surroundingRangeMemo.value[0] > 1}>
-        <button class="solid-design-parts-Pagination_page-number" onClick={() => (activePageNumberSignal.value = 1)}>
+        <button class="solid-design-parts-Pagination_page-number" onClick={() => changeActivePageNumber(1)}>
           1
         </button>
       </Show>
@@ -62,7 +73,7 @@ export function Pagination(rawProps: PaginationProps) {
             <button
               class="solid-design-parts-Pagination_page-number"
               aria-current={pageNumber === activePageNumberSignal.value}
-              onClick={() => (activePageNumberSignal.value = pageNumber)}
+              onClick={() => changeActivePageNumber(pageNumber)}
             >
               {pageNumber}
             </button>
@@ -75,7 +86,7 @@ export function Pagination(rawProps: PaginationProps) {
       <Show when={lastOf(surroundingRangeMemo.value) < props.totalPages && props.totalPages !== Infinity}>
         <button
           class="solid-design-parts-Pagination_page-number"
-          onClick={() => (activePageNumberSignal.value = props.totalPages)}
+          onClick={() => changeActivePageNumber(props.totalPages)}
         >
           {props.totalPages}
         </button>
@@ -84,7 +95,7 @@ export function Pagination(rawProps: PaginationProps) {
         src={chevronRightIcon}
         disabled={activePageNumberSignal.value >= props.totalPages}
         radius="var(--solid-design-parts-Pagination_button-default-radius)"
-        onClick={() => activePageNumberSignal.value++}
+        onClick={() => changeActivePageNumber(activePageNumberSignal.value + 1)}
       />
     </div>
   )
