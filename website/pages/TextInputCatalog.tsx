@@ -3,8 +3,7 @@ import { Button, Gravity, Icon, IconButton, TextInput } from '../../library'
 import microphoneIcon from '../images/microphone.svg'
 import searchIcon from '../images/search.svg'
 import { Catalog } from './ComponentCatalogPage'
-
-const [value, setValue] = createSignal('default value')
+import { Const } from '../../library/Const'
 
 export const TextInputCatalog: Catalog = createRoot(() => ({
   introduction: (
@@ -30,10 +29,14 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
         </>
       ),
       children: (
-        <>
-          <TextInput value={value()} onChangeValue={setValue} />
-          <div style={{ 'white-space': 'pre-wrap' }}>value: {JSON.stringify(value())}</div>
-        </>
+        <Const value={createSignal('default value')}>
+          {([value, setValue]) => (
+            <>
+              <TextInput value={value()} onChangeValue={setValue} />
+              <div style={{ 'white-space': 'pre-wrap' }}>value: {JSON.stringify(value())}</div>
+            </>
+          )}
+        </Const>
       ),
     },
     {
