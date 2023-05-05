@@ -41,6 +41,7 @@ export function Pagination(rawProps: PaginationProps) {
 
     if (!props.passive) {
       activePageNumberSignal.value = pageNumber
+      props.onChangeActivePageNumber?.(pageNumber)
     }
   }
 
