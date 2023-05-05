@@ -71,20 +71,18 @@ export function Pagination(rawProps: PaginationProps) {
       <Show when={surroundingRangeMemo.value[0] > 2}>
         <Icon src={ellipsisHorizontal} size="1em" />
       </Show>
-      <div>
-        <For each={surroundingRangeMemo.value}>
-          {(pageNumber) => (
-            <button
-              class="solid-design-parts-Pagination_page-number"
-              type="button"
-              aria-current={pageNumber === activePageNumberSignal.value}
-              onClick={() => changeActivePageNumber(pageNumber)}
-            >
-              {pageNumber}
-            </button>
-          )}
-        </For>
-      </div>
+      <For each={surroundingRangeMemo.value}>
+        {(pageNumber) => (
+          <button
+            class="solid-design-parts-Pagination_page-number"
+            type="button"
+            aria-current={pageNumber === activePageNumberSignal.value}
+            onClick={() => changeActivePageNumber(pageNumber)}
+          >
+            {pageNumber}
+          </button>
+        )}
+      </For>
       <Show when={lastOf(surroundingRangeMemo.value) < props.totalPages - 1}>
         <Icon src={ellipsisHorizontal} size="1em" />
       </Show>
