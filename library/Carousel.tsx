@@ -218,6 +218,7 @@ export function Carousel(rawProps: CarouselProps) {
           {(i) => (
             <button
               class="solid-design-parts-Carousel_indicator"
+              type="button"
               aria-current={flagsThatIndicateWhetherItemIsWithinScrollRange[i]}
               onClick={() => {
                 if (props.autoScroll) {

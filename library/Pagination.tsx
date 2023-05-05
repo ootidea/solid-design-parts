@@ -60,7 +60,11 @@ export function Pagination(rawProps: PaginationProps) {
         onClick={() => changeActivePageNumber(activePageNumberSignal.value - 1)}
       />
       <Show when={surroundingRangeMemo.value[0] > 1}>
-        <button class="solid-design-parts-Pagination_page-number" onClick={() => changeActivePageNumber(1)}>
+        <button
+          class="solid-design-parts-Pagination_page-number"
+          type="button"
+          onClick={() => changeActivePageNumber(1)}
+        >
           1
         </button>
       </Show>
@@ -72,6 +76,7 @@ export function Pagination(rawProps: PaginationProps) {
           {(pageNumber) => (
             <button
               class="solid-design-parts-Pagination_page-number"
+              type="button"
               aria-current={pageNumber === activePageNumberSignal.value}
               onClick={() => changeActivePageNumber(pageNumber)}
             >
@@ -86,6 +91,7 @@ export function Pagination(rawProps: PaginationProps) {
       <Show when={lastOf(surroundingRangeMemo.value) < props.totalPages && props.totalPages !== Infinity}>
         <button
           class="solid-design-parts-Pagination_page-number"
+          type="button"
           onClick={() => changeActivePageNumber(props.totalPages)}
         >
           {props.totalPages}

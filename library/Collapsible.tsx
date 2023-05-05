@@ -71,6 +71,7 @@ export function Collapsible(rawProps: CollapsibleProps) {
       <button
         {...props.titleAreaProps}
         class={joinClasses(props.titleAreaProps, 'solid-design-parts-Collapsible_title-area')}
+        type="button"
         aria-expanded={!collapsedSignal.value}
         onClick={(event) => {
           if (isNestedClickEvent(event)) return
