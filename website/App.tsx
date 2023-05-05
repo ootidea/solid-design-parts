@@ -33,7 +33,7 @@ export function App() {
     },
     { title: 'Other inputs', children: ['Slider'] },
     { title: 'Floating', children: ['Modal', 'Popover', 'Toast'] },
-    { title: 'Data collections', children: ['DataTable', 'Tabs', 'Carousel'] },
+    { title: 'Data collections', children: ['DataTable', 'Pagination', 'Tabs', 'Carousel'] },
     { title: 'Animations', children: ['AnimatedShow', 'AnimateOnView'] },
     {
       title: 'Layout',

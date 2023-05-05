@@ -45,6 +45,7 @@ import { TitleBarLayoutCatalog } from './TitleBarLayoutCatalog'
 import { ToastCatalog } from './ToastCatalog'
 import { TriangleCatalog } from './TriangleCatalog'
 import { UrlToLinkCatalog } from './UrlToLinkCatalog'
+import { PaginationCatalog } from './PaginationCatalog'
 
 export type Catalog = {
   introduction?: JSX.Element
@@ -72,6 +73,7 @@ const catalogs: Partial<Record<string, Catalog>> = createRoot(() => ({
   PopoverCatalog,
   ToastCatalog,
   DataTableCatalog,
+  PaginationCatalog,
   TabsCatalog,
   CarouselCatalog,
   GravityCatalog,

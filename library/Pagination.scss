@@ -1,0 +1,36 @@
+:root {
+  --solid-design-parts-Pagination_button-default-radius: 0.2em;
+}
+
+.solid-design-parts-Pagination_root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.solid-design-parts-Pagination_page-number {
+  box-sizing: border-box;
+  min-width: 1.8em;
+  padding: 0.18em 0.4em;
+  border-radius: var(--solid-design-parts-Pagination_button-default-radius);
+  border: none;
+  background: transparent;
+  font: inherit;
+
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: oklch(0 0 0 / 6%);
+    }
+  }
+
+  &:active {
+    background-color: oklch(0 0 0 / 10%);
+  }
+
+  &[aria-current='true'] {
+    background: var(--solid-design-parts-primary-color);
+    color: var(--solid-design-parts-inverted-text-color);
+  }
+}
