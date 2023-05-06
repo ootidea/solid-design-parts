@@ -21,6 +21,10 @@ export function ProgressBar(rawProps: ProgressBarProps) {
       style={{
         '--solid-design-parts-ProgressBar_value': valueSignal.value,
       }}
+      role="progressbar"
+      aria-valuenow={valueSignal.value}
+      aria-valuemin={0}
+      aria-valuemax={1}
     >
       <div class="solid-design-parts-ProgressBar_progress" />
     </div>
