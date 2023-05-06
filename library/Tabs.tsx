@@ -71,7 +71,7 @@ export function Tabs<const T extends readonly (string | number)[]>(rawProps: Tab
               aria-current={currentTabNameSignal.value === name}
               onClick={() => onClick(name)}
             >
-              <div class="solid-design-parts-Tabs_tab-title">{getTabTitle(name)}</div>
+              {getTabTitle(name)}
             </button>
           )}
         </For>

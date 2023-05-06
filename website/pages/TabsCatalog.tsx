@@ -1,6 +1,7 @@
 import { createRoot } from 'solid-js'
-import { showToast, Tabs } from '../../library'
+import { IconButton, showToast, Tabs } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
+import closeIcon from '../images/close.svg'
 
 export const TabsCatalog: Catalog = createRoot(() => ({
   samples: [
@@ -9,7 +10,7 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs tabNames={['tab1', 'tab2', 'tab3']}>
-            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
+            {(tabName) => <div style="padding: 2em">{tabName} contents</div>}
           </Tabs>
         </>
       ),
@@ -19,10 +20,10 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs variant="bordered tab" tabNames={['tab1', 'tab2', 'tab3']}>
-            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
+            {(tabName) => <div style="padding: 2em">{tabName} contents</div>}
           </Tabs>
           <Tabs variant="underlined tab" tabNames={['tab1', 'tab2', 'tab3']}>
-            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
+            {(tabName) => <div style="padding: 2em">{tabName} contents</div>}
           </Tabs>
         </>
       ),
@@ -32,7 +33,7 @@ export const TabsCatalog: Catalog = createRoot(() => ({
       children: (
         <>
           <Tabs tabNames={['tab1', 'tab2', 'tab3']} activeTabName="tab2">
-            {(activeTabName) => <div style="padding: 2em">{activeTabName}</div>}
+            {(tabName) => <div style="padding: 2em">{tabName} contents</div>}
           </Tabs>
         </>
       ),
@@ -51,6 +52,22 @@ export const TabsCatalog: Catalog = createRoot(() => ({
             tabNames={['tab1', 'tab2', 'tab3']}
             onClickTab={(tabName) => showToast('success', tabName)}
           ></Tabs>
+        </>
+      ),
+    },
+    {
+      title: 'Custom tab titles',
+      children: (
+        <>
+          <Tabs
+            tabNames={['tab1', 'tab2', 'tab3']}
+            tabTitles={(tabName) => (
+              <>
+                {tabName}
+                <IconButton src={closeIcon} iconColor="currentColor" size="1.3em" />
+              </>
+            )}
+          />
         </>
       ),
     },
