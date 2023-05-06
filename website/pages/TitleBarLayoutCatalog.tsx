@@ -5,6 +5,12 @@ import chevronRightIcon from '../images/chevron-right.svg'
 import { Catalog } from './ComponentCatalogPage'
 
 export const TitleBarLayoutCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>TitleBarLayout</code> is a component that represents a layout with a centered title and elements that are
+      left and/or right aligned.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',

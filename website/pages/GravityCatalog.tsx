@@ -3,6 +3,11 @@ import { Gravity } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
 
 export const GravityCatalog: Catalog = createRoot(() => ({
+  introduction: (
+    <>
+      <code>Gravity</code> is a layout component that handles alignment, such as centering or right-aligning elements.
+    </>
+  ),
   samples: [
     {
       title: 'Basic example',
