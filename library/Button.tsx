@@ -3,6 +3,7 @@ import './Button.scss'
 import './common.scss'
 import { Spinner } from './Spinner'
 import { joinClasses, joinStyle, prepareProps, Props } from './utility/props'
+import { HrefButton } from './HrefButton'
 
 type CommonOwnProps = {
   color?: 'primary' | 'achromatic' | 'error'
@@ -61,6 +62,22 @@ export function Button(rawProps: ButtonProps) {
         <Spinner color="currentColor" />
       </div>
     </div>
+  )
+
+  return (
+    <HrefButton
+      class={joinClasses(rawProps, 'solid-design-parts-Button_root', {
+        'solid-design-parts-Button_full-width': props.fullWidth,
+      })}
+      style={joinStyle(rawProps.style, { '--solid-design-parts-Button_radius': props.radius })}
+      data-variant={props.variant}
+      data-color={props.color}
+      disabled={props.disabled || isInProgress.value}
+      aria-disabled={props.disabled}
+      onClick={onClick}
+    >
+      {content}
+    </HrefButton>
   )
 
   return (

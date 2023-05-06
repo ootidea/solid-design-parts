@@ -153,7 +153,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <IconButton src={gitHubIcon} href={`https://github.com/ootidea/solid-design-parts/`} />
+          <IconButton src={gitHubIcon} disabled href="https://github.com/ootidea/solid-design-parts/" />
         </>
       ),
     },

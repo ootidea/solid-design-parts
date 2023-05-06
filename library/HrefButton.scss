@@ -1,0 +1,18 @@
+.solid-design-parts-HrefButton_root {
+  display: inline-block;
+  vertical-align: top;
+
+  border: none;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  white-space: pre-wrap;
+  cursor: pointer;
+
+  &[aria-disabled='true'] {
+    pointer-events: none;
+  }
+}

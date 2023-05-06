@@ -1,7 +1,8 @@
 import { createRoot } from 'solid-js'
-import { Button, Icon } from '../../library'
+import { Button, Icon, showToast } from '../../library'
 import calendarIcon from '../images/calendar.svg'
 import { Catalog } from './ComponentCatalogPage'
+import { HrefButton } from '../../library/HrefButton'
 
 async function awaitSomeSeconds() {
   return new Promise((resolve) => {
@@ -19,6 +20,16 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
           <Button>Button</Button>
           <Button color="achromatic">Button</Button>
           <Button color="error">Button</Button>
+          <HrefButton onClick={() => showToast('info', '12')}>HrefButton</HrefButton>
+          <HrefButton href="#" onClick={() => showToast('info', '12')}>
+            HrefButton
+          </HrefButton>
+          <HrefButton disabled onClick={() => showToast('info', '12')}>
+            HrefButton
+          </HrefButton>
+          <HrefButton disabled href="#" onClick={() => showToast('info', '12')}>
+            HrefButton
+          </HrefButton>
         </>
       ),
     },
@@ -51,7 +62,9 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       direction: 'horizontal',
       children: (
         <>
-          <Button href="https://google.com">Google</Button>
+          <Button href="https://google.com" disabled>
+            Google
+          </Button>
           <Button.ghost href="https://google.com" color="achromatic">
             Google
           </Button.ghost>
