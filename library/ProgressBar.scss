@@ -1,0 +1,14 @@
+.solid-design-parts-ProgressBar_root {
+  box-sizing: border-box;
+  height: 0.6em;
+  border-radius: 999vh;
+  overflow: hidden;
+  background: oklch(92% 0 0);
+}
+
+.solid-design-parts-ProgressBar_progress {
+  box-sizing: border-box;
+  width: calc(100% * var(--solid-design-parts-ProgressBar_value));
+  height: 100%;
+  background: var(--solid-design-parts-primary-color);
+}

@@ -62,7 +62,7 @@ export function createDeferEffect<S>(deps: AccessorArray<S> | Accessor<S>, fn: (
 export function createNormalizedSignalObject<T>(
   rawValue: T,
   normalizedValue: Accessor<T>,
-  onChangeValue: ((value: T) => void) | undefined
+  onChangeValue?: ((value: T) => void) | undefined
 ): SignalObject<T> {
   const initialValue = normalizedValue()
   if (initialValue !== rawValue) {

@@ -41,7 +41,7 @@ export function App() {
     },
     {
       title: 'Others',
-      children: ['Icon', 'Divider', 'Spinner', 'Triangle', 'SpeechBubble', 'Stepper', 'Link', 'Image'],
+      children: ['Icon', 'Divider', 'Spinner', 'Triangle', 'SpeechBubble', 'ProgressBar', 'Stepper', 'Link', 'Image'],
     },
     { title: 'Utility', children: ['Await', 'Const', 'UrlToLink'] },
   ]
