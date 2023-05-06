@@ -27,6 +27,8 @@
   );
   background-size: var(--solid-design-parts-ProgressBar_height);
   animation: solid-design-parts-ProgressBar_stripe-animation 1s linear infinite;
+
+  transition: width 300ms ease;
 }
 @keyframes solid-design-parts-ProgressBar_stripe-animation {
   100% {
