@@ -1,5 +1,5 @@
 :root {
-  --solid-design-parts-ProgressBar_height: 0.8em;
+  --solid-design-parts-ProgressBar_height: 0.6em;
   --solid-design-parts-ProgressBar_stripe-first-color: oklch(70% 0.17 255.4);
 }
 
@@ -17,15 +17,13 @@
   height: 100%;
 
   background-image: linear-gradient(
-    -45deg,
+    -60deg,
     var(--solid-design-parts-ProgressBar_stripe-first-color),
-    var(--solid-design-parts-ProgressBar_stripe-first-color) 25%,
-    var(--solid-design-parts-primary-color) 25%,
-    var(--solid-design-parts-primary-color) 50%,
-    var(--solid-design-parts-ProgressBar_stripe-first-color) 50%,
-    var(--solid-design-parts-ProgressBar_stripe-first-color) 75%,
-    var(--solid-design-parts-primary-color) 75%,
-    var(--solid-design-parts-primary-color)
+    var(--solid-design-parts-ProgressBar_stripe-first-color) 33.33333%,
+    var(--solid-design-parts-primary-color) 33.33333%,
+    var(--solid-design-parts-primary-color) 66.66667%,
+    var(--solid-design-parts-ProgressBar_stripe-first-color) 66.66667%,
+    var(--solid-design-parts-ProgressBar_stripe-first-color)
   );
   background-size: var(--solid-design-parts-ProgressBar_height);
   animation: solid-design-parts-ProgressBar_stripe-animation 1s linear infinite;
