@@ -131,6 +131,9 @@ export function Slider(rawProps: SliderProps) {
         '--solid-design-parts-Slider_thumb-x': `${ratio.value * (trackWidthPx.value - thumbWidthPx.value)}px`,
       }}
       role="slider"
+      aria-valuemin={props.min}
+      aria-valuemax={props.max}
+      aria-valuenow={valueSignal.value}
     >
       <div class="solid-design-parts-Slider_track" ref={trackElement} onMouseDown={onMouseDownTrack} />
       <div
