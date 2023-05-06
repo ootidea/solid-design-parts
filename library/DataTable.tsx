@@ -51,7 +51,7 @@ export type DataTableProps<
   horizontalRuledLine?: SlotProp<{ verticalIndex: number }>
   verticalRuledLine?: SlotProp<{ verticalIndex: number; horizontalIndex: number }>
   headerCell?: SlotProp<{ columnId: ColumnId; columnTitle: JSX.Element }>
-  emptyState?: SlotProp<{}>
+  emptyState?: JSX.Element
 }>
 
 export function DataTable<
@@ -280,9 +280,9 @@ export function DataTable<
                 </Slot>
               </div>
               <div class="solid-design-parts-DataTable_empty-state-cell">
-                <Slot content={props.emptyState} params={{}}>
+                {props.emptyState ?? (
                   <Gravity class="solid-design-parts-DataTable_empty-message">{i18nGetters.emptyMessage}</Gravity>
-                </Slot>
+                )}
               </div>
               <div class="solid-design-parts-DataTable_vertical-ruled-line">
                 <Slot
