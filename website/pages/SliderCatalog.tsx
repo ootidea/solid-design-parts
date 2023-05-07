@@ -1,8 +1,7 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Slider } from '../../library'
+import { Const } from '../../library/Const'
 import { Catalog } from './ComponentCatalogPage'
-
-const [value, setValue] = createSignal(0)
 
 export const SliderCatalog: Catalog = createRoot(() => ({
   introduction: {
@@ -85,10 +84,14 @@ export const SliderCatalog: Catalog = createRoot(() => ({
         ),
       },
       children: (
-        <>
-          <Slider value={value()} onChangeValue={setValue} />
-          <div>value: {value()}</div>
-        </>
+        <Const value={createSignal(0)}>
+          {([value, setValue]) => (
+            <>
+              <Slider value={value()} onChangeValue={setValue} />
+              <div>value: {value()}</div>
+            </>
+          )}
+        </Const>
       ),
     },
   ],
