@@ -1,7 +1,7 @@
 import { createRoot } from 'solid-js'
 import { IconButton, showToast, Tabs } from '../../library'
-import { Catalog } from './ComponentCatalogPage'
 import closeIcon from '../images/close.svg'
+import { Catalog } from './ComponentCatalogPage'
 
 export const TabsCatalog: Catalog = createRoot(() => ({
   samples: [

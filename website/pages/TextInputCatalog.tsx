@@ -1,9 +1,9 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Button, Gravity, Icon, IconButton, TextInput } from '../../library'
+import { Const } from '../../library/Const'
 import microphoneIcon from '../images/microphone.svg'
 import searchIcon from '../images/search.svg'
 import { Catalog } from './ComponentCatalogPage'
-import { Const } from '../../library/Const'
 
 export const TextInputCatalog: Catalog = createRoot(() => ({
   introduction: (

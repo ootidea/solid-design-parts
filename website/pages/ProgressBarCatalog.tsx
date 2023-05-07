@@ -1,9 +1,9 @@
 import { createRoot } from 'solid-js'
-import { Catalog } from './ComponentCatalogPage'
-import { ProgressBar } from '../../library/ProgressBar'
-import { Const } from '../../library/Const'
 import { createSignalObject } from 'solid-signal-object'
 import { Button } from '../../library'
+import { Const } from '../../library/Const'
+import { ProgressBar } from '../../library/ProgressBar'
+import { Catalog } from './ComponentCatalogPage'
 
 export const ProgressBarCatalog: Catalog = createRoot(() => ({
   samples: [

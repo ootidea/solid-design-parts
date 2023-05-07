@@ -1,14 +1,14 @@
-import './Pagination.scss'
-import './common.scss'
-import { createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 import { clamp, lastOf, rangeThrough } from 'base-up'
 import { For, Show } from 'solid-js'
+import { createMemoObject } from 'solid-signal-object'
+import './common.scss'
+import { Icon } from './Icon'
 import { IconButton } from './IconButton'
 import chevronLeftIcon from './image/chevron-left.svg'
 import chevronRightIcon from './image/chevron-right.svg'
 import ellipsisHorizontal from './image/ellipsis-horizontal.svg'
-import { createMemoObject } from 'solid-signal-object'
-import { Icon } from './Icon'
+import './Pagination.scss'
+import { createNormalizedSignalObject, joinClasses, prepareProps, Props } from './utility/props'
 
 export type PaginationProps = Props<{
   totalPages: number

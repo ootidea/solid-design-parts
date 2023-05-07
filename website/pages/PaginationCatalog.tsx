@@ -1,9 +1,9 @@
 import { createRoot } from 'solid-js'
-import { Catalog } from './ComponentCatalogPage'
-import { Pagination } from '../../library/Pagination'
+import { createSignalObject } from 'solid-signal-object'
 import { showToast } from '../../library'
 import { Const } from '../../library/Const'
-import { createSignalObject } from 'solid-signal-object'
+import { Pagination } from '../../library/Pagination'
+import { Catalog } from './ComponentCatalogPage'
 
 export const PaginationCatalog: Catalog = createRoot(() => ({
   samples: [

@@ -27,7 +27,9 @@ import { ModalCatalog } from './ModalCatalog'
 import { MultiSelectCatalog } from './MultiSelectCatalog'
 import { MultiSelectToggleButtonsCatalog } from './MultiSelectToggleButtonsCatalog'
 import { NumberInputCatalog } from './NumberInputCatalog'
+import { PaginationCatalog } from './PaginationCatalog'
 import { PopoverCatalog } from './PopoverCatalog'
+import { ProgressBarCatalog } from './ProgressBarCatalog'
 import { RadioButtonsCatalog } from './RadioButtonsCatalog'
 import { ResizableCatalog } from './ResizableCatalog'
 import { ScrollableCatalog } from './ScrollableCatalog'
@@ -45,8 +47,6 @@ import { TitleBarLayoutCatalog } from './TitleBarLayoutCatalog'
 import { ToastCatalog } from './ToastCatalog'
 import { TriangleCatalog } from './TriangleCatalog'
 import { UrlToLinkCatalog } from './UrlToLinkCatalog'
-import { PaginationCatalog } from './PaginationCatalog'
-import { ProgressBarCatalog } from './ProgressBarCatalog'
 
 export type Catalog = {
   introduction?: JSX.Element
