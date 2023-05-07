@@ -13,6 +13,7 @@ import { CarouselCatalog } from './CarouselCatalog'
 import { CheckboxCatalog } from './CheckboxCatalog'
 import { CheckboxesCatalog } from './CheckboxesCatalog'
 import { CollapsibleCatalog } from './CollapsibleCatalog'
+import classes from './ComponentCatalogPage.module.scss'
 import { ConstCatalog } from './ConstCatalog'
 import { DataTableCatalog } from './DataTableCatalog'
 import { DateInputCatalog } from './DateInputCatalog'
@@ -116,9 +117,7 @@ export function ComponentCatalogPage() {
         <Scrollable style="padding: 1rem 4rem 10rem;">
           <article>
             <PageTitle>{componentName}</PageTitle>
-            <Show when={catalog.introduction}>
-              <p>{catalog.introduction}</p>
-            </Show>
+            <p class={classes.introduction}>{catalog.introduction}</p>
 
             <For each={catalog.samples}>{(sample) => <Sample {...sample} />}</For>
           </article>
