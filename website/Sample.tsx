@@ -2,12 +2,12 @@ import { JSX, mergeProps, Show } from 'solid-js'
 import { ParentProps } from 'solid-js/types/render/component'
 import { Link } from '../library'
 import { extractContainedTexts } from '../library/utility/dom'
-import classes from './Sample.module.scss'
 import { I18nPack, internationalizeForCurrentLanguages } from '../library/utility/i18n'
+import classes from './Sample.module.scss'
 
 export type SampleProps = ParentProps<{
   title: JSX.Element | I18nPack<JSX.Element>
-  description?: JSX.Element
+  description?: JSX.Element | I18nPack<JSX.Element>
   direction?: 'horizontal' | 'vertical'
 }>
 
@@ -30,6 +30,14 @@ export function Sample(rawProps: SampleProps) {
   }
   const id = () => extractContainedTexts(englishTitle()).join(' ').replaceAll(' ', '-')
 
+  const description = () => {
+    if (typeof props.description === 'object' && props.description !== null && 'default' in props.description) {
+      return internationalizeForCurrentLanguages(props.description)
+    } else {
+      return props.description
+    }
+  }
+
   return (
     <section>
       <h2 id={id()} class={classes.title}>
@@ -49,8 +57,8 @@ export function Sample(rawProps: SampleProps) {
           #
         </Link>
       </h2>
-      <Show when={props.description}>
-        <p class={classes.description}>{props.description}</p>
+      <Show when={description()}>
+        <p class={classes.description}>{description()}</p>
       </Show>
       <div class={classes.frame}>
         <div class={classes.list} data-direction={props.direction}>

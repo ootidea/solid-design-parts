@@ -4,6 +4,11 @@ import { createSignalObject } from 'solid-signal-object'
 
 export type I18nPack<T = unknown> = { default: T } & Record<LiteralAutoComplete<'ja'>, T>
 
+export function internationalizeForCurrentLanguages<T>(i18nPack: I18nPack<T>): T {
+  const resultLanguage = getCurrentLanguages().find((language) => language in i18nPack) ?? 'default'
+  return i18nPack[resultLanguage]
+}
+
 export function createI18nGetters<const T extends Record<string, I18nPack>>(
   source: T
 ): {
@@ -18,11 +23,6 @@ export function createI18nGetters<const T extends Record<string, I18nPack>>(
     })
   }
   return result as any
-}
-
-export function internationalizeForCurrentLanguages<T>(i18nPack: I18nPack<T>): T {
-  const resultLanguage = getCurrentLanguages().find((language) => language in i18nPack) ?? 'default'
-  return i18nPack[resultLanguage]
 }
 
 const forcedLanguage = createRoot(() => createSignalObject<string | undefined>())
