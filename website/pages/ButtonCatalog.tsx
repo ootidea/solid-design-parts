@@ -118,7 +118,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: { default: 'Changing the radius', ja: 'radiusの変更' },
+      title: { default: 'Changing the radius', ja: 'radiusを変更' },
       direction: 'horizontal',
       children: (
         <>

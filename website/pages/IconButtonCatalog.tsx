@@ -26,7 +26,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the icon color',
+      title: { default: 'Changing the icon color', ja: 'アイコン色を変更' },
       direction: 'horizontal',
       children: (
         <>
@@ -36,7 +36,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the background color',
+      title: { default: 'Changing the background color', ja: '背景色を変更' },
       direction: 'horizontal',
       children: (
         <>
@@ -57,7 +57,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the button radius',
+      title: { default: 'Changing the button radius', ja: 'ボタンのradiusを変更' },
       direction: 'horizontal',
       children: (
         <>
@@ -67,10 +67,10 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the button size',
+      title: { default: 'Changing the button size', ja: 'ボタンのサイズを変更' },
       description: (
         <>
-          Using <code>size</code> changes the button size. The <code>size</code> sets both the width and height.
+          Setting the <code>size</code> will change the button's width and height.
         </>
       ),
       direction: 'horizontal',
@@ -82,10 +82,11 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the icon size (without changing the button size).',
+      title: { default: 'Changing the icon size', ja: 'アイコンのサイズを変更' },
       description: (
         <>
-          Using <code>iconSize</code> changes the icon size, but the clickable area remains unchanged.
+          Setting the <code>iconSize</code> will change the size of the icon, but the size of the button will not
+          change.
         </>
       ),
       direction: 'horizontal',
@@ -113,7 +114,7 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Link buttons',
+      title: { default: 'Link buttons', ja: 'リンクボタン' },
       description: (
         <>
           When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
