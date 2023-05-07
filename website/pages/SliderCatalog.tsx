@@ -1,11 +1,10 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Slider } from '../../library'
-import { createI18nGetters } from '../../library/utility/i18n'
 import { Catalog } from './ComponentCatalogPage'
 
 const [value, setValue] = createSignal(0)
 
-const i18nGetters = createI18nGetters({
+export const SliderCatalog: Catalog = createRoot(() => ({
   introduction: {
     default: (
       <>
@@ -15,14 +14,10 @@ const i18nGetters = createI18nGetters({
     ),
     ja: (
       <>
-        <code>Slider</code>は直感的な操作で数値を入力できるコンポーネントです。
+        <code>Slider</code>は一定範囲内の数値を直感的な操作で入力できるコンポーネントです。
       </>
     ),
   },
-})
-
-export const SliderCatalog: Catalog = createRoot(() => ({
-  introduction: <>{i18nGetters.introduction}</>,
   samples: [
     {
       title: { default: 'Basic example', ja: '基本例' },

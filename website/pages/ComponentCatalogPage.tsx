@@ -2,6 +2,7 @@ import { useLocation } from '@solidjs/router'
 import { createRoot, For, JSX, Show } from 'solid-js'
 import { createMemoObject } from 'solid-signal-object'
 import { Scrollable } from '../../library'
+import { I18nPack, internationalizeForCurrentLanguages } from '../../library/utility/i18n'
 import { PageTitle } from '../PageTitle'
 import { Sample, SampleProps } from '../Sample'
 import { AnimatedShowCatalog } from './AnimatedShowCatalog'
@@ -50,7 +51,7 @@ import { TriangleCatalog } from './TriangleCatalog'
 import { UrlToLinkCatalog } from './UrlToLinkCatalog'
 
 export type Catalog = {
-  introduction?: JSX.Element
+  introduction?: JSX.Element | I18nPack<JSX.Element>
   samples: SampleProps[]
 }
 
@@ -111,13 +112,25 @@ export function ComponentCatalogPage() {
     return { catalog, componentName: urlComponentName }
   })
 
+  function getTitle(catalog: Catalog) {
+    if (
+      typeof catalog.introduction === 'object' &&
+      catalog.introduction !== null &&
+      'default' in catalog.introduction
+    ) {
+      return internationalizeForCurrentLanguages(catalog.introduction)
+    } else {
+      return catalog.introduction
+    }
+  }
+
   return (
     <Show when={pageInfo.value} keyed={true}>
       {({ catalog, componentName }) => (
         <Scrollable style="padding: 1rem 4rem 10rem;">
           <article>
             <PageTitle>{componentName}</PageTitle>
-            <p class={classes.introduction}>{catalog.introduction}</p>
+            <p class={classes.introduction}>{getTitle(catalog)}</p>
 
             <For each={catalog.samples}>{(sample) => <Sample {...sample} />}</For>
           </article>
