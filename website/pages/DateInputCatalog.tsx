@@ -23,11 +23,18 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>value</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>value</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>value</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <DateInput value={value()} onChangeValue={setValue} />
@@ -46,21 +53,21 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disable date',
-      direction: 'horizontal',
-      children: (
-        <>
-          <DateInput disabledDate={(date) => date.getDay() % 3 === 0} />
-        </>
-      ),
-    },
-    {
       title: 'Disabled',
       direction: 'horizontal',
       children: (
         <>
           <DateInput placeholder="placeholder" disabled />
           <DateInput value={new Date()} disabled />
+        </>
+      ),
+    },
+    {
+      title: 'Disable date',
+      direction: 'horizontal',
+      children: (
+        <>
+          <DateInput disabledDate={(date) => date.getDay() % 3 === 0} />
         </>
       ),
     },

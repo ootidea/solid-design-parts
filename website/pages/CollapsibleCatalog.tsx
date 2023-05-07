@@ -19,11 +19,18 @@ export const CollapsibleCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>collapsed</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>collapsed</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>collapsed</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <Collapsible title="Title" collapsed={collapsed.value} onChangeCollapsed={collapsed.set}>

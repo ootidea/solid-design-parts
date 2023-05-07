@@ -24,11 +24,18 @@ export const TextAreaCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>value</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>value</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>value</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <TextArea value={value()} onChangeValue={setValue} />

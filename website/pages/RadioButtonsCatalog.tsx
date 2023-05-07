@@ -17,11 +17,18 @@ export const RadioButtonsCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>selected</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>selected</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>selected</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <RadioButtons

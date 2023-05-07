@@ -18,11 +18,18 @@ export const SelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>selected</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>selected</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>selected</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <Select values={['Female', 'Male', 'Other']} selected={selected()} onChangeSelected={setSelected} />

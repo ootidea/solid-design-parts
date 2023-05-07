@@ -26,11 +26,18 @@ export const PaginationCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>activePageNumber</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>activePageNumber</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>activePageNumber</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <Const value={createSignalObject(20)}>
           {(activePageNumberSignal) => (

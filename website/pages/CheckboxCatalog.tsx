@@ -17,11 +17,18 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>checked</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>checked</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>checked</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <Checkbox checked={checked.value} onChangeChecked={checked.set}>

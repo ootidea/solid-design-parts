@@ -15,11 +15,18 @@ export const ModalCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>opened</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>opened</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>opened</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <Button onClick={() => setOpened(true)}>Open</Button>

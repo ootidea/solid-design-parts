@@ -21,11 +21,18 @@ export const ResizableCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: (
-        <>
-          Binding <code>widthPx</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>widthPx</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>widthPx</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <Resizable widthPx={widthPx()} onChangeWidthPx={setWidthPx}>

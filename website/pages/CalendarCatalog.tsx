@@ -13,11 +13,18 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
       children: <Calendar month={new Date(1999, 0)} />,
     },
     {
-      title: (
-        <>
-          Binding <code>month</code> to a signal
-        </>
-      ),
+      title: {
+        default: (
+          <>
+            Binding <code>month</code> to a signal
+          </>
+        ),
+        ja: (
+          <>
+            <code>month</code>とsignalの双方向バインディング
+          </>
+        ),
+      },
       children: (
         <>
           <Calendar month={date.value} onChangeMonth={date.set} />
