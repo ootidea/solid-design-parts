@@ -2,7 +2,9 @@ import { keysOf } from 'base-up'
 import { createRoot } from 'solid-js'
 import { createSignalObject } from 'solid-signal-object'
 
-export function createI18nGetters<const T extends Record<string, { default: unknown } & Record<string, unknown>>>(
+export type I18nPack = { default: unknown } & Record<string, unknown>
+
+export function createI18nGetters<const T extends Record<string, I18nPack>>(
   source: T
 ): {
   [K in keyof T]: T[K][keyof T[K]]
@@ -10,16 +12,17 @@ export function createI18nGetters<const T extends Record<string, { default: unkn
   const result = {}
   for (const key of keysOf(source)) {
     Object.defineProperty(result, key, {
-      get: () => {
-        const pack = source[key]
-        const resultLanguage = getCurrentLanguages().find((language) => language in pack) ?? 'default'
-        return pack[resultLanguage]
-      },
+      get: () => getResourceForCurrentLanguages(source[key]),
       enumerable: true,
       configurable: true,
     })
   }
   return result as any
+}
+
+export function getResourceForCurrentLanguages(i18nPack: I18nPack) {
+  const resultLanguage = getCurrentLanguages().find((language) => language in i18nPack) ?? 'default'
+  return i18nPack[resultLanguage]
 }
 
 const forcedLanguage = createRoot(() => createSignalObject<string | undefined>())
