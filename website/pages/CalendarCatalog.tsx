@@ -9,7 +9,7 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
   samples: [
     { title: { default: 'Basic example', ja: '基本例' }, children: <Calendar /> },
     {
-      title: 'Showing the specified month',
+      title: { default: 'Showing the specified month', ja: '指定した月を表示' },
       children: <Calendar month={new Date(1999, 0)} />,
     },
     {
@@ -33,7 +33,7 @@ export const CalendarCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Minimum and maximum month',
+      title: { default: 'Limiting the range of months', ja: '表示可能な月の範囲を設定' },
       children: (
         <>
           <Calendar min={new Date()} />

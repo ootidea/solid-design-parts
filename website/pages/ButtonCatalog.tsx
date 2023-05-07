@@ -35,12 +35,19 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
     },
     {
       title: { default: 'Link buttons', ja: 'リンクボタン' },
-      description: (
-        <>
-          When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
-          <code>&lt;button&gt;</code>-based.
-        </>
-      ),
+      description: {
+        default: (
+          <>
+            When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
+            <code>&lt;button&gt;</code>-based.
+          </>
+        ),
+        ja: (
+          <>
+            <code>href</code>を設定するとbutton要素ベースではなくa要素ベースになります。
+          </>
+        ),
+      },
       direction: 'horizontal',
       children: (
         <>

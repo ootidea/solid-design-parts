@@ -1,7 +1,7 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Slider } from '../../library'
-import { Catalog } from './ComponentCatalogPage'
 import { createI18nGetters } from '../../library/utility/i18n'
+import { Catalog } from './ComponentCatalogPage'
 
 const [value, setValue] = createSignal(0)
 
@@ -16,18 +16,6 @@ const i18nGetters = createI18nGetters({
     ja: (
       <>
         <code>Slider</code>は直感的な操作で数値を入力できるコンポーネントです。
-      </>
-    ),
-  },
-  discreteSlidersDescription: {
-    default: (
-      <>
-        Specifying <code>stops</code> or <code>steps</code> prop will make it a discrete slider.
-      </>
-    ),
-    ja: (
-      <>
-        <code>stops</code>か<code>steps</code>を設定すると離散値のみ入力できる離散スライダーになります。
       </>
     ),
   },
@@ -58,7 +46,19 @@ export const SliderCatalog: Catalog = createRoot(() => ({
     },
     {
       title: { default: 'Discrete slider', ja: '離散スライダー' },
-      description: <>{i18nGetters.discreteSlidersDescription}</>,
+      description: {
+        default: (
+          <>
+            By setting the <code>stops</code> or <code>steps</code>, the slider will become a discrete slider, allowing
+            input of discrete values only.
+          </>
+        ),
+        ja: (
+          <>
+            <code>stops</code>か<code>steps</code>を設定すると離散値のみ入力できる離散スライダーになります。
+          </>
+        ),
+      },
       children: (
         <>
           <Slider stops={[25, 50, 75]} max={100} />
