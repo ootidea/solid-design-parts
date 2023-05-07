@@ -6,7 +6,7 @@ import closeIcon from '../images/close.svg'
 export const TabsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Tabs tabNames={['tab1', 'tab2', 'tab3']}>

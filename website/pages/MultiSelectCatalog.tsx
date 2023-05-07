@@ -8,7 +8,7 @@ const [selected, setSelected] = createSignal(setOf('macOS', 'Linux'))
 export const MultiSelectCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <MultiSelect values={['Windows', 'macOS', 'Linux']} />

@@ -15,7 +15,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <NumberInput />

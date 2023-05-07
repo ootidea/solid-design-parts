@@ -7,7 +7,7 @@ const date = createSignalObject(new Date(), { equals: false })
 
 export const CalendarCatalog: Catalog = createRoot(() => ({
   samples: [
-    { title: 'Basic example', children: <Calendar /> },
+    { title: { default: 'Basic example', ja: '基本例' }, children: <Calendar /> },
     {
       title: 'Showing the specified month',
       children: <Calendar month={new Date(1999, 0)} />,

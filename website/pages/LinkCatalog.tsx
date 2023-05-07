@@ -5,7 +5,7 @@ import { Catalog } from './ComponentCatalogPage'
 export const LinkCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: <Link href="https://example.com">sample</Link>,
     },
   ],

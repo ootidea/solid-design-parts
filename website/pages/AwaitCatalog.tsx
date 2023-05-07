@@ -25,7 +25,7 @@ export const AwaitCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Await value={new Promise((resolve) => setTimeout(resolve, 2000))}>

@@ -8,7 +8,7 @@ import { Button } from '../../library'
 export const ProgressBarCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <ProgressBar />

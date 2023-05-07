@@ -37,7 +37,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
   introduction: <>{i18nGetters.introduction}</>,
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Slider />

@@ -8,7 +8,7 @@ const checked = createSignalObject(true)
 export const CheckboxCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Checkbox checked>Remember my choice</Checkbox>

@@ -9,7 +9,7 @@ const [selected, setSelected] = createSignal<Set<'Walking' | 'Bicycle' | 'Car' |
 export const MultiSelectToggleButtonsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <MultiSelectToggleButtons values={['Dog', 'Cat']} />

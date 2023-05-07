@@ -10,7 +10,7 @@ export const GravityCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <div style={{ width: '12rem', height: '9rem', border: '1px dashed gray' }}>

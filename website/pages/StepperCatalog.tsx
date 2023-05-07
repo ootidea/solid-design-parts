@@ -10,7 +10,7 @@ export const StepperCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Stepper titles={['first', 'second', 'third']} currentStep={0} />

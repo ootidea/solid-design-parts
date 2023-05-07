@@ -4,7 +4,7 @@ import { Catalog } from './ComponentCatalogPage'
 
 export const DividerCatalog: Catalog = createRoot(() => ({
   samples: [
-    { title: 'Basic example', children: <Divider /> },
+    { title: { default: 'Basic example', ja: '基本例' }, children: <Divider /> },
     {
       title: 'Color',
       children: (

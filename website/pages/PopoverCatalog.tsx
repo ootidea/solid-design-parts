@@ -6,7 +6,7 @@ import { Catalog } from './ComponentCatalogPage'
 export const PopoverCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <Popover launcher={({ openPopover }) => <Button onClick={openPopover}>Open</Button>}>
           <p style={{ padding: '2em' }}>contents</p>

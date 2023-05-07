@@ -8,7 +8,7 @@ const [selected, setSelected] = createSignal<'Female' | 'Male' | 'Other' | undef
 export const SelectCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Select values={['Female', 'Male', 'Other']} />

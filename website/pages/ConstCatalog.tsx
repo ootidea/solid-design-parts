@@ -6,7 +6,7 @@ import { Catalog } from './ComponentCatalogPage'
 export const ConstCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: <Const value={Math.random()}>{(value) => <div>value: {value}</div>}</Const>,
     },
     {

@@ -10,7 +10,7 @@ export const SpinnerCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       direction: 'horizontal',
       children: (
         <>

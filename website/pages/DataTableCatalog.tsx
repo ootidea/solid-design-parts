@@ -5,7 +5,7 @@ import { Catalog } from './ComponentCatalogPage'
 export const DataTableCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <DataTable
           columns={[{ id: 'ID' }, { id: 'name' }]}

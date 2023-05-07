@@ -9,7 +9,7 @@ const collapsed = createSignalObject(false)
 export const CollapsibleCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Collapsible title="Title">

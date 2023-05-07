@@ -7,7 +7,7 @@ const [opened, setOpened] = createSignal(false)
 export const ModalCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <Modal launcher={({ openModal }) => <Button onClick={openModal}>Open</Button>}>
           <div style="padding: 1em">This is sample text for Modal component.</div>

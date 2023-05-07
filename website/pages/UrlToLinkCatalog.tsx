@@ -15,5 +15,5 @@ export const UrlToLinkCatalog: Catalog = createRoot(() => ({
       <code>UrlToLink</code> is a component that replaces URLs within content with clickable links.
     </>
   ),
-  samples: [{ title: 'Basic example', children: <UrlToLink>{text}</UrlToLink> }],
+  samples: [{ title: { default: 'Basic example', ja: '基本例' }, children: <UrlToLink>{text}</UrlToLink> }],
 }))

@@ -8,7 +8,7 @@ import { createSignalObject } from 'solid-signal-object'
 export const PaginationCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Pagination totalPages={9} />

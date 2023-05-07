@@ -11,7 +11,7 @@ export const ScrollableCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <div style={{ height: '10rem' }}>

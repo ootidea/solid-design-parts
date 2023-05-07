@@ -7,7 +7,7 @@ const [widthPx, setWidthPx] = createSignal(500)
 export const ResizableCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Resizable>

@@ -8,7 +8,7 @@ const [selected, setSelected] = createSignal<'Python' | 'TypeScript' | 'Kotlin' 
 export const RadioButtonsCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic example',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <RadioButtons values={['Dog', 'Cat']} />
