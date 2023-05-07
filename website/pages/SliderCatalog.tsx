@@ -1,16 +1,52 @@
 import { createRoot, createSignal } from 'solid-js'
 import { Slider } from '../../library'
 import { Catalog } from './ComponentCatalogPage'
+import { createI18nGetters } from '../../library/utility/i18n'
 
 const [value, setValue] = createSignal(0)
 
+const i18nGetters = createI18nGetters({
+  introduction: {
+    default: (
+      <>
+        <code>Slider</code> is a component for inputting a numerical value within a certain range through intuitive
+        interaction.
+      </>
+    ),
+    ja: (
+      <>
+        <code>Slider</code>は直感的な操作で数値を入力できるコンポーネントです。
+      </>
+    ),
+  },
+  minimumAndMaximumValue: {
+    default: 'Minimum and maximum value',
+    ja: '最小値、最大値の設定',
+  },
+  discreteSliders: {
+    default: 'Discrete slider',
+    ja: '離散スライダー',
+  },
+  discreteSlidersDescription: {
+    default: (
+      <>
+        Specifying <code>stops</code> or <code>steps</code> prop will make it a discrete slider.
+      </>
+    ),
+    ja: (
+      <>
+        <code>stops</code>か<code>steps</code>を設定すると離散値のみ入力できる離散スライダーになります。
+      </>
+    ),
+  },
+  changingThumbSize: {
+    default: 'Changing thumb size',
+    ja: 'つまみ（thumb）のサイズを変更',
+  },
+})
+
 export const SliderCatalog: Catalog = createRoot(() => ({
-  introduction: (
-    <>
-      <code>Slider</code> is a component for inputting a numerical value within a certain range through intuitive
-      interaction.
-    </>
-  ),
+  introduction: <>{i18nGetters.introduction}</>,
   samples: [
     {
       title: 'Basic example',
@@ -23,7 +59,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'min and max',
+      title: <>{i18nGetters.minimumAndMaximumValue}</>,
       children: (
         <>
           <Slider min={-1} />
@@ -33,12 +69,8 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Discrete sliders',
-      description: (
-        <>
-          Specifying <code>stops</code> or <code>steps</code> prop will make it a discrete slider.
-        </>
-      ),
+      title: <>{i18nGetters.discreteSliders}</>,
+      description: <>{i18nGetters.discreteSlidersDescription}</>,
       children: (
         <>
           <Slider stops={[25, 50, 75]} max={100} />
@@ -48,7 +80,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Thumb size',
+      title: <>{i18nGetters.changingThumbSize}</>,
       children: (
         <>
           <Slider thumbWidth="5px" value={0.2} />
