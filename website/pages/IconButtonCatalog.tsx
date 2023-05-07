@@ -68,11 +68,18 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
     },
     {
       title: { default: 'Changing the button size', ja: 'ボタンのサイズを変更' },
-      description: (
-        <>
-          Setting the <code>size</code> will change the button's width and height.
-        </>
-      ),
+      description: {
+        default: (
+          <>
+            Setting the <code>size</code> will change both the button's width and height.
+          </>
+        ),
+        ja: (
+          <>
+            <code>size</code>を設定するとボタンのwidthとheightの両方が変わります。
+          </>
+        ),
+      },
       direction: 'horizontal',
       children: (
         <>
@@ -83,12 +90,19 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
     },
     {
       title: { default: 'Changing the icon size', ja: 'アイコンのサイズを変更' },
-      description: (
-        <>
-          Setting the <code>iconSize</code> will change the size of the icon, but the size of the button will not
-          change.
-        </>
-      ),
+      description: {
+        default: (
+          <>
+            Setting the <code>iconSize</code> will change the size of the icon, but the size of the button will not
+            change.
+          </>
+        ),
+        ja: (
+          <>
+            <code>iconSize</code>を設定するとアイコンのサイズが変わります。ただしボタンのサイズは変わりません。
+          </>
+        ),
+      },
       direction: 'horizontal',
       children: (
         <>
@@ -115,12 +129,19 @@ export const IconButtonCatalog: Catalog = createRoot(() => ({
     },
     {
       title: { default: 'Link buttons', ja: 'リンクボタン' },
-      description: (
-        <>
-          When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
-          <code>&lt;button&gt;</code>-based.
-        </>
-      ),
+      description: {
+        default: (
+          <>
+            When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
+            <code>&lt;button&gt;</code>-based.
+          </>
+        ),
+        ja: (
+          <>
+            <code>href</code>を設定するとbutton要素ベースではなくa要素ベースになります。
+          </>
+        ),
+      },
       direction: 'horizontal',
       children: (
         <>
