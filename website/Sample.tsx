@@ -3,38 +3,52 @@ import { ParentProps } from 'solid-js/types/render/component'
 import { Link } from '../library'
 import { extractContainedTexts } from '../library/utility/dom'
 import classes from './Sample.module.scss'
+import { I18nPack, internationalizeForCurrentLanguages } from '../library/utility/i18n'
 
 export type SampleProps = ParentProps<{
-  title: JSX.Element
+  title: JSX.Element | I18nPack<JSX.Element>
   description?: JSX.Element
   direction?: 'horizontal' | 'vertical'
 }>
 
 export function Sample(rawProps: SampleProps) {
   const props = mergeProps({ direction: 'vertical' }, rawProps)
-  const id = () => extractContainedTexts(props.title).join(' ').replaceAll(' ', '-')
+
+  const title = () => {
+    if (typeof props.title === 'object' && props.title !== null && 'default' in props.title) {
+      return internationalizeForCurrentLanguages(props.title)
+    } else {
+      return props.title
+    }
+  }
+  const englishTitle = () => {
+    if (typeof props.title === 'object' && props.title !== null && 'default' in props.title) {
+      return props.title.default
+    } else {
+      return props.title
+    }
+  }
+  const id = () => extractContainedTexts(englishTitle()).join(' ').replaceAll(' ', '-')
 
   return (
     <section>
-      <Show when={props.title}>
-        <h2 id={id()} class={classes.title}>
-          <span>{props.title}</span>
-          <Link
-            class={classes.fragment}
-            href={`#${id()}`}
-            onClick={(event) => {
-              if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return
+      <h2 id={id()} class={classes.title}>
+        <span>{title()}</span>
+        <Link
+          class={classes.fragment}
+          href={`#${id()}`}
+          onClick={(event) => {
+            if (event.ctrlKey || event.shiftKey || event.altKey || event.metaKey) return
 
-              /** Smooth scroll */
-              event.preventDefault()
-              history.pushState(undefined, '', `#${id()}`)
-              event.currentTarget.scrollIntoView({ behavior: 'smooth' })
-            }}
-          >
-            #
-          </Link>
-        </h2>
-      </Show>
+            /** Smooth scroll */
+            event.preventDefault()
+            history.pushState(undefined, '', `#${id()}`)
+            event.currentTarget.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
+          #
+        </Link>
+      </h2>
       <Show when={props.description}>
         <p class={classes.description}>{props.description}</p>
       </Show>

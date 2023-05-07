@@ -12,7 +12,7 @@ async function awaitSomeSeconds() {
 export const ButtonCatalog: Catalog = createRoot(() => ({
   samples: [
     {
-      title: 'Basic examples',
+      title: { default: 'Basic examples', ja: '基本例' },
       direction: 'horizontal',
       children: (
         <>
@@ -23,7 +23,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Ghost buttons',
+      title: { default: 'Ghost buttons', ja: 'ゴーストボタン' },
       direction: 'horizontal',
       children: (
         <>
@@ -34,7 +34,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Link buttons',
+      title: { default: 'Link buttons', ja: 'リンクボタン' },
       description: (
         <>
           When the <code>href</code> is set, it becomes <code>&lt;a&gt;</code>-based instead of{' '}
@@ -68,7 +68,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Button with icon',
+      title: { default: 'Button with icon', ja: 'アイコン付きボタン' },
       direction: 'horizontal',
       children: (
         <>
@@ -118,7 +118,7 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing the radius',
+      title: { default: 'Changing the radius', ja: 'radiusの変更' },
       direction: 'horizontal',
       children: (
         <>

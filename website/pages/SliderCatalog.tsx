@@ -19,14 +19,6 @@ const i18nGetters = createI18nGetters({
       </>
     ),
   },
-  minimumAndMaximumValue: {
-    default: 'Minimum and maximum value',
-    ja: '最小値、最大値の設定',
-  },
-  discreteSliders: {
-    default: 'Discrete slider',
-    ja: '離散スライダー',
-  },
   discreteSlidersDescription: {
     default: (
       <>
@@ -38,10 +30,6 @@ const i18nGetters = createI18nGetters({
         <code>stops</code>か<code>steps</code>を設定すると離散値のみ入力できる離散スライダーになります。
       </>
     ),
-  },
-  changingThumbSize: {
-    default: 'Changing thumb size',
-    ja: 'つまみ（thumb）のサイズを変更',
   },
 })
 
@@ -59,7 +47,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: <>{i18nGetters.minimumAndMaximumValue}</>,
+      title: { default: 'Minimum and maximum value', ja: '最小値、最大値の設定' },
       children: (
         <>
           <Slider min={-1} />
@@ -69,7 +57,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: <>{i18nGetters.discreteSliders}</>,
+      title: { default: 'Discrete slider', ja: '離散スライダー' },
       description: <>{i18nGetters.discreteSlidersDescription}</>,
       children: (
         <>
@@ -80,7 +68,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: <>{i18nGetters.changingThumbSize}</>,
+      title: { default: 'Changing thumb size', ja: 'つまみ（thumb）のサイズを変更' },
       children: (
         <>
           <Slider thumbWidth="5px" value={0.2} />
