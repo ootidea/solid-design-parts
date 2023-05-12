@@ -26,7 +26,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing carousel width',
+      title: { default: 'Changing carousel width', ja: 'カルーセルの横幅を変更' },
       children: (
         <>
           <Carousel style={{ width: '18rem' }} itemWidth="18rem">
@@ -47,7 +47,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Auto scroll',
+      title: { default: 'Auto scroll', ja: '自動スクロール' },
       children: (
         <>
           <Carousel style={{ width: '22rem' }} itemWidth="22rem" autoScroll>
@@ -79,7 +79,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Hiding navigation buttons',
+      title: { default: 'Hiding navigation buttons', ja: 'ナビゲーションボタンを非表示' },
       children: (
         <>
           <Carousel itemWidth="22rem" hideNavigationButtons>
@@ -94,7 +94,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Hiding indicators',
+      title: { default: 'Hiding indicators', ja: 'インジケーターを非表示' },
       children: (
         <>
           <Carousel itemWidth="22rem" hideIndicators>
@@ -109,7 +109,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing indicator position',
+      title: { default: 'Changing indicator position', ja: 'インジケーターの位置を変更' },
       children: (
         <>
           <Carousel itemWidth="22rem" indicatorPosition="inside">
@@ -124,7 +124,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing gap',
+      title: { default: 'Changing gap', ja: 'gapを変更' },
       children: (
         <>
           <Carousel itemWidth="22rem" gap="50px">
