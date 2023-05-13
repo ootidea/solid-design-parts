@@ -34,8 +34,20 @@ export type TextInputProps = Props<{
     | 'week'
   >
   disabled?: boolean
+  /**
+   * If the length is 0, it becomes an error state.
+   * The method of calculating length can be changed with the {@link lengthMeasure} prop.
+   */
   required?: boolean
+  /**
+   * If the length is less than the given min value, it becomes an error state.
+   * The method of calculating length can be changed with the {@link lengthMeasure} prop.
+   */
   min?: number
+  /**
+   * If the length is more than the given max value, it becomes an error state.
+   * The method of calculating length can be changed with the {@link lengthMeasure} prop.
+   */
   max?: number
   lengthMeasure?: (text: string) => number
   error?: boolean | string | ((value: string) => Promisable<boolean | string>)
