@@ -68,17 +68,6 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'In cases with few items',
-      description: 'The buttons and indicators will not be displayed if there is no overflow.',
-      children: (
-        <>
-          <Carousel itemWidth="22rem">
-            <img src="https://source.unsplash.com/600x300/?dog" alt="" />
-          </Carousel>
-        </>
-      ),
-    },
-    {
       title: { default: 'Hiding navigation buttons', ja: 'ナビゲーションボタンを非表示' },
       children: (
         <>
@@ -124,7 +113,7 @@ export const CarouselCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: { default: 'Changing gap', ja: 'gapを変更' },
+      title: { default: 'Change the gap between items', ja: '項目間のgapを変更' },
       children: (
         <>
           <Carousel itemWidth="22rem" gap="50px">
