@@ -133,7 +133,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Showing the clear button',
+      title: { default: 'Showing the clear button', ja: 'クリアボタンを表示' },
       children: (
         <>
           <NumberInput value={3.14159} showClearButton />

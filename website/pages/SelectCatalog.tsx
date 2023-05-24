@@ -47,7 +47,7 @@ export const SelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Showing the clear button',
+      title: { default: 'Showing the clear button', ja: 'クリアボタンを表示' },
       children: (
         <>
           <Select placeholder="gender" values={['Female', 'Male', 'Other']} selected="Female" showClearButton />

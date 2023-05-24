@@ -72,7 +72,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Showing the clear button',
+      title: { default: 'Showing the clear button', ja: 'クリアボタンを表示' },
       direction: 'horizontal',
       children: (
         <>

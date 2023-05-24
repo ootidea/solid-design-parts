@@ -58,7 +58,7 @@ export const TextInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Showing the clear button',
+      title: { default: 'Showing the clear button', ja: 'クリアボタンを表示' },
       children: (
         <>
           <TextInput
