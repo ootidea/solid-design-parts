@@ -87,13 +87,21 @@ export const ButtonCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Async onClick handlers',
-      description: (
-        <>
-          If the <code>onClick</code> handler returns a <code>Promise</code>, the button will be disabled and show a{' '}
-          <code>Spinner</code> until the <code>Promise</code> is resolved.
-        </>
-      ),
+      title: { default: 'Async onClick handlers', ja: '非同期onClickハンドラ' },
+      description: {
+        default: (
+          <>
+            If the <code>onClick</code> handler returns a <code>Promise</code>, the button will be disabled and show a{' '}
+            <code>Spinner</code> until the <code>Promise</code> is resolved.
+          </>
+        ),
+        ja: (
+          <>
+            <code>onClick</code>ハンドラが<code>Promise</code>を返した場合、それが完了するまでボタンはdisabledになり、
+            <code>Spinner</code>が表示されます。
+          </>
+        ),
+      },
       direction: 'horizontal',
       children: (
         <>
