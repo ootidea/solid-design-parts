@@ -51,6 +51,12 @@ function removeToast(toastId: symbol) {
 
   toastModelsSignal.update((toastModels) => {
     toastModels.splice(index, 1)
+
+    if (toastModels.length === 0) {
+      const toastsElement = document.querySelector('.solid-design-parts-Toasts_root')
+      toastsElement?.remove()
+    }
+
     return toastModels
   })
 
