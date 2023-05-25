@@ -1,4 +1,3 @@
-import postcssOKLabFunction from '@csstools/postcss-oklab-function'
 import url from '@rollup/plugin-url'
 import autoprefixer from 'autoprefixer'
 import postcss from 'rollup-plugin-postcss'
@@ -9,7 +8,7 @@ export default withSolid({
   targets: ['esm', 'cjs'],
   plugins: [
     postcss({
-      plugins: [autoprefixer(), postcssOKLabFunction({ subFeatures: { displayP3: false } })],
+      plugins: [autoprefixer()],
     }),
     url(),
   ],

@@ -49,7 +49,6 @@
     "solid-signal-object": "^1.1.0"
   },
   "devDependencies": {
-    "@csstools/postcss-oklab-function": "^2.2.2",
     "@rollup/plugin-url": "^8.0.1",
     "@solidjs/router": "^0.8.2",
     "autoprefixer": "^10.4.14",
