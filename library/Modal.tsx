@@ -22,15 +22,28 @@ import {
 import { Slot } from './utility/Slot'
 
 export type ModalProps = Props<{
+  /** Flag to determine whether to display the modal or not */
   opened?: boolean
   disableAutoClose?: boolean
+  /** Flag to display the close button */
   showCloseButton?: boolean
   ignoreEscKey?: boolean
+  /** Callback function that is called when {@link opened} changes */
   onChangeOpened?: (opened: boolean) => void
   launcher?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  /** Title of the modal content */
   title?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  /**
+   * Content of the modal.
+   * If the content does not fit on the screen, the content area becomes scrollable.
+   */
   children?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  /**
+   * Footer content of the modal.
+   * Even if the content area is scrollable, the footer is always displayed at the bottom.
+   */
   footer?: SlotProp<{ openModal: () => void; closeModal: () => void; toggleModal: () => void }>
+  /** CSS background-color of the overlay */
   overlayBackgroundColor?: CssColor
 }>
 
