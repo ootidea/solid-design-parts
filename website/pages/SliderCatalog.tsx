@@ -29,7 +29,7 @@ export const SliderCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: { default: 'Minimum and maximum value', ja: '最小値、最大値の設定' },
+      title: { default: 'Minimum and maximum value', ja: '最小値、最大値を設定' },
       children: (
         <>
           <Slider min={-1} />
