@@ -65,7 +65,7 @@ export const DatePickerCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: { default: 'Disabling the specified date', ja: '指定した日付をdisable' },
+      title: { default: 'Disabling the specified dates', ja: '指定した日付をdisable' },
       children: (
         <>
           <DatePicker disabled={(date) => date.getDay() % 3 === 0} />

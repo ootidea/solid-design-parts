@@ -5,11 +5,18 @@ import { Catalog } from './ComponentCatalogPage'
 const [value, setValue] = createSignal<Date | undefined>(new Date())
 
 export const DateInputCatalog: Catalog = createRoot(() => ({
-  introduction: (
-    <>
-      <code>DateInput</code> is a component for inputting a date, specifically year, month, and day.
-    </>
-  ),
+  introduction: {
+    default: (
+      <>
+        <code>DateInput</code> is a component for inputting a date, specifically year, month, and day.
+      </>
+    ),
+    ja: (
+      <>
+        <code>DateInput</code>は日付を入力するためのコンポーネントです。
+      </>
+    ),
+  },
   samples: [
     {
       title: { default: 'Basic example', ja: '基本例' },
@@ -63,7 +70,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Disable date',
+      title: { default: 'Disabling the specified dates', ja: '指定した日付をdisable' },
       direction: 'horizontal',
       children: (
         <>
