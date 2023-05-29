@@ -75,7 +75,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation function',
+      title: { default: 'Validation function', ja: 'バリデーション関数を指定' },
       children: (
         <>
           <Checkbox error={(checked) => !checked && 'This checkbox is required.'}>
@@ -86,7 +86,7 @@ export const CheckboxCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validate initial value',
+      title: { default: 'Validate initial value', ja: '初期値をバリデート' },
       children: (
         <>
           <Checkbox error={(checked) => !checked && 'This checkbox is required.'} validateImmediately>

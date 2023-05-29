@@ -160,7 +160,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation function',
+      title: { default: 'Validation function', ja: 'バリデーション関数を指定' },
       children: (
         <>
           <Checkboxes
@@ -171,7 +171,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validate initial value',
+      title: { default: 'Validate initial value', ja: '初期値をバリデート' },
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} required validateImmediately />

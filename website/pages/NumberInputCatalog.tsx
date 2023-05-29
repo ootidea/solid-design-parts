@@ -89,7 +89,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation function',
+      title: { default: 'Validation function', ja: 'バリデーション関数を指定' },
       children: (
         <>
           <NumberInput placeholder="placeholder" error={(value) => value === undefined && 'Required'} />
@@ -106,7 +106,7 @@ export const NumberInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validate initial value',
+      title: { default: 'Validate initial value', ja: '初期値をバリデート' },
       description: (
         <>
           If <code>validateImmediately</code> option is set, it perform validation even if the user did not edit it.

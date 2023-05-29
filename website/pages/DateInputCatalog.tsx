@@ -43,7 +43,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Minimum and maximum date',
+      title: { default: 'Minimum and maximum date', ja: '日付の上限、下限を設定' },
       direction: 'horizontal',
       children: (
         <>
@@ -81,7 +81,7 @@ export const DateInputCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Changing date format',
+      title: { default: 'Changing date format', ja: '日付表示形式を変更' },
       direction: 'horizontal',
       children: (
         <>

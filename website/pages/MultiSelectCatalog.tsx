@@ -90,7 +90,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validation function',
+      title: { default: 'Validation function', ja: 'バリデーション関数を指定' },
       children: (
         <>
           <MultiSelect
@@ -102,7 +102,7 @@ export const MultiSelectCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Validate initial value',
+      title: { default: 'Validate initial value', ja: '初期値をバリデート' },
       description: (
         <>
           If <code>validateImmediately</code> option is set, it perform validation even if the user did not edit it.
