@@ -15,7 +15,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
   ),
   samples: [
     {
-      title: 'Basic sample',
+      title: { default: 'Basic example', ja: '基本例' },
       children: (
         <>
           <Checkboxes values={['PC', 'Smartphone']} selected={new Set(['PC'])} />
@@ -48,7 +48,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Layout',
+      title: { default: 'Layout', ja: 'レイアウト' },
       children: (
         <>
           <div style={{ border: '1px dashed gray', padding: '1em' }}>
@@ -86,7 +86,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Grid layout',
+      title: { default: 'Grid layout', ja: 'グリッドレイアウト' },
       children: (
         <>
           <div style={{ width: '20em', border: '1px dashed gray', padding: '1em' }}>
@@ -105,7 +105,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Gap between options',
+      title: { default: 'Gap between items', ja: '項目間のgap' },
       description: 'Note that flex gap is not supported on iOS versions earlier than 15.4.',
       children: (
         <>
@@ -151,7 +151,7 @@ export const CheckboxesCatalog: Catalog = createRoot(() => ({
       ),
     },
     {
-      title: 'Minimum and maximum selection count',
+      title: { default: 'Minimum and maximum selection count', ja: '選択項目数の最小値、最大値を設定' },
       children: (
         <>
           <Checkboxes values={['Windows', 'macOS', 'Linux']} min={2} error="Select two or more." />
