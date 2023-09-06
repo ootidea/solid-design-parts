@@ -275,7 +275,7 @@ export function MultiSelect<const T extends readonly (string | number)[]>(rawPro
                   ref={(element) => setupFocusTrap(element)}
                   onClick={onOperateOverlay}
                   onTouchMove={onOperateOverlay}
-                  onMouseWheel={onOperateOverlay}
+                  onWheel={onOperateOverlay}
                   onKeyDown={onKeyDown}
                 >
                   <div

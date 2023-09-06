@@ -140,7 +140,7 @@ export function Carousel(rawProps: CarouselProps) {
         />
         <div
           class="solid-design-parts-Carousel_item-list"
-          onMouseWheel={(event: WheelEvent) => {
+          onWheel={(event) => {
             if (event.deltaX !== 0 || (event.shiftKey && event.deltaY !== 0)) {
               if (props.autoScroll) {
                 restartAutoScrollTimer()

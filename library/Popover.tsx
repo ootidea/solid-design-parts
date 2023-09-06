@@ -107,7 +107,7 @@ export function Popover(rawProps: PopoverProps) {
             ref={(element) => setupFocusTrap(element)}
             onClick={onOperateOverlay}
             onTouchMove={onOperateOverlay}
-            onMouseWheel={onOperateOverlay}
+            onWheel={onOperateOverlay}
             onKeyDown={onKeyDown}
           >
             <Slot content={rawProps.frame} params={{ openPopover, closePopover, togglePopover }}>

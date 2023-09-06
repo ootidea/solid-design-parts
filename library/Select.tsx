@@ -244,7 +244,7 @@ export function Select<const T extends readonly (string | number)[]>(rawProps: S
                   ref={(element) => setupFocusTrap(element)}
                   onClick={onOperateOverlay}
                   onTouchMove={onOperateOverlay}
-                  onMouseWheel={onOperateOverlay}
+                  onWheel={onOperateOverlay}
                   onKeyDown={onKeyDown}
                 >
                   <div
