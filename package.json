@@ -17,22 +17,20 @@
   "author": "ootidea",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "browser": "./dist/esm/index.js",
-      "default": "./dist/esm/index.js",
-      "types": "./dist/types/index.d.ts"
+    "import": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite serve website",
-    "build": "rollup -c",
+    "build": "tsup",
     "build-website": "vite build website",
     "format": "run-p format:*",
     "format:prettier": "prettier -w \"library/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"website/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
@@ -49,17 +47,17 @@
     "solid-signal-object": "^1.1.0"
   },
   "devDependencies": {
-    "@rollup/plugin-url": "^8.0.1",
     "@solidjs/router": "^0.8.3",
     "autoprefixer": "^10.4.15",
+    "esbuild-plugin-svg": "^0.1.0",
+    "esbuild-sass-plugin": "^2.14.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.8",
-    "rollup": "^3.28.1",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-preset-solid": "^2.0.1",
     "sass": "^1.66.1",
     "solid-js": "^1.7.11",
     "sort-package-json": "^2.5.1",
+    "tsup": "^7.2.0",
+    "tsup-preset-solid": "^2.1.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-solid": "^2.7.0"
@@ -69,5 +67,7 @@
   },
   "volta": {
     "node": "18.11.0"
-  }
+  },
+  "browser": {},
+  "typesVersions": {}
 }
