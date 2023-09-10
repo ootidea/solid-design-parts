@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "dev": "vite serve website",
-    "build": "tsup",
+    "build": "vite build library",
     "build-website": "vite build website",
     "format": "run-p format:*",
     "format:prettier": "prettier -w \"library/**/*.{js,ts,json,css,scss,tsx,jsx}\" \"website/**/*.{js,ts,json,css,scss,tsx,jsx}\"",
@@ -60,6 +60,7 @@
     "tsup-preset-solid": "^2.1.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.3",
     "vite-plugin-solid": "^2.7.0"
   },
   "peerDependencies": {
