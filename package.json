@@ -18,15 +18,15 @@
   "type": "module",
   "exports": {
     "import": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./library/dist/index.d.ts",
+      "default": "./library/dist/index.js"
     }
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./library/dist/index.js",
+  "module": "./library/dist/index.js",
+  "types": "./library/dist/index.d.ts",
   "files": [
-    "dist"
+    "library/dist"
   ],
   "scripts": {
     "dev": "vite serve website",
